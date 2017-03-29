@@ -1,0 +1,104 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "drmonty-datatables-plugins",
+        "scope": null,
+        "escapedName": "drmonty-datatables-plugins",
+        "name": "drmonty-datatables-plugins",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "/var/www/sheyd/boilerplate/packages/sebastienheyd/boilerplate/src"
+    ]
+  ],
+  "_from": "drmonty-datatables-plugins@latest",
+  "_id": "drmonty-datatables-plugins@1.10.12",
+  "_inCache": true,
+  "_location": "/drmonty-datatables-plugins",
+  "_nodeVersion": "6.4.0",
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/drmonty-datatables-plugins-1.10.12.tgz_1471949908141_0.3184378780424595"
+  },
+  "_npmUser": {
+    "name": "drmonty",
+    "email": "linksoft@gmx.de"
+  },
+  "_npmVersion": "3.10.6",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "drmonty-datatables-plugins",
+    "scope": null,
+    "escapedName": "drmonty-datatables-plugins",
+    "name": "drmonty-datatables-plugins",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/drmonty-datatables-plugins/-/drmonty-datatables-plugins-1.10.12.tgz",
+  "_shasum": "32fd57f562c938c2da4445cea9675330dd968eb1",
+  "_shrinkwrap": null,
+  "_spec": "drmonty-datatables-plugins",
+  "_where": "/var/www/sheyd/boilerplate/packages/sebastienheyd/boilerplate/src",
+  "author": {
+    "name": "Allan Jardine",
+    "url": "http://sprymedia.co.uk"
+  },
+  "bugs": {
+    "url": "https://github.com/mrohnstock/datatables-plugins/issues"
+  },
+  "dependencies": {
+    "jquery": ">=1.7"
+  },
+  "description": "Plug-ins for DataTables",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "32fd57f562c938c2da4445cea9675330dd968eb1",
+    "tarball": "https://registry.npmjs.org/drmonty-datatables-plugins/-/drmonty-datatables-plugins-1.10.12.tgz"
+  },
+  "gitHead": "d80fea312937906ad80888e15d30a828c7541113",
+  "homepage": "http://datatables.net",
+  "keywords": [
+    "DataTables",
+    "DataTable",
+    "table",
+    "grid",
+    "filter",
+    "sort",
+    "page",
+    "internationalisable"
+  ],
+  "licenses": [
+    {
+      "type": "BSD",
+      "url": "http://datatables.net/license_bsd"
+    },
+    {
+      "type": "GPLv2",
+      "url": "http://datatables.net/license_gpl2"
+    }
+  ],
+  "main": "main.js",
+  "maintainers": [
+    {
+      "name": "drmonty",
+      "email": "linksoft@gmx.de"
+    }
+  ],
+  "name": "drmonty-datatables-plugins",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrohnstock/datatables-plugins.git"
+  },
+  "scripts": {},
+  "version": "1.10.12"
+}

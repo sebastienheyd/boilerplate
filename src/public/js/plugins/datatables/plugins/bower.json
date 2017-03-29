@@ -1,0 +1,29 @@
+{
+    "name": "drmonty-datatables-plugins",
+    "description": "Plug-ins for DataTables",
+    "homepage": "http://datatables.net",
+    "version": "1.10.12",
+    "author": {
+        "name": "Allan Jardine",
+        "url": "http://sprymedia.co.uk"
+    },
+    "licenses": [
+        {
+            "type": "BSD",
+            "url": "http://datatables.net/license_bsd"
+        },
+        {
+            "type": "GPLv2",
+            "url": "http://datatables.net/license_gpl2"
+        }
+    ],
+    "dependencies": {
+        "jquery": ">=1.7"
+    },
+    "main": "main.js",
+    "ignore": [
+        "component.json",
+        "package.json",
+        "composer.json"
+    ]
+}
