@@ -3,6 +3,7 @@
 namespace Sebastienheyd\Boilerplate;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Foundation\AliasLoader;
 
 class BoilerplateServiceProvider extends ServiceProvider
 {
@@ -17,18 +18,22 @@ class BoilerplateServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__ . '/config'         => config_path(),
+            __DIR__ . '/routes'         => base_path('routes/'),
             __DIR__ . '/resources'      => base_path('resources/'),
             __DIR__ . '/public'         => base_path('public/'),
-            __DIR__ . '/fonts'          => base_path('public/fonts'),
-            __DIR__ . '/images'         => base_path('public/images'),
             __DIR__ . '/Models'         => app_path('Models'),
             __DIR__ . '/webpack.mix.js' => base_path('webpack.mix.js'),
         ]);
 
-        $this->loadRoutesFrom(__DIR__ . '/routes/boilerplate.php');
-        $this->loadMigrationsFrom(__DIR__.'/migrations');
+        if(is_file(base_path('routes/boilerplate.php'))) {
+            $this->loadRoutesFrom(base_path('routes/boilerplate.php'));
+        } else {
+            $this->loadRoutesFrom(__DIR__ . '/routes/boilerplate.php');
+        }
 
-        $this->bladeDirectives();
+        $this->loadMigrationsFrom(__DIR__.'/migrations');
+        $this->loadViewsFrom(__DIR__.'/resources/views/vendor/boilerplate', 'boilerplate');
+        $this->loadTranslationsFrom(__DIR__.'/resources/lang/vendor/boilerplate', 'boilerplate');
     }
 
     /**
@@ -38,62 +43,47 @@ class BoilerplateServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(
-            __DIR__.'/config/boilerplate/app.php', 'boilerplate.app',
-            __DIR__.'/config/entrust.php', 'entrust'
-        );
+        $this->mergeConfigFrom(__DIR__.'/config/boilerplate/app.php', 'boilerplate.app');
+        $this->mergeConfigFrom(__DIR__.'/config/boilerplate/entrust.php', 'boilerplate.entrust');
+        $this->mergeConfigFrom(__DIR__.'/config/boilerplate/auth.php', 'boilerplate.auth');
+        $this->mergeConfigFrom(__DIR__.'/config/boilerplate/cache.php', 'boilerplate.cache');
 
-        $this->registerEntrust();
+        config([
+            'auth.providers.users.driver' => config('boilerplate.auth.providers.users.driver', 'eloquent'),
+            'auth.providers.users.model' => config('boilerplate.auth.providers.users.model', 'App\User'),
+            'auth.providers.users.table' => config('boilerplate.auth.providers.users.table', 'users'),
+            'cache.default' => config('boilerplate.cache.default', 'array'),
+        ]);
+
+        $this->_registerEntrust();
+        $this->_registerLaravelCollective();
     }
 
-    /**
-     * Register the blade directives
-     *
-     * @return void
-     */
-    private function bladeDirectives()
+    private function _registerLaravelCollective()
     {
-        if (!class_exists('\Blade')) return;
+        $this->app->register(\Collective\Html\HtmlServiceProvider::class);
 
-        // Call to Entrust::hasRole
-        \Blade::directive('role', function($expression) {
-            return "<?php if (\\Entrust::hasRole({$expression})) : ?>";
-        });
-
-        \Blade::directive('endrole', function($expression) {
-            return "<?php endif; // Entrust::hasRole ?>";
-        });
-
-        // Call to Entrust::can
-        \Blade::directive('permission', function($expression) {
-            return "<?php if (\\Entrust::can({$expression})) : ?>";
-        });
-
-        \Blade::directive('endpermission', function($expression) {
-            return "<?php endif; // Entrust::can ?>";
-        });
-
-        // Call to Entrust::ability
-        \Blade::directive('ability', function($expression) {
-            return "<?php if (\\Entrust::ability({$expression})) : ?>";
-        });
-
-        \Blade::directive('endability', function($expression) {
-            return "<?php endif; // Entrust::ability ?>";
-        });
+        $loader = AliasLoader::getInstance();
+        $loader->alias('Form', \Collective\Html\FormFacade::class);
+        $loader->alias('Html', \Collective\Html\HtmlFacade::class);
     }
+
 
     /**
      * Register the application bindings.
      *
      * @return void
      */
-    private function registerEntrust()
+    private function _registerEntrust()
     {
-        $this->app->bind('entrust', function ($app) {
-            return new Entrust($app);
-        });
+        $this->app->register(\Zizaco\Entrust\EntrustServiceProvider::class);
 
-        $this->app->alias('entrust', 'Zizaco\Entrust\Entrust');
+        $loader = AliasLoader::getInstance();
+        $loader->alias('Entrust', \Zizaco\Entrust\EntrustFacade::class);
+
+        config([
+            'entrust.role' => config('boilerplate.entrust.role', 'App\Role'),
+            'entrust.permission' => config('boilerplate.entrust.permission', 'App\Permission'),
+        ]);
     }
 }

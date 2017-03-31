@@ -2,7 +2,6 @@
 
 namespace Sebastienheyd\Boilerplate\Controllers;
 
-use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -36,7 +35,11 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->redirectTo = config('auth.redirectTo','/home');
+        $this->redirectTo = config('boilerplate.app.redirectTo','/');
+
+        $userModel = config('auth.providers.users.model');
+        $this->firstUser = $userModel::all()->count() === 0;
+
         $this->middleware('guest');
     }
 
@@ -49,7 +52,8 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
+            'last_name' => 'required|max:255',
+            'first_name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
@@ -62,7 +66,7 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm()
     {
-        return view('auth.register', ['firstUser' => User::all()->count() === 0]);
+        return view('boilerplate::auth.register', ['firstUser' => $this->firstUser]);
     }
 
     /**
@@ -73,16 +77,19 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $firstUser = User::all()->count() === 0;
+        $userModel = config('auth.providers.users.model');
+        $roleModel = config('entrust.role');
 
-        $user = User::create([
-            'name' => $data['name'],
+        $user = $userModel::create([
+            'active' => true,
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
 
-        if ($firstUser) {
-            $admin = Role::where('name', 'admin')->first();
+        if ($this->firstUser) {
+            $admin = $roleModel::whereName('admin')->first();
             $user->attachRole($admin);
         }
 

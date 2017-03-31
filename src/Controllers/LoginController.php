@@ -3,7 +3,6 @@
 namespace Sebastienheyd\Boilerplate\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -35,7 +34,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->redirectTo = config('auth.redirectTo','/');
+        $this->redirectTo = config('boilerplate.app.redirectTo','/');
         $this->middleware('guest', ['except' => 'logout']);
     }
 
@@ -46,10 +45,11 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        if (User::all()->count() === 0) {
-            return redirect(route('register'));
-        }
+        $userModel = config('auth.providers.users.model');
 
-        return view('auth.login');
+        if ($userModel::all()->count() === 0) {
+            return redirect(route('register'));}
+
+        return view('boilerplate::auth.login');
     }
 }

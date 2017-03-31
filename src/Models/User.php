@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Models;
+namespace Sebastienheyd\Boilerplate\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Notifications\ResetPassword as ResetPasswordNotification;
-
+use Sebastienheyd\Boilerplate\Notifications\ResetPassword as ResetPasswordNotification;
 
 class User extends Authenticatable
 {
@@ -19,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'active', 'last_name', 'first_name', 'email', 'password',
     ];
 
     /**

@@ -1,7 +1,8 @@
 <?php
 
 return [
-    'logo-lg'    => 'Boilerplate',
-    'logo-mini'  => 'BP',
-    'prefix'     => ''
+    'logo-lg'    => '<b>BO</b>ilerplate',
+    'logo-mini'  => 'BO',
+    'prefix'     => '',
+    'redirectTo' => '/'
 ];

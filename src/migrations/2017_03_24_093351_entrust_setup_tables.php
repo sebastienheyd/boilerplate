@@ -5,13 +5,29 @@ use Illuminate\Database\Schema\Blueprint;
 class EntrustSetupTables extends Migration
 {
     private $_roles = [
-        ['name' => 'admin', 'display_name' => 'Administrateur', 'description' => 'Administrateur du Back-Office (toutes les permissions)']
+        [
+            'name' => 'admin',
+            'display_name' => 'boilerplate::role.admin.display_name',
+            'description' => 'boilerplate::role.admin.description'
+        ]
     ];
 
     private $_permissions = [
-        ['name' => 'backend_access','display_name' => 'Accès au Back-Office','description' => 'L\'utilisateur peut accéder à l\'administration'],
-        ['name' => 'users_crud','display_name' => 'Gestion des utilisateurs','description' => 'Permet de créer, de supprimer et de modifier les utilisateurs'],
-        ['name' => 'roles_crud','display_name' => 'Gestion des rôles et permissions','description' => 'Permet d\'éditer et de définir les permissions pour un rôle'],
+        [
+            'name' => 'backend_access',
+            'display_name' => 'boilerplate::permissions.backend_access.display_name',
+            'description' => 'boilerplate::permissions.backend_access.description'
+        ],
+        [
+            'name' => 'users_crud',
+            'display_name' => 'boilerplate::permissions.users_crud.display_name',
+            'description' => 'boilerplate::permissions.users_crud.description',
+        ],
+        [
+            'name' => 'roles_crud',
+            'display_name' => 'boilerplate::permissions.roles_crud.display_name',
+            'description' => 'boilerplate::permissions.roles_crud.description'
+        ],
     ];
 
     /**

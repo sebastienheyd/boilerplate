@@ -4,6 +4,8 @@ $namespace = 'Sebastienheyd\Boilerplate\Controllers\\';
 
 Route::group(['prefix' => config('boilerplate.app.prefix', ''), 'middleware' => ['web']], function() use ($namespace) {
 
+    Route::get('/', ['as' => 'home', 'uses' => $namespace.'HomeController@index']);
+
     // Login Routes...
     Route::get('login', ['as' => 'login', 'uses' => $namespace.'LoginController@showLoginForm']);
     Route::post('login', ['as' => 'login.post', 'uses' => $namespace.'LoginController@login']);

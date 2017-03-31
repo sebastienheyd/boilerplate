@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace Sebastienheyd\Boilerplate\Models;
 
 use Zizaco\Entrust\EntrustPermission;
 
