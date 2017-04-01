@@ -1,5 +1,0 @@
-Configurer la base de données
-Définir la langue de l'application
-
-- si MySQL < 5.7, ajouter ```Schema::defaultStringLength(191);``` dans la méthode ```boot()``` du fichier ```app/Providers/AppServiceProvider.php``` (ne pas oublier de déclarer ```use Illuminate\Support\Facades\Schema;```)
-- supprimer le fichier webpack.mix.js à la racine
