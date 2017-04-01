@@ -1,4 +1,4 @@
-# Laravel - AdminLTE - Boilerplate [![Packagist License][badge_license]](LICENSE.md)
+# Laravel - AdminLTE - Boilerplate
 
 This package is to be served as a basis for a web application. It allows you to manage users, roles and permissions.
 
