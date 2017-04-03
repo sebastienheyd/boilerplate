@@ -1,11 +1,11 @@
-@extends('auth.layout', ['title' => 'Erreur 404'])
+xtends('boilerplate::auth.layout', ['title' => __('boilerplate::errors.403.title')])
 
 @section('content')
-    @component('auth.loginbox')
+    @component('boilerplate::auth.loginbox')
         <div class="text-center">
-            <h2 class="mtn">Erreur 403</h2>
-            <p>Vous n'êtes pas autorisé à accéder à cette page.</p>
-            <p><a href="{{ URL::previous() }}" class="btn btn-primary">Revenir à la page précédente</a></p>
+            <h2 class="mtn">{{ __('boilerplate::errors.403.title') }}</h2>
+            <p>{{ __('boilerplate::errors.403.message') }}</p>
+            <p><a href="{{ URL::previous() }}" class="btn btn-primary">{{ __('boilerplate::errors.backlink') }}</a></p>
         </div>
     @endcomponent
 @endsection
