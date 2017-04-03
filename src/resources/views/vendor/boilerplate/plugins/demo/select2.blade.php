@@ -16,9 +16,14 @@
     <div class="box-body">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <p class="small mbl">
-                    Ajoutez <code>&commat;include('load.select2')</code> dans la vue et appelez select2 via <code>&commat;push('js')</code>
-                </p>
+                Usage :
+                <pre>
+&commat;include('boilerplate::load.select2')
+&commat;push('js')
+    &lt;script>
+        $('.select2').select2();
+    &lt;/script>
+&commat;endpush</pre>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
@@ -73,5 +78,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="box-footer">
+        Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples and information about
+        the plugin.
     </div>
 </div>

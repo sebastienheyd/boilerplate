@@ -4,7 +4,7 @@
             <li class="header text-uppercase">{{ __('boilerplate::layout.mainmenu') }}</li>
             <li class="active">
                 <a href="#">
-                    <i class="fa fa-home"></i> <span>{{ __('boilerplate::layout.dashboard') }}</span>
+                    <i class="fa fa-cog"></i> <span>Plugins</span>
                 </a>
             </li>
             <li class="treeview">

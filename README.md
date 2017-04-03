@@ -15,7 +15,7 @@ This package is to be served as a basis for a web application. It allows you to 
 1. In order to install Laravel - AdminLTE - Boilerplate run :
 
 ```
-require sebastienheyd/boilerplate
+composer require sebastienheyd/boilerplate
 ```
 
 2. Open ```config/app.php``` and add the following to the ```providers``` array :

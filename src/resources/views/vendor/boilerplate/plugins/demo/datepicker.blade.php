@@ -10,12 +10,12 @@
     $('#daterange-btn').daterangepicker(
         {
             ranges: {
-                "Aujourd'hui": [moment(), moment()],
-                'Hier': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                'Les 7 derniers jours': [moment().subtract(6, 'days'), moment()],
-                'Les 30 derniers jours': [moment().subtract(29, 'days'), moment()],
-                'Ce mois': [moment().startOf('month'), moment().endOf('month')],
-                'Le mois dernier': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                "Today": [moment(), moment()],
+                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Last 7 days': [moment().subtract(6, 'days'), moment()],
+                'Last 30 days': [moment().subtract(29, 'days'), moment()],
+                'This month': [moment().startOf('month'), moment().endOf('month')],
+                'Last month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
             },
             startDate: moment().subtract(29, 'days'),
             endDate: moment()
@@ -35,6 +35,16 @@
         <h3 class="box-title">Date picker</h3>
     </div>
     <div class="box-body">
+        Usage :
+        <pre>
+&commat;include('boilerplate::load.datepicker')
+&commat;push('js')
+    &lt;script>
+        $('.daterangepicker').daterangepicker();
+        $('.datepicker').datepicker();
+    &lt;/script>
+&commat;endpush</pre>
+
         <!-- Date -->
         <div class="form-group">
             <label>Date:</label>

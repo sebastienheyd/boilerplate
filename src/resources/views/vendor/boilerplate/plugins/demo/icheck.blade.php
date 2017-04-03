@@ -8,10 +8,12 @@
         </div>
     </div>
     <div class="box-body">
-        <p class="small mbl">
-            Ajoutez <code>&commat;include('load.icheck')</code> dans la vue et ajoutez la classe <code>icheck</code>
-            aux balises input de type checkbox ou radio.
-        </p>
+        Usage :
+        <pre>
+&commat;include('boilerplate::load.icheck')
+&ltinput type="checkbox" class="icheck">
+</pre>
+
         <!-- checkbox -->
         <div class="form-group">
             <label>

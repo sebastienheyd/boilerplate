@@ -23,6 +23,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('boilerplate::_mockup.homepage');
+        return view('boilerplate::plugins.demo');
     }
 }
