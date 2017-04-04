@@ -44,7 +44,7 @@ class BoilerplateServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__.'/config/boilerplate/app.php', 'boilerplate.app');
-        $this->mergeConfigFrom(__DIR__.'/config/boilerplate/entrust.php', 'boilerplate.entrust');
+        $this->mergeConfigFrom(__DIR__.'/config/boilerplate/laratrust.php', 'boilerplate.laratrust');
         $this->mergeConfigFrom(__DIR__.'/config/boilerplate/auth.php', 'boilerplate.auth');
         $this->mergeConfigFrom(__DIR__.'/config/boilerplate/cache.php', 'boilerplate.cache');
 
@@ -55,8 +55,9 @@ class BoilerplateServiceProvider extends ServiceProvider
             'cache.default' => config('boilerplate.cache.default', 'array'),
         ]);
 
-        $this->_registerEntrust();
+        $this->_registerLaratrust();
         $this->_registerLaravelCollective();
+        $this->_registerActive();
     }
 
     private function _registerLaravelCollective()
@@ -68,22 +69,33 @@ class BoilerplateServiceProvider extends ServiceProvider
         $loader->alias('Html', \Collective\Html\HtmlFacade::class);
     }
 
-
     /**
      * Register the application bindings.
      *
      * @return void
      */
-    private function _registerEntrust()
+    private function _registerLaratrust()
     {
-        $this->app->register(\Zizaco\Entrust\EntrustServiceProvider::class);
+        $this->app->register(\Laratrust\LaratrustServiceProvider::class);
 
         $loader = AliasLoader::getInstance();
-        $loader->alias('Entrust', \Zizaco\Entrust\EntrustFacade::class);
+        $loader->alias('Laratrust', \Laratrust\LaratrustFacade::class);
 
         config([
-            'entrust.role' => config('boilerplate.entrust.role', 'App\Role'),
-            'entrust.permission' => config('boilerplate.entrust.permission', 'App\Permission'),
+            'laratrust.role' => config('boilerplate.laratrust.role', 'App\Role'),
+            'laratrust.permission' => config('boilerplate.laratrust.permission', 'App\Permission'),
         ]);
+
+        app('router')->aliasMiddleware('role', \Laratrust\Middleware\LaratrustRole::class);
+        app('router')->aliasMiddleware('permission', \Laratrust\Middleware\LaratrustPermission::class);
+        app('router')->aliasMiddleware('ability', \Laratrust\Middleware\LaratrustAbility::class);
+
+    }
+
+    private function _registerActive()
+    {
+        $this->app->register(\HieuLe\Active\ActiveServiceProvider::class);
+        $loader = AliasLoader::getInstance();
+        $loader->alias('Active', \HieuLe\Active\Facades\Active::class);
     }
 }

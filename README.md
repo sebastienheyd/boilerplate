@@ -7,8 +7,9 @@ This package is to be served as a basis for a web application. It allows you to 
 * [Admin LTE Theme](https://almsaeedstudio.com/)
 * [Bootstrap 3](http://getbootstrap.com/)
 * [Font Awesome](http://fontawesome.io/)
-* [zizaco/entrust](https://github.com/Zizaco/entrust)
+* [santigarcor/laratrust](https://github.com/santigarcor/laratrust)
 * [laravelcollective/html](https://github.com/laravelcollective/html)
+* [hieu-le/active](https://github.com/letrunghieu/active)
 
 ## Installation
 

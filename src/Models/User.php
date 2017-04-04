@@ -3,14 +3,14 @@
 namespace Sebastienheyd\Boilerplate\Models;
 
 use Illuminate\Notifications\Notifiable;
-use Zizaco\Entrust\Traits\EntrustUserTrait;
+use Laratrust\Traits\LaratrustUserTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Sebastienheyd\Boilerplate\Notifications\ResetPassword as ResetPasswordNotification;
 
 class User extends Authenticatable
 {
     use Notifiable;
-    use EntrustUserTrait;
+    use LaratrustUserTrait;
 
     /**
      * The attributes that are mass assignable.
