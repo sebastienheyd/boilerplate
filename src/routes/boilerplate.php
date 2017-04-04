@@ -4,8 +4,6 @@ $ns = 'Sebastienheyd\Boilerplate\Controllers\\';
 
 Route::group(['prefix' => config('boilerplate.app.prefix', ''), 'middleware' => ['web']], function() use ($ns) {
 
-    Route::get('/', ['as' => 'home', 'uses' => $ns.'HomeController@index']);
-
     // Login Routes...
     Route::get('login', ['as' => 'login', 'uses' => $ns.'Auth\LoginController@showLoginForm']);
     Route::post('login', ['as' => 'login.post', 'uses' => $ns.'Auth\LoginController@login']);
@@ -21,4 +19,11 @@ Route::group(['prefix' => config('boilerplate.app.prefix', ''), 'middleware' => 
     Route::get('password/reset/{token}', ['as' => 'password.reset', 'uses' => $ns.'Auth\ResetPasswordController@showResetForm']);
     Route::post('password/reset', ['as' => 'password.reset.post', 'uses' => $ns.'Auth\ResetPasswordController@reset']);
 
+});
+
+Route::group(['prefix' => config('boilerplate.app.prefix', ''), 'middleware' => ['web', 'auth']], function() use ($ns) {
+
+    Route::get('/', ['as' => 'home', 'uses' => $ns.'HomeController@index']);
+
+    Route::resource('/access/roles', $ns.'Users\RolesController');
 });

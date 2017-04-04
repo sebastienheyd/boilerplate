@@ -1,7 +1,7 @@
 {
     "name": "sebastienheyd/boilerplate",
     "description": "Boilerplate with AdminLTE, user management, roles, permissions for Laravel >= 5.4",
-    "keywords": ["laravel", "adminlte", "entrust", "admin"],
+    "keywords": ["laravel", "adminlte", "laratrust", "laravelcollective", "active", "admin"],
     "license": "MIT",
     "require": {
         "illuminate/support": "^5.4",

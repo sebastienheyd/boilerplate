@@ -5,7 +5,7 @@ return [
     'logout' => 'Logout',
     'home'  => 'Home',
     'dashboard'  => 'Dashboard',
-    'administration'  => 'Administration',
-    'role_managament'  => 'Role management',
-    'user_managament'  => 'User management',
+    'access'  => 'Access management',
+    'role_management'  => 'Role management',
+    'user_management'  => 'User management',
 ];

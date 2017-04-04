@@ -5,7 +5,7 @@ return [
     'logout' => 'Déconnexion',
     'home'  => 'Accueil',
     'dashboard'  => 'Tableau de bord',
-    'administration'  => 'Administration',
-    'role_managament'  => 'Gestion des rôles',
-    'user_managament'  => 'Gestion des utilisateurs',
+    'access'  => 'Gestion des accès',
+    'role_management'  => 'Gestion des rôles',
+    'user_management'  => 'Gestion des utilisateurs',
 ];

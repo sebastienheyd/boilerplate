@@ -78,7 +78,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $userModel = config('auth.providers.users.model');
-        $roleModel = config('entrust.role');
+        $roleModel = config('laratrust.role');
 
         $user = $userModel::create([
             'active' => true,
