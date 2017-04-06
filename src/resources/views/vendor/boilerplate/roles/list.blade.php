@@ -21,7 +21,6 @@
                 <thead>
                 <tr>
                     <th>Libellé</th>
-                    <th>Slug</th>
                     <th>Description</th>
                     <th></th>
                 </tr>
@@ -29,9 +28,11 @@
                 <tbody>
                 @foreach($roles as $role)
                     <tr>
-                        <td><strong>{{ __($role->display_name) }}</strong></td>
-                        <td>{{ $role->name }}</td>
-                        <td>{{ __($role->description) }}</td>
+                        <td><strong>{{ $role->display_name }}</strong></td>
+                        <td>
+                            {{ $role->description }}<br />
+                            <small class="text-muted">{{ $role->permissions->implode('display_name', ', ') }}</small>
+                        </td>
                         <td>
                             <a href="{{ URL::route('roles.edit', $role->id) }}" class="btn btn-sm btn-primary"><span class="fa fa-pencil"></span></a>
                         </td>

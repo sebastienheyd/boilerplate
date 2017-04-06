@@ -25,7 +25,7 @@
                     <div class="box-body">
                         <div class="form-group {{ $errors->has('display_name') ? 'has-error' : '' }}">
                             {{ Form::label('display_name', 'Libellé') }}
-                            {{ Form::text('display_name', old('display_name'), ['class' => 'form-control']) }}
+                            {{ Form::text('display_name', old('display_name'), ['class' => 'form-control', 'autofocus']) }}
                             {!! $errors->first('display_name','<p class="text-danger"><strong>:message</strong></p>') !!}
                         </div>
                         <div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">

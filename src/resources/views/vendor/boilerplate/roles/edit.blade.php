@@ -26,12 +26,12 @@
                         {!! $errors->first('name','<p class="text-danger"><strong>:message</strong></p>') !!}
                         <div class="form-group {{ $errors->has('display_name') ? 'has-error' : '' }}">
                             {{ Form::label('display_name', 'Display name') }}
-                            {{ Form::text('display_name', old('display_name', __($role->display_name)), ['class' => 'form-control']) }}
+                            {{ Form::text('display_name', old('display_name', $role->display_name), ['class' => 'form-control', 'autofocus']) }}
                             {!! $errors->first('display_name','<p class="text-danger"><strong>:message</strong></p>') !!}
                         </div>
                         <div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
                             {{ Form::label('description', 'Description') }}
-                            {{ Form::text('description', old('description', __($role->description)), ['class' => 'form-control']) }}
+                            {{ Form::text('description', old('description', $role->description), ['class' => 'form-control']) }}
                             {!! $errors->first('description','<p class="text-danger"><strong>:message</strong></p>') !!}
                         </div>
                     </div>
@@ -56,8 +56,8 @@
                                         @endif
                                     </td>
                                     <td>
-                                        {{ Form::label('permission_'.$permission->id, __($permission->display_name), ['class' => 'mbn']) }}<br />
-                                        <small>{{ __($permission->description) }}</small>
+                                        {{ Form::label('permission_'.$permission->id, $permission->display_name, ['class' => 'mbn']) }}<br />
+                                        <small>{{ $permission->description }}</small>
                                     </td>
                                 </tr>
                             @endforeach

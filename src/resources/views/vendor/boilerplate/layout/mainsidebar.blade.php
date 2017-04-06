@@ -25,8 +25,8 @@
                     @endability
 
                     @ability('admin','users_crud')
-                    <li>
-                        <a href="#">
+                    <li class="{{ active_class(if_route_pattern('users.*')) }}">
+                        <a href="{{ route('users.index') }}">
                             <i class="fa fa-circle-o"></i> {{ __('boilerplate::layout.user_management') }}
                         </a>
                     </li>

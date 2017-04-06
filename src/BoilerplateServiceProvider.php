@@ -22,6 +22,7 @@ class BoilerplateServiceProvider extends ServiceProvider
             __DIR__ . '/resources'      => base_path('resources/'),
             __DIR__ . '/public'         => base_path('public/'),
             __DIR__ . '/Models'         => app_path('Models'),
+            __DIR__ . '/Notifications'  => app_path('Notifications'),
             __DIR__ . '/webpack.mix.js' => base_path('webpack.mix.js'),
         ]);
 
@@ -58,6 +59,20 @@ class BoilerplateServiceProvider extends ServiceProvider
         $this->_registerLaratrust();
         $this->_registerLaravelCollective();
         $this->_registerActive();
+        $this->_registerDatatables();
+        $this->_registerDate();
+    }
+
+    private function _registerDate()
+    {
+        $this->app->register(\Jenssegers\Date\DateServiceProvider::class);
+        $loader = AliasLoader::getInstance();
+        $loader->alias('Date', \Jenssegers\Date\Date::class);
+    }
+
+    private function _registerDatatables()
+    {
+        $this->app->register(\Yajra\Datatables\DatatablesServiceProvider::class);
     }
 
     private function _registerLaravelCollective()

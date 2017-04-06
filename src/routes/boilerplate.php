@@ -19,11 +19,16 @@ Route::group(['prefix' => config('boilerplate.app.prefix', ''), 'middleware' => 
     Route::get('password/reset/{token}', ['as' => 'password.reset', 'uses' => $ns.'Auth\ResetPasswordController@showResetForm']);
     Route::post('password/reset', ['as' => 'password.reset.post', 'uses' => $ns.'Auth\ResetPasswordController@reset']);
 
+    Route::get('connect/{token?}', ['as' => 'users.firstlogin', 'uses' => $ns.'Users\UsersController@firstLogin']);
+    Route::post('connect/{token?}', ['uses' => $ns.'Users\UsersController@firstLoginPost']);
+
 });
 
 Route::group(['prefix' => config('boilerplate.app.prefix', ''), 'middleware' => ['web', 'auth']], function() use ($ns) {
 
-    Route::get('/', ['as' => 'home', 'uses' => $ns.'HomeController@index']);
-
+    Route::get('/', ['as' => 'boilerplate.home', 'uses' => $ns.'HomeController@index']);
     Route::resource('/access/roles', $ns.'Users\RolesController');
+    Route::resource('/access/users', $ns.'Users\UsersController');
+    Route::any('/access/users/dt', ['as' => 'users.datatable', 'uses' => $ns.'Users\UsersController@datatable']);
+
 });
