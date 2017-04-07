@@ -4,18 +4,20 @@ namespace Sebastienheyd\Boilerplate;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\AliasLoader;
+use Illuminate\Support\Facades\View;
 
 class BoilerplateServiceProvider extends ServiceProvider
 {
     protected $defer = false;
 
     /**
-     * Bootstrap the application services.
+     * Bootstrap the boilerplate services.
      *
      * @return void
      */
     public function boot()
     {
+        // Publish all files when calling php artisan vendor:publish
         $this->publishes([
             __DIR__ . '/config'         => config_path(),
             __DIR__ . '/routes'         => base_path('routes/'),
@@ -23,18 +25,23 @@ class BoilerplateServiceProvider extends ServiceProvider
             __DIR__ . '/public'         => base_path('public/'),
             __DIR__ . '/Models'         => app_path('Models'),
             __DIR__ . '/Notifications'  => app_path('Notifications'),
-            __DIR__ . '/webpack.mix.js' => base_path('webpack.mix.js'),
+            __DIR__ . '/webpack.mix.js' => base_path('webpack.mix.js'), // Remove the original file for this one if needed
         ]);
 
+        // If routes file has been published load routes from published file
         if(is_file(base_path('routes/boilerplate.php'))) {
             $this->loadRoutesFrom(base_path('routes/boilerplate.php'));
         } else {
             $this->loadRoutesFrom(__DIR__ . '/routes/boilerplate.php');
         }
 
+        // Load migrations, views and translations from current directory
         $this->loadMigrationsFrom(__DIR__.'/migrations');
         $this->loadViewsFrom(__DIR__.'/resources/views/vendor/boilerplate', 'boilerplate');
         $this->loadTranslationsFrom(__DIR__.'/resources/lang/vendor/boilerplate', 'boilerplate');
+
+        // Loading dynamic menu when calling the view
+        View::composer('boilerplate::layout.mainsidebar', 'Sebastienheyd\Boilerplate\ViewComposers\MenuComposer');
     }
 
     /**
@@ -44,11 +51,13 @@ class BoilerplateServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        // Get config
         $this->mergeConfigFrom(__DIR__.'/config/boilerplate/app.php', 'boilerplate.app');
         $this->mergeConfigFrom(__DIR__.'/config/boilerplate/laratrust.php', 'boilerplate.laratrust');
         $this->mergeConfigFrom(__DIR__.'/config/boilerplate/auth.php', 'boilerplate.auth');
         $this->mergeConfigFrom(__DIR__.'/config/boilerplate/cache.php', 'boilerplate.cache');
 
+        // Overriding Laravel config
         config([
             'auth.providers.users.driver' => config('boilerplate.auth.providers.users.driver', 'eloquent'),
             'auth.providers.users.model' => config('boilerplate.auth.providers.users.model', 'App\User'),
@@ -56,11 +65,20 @@ class BoilerplateServiceProvider extends ServiceProvider
             'cache.default' => config('boilerplate.cache.default', 'array'),
         ]);
 
+        // Loading packages
         $this->_registerLaratrust();
         $this->_registerLaravelCollective();
         $this->_registerActive();
         $this->_registerDatatables();
         $this->_registerDate();
+        $this->_registerMenu();
+    }
+
+    private function _registerMenu()
+    {
+        $this->app->register(\Lavary\Menu\ServiceProvider::class);
+        $loader = AliasLoader::getInstance();
+        $loader->alias('Menu', \Lavary\Menu\Facade::class);
     }
 
     private function _registerDate()

@@ -9,6 +9,7 @@
         "santigarcor/laratrust": "^3.2",
         "hieu-le/active": "^3.4",
         "yajra/laravel-datatables-oracle": "^7.3",
+        "lavary/laravel-menu": "^1.6",
         "jenssegers/date": "^3.2"
     },
     "require-dev": {
