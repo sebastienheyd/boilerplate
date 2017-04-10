@@ -3,6 +3,7 @@
 namespace Sebastienheyd\Boilerplate\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -39,6 +40,10 @@ class RegisterController extends Controller
 
         $userModel = config('auth.providers.users.model');
         $this->firstUser = $userModel::all()->count() === 0;
+        
+        if(!$this->firstUser && !config('boilerplate.auth.register')) {
+            abort('404');
+        }
 
         $this->middleware('guest');
     }
@@ -86,11 +91,15 @@ class RegisterController extends Controller
             'last_name' => $data['last_name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'last_login' => Carbon::now()->toDateTimeString()
         ]);
 
         if ($this->firstUser) {
             $admin = $roleModel::whereName('admin')->first();
             $user->attachRole($admin);
+        } else {
+            $role = $roleModel::whereName(config('boilerplate.auth.register_role'))->first();
+            $user->attachRole($role);
         }
 
         return $user;

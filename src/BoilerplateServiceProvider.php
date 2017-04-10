@@ -9,6 +9,21 @@ use Illuminate\Support\Facades\View;
 class BoilerplateServiceProvider extends ServiceProvider
 {
     protected $defer = false;
+    protected $loader;
+    protected $router;
+
+    /**
+     * Create a new boilerplate service provider instance.
+     *
+     * @param  \Illuminate\Foundation\Application  $app
+     * @return void
+     */
+    public function __construct($app)
+    {
+        $this->loader = AliasLoader::getInstance();
+        $this->router = app('router');
+        return parent::__construct($app);
+    }
 
     /**
      * Bootstrap the boilerplate services.
@@ -28,7 +43,7 @@ class BoilerplateServiceProvider extends ServiceProvider
             __DIR__ . '/webpack.mix.js' => base_path('webpack.mix.js'), // Remove the original file for this one if needed
         ]);
 
-        // If routes file has been published load routes from published file
+        // If routes file has been published, load routes from the published file
         if(is_file(base_path('routes/boilerplate.php'))) {
             $this->loadRoutesFrom(base_path('routes/boilerplate.php'));
         } else {
@@ -56,6 +71,7 @@ class BoilerplateServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/config/boilerplate/laratrust.php', 'boilerplate.laratrust');
         $this->mergeConfigFrom(__DIR__.'/config/boilerplate/auth.php', 'boilerplate.auth');
         $this->mergeConfigFrom(__DIR__.'/config/boilerplate/cache.php', 'boilerplate.cache');
+        $this->mergeConfigFrom(__DIR__.'/config/boilerplate/menu.php', 'boilerplate.menu');
 
         // Overriding Laravel config
         config([
@@ -74,61 +90,68 @@ class BoilerplateServiceProvider extends ServiceProvider
         $this->_registerMenu();
     }
 
+    /**
+     * Register package lavary/laravel-menu
+     */
     private function _registerMenu()
     {
         $this->app->register(\Lavary\Menu\ServiceProvider::class);
-        $loader = AliasLoader::getInstance();
-        $loader->alias('Menu', \Lavary\Menu\Facade::class);
+        $this->loader->alias('Menu', \Lavary\Menu\Facade::class);
     }
 
+    /**
+     * Register package jenssegers/date
+     */
     private function _registerDate()
     {
         $this->app->register(\Jenssegers\Date\DateServiceProvider::class);
-        $loader = AliasLoader::getInstance();
-        $loader->alias('Date', \Jenssegers\Date\Date::class);
+        $this->loader->alias('Date', \Jenssegers\Date\Date::class);
     }
 
+    /**
+     * Register package yajra/laravel-datatables-oracle
+     */
     private function _registerDatatables()
     {
         $this->app->register(\Yajra\Datatables\DatatablesServiceProvider::class);
     }
 
+    /**
+     * Register package laravelcollective/html
+     */
     private function _registerLaravelCollective()
     {
         $this->app->register(\Collective\Html\HtmlServiceProvider::class);
-
-        $loader = AliasLoader::getInstance();
-        $loader->alias('Form', \Collective\Html\FormFacade::class);
-        $loader->alias('Html', \Collective\Html\HtmlFacade::class);
+        $this->loader->alias('Form', \Collective\Html\FormFacade::class);
+        $this->loader->alias('Html', \Collective\Html\HtmlFacade::class);
     }
 
     /**
-     * Register the application bindings.
-     *
-     * @return void
+     * Register package lavary/laravel-menu
      */
     private function _registerLaratrust()
     {
         $this->app->register(\Laratrust\LaratrustServiceProvider::class);
+        $this->loader->alias('Laratrust', \Laratrust\LaratrustFacade::class);
 
-        $loader = AliasLoader::getInstance();
-        $loader->alias('Laratrust', \Laratrust\LaratrustFacade::class);
-
+        // Overriding config
         config([
             'laratrust.role' => config('boilerplate.laratrust.role', 'App\Role'),
             'laratrust.permission' => config('boilerplate.laratrust.permission', 'App\Permission'),
         ]);
 
-        app('router')->aliasMiddleware('role', \Laratrust\Middleware\LaratrustRole::class);
-        app('router')->aliasMiddleware('permission', \Laratrust\Middleware\LaratrustPermission::class);
-        app('router')->aliasMiddleware('ability', \Laratrust\Middleware\LaratrustAbility::class);
-
+        // Registering middlewares
+        $this->router->aliasMiddleware('role', \Laratrust\Middleware\LaratrustRole::class);
+        $this->router->aliasMiddleware('permission', \Laratrust\Middleware\LaratrustPermission::class);
+        $this->router->aliasMiddleware('ability', \Laratrust\Middleware\LaratrustAbility::class);
     }
 
+    /**
+     * Register package hieu-le/active
+     */
     private function _registerActive()
     {
         $this->app->register(\HieuLe\Active\ActiveServiceProvider::class);
-        $loader = AliasLoader::getInstance();
-        $loader->alias('Active', \HieuLe\Active\Facades\Active::class);
+        $this->loader->alias('Active', \HieuLe\Active\Facades\Active::class);
     }
 }

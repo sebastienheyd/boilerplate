@@ -24,7 +24,7 @@ Route::group(['prefix' => config('boilerplate.app.prefix', ''), 'middleware' => 
 
 });
 
-Route::group(['prefix' => config('boilerplate.app.prefix', ''), 'middleware' => ['web', 'auth']], function() use ($ns) {
+Route::group(['prefix' => config('boilerplate.app.prefix', ''), 'middleware' => ['web', 'auth', 'ability:admin,backend_access']], function() use ($ns) {
 
     Route::get('/', ['as' => 'boilerplate.home', 'uses' => $ns.'HomeController@index']);
     Route::resource('/access/roles', $ns.'Users\RolesController');

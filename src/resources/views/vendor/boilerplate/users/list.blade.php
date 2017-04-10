@@ -23,11 +23,13 @@
                 <thead>
                 <tr>
                     <th>Id</th>
+                    <th>État</th>
                     <th>Nom</th>
                     <th>Prénom</th>
                     <th>Email</th>
                     <th>Role(s)</th>
                     <th>Date de création</th>
+                    <th>Dernière connexion</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -50,12 +52,14 @@
                 headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'}
             },
             columns: [
-                {data: 'id', name: 'id', visible: false},
+                {data: 'id', name: 'id'},
+                {data: 'status', name: 'status'},
                 {data: 'last_name', name: 'last_name'},
                 {data: 'first_name', name: 'first_name'},
                 {data: 'email', name: 'email'},
                 {data: 'roles', name: 'roles', searchable: false},
                 {data: 'created_at', name: 'created_at', searchable: false},
+                {data: 'last_login', name: 'last_login', searchable: false},
                 {data: 'actions', name: 'actions', orderable: false, searchable: false, width : '80px'}
             ]
         });

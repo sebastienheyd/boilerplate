@@ -3,7 +3,9 @@
 namespace Sebastienheyd\Boilerplate\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -51,5 +53,38 @@ class LoginController extends Controller
             return redirect(route('register'));}
 
         return view('boilerplate::auth.login');
+    }
+
+    /**
+     * Validate the user login request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return void
+     */
+    protected function validateLogin(Request $request)
+    {
+        $this->validate($request, [
+            $this->username() => 'required|exists:users,'.$this->username().',active,1', 'password' => 'required',
+        ],[
+            $this->username() . '.exists' => __('auth.failed')
+        ]);
+    }
+
+    /**
+     * Send the response after the user was authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    protected function sendLoginResponse(Request $request)
+    {
+        $request->session()->regenerate();
+
+        $this->clearLoginAttempts($request);
+        
+        $this->guard()->user()->update(['last_login' => Carbon::now()->toDateTimeString()]);
+
+        return $this->authenticated($request, $this->guard()->user())
+            ?: redirect()->intended($this->redirectPath());
     }
 }

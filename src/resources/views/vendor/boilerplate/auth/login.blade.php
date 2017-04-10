@@ -39,6 +39,8 @@
         {!! Form::close() !!}
 
         <a href="{{ route('password.request') }}">{{ __('boilerplate::auth.login.forgotpassword') }}</a><br>
-        <a href="{{ route('register') }}" class="text-center">{{ __('boilerplate::auth.login.register') }}</a>
+        @if(config('boilerplate.auth.register'))
+            <a href="{{ route('register') }}" class="text-center">{{ __('boilerplate::auth.login.register') }}</a>
+        @endif
     @endcomponent
 @endsection

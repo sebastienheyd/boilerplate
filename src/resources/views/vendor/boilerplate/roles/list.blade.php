@@ -22,19 +22,35 @@
                 <tr>
                     <th>Libellé</th>
                     <th>Description</th>
+                    <th>Permissions</th>
+                    <th>Nb utilisateurs</th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($roles as $role)
                     <tr>
-                        <td><strong>{{ $role->display_name }}</strong></td>
                         <td>
-                            {{ $role->description }}<br />
-                            <small class="text-muted">{{ $role->permissions->implode('display_name', ', ') }}</small>
+                            <strong>{{ $role->display_name }}</strong>
                         </td>
                         <td>
-                            <a href="{{ URL::route('roles.edit', $role->id) }}" class="btn btn-sm btn-primary"><span class="fa fa-pencil"></span></a>
+                            {{ $role->description }}<br />
+                        </td>
+                        <td>
+                            {!! $role->permissions->implode('display_name', ', ') !!}
+                        </td>
+                        <td>
+                            {{ $role->getNbUsers() }}
+                        </td>
+                        <td>
+                            <a href="{{ URL::route('roles.edit', $role->id) }}" class="btn btn-sm btn-primary">
+                                <span class="fa fa-pencil"></span>
+                            </a>
+                            @if($role->name !== 'admin')
+                                <a href="{{ URL::route('roles.destroy', $role->id) }}" class="btn btn-sm btn-danger destroy">
+                                    <span class="fa fa-trash"></span>
+                                </a>
+                            @endif
                         </td>
                     </tr>
                 @endforeach
@@ -44,9 +60,13 @@
     </div>
 @endsection
 
-@push('scripts')
+@include('boilerplate::load.datatables')
+
+@push('js')
 <script>
     $(function () {
+
+        $('#roles-table').dataTable();
 
         $('#roles-table').on('click', '.destroy', function (e) {
             e.preventDefault();

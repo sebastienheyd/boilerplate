@@ -4,6 +4,7 @@ namespace Sebastienheyd\Boilerplate\Controllers\Users;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use Yajra\Datatables\Datatables;
@@ -14,13 +15,35 @@ use URL;
 
 class UsersController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Users Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller handles the users management.
+    |
+    */
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
-        $this->middleware('ability:admin,users_crud', ['except' => ['avatar', 'avatarDelete', 'avatarPost', 'firstLogin', 'firstLoginPost']]);
+        $this->middleware('ability:admin,users_crud', [
+            'except' => [
+                'firstLogin',
+                'firstLoginPost',
+                'avatar',
+                'avatarDelete',
+                'avatarPost'
+            ]
+        ]);
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a listing of users.
      *
      * @return \Illuminate\Http\Response
      */
@@ -30,47 +53,56 @@ class UsersController extends Controller
     }
 
     /**
-     * Liste des utilisateurs
+     * To display dynamic table by datatable
      *
      * @return mixed
      */
     public function datatable()
     {
         return Datatables::of(User::select('*'))
-          ->rawColumns(['actions'])
+          ->rawColumns(['actions', 'status'])
           ->editColumn('created_at', function ($user) {
-            return ucwords($user->created_at->format(__('boilerplate::date.lFdY')));
+            return $user->created_at->format(__('boilerplate::date.YmdHis'));
+        })->editColumn('last_login', function ($user) {
+            return $user->getLastLogin(__('boilerplate::date.YmdHis'), '-');
+        })->editColumn('status', function ($user) {
+            if($user->active == 1) return '<span class="label label-success">Activé</span>';
+            return '<span class="label label-danger">Désactivé</span>';
         })->editColumn('roles', function ($user) {
             return $user->getRolesList();
         })->editColumn('actions', function ($user) {
             $currentUser = Auth::user();
 
-            // Les admins peuvent tout éditer
+            // Admin can edit and delete anyone...
             if ($currentUser->hasRole('admin')) {
                 $b = '<a href="' . URL::route('users.edit', $user->id) . '" class="btn btn-primary btn-sm mrs"><i class="fa fa-pencil"></i></a>';
+
+                // ...except delete himself
                 if ($user->id !== $currentUser->id) {
                     $b .= '<a href="' . URL::route('users.destroy', $user->id) . '" class="btn btn-danger btn-sm destroy"><i class="fa fa-trash"></i></a>';
                 }
                 return $b;
             }
 
-            // L'utilisateur est l'utilisateur courant
+            // The user is the current user, you can't delete yourself
             if ($user->id === $currentUser->id) {
                 return '<a href="' . URL::route('users.edit', $user) . '" class="btn btn-primary btn-sm mrs"><i class="fa fa-pencil"></i></a>';
             }
 
-            // Si l'utilisateur
-            if (!$user->hasRole('admin')) {
-                $b = '<a href="' . URL::route('users.edit', $user->id) . '" class="btn btn-primary btn-sm mrs"><i class="fa fa-pencil"></i></a>';
+            $b = '<a href="' . URL::route('users.edit', $user->id) . '" class="btn btn-primary btn-sm mrs"><i class="fa fa-pencil"></i></a>';
+
+            // Current user is not admin, only admin can delete another admin
+            if(!$user->hasRole('admin')) {
                 $b .= '<a href="' . URL::route('users.destroy', $user->id) . '" class="btn btn-danger btn-sm destroy"><i class="fa fa-trash"></i></a>';
             }
 
-            return '';
+            return $b;
+
         })->make(true);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new user.
      *
      * @return \Illuminate\Http\Response
      */
@@ -86,7 +118,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created user in storage.
      *
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
@@ -112,7 +144,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified user.
      *
      * @param  int $id
      * @return \Illuminate\Http\Response
@@ -123,7 +155,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified user.
      *
      * @param  int $id
      * @return \Illuminate\Http\Response
@@ -142,7 +174,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified user in storage.
      *
      * @param  \Illuminate\Http\Request $request
      * @param  int $id
@@ -167,7 +199,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified user from storage.
      *
      * @param  int $id
      * @return \Illuminate\Http\Response
@@ -178,7 +210,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Affichage du formulaire de création du mot de passe
+     * Show the form to set a new password on the first login
      *
      * @param $token
      * @param Request $request
@@ -192,7 +224,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Traitement de la création du mot de passe
+     * Store a newly created password in storage after the first login.
      *
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
@@ -209,6 +241,7 @@ class UsersController extends Controller
 
         $user->password = bcrypt($request->input('password'));
         $user->remember_token = str_random(32);
+        $user->last_login = Carbon::now()->toDateTimeString();
         $user->save();
 
         Auth::attempt(['email' => $user->email, 'password' => $request->input('password'), 'active' => 1]);

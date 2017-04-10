@@ -4,12 +4,16 @@ This package is to be served as a basis for a web application. It allows you to 
 
 ## Features
 
-* [Admin LTE Theme](https://almsaeedstudio.com/)
-* [Bootstrap 3](http://getbootstrap.com/)
-* [Font Awesome](http://fontawesome.io/)
-* [santigarcor/laratrust](https://github.com/santigarcor/laratrust)
-* [laravelcollective/html](https://github.com/laravelcollective/html)
-* [hieu-le/active](https://github.com/letrunghieu/active)
+* Backend theme [Admin LTE](https://almsaeedstudio.com/)
+* Css framework [Bootstrap 3](http://getbootstrap.com/)
+* Additional icons by [Font Awesome](http://fontawesome.io/)
+* Role-based permissions provided by [santigarcor/laratrust](https://github.com/santigarcor/laratrust)
+* Forms & Html helpers by [laravelcollective/html](https://github.com/laravelcollective/html) 
+* Menu dynamically builded by [lavary/laravel-menu](https://github.com/lavary/laravel-menu)
+* Menu items activated by [hieu-le/active](https://github.com/letrunghieu/active)
+* Server-sided datatables methods provided by [yajra/laravel-datatables](https://github.com/yajra/laravel-datatables)
+* Multi-language date support by [jenssegers/date](https://github.com/jenssegers/date)
+* Localized English-French
 
 ## Installation
 
@@ -36,3 +40,5 @@ php artisan vendor:publish
 ```
 php artisan migrate
 ```
+
+You are ready to go !

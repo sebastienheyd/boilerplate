@@ -3,6 +3,7 @@
 namespace Sebastienheyd\Boilerplate\Models;
 
 use Laratrust\LaratrustRole;
+use Sebastienheyd\Boilerplate\Models\User;
 
 class Role extends LaratrustRole
 {
@@ -16,5 +17,10 @@ class Role extends LaratrustRole
     public function getDescriptionAttribute($value)
     {
         return __($value);
+    }
+
+    public function getNbUsers()
+    {
+        return User::whereRoleIs($this->name)->count();
     }
 }

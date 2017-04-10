@@ -9,6 +9,11 @@ class LaratrustSetupTables extends Migration
             'name' => 'admin',
             'display_name' => 'boilerplate::role.admin.display_name',
             'description' => 'boilerplate::role.admin.description'
+        ],
+        [
+            'name' => 'backend_user',
+            'display_name' => 'boilerplate::role.backend_user.display_name',
+            'description' => 'boilerplate::role.backend_user.description'
         ]
     ];
 
@@ -104,6 +109,8 @@ class LaratrustSetupTables extends Migration
             $permission['updated_at'] = date('Y-m-d H:i:s');
             DB::table('permissions')->insert($permission);
         }
+
+        DB::table('permission_role')->insert(['permission_id' => 1, 'role_id' => 2]);
     }
 
     /**
