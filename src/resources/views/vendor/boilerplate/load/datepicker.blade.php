@@ -6,19 +6,14 @@
     @endpush
 
     @push('js')
-
-        @if(!defined('LOAD_MOMENT'))
-            <script src="{!! asset('/js/plugins/daterangepicker/moment.min.js') !!}"></script>
-            <?php define('LOAD_MOMENT', true)  ?>
-        @endif
-
+        @include('boilerplate::load.moment')
         <script src="{!! asset('/js/plugins/datepicker/bootstrap-datepicker.js') !!}"></script>
-        <script src="{!! asset('/js/plugins/datepicker/locales/bootstrap-datepicker.fr.js') !!}"></script>
-
+        @if(config('app.locale') !== 'en')
+            <script src="{!! asset('/js/plugins/datepicker/locales/bootstrap-datepicker.'.config('app.locale').'.js') !!}"></script>
+        @endif
         <script src="{!! asset('/js/plugins/daterangepicker/daterangepicker.js') !!}"></script>
-
         <script>
-            $.fn.datepicker.defaults.language = 'fr';
+            $.fn.datepicker.defaults.language = '{{ config('app.locale') }}';
             $.fn.datepicker.defaults.autoclose = true;
         </script>
     @endpush

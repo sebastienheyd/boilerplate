@@ -23,4 +23,5 @@ mix.scripts([
 ], 'public/js/boilerplate.js')
     .copy('node_modules/admin-lte/plugins/', 'public/js/plugins/', false)
     .copy('node_modules/drmonty-datatables-plugins/', 'public/js/plugins/datatables/plugins/', false)
+    .copy('node_modules/moment/', 'public/js/plugins/moment/', false)
     .less('resources/assets/less/boilerplate.less', 'public/css/boilerplate.css');

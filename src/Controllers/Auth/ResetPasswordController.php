@@ -35,7 +35,7 @@ class ResetPasswordController extends Controller
      */
     public function __construct()
     {
-        $this->redirectTo = config('auth.redirectTo','/home');
+        $this->redirectTo = route(config('boilerplate.app.redirectTo','boilerplate.home'));
         $this->middleware('guest');
     }
 

@@ -3,7 +3,6 @@
 namespace Sebastienheyd\Boilerplate\ViewComposers;
 
 use Illuminate\View\View;
-use Laratrust\Laratrust;
 use Lavary\Menu\Builder;
 use Menu;
 use Auth;

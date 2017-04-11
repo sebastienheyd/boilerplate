@@ -25,7 +25,7 @@
                     <div class="box-body">
                         <div class="form-group {{ $errors->has('active') ? 'has-error' : '' }}">
                             {{ Form::label('active', 'Statut') }}
-                            {{ Form::select("active", ['0' => 'Désactivé', '1' => 'Actif'], old('active', 1), ['class' => 'form-control']) }}
+                            {{ Form::select("active", ['0' => 'Désactivé', '1' => 'Activé'], old('active', 1), ['class' => 'form-control']) }}
                             {!! $errors->first('active','<p class="text-danger"><strong>:message</strong></p>') !!}
                         </div>
                         <div class="row">
@@ -48,6 +48,9 @@
                             {{ Form::label('email', 'E-mail') }}
                             {{ Form::input('text', 'email', old('email'), ['class' => 'form-control']) }}
                             {!! $errors->first('email','<p class="text-danger"><strong>:message</strong></p>') !!}
+                            <small class="text-muted">
+                                L'utilisateur recevra un e-mail d'invitation à se connecter qui lui permettra de saisir son nouveau mot de passe.
+                            </small>
                         </div>
                     </div>
                 </div>

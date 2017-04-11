@@ -2,18 +2,18 @@
   "_args": [
     [
       {
-        "raw": "drmonty-datatables-plugins",
+        "raw": "drmonty-datatables-plugins@1.10.12",
         "scope": null,
         "escapedName": "drmonty-datatables-plugins",
         "name": "drmonty-datatables-plugins",
-        "rawSpec": "",
-        "spec": "latest",
-        "type": "tag"
+        "rawSpec": "1.10.12",
+        "spec": "1.10.12",
+        "type": "version"
       },
-      "/var/www/sheyd/boilerplate/packages/sebastienheyd/boilerplate/src"
+      "/var/www/sheyd/boilerplate/vendor/sebastienheyd/boilerplate/src"
     ]
   ],
-  "_from": "drmonty-datatables-plugins@latest",
+  "_from": "drmonty-datatables-plugins@1.10.12",
   "_id": "drmonty-datatables-plugins@1.10.12",
   "_inCache": true,
   "_location": "/drmonty-datatables-plugins",
@@ -29,13 +29,13 @@
   "_npmVersion": "3.10.6",
   "_phantomChildren": {},
   "_requested": {
-    "raw": "drmonty-datatables-plugins",
+    "raw": "drmonty-datatables-plugins@1.10.12",
     "scope": null,
     "escapedName": "drmonty-datatables-plugins",
     "name": "drmonty-datatables-plugins",
-    "rawSpec": "",
-    "spec": "latest",
-    "type": "tag"
+    "rawSpec": "1.10.12",
+    "spec": "1.10.12",
+    "type": "version"
   },
   "_requiredBy": [
     "#USER",
@@ -44,8 +44,8 @@
   "_resolved": "https://registry.npmjs.org/drmonty-datatables-plugins/-/drmonty-datatables-plugins-1.10.12.tgz",
   "_shasum": "32fd57f562c938c2da4445cea9675330dd968eb1",
   "_shrinkwrap": null,
-  "_spec": "drmonty-datatables-plugins",
-  "_where": "/var/www/sheyd/boilerplate/packages/sebastienheyd/boilerplate/src",
+  "_spec": "drmonty-datatables-plugins@1.10.12",
+  "_where": "/var/www/sheyd/boilerplate/vendor/sebastienheyd/boilerplate/src",
   "author": {
     "name": "Allan Jardine",
     "url": "http://sprymedia.co.uk"

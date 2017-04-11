@@ -36,7 +36,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->redirectTo = config('boilerplate.app.redirectTo','/');
+        $this->redirectTo = route(config('boilerplate.app.redirectTo','boilerplate.home'));
         $this->middleware('guest', ['except' => 'logout']);
     }
 

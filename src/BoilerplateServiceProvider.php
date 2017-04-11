@@ -57,6 +57,9 @@ class BoilerplateServiceProvider extends ServiceProvider
 
         // Loading dynamic menu when calling the view
         View::composer('boilerplate::layout.mainsidebar', 'Sebastienheyd\Boilerplate\ViewComposers\MenuComposer');
+
+        // For datatables locales
+        View::composer('boilerplate::load.datatables', 'Sebastienheyd\Boilerplate\ViewComposers\DatatablesComposer');
     }
 
     /**
@@ -70,15 +73,13 @@ class BoilerplateServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/config/boilerplate/app.php', 'boilerplate.app');
         $this->mergeConfigFrom(__DIR__.'/config/boilerplate/laratrust.php', 'boilerplate.laratrust');
         $this->mergeConfigFrom(__DIR__.'/config/boilerplate/auth.php', 'boilerplate.auth');
-        $this->mergeConfigFrom(__DIR__.'/config/boilerplate/cache.php', 'boilerplate.cache');
         $this->mergeConfigFrom(__DIR__.'/config/boilerplate/menu.php', 'boilerplate.menu');
 
         // Overriding Laravel config
         config([
             'auth.providers.users.driver' => config('boilerplate.auth.providers.users.driver', 'eloquent'),
             'auth.providers.users.model' => config('boilerplate.auth.providers.users.model', 'App\User'),
-            'auth.providers.users.table' => config('boilerplate.auth.providers.users.table', 'users'),
-            'cache.default' => config('boilerplate.cache.default', 'array'),
+            'auth.providers.users.table' => config('boilerplate.auth.providers.users.table', 'users')
         ]);
 
         // Loading packages
