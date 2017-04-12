@@ -27,8 +27,8 @@ Route::group(['prefix' => config('boilerplate.app.prefix', ''), 'middleware' => 
 Route::group(['prefix' => config('boilerplate.app.prefix', ''), 'middleware' => ['web', 'auth', 'ability:admin,backend_access']], function() use ($ns) {
 
     Route::get('/', ['as' => 'boilerplate.home', 'uses' => $ns.'HomeController@index']);
-    Route::resource('/access/roles', $ns.'Users\RolesController');
-    Route::resource('/access/users', $ns.'Users\UsersController');
-    Route::any('/access/users/dt', ['as' => 'users.datatable', 'uses' => $ns.'Users\UsersController@datatable']);
+    Route::resource('/roles', $ns.'Users\RolesController');
+    Route::resource('/users', $ns.'Users\UsersController');
+    Route::any('/users/dt', ['as' => 'users.datatable', 'uses' => $ns.'Users\UsersController@datatable']);
 
 });
