@@ -128,14 +128,16 @@ class UsersController extends Controller
         $this->validate($request, [
             'last_name' => 'required',
             'first_name' => 'required',
-            'email' => 'required|email|unique:users,email'
+            'email' => 'required|email|unique:users,email,NULL,id,deleted_at,NULL'
         ]);
 
         $input = $request->all();
         $input['password'] = bcrypt(str_random(8));
         $input['remember_token'] = str_random(32);
+        $input['deleted_at'] = null;
 
-        $user = User::create($input);
+        $user = User::withTrashed()->updateOrCreate(['email' => $input['email']], $input);
+        $user->restore();
         $user->roles()->sync(array_keys($request->input('roles')));
 
         $user->sendNewUserNotification($input['remember_token'], Auth::user());
