@@ -49,14 +49,22 @@ php artisan vendor:publish
 php artisan migrate
 ```
 
-You are ready to go !
+**Optional**
+
+If you want to quickly test your Laravel application.
+               
+```
+php artisan serve
+```
+
+Now you can point your browser to [http://localhost:8000](http://localhost:8000) and see your application.
 
 ## Configuration
 
 After `php artisan vendor:publish` you will find a folder `boilerplate` into the directory `config`.
 
 * [`app.php`](src/config/boilerplate/app.php) : name of the application (only backend), admin panel prefix and redirection after login (see comments in file)
-* [`auth.php`](src/config/boilerplate/auth.php) : overriding of `config/auth.php` to use boilerplate's models instead of default Laravel's models.
+* [`auth.php`](src/config/boilerplate/auth.php) : overriding of `config/auth.php` to use boilerplate's models instead of default Laravel's models. Allow you to define if users can register from login page and which role will be assigned to a new user.
 * [`laratrust.php`](src/config/boilerplate/laratrust.php) : overriding of Laratrust's (package santigarcor/laratrust) default config.
 * [`menu.php`](src/config/boilerplate/menu.php) : classes to add menu items, [see below](#adding-items-to-the-main-menu).
 
@@ -144,6 +152,32 @@ You can already replace by yourself the file with the file [`webpack.mix.js`](sr
 After that, at the root of your project, run `npm update` and `npm run dev` (or `npm run production`).
 
 [See Laravel `Mix` documentation](https://laravel.com/docs/5.4/mix)
+
+## Troubleshooting
+
+### Migration error
+
+MySQL < v5.7.7 or MariaDB
+
+When you run `php artisan migrate` and you hit this error :
+
+```
+[PDOException]                                                                                                   
+  SQLSTATE[42000]: Syntax error or access violation: 1071 Specified key was too long; max key length is 767 bytes
+```
+
+This is an error from a change in Laravel 5.4 : [see here](https://laravel-news.com/laravel-5-4-key-too-long-error)
+
+To correct this, edit your `app/Providers/AppServiceProvider.php` file and define a default string inside the boot method : 
+
+```php
+use Illuminate\Support\Facades\Schema;
+
+public function boot()
+{
+    Schema::defaultStringLength(191);
+}
+```
 
 ## License
 
