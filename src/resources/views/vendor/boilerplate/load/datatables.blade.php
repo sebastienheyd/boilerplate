@@ -20,5 +20,5 @@
     </script>
     @endpush
 
-    <?php define('LOAD_DATATABLES', true)  ?>
+    @php define('LOAD_DATATABLES', true) @endphp
 @endif

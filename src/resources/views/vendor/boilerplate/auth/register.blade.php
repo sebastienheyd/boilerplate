@@ -32,7 +32,6 @@
                 </div>
             </div>
         {!! Form::close() !!}
-
         @if(!$firstUser)
             <a href="{{ route('login') }}">{{ __('boilerplate::auth.register.login_link') }}</a><br>
         @endif

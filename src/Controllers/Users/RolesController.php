@@ -70,9 +70,9 @@ class RolesController extends Controller
         ]);
 
         $role = Role::create($input);
-        $role->permissions()->sync(array_keys($request->input('permission')));
+        $role->permissions()->sync(array_keys($request->input('permission', [])));
 
-        return redirect()->route('roles.edit', $role)->with('growl', "Le rôle a été correctement ajouté");
+        return redirect()->route('roles.edit', $role)->with('growl', [__('boilerplate::role.successadd'), 'success']);
     }
 
     /**
@@ -122,7 +122,7 @@ class RolesController extends Controller
         $role->update($request->all());
         $role->permissions()->sync(array_keys($request->input('permission')));
 
-        return redirect()->route('roles.edit', $role)->with('growl', "Le role a été correctement modifié");
+        return redirect()->route('roles.edit', $role)->with('growl', [__('boilerplate::role.successmod'), 'success']);
     }
 
     /**
@@ -133,6 +133,6 @@ class RolesController extends Controller
      */
     public function destroy($id)
     {
-        abort(404);
+        Role::destroy($id);
     }
 }

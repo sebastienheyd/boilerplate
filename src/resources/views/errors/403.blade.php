@@ -11,7 +11,6 @@
                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-default">
                         {{ __('boilerplate::layout.logout') }}
                     </a>
-
                     {!! Form::open(['route' => 'logout', 'method' => 'post', 'id' => 'logout-form', 'style'=> 'display:none']) !!}
                     {!! Form::close() !!}
                 @endif

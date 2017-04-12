@@ -48,9 +48,9 @@
                         <input type="checkbox" class="icheck minimal red">
                         <input type="checkbox" class="icheck minimal red" disabled>
                         <span class="mrm">&nbsp;</span>
-                        <input type="radio" name="r1" class="icheck minimal red" checked>
-                        <input type="radio" name="r1" class="icheck minimal red">
-                        <input type="radio" name="r1" class="icheck minimal red" disabled>
+                        <input type="radio" name="r2" class="icheck minimal red" checked>
+                        <input type="radio" name="r2" class="icheck minimal red">
+                        <input type="radio" name="r2" class="icheck minimal red" disabled>
                     </td>
                 </tr>
                 <tr>
@@ -62,9 +62,9 @@
                         <input type="checkbox" class="icheck flat green">
                         <input type="checkbox" class="icheck flat green" disabled>
                         <span class="mrm">&nbsp;</span>
-                        <input type="radio" name="r1" class="icheck flat green" checked>
-                        <input type="radio" name="r1" class="icheck flat green">
-                        <input type="radio" name="r1" class="icheck flat green" disabled>
+                        <input type="radio" name="r3" class="icheck flat green" checked>
+                        <input type="radio" name="r3" class="icheck flat green">
+                        <input type="radio" name="r3" class="icheck flat green" disabled>
                     </td>
                 </tr>
             </tbody>

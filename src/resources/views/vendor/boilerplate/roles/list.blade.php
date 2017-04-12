@@ -1,29 +1,29 @@
 @extends('boilerplate::layout.index', [
-    'title' => 'Gestion des rôles',
-    'subtitle' => 'Liste des rôles',
-    'breadcrumb' => ['Gestion des rôles']
+    'title' => __('boilerplate::role.title'),
+    'subtitle' => __('boilerplate::role.list.title'),
+    'breadcrumb' => [__('boilerplate::role.title')]
 ])
 
 @section('content')
     <div class="row">
         <div class="col-sm-12 mbl">
             <span class="pull-right">
-                <a href="{{ URL::route("roles.create") }}" class="btn btn-primary">Ajouter un rôle</a>
+                <a href="{{ URL::route("roles.create") }}" class="btn btn-primary">{{ __('boilerplate::role.create.title') }}</a>
             </span>
         </div>
     </div>
     <div class="box box-info">
         <div class="box-header">
-            <h3 class="box-title">Liste des rôles</h3>
+            <h3 class="box-title">{{ __('boilerplate::role.list.title') }}</h3>
         </div>
         <div class="box-body">
             <table class="table table-striped table-hover va-middle" id="roles-table">
                 <thead>
                 <tr>
-                    <th>Libellé</th>
-                    <th>Description</th>
-                    <th>Permissions</th>
-                    <th>Nb utilisateurs</th>
+                    <th>{{ __('boilerplate::role.label') }}</th>
+                    <th>{{ __('boilerplate::role.description') }}</th>
+                    <th>{{ __('boilerplate::role.permissions') }}</th>
+                    <th>{{ __('boilerplate::role.list.nbusers') }}</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -46,7 +46,7 @@
                             <a href="{{ URL::route('roles.edit', $role->id) }}" class="btn btn-sm btn-primary">
                                 <span class="fa fa-pencil"></span>
                             </a>
-                            @if($role->name !== 'admin')
+                            @if($role->name !== 'admin' && $role->getNbUsers() === 0)
                                 <a href="{{ URL::route('roles.destroy', $role->id) }}" class="btn btn-sm btn-danger destroy">
                                     <span class="fa fa-trash"></span>
                                 </a>
@@ -74,7 +74,7 @@
             var href = $(this).attr('href');
             var line = $(this).closest('tr');
 
-            bootbox.confirm("Confirmez vous la suppression du rôle ?", function (result) {
+            bootbox.confirm("{{ __('boilerplate::role.list.confirmdelete') }}", function (result) {
                 if (result === false) return;
 
                 $.ajax({
@@ -83,7 +83,7 @@
                     headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
                     success: function(){
                         line.remove();
-                        growl("Le rôle a été correctement supprimé");
+                        growl("{{ __('boilerplate::role.list.deletesuccess') }}", 'success');
                     }
                 });
             });

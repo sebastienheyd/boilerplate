@@ -8,7 +8,6 @@
 @section('content')
     @component('boilerplate::auth.loginbox')
         <p class="login-box-msg">{{ __('boilerplate::auth.login.intro') }}</p>
-
         {!! Form::open(['route' => 'login', 'method' => 'post', 'autocomplete'=> 'off']) !!}
         <div class="form-group has-feedback">
             <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
@@ -37,7 +36,6 @@
             </div>
         </div>
         {!! Form::close() !!}
-
         <a href="{{ route('password.request') }}">{{ __('boilerplate::auth.login.forgotpassword') }}</a><br>
         @if(config('boilerplate.auth.register'))
             <a href="{{ route('register') }}" class="text-center">{{ __('boilerplate::auth.login.register') }}</a>

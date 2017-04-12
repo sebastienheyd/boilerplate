@@ -66,8 +66,8 @@ class UsersController extends Controller
         })->editColumn('last_login', function ($user) {
             return $user->getLastLogin(__('boilerplate::date.YmdHis'), '-');
         })->editColumn('status', function ($user) {
-            if($user->active == 1) return '<span class="label label-success">Activé</span>';
-            return '<span class="label label-danger">Désactivé</span>';
+            if($user->active == 1) return '<span class="label label-success">'.__('boilerplate::users.active').'</span>';
+            return '<span class="label label-danger">'.__('boilerplate::users.inactive').'</span>';
         })->editColumn('roles', function ($user) {
             return $user->getRolesList();
         })->editColumn('actions', function ($user) {
@@ -108,7 +108,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        // Filtres des rôles si pas admin
+        // Filter roles if not admin
         if (!Auth::user()->hasRole('admin')) {
             $roles = Role::whereNotIn('name', ['admin'])->get();
         } else {
@@ -142,7 +142,7 @@ class UsersController extends Controller
 
         $user->sendNewUserNotification($input['remember_token'], Auth::user());
 
-        return redirect()->route('users.edit', $user)->with('growl', "L'utilisateur a été correctement ajouté");
+        return redirect()->route('users.edit', $user)->with('growl', [__('boilerplate::users.successadd'), 'success']);
     }
 
     /**
@@ -197,7 +197,7 @@ class UsersController extends Controller
         // Mise à jour des rôles
         $user->roles()->sync(array_keys($request->input('roles', [])));
 
-        return redirect(route('users.edit', $user))->with('growl', "L'utilisateur a été correctement modifié");
+        return redirect(route('users.edit', $user))->with('growl', [__('boilerplate::users.successadd'), 'success']);
     }
 
     /**
@@ -248,44 +248,6 @@ class UsersController extends Controller
 
         Auth::attempt(['email' => $user->email, 'password' => $request->input('password'), 'active' => 1]);
 
-        return redirect()->route('boilerplate.home')->with('growl', "Votre mot de passe a bien été enregistré.");
+        return redirect()->route('boilerplate.home')->with('growl', [__('boilerplate::users.newpassword'), 'success']);
     }
-
-    public function avatar()
-    {
-        return view('users.avatar');
-    }
-
-    public function avatarPost(Request $request)
-    {
-        $this->validate($request, [
-            'avatar' => 'required|mimes:jpeg,png|max:10000'
-        ]);
-
-        $avatar = $request->file('avatar');
-
-        if ($file = $avatar->isValid()) {
-            $destinationPath = public_path('images/avatars');
-            $extension = $avatar->getClientOriginalExtension();
-            $fileName = str_pad(Auth::user()->id, 6, '0', STR_PAD_LEFT) . '_tmp.' . $extension;
-            $avatar->move($destinationPath, $fileName);
-
-            Image::make($destinationPath . DIRECTORY_SEPARATOR . $fileName)
-                ->fit(100, 100)
-                ->save($destinationPath . DIRECTORY_SEPARATOR . str_pad(Auth::user()->id, 6, '0', STR_PAD_LEFT) . '.jpg');
-
-            unlink($destinationPath . DIRECTORY_SEPARATOR . $fileName);
-
-            return redirect()->route('users.avatar')->with('growl', "La photo a été téléchargée");
-        } else {
-            return redirect()->route('users.avatar')->with('growl', "Une erreur s'est produite !");
-        }
-    }
-
-    public function avatarDelete()
-    {
-        unlink(public_path('images/avatars/' . str_pad(Auth::user()->id, 6, '0', STR_PAD_LEFT) . '.jpg'));
-        return redirect()->route('users.avatar')->with('growl', "La photo a été supprimée");
-    }
-
 }

@@ -25,10 +25,12 @@
     <script src="{{ mix('/js/boilerplate.js') }}"></script>
     <script>
         $(function() {
-            @if(Session::has('growl') && Session::has('growl-type'))
-                growl("{!!Session::get('growl')!!}", "{{Session::get('growl-type')}}");
-            @elseif(Session::has('growl'))
-                growl("{{Session::get('growl')}}");
+            @if(Session::has('growl'))
+                @if(is_array(Session::get('growl')))
+                    growl("{!! Session::get('growl')[0] !!}", "{{ Session::get('growl')[1] }}");
+                @else
+                    growl("{{Session::get('growl')}}");
+                @endif
             @endif
         });
     </script>

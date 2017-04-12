@@ -32,5 +32,10 @@ return [
         'signin'            => 'Sign in',
         'forgotpassword'    => "I forgot my password",
         'register'          => 'Register a new user'
+    ],
+    'firstlogin' => [
+        'title'             => 'First login',
+        'intro'             => 'This is your first login, please enter a password to activate your account.',
+        'button'            => 'Login'
     ]
 ];

@@ -5,5 +5,5 @@
         <script src="{!! asset('/js/plugins/select2/i18n/'.config('app.locale').'.js') !!}"></script>
     @endpush
 
-    <?php define('LOAD_SELECT2', true)  ?>
+    @php define('LOAD_SELECT2', true) @endphp
 @endif

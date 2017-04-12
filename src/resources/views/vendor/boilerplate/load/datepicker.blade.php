@@ -18,5 +18,5 @@
         </script>
     @endpush
 
-    <?php define('LOAD_DATEPICKER', true)  ?>
+    @php define('LOAD_DATEPICKER', true) @endphp
 @endif
