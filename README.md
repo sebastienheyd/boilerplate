@@ -80,6 +80,13 @@ Error views are copied to the folder `resources/views/errors`
 
 Every view into these folders can be modified, they will not be overwrited if you launch `php artisan vendor:publish` again. You can already delete these files to reset them if needed, just remove them and run `php artisan vendor:publish`
 
+### Routes
+
+Routes are loaded from the file [`boilerplate.php`](src/routes/boilerplate.php). 
+After `php artisan vendor:publish` the file will be found in the folder `routes` at the root of your project.
+
+A prefix can be set to your url into the config file [`app.php`](src/config/boilerplate/app.php). 
+
 ### Language
 
 Language used by boilerplate is the application language declared into `config/app.php`. 
