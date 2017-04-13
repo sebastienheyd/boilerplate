@@ -29,6 +29,9 @@ Route::group(['prefix' => config('boilerplate.app.prefix', ''), 'middleware' => 
     Route::get('/', ['as' => 'boilerplate.home', 'uses' => $ns.'HomeController@index']);
     Route::resource('/roles', $ns.'Users\RolesController');
     Route::resource('/users', $ns.'Users\UsersController');
+    Route::get('/userprofile', ['as' => 'user.profile', 'uses' => $ns.'Users\UsersController@profile']);
+    Route::post('/userprofile', ['uses' => $ns.'Users\UsersController@profilePost']);
+    Route::post('/userprofile/avatardelete', ['as' => 'user.avatardelete', 'uses' => $ns.'Users\UsersController@avatarDelete']);
     Route::any('/users/dt', ['as' => 'users.datatable', 'uses' => $ns.'Users\UsersController@datatable']);
 
 });

@@ -10,7 +10,8 @@
         "hieu-le/active": "^3.4",
         "yajra/laravel-datatables-oracle": "^7.3",
         "lavary/laravel-menu": "^1.6",
-        "jenssegers/date": "^3.2"
+        "jenssegers/date": "^3.2",
+        "intervention/image": "^2.3"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0||~5.0"

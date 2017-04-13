@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ config('app.locale') }}">
+<html lang="{{ App::getLocale() }}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,10 +21,12 @@
                 @yield('content')
             </section>
         </div>
+        @include('boilerplate::layout.footer')
     </div>
     <script src="{{ mix('/js/boilerplate.js') }}"></script>
     <script>
         $(function() {
+            bootbox.setLocale("{{ App::getLocale() }}");
             @if(Session::has('growl'))
                 @if(is_array(Session::get('growl')))
                     growl("{!! Session::get('growl')[0] !!}", "{{ Session::get('growl')[1] }}");
@@ -32,6 +34,13 @@
                     growl("{{Session::get('growl')}}");
                 @endif
             @endif
+            $('.logout').click(function(e){
+                e.preventDefault();
+                if(bootbox.confirm("{{ __('boilerplate::layout.logoutconfirm') }}", function(e){
+                    if(e === false) return;
+                    $('#logout-form').submit();
+                }));
+            });
         });
     </script>
     @stack('js')

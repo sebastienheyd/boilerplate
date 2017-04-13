@@ -1,0 +1,100 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "bootstrap-fileinput",
+        "scope": null,
+        "escapedName": "bootstrap-fileinput",
+        "name": "bootstrap-fileinput",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "/var/www/sheyd/boilerplate/vendor/sebastienheyd/boilerplate/src"
+    ]
+  ],
+  "_from": "bootstrap-fileinput@latest",
+  "_id": "bootstrap-fileinput@4.3.8",
+  "_inCache": true,
+  "_location": "/bootstrap-fileinput",
+  "_nodeVersion": "4.2.1",
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/bootstrap-fileinput-4.3.8.tgz_1487659307230_0.9001853091176599"
+  },
+  "_npmUser": {
+    "name": "kartik-v",
+    "email": "kartikv2@gmail.com"
+  },
+  "_npmVersion": "3.3.10",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "bootstrap-fileinput",
+    "scope": null,
+    "escapedName": "bootstrap-fileinput",
+    "name": "bootstrap-fileinput",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/bootstrap-fileinput/-/bootstrap-fileinput-4.3.8.tgz",
+  "_shasum": "90613890a3b5c48bd0537e7186938484624eec3b",
+  "_shrinkwrap": null,
+  "_spec": "bootstrap-fileinput",
+  "_where": "/var/www/sheyd/boilerplate/vendor/sebastienheyd/boilerplate/src",
+  "authors": [
+    "Kartik Visweswaran <kartikv2@gmail.com>"
+  ],
+  "bugs": {
+    "url": "https://github.com/kartik-v/bootstrap-fileinput/issues"
+  },
+  "dependencies": {},
+  "description": "An enhanced HTML 5 file input for Bootstrap 3.x with file preview, multiple selection, ajax uploads, and more features.",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "90613890a3b5c48bd0537e7186938484624eec3b",
+    "tarball": "https://registry.npmjs.org/bootstrap-fileinput/-/bootstrap-fileinput-4.3.8.tgz"
+  },
+  "gitHead": "f24af35fbf8dbb4875238ade355c1913751e22d4",
+  "homepage": "https://github.com/kartik-v/bootstrap-fileinput",
+  "keywords": [
+    "bootstrap",
+    "file",
+    "input",
+    "preview",
+    "image",
+    "upload",
+    "ajax",
+    "multiple",
+    "delete",
+    "progress",
+    "gallery"
+  ],
+  "license": "BSD-3-Clause",
+  "main": "./js/fileinput.js",
+  "maintainers": [
+    {
+      "name": "kartik-v",
+      "email": "feedback@krajee.com"
+    }
+  ],
+  "name": "bootstrap-fileinput",
+  "optionalDependencies": {},
+  "peerDependencies": {
+    "jquery": ">= 1.9.0",
+    "bootstrap": "~3"
+  },
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kartik-v/bootstrap-fileinput.git"
+  },
+  "scripts": {},
+  "style": "./css/fileinput.css",
+  "version": "4.3.8"
+}

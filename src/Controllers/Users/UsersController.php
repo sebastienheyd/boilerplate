@@ -6,10 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Intervention\Image\Facades\Image;
 use Yajra\Datatables\Datatables;
 use Sebastienheyd\Boilerplate\Models\Role;
 use Sebastienheyd\Boilerplate\Models\User;
+use Image;
 use Auth;
 use URL;
 
@@ -249,5 +249,58 @@ class UsersController extends Controller
         Auth::attempt(['email' => $user->email, 'password' => $request->input('password'), 'active' => 1]);
 
         return redirect()->route('boilerplate.home')->with('growl', [__('boilerplate::users.newpassword'), 'success']);
+    }
+
+    public function profile()
+    {
+        return view('boilerplate::users.profile', ['user' => Auth::user()]);
+    }
+
+    public function profilePost(Request $request)
+    {
+        $this->validate($request, [
+            'avatar' => 'mimes:jpeg,png|max:10000',
+            'last_name' => 'required',
+            'first_name' => 'required',
+            'password_confirmation' => 'same:password'
+        ]);
+
+        $avatar = $request->file('avatar');
+        $user = Auth::user();
+
+        if ($avatar && $file = $avatar->isValid()) {
+            $destinationPath = dirname($user->avatar_path);
+            if(!is_dir($destinationPath)) mkdir($destinationPath, 0766, true);
+            $extension = $avatar->getClientOriginalExtension();
+            $fileName = md5($user->id.$user->email) . '_tmp.' . $extension;
+            $avatar->move($destinationPath, $fileName);
+
+            Image::make($destinationPath . DIRECTORY_SEPARATOR . $fileName)
+                ->fit(100, 100)
+                ->save($user->avatar_path);
+
+            unlink($destinationPath . DIRECTORY_SEPARATOR . $fileName);
+        }
+
+        $input = $request->all();
+
+        if($input['password'] !== null) {
+            $input['password'] = bcrypt($input['password']);
+            $input['remember_token'] = str_random(32);
+        } else {
+            unset($input['password']);
+        }
+
+        $user->update($input);
+
+        return redirect()->route('user.profile')->with('growl', [__('boilerplate::users.profile.successupdate'), 'success']);
+    }
+
+    public function avatarDelete()
+    {
+        $user = Auth::user();
+        if(is_file($user->avatar_path)) {
+            unlink($user->avatar_path);
+        }
     }
 }

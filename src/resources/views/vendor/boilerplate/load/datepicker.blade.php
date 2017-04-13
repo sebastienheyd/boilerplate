@@ -8,12 +8,12 @@
     @push('js')
         @include('boilerplate::load.moment')
         <script src="{!! asset('/js/plugins/datepicker/bootstrap-datepicker.js') !!}"></script>
-        @if(config('app.locale') !== 'en')
-            <script src="{!! asset('/js/plugins/datepicker/locales/bootstrap-datepicker.'.config('app.locale').'.js') !!}"></script>
+        @if(App::getLocale() !== 'en')
+            <script src="{!! asset('/js/plugins/datepicker/locales/bootstrap-datepicker.'.App::getLocale().'.js') !!}"></script>
         @endif
         <script src="{!! asset('/js/plugins/daterangepicker/daterangepicker.js') !!}"></script>
         <script>
-            $.fn.datepicker.defaults.language = '{{ config('app.locale') }}';
+            $.fn.datepicker.defaults.language = '{{ App::getLocale() }}';
             $.fn.datepicker.defaults.autoclose = true;
         </script>
     @endpush

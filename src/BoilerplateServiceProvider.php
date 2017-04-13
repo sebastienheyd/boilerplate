@@ -89,6 +89,13 @@ class BoilerplateServiceProvider extends ServiceProvider
         $this->_registerDatatables();
         $this->_registerDate();
         $this->_registerMenu();
+        $this->_registerImage();
+    }
+
+    private function _registerImage()
+    {
+        $this->app->register(\Intervention\Image\ImageServiceProvider::class);
+        $this->loader->alias('Image', \Intervention\Image\Facades\Image::class);
     }
 
     /**

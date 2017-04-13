@@ -34,5 +34,14 @@ return [
         'lastconnect'   => 'Last log',
         'confirmdelete' => "Do you confirm that you want to delete this user ?",
         'deletesuccess' => "The user has been correctly deleted",
+    ],
+    'profile' => [
+        'title'         => 'User profile',
+        'subscribedsince' => 'Member since :date ( :since )',
+        'avatar'        => 'Profile image',
+        'delavatar'     => 'Remove the profile image',
+        'confirmdelavatar' => 'Remove the profile image ?',
+        'successdelavatar' => 'Profile image has been removed',
+        'successupdate' => 'The profile has been correctly updated'
     ]
 ];

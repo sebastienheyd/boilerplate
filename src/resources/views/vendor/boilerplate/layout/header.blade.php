@@ -1,5 +1,5 @@
 <header class="main-header">
-    <a href="index2.html" class="logo">
+    <a href="{{ route('boilerplate.home') }}" class="logo">
         <span class="logo-mini">{!! config('boilerplate.app.logo-mini') !!}</span>
         <span class="logo-lg">{!! config('boilerplate.app.logo-lg') !!}</span>
     </a>
@@ -10,14 +10,16 @@
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="#">
-                        <span class="hidden-xs">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</span>
+                    <a href="{{ route('user.profile') }}">
+                        <img src="{{ Auth::user()->avatar_url }}" class="user-image avatar" alt="User Image"/>
+                        <span class="hidden-xs">{{ Auth::user()->name }}</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('logout') }}"
-                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        <span class="hidden-xs"><span class="fa fa-power-off"></span> {{ __('boilerplate::layout.logout') }}</span>
+                    <a href="{{ route('logout') }}" class="logout">
+                        <span class="hidden-xs">
+                            <span class="fa fa-power-off"></span> {{ __('boilerplate::layout.logout') }}
+                        </span>
                     </a>
                     {!! Form::open(['route' => 'logout', 'method' => 'post', 'id' => 'logout-form', 'style'=> 'display:none']) !!}
                     {!! Form::close() !!}

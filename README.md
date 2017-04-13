@@ -21,6 +21,7 @@ roles and permissions.
 * Menu items activated by [hieu-le/active](https://github.com/letrunghieu/active)
 * Server-sided datatables methods provided by [yajra/laravel-datatables](https://github.com/yajra/laravel-datatables)
 * Multi-language date support by [jenssegers/date](https://github.com/jenssegers/date)
+* Image manipulation by [intervention/image](https://github.com/intervention/image)
 * Localized English-French
 
 ## Installation
@@ -131,6 +132,7 @@ Available loaders are :
 * [`boilerplate::load.icheck`](src/resources/views/vendor/boilerplate/load/icheck.blade.php) : [iCheck](http://icheck.fronteed.com/) - [Example](src/resources/views/vendor/boilerplate/plugins/demo/icheck.blade.php)
 * [`boilerplate::load.select2`](src/resources/views/vendor/boilerplate/load/select2.blade.php) : [Select2](https://select2.github.io/) - [Example](src/resources/views/vendor/boilerplate/plugins/demo/select2.blade.php)
 * [`boilerplate::load.moment`](src/resources/views/vendor/boilerplate/load/moment.blade.php) : [MomentJs](http://momentjs.com/)
+* [`boilerplate::load.fileinput`](src/resources/views/vendor/boilerplate/load/fileinput.blade.php) : [Bootstrap FileInput](http://plugins.krajee.com/file-input)
 
 More will come...
 

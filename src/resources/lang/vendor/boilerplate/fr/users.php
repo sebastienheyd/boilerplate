@@ -34,5 +34,14 @@ return [
         'lastconnect'   => 'Dernière connexion',
         'confirmdelete' => "Confirmez vous la suppression de l'utilisateur ?",
         'deletesuccess' => "L'utilisateur à été correctement supprimé",
+    ],
+    'profile' => [
+        'title'         => 'Profil utilisateur',
+        'subscribedsince' => 'Inscrit depuis le :date ( :since )',
+        'avatar'        => 'Image de profil',
+        'delavatar'     => "Supprimer l'image de profil",
+        'confirmdelavatar' => "Confirmez vous la suppression de l'image du profil ?",
+        'successdelavatar' => "L'image du profil à été supprimée",
+        'successupdate' => "Le profil à été mis à jour"
     ]
 ];

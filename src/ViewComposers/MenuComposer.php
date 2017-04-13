@@ -52,7 +52,7 @@ class MenuComposer
             $menu->add(__('boilerplate::layout.access'), ['url' => '#', 'class' => 'treeview'])
                 ->id('access')
                 ->data('order', 1000)
-                ->prepend('<i class="fa fa-lock"></i>')
+                ->prepend('<i class="fa fa-users"></i>')
                 ->append('<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>');
 
             if(if_route_pattern(['roles.*', 'users.*'])) $menu->find('access')->active();
