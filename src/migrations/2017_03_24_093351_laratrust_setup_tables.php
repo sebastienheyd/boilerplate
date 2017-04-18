@@ -32,11 +32,6 @@ class LaratrustSetupTables extends Migration
             'name' => 'roles_crud',
             'display_name' => 'boilerplate::permissions.roles_crud.display_name',
             'description' => 'boilerplate::permissions.roles_crud.description'
-        ],
-        [
-            'name' => 'logs',
-            'display_name' => 'boilerplate::permissions.logs.display_name',
-            'description' => 'boilerplate::permissions.logs.description'
         ]
     ];
 
