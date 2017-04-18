@@ -77,5 +77,31 @@ class MenuComposer
 
             if (if_route_pattern('roles.*')) $menu->find('roles')->active();
         }
+
+        if($currentUser->ability('admin', ['logs'])) {
+            $menu->add(__('boilerplate::logs.menu.category'), ['url' => '#', 'class' => 'treeview'])
+                ->id('logs')
+                ->data('order', 1100)
+                ->prepend('<i class="fa fa-list"></i>')
+                ->append('<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>');
+
+            if(if_route_pattern(['logs.*'])) $menu->find('logs')->active();
+
+            $menu->find('logs')
+                ->add(__('boilerplate::logs.menu.stats'), ['route' => 'logs.dashboard'])
+                ->id('logs_dashboard')
+                ->data('order', 1110)
+                ->prepend('<span class="fa fa-circle-o"></span> ');
+
+            if (if_route('logs.dashboard')) $menu->find('logs')->active();
+
+            $menu->find('logs')
+                ->add(__('boilerplate::logs.menu.reports'), ['route' => 'logs.list'])
+                ->id('logs_list')
+                ->data('order', 1120)
+                ->prepend('<span class="fa fa-circle-o"></span> ');
+
+            if (if_route(['logs.list', 'logs.show', 'logs.filter'])) $menu->find('logs_list')->active();
+        }
     }
 }

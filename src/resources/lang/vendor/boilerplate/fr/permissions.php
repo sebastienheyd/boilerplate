@@ -13,4 +13,8 @@ return [
         'display_name' => 'Gestion des rôles et permissions',
         'description'  => "Permet d'éditer et de définir les permissions pour un rôle",
     ],
+    'logs' => [
+        'display_name' => "Visualisation des journaux",
+        'description'  => "L'utilisateur peut consulter les journaux de l'application",
+    ],
 ];

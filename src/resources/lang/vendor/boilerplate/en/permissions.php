@@ -13,4 +13,8 @@ return [
         'display_name' => 'Role and permissions management',
         'description'  => "User can edit and define permissions for a role",
     ],
+    'logs' => [
+        'display_name' => 'Viewing logs',
+        'description'  => "User can view application logs",
+    ],
 ];

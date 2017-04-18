@@ -79,7 +79,10 @@ class BoilerplateServiceProvider extends ServiceProvider
         config([
             'auth.providers.users.driver' => config('boilerplate.auth.providers.users.driver', 'eloquent'),
             'auth.providers.users.model' => config('boilerplate.auth.providers.users.model', 'App\User'),
-            'auth.providers.users.table' => config('boilerplate.auth.providers.users.table', 'users')
+            'auth.providers.users.table' => config('boilerplate.auth.providers.users.table', 'users'),
+            'app.log' => 'daily',
+            'log-viewer.route.enabled' => false,
+            'log-viewer.menu.filter-route'  => 'logs.filter'
         ]);
 
         // Loading packages
@@ -90,8 +93,17 @@ class BoilerplateServiceProvider extends ServiceProvider
         $this->_registerDate();
         $this->_registerMenu();
         $this->_registerImage();
+        $this->_registerLog();
     }
 
+    private function _registerLog()
+    {
+        $this->app->register(\Arcanedev\LogViewer\LogViewerServiceProvider::class);
+    }
+
+    /**
+     * Register package intervention/image
+     */
     private function _registerImage()
     {
         $this->app->register(\Intervention\Image\ImageServiceProvider::class);
