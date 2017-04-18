@@ -59,7 +59,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'last_name' => 'required|max:255',
             'first_name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
+            'email' => 'required|email|max:255|unique:users,email,NULL,id,deleted_at,NULL',
             'password' => 'required|min:6|confirmed',
         ]);
     }
@@ -85,7 +85,7 @@ class RegisterController extends Controller
         $userModel = config('auth.providers.users.model');
         $roleModel = config('laratrust.role');
 
-        $user = $userModel::create([
+        $user = $userModel::withTrashed()->updateOrCreate(['email' => $data['email']], [
             'active' => true,
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
@@ -98,8 +98,9 @@ class RegisterController extends Controller
             $admin = $roleModel::whereName('admin')->first();
             $user->attachRole($admin);
         } else {
+            $user->restore();
             $role = $roleModel::whereName(config('boilerplate.auth.register_role'))->first();
-            $user->attachRole($role);
+            $user->roles()->sync([$role->id]);
         }
 
         return $user;
