@@ -108,12 +108,7 @@ class RolesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $input = $request->all();
-        $input['name'] = str_slug($input['display_name']);
-        $request->replace($input);
-
         $this->validate($request, [
-            'name' => "required|unique:roles,name,$id",
             'display_name' => 'required',
             'description' => 'required'
         ]);
