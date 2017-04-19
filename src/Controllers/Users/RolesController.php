@@ -3,10 +3,7 @@
 namespace Sebastienheyd\Boilerplate\Controllers\Users;
 
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
 use Sebastienheyd\Boilerplate\Models\Permission;
 use Sebastienheyd\Boilerplate\Models\Role;
 
@@ -38,7 +35,7 @@ class RolesController extends Controller
      */
     public function index()
     {
-        return view('boilerplate::roles.list', ['roles' => Role::all()]);
+        return view('boilerplate::roles.list', [ 'roles' => Role::all() ]);
     }
 
     /**
@@ -48,7 +45,7 @@ class RolesController extends Controller
      */
     public function create()
     {
-        return view('boilerplate::roles.create', ['permissions' => Permission::all()]);
+        return view('boilerplate::roles.create', [ 'permissions' => Permission::all() ]);
     }
 
     /**
@@ -60,7 +57,7 @@ class RolesController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        $input['name'] = str_slug($input['display_name']);
+        $input[ 'name' ] = str_slug($input[ 'display_name' ]);
         $request->replace($input);
 
         $this->validate($request, [
@@ -70,16 +67,16 @@ class RolesController extends Controller
         ]);
 
         $role = Role::create($input);
-        $role->permissions()->sync(array_keys($request->input('permission', [])));
+        $role->permissions()->sync(array_keys($request->input('permission', [ ])));
 
-        return redirect()->route('roles.edit', $role)->with('growl', [__('boilerplate::role.successadd'), 'success']);
+        return redirect()->route('roles.edit', $role)->with('growl', [ __('boilerplate::role.successadd'), 'success' ]);
     }
 
     /**
      * Display the specified role.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function show($id)
     {
@@ -104,7 +101,7 @@ class RolesController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
@@ -117,7 +114,7 @@ class RolesController extends Controller
         $role->update($request->all());
         $role->permissions()->sync(array_keys($request->input('permission')));
 
-        return redirect()->route('roles.edit', $role)->with('growl', [__('boilerplate::role.successmod'), 'success']);
+        return redirect()->route('roles.edit', $role)->with('growl', [ __('boilerplate::role.successmod'), 'success' ]);
     }
 
     /**

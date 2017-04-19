@@ -16,8 +16,8 @@ class User extends Authenticatable
     use LaratrustUserTrait;
     use SoftDeletes;
 
-    protected $fillable = ['active', 'last_name', 'first_name', 'email', 'password', 'remember_token', 'last_login'];
-    protected $hidden = ['password', 'remember_token'];
+    protected $fillable = [ 'active', 'last_name', 'first_name', 'email', 'password', 'remember_token', 'last_login' ];
+    protected $hidden = [ 'password', 'remember_token' ];
 
     /**
      * Send the password reset notification.
@@ -44,7 +44,7 @@ class User extends Authenticatable
      * Return last name in uppercase by default
      *
      * @param $value
-     * @return mixed|string
+     * @return string
      */
     public function getLastNameAttribute($value)
     {
@@ -55,7 +55,7 @@ class User extends Authenticatable
      * Return first name with first char of every word in uppercase
      *
      * @param $value
-     * @return mixed|string
+     * @return string
      */
     public function getFirstNameAttribute($value)
     {
@@ -87,7 +87,7 @@ class User extends Authenticatable
      */
     public function getLastLogin($format = 'Y-m-d H:i:s', $default = '')
     {
-        if($this->last_login === null) return $default;
+        if ($this->last_login === null) return $default;
         return Date::parse($this->last_login)->format($format);
     }
 
@@ -98,9 +98,9 @@ class User extends Authenticatable
      */
     public function getRolesList()
     {
-        $res = [];
-        foreach ($this->roles as $role) { $res[] = __($role->display_name); }
-        if(empty($res)) return '-';
+        $res = [ ];
+        foreach ($this->roles as $role) { $res[ ] = __($role->display_name); }
+        if (empty($res)) return '-';
         return join(', ', $res);
     }
 
@@ -121,7 +121,7 @@ class User extends Authenticatable
      */
     public function getAvatarUrlAttribute()
     {
-        if(is_file($this->avatar_path)) {
+        if (is_file($this->avatar_path)) {
             $ts = filemtime($this->avatar_path);
             return asset('images/avatars/'.md5($this->id.$this->email).'.jpg?t='.$ts);
         }
