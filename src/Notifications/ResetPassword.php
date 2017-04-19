@@ -4,7 +4,6 @@ namespace Sebastienheyd\Boilerplate\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
 class ResetPassword extends Notification
@@ -25,11 +24,11 @@ class ResetPassword extends Notification
      * Get the notification's delivery channels.
      *
      * @param  mixed  $notifiable
-     * @return array
+     * @return string[]
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return [ 'mail' ];
     }
 
     /**

@@ -21,6 +21,6 @@ class DatatablesComposer
 
         $locale = config('app.locale');
 
-        $view->with('locale', isset($languages[$locale]) ? $languages[$locale] : 'English');
+        $view->with('locale', isset($languages[ $locale ]) ? $languages[ $locale ] : 'English');
     }
 }

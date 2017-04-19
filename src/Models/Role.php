@@ -7,7 +7,7 @@ use Sebastienheyd\Boilerplate\Models\User;
 
 class Role extends LaratrustRole
 {
-    protected $fillable = ['name', 'display_name', 'description'];
+    protected $fillable = [ 'name', 'display_name', 'description' ];
 
     public function getDisplayNameAttribute($value)
     {

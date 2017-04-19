@@ -3,11 +3,8 @@
 namespace Sebastienheyd\Boilerplate\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Http\Request;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Support\Facades\URL;
 
 class NewUser extends Notification
 {
@@ -27,11 +24,11 @@ class NewUser extends Notification
      * Get the notification's delivery channels.
      *
      * @param  mixed  $notifiable
-     * @return array
+     * @return string[]
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return [ 'mail' ];
     }
 
     /**
@@ -46,11 +43,11 @@ class NewUser extends Notification
 
         return (new MailMessage)
             ->markdown('boilerplate::notifications.email')
-            ->greeting(__('boilerplate::notifications.greeting', ['firstname' => $notifiable->first_name]))
-            ->subject(__('boilerplate::notifications.newuser.subject', ['name' => config('app.name')]))
-            ->line(__('boilerplate::notifications.newuser.intro', ['name' => $currentUser->first_name.' '.$currentUser->last_name]))
+            ->greeting(__('boilerplate::notifications.greeting', [ 'firstname' => $notifiable->first_name ]))
+            ->subject(__('boilerplate::notifications.newuser.subject', [ 'name' => config('app.name') ]))
+            ->line(__('boilerplate::notifications.newuser.intro', [ 'name' => $currentUser->first_name.' '.$currentUser->last_name ]))
             ->action(__('boilerplate::notifications.newuser.button'), route('users.firstlogin', $notifiable->remember_token))
-            ->salutation(__('boilerplate::notifications.salutation', ['name' => $currentUser->first_name.' '.$currentUser->last_name]))
+            ->salutation(__('boilerplate::notifications.salutation', [ 'name' => $currentUser->first_name.' '.$currentUser->last_name ]))
             ->line(__('boilerplate::notifications.newuser.outro'));
     }
 

@@ -3,7 +3,6 @@
 namespace Sebastienheyd\Boilerplate\Controllers\Users;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
@@ -60,13 +59,15 @@ class UsersController extends Controller
     public function datatable()
     {
         return Datatables::of(User::select('*'))
-          ->rawColumns(['actions', 'status'])
-          ->editColumn('created_at', function ($user) {
+            ->rawColumns(['actions', 'status'])
+            ->editColumn('created_at', function ($user) {
             return $user->created_at->format(__('boilerplate::date.YmdHis'));
         })->editColumn('last_login', function ($user) {
             return $user->getLastLogin(__('boilerplate::date.YmdHis'), '-');
         })->editColumn('status', function ($user) {
-            if($user->active == 1) return '<span class="label label-success">'.__('boilerplate::users.active').'</span>';
+            if($user->active == 1) {
+                return '<span class="label label-success">'.__('boilerplate::users.active').'</span>';
+            }
             return '<span class="label label-danger">'.__('boilerplate::users.inactive').'</span>';
         })->editColumn('roles', function ($user) {
             return $user->getRolesList();
@@ -110,18 +111,18 @@ class UsersController extends Controller
     {
         // Filter roles if not admin
         if (!Auth::user()->hasRole('admin')) {
-            $roles = Role::whereNotIn('name', ['admin'])->get();
+            $roles = Role::whereNotIn('name', [ 'admin' ])->get();
         } else {
             $roles = Role::all();
         }
-        return view('boilerplate::users.create', ['roles' => $roles]);
+        return view('boilerplate::users.create', [ 'roles' => $roles ]);
     }
 
     /**
      * Store a newly created user in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -132,17 +133,17 @@ class UsersController extends Controller
         ]);
 
         $input = $request->all();
-        $input['password'] = bcrypt(str_random(8));
-        $input['remember_token'] = str_random(32);
-        $input['deleted_at'] = null;
+        $input[ 'password' ] = bcrypt(str_random(8));
+        $input[ 'remember_token' ] = str_random(32);
+        $input[ 'deleted_at' ] = null;
 
-        $user = User::withTrashed()->updateOrCreate(['email' => $input['email']], $input);
+        $user = User::withTrashed()->updateOrCreate([ 'email' => $input[ 'email' ] ], $input);
         $user->restore();
         $user->roles()->sync(array_keys($request->input('roles')));
 
-        $user->sendNewUserNotification($input['remember_token'], Auth::user());
+        $user->sendNewUserNotification($input[ 'remember_token' ], Auth::user());
 
-        return redirect()->route('users.edit', $user)->with('growl', [__('boilerplate::users.successadd'), 'success']);
+        return redirect()->route('users.edit', $user)->with('growl', [ __('boilerplate::users.successadd'), 'success' ]);
     }
 
     /**
@@ -167,7 +168,7 @@ class UsersController extends Controller
         $user = User::findOrFail($id);
 
         if (!Auth::user()->hasRole('admin')) {
-            $roles = Role::whereNotIn('name', ['admin'])->get();
+            $roles = Role::whereNotIn('name', [ 'admin' ])->get();
         } else {
             $roles = Role::all();
         }
@@ -180,14 +181,14 @@ class UsersController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
         $this->validate($request, [
             'last_name' => 'required',
             'first_name' => 'required',
-            'email' => 'required|email|unique:users,email,' . $id
+            'email' => 'required|email|unique:users,email,'.$id
         ]);
 
         $user = User::findOrFail($id);
@@ -195,9 +196,9 @@ class UsersController extends Controller
         $user->update($request->all());
         
         // Mise à jour des rôles
-        $user->roles()->sync(array_keys($request->input('roles', [])));
+        $user->roles()->sync(array_keys($request->input('roles', [ ])));
 
-        return redirect(route('users.edit', $user))->with('growl', [__('boilerplate::users.successadd'), 'success']);
+        return redirect(route('users.edit', $user))->with('growl', [ __('boilerplate::users.successadd'), 'success' ]);
     }
 
     /**
@@ -220,7 +221,7 @@ class UsersController extends Controller
      */
     public function firstLogin($token, Request $request)
     {
-        $user = User::where(['remember_token' => $token])->first();
+        $user = User::where([ 'remember_token' => $token ])->first();
         if (is_null($user)) abort(404);
         return view('boilerplate::auth.firstlogin', compact('user', 'token'));
     }
@@ -239,21 +240,21 @@ class UsersController extends Controller
             'password_confirmation' => 'required|same:password'
         ]);
 
-        $user = User::where(['remember_token' => $request->input('token')])->first();
+        $user = User::where([ 'remember_token' => $request->input('token') ])->first();
 
         $user->password = bcrypt($request->input('password'));
         $user->remember_token = str_random(32);
         $user->last_login = Carbon::now()->toDateTimeString();
         $user->save();
 
-        Auth::attempt(['email' => $user->email, 'password' => $request->input('password'), 'active' => 1]);
+        Auth::attempt([ 'email' => $user->email, 'password' => $request->input('password'), 'active' => 1 ]);
 
-        return redirect()->route('boilerplate.home')->with('growl', [__('boilerplate::users.newpassword'), 'success']);
+        return redirect()->route('boilerplate.home')->with('growl', [ __('boilerplate::users.newpassword'), 'success' ]);
     }
 
     public function profile()
     {
-        return view('boilerplate::users.profile', ['user' => Auth::user()]);
+        return view('boilerplate::users.profile', [ 'user' => Auth::user() ]);
     }
 
     public function profilePost(Request $request)
@@ -270,36 +271,36 @@ class UsersController extends Controller
 
         if ($avatar && $file = $avatar->isValid()) {
             $destinationPath = dirname($user->avatar_path);
-            if(!is_dir($destinationPath)) mkdir($destinationPath, 0766, true);
+            if (!is_dir($destinationPath)) mkdir($destinationPath, 0766, true);
             $extension = $avatar->getClientOriginalExtension();
-            $fileName = md5($user->id.$user->email) . '_tmp.' . $extension;
+            $fileName = md5($user->id.$user->email).'_tmp.'.$extension;
             $avatar->move($destinationPath, $fileName);
 
-            Image::make($destinationPath . DIRECTORY_SEPARATOR . $fileName)
+            Image::make($destinationPath.DIRECTORY_SEPARATOR.$fileName)
                 ->fit(100, 100)
                 ->save($user->avatar_path);
 
-            unlink($destinationPath . DIRECTORY_SEPARATOR . $fileName);
+            unlink($destinationPath.DIRECTORY_SEPARATOR.$fileName);
         }
 
         $input = $request->all();
 
-        if($input['password'] !== null) {
-            $input['password'] = bcrypt($input['password']);
-            $input['remember_token'] = str_random(32);
+        if ($input[ 'password' ] !== null) {
+            $input[ 'password' ] = bcrypt($input[ 'password' ]);
+            $input[ 'remember_token' ] = str_random(32);
         } else {
-            unset($input['password']);
+            unset($input[ 'password' ]);
         }
 
         $user->update($input);
 
-        return redirect()->route('user.profile')->with('growl', [__('boilerplate::users.profile.successupdate'), 'success']);
+        return redirect()->route('user.profile')->with('growl', [ __('boilerplate::users.profile.successupdate'), 'success' ]);
     }
 
     public function avatarDelete()
     {
         $user = Auth::user();
-        if(is_file($user->avatar_path)) {
+        if (is_file($user->avatar_path)) {
             unlink($user->avatar_path);
         }
     }

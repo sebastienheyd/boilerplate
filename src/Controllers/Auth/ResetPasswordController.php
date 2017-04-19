@@ -35,7 +35,7 @@ class ResetPasswordController extends Controller
      */
     public function __construct()
     {
-        $this->redirectTo = route(config('boilerplate.app.redirectTo','boilerplate.home'));
+        $this->redirectTo = route(config('boilerplate.app.redirectTo', 'boilerplate.home'));
         $this->middleware('guest');
     }
 
@@ -51,7 +51,7 @@ class ResetPasswordController extends Controller
     public function showResetForm(Request $request, $token = null)
     {
         return view('boilerplate::auth.passwords.reset')->with(
-            ['token' => $token, 'email' => $request->email]
+            [ 'token' => $token, 'email' => $request->email ]
         );
     }
 }

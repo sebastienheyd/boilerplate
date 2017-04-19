@@ -2,7 +2,6 @@
 
 use Arcanedev\LogViewer\Http\Controllers\LogViewerController as ArcanedevController;
 use Arcanedev\LogViewer\Contracts\LogViewer as LogViewerContract;
-use Illuminate\Http\Request;
 
 class LogViewerController extends ArcanedevController
 {
@@ -24,7 +23,7 @@ class LogViewerController extends ArcanedevController
      |  Main Functions
      | ------------------------------------------------------------------------------------------------
      */
-    protected function view($view, $data = [], $mergeData = [])
+    protected function view($view, $data = [ ], $mergeData = [ ])
     {
         return view('boilerplate::logs.'.$view, $data, $mergeData);
     }

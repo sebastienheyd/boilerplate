@@ -36,12 +36,12 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->redirectTo = route(config('boilerplate.app.redirectTo','boilerplate.home'));
+        $this->redirectTo = route(config('boilerplate.app.redirectTo', 'boilerplate.home'));
 
         $userModel = config('auth.providers.users.model');
         $this->firstUser = $userModel::all()->count() === 0;
         
-        if(!$this->firstUser && !config('boilerplate.auth.register')) {
+        if (!$this->firstUser && !config('boilerplate.auth.register')) {
             abort('404');
         }
 
@@ -71,7 +71,7 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm()
     {
-        return view('boilerplate::auth.register', ['firstUser' => $this->firstUser]);
+        return view('boilerplate::auth.register', [ 'firstUser' => $this->firstUser ]);
     }
 
     /**
@@ -85,12 +85,12 @@ class RegisterController extends Controller
         $userModel = config('auth.providers.users.model');
         $roleModel = config('laratrust.role');
 
-        $user = $userModel::withTrashed()->updateOrCreate(['email' => $data['email']], [
+        $user = $userModel::withTrashed()->updateOrCreate([ 'email' => $data[ 'email' ] ], [
             'active' => true,
-            'first_name' => $data['first_name'],
-            'last_name' => $data['last_name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+            'first_name' => $data[ 'first_name' ],
+            'last_name' => $data[ 'last_name' ],
+            'email' => $data[ 'email' ],
+            'password' => bcrypt($data[ 'password' ]),
             'last_login' => Carbon::now()->toDateTimeString()
         ]);
 
@@ -100,7 +100,7 @@ class RegisterController extends Controller
         } else {
             $user->restore();
             $role = $roleModel::whereName(config('boilerplate.auth.register_role'))->first();
-            $user->roles()->sync([$role->id]);
+            $user->roles()->sync([ $role->id ]);
         }
 
         return $user;

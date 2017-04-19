@@ -36,8 +36,8 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->redirectTo = route(config('boilerplate.app.redirectTo','boilerplate.home'));
-        $this->middleware('guest', ['except' => 'logout']);
+        $this->redirectTo = route(config('boilerplate.app.redirectTo', 'boilerplate.home'));
+        $this->middleware('guest', [ 'except' => 'logout' ]);
     }
 
     /**
@@ -50,7 +50,7 @@ class LoginController extends Controller
         $userModel = config('auth.providers.users.model');
 
         if ($userModel::all()->count() === 0) {
-            return redirect(route('register'));}
+            return redirect(route('register')); }
 
         return view('boilerplate::auth.login');
     }
@@ -65,8 +65,8 @@ class LoginController extends Controller
     {
         $this->validate($request, [
             $this->username() => 'required|exists:users,'.$this->username().',active,1', 'password' => 'required',
-        ],[
-            $this->username() . '.exists' => __('auth.failed')
+        ], [
+            $this->username().'.exists' => __('auth.failed')
         ]);
     }
 
@@ -82,7 +82,7 @@ class LoginController extends Controller
 
         $this->clearLoginAttempts($request);
         
-        $this->guard()->user()->update(['last_login' => Carbon::now()->toDateTimeString()]);
+        $this->guard()->user()->update([ 'last_login' => Carbon::now()->toDateTimeString() ]);
 
         return $this->authenticated($request, $this->guard()->user())
             ?: redirect()->intended($this->redirectPath());
@@ -92,7 +92,7 @@ class LoginController extends Controller
      * The user has been authenticated.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  mixed  $user
+     * @param  \Illuminate\Contracts\Auth\Authenticatable|null  $user
      * @return mixed
      */
     protected function authenticated(Request $request, $user)

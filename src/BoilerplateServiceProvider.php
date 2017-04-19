@@ -34,20 +34,20 @@ class BoilerplateServiceProvider extends ServiceProvider
     {
         // Publish all files when calling php artisan vendor:publish
         $this->publishes([
-            __DIR__ . '/config'         => config_path(),
-            __DIR__ . '/routes'         => base_path('routes/'),
-            __DIR__ . '/resources'      => base_path('resources/'),
-            __DIR__ . '/public'         => base_path('public/'),
-            __DIR__ . '/Models'         => app_path('Models'),
-            __DIR__ . '/Notifications'  => app_path('Notifications'),
-            __DIR__ . '/webpack.mix.js' => base_path('webpack.mix.js'), // Remove the original file for this one if needed
+            __DIR__.'/config'         => config_path(),
+            __DIR__.'/routes'         => base_path('routes/'),
+            __DIR__.'/resources'      => base_path('resources/'),
+            __DIR__.'/public'         => base_path('public/'),
+            __DIR__.'/Models'         => app_path('Models'),
+            __DIR__.'/Notifications'  => app_path('Notifications'),
+            __DIR__.'/webpack.mix.js' => base_path('webpack.mix.js'), // Remove the original file for this one if needed
         ]);
 
         // If routes file has been published, load routes from the published file
-        if(is_file(base_path('routes/boilerplate.php'))) {
+        if (is_file(base_path('routes/boilerplate.php'))) {
             $this->loadRoutesFrom(base_path('routes/boilerplate.php'));
         } else {
-            $this->loadRoutesFrom(__DIR__ . '/routes/boilerplate.php');
+            $this->loadRoutesFrom(__DIR__.'/routes/boilerplate.php');
         }
 
         // Load migrations, views and translations from current directory
