@@ -9,7 +9,7 @@
             <div class="pull-left info">
                 <p>{{ Auth::user()->name }}</p>
                 <a href="{{ route('logout') }}" class="logout">
-                    <i class="fa fa-circle text-success"></i> Connecté
+                    <i class="fa fa-circle text-success"></i> {{ __('boilerplate::layout.online') }}
                 </a>
             </div>
         </div>

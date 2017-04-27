@@ -2,6 +2,7 @@
 
 return [
     'mainmenu'          => 'Menu principal',
+    'online'            => 'Connecté',
     'logout'            => 'Déconnexion',
     'home'              => 'Accueil',
     'dashboard'         => 'Tableau de bord',

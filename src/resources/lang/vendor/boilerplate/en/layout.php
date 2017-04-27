@@ -2,6 +2,7 @@
 
 return [
     'mainmenu'          => 'Main menu',
+    'online'            => 'Online',
     'logout'            => 'Logout',
     'home'              => 'Home',
     'dashboard'         => 'Dashboard',
