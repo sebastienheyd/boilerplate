@@ -10,6 +10,40 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Sebastienheyd\Boilerplate\Notifications\ResetPassword as ResetPasswordNotification;
 use Sebastienheyd\Boilerplate\Notifications\NewUser as NewUserNotification;
 
+/**
+ * Sebastienheyd\Boilerplate\Models\User
+ *
+ * @property int $id
+ * @property bool $active
+ * @property string $first_name
+ * @property string $last_name
+ * @property string $email
+ * @property string $password
+ * @property string $remember_token
+ * @property \Jenssegers\Date\Date $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property string $deleted_at
+ * @property string $last_login
+ * @property-read string|false $avatar_path
+ * @property-read string $avatar_url
+ * @property-read mixed $name
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Sebastienheyd\Boilerplate\Models\Permission[] $permissions
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Sebastienheyd\Boilerplate\Models\Role[] $roles
+ * @method static \Illuminate\Database\Query\Builder|\Sebastienheyd\Boilerplate\Models\User whereActive($value)
+ * @method static \Illuminate\Database\Query\Builder|\Sebastienheyd\Boilerplate\Models\User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Sebastienheyd\Boilerplate\Models\User whereDeletedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Sebastienheyd\Boilerplate\Models\User whereEmail($value)
+ * @method static \Illuminate\Database\Query\Builder|\Sebastienheyd\Boilerplate\Models\User whereFirstName($value)
+ * @method static \Illuminate\Database\Query\Builder|\Sebastienheyd\Boilerplate\Models\User whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Sebastienheyd\Boilerplate\Models\User whereLastLogin($value)
+ * @method static \Illuminate\Database\Query\Builder|\Sebastienheyd\Boilerplate\Models\User whereLastName($value)
+ * @method static \Illuminate\Database\Query\Builder|\Sebastienheyd\Boilerplate\Models\User wherePassword($value)
+ * @method static \Illuminate\Database\Query\Builder|\Sebastienheyd\Boilerplate\Models\User whereRememberToken($value)
+ * @method static \Illuminate\Database\Query\Builder|\Sebastienheyd\Boilerplate\Models\User whereRoleIs($role = '')
+ * @method static \Illuminate\Database\Query\Builder|\Sebastienheyd\Boilerplate\Models\User whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class User extends Authenticatable
 {
     use Notifiable;
