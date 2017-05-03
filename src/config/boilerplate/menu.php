@@ -9,6 +9,7 @@
 
 return [
     'providers' => [
-        \Sebastienheyd\Boilerplate\ViewComposers\MenuComposer::class
+        \Sebastienheyd\Boilerplate\Menu\Users::class,
+        \Sebastienheyd\Boilerplate\Menu\Logs::class,
     ]
 ];

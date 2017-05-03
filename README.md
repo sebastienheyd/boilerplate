@@ -71,13 +71,15 @@ After `php artisan vendor:publish` you will find a folder `boilerplate` into the
 
 ### Adding items to the main menu
 
-If in your application you need to add items to the main menu, for that you must declare the classes you want to use into 
+If in your application you need to add items to the main menu, you must declare the classes you want to use to build your menu into 
 the config file [`menu.php`](src/config/boilerplate/menu.php).
 
-As you can see you have already one class declared into this file, if you check the code into [MenuComposer.php](src/ViewComposers/MenuComposer.php) you will find a method named `make(Builder $menu)`.
-This is the method called to build menu items.
+As you can see you have already two classes declared into this file, if you check the code into [Users.php](src/Menu/Users.php) or [Logs.php](src/Menu/Logs.php) you will find a method named `make(Builder $menu)`.
+This is the method called to build menu items. Feel free to use these files as an example to build your own menu items.
 
-So, to add items : create a class, declare this class into the config file `menu.php` and add a `make(Builder $menu)` method into the class.
+So, to add menu  items : create a class, declare this class into the config file `menu.php` and add a `make(Builder $menu)` method into the class.
+
+Don't forget to declare ```use Sebastienheyd\Boilerplate\Menu\Builder as Builder;```
 
 See [lavary/laravel-menu](https://github.com/lavary/laravel-menu) and [hieu-le/active](https://github.com/letrunghieu/active) documentations.
 
