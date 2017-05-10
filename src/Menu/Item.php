@@ -39,6 +39,11 @@ class Item extends LavaryMenuItem
 
             if(if_route_pattern($pattern)) {
                 $this->activate();
+                
+                if(strstr($this->title, 'circle-o')) {
+                    $this->title = str_replace('fa-circle-o', 'fa-dot-circle-o', $this->title);
+                }
+
                 return $this;
             }
 
@@ -47,6 +52,10 @@ class Item extends LavaryMenuItem
 
         $this->attributes['class'] = Builder::formatGroupClass(array('class' => $this->builder->conf('active_class')), $this->attributes);
         $this->isActive = true;
+
+        if(strstr($this->title, 'circle-o')) {
+            $this->title = str_replace('fa-circle-o', 'fa-dot-circle-o', $this->title);
+        }
 
         return $this;
     }
