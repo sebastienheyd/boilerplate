@@ -60,6 +60,16 @@ php artisan serve
 
 Now you can point your browser to [http://localhost:8000](http://localhost:8000) and see your application.
 
+## Update
+
+Boilerplate comes with assets such as Javascript, CSS, and images. Since you typically will need to overwrite the assets every time the package is updated, you may use the ```--force``` flag. For example :
+  
+```
+php artisan vendor:publish --tag=public --force
+```
+
+If needed, you can force update for these tags : ```config```, ```routes```, ```resources```, ```public```, ```models```, ```notifications```, ```webpack```
+
 ## Configuration
 
 After `php artisan vendor:publish` you will find a folder `boilerplate` into the directory `config`.
