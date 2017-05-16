@@ -154,6 +154,7 @@ class BoilerplateServiceProvider extends ServiceProvider
 
         // Overriding config
         config([
+            'laratrust.user_models.users' => config('boilerplate.laratrust.user', 'App\User'),
             'laratrust.role' => config('boilerplate.laratrust.role', 'App\Role'),
             'laratrust.permission' => config('boilerplate.laratrust.permission', 'App\Permission'),
         ]);
