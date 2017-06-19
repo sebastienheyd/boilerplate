@@ -25,6 +25,7 @@
         msgNoFilesSelected: 'Nevybrány žádné soubory',
         msgCancelled: 'Zrušeno',
         msgZoomModalHeading: 'Detailní náhled',
+        msgFileRequired: 'You must select a file to upload.',
         msgSizeTooSmall: 'Soubor "{name}" (<b>{size} KB</b>) je příliš malý, musí mít velikost nejméně <b>{minSize} KB</b>.',
         msgSizeTooLarge: 'Soubor "{name}" (<b>{size} KB</b>): je příliš velký - maximální povolená velikost <b>{maxSize} KB</b>.',
         msgFilesTooLess: 'Musíte vybrat nejméně <b>{n}</b> {files} souborů.',
@@ -39,6 +40,8 @@
         msgInvalidFileExtension: 'Neplatná extenze souboru "{name}". Pouze "{extensions}" souborů jsou podporovány.',
         msgUploadAborted: 'Nahrávání souboru bylo přerušeno',
         msgUploadThreshold: 'Zpracovávám...',
+        msgUploadBegin: 'Initializing...',
+        msgUploadEnd: 'Done',
         msgUploadEmpty: 'No valid data available for upload.',
         msgValidationError: 'Chyba ověření',
         msgLoading: 'Nahrávání souboru {index} z {files} &hellip;',
@@ -55,7 +58,7 @@
         msgAjaxProgressError: '{operation} failed',
         ajaxOperations: {
             deleteThumb: 'file delete',
-            uploadThumb: 'single file upload',
+            uploadThumb: 'file upload',
             uploadBatch: 'batch file upload',
             uploadExtra: 'form data upload'
         },

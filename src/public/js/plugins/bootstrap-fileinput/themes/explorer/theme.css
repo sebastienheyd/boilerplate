@@ -1,5 +1,5 @@
 /*!
- * bootstrap-fileinput v4.3.8
+ * bootstrap-fileinput v4.4.1
  * http://plugins.krajee.com/file-input
  *
  * Krajee Explorer theme style for bootstrap-fileinput. Load this theme file after loading `fileinput.css`.
@@ -19,7 +19,7 @@
     text-align: left;
 }
 
-.theme-explorer .file-preview-text {
+.explorer-frame .file-preview-text {
     display: inline-block;
     color: #428bca;
     border: 1px solid #ddd;
@@ -29,18 +29,18 @@
     resize: none;
 }
 
-.theme-explorer .file-preview-html {
+.explorer-frame .file-preview-html {
     display: inline-block;
     border: 1px solid #ddd;
     padding: 8px;
     overflow: auto;
 }
 
-.theme-explorer .explorer-frame .file-preview-other {
+.explorer-frame .file-preview-other {
     text-align: center;
 }
 
-.theme-explorer .file-other-icon {
+.explorer-frame .file-other-icon {
     font-size: 4.2em;
 }
 
@@ -101,24 +101,6 @@
     border: 2px solid #a1abff;
 }
 
-@media only screen and (max-device-width: 500px) {
-    .theme-explorer .file-upload-indicator, .theme-explorer .file-drag-handle {
-        border-radius: 0;
-        border: 1px solid #8a6d3b;
-        margin-bottom: 5px;
-    }
-
-    .theme-explorer .explorer-caption {
-        display: block;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        width: 160px;
-        text-align: left;
-        color: #777;
-    }
-}
-
 .theme-explorer .file-upload-indicator {
     font-size: 13px;
     padding-left: 6px;
@@ -145,4 +127,85 @@
 .theme-explorer .file-preview-loading .file-upload-indicator {
     background-color: #e5e5e5;
     border-color: #777;
+}
+
+.theme-explorer .file-error-message ul {
+    padding-left: 15px;
+}
+
+.theme-explorer .file-error-message .close {
+    margin-top: -5px;
+    margin-right: -5px;
+}
+
+/*
+ * mobile responsive styling
+ */
+@media only screen and (max-width: 500px) {
+    .theme-explorer .table, .theme-explorer .table tbody, .theme-explorer .table tr, .theme-explorer .table td {
+        display: block;
+        width: 100% !important;
+    }
+
+    .theme-explorer .table {
+        border: none;
+    }
+
+    .theme-explorer .table tr {
+        margin-top: 5px;
+    }
+
+    .theme-explorer .table tr:first-child {
+        margin-top: 0;
+    }
+
+    .theme-explorer .table td {
+        text-align: center;
+    }
+
+    .theme-explorer .table .kv-file-content {
+        border-bottom: none;
+        padding: 4px;
+        margin: 0;
+    }
+
+    .theme-explorer .table .kv-file-content .file-preview-image {
+        max-width: 100%;
+    }
+
+    .theme-explorer .file-details-cell {
+        border-top: none;
+        border-bottom: none;
+        padding-top: 0;
+        margin: 0;
+    }
+
+    .theme-explorer .file-actions-cell {
+        border-top: none;
+        padding-bottom: 4px;
+    }
+
+    .theme-explorer .explorer-frame .explorer-caption {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+
+    .theme-explorer .file-upload-indicator, .theme-explorer .file-drag-handle {
+        right: 0;
+        bottom: 0;
+        border-top-left-radius: 40px;
+        border-bottom-left-radius: 0;
+        padding: 12px 3px 0 6px;
+    }
+
+    .theme-explorer .file-actions-cell .btn-xs {
+        font-size: 0.9em;
+        padding: 2px 7px;
+        margin-right: 3px;
+        cursor: pointer;
+    }
 }

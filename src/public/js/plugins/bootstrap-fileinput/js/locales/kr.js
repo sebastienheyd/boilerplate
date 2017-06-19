@@ -25,6 +25,7 @@
         msgNoFilesSelected: '선택한 파일이 없습니다.',
         msgCancelled: '취소되었습니다.',
         msgZoomModalHeading: '자세한 미리보기',
+        msgFileRequired: 'You must select a file to upload.',
         msgSizeTooSmall: '파일 "{name}" (<b>{size} KB</b>)이 너무 작습니다. <b>{minSize} KB</b>보다 용량이 커야 합니다..',
         msgSizeTooLarge: '파일 "{name}" (<b>{size} KB</b>)이 너무 큽니다. 허용 파일 사이즈는 <b>{maxSize} KB</b>.입니다.',
         msgFilesTooLess: '업로드하기 위해 최소 <b>{n}</b> {files}개의 파일을 선택해야 합니다.',
@@ -49,6 +50,8 @@
         },
         msgUploadAborted: '파일 업로드가 중단되었습니다.',
         msgUploadThreshold: '업로드 중...',
+        msgUploadBegin: 'Initializing...',
+        msgUploadEnd: 'Done',
         msgUploadEmpty: '업로드 가능 데이터가 존재하지 않습니다.',
         msgValidationError: '유효성 오류',
         msgLoading: '파일 {files} 중 {index}번째를 로딩하고 있습니다. &hellip;',
@@ -65,7 +68,7 @@
         msgAjaxProgressError: '{operation} failed',
         ajaxOperations: {
             deleteThumb: 'file delete',
-            uploadThumb: 'single file upload',
+            uploadThumb: 'file upload',
             uploadBatch: 'batch file upload',
             uploadExtra: 'form data upload'
         },
