@@ -11,5 +11,11 @@ return [
         'intro' => 'Vous recevez ce courriel car un compte a été créé pour vous par :name.',
         'button' => 'Vous connecter',
         'outro' => 'Lors de votre première connexion vous allez être invité à saisir votre mot de passe'
+    ],
+    'resetpassword' => [
+        'subject' => 'Réinitialisation de votre mot de passe',
+        'intro' => 'Vous recevez ce courriel car vous avez demandé à réinitialiser votre mot de passe.',
+        'button' => 'Réinitialiser votre mot de passe',
+        'outro' => "Si vous n'avez pas demandé à réinitialiser votre mot de passe, ne tenez pas compte de cet e-mail."
     ]
 ];
