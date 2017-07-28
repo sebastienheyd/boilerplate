@@ -99,4 +99,19 @@ class LoginController extends Controller
     {
         \Log::info('User logged in : '.$user->name);
     }
+
+    /**
+     * Log the user out of the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        return redirect('/'.config('boilerplate.app.prefix', ''));
+    }
 }
