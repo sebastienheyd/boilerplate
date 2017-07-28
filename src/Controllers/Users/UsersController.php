@@ -198,7 +198,7 @@ class UsersController extends Controller
         // Mise à jour des rôles
         $user->roles()->sync(array_keys($request->input('roles', [ ])));
 
-        return redirect(route('users.edit', $user))->with('growl', [ __('boilerplate::users.successadd'), 'success' ]);
+        return redirect(route('users.edit', $user))->with('growl', [ __('boilerplate::users.successmod'), 'success' ]);
     }
 
     /**
