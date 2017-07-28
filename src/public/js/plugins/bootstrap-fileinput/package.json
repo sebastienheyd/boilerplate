@@ -2,49 +2,49 @@
   "_args": [
     [
       {
-        "raw": "bootstrap-fileinput@4.4.1",
+        "raw": "bootstrap-fileinput@4.4.2",
         "scope": null,
         "escapedName": "bootstrap-fileinput",
         "name": "bootstrap-fileinput",
-        "rawSpec": "4.4.1",
-        "spec": "4.4.1",
+        "rawSpec": "4.4.2",
+        "spec": "4.4.2",
         "type": "version"
       },
       "/var/www/sheyd/boilerplate/vendor/sebastienheyd/boilerplate/src"
     ]
   ],
-  "_from": "bootstrap-fileinput@4.4.1",
-  "_id": "bootstrap-fileinput@4.4.1",
+  "_from": "bootstrap-fileinput@4.4.2",
+  "_id": "bootstrap-fileinput@4.4.2",
   "_inCache": true,
   "_location": "/bootstrap-fileinput",
-  "_nodeVersion": "4.4.5",
+  "_nodeVersion": "4.2.1",
   "_npmOperationalInternal": {
     "host": "s3://npm-registry-packages",
-    "tmp": "tmp/bootstrap-fileinput-4.4.1.tgz_1495743523537_0.7861904762685299"
+    "tmp": "tmp/bootstrap-fileinput-4.4.2.tgz_1498297271828_0.262972726020962"
   },
   "_npmUser": {
     "name": "kartik-v",
     "email": "kartikv2@gmail.com"
   },
-  "_npmVersion": "2.15.5",
+  "_npmVersion": "3.3.10",
   "_phantomChildren": {},
   "_requested": {
-    "raw": "bootstrap-fileinput@4.4.1",
+    "raw": "bootstrap-fileinput@4.4.2",
     "scope": null,
     "escapedName": "bootstrap-fileinput",
     "name": "bootstrap-fileinput",
-    "rawSpec": "4.4.1",
-    "spec": "4.4.1",
+    "rawSpec": "4.4.2",
+    "spec": "4.4.2",
     "type": "version"
   },
   "_requiredBy": [
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/bootstrap-fileinput/-/bootstrap-fileinput-4.4.1.tgz",
-  "_shasum": "f19b3e7daf3efa6fb4ad42134dee89979fc03f33",
+  "_resolved": "https://registry.npmjs.org/bootstrap-fileinput/-/bootstrap-fileinput-4.4.2.tgz",
+  "_shasum": "55aac15e1563b6855f6df131245bf75a4270597a",
   "_shrinkwrap": null,
-  "_spec": "bootstrap-fileinput@4.4.1",
+  "_spec": "bootstrap-fileinput@4.4.2",
   "_where": "/var/www/sheyd/boilerplate/vendor/sebastienheyd/boilerplate/src",
   "authors": [
     "Kartik Visweswaran <kartikv2@gmail.com>"
@@ -57,10 +57,10 @@
   "devDependencies": {},
   "directories": {},
   "dist": {
-    "shasum": "f19b3e7daf3efa6fb4ad42134dee89979fc03f33",
-    "tarball": "https://registry.npmjs.org/bootstrap-fileinput/-/bootstrap-fileinput-4.4.1.tgz"
+    "shasum": "55aac15e1563b6855f6df131245bf75a4270597a",
+    "tarball": "https://registry.npmjs.org/bootstrap-fileinput/-/bootstrap-fileinput-4.4.2.tgz"
   },
-  "gitHead": "aa4e1a520cef078922ed2c7c8e3e944d496388f6",
+  "gitHead": "28c89de2708f32814879241b6f112ee27b8f4ec8",
   "homepage": "https://github.com/kartik-v/bootstrap-fileinput",
   "keywords": [
     "bootstrap",
@@ -96,5 +96,5 @@
   },
   "scripts": {},
   "style": "./css/fileinput.css",
-  "version": "4.4.1"
+  "version": "4.4.2"
 }

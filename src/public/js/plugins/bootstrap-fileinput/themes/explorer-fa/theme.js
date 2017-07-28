@@ -2,7 +2,9 @@
  * bootstrap-fileinput v4.4.2
  * http://plugins.krajee.com/file-input
  *
- * Krajee Explorer theme configuration for bootstrap-fileinput. Load this theme file after loading `fileinput.js`.
+ * Krajee Explorer Font Awesome theme configuration for bootstrap-fileinput. 
+ * Load this theme file after loading `fileinput.js`. Ensure that
+ * font awesome assets and CSS are loaded on the page as well.
  *
  * Author: Kartik Visweswaran
  * Copyright: 2014 - 2017, Kartik Visweswaran, Krajee.com
@@ -14,7 +16,7 @@
     "use strict";
     var teTagBef = '<tr class="file-preview-frame {frameClass}" id="{previewId}" data-fileindex="{fileindex}"' +
         ' data-template="{template}"', teContent = '<td class="kv-file-content">\n';
-    $.fn.fileinputThemes.explorer = {
+    $.fn.fileinputThemes['explorer-fa'] = {
         layoutTemplates: {
             preview: '<div class="file-preview {class}">\n' +
             '    {close}' +
@@ -35,7 +37,8 @@
             '    </div>\n' +
             '</div>',
             zoomCache: '<tr style="display:none" class="kv-zoom-cache-theme"><td>' +
-            '<table class="kv-zoom-cache">{zoomContent}</table></td></tr>'
+            '<table class="kv-zoom-cache">{zoomContent}</table></td></tr>',
+            fileIcon: '<i class="fa fa-file kv-caption-icon"></i> '
         },
         previewMarkupTags: {
             tagBefore1: teTagBef + '>' + teContent,
@@ -53,6 +56,30 @@
             pdf: {width: "100px", height: "60px"},
             other: {width: "100%", height: "60px"}
         },
-        frameClass: 'explorer-frame'
+        frameClass: 'explorer-frame',
+        fileActionSettings: {
+            removeIcon: '<i class="fa fa-trash text-danger"></i>',
+            uploadIcon: '<i class="fa fa-upload text-info"></i>',
+            zoomIcon: '<i class="fa fa-search-plus"></i>',
+            dragIcon: '<i class="fa fa-bars"></i>',
+            indicatorNew: '<i class="fa fa-hand-o-down text-warning"></i>',
+            indicatorSuccess: '<i class="fa fa-check-circle text-success"></i>',
+            indicatorError: '<i class="fa fa-exclamation-circle text-danger"></i>',
+            indicatorLoading: '<i class="fa fa-hand-o-up text-muted"></i>'
+        },
+        previewZoomButtonIcons: {
+            prev: '<i class="fa fa-caret-left fa-lg"></i>',
+            next: '<i class="fa fa-caret-right fa-lg"></i>',
+            toggleheader: '<i class="fa fa-arrows-v"></i>',
+            fullscreen: '<i class="fa fa-arrows-alt"></i>',
+            borderless: '<i class="fa fa-external-link"></i>',
+            close: '<i class="fa fa-remove"></i>'
+        },
+        previewFileIcon: '<i class="fa fa-file"></i>',
+        browseIcon: '<i class="fa fa-folder-open"></i>',
+        removeIcon: '<i class="fa fa-trash"></i>',
+        cancelIcon: '<i class="fa fa-ban"></i>',
+        uploadIcon: '<i class="fa fa-upload"></i>',
+        msgValidationErrorIcon: '<i class="fa fa-exclamation-circle"></i> '
     };
 })(window.jQuery);
