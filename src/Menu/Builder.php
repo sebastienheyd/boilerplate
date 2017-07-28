@@ -26,9 +26,20 @@ class Builder extends LavaryMenuBuilder
             $item->icon($options['icon']);
         }
 
-        if(isset($options['role'])) {
+        if(isset($options['role']) || isset($options['permission'])) {
+
+            $ability = ['admin'];
+            if(isset($options['role'])) {
+                $ability = $ability + explode(',', $options['role']);
+            }
+
+            $permission = [];
+            if(isset($options['permission'])) {
+                $permission = explode(',', $options['permission']);
+            }
+
             $currentUser = Auth::user();
-            if($currentUser->ability('admin', explode(',', $options['role']))) {
+            if($currentUser->ability($ability, $permission)) {
                 $this->items->push($item);
             }
         } else {
