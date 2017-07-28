@@ -36,7 +36,9 @@ class UsersController extends Controller
                 'firstLoginPost',
                 'avatar',
                 'avatarDelete',
-                'avatarPost'
+                'avatarPost',
+                'profile',
+                'profilePost'
             ]
         ]);
     }
