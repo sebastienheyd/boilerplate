@@ -4,11 +4,11 @@
     "keywords": ["laravel", "adminlte", "laratrust", "laravelcollective", "active", "admin"],
     "license": "MIT",
     "require": {
-        "illuminate/support": "^5.4",
-        "laravelcollective/html": "^5.4",
+        "illuminate/support": "^5.5",
+        "laravelcollective/html": "^5.5",
         "santigarcor/laratrust": "^3.2",
         "hieu-le/active": "^3.4",
-        "yajra/laravel-datatables-oracle": "^7.3",
+        "yajra/laravel-datatables-oracle": "^8.0",
         "lavary/laravel-menu": "^1.6",
         "jenssegers/date": "^3.2",
         "intervention/image": "^2.3",
@@ -28,5 +28,12 @@
             "name": "Sébastien HEYD",
             "email": "contact@sheyd.fr"
         }
-    ]
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Sebastienheyd\\Boilerplate\\BoilerplateServiceProvider"
+            ]
+        }
+    }
 }
