@@ -2,8 +2,8 @@
 
 ![Package](https://img.shields.io/badge/Package-sebastienheyd%2Fboilerplate-lightgrey.svg)
 ![Laravel](https://img.shields.io/badge/Laravel-5.4.x-green.svg)
-![Release](https://img.shields.io/badge/release-v1.2.8-blue.svg)
-![Packagist](https://img.shields.io/badge/packagist-v1.2.8-blue.svg)
+![Release](https://img.shields.io/badge/release-v5.4.1-blue.svg)
+![Packagist](https://img.shields.io/badge/packagist-v5.4.1-blue.svg)
 ![MIT License](https://img.shields.io/github/license/sebastienheyd/boilerplate.svg)
 
 This package is to be served as a basis for a web application. 
