@@ -14,7 +14,7 @@
 
     $.fn.fileinputLocales['fa'] = {
         fileSingle: 'فایل',
-        filePlural: 'فایل',
+        filePlural: 'فایل‌ها',
         browseLabel: 'مرور &hellip;',
         removeLabel: 'حذف',
         removeTitle: 'پاکسازی فایل‌های انتخاب شده',
@@ -25,6 +25,7 @@
         msgNo: 'نه',
         msgNoFilesSelected: 'هیچ فایلی انتخاب نشده است',
         msgCancelled: 'لغو شد',
+        msgPlaceholder: 'Select {files}...',
         msgZoomModalHeading: 'نمایش با جزییات',
         msgFileRequired: 'You must select a file to upload.',
         msgSizeTooSmall: 'فایل "{name}" (<b>{size} کیلوبایت</b>) خیلی کوچک است و باید از <b>{minSize} کیلوبایت بزرگتر باشد</b>.',
@@ -54,6 +55,7 @@
         msgUploadBegin: 'در حال شروع...',
         msgUploadEnd: 'انجام شد',
         msgUploadEmpty: 'هیچ داده معتبری برای بارگذاری موجود نیست.',
+        msgUploadError: 'Error',
         msgValidationError: 'خطای اعتبار سنجی',
         msgLoading: 'بارگیری فایل {index} از {files} &hellip;',
         msgProgress: 'بارگیری فایل {index} از {files} - {name} - {percent}% تمام شد.',
@@ -78,6 +80,8 @@
         fileActionSettings: {
             removeTitle: 'حذف فایل',
             uploadTitle: 'آپلود فایل',
+            uploadRetryTitle: 'Retry upload',
+            downloadTitle: 'Download file',
             zoomTitle: 'دیدن جزئیات',
             dragTitle: 'جابجایی / چیدمان',
             indicatorNewTitle: 'آپلود نشده است',

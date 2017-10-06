@@ -1,7 +1,71 @@
 Change Log: `bootstrap-fileinput`
 =================================
 
-## version 4.4.2 (_under development_)
+## version 4.4.5
+
+**Date:** 01-Oct-2017
+
+- Update readme and example index to use plugin's CDN libraries.
+- (enh #1093): Revamp SCSS with better variables and extensions.
+- (enh #1091): Set default button type for close button markup template.
+- (enh #1090): Auto detect intelligently the preview type based on file content.
+- (enh #1087): Enhance SCSS/SASS styling configurations.
+- (enh #1086): New placeholder property and various caption rendering enhancements.
+- (enh #1085): Update Slovak Translations.
+- (enh #1084): Update Czech Translations.
+
+## version 4.4.4
+
+**Date:** 21-Sep-2017
+
+**_This release adds Bootstrap v4.x support._**
+
+- (enh #1082, #1083): Better handling of errors when `showPreview` is `false`.
+- (enh #1080): Enhance styling of zoom modal header and buttons.
+- (bug #1079): Correct initial preview rendering when no `initialPreviewConfig` supplied.
+- (enh #1078): Correct markup during file validation errors (non-ajax mode).
+- (enh #1075): Enhance initial preview delete behavior (ensure `previewCache` splices deleted initial preview content items).
+- (enh #1073): Enhance `refresh` method to overwrite options.
+- (enh #1072): Enhance preview thumb templates to allow setting CSS styles (BC Breaking).
+- (enh #1071): Auto detect small screen width and auto style/auto fit preview thumbnails.
+- (enh #1070): Include new download action button for initial preview thumbnails.
+- (enh #1069): Enhance action buttons to parse new `{key}` & `{filename}` tags.
+- (bug #1068): Add ability to merge ajax callbacks when overriding ajax settings.
+- (bug #1066): Correct `removeFromPreviewOnError` validation.
+- (enh #1065): Enhancements to support Bootstrap v4.x framework.
+- (enh #1064): Update Chinese Translations.
+
+## version 4.4.3
+
+**Date:** 27-Aug-2017
+
+- (enh #1059): Better form reset behavior and update of `reset` method in docs.
+- (enh #1056): Add Lithuanian Translations.
+- (enh #1050): Update Japanese Translations & Locales.
+- (enh #1049): New property `uploadUrlThumb`.
+- (enh #1048): Add ability to retry errored file uploads.
+    - New plugin properties added:
+        - `retryErrorUploads`: _boolean_, will determine if errored out thumbnails can be retried for upload and submitted again.
+        - `fileActionSettings.uploadRetryIcon`: Will change the icon of the upload button to retry icon specified here.
+        - `fileActionSettings.uploadRetryTitle`: Will change the title of the upload button to retry title specified here.
+        - `msgUploadError`: will be displayed within the progress bar on the errored out thumbnails.
+    - Other enhancements include:
+        - resetting progress bar correctly
+        - enhancing upload validation behavior so that if `retryErrorUploads` is `false`, then no upload button is shown on the errored out thumbnails.
+- (enh #1044): Add Slovak Translations.
+- (enh #1043): Add Czech Translations.
+- (enh #1042, #830): Fixes to initial preview delete (related to #1034).
+- (enh #1038): Fix documentation for `{dataKey}`.
+- (enh #1034): Add new event `filebeforedelete` and enhance delete abort logic.
+- (enh #1033): Correct reset of preview in `reset` method.
+- (enh #1031): Update French Translations.
+- (bug #1030): Correct image dimension validation to consider non JPEG images.
+- (enh #1015): Enhancement to RTL styling.
+- (enh #1014): Enhancements to file upload single.
+- (enh #1012): Better formatting of ajax errors display.
+- (enh #1006): Update Farsi Translations.
+
+## version 4.4.2
 
 **Date:** 24-Jun-2017
 
