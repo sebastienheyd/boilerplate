@@ -26,7 +26,7 @@ roles and permissions.
 
 ## Installation
 
-For Laravel 5.4 see [readme on 5.4 branch](https://github.com/sebastienheyd/boilerplate/blob/5.4/README.md)
+For other version : [5.4](https://github.com/sebastienheyd/boilerplate/blob/5.4/README.md)
 
 1. In order to install Laravel/AdminLTE Boilerplate run :
 
@@ -34,7 +34,7 @@ For Laravel 5.4 see [readme on 5.4 branch](https://github.com/sebastienheyd/boil
 composer require sebastienheyd/boilerplate
 ```
 
-2. Run the command below to publish assets, views, lang files, ...
+2. Run the command below to publish assets, views, lang files, ... select `Provider: Sebastienheyd\Boilerplate\BoilerplateServiceProvider`
 
 ```
 php artisan vendor:publish
@@ -54,7 +54,8 @@ If you want to quickly test your Laravel application.
 php artisan serve
 ```
 
-Now you can point your browser to [http://localhost:8000/admin](http://localhost:8000/admin) and see your application.
+Now you can point your browser to [http://localhost:8000/](http://localhost:8000/) you will see buttons on the top right 
+of the Laravel's default page. Click on Login or Register to access the administration panel.
 
 ## Update
 
@@ -162,33 +163,7 @@ You can already replace by yourself the file with the file [`webpack.mix.js`](sr
  
 After that, at the root of your project, run `npm update` and `npm run dev` (or `npm run production`).
 
-[See Laravel `Mix` documentation](https://laravel.com/docs/5.4/mix)
-
-## Troubleshooting
-
-### Migration error
-
-MySQL < v5.7.7 or MariaDB
-
-When you run `php artisan migrate` and you hit this error :
-
-```
-[PDOException]                                                                                                   
-  SQLSTATE[42000]: Syntax error or access violation: 1071 Specified key was too long; max key length is 767 bytes
-```
-
-This is an error from a change in Laravel 5.4 : [see here](https://laravel-news.com/laravel-5-4-key-too-long-error)
-
-To correct this, edit your `app/Providers/AppServiceProvider.php` file and define a default string inside the boot method : 
-
-```php
-use Illuminate\Support\Facades\Schema;
-
-public function boot()
-{
-    Schema::defaultStringLength(191);
-}
-```
+[See Laravel `Mix` documentation](https://laravel.com/docs/5.5/mix)
 
 ## License
 
