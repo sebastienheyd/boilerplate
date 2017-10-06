@@ -1,7 +1,7 @@
 # Laravel/AdminLTE Boilerplate
 
 ![Package](https://img.shields.io/badge/Package-sebastienheyd%2Fboilerplate-lightgrey.svg)
-![Laravel](https://img.shields.io/badge/For-Laravel%20%E2%89%A5%205.4-yellow.svg)
+![Laravel](https://img.shields.io/badge/Laravel-5.5.x-green.svg)
 ![Release](https://img.shields.io/github/release/sebastienheyd/boilerplate.svg)
 ![Packagist](https://img.shields.io/packagist/v/sebastienheyd/boilerplate.svg)
 ![MIT License](https://img.shields.io/github/license/sebastienheyd/boilerplate.svg)
