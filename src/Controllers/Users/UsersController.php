@@ -5,7 +5,7 @@ namespace Sebastienheyd\Boilerplate\Controllers\Users;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Yajra\Datatables\Datatables;
+use Yajra\DataTables\DataTables;
 use Sebastienheyd\Boilerplate\Models\Role;
 use Sebastienheyd\Boilerplate\Models\User;
 use Image;
