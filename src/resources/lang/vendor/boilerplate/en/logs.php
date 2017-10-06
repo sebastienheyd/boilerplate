@@ -17,7 +17,7 @@ return [
     'show' => [
         'title'         => ':date report',
         'file'          => ':date log',
-        'backtolist'    => 'Liste des fichiers',
+        'backtolist'    => 'List of logs',
         'download'      => 'Download',
         'delete'        => 'Delete log file',
         'levels'        => 'Levels',
