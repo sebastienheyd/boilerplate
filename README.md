@@ -26,25 +26,21 @@ roles and permissions.
 
 ## Installation
 
+For Laravel 5.4 see [readme on 5.4 branch](https://github.com/sebastienheyd/boilerplate/blob/5.4/README.md)
+
 1. In order to install Laravel/AdminLTE Boilerplate run :
 
 ```
 composer require sebastienheyd/boilerplate
 ```
 
-2. Open ```config/app.php``` and add the following to the ```providers``` array :
-
-```
-Sebastienheyd\Boilerplate\BoilerplateServiceProvider::class,
-```
-
-3. Run the command below to publish assets, views, lang files, ...
+2. Run the command below to publish assets, views, lang files, ...
 
 ```
 php artisan vendor:publish
 ```
 
-4. After you set your database parameters in your ```.env``` file run :
+3. After you set your database parameters in your ```.env``` file run :
 
 ```
 php artisan migrate
@@ -58,7 +54,7 @@ If you want to quickly test your Laravel application.
 php artisan serve
 ```
 
-Now you can point your browser to [http://localhost:8000](http://localhost:8000) and see your application.
+Now you can point your browser to [http://localhost:8000/admin](http://localhost:8000/admin) and see your application.
 
 ## Update
 
@@ -106,7 +102,8 @@ Every view into these folders can be modified, they will not be overwrited if yo
 Routes are loaded from the file [`boilerplate.php`](src/routes/boilerplate.php). 
 After `php artisan vendor:publish` the file will be found in the folder `routes` at the root of your project.
 
-A prefix can be set to your url into the config file [`app.php`](src/config/boilerplate/app.php). 
+A default prefix `admin` is set into the config file [`app.php`](src/config/boilerplate/app.php), this is why boilerplate is accessible by /admin url. 
+You can set an empty prefix if you remove the default route / defined in `routes/web.php`  
 
 ### Language
 
