@@ -55,7 +55,7 @@
             },
             columns: [
                 {data: 'id', name: 'id'},
-                {data: 'status', name: 'status'},
+                {data: 'status', name: 'status', searchable: false},
                 {data: 'last_name', name: 'last_name'},
                 {data: 'first_name', name: 'first_name'},
                 {data: 'email', name: 'email'},
