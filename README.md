@@ -2,8 +2,7 @@
 
 ![Package](https://img.shields.io/badge/Package-sebastienheyd%2Fboilerplate-lightgrey.svg)
 ![Laravel](https://img.shields.io/badge/Laravel-5.5.x-green.svg)
-![Release](https://img.shields.io/github/release/sebastienheyd/boilerplate.svg)
-![Packagist](https://img.shields.io/packagist/v/sebastienheyd/boilerplate.svg)
+![Packagist](https://img.shields.io/badge/packagist-v5.5.1-blue.svg)
 ![MIT License](https://img.shields.io/github/license/sebastienheyd/boilerplate.svg)
 
 This package is to be served as a basis for a web application. 
