@@ -85,27 +85,7 @@ class BoilerplateServiceProvider extends ServiceProvider
 
         // Loading packages
         $this->_registerLaratrust();
-        $this->_registerLaravelCollective();
-        $this->_registerActive();
-        $this->_registerDatatables();
-        $this->_registerDate();
         $this->_registerMenu();
-        $this->_registerImage();
-        $this->_registerLog();
-    }
-
-    private function _registerLog()
-    {
-        $this->app->register(\Arcanedev\LogViewer\LogViewerServiceProvider::class);
-    }
-
-    /**
-     * Register package intervention/image
-     */
-    private function _registerImage()
-    {
-        $this->app->register(\Intervention\Image\ImageServiceProvider::class);
-        $this->loader->alias('Image', \Intervention\Image\Facades\Image::class);
     }
 
     /**
@@ -115,33 +95,6 @@ class BoilerplateServiceProvider extends ServiceProvider
     {
         $this->app->register(\Lavary\Menu\ServiceProvider::class);
         $this->loader->alias('Menu', \Lavary\Menu\Facade::class);
-    }
-
-    /**
-     * Register package jenssegers/date
-     */
-    private function _registerDate()
-    {
-        $this->app->register(\Jenssegers\Date\DateServiceProvider::class);
-        $this->loader->alias('Date', \Jenssegers\Date\Date::class);
-    }
-
-    /**
-     * Register package yajra/laravel-datatables-oracle
-     */
-    private function _registerDatatables()
-    {
-        $this->app->register(\Yajra\Datatables\DatatablesServiceProvider::class);
-    }
-
-    /**
-     * Register package laravelcollective/html
-     */
-    private function _registerLaravelCollective()
-    {
-        $this->app->register(\Collective\Html\HtmlServiceProvider::class);
-        $this->loader->alias('Form', \Collective\Html\FormFacade::class);
-        $this->loader->alias('Html', \Collective\Html\HtmlFacade::class);
     }
 
     /**
@@ -163,14 +116,5 @@ class BoilerplateServiceProvider extends ServiceProvider
         $this->router->aliasMiddleware('role', \Laratrust\Middleware\LaratrustRole::class);
         $this->router->aliasMiddleware('permission', \Laratrust\Middleware\LaratrustPermission::class);
         $this->router->aliasMiddleware('ability', \Laratrust\Middleware\LaratrustAbility::class);
-    }
-
-    /**
-     * Register package hieu-le/active
-     */
-    private function _registerActive()
-    {
-        $this->app->register(\HieuLe\Active\ActiveServiceProvider::class);
-        $this->loader->alias('Active', \HieuLe\Active\Facades\Active::class);
     }
 }
