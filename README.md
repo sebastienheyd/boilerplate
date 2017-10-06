@@ -1,9 +1,9 @@
 # Laravel/AdminLTE Boilerplate
 
 ![Package](https://img.shields.io/badge/Package-sebastienheyd%2Fboilerplate-lightgrey.svg)
-![Laravel](https://img.shields.io/badge/For-Laravel%20%E2%89%A5%205.4-yellow.svg)
-![Release](https://img.shields.io/github/release/sebastienheyd/boilerplate.svg)
-![Packagist](https://img.shields.io/packagist/v/sebastienheyd/boilerplate.svg)
+![Laravel](https://img.shields.io/badge/Laravel-5.4.x-green.svg)
+![Release](https://img.shields.io/badge/release-v1.2.8-blue.svg)
+![Packagist](https://img.shields.io/badge/packagist-v1.2.8-blue.svg)
 ![MIT License](https://img.shields.io/github/license/sebastienheyd/boilerplate.svg)
 
 This package is to be served as a basis for a web application. 
@@ -29,7 +29,7 @@ roles and permissions.
 1. In order to install Laravel/AdminLTE Boilerplate run :
 
 ```
-composer require sebastienheyd/boilerplate
+composer require sebastienheyd/boilerplate:5.4.*
 ```
 
 2. Open ```config/app.php``` and add the following to the ```providers``` array :
