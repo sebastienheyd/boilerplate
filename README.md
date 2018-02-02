@@ -3,6 +3,7 @@
 ![Package](https://img.shields.io/badge/Package-sebastienheyd%2Fboilerplate-lightgrey.svg)
 ![Laravel](https://img.shields.io/badge/Laravel-5.5.x-green.svg)
 ![Packagist](https://img.shields.io/badge/packagist-v5.5.1-blue.svg)
+![Nb downloads](https://img.shields.io/packagist/dt/sebastienheyd/boilerplate.svg)
 ![MIT License](https://img.shields.io/github/license/sebastienheyd/boilerplate.svg)
 
 This package is to be served as a basis for a web application. 
@@ -33,11 +34,13 @@ For other version : [5.4](https://github.com/sebastienheyd/boilerplate/blob/5.4/
 composer require sebastienheyd/boilerplate
 ```
 
-2. Run the command below to publish assets, views, lang files, ... select `Provider: Sebastienheyd\Boilerplate\BoilerplateServiceProvider`
+2. Run the command below to publish assets, views, lang files, ... 
 
 ```
 php artisan vendor:publish
 ```
+
+Select `Provider: Sebastienheyd\Boilerplate\BoilerplateServiceProvider`
 
 3. After you set your database parameters in your ```.env``` file run :
 
@@ -163,6 +166,32 @@ You can already replace by yourself the file with the file [`webpack.mix.js`](sr
 After that, at the root of your project, run `npm update` and `npm run dev` (or `npm run production`).
 
 [See Laravel `Mix` documentation](https://laravel.com/docs/5.5/mix)
+
+## Troubleshooting
+
+### Migration error
+
+MySQL < v5.7.7 or MariaDB
+
+When you run `php artisan migrate` and you hit this error :
+
+```
+[PDOException]                                                                                                   
+  SQLSTATE[42000]: Syntax error or access violation: 1071 Specified key was too long; max key length is 767 bytes
+```
+
+This is an error from a change since Laravel 5.4 : [see here](https://laravel-news.com/laravel-5-4-key-too-long-error)
+
+To correct this, edit your `app/Providers/AppServiceProvider.php` file and define a default string inside the boot method : 
+
+```php
+use Illuminate\Support\Facades\Schema;
+
+public function boot()
+{
+    Schema::defaultStringLength(191);
+}
+```
 
 ## License
 
