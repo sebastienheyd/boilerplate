@@ -40,10 +40,6 @@ class RegisterController extends Controller
 
         $userModel = config('auth.providers.users.model');
         $this->firstUser = $userModel::all()->count() === 0;
-        
-        if (!$this->firstUser && !config('boilerplate.auth.register')) {
-            abort('404');
-        }
 
         $this->middleware('guest');
     }
@@ -71,6 +67,10 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm()
     {
+        if (!$this->firstUser && !config('boilerplate.auth.register')) {
+            abort('404');
+        }
+
         return view('boilerplate::auth.register', [ 'firstUser' => $this->firstUser ]);
     }
 
@@ -82,6 +82,10 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        if (!$this->firstUser && !config('boilerplate.auth.register')) {
+            abort('404');
+        }
+
         $userModel = config('auth.providers.users.model');
         $roleModel = config('laratrust.role');
 
