@@ -4,7 +4,7 @@
     "keywords": ["laravel", "adminlte", "laratrust", "laravelcollective", "active", "admin"],
     "license": "MIT",
     "require": {
-        "illuminate/support": "5.5.*",
+        "illuminate/support": "5.6.*",
         "laravelcollective/html": "^5.5",
         "santigarcor/laratrust": "^3.2",
         "hieu-le/active": "^3.4",
