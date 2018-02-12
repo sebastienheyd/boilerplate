@@ -1,14 +1,21 @@
 {
   "_args": [
     [
-      "drmonty-datatables-plugins@1.10.12",
-      "/home/sheyd/webroot/ptiseb.com/boilerplate55/vendor/sebastienheyd/boilerplate/src"
+      {
+        "raw": "drmonty-datatables-plugins@^1.10.12",
+        "scope": null,
+        "escapedName": "drmonty-datatables-plugins",
+        "name": "drmonty-datatables-plugins",
+        "rawSpec": "^1.10.12",
+        "spec": ">=1.10.12 <2.0.0",
+        "type": "range"
+      },
+      "/home/sheyd/webroot/ptiseb.com/boilerplate/src"
     ]
   ],
-  "_from": "drmonty-datatables-plugins@1.10.12",
+  "_from": "drmonty-datatables-plugins@>=1.10.12 <2.0.0",
   "_id": "drmonty-datatables-plugins@1.10.12",
   "_inCache": true,
-  "_installable": true,
   "_location": "/drmonty-datatables-plugins",
   "_nodeVersion": "6.4.0",
   "_npmOperationalInternal": {
@@ -16,18 +23,19 @@
     "tmp": "tmp/drmonty-datatables-plugins-1.10.12.tgz_1471949908141_0.3184378780424595"
   },
   "_npmUser": {
-    "email": "linksoft@gmx.de",
-    "name": "drmonty"
+    "name": "drmonty",
+    "email": "linksoft@gmx.de"
   },
   "_npmVersion": "3.10.6",
   "_phantomChildren": {},
   "_requested": {
-    "name": "drmonty-datatables-plugins",
-    "raw": "drmonty-datatables-plugins@1.10.12",
-    "rawSpec": "1.10.12",
+    "raw": "drmonty-datatables-plugins@^1.10.12",
     "scope": null,
-    "spec": "1.10.12",
-    "type": "version"
+    "escapedName": "drmonty-datatables-plugins",
+    "name": "drmonty-datatables-plugins",
+    "rawSpec": "^1.10.12",
+    "spec": ">=1.10.12 <2.0.0",
+    "type": "range"
   },
   "_requiredBy": [
     "/"
@@ -35,8 +43,8 @@
   "_resolved": "https://registry.npmjs.org/drmonty-datatables-plugins/-/drmonty-datatables-plugins-1.10.12.tgz",
   "_shasum": "32fd57f562c938c2da4445cea9675330dd968eb1",
   "_shrinkwrap": null,
-  "_spec": "drmonty-datatables-plugins@1.10.12",
-  "_where": "/home/sheyd/webroot/ptiseb.com/boilerplate55/vendor/sebastienheyd/boilerplate/src",
+  "_spec": "drmonty-datatables-plugins@^1.10.12",
+  "_where": "/home/sheyd/webroot/ptiseb.com/boilerplate/src",
   "author": {
     "name": "Allan Jardine",
     "url": "http://sprymedia.co.uk"
@@ -57,14 +65,14 @@
   "gitHead": "d80fea312937906ad80888e15d30a828c7541113",
   "homepage": "http://datatables.net",
   "keywords": [
-    "DataTable",
     "DataTables",
-    "filter",
+    "DataTable",
+    "table",
     "grid",
-    "internationalisable",
-    "page",
+    "filter",
     "sort",
-    "table"
+    "page",
+    "internationalisable"
   ],
   "licenses": [
     {
