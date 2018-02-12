@@ -1,42 +1,50 @@
 {
   "_args": [
     [
-      "bootstrap-fileinput@4.4.5",
-      "/home/sheyd/webroot/ptiseb.com/boilerplate55/vendor/sebastienheyd/boilerplate/src"
+      {
+        "raw": "bootstrap-fileinput@^4.3.8",
+        "scope": null,
+        "escapedName": "bootstrap-fileinput",
+        "name": "bootstrap-fileinput",
+        "rawSpec": "^4.3.8",
+        "spec": ">=4.3.8 <5.0.0",
+        "type": "range"
+      },
+      "/home/sheyd/webroot/ptiseb.com/boilerplate/src"
     ]
   ],
-  "_from": "bootstrap-fileinput@4.4.5",
-  "_id": "bootstrap-fileinput@4.4.5",
+  "_from": "bootstrap-fileinput@>=4.3.8 <5.0.0",
+  "_id": "bootstrap-fileinput@4.4.7",
   "_inCache": true,
-  "_installable": true,
   "_location": "/bootstrap-fileinput",
   "_nodeVersion": "4.2.1",
   "_npmOperationalInternal": {
     "host": "s3://npm-registry-packages",
-    "tmp": "tmp/bootstrap-fileinput-4.4.5.tgz_1506863719169_0.7558760929387063"
+    "tmp": "tmp/bootstrap-fileinput-4.4.7.tgz_1516640870478_0.04330837517045438"
   },
   "_npmUser": {
-    "email": "kartikv2@gmail.com",
-    "name": "kartik-v"
+    "name": "kartik-v",
+    "email": "kartikv2@gmail.com"
   },
   "_npmVersion": "3.3.10",
   "_phantomChildren": {},
   "_requested": {
-    "name": "bootstrap-fileinput",
-    "raw": "bootstrap-fileinput@4.4.5",
-    "rawSpec": "4.4.5",
+    "raw": "bootstrap-fileinput@^4.3.8",
     "scope": null,
-    "spec": "4.4.5",
-    "type": "version"
+    "escapedName": "bootstrap-fileinput",
+    "name": "bootstrap-fileinput",
+    "rawSpec": "^4.3.8",
+    "spec": ">=4.3.8 <5.0.0",
+    "type": "range"
   },
   "_requiredBy": [
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/bootstrap-fileinput/-/bootstrap-fileinput-4.4.5.tgz",
-  "_shasum": "889a0d4e0685c6749956dbccd3f7dcc7634ba52b",
+  "_resolved": "https://registry.npmjs.org/bootstrap-fileinput/-/bootstrap-fileinput-4.4.7.tgz",
+  "_shasum": "ea6df7f6919e8de777ab7900fd07eed0893163ef",
   "_shrinkwrap": null,
-  "_spec": "bootstrap-fileinput@4.4.5",
-  "_where": "/home/sheyd/webroot/ptiseb.com/boilerplate55/vendor/sebastienheyd/boilerplate/src",
+  "_spec": "bootstrap-fileinput@^4.3.8",
+  "_where": "/home/sheyd/webroot/ptiseb.com/boilerplate/src",
   "authors": [
     "Kartik Visweswaran <kartikv2@gmail.com>"
   ],
@@ -51,22 +59,22 @@
   "devDependencies": {},
   "directories": {},
   "dist": {
-    "shasum": "889a0d4e0685c6749956dbccd3f7dcc7634ba52b",
-    "tarball": "https://registry.npmjs.org/bootstrap-fileinput/-/bootstrap-fileinput-4.4.5.tgz"
+    "shasum": "ea6df7f6919e8de777ab7900fd07eed0893163ef",
+    "tarball": "https://registry.npmjs.org/bootstrap-fileinput/-/bootstrap-fileinput-4.4.7.tgz"
   },
-  "gitHead": "47377ede9533f2060ed8a132a925e4efa60cbd77",
+  "gitHead": "aebea0804d955af913d3cd5922e6b01be66290c9",
   "homepage": "https://github.com/kartik-v/bootstrap-fileinput",
   "keywords": [
-    "ajax",
-    "delete",
     "file",
-    "gallery",
-    "image",
     "input",
-    "multiple",
     "preview",
+    "image",
+    "upload",
+    "ajax",
+    "multiple",
+    "delete",
     "progress",
-    "upload"
+    "gallery"
   ],
   "license": "BSD-3-Clause",
   "main": "./js/fileinput.js",
@@ -79,8 +87,8 @@
   "name": "bootstrap-fileinput",
   "optionalDependencies": {},
   "peerDependencies": {
-    "bootstrap": ">= 3.0.0",
-    "jquery": ">= 1.9.0"
+    "jquery": ">= 1.9.0",
+    "bootstrap": ">= 3.0.0"
   },
   "readme": "ERROR: No README data found!",
   "repository": {
@@ -89,5 +97,5 @@
   },
   "scripts": {},
   "style": "./css/fileinput.css",
-  "version": "4.4.5"
+  "version": "4.4.7"
 }
