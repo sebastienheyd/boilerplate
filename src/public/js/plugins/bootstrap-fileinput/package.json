@@ -10,7 +10,7 @@
         "spec": ">=4.3.8 <5.0.0",
         "type": "range"
       },
-      "/home/sheyd/webroot/ptiseb.com/boilerplate/src"
+      "/srv/scm/sebastien.heyd/boilerplate/src"
     ]
   ],
   "_from": "bootstrap-fileinput@>=4.3.8 <5.0.0",
@@ -44,7 +44,7 @@
   "_shasum": "ea6df7f6919e8de777ab7900fd07eed0893163ef",
   "_shrinkwrap": null,
   "_spec": "bootstrap-fileinput@^4.3.8",
-  "_where": "/home/sheyd/webroot/ptiseb.com/boilerplate/src",
+  "_where": "/srv/scm/sebastien.heyd/boilerplate/src",
   "authors": [
     "Kartik Visweswaran <kartikv2@gmail.com>"
   ],

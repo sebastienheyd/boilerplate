@@ -10,7 +10,7 @@
         "spec": ">=1.10.12 <2.0.0",
         "type": "range"
       },
-      "/home/sheyd/webroot/ptiseb.com/boilerplate/src"
+      "/srv/scm/sebastien.heyd/boilerplate/src"
     ]
   ],
   "_from": "drmonty-datatables-plugins@>=1.10.12 <2.0.0",
@@ -44,7 +44,7 @@
   "_shasum": "32fd57f562c938c2da4445cea9675330dd968eb1",
   "_shrinkwrap": null,
   "_spec": "drmonty-datatables-plugins@^1.10.12",
-  "_where": "/home/sheyd/webroot/ptiseb.com/boilerplate/src",
+  "_where": "/srv/scm/sebastien.heyd/boilerplate/src",
   "author": {
     "name": "Allan Jardine",
     "url": "http://sprymedia.co.uk"

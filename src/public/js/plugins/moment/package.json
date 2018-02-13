@@ -10,7 +10,7 @@
         "spec": ">=2.18.1 <3.0.0",
         "type": "range"
       },
-      "/home/sheyd/webroot/ptiseb.com/boilerplate/src"
+      "/srv/scm/sebastien.heyd/boilerplate/src"
     ]
   ],
   "_from": "moment@>=2.18.1 <3.0.0",
@@ -47,7 +47,7 @@
   "_shasum": "d6eb1a46cbcc14a2b2f9434112c1ff8907f313fd",
   "_shrinkwrap": null,
   "_spec": "moment@^2.18.1",
-  "_where": "/home/sheyd/webroot/ptiseb.com/boilerplate/src",
+  "_where": "/srv/scm/sebastien.heyd/boilerplate/src",
   "author": {
     "name": "Iskren Ivov Chernev",
     "email": "iskren.chernev@gmail.com",

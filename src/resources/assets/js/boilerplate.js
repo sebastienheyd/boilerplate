@@ -10,7 +10,7 @@ function growl(message, type) {
     }
 })();
 
-$('.sidebar-toggle').click(function(event) {
+$('.sidebar-toggle').on('click', function(event) {
     event.preventDefault();
     if (Boolean(sessionStorage.getItem('sidebar-toggle-collapsed'))) {
         sessionStorage.setItem('sidebar-toggle-collapsed', '');

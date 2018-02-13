@@ -33,6 +33,9 @@ class MenuComposer
             }
         });
 
-        $view->with('menu', $menu->sortBy('order')->asUl([ 'class' => 'sidebar-menu' ], [ 'class' => 'treeview-menu' ]));
+        $view->with('menu', $menu->sortBy('order')->asUl([
+            'class' => 'sidebar-menu',
+            'data-widget' => "tree"
+        ], [ 'class' => 'treeview-menu' ]));
     }
 }

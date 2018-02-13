@@ -16,7 +16,7 @@ mix.setPublicPath("public")
 mix.scripts([
     'node_modules/jquery/dist/jquery.min.js',
     'node_modules/bootstrap/dist/js/bootstrap.min.js',
-    'node_modules/admin-lte/dist/js/app.min.js',
+    'node_modules/admin-lte/dist/js/adminlte.min.js',
     'node_modules/bootbox/bootbox.min.js',
     'node_modules/bootstrap-growl/bootstrap-notify.min.js',
     'resources/assets/js/boilerplate.js'
