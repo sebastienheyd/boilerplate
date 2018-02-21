@@ -11,7 +11,7 @@ return [
     'password' => [
         'title'             => 'Recuperación de contraseña',
         'intro'             => 'Rellena el siguiente dato para reiniciar tu contraseña',
-        'submit'            => 'Reiniciar contraseña contraseña',
+        'submit'            => 'Reiniciar contraseña',
         'login_link'        => "Entrar con un usuario ya existente",
     ],
     'password_reset' => [

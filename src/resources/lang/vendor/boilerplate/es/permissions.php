@@ -10,7 +10,7 @@ return [
         'description'  => 'El usuario puede crear, eliminar o modificar usuarios',
     ],
     'roles_crud' => [
-        'display_name' => 'Gestión de Roles y permisos',
+        'display_name' => 'Gestión de roles y permisos',
         'description'  => "El usuario puede editar y definir permisos para un rol",
     ],
     'logs' => [

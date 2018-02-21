@@ -17,7 +17,7 @@ return [
     'newpassword'   => "Tu contraseña ha sido guardada.",
     'create' => [
         'title'     => "Añadir un usuario",
-        'help'      => "El usuario recibirá una invitación por correo electrónico para acceder al panel de administración y configurar su nueva contraseña",
+        'help'      => "El usuario recibirá una invitación por correo electrónico para acceder al panel de administración y configurar su nueva contraseña.",
     ],
     'edit' => [
         'title'     => "Editar un usuario",
@@ -39,8 +39,8 @@ return [
         'title'         => 'Perfil del usuario',
         'subscribedsince' => 'Miembro desde :date ( :since )',
         'avatar'        => 'Imagen del perfil',
-        'delavatar'     => 'Eliminar imagen del perfill',
-        'confirmdelavatar' => '¿Estás seguro de eliminar la imagen del perfil?',
+        'delavatar'     => 'Eliminar imagen del perfil',
+        'confirmdelavatar' => '¿Estás seguro de que deseas eliminar la imagen del perfil?',
         'successdelavatar' => 'La imagen del perfil ha sido eliminada',
         'successupdate' => 'El perfil ha sido actualizado correctamente'
     ]

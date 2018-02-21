@@ -8,7 +8,7 @@ return [
     'copyright' => '&copy; :date :name. Todos los derechos reservados.',
     'newuser' => [
         'subject' => 'Tu cuenta ha sido creada :name',
-        'intro' => 'Has recibido este correo electrónico porque se ha creado una cuenta con esta direción a nombre de :name.',
+        'intro' => 'Has recibido este correo electrónico porque se ha creado una cuenta con esta dirección de correo electrónico a nombre de :name.',
         'button' => 'Entrar',
         'outro' => 'La primera vez que accedas al panel, será necesario que introduzas una nueva contraseña.'
     ],
