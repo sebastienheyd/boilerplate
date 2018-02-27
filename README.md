@@ -24,7 +24,7 @@ For other Laravel versions : [5.5](https://github.com/sebastienheyd/boilerplate/
 * Server-sided datatables methods provided by [yajra/laravel-datatables](https://github.com/yajra/laravel-datatables)
 * Multi-language date support by [jenssegers/date](https://github.com/jenssegers/date)
 * Image manipulation by [intervention/image](https://github.com/intervention/image)
-* Localized English-French
+* Localized English / French / Spanish
 
 ## Installation
 
