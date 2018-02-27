@@ -109,7 +109,7 @@ You can set an empty prefix if you remove the default route / defined in `routes
 ### Language
 
 Language used by boilerplate is the application language declared into `config/app.php`. 
-For the moment only english and french are supported.
+For the moment only english, french and spanish are supported.
 
 When you run `php artisan vendor:publish --provider=sebastienheyd/boilerplate`, locale files are copied to the folder `resources/lang/vendor/boilerplate`
  
