@@ -78,7 +78,7 @@ class BoilerplateServiceProvider extends ServiceProvider
             'auth.providers.users.driver' => config('boilerplate.auth.providers.users.driver', 'eloquent'),
             'auth.providers.users.model' => config('boilerplate.auth.providers.users.model', 'App\User'),
             'auth.providers.users.table' => config('boilerplate.auth.providers.users.table', 'users'),
-            'app.log' => 'daily',
+            'logging.channels.stack.channels' => 'daily',
             'log-viewer.route.enabled' => false,
             'log-viewer.menu.filter-route'  => 'logs.filter'
         ]);
