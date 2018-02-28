@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+            <div class="col-sm-12 col-md-5">
                 <div class="info-box">
                     <span class="info-box-icon" style="line-height: normal">
                         <img src="{{ $user->avatar_url }}" class="avatar" alt="avatar"/>
@@ -56,37 +56,37 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+            <div class="col-sm-12 col-md-7">
                 <div class="box box-primary">
                     <div class="box-header">
                         <h3 class="box-title">{{ __('boilerplate::users.informations') }}</h3>
                     </div>
                     <div class="box-body">
                         <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                                <div class="form-group {{ $errors->has('last_name') ? 'has-error' : '' }}">
-                                    {{ Form::label('last_name', __('boilerplate::users.lastname')) }}
-                                    {{ Form::text('last_name', old('last_name', $user->last_name), ['class' => 'form-control', 'autofocus']) }}
-                                    {!! $errors->first('last_name','<p class="text-danger"><strong>:message</strong></p>') !!}
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="col-sm-12 col-md-6">
                                 <div class="form-group {{ $errors->has('first_name') ? 'has-error' : '' }}">
                                     {{ Form::label('first_name', __('boilerplate::users.firstname')) }}
                                     {{ Form::text('first_name', old('first_name', $user->first_name), ['class' => 'form-control']) }}
                                     {!! $errors->first('first_name','<p class="text-danger"><strong>:message</strong></p>') !!}
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group {{ $errors->has('last_name') ? 'has-error' : '' }}">
+                                    {{ Form::label('last_name', __('boilerplate::users.lastname')) }}
+                                    {{ Form::text('last_name', old('last_name', $user->last_name), ['class' => 'form-control', 'autofocus']) }}
+                                    {!! $errors->first('last_name','<p class="text-danger"><strong>:message</strong></p>') !!}
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
                                 <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
-                                    {{ Form::label('password', ucfirst(__('validation.attributes.password'))) }}
+                                    {{ Form::label('password', ucfirst(__('boilerplate::auth.fields.password'))) }}
                                     {{ Form::password('password', ['class' => 'form-control']) }}
                                     {!! $errors->first('password','<p class="text-danger"><strong>:message</strong></p>') !!}
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="col-sm-12 col-md-6">
                                 <div class="form-group {{ $errors->has('password_confirmation') ? 'has-error' : '' }}">
-                                    {{ Form::label('password_confirmation', ucfirst(__('validation.attributes.password_confirmation'))) }}
+                                    {{ Form::label('password_confirmation', ucfirst(__('boilerplate::auth.fields.password_confirm'))) }}
                                     {{ Form::password('password_confirmation', ['class' => 'form-control']) }}
                                     {!! $errors->first('password_confirmation','<p class="text-danger"><strong>:message</strong></p>') !!}
                                 </div>
