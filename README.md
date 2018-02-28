@@ -157,13 +157,9 @@ You can see examples on the default dashboard.
 
 Boilerplate come with compiled assets. To do this, this package is frequently updated by using `npm` and `mix`.
 
-If you need to update assets by yourself, remove the file `webpack.mix.js` at the root of your Laravel project and do a `php artisan vendor:publish --provider=sebastienheyd/boilerplate`. The file from this package will be automatically copied to this location.
+Updating assets after a package update is very simple : 
 
-You can already replace by yourself the file with the file [`webpack.mix.js`](src/webpack.mix.js) from this package.
- 
-After that, at the root of your project, run `npm update` and `npm run dev` (or `npm run production`).
-
-[See Laravel `Mix` documentation](https://laravel.com/docs/5.5/mix)
+`php artisan vendor:publish --provider="Sebastienheyd\Boilerplate\BoilerplateServiceProvider" --tag=public --force`
 
 ## Troubleshooting
 
