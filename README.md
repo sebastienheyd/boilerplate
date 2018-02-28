@@ -37,7 +37,7 @@ composer require sebastienheyd/boilerplate
 2. Run the command below to publish assets, views, lang files, ... 
 
 ```
-php artisan vendor:publish --provider=sebastienheyd/boilerplate
+php artisan vendor:publish --provider="Sebastienheyd\Boilerplate\BoilerplateServiceProvider"
 ```
 
 3. After you set your database parameters in your ```.env``` file run :
@@ -62,14 +62,14 @@ of the Laravel's default page. Click on Login or Register to access the administ
 Boilerplate comes with assets such as Javascript, CSS, and images. Since you typically will need to overwrite the assets every time the package is updated, you may use the ```--force``` flag. For example :
   
 ```
-php artisan vendor:publish --provider=sebastienheyd/boilerplate --tag=public --force
+php artisan vendor:publish --provider="Sebastienheyd\Boilerplate\BoilerplateServiceProvider" --tag=public --force
 ```
 
 If needed, you can force update for these tags : ```config```, ```routes```, ```resources```, ```public```, ```models```, ```notifications```, ```webpack```
 
 ## Configuration
 
-After `php artisan vendor:publish --provider=sebastienheyd/boilerplate` you will find a folder `boilerplate` into the directory `config`.
+After `php artisan vendor:publish --provider="Sebastienheyd\Boilerplate\BoilerplateServiceProvider"` you will find a folder `boilerplate` into the directory `config`.
 
 * [`app.php`](src/config/boilerplate/app.php) : name of the application (only backend), admin panel prefix and redirection after login (see comments in file)
 * [`auth.php`](src/config/boilerplate/auth.php) : overriding of `config/auth.php` to use boilerplate's models instead of default Laravel's models. Allow you to define if users can register from login page and which role will be assigned to a new user.
@@ -92,7 +92,7 @@ See [lavary/laravel-menu](https://github.com/lavary/laravel-menu) and [hieu-le/a
 
 ### Customizing views
 
-When published by `php artisan vendor:publish --provider=sebastienheyd/boilerplate` views are copied to the folder `resources/views/vendor/boilerplate`.
+When published by `php artisan vendor:publish --provider="Sebastienheyd\Boilerplate\BoilerplateServiceProvider"` views are copied to the folder `resources/views/vendor/boilerplate`.
 
 Error views are copied to the folder `resources/views/errors`
 
@@ -101,7 +101,7 @@ Every view into these folders can be modified, they will not be overwrited if yo
 ### Routes
 
 Routes are loaded from the file [`boilerplate.php`](src/routes/boilerplate.php). 
-After `php artisan vendor:publish --provider=sebastienheyd/boilerplate` the file will be found in the folder `routes` at the root of your project.
+After `php artisan vendor:publish --provider="Sebastienheyd\Boilerplate\BoilerplateServiceProvider"` the file will be found in the folder `routes` at the root of your project.
 
 A default prefix `admin` is set into the config file [`app.php`](src/config/boilerplate/app.php), this is why boilerplate is accessible by /admin url. 
 You can set an empty prefix if you remove the default route / defined in `routes/web.php`  
@@ -111,7 +111,7 @@ You can set an empty prefix if you remove the default route / defined in `routes
 Language used by boilerplate is the application language declared into `config/app.php`. 
 For the moment only english, french and spanish are supported.
 
-When you run `php artisan vendor:publish --provider=sebastienheyd/boilerplate`, locale files are copied to the folder `resources/lang/vendor/boilerplate`
+When you run `php artisan vendor:publish --provider="Sebastienheyd\Boilerplate\BoilerplateServiceProvider"`, locale files are copied to the folder `resources/lang/vendor/boilerplate`
  
 NB : Dates are translated by the package [jenssegers/date](https://github.com/jenssegers/date)
 
