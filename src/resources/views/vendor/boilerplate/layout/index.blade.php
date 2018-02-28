@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $title }} | {{ config('app.name') }}</title>
-    <link rel="stylesheet" href="{{ asset('css/boilerplate.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/boilerplate.min.css') }}">
     @stack('css')
 </head>
 <body class="sidebar-mini skin-blue">
@@ -23,7 +23,7 @@
         </div>
         @include('boilerplate::layout.footer')
     </div>
-    <script src="{{ asset('/js/boilerplate.js') }}"></script>
+    <script src="{{ asset('/js/boilerplate.min.js') }}"></script>
     <script>
         $(function() {
             $.ajaxSetup({headers:{'X-CSRF-TOKEN':'{{ csrf_token() }}'}});
