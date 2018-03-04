@@ -8,5 +8,5 @@ return [
     'prefix'     => 'admin',                // Backend routes prefix. Ex: "admin" => "http://..../admin"
     'redirectTo' => 'boilerplate.home',     // Redirection to route after backend login
     'locale'     => config('app.locale'),   // Backend locale
-    'skin'       => 'black',                // AdminLTE skin (blue, yellow, green, purple, red, black, *-light)
+    'skin'       => 'blue',                 // AdminLTE skin (blue, yellow, green, purple, red, black, *-light)
 ];
