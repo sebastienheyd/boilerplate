@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{ asset('css/boilerplate.min.css') }}">
     @stack('css')
 </head>
-<body class="sidebar-mini skin-blue">
+<body class="sidebar-mini skin-{{ config('boileplate.app.skin', 'blue') }}">
     <div class="wrapper">
         @include('boilerplate::layout.header')
         @include('boilerplate::layout.mainsidebar')
