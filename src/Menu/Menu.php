@@ -1,6 +1,7 @@
 <?php namespace Sebastienheyd\Boilerplate\Menu;
 
 use Lavary\Menu\Menu as LavaryMenu;
+use View;
 
 class Menu extends LavaryMenu
 {
@@ -19,7 +20,7 @@ class Menu extends LavaryMenu
             $this->collection->put($name, $this->menu[$name]);
 
             // Make the instance available in all views
-            \View::share($name, $this->menu[$name]);
+            View::share($name, $this->menu[$name]);
 
             return $this->menu[$name];
         }
