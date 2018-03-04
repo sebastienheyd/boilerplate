@@ -7,6 +7,9 @@ $default = [
 
 Route::group(array_merge($default, [ 'middleware' => [ 'web' ] ]), function() {
 
+    App::setLocale(config('boilerplate.app.locale', config('app.locale')));
+    Date::setLocale(config('boilerplate.app.locale', config('app.locale')));
+
     // Login Routes...
     Route::get('login', [ 'as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm' ]);
     Route::post('login', [ 'as' => 'login.post', 'uses' => 'Auth\LoginController@login' ]);
@@ -28,6 +31,9 @@ Route::group(array_merge($default, [ 'middleware' => [ 'web' ] ]), function() {
 });
 
 Route::group(array_merge($default, [ 'middleware' => [ 'web', 'auth', 'ability:admin,backend_access' ] ]), function() {
+
+    App::setLocale(config('boilerplate.app.locale', config('app.locale')));
+    Date::setLocale(config('boilerplate.app.locale', config('app.locale')));
 
     Route::get('/', [ 'as' => 'boilerplate.home', 'uses' => 'HomeController@index' ]);
     Route::resource('roles', 'Users\RolesController');
