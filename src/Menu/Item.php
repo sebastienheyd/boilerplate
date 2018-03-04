@@ -50,7 +50,8 @@ class Item extends LavaryMenuItem
             return $this;
         }
 
-        $this->attributes['class'] = Builder::formatGroupClass(array('class' => $this->builder->conf('active_class')), $this->attributes);
+        $activeClass = $this->builder->conf('active_class');
+        $this->attributes['class'] = Builder::formatGroupClass(['class' => $activeClass], $this->attributes);
         $this->isActive = true;
 
         if(strstr($this->title, 'circle-o')) {
