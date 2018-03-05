@@ -6,11 +6,11 @@
 ![Nb downloads](https://img.shields.io/packagist/dt/sebastienheyd/boilerplate.svg)
 ![MIT License](https://img.shields.io/github/license/sebastienheyd/boilerplate.svg)
 
-This package is to be served as a basis for a web application. 
-It allows you to access to an administration panel to manage users, 
-roles and permissions.
+This package is to be served as a basis for a web application. It allows you to access to an administration panel to 
+manage users, roles and permissions.
 
-For other Laravel versions : [5.5](https://github.com/sebastienheyd/boilerplate/blob/5.5/README.md) / [5.4](https://github.com/sebastienheyd/boilerplate/blob/5.4/README.md)
+For other Laravel versions : [5.5](https://github.com/sebastienheyd/boilerplate/blob/5.5/README.md) / 
+[5.4](https://github.com/sebastienheyd/boilerplate/blob/5.4/README.md)
 
 ## Features
 
@@ -59,59 +59,82 @@ of the Laravel's default page. Click on Login or Register to access the administ
 
 ## Update
 
-Boilerplate comes with assets such as Javascript, CSS, and images. Since you typically will need to overwrite the assets every time the package is updated, you may use the ```--force``` flag. For example :
+Boilerplate comes with assets such as Javascript, CSS, and images. Since you typically will need to overwrite the assets 
+every time the package is updated, you may use the ```--force``` flag. For example :
   
 ```
 php artisan vendor:publish --provider="Sebastienheyd\Boilerplate\BoilerplateServiceProvider" --tag=public --force
 ```
 
-If needed, you can force update for these tags : ```config```, ```routes```, ```resources```, ```public```, ```models```, ```notifications```, ```webpack```
+If needed, you can force update for these tags : ```config```, ```lang```, ```public```, ```errors```
+
+| name | description | path |
+|---|---|---|
+| config | Configuration files | app/config |
+| lang | Laravel default lang files for form validation | ressources/lang/[LANG] |
+| public | Public assets, update it after each package update | public |
+| errors | Laravel default error views | resources/views/errors |
 
 ## Configuration
 
-After `php artisan vendor:publish --provider="Sebastienheyd\Boilerplate\BoilerplateServiceProvider"` you will find a folder `boilerplate` into the directory `config`.
+Configuration files can be found in the `boilerplate` sub-folder of the Laravel `config` folder.
 
-* [`app.php`](src/config/boilerplate/app.php) : name of the application (only backend), admin panel prefix and redirection after login (see comments in file)
-* [`auth.php`](src/config/boilerplate/auth.php) : overriding of `config/auth.php` to use boilerplate's models instead of default Laravel's models. Allow you to define if users can register from login page and which role will be assigned to a new user.
-* [`laratrust.php`](src/config/boilerplate/laratrust.php) : overriding of Laratrust's (package santigarcor/laratrust) default config.
+* [`app.php`](src/config/boilerplate/app.php) : name of the application (only backend), admin panel prefix, 
+redirection after login (see comments in file), AdminLTE skin and more...
+* [`auth.php`](src/config/boilerplate/auth.php) : overriding of `config/auth.php` to use boilerplate models instead 
+of default Laravel models. Allow you to define if users can register from login page and which role will be assigned 
+to a new user.
+* [`laratrust.php`](src/config/boilerplate/laratrust.php) : overriding of Laratrust (package santigarcor/laratrust) 
+default config.
 * [`menu.php`](src/config/boilerplate/menu.php) : classes to add menu items, [see below](#adding-items-to-the-main-menu).
 
 ### Adding items to the main menu
 
-If in your application you need to add items to the main menu, you must declare the classes you want to use to build your menu into 
-the config file [`menu.php`](src/config/boilerplate/menu.php).
+If in your application you need to add items to the main menu, you must declare the classes you want to use to build 
+your menu into the config file [`menu.php`](src/config/boilerplate/menu.php).
 
-As you can see you have already two classes declared into this file, if you check the code into [Users.php](src/Menu/Users.php) or [Logs.php](src/Menu/Logs.php) you will find a method named `make(Builder $menu)`.
+As you can see you have already two classes declared into this file, if you check the code into 
+[Users.php](src/Menu/Users.php) or [Logs.php](src/Menu/Logs.php) you will find a method named `make(Builder $menu)`.
 This is the method called to build menu items. Feel free to use these files as an example to build your own menu items.
 
-So, to add menu  items : create a class, declare this class into the config file `menu.php` and add a `make(Builder $menu)` method into the class.
+So, to add menu  items : create a class, declare this class into the config file `menu.php` and add a 
+`make(Builder $menu)` method into the class.
 
 Don't forget to declare ```use Sebastienheyd\Boilerplate\Menu\Builder as Builder;```
 
-See [lavary/laravel-menu](https://github.com/lavary/laravel-menu) and [hieu-le/active](https://github.com/letrunghieu/active) documentations.
+See [lavary/laravel-menu](https://github.com/lavary/laravel-menu) and 
+[hieu-le/active](https://github.com/letrunghieu/active) documentations.
 
 ### Customizing views
 
-When published by `php artisan vendor:publish --provider="Sebastienheyd\Boilerplate\BoilerplateServiceProvider"` views are copied to the folder `resources/views/vendor/boilerplate`.
+When published by `php artisan` error views are copied to the folder `resources/views/errors`. These files can be 
+modified.
 
-Error views are copied to the folder `resources/views/errors`
-
-Every view into these folders can be modified, they will not be overwrited if you launch `php artisan vendor:publish --provider=sebastienheyd/boilerplate` again. You can already delete these files to reset them if needed, just remove them and run `php artisan vendor:publish --provider=sebastienheyd/boilerplate`
+If you need to modify default Boilerplate views (not recommended), you can copy boilerplate package  
+[`vendor`](src/resources/views/vendor) folder in your `resources/views` folder.
 
 ### Routes
 
-Routes are loaded from the file [`boilerplate.php`](src/routes/boilerplate.php). 
-After `php artisan vendor:publish --provider="Sebastienheyd\Boilerplate\BoilerplateServiceProvider"` the file will be found in the folder `routes` at the root of your project.
+Routes are loaded from the file [`boilerplate.php`](src/routes/boilerplate.php).
 
-A default prefix `admin` is set into the config file [`app.php`](src/config/boilerplate/app.php), this is why boilerplate is accessible by /admin url. 
-You can set an empty prefix if you remove the default route / defined in `routes/web.php`  
+Routes can be overloaded by copying the file [`boilerplate.php`](src/routes/boilerplate.php) to your routes folder. 
+
+A default prefix `admin` is set into the config file [`app.php`](src/config/boilerplate/app.php), this is why 
+boilerplate is accessible by /admin url. You can set an empty prefix if you remove the default route / defined in 
+`routes/web.php`  
 
 ### Language
 
 Language used by boilerplate is the application language declared into `config/app.php`. 
 For the moment only english, french and spanish are supported.
 
-When you run `php artisan vendor:publish --provider="Sebastienheyd\Boilerplate\BoilerplateServiceProvider"`, locale files are copied to the folder `resources/lang/vendor/boilerplate`
+When you run `php artisan vendor:publish --provider="Sebastienheyd\Boilerplate\BoilerplateServiceProvider"`, only the 
+language files for form validation are copied for supported languages. Thanks to 
+[caouecs/Laravel-lang](https://github.com/caouecs/Laravel-lang) package !
+
+You can translate into a language not yet supported by copying the [`vendor`](src/resources/lang/vendor) folder into 
+your resources/lang folder. After that, copy or rename one of the language folders in the new language folder to create. 
+All you have to do is translate. If you want to share the language you have added, don't hesitate to make a pull-request.
  
 NB : Dates are translated by the package [jenssegers/date](https://github.com/jenssegers/date)
 
@@ -119,7 +142,8 @@ NB : Dates are translated by the package [jenssegers/date](https://github.com/je
 
 By default, only jQuery, bootstrap 3, Font Awesome and AdminLTE scripts and css are loaded.
 
-To "activate" and use plugins like datatable, datepicker, icheck, ... you can use "loaders". These are blade templates prepared to add the loading of scripts and styles for a plugin.
+To "activate" and use plugins like datatable, datepicker, icheck, ... you can use "loaders". These are blade templates 
+prepared to add the loading of scripts and styles for a plugin.
 
 For example, you want to use a datepicker on a text field :
  
@@ -133,23 +157,37 @@ For example, you want to use a datepicker on a text field :
 @endpush
 ```
 
-Here `@include('boilerplate::load.datepicker')` will load scripts and styles to allow usage of datepicker. After that you can push your scripts on the `js` stack (or styles on the `css` stack).
+Here `@include('boilerplate::load.datepicker')` will load scripts and styles to allow usage of datepicker. After that 
+you can push your scripts on the `js` stack (or styles on the `css` stack).
 
 Available loaders are :
 
-* [`boilerplate::load.datatables`](src/resources/views/vendor/boilerplate/load/datatables.blade.php) : [Datatables](https://www.datatables.net/) - [Example](src/resources/views/vendor/boilerplate/plugins/demo/datatables.blade.php) 
-* [`boilerplate::load.datepicker`](src/resources/views/vendor/boilerplate/load/datepicker.blade.php) : [Datepicker](https://github.com/uxsolutions/bootstrap-datepicker) & [DateRangePicker](https://github.com/dangrossman/bootstrap-daterangepicker) - [Example](src/resources/views/vendor/boilerplate/plugins/demo/datepicker.blade.php)
-* [`boilerplate::load.icheck`](src/resources/views/vendor/boilerplate/load/icheck.blade.php) : [iCheck](http://icheck.fronteed.com/) - [Example](src/resources/views/vendor/boilerplate/plugins/demo/icheck.blade.php)
-* [`boilerplate::load.select2`](src/resources/views/vendor/boilerplate/load/select2.blade.php) : [Select2](https://select2.github.io/) - [Example](src/resources/views/vendor/boilerplate/plugins/demo/select2.blade.php)
-* [`boilerplate::load.moment`](src/resources/views/vendor/boilerplate/load/moment.blade.php) : [MomentJs](http://momentjs.com/)
-* [`boilerplate::load.fileinput`](src/resources/views/vendor/boilerplate/load/fileinput.blade.php) : [Bootstrap FileInput](http://plugins.krajee.com/file-input)
+* [`boilerplate::load.datatables`](src/resources/views/vendor/boilerplate/load/datatables.blade.php) : 
+[Datatables](https://www.datatables.net/) - 
+[Example](src/resources/views/vendor/boilerplate/plugins/demo/datatables.blade.php) 
+* [`boilerplate::load.datepicker`](src/resources/views/vendor/boilerplate/load/datepicker.blade.php) : 
+[Datepicker](https://github.com/uxsolutions/bootstrap-datepicker) & 
+[DateRangePicker](https://github.com/dangrossman/bootstrap-daterangepicker) - 
+[Example](src/resources/views/vendor/boilerplate/plugins/demo/datepicker.blade.php)
+* [`boilerplate::load.icheck`](src/resources/views/vendor/boilerplate/load/icheck.blade.php) : 
+[iCheck](http://icheck.fronteed.com/) - 
+[Example](src/resources/views/vendor/boilerplate/plugins/demo/icheck.blade.php)
+* [`boilerplate::load.select2`](src/resources/views/vendor/boilerplate/load/select2.blade.php) : 
+[Select2](https://select2.github.io/) - 
+[Example](src/resources/views/vendor/boilerplate/plugins/demo/select2.blade.php)
+* [`boilerplate::load.moment`](src/resources/views/vendor/boilerplate/load/moment.blade.php) : 
+[MomentJs](http://momentjs.com/)
+* [`boilerplate::load.fileinput`](src/resources/views/vendor/boilerplate/load/fileinput.blade.php) : 
+[Bootstrap FileInput](http://plugins.krajee.com/file-input)
 
 More will come...
 
 Some plugins are loaded by default :
 
-* [Bootbox](https://github.com/makeusabrew/bootbox) - [Example](src/resources/views/vendor/boilerplate/plugins/demo/bootbox.blade.php)
-* [Notify](https://github.com/mouse0270/bootstrap-notify) - [Example](src/resources/views/vendor/boilerplate/plugins/demo/notify.blade.php)
+* [Bootbox](https://github.com/makeusabrew/bootbox) - 
+[Example](src/resources/views/vendor/boilerplate/plugins/demo/bootbox.blade.php)
+* [Notify](https://github.com/mouse0270/bootstrap-notify) - 
+[Example](src/resources/views/vendor/boilerplate/plugins/demo/notify.blade.php)
 
 You can see examples on the default dashboard.
 
@@ -176,7 +214,12 @@ When you run `php artisan migrate` and you hit this error :
 
 This is an error from a change since Laravel 5.4 : [see here](https://laravel-news.com/laravel-5-4-key-too-long-error)
 
-To correct this, edit your `app/Providers/AppServiceProvider.php` file and define a default string inside the boot method : 
+To correct this, two possibilities :
+
+- Define `utf8` instead of `utf8mb4` as default database charset and `utf8_unicode_ci` instead of 
+`utf8mb4_unicode_ci` as default database collation.
+
+- Edit your `app/Providers/AppServiceProvider.php` file and define a default string inside the boot method : 
 
 ```php
 use Illuminate\Support\Facades\Schema;
