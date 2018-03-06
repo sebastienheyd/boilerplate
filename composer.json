@@ -29,14 +29,6 @@
             "email": "contact@sheyd.fr"
         }
     ],
-    "scripts": {
-        "post-install-cmd": [
-            "php artisan vendor:publish --provider=\"Sebastienheyd\\Boilerplate\\BoilerplateServiceProvider\""
-        ],
-        "post-update-cmd": [
-            "php artisan vendor:publish --provider=\"Sebastienheyd\\Boilerplate\\BoilerplateServiceProvider\" --tag=public --force"
-        ]
-    },
     "extra": {
         "laravel": {
             "providers": [
