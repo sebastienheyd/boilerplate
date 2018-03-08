@@ -75,7 +75,6 @@ class BoilerplateServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/config/boilerplate/app.php', 'boilerplate.app');
         $this->mergeConfigFrom(__DIR__.'/config/boilerplate/laratrust.php', 'boilerplate.laratrust');
         $this->mergeConfigFrom(__DIR__.'/config/boilerplate/auth.php', 'boilerplate.auth');
-        $this->mergeConfigFrom(__DIR__.'/config/boilerplate/menu.php', 'boilerplate.menu');
 
         // Overriding Laravel config
         config([

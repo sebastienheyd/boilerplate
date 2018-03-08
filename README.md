@@ -86,7 +86,6 @@ of default Laravel models. Allow you to define if users can register from login 
 to a new user.
 * [`laratrust.php`](src/config/boilerplate/laratrust.php) : overriding of Laratrust (package santigarcor/laratrust) 
 default config.
-* [`menu.php`](src/config/boilerplate/menu.php) : classes to add menu items, [see below](#adding-items-to-the-main-menu).
 
 ### Adding items to the backend menu
 
