@@ -25,7 +25,8 @@ class MenuComposer
                  ->id('home')
                  ->order(1);
 
-            $providers = config('boilerplate.menu.providers');
+
+            $providers = $this->getProviders();
 
             foreach ($providers as $provider) {
                 $class = new $provider;
@@ -37,5 +38,30 @@ class MenuComposer
             'class' => 'sidebar-menu',
             'data-widget' => "tree"
         ], [ 'class' => 'treeview-menu' ]));
+    }
+
+    /**
+     * Get menu items providers
+     *
+     * @return array
+     */
+    private function getProviders()
+    {
+        $providers = [
+            \Sebastienheyd\Boilerplate\Menu\Users::class,
+            \Sebastienheyd\Boilerplate\Menu\Logs::class,
+        ];
+
+        if(is_dir(app_path('Menu'))) {
+            $classes = glob(app_path('Menu').'/*.php');
+
+            if(!empty($classes)) {
+                foreach ($classes as $class) {
+                    $providers[] = '\\App\\Menu\\'.preg_replace('#\.php$#i', '', basename($class));
+                }
+            }
+        }
+
+        return $providers;
     }
 }

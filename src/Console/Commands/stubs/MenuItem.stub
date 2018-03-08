@@ -8,8 +8,8 @@ class {{NAME}}
 {
     public function make(Builder $menu)
     {
-        $menu->add('My menu item', ['route' => 'boilerplate.home', 'permission' => 'backend', 'icon' => 'square'])
-             ->id('boilerplate')
+        $menu->add('{{NAME}}', ['route' => 'boilerplate.home', 'permission' => 'backend', 'icon' => 'square'])
+             ->id('{{NAME}}')
              ->activeIfRoute('boilerplate.*')
              ->order(100);
     }

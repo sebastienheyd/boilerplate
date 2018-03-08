@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Menu;
+
+use Sebastienheyd\Boilerplate\Menu\Builder;
+
+class {{NAME}}
+{
+    public function make(Builder $menu)
+    {
+        $menu->add('{{NAME}}', [ 'permission' => 'backend', 'icon' => 'square' ])
+             ->id('{{ID}}')
+             ->activeIfRoute('boilerplate.*')
+             ->order({{ORDER}});
+
+        $menu->addTo('{{ID}}', '{{NAME}} sub item 1', [ 'route' => 'boilerplate.home', 'permission' => 'backend' ])
+             ->order({{ORDER+1}})
+             ->activeIfRoute(['boilerplate.home']);
+
+        $menu->addTo('{{ID}}', '{{NAME}} sub item 1', [ 'route' => 'boilerplate.home', 'permission' => 'backend' ])
+             ->order({{ORDER+2}})
+             ->activeIfRoute(['boilerplate.home']);
+    }
+}
