@@ -88,22 +88,27 @@ to a new user.
 default config.
 * [`menu.php`](src/config/boilerplate/menu.php) : classes to add menu items, [see below](#adding-items-to-the-main-menu).
 
-### Adding items to the main menu
+### Adding items to the backend menu
 
-If in your application you need to add items to the main menu, you must declare the classes you want to use to build 
-your menu into the config file [`menu.php`](src/config/boilerplate/menu.php).
+To add an item to the menu, nothing simpler, use the `artisan boilerplate:menuitem` command provided with boilerplate.
 
-As you can see you have already two classes declared into this file, if you check the code into 
-[Users.php](src/Menu/Users.php) or [Logs.php](src/Menu/Logs.php) you will find a method named `make(Builder $menu)`.
-This is the method called to build menu items. Feel free to use these files as an example to build your own menu items.
+This command will generate the classes needed to generate the menu item in the `app/Menu` folder.
 
-So, to add menu  items : create a class, declare this class into the config file `menu.php` and add a 
-`make(Builder $menu)` method into the class.
+```bash
+php artisan boilerplate:menuitem {name} {-s} {-o=100}
+```
 
-Don't forget to declare ```use Sebastienheyd\Boilerplate\Menu\Builder as Builder;```
+| option / argument | description |
+|---|---|
+| name | Class name to generate |
+| -s --submenu | Menu item must have sub item(s) |
+| -o --order | Menu item order in the backend menu |
 
-See [lavary/laravel-menu](https://github.com/lavary/laravel-menu) and 
-[hieu-le/active](https://github.com/letrunghieu/active) documentations.
+Once generated, the files can be edited to customize the item, it's quite easy to understand. 
+For more information, see the documentation of the following packages:
+
+- [lavary/laravel-menu](https://github.com/lavary/laravel-menu) 
+- [hieu-le/active](https://github.com/letrunghieu/active)
 
 ### Customizing views
 
