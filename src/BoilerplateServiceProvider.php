@@ -5,6 +5,7 @@ namespace Sebastienheyd\Boilerplate;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\Facades\View;
+use Sebastienheyd\Middleware\BoilerplateLocale;
 
 class BoilerplateServiceProvider extends ServiceProvider
 {
@@ -79,6 +80,8 @@ class BoilerplateServiceProvider extends ServiceProvider
             'log-viewer.route.enabled' => false,
             'log-viewer.menu.filter-route'  => 'logs.filter'
         ]);
+
+        $this->router->aliasMiddleware('boilerplatelocale', Middleware\BoilerplateLocale::class);
 
         // Loading packages
         $this->_registerLaratrust();
