@@ -83,6 +83,8 @@ class BoilerplateServiceProvider extends ServiceProvider
             'log-viewer.menu.filter-route'  => 'logs.filter'
         ]);
 
+        $this->router->aliasMiddleware('boilerplatelocale', Middleware\BoilerplateLocale::class);
+
         // Loading packages
         $this->_registerLaratrust();
         $this->_registerMenu();
