@@ -7,4 +7,5 @@ return [
     'logo-mini'  => 'BO',                       // Logo displayed on small screen
     'prefix'     => 'admin',                    // Backend prefix. Ex: "admin" => "http://..../admin"
     'redirectTo' => 'boilerplate.home'          // Redirection to route after backend login
+    'skin'       => 'blue',                     // AdminLTE skin (blue, yellow, green, purple, red, black, *-light)
 ];
