@@ -35,16 +35,13 @@ class BoilerplateServiceProvider extends ServiceProvider
     {
         // Publish files when calling php artisan vendor:publish
         $this->publishes([ __DIR__.'/config'                    => config_path()], 'config');
-        $this->publishes([ __DIR__.'/public'                    => base_path('public/')], 'public');
-        $this->publishes([ __DIR__.'/resources/lang/laravel'    => base_path('resources/lang')], 'lang');
-        $this->publishes([ __DIR__.'/resources/views/errors'    => base_path('resources/views')], 'errors');
+        $this->publishes([ __DIR__.'/public'                    => public_path()], 'public');
+        $this->publishes([ __DIR__.'/resources/lang/laravel'    => resource_path('lang')], 'lang');
+        $this->publishes([ __DIR__.'/resources/views/errors'    => resource_path('views/errors')], 'errors');
 
         // If routes file has been published, load routes from the published file
-        if (is_file(base_path('routes/boilerplate.php'))) {
-            $this->loadRoutesFrom(base_path('routes/boilerplate.php'));
-        } else {
-            $this->loadRoutesFrom(__DIR__.'/routes/boilerplate.php');
-        }
+        $routesPath = base_path('routes/boilerplate.php');
+        $this->loadRoutesFrom(is_file($routesPath) ? $routesPath : __DIR__.'/routes/boilerplate.php');
 
         // Load migrations, views and translations from current directory
         $this->loadMigrationsFrom(__DIR__.'/migrations');
