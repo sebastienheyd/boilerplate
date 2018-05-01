@@ -2,6 +2,7 @@
 
 $default = [
     'prefix' => config('boilerplate.app.prefix', ''),
+    'domain'    => config('boilerplate.app.domain',''),
     'namespace' => 'Sebastienheyd\Boilerplate\Controllers'
 ];
 
