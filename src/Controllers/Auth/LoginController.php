@@ -48,8 +48,8 @@ class LoginController extends Controller
     public function showLoginForm()
     {
         $userModel = config('auth.providers.users.model');
-
-        if ($userModel::all()->count() === 0) {
+        
+        if ($userModel::whereRoleIs('admin')->count() === 0) {
             return redirect(route('register')); }
 
         return view('boilerplate::auth.login');

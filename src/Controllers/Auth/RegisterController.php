@@ -39,7 +39,7 @@ class RegisterController extends Controller
         $this->redirectTo = route(config('boilerplate.app.redirectTo', 'boilerplate.home'));
 
         $userModel = config('auth.providers.users.model');
-        $this->firstUser = $userModel::all()->count() === 0;
+        $this->firstUser = $userModel::whereRoleIs('admin')->count() === 0;
 
         $this->middleware('guest');
     }
