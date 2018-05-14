@@ -107,8 +107,17 @@ class User extends Authenticatable
         return Date::parse($value);
     }
 
-    public function getNameAttribute()
+    /**
+     * Return a concatenation of first name and last_name if field name does not exists
+     * @param $value
+     * @return string
+     */
+    public function getNameAttribute($value)
     {
+        if(!empty($value)) {
+            return $value;
+        }
+
         return $this->first_name.' '.$this->last_name;
     }
 
