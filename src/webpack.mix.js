@@ -15,7 +15,7 @@ mix.setPublicPath("public");
 
 mix.scripts([
     'node_modules/jquery/dist/jquery.min.js',
-    'node_modules/bootstrap/dist/js/bootstrap.min.js',
+    'node_modules/bootstrap-sass/assets/javascripts/bootstrap.min.js',
     'node_modules/admin-lte/dist/js/adminlte.min.js',
     'node_modules/bootbox/bootbox.min.js',
     'node_modules/bootstrap-notify/bootstrap-notify.min.js',
@@ -27,4 +27,6 @@ mix.copy('node_modules/admin-lte/plugins/', 'public/js/plugins/', false)
    .copy('node_modules/moment/', 'public/js/plugins/moment/', false)
    .copy('node_modules/bootstrap-fileinput/', 'public/js/plugins/bootstrap-fileinput/', false);
 
-mix.less('resources/assets/less/boilerplate.less', 'public/css/boilerplate.min.css');
+mix.sass('resources/assets/scss/boilerplate.scss', 'public/css/boilerplate.min.css');
+
+//mix.less('resources/assets/less/boilerplate.less', 'public/css/boilerplate.min.css');
