@@ -1,5 +1,5 @@
 /*!
- * bootstrap-fileinput v4.4.7
+ * bootstrap-fileinput v4.5.0
  * http://plugins.krajee.com/file-input
  *
  * Font Awesome icon theme configuration for bootstrap-fileinput. Requires font awesome assets to be loaded.
@@ -18,8 +18,9 @@
             removeIcon: '<i class="fa fa-trash"></i>',
             uploadIcon: '<i class="fa fa-upload"></i>',
             uploadRetryIcon: '<i class="fa fa-repeat"></i>',
+            downloadIcon: '<i class="fa fa-download"></i>',
             zoomIcon: '<i class="fa fa-search-plus"></i>',
-            dragIcon: '<i class="fa fa-bars"></i>',
+            dragIcon: '<i class="fa fa-arrows"></i>',
             indicatorNew: '<i class="fa fa-plus-circle text-warning"></i>',
             indicatorSuccess: '<i class="fa fa-check-circle text-success"></i>',
             indicatorError: '<i class="fa fa-exclamation-circle text-danger"></i>',
@@ -31,10 +32,10 @@
         previewZoomButtonIcons: {
             prev: '<i class="fa fa-caret-left fa-lg"></i>',
             next: '<i class="fa fa-caret-right fa-lg"></i>',
-            toggleheader: '<i class="fa fa-arrows-v"></i>',
-            fullscreen: '<i class="fa fa-arrows-alt"></i>',
-            borderless: '<i class="fa fa-external-link"></i>',
-            close: '<i class="fa fa-remove"></i>'
+            toggleheader: '<i class="fa fa-fw fa-arrows-v"></i>',
+            fullscreen: '<i class="fa fa-fw fa-arrows-alt"></i>',
+            borderless: '<i class="fa fa-fw fa-external-link"></i>',
+            close: '<i class="fa fa-fw fa-remove"></i>'
         },
         previewFileIcon: '<i class="fa fa-file"></i>',
         browseIcon: '<i class="fa fa-folder-open"></i>',

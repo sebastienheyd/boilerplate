@@ -1,6 +1,59 @@
 Change Log: `bootstrap-fileinput`
 =================================
 
+## version 4.5.0
+
+**Date:** 30-Aug-2018
+
+- (enh #1292): Update DOMPurify plugin to the latest release.
+- (enh #1291): Update Dutch Translations.
+- (enh #1290): Enhance `htmlEncode` to parse undefined variables.
+- (enh #1288): Update Dutch Translations.
+- (enh #1287): Correct full screen modal styling.
+- (enh #1286): Default `autoOrientImage` to `false`.
+- (enh #1285): Update Danish Translations.
+- (bug #1282): Allow `filebrowse` event to be prevented.
+- (enh #1279): Enhance `usePdfRenderer` callback check to detect android phones.
+- Correct nuget batch file.
+
+## version 4.4.9
+
+**Date:** 25-Jul-2018
+
+- (bug #1276): More correct validation of `previewContentTemplates`.
+- (enh #1275): Update Farsi Translations.
+- (enh #1272, #1273): Add Hebrew Translations.
+- (enh #1269, #1270): Enhance auto orientation of images using piexif.js.
+- Enhance progress bar text styling.
+- (enh #1254): Enhance PDF Preview on iOS devices via external PDF renderer (PDFJS).
+- (bug #1242): Correct drop zone enabling check for ajax uploads.
+- (bug #1232): Correct RTL input group button styling.
+- (enh #1228): Enhance and correct preview refresh for various scenarios.
+- (bug #1226): Enhance native input display styling when `showBrowse` is `false`.
+- (enh #1223): Update Font Awesome 5.x theme icons.
+
+## version 4.4.8
+
+**Date:** 11-Apr-2018
+
+- (enh #1221): Update Indonesian Translations.
+- (enh #1220): Add Krajee Explorer Font Awesome 5 Theme (`explorer-fas`).
+- (enh #1219): Update Chinese translations.
+- (bug #1217): Fix drag and drop to send files correctly for form submission.
+- (enh #1216): Add drag and drop support for folders for webkit browsers (only for ajax upload mode).
+- (bug #1215): Correct zoom preview for errored thumbnails.
+- (enh #1210): Enhance support for Office Docs Preview and Google Docs Preview.
+- (bug #1204): Correct merging of ajax callbacks.
+- (bug #1201, #1200): Correct `elErrorContainer` validation for `browseOnZoneClick`.
+- (enh #1197): Add new Font Awesome 5 Theme.
+- (enh #1193): Add drag and drop functionality for form based submissions.
+- (enh #1179): New property `reversePreviewOrder` to allow reversing files displayed in preview.
+- (enh #1178): Enhance BS button styling for default and FA themes.
+- (bug #1173): Correct `showRemove` validation in `fileActionSettings`.
+- (enh #1168): Update Ukranian translations.
+- (enh #1166): Update Hungarian translations.
+- (enh #1148): Update font awesome themes to include missing download icon.
+
 ## version 4.4.7
 
 **Date:** 22-Jan-2018

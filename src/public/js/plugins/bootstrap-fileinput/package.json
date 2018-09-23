@@ -1,0 +1,97 @@
+{
+  "_args": [
+    [
+      "bootstrap-fileinput@^4.3.8",
+      "/media/sheyd/Web/webroot/ptiseb.com/boilerplate57/vendor/sebastienheyd/boilerplate/src"
+    ]
+  ],
+  "_from": "bootstrap-fileinput@>=4.3.8 <5.0.0",
+  "_hasShrinkwrap": false,
+  "_id": "bootstrap-fileinput@4.5.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/bootstrap-fileinput",
+  "_nodeVersion": "10.9.0",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/bootstrap-fileinput_4.5.0_1535595886822_0.5122279952805966"
+  },
+  "_npmUser": {
+    "email": "kartikv2@gmail.com",
+    "name": "kartik-v"
+  },
+  "_npmVersion": "6.2.0",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "bootstrap-fileinput",
+    "raw": "bootstrap-fileinput@^4.3.8",
+    "rawSpec": "^4.3.8",
+    "scope": null,
+    "spec": ">=4.3.8 <5.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/bootstrap-fileinput/-/bootstrap-fileinput-4.5.0.tgz",
+  "_shasum": "05a139869711ec6d2cb023dcf0ff960379f6982a",
+  "_shrinkwrap": null,
+  "_spec": "bootstrap-fileinput@^4.3.8",
+  "_where": "/media/sheyd/Web/webroot/ptiseb.com/boilerplate57/vendor/sebastienheyd/boilerplate/src",
+  "authors": [
+    "Kartik Visweswaran <kartikv2@gmail.com>"
+  ],
+  "bugs": {
+    "url": "https://github.com/kartik-v/bootstrap-fileinput/issues"
+  },
+  "dependencies": {
+    "bootstrap": ">= 3.0.0",
+    "jquery": ">= 1.9.0"
+  },
+  "description": "An enhanced HTML 5 file input for Bootstrap 3.x with file preview, multiple selection, ajax uploads, and more features.",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "fileCount": 91,
+    "integrity": "sha512-h9235AeYReGJNJHOGkl98UomSMCYIsBDI3Gv3eMiyEb3MAonkU47WeHpRBPZSrG0IxMNzJSh1eE5Jc2CHWMFlA==",
+    "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJbh1VvCRA9TVsSAnZWagAAE4wQAJZWErPVSPVgQtsvsC/v\n/ffYWuwjlgPJS8fWyYUjsrpBxW7E4+lItJ2V2asWFljxBapZ1H9hSjUFWhHm\nV/RuVFo6prT9ibv6absLaNNUKb88mFdRco+4cbO+jaEV7UrS+H7Fvm+uanF1\nOmRp7bdXiNY0fFWnQOlrvHwl3DsG5aVJiCnPlYpFL/bcPtbPTKVPLYvMMCc9\na/KSuguof/+EK29py3cXK9tw/6+u1qz6PyEFnXErrbzMZwTgIffMI/o6vwUz\nLKXRmJkLpzKzKdEjOQ18ixF627UBnfSE3AZeLYEG8fWoukCem1Q7XVD6YoP+\nMtBTMbBo3i1D9wAr7UomQ3piO4w9pfivtHLCr+jokXWjz5OLVUBLQKL923Ev\nO0yH8JHQmPbvrK+BjwHcRXrkUz7rZWTcZ1AjjkVEcT7UhBRMdeDvsMcOYaxp\nSmjM0ETzfjdGVaSUdnjOvhKKuNr6uHZLJytofvAtGJqgBoCdtHH/ciD9IVc6\n7aPp6otBW9LtbvOnawNgAufNybYJOl520EXKRDr3BKXhw8kiztRxBFw8LseV\n3JgH9dPT+X74LBvoA22gHnDx2DMHdnGbVaRjr8bdilKOV4Lh8cpYuPy764Zf\nRGZRw5T+VL0LlTO2u6adrB0722+FFi+5JABwmKe44oXIKhXusVEApVk5F+qW\nX7R0\r\n=LFF0\r\n-----END PGP SIGNATURE-----\r\n",
+    "shasum": "05a139869711ec6d2cb023dcf0ff960379f6982a",
+    "tarball": "https://registry.npmjs.org/bootstrap-fileinput/-/bootstrap-fileinput-4.5.0.tgz",
+    "unpackedSize": 961378
+  },
+  "gitHead": "e3126b482e72022b819f4aae58096f3f17d55a90",
+  "homepage": "https://github.com/kartik-v/bootstrap-fileinput",
+  "keywords": [
+    "ajax",
+    "delete",
+    "file",
+    "gallery",
+    "image",
+    "input",
+    "multiple",
+    "preview",
+    "progress",
+    "upload"
+  ],
+  "license": "BSD-3-Clause",
+  "main": "./js/fileinput.js",
+  "maintainers": [
+    {
+      "name": "kartik-v",
+      "email": "feedback@krajee.com"
+    }
+  ],
+  "name": "bootstrap-fileinput",
+  "optionalDependencies": {},
+  "peerDependencies": {
+    "bootstrap": ">= 3.0.0",
+    "jquery": ">= 1.9.0"
+  },
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kartik-v/bootstrap-fileinput.git"
+  },
+  "style": "./css/fileinput.css",
+  "version": "4.5.0"
+}

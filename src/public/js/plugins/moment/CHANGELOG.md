@@ -1,6 +1,30 @@
 Changelog
 =========
 
+### 2.22.2 [See full changelog](https://gist.github.com/marwahaha/4d992c13c2dbc0f59d4d8acae1dc6d3a)
+
+* Release May 31, 2018
+
+* [#4564](https://github.com/moment/moment/pull/4564) [bugfix] Avoid using trim()
+* [#4453](https://github.com/moment/moment/pull/4453) [bugfix] Treat periods as periods, not regex-anything period, for weekday parsing in strict mode.
+* Minor locale improvements (pa-in, be, az)
+
+### 2.22.1 [See full changelog](https://gist.github.com/marwahaha/ff2cd13d0eda08afb7a237b10aae558c)
+
+* Release Apr 14, 2018
+
+* [#4495](https://github.com/moment/moment/pull/4495) [bugfix] Added HTML5_FMT to moment.d.ts
+* Minor locale improvements
+* QUnit upgrade and coveralls reporting
+
+### 2.22.0 [See full changelog](https://gist.github.com/marwahaha/ae895025dac3f0641fa9ec2e36d282bb)
+
+* Release Mar 30, 2018
+
+* [#4423](https://github.com/moment/moment/pull/4423) [new locale] Added Mongolian locale mn
+* Various locale improvements
+* Minor misc changes
+
 ### 2.21.0 [See full changelog](https://gist.github.com/marwahaha/80d19ef882b71df1948df7865efdd40e)
 
 * Release Mar 2, 2018
