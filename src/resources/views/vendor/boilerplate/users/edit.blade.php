@@ -68,7 +68,7 @@
                     <div class="box-body">
                         <table class="table table-condensed table-hover">
                             @foreach($roles as $role)
-                                @if($role->name !== 'admin' or ($role->name === 'admin' && Auth::user()->hasRole('admin')))
+                                @if($role->name !== 'admin' || ($role->name === 'admin' && Auth::user()->hasRole('admin')))
                                 <tr>
                                     <td style="width:25px">
                                         @if(Auth::user()->id === $user->id && $role->name === 'admin' && Auth::user()->hasRole('admin'))

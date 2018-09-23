@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{{ asset('css/boilerplate.min.css') }}">
     @stack('css')
 </head>
-<body class="{{ $bodyClass or 'login-page'}}">
+<body class="{{ $bodyClass ?? 'login-page'}}">
     @yield('content')
     <script src="{{ asset('js/boilerplate.min.js') }}"></script>
     @stack('js')

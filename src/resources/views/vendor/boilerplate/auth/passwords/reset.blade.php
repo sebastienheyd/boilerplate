@@ -6,7 +6,7 @@
         {!! Form::open(['route' => 'password.reset.post', 'method' => 'post', 'autocomplete'=> 'off']) !!}
             {!! Form::hidden('token', $token) !!}
             <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
-                {{ Form::email('email', $email or old('email'), ['class' => 'form-control', 'placeholder' =>  __('boilerplate::auth.fields.email'), 'required', 'autofocus']) }}
+                {{ Form::email('email', old('email', $email), ['class' => 'form-control', 'placeholder' =>  __('boilerplate::auth.fields.email'), 'required', 'autofocus']) }}
                 {!! $errors->first('email','<p class="text-danger"><strong>:message</strong></p>') !!}
             </div>
             <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">

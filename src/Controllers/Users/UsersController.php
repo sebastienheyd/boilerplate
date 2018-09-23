@@ -141,7 +141,7 @@ class UsersController extends Controller
 
         $user = User::withTrashed()->updateOrCreate([ 'email' => $input[ 'email' ] ], $input);
         $user->restore();
-        $user->roles()->sync(array_keys($request->input('roles')));
+        $user->roles()->sync(array_keys($request->input('roles', [])));
 
         $user->sendNewUserNotification($input[ 'remember_token' ], Auth::user());
 
@@ -198,7 +198,7 @@ class UsersController extends Controller
         $user->update($request->all());
         
         // Mise à jour des rôles
-        $user->roles()->sync(array_keys($request->input('roles', [ ])));
+        $user->roles()->sync(array_keys($request->input('roles', [])));
 
         return redirect(route('users.edit', $user))->with('growl', [ __('boilerplate::users.successmod'), 'success' ]);
     }

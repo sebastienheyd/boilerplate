@@ -1,6 +1,6 @@
 <div class="login-box">
     <div class="login-logo">
-        {!! $title or config('boilerplate.app.logo-lg') !!}
+        {!! config('boilerplate.app.logo-lg') ?? $title !!}
     </div>
 
     <div class="login-box-body">
