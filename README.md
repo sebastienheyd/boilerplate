@@ -1,15 +1,14 @@
 # Laravel/AdminLTE Boilerplate
 
 ![Package](https://img.shields.io/badge/Package-sebastienheyd%2Fboilerplate-lightgrey.svg)
-![Laravel](https://img.shields.io/badge/Laravel-5.6.x-green.svg)
-![Packagist](https://img.shields.io/badge/packagist-v5.5.1-blue.svg)
+![Laravel](https://img.shields.io/badge/Laravel-5.7.x-green.svg)
 ![Nb downloads](https://img.shields.io/packagist/dt/sebastienheyd/boilerplate.svg)
 ![MIT License](https://img.shields.io/github/license/sebastienheyd/boilerplate.svg)
 
 This package is to be served as a basis for a web application. It allows you to access to an administration panel to 
 manage users, roles and permissions.
 
-For other Laravel versions : [5.5](https://github.com/sebastienheyd/boilerplate/blob/5.5/README.md) / 
+For other Laravel versions : [5.6](https://github.com/sebastienheyd/boilerplate/blob/5.6/README.md) / [5.5](https://github.com/sebastienheyd/boilerplate/blob/5.5/README.md) / 
 [5.4](https://github.com/sebastienheyd/boilerplate/blob/5.4/README.md)
 
 ## Features
