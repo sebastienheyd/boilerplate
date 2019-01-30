@@ -8,7 +8,7 @@
                 {{ session('status') }}
             </div>
         @endif
-        {!! Form::open(['route' => 'password.email', 'method' => 'post', 'autocomplete'=> 'off']) !!}
+        {!! Form::open(['route' => 'boilerplate.password.email', 'method' => 'post', 'autocomplete'=> 'off']) !!}
             <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
                 {{ Form::email('email', old('email'), ['class' => 'form-control', 'placeholder' => __('boilerplate::auth.fields.email'), 'required', 'autofocus']) }}
                 {!! $errors->first('email','<p class="text-danger"><strong>:message</strong></p>') !!}
@@ -23,6 +23,6 @@
                 </div>
             </div>
         {!! Form::close() !!}
-        <a href="{{ route('login') }}">{{ __('boilerplate::auth.password.login_link') }}</a><br>
+        <a href="{{ route('boilerplate.login') }}">{{ __('boilerplate::auth.password.login_link') }}</a><br>
     @endcomponent
 @endsection

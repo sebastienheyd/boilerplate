@@ -2,7 +2,7 @@
     'title' => __('boilerplate::role.title'),
     'subtitle' => __('boilerplate::role.edit.title'),
     'breadcrumb' => [
-        __('boilerplate::role.title') => 'roles.index',
+        __('boilerplate::role.title') => 'boilerplate.roles.index',
         __('boilerplate::role.edit.title')
     ]
 ])
@@ -10,10 +10,10 @@
 @include('boilerplate::load.icheck')
 
 @section('content')
-    {{ Form::open(['route' => ['roles.update', $role->id], 'method' => 'put', 'autocomplete' => 'off']) }}
+    {{ Form::open(['route' => ['boilerplate.roles.update', $role->id], 'method' => 'put', 'autocomplete' => 'off']) }}
         <div class="row">
             <div class="col-sm-12 mbl">
-                <a href="{{ route("roles.index") }}" class="btn btn-default">
+                <a href="{{ route("boilerplate.roles.index") }}" class="btn btn-default">
                     {{ __('boilerplate::role.list.title') }}
                 </a>
                 <span class="btn-group pull-right">

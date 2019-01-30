@@ -6,7 +6,7 @@
     'title' => __('boilerplate::logs.menu.category'),
     'subtitle' => __('boilerplate::logs.show.title', ['date' => $date]),
     'breadcrumb' => [
-        __('boilerplate::logs.menu.reports') => 'logs.list',
+        __('boilerplate::logs.menu.reports') => 'boilerplate.logs.list',
         __('boilerplate::logs.show.title', ['date' => $date])
     ]
 ])
@@ -16,11 +16,11 @@
 @section('content')
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mbm">
-            <a href="{{ route('logs.list') }}" class="btn btn-default">
+            <a href="{{ route('boilerplate.logs.list') }}" class="btn btn-default">
                 {{ __('boilerplate::logs.show.backtolist') }}
             </a>
             <span class="pull-right btn-group">
-                <a href="{{ route('logs.download', [$log->date]) }}" class="btn btn-default">
+                <a href="{{ route('boilerplate.logs.download', [$log->date]) }}" class="btn btn-default">
                     {{ __('boilerplate::logs.show.download') }}
                 </a>
                 <a href="#delete-log-modal" class="btn btn-danger" data-log-date="{{ $log->date }}">
@@ -181,14 +181,14 @@
                     if(e === false) return;
 
                     $.ajax({
-                        url: '{{ route('logs.delete') }}',
+                        url: '{{ route('boilerplate.logs.delete') }}',
                         type: 'delete',
                         dataType: 'json',
                         data: {date:el.data('log-date')},
                         headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
                         cache: false,
                         success: function(res) {
-                            location.replace("{{ route('logs.list') }}");
+                            location.replace("{{ route('boilerplate.logs.list') }}");
                         }
                     });
                 });

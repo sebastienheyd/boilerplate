@@ -81,10 +81,11 @@ class BoilerplateServiceProvider extends ServiceProvider
             'auth.providers.users.table' => config('boilerplate.auth.providers.users.table', 'users'),
             'logging.channels.stack.channels' => array_merge(['daily'], config('logging.channels.stack.channels')),
             'log-viewer.route.enabled' => false,
-            'log-viewer.menu.filter-route'  => 'logs.filter'
+            'log-viewer.menu.filter-route'  => 'boilerplate.logs.filter'
         ]);
 
         $this->router->aliasMiddleware('boilerplatelocale', Middleware\BoilerplateLocale::class);
+        $this->router->aliasMiddleware('boilerplateauth', Middleware\BoilerplateAuthenticate::class);
 
         // Loading packages
         $this->_registerLaratrust();

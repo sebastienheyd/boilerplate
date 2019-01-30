@@ -78,25 +78,25 @@ class UsersController extends Controller
 
             // Admin can edit and delete anyone...
             if ($currentUser->hasRole('admin')) {
-                $b = '<a href="' . URL::route('users.edit', $user->id) . '" class="btn btn-primary btn-sm mrs"><i class="fa fa-pencil"></i></a>';
+                $b = '<a href="' . route('boilerplate.users.edit', $user->id) . '" class="btn btn-primary btn-sm mrs"><i class="fa fa-pencil"></i></a>';
 
                 // ...except delete himself
                 if ($user->id !== $currentUser->id) {
-                    $b .= '<a href="' . URL::route('users.destroy', $user->id) . '" class="btn btn-danger btn-sm destroy"><i class="fa fa-trash"></i></a>';
+                    $b .= '<a href="' . route('boilerplate.users.destroy', $user->id) . '" class="btn btn-danger btn-sm destroy"><i class="fa fa-trash"></i></a>';
                 }
                 return $b;
             }
 
             // The user is the current user, you can't delete yourself
             if ($user->id === $currentUser->id) {
-                return '<a href="' . URL::route('users.edit', $user) . '" class="btn btn-primary btn-sm mrs"><i class="fa fa-pencil"></i></a>';
+                return '<a href="' . route('boilerplate.users.edit', $user) . '" class="btn btn-primary btn-sm mrs"><i class="fa fa-pencil"></i></a>';
             }
 
-            $b = '<a href="' . URL::route('users.edit', $user->id) . '" class="btn btn-primary btn-sm mrs"><i class="fa fa-pencil"></i></a>';
+            $b = '<a href="' . route('boilerplate.users.edit', $user->id) . '" class="btn btn-primary btn-sm mrs"><i class="fa fa-pencil"></i></a>';
 
             // Current user is not admin, only admin can delete another admin
             if(!$user->hasRole('admin')) {
-                $b .= '<a href="' . URL::route('users.destroy', $user->id) . '" class="btn btn-danger btn-sm destroy"><i class="fa fa-trash"></i></a>';
+                $b .= '<a href="' . route('boilerplate.users.destroy', $user->id) . '" class="btn btn-danger btn-sm destroy"><i class="fa fa-trash"></i></a>';
             }
 
             return $b;
@@ -145,7 +145,7 @@ class UsersController extends Controller
 
         $user->sendNewUserNotification($input[ 'remember_token' ], Auth::user());
 
-        return redirect()->route('users.edit', $user)->with('growl', [ __('boilerplate::users.successadd'), 'success' ]);
+        return redirect()->route('boilerplate.users.edit', $user)->with('growl', [ __('boilerplate::users.successadd'), 'success' ]);
     }
 
     /**
@@ -200,7 +200,7 @@ class UsersController extends Controller
         // Mise à jour des rôles
         $user->roles()->sync(array_keys($request->input('roles', [])));
 
-        return redirect(route('users.edit', $user))->with('growl', [ __('boilerplate::users.successmod'), 'success' ]);
+        return redirect(route('boilerplate.users.edit', $user))->with('growl', [ __('boilerplate::users.successmod'), 'success' ]);
     }
 
     /**
@@ -251,7 +251,7 @@ class UsersController extends Controller
 
         Auth::attempt([ 'email' => $user->email, 'password' => $request->input('password'), 'active' => 1 ]);
 
-        return redirect()->route('boilerplate.home')->with('growl', [ __('boilerplate::users.newpassword'), 'success' ]);
+        return redirect()->route('boilerplate.dashboard')->with('growl', [ __('boilerplate::users.newpassword'), 'success' ]);
     }
 
     public function profile()
@@ -296,7 +296,7 @@ class UsersController extends Controller
 
         $user->update($input);
 
-        return redirect()->route('user.profile')->with('growl', [ __('boilerplate::users.profile.successupdate'), 'success' ]);
+        return redirect()->route('boilerplate.user.profile')->with('growl', [ __('boilerplate::users.profile.successupdate'), 'success' ]);
     }
 
     public function avatarDelete()

@@ -3,7 +3,7 @@
 @section('content')
     @component('boilerplate::auth.loginbox')
         <p class="login-box-msg">{{ __('boilerplate::auth.password_reset.intro') }}</p>
-        {!! Form::open(['route' => 'password.reset.post', 'method' => 'post', 'autocomplete'=> 'off']) !!}
+        {!! Form::open(['route' => 'boilerplate.password.reset.post', 'method' => 'post', 'autocomplete'=> 'off']) !!}
             {!! Form::hidden('token', $token) !!}
             <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
                 {{ Form::email('email', old('email', $email), ['class' => 'form-control', 'placeholder' =>  __('boilerplate::auth.fields.email'), 'required', 'autofocus']) }}

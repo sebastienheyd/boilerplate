@@ -5,7 +5,7 @@
 
 @section('content')
     @component('boilerplate::auth.loginbox')
-        {{ Form::open(['route' => 'users.firstlogin', 'autocomplete' => 'off']) }}
+        {{ Form::open(['route' => 'boilerplate.users.firstlogin', 'autocomplete' => 'off']) }}
         <input type="hidden" name="token" value="{{ $token }}">
         <div class="alert alert-info">
             <p>{{ __('boilerplate::auth.firstlogin.intro') }}</p>

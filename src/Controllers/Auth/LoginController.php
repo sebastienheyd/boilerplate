@@ -36,7 +36,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->redirectTo = route(config('boilerplate.app.redirectTo', 'boilerplate.home'));
+        $this->redirectTo = route(config('boilerplate.app.redirectTo', 'boilerplate.dashboard'));
         $this->middleware('guest', [ 'except' => 'logout' ]);
     }
 
@@ -50,7 +50,7 @@ class LoginController extends Controller
         $userModel = config('auth.providers.users.model');
         
         if ($userModel::whereRoleIs('admin')->count() === 0) {
-            return redirect(route('register')); }
+            return redirect(route('boilerplate.register')); }
 
         return view('boilerplate::auth.login');
     }

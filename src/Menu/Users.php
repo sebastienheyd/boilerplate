@@ -12,12 +12,12 @@ class Users
             ->id('access')
             ->order(1000);
 
-        $menu->addTo('access', __('boilerplate::layout.user_management'), ['route' => 'users.index', 'permission' => 'users_crud'])
+        $menu->addTo('access', __('boilerplate::layout.user_management'), ['route' => 'boilerplate.users.index', 'permission' => 'users_crud'])
             ->order(1010)
-            ->activeIfRoute('users.*');
+            ->activeIfRoute('boilerplate.users.*');
 
-        $menu->addTo('access', __('boilerplate::layout.role_management'), ['route' => 'roles.index', 'permission' => 'roles_crud'])
+        $menu->addTo('access', __('boilerplate::layout.role_management'), ['route' => 'boilerplate.roles.index', 'permission' => 'roles_crud'])
             ->order(1020)
-            ->activeIfRoute('roles.*');
+            ->activeIfRoute('boilerplate.roles.*');
     }
 }

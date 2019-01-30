@@ -7,19 +7,19 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="{{ route('logs.dashboard') }}" class="navbar-brand">
+            <a href="{{ route('boilerplate.logs.dashboard') }}" class="navbar-brand">
                 <i class="fa fa-fw fa-book"></i> LogViewer
             </a>
         </div>
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="nav navbar-nav">
-                <li class="{{ Route::is('logs.dashboard') ? 'active' : '' }}">
-                    <a href="{{ route('logs.dashboard') }}">
+                <li class="{{ Route::is('boilerplate.logs.dashboard') ? 'active' : '' }}">
+                    <a href="{{ route('boilerplate.logs.dashboard') }}">
                         <i class="fa fa-dashboard"></i> Dashboard
                     </a>
                 </li>
-                <li class="{{ Route::is('logs.list') ? 'active' : '' }}">
-                    <a href="{{ route('logs.list') }}">
+                <li class="{{ Route::is('boilerplate.logs.list') ? 'active' : '' }}">
+                    <a href="{{ route('boilerplate.logs.list') }}">
                         <i class="fa fa-archive"></i> Logs
                     </a>
                 </li>

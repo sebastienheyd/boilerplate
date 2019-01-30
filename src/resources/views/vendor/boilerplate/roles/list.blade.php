@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-sm-12 mbl">
             <span class="pull-right">
-                <a href="{{ URL::route("roles.create") }}" class="btn btn-primary">{{ __('boilerplate::role.create.title') }}</a>
+                <a href="{{ route("boilerplate.roles.create") }}" class="btn btn-primary">{{ __('boilerplate::role.create.title') }}</a>
             </span>
         </div>
     </div>
@@ -43,13 +43,13 @@
                             {{ $role->getNbUsers() }}
                         </td>
                         <td>
-                            <a href="{{ URL::route('roles.edit', $role->id) }}" class="btn btn-sm btn-primary">
+                            <a href="{{ route('boilerplate.roles.edit', $role->id) }}" class="btn btn-sm btn-primary">
                                 <span class="fa fa-pencil"></span>
                             </a>
                             @if($role->name !== 'admin' &&
                                 !(config('boilerplate.auth.register') && $role->name === config('boilerplate.auth.register_role')) &&
                                 $role->getNbUsers() === 0)
-                                <a href="{{ URL::route('roles.destroy', $role->id) }}" class="btn btn-sm btn-danger destroy">
+                                <a href="{{ route('boilerplate.roles.destroy', $role->id) }}" class="btn btn-sm btn-danger destroy">
                                     <span class="fa fa-trash"></span>
                                 </a>
                             @endif

@@ -3,7 +3,7 @@
 @section('content')
     @component('boilerplate::auth.loginbox')
         <p class="login-box-msg">{{ __('boilerplate::auth.register.intro') }}</p>
-        {!! Form::open(['route' => 'register', 'method' => 'post', 'autocomplete'=> 'off']) !!}
+        {!! Form::open(['route' => 'boilerplate.register', 'method' => 'post', 'autocomplete'=> 'off']) !!}
             <div class="form-group {{ $errors->has('first_name') ? 'has-error' : '' }}">
                 {{ Form::text('first_name', old('first_name'), ['class' => 'form-control', 'placeholder' => __('boilerplate::auth.fields.first_name'), 'required', 'autofocus']) }}
                 {!! $errors->first('first_name','<p class="text-danger"><strong>:message</strong></p>') !!}
@@ -33,7 +33,7 @@
             </div>
         {!! Form::close() !!}
         @if(!$firstUser)
-            <a href="{{ route('login') }}">{{ __('boilerplate::auth.register.login_link') }}</a><br>
+            <a href="{{ route('boilerplate.login') }}">{{ __('boilerplate::auth.register.login_link') }}</a><br>
         @endif
     @endcomponent
 @endsection

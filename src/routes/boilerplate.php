@@ -1,16 +1,17 @@
 <?php
 
 $default = [
-    'prefix' => config('boilerplate.app.prefix', ''),
-    'domain' => config('boilerplate.app.domain', ''),
-    'middleware' => ['web', 'boilerplatelocale']
+    'prefix'     => config('boilerplate.app.prefix', ''),
+    'domain'     => config('boilerplate.app.domain', ''),
+    'middleware' => ['web', 'boilerplatelocale'],
+    'as'         => 'boilerplate.'
 ];
 
 Route::group($default, function() {
 
     // Dashboard
-    Route::group(['middleware' => ['auth', 'ability:admin,backend_access']], function() {
-        Route::get('/', ['as' => 'boilerplate.home', 'uses' => config('boilerplate.menu.dashboard').'@index']);
+    Route::group(['middleware' => ['boilerplateauth', 'ability:admin,backend_access']], function() {
+        Route::get('/', ['as' => 'dashboard', 'uses' => config('boilerplate.menu.dashboard').'@index']);
     });
 
     Route::group(['namespace' => '\Sebastienheyd\Boilerplate\Controllers'], function() {
@@ -34,17 +35,17 @@ Route::group($default, function() {
 
         // First login
         Route::get('connect/{token?}', ['as' => 'users.firstlogin', 'uses' => 'Users\UsersController@firstLogin']);
-        Route::post('connect/{token?}', ['uses' => 'Users\UsersController@firstLoginPost']);
+        Route::post('connect/{token?}', ['as' => 'users.firstlogin.post', 'uses' => 'Users\UsersController@firstLoginPost']);
 
         // Backend
-        Route::group(['middleware' => ['auth', 'ability:admin,backend_access']], function() {
+        Route::group(['middleware' => ['boilerplateauth', 'ability:admin,backend_access']], function() {
 
             // Roles and users
             Route::resource('roles', 'Users\RolesController');
             Route::resource('users', 'Users\UsersController');
             Route::any('users/dt', ['as' => 'users.datatable', 'uses' => 'Users\UsersController@datatable']);
             Route::get('userprofile', ['as' => 'user.profile', 'uses' => 'Users\UsersController@profile']);
-            Route::post('userprofile', ['uses' => 'Users\UsersController@profilePost']);
+            Route::post('userprofile', ['as' => 'user.profile.post', 'uses' => 'Users\UsersController@profilePost']);
             Route::post('userprofile/avatardelete', ['as' => 'user.avatardelete', 'uses' => 'Users\UsersController@avatarDelete']);
 
             // Logs

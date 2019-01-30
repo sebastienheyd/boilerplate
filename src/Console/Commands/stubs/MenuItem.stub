@@ -8,9 +8,9 @@ class {{NAME}}
 {
     public function make(Builder $menu)
     {
-        $menu->add('{{NAME}}', ['route' => 'boilerplate.home', 'permission' => 'backend', 'icon' => 'square'])
+        $menu->add('{{NAME}}', ['route' => 'boilerplate.dashboard', 'permission' => 'backend', 'icon' => 'square'])
              ->id('{{NAME}}')
-             ->activeIfRoute('boilerplate.*')
+             ->activeIfRoute('boilerplate.dashboard')
              ->order(100);
     }
 }

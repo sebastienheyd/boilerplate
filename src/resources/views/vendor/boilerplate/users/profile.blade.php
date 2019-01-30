@@ -2,12 +2,12 @@
     'title' => __('boilerplate::users.profile.title'),
     'subtitle' => $user->name,
     'breadcrumb' => [
-        $user->name => 'user.profile',
+        $user->name => 'boilerplate.user.profile',
     ]
 ])
 
 @section('content')
-    {{ Form::open(['route' => ['user.profile'], 'method' => 'post', 'autocomplete' => 'off', 'files' => true]) }}
+    {{ Form::open(['route' => ['boilerplate.user.profile'], 'method' => 'post', 'autocomplete' => 'off', 'files' => true]) }}
         <div class="row">
             <div class="col-sm-12 mbl">
                 <span class="btn-group pull-right">
@@ -115,7 +115,7 @@
             if(e === false) return;
 
             $.ajax({
-                url: '{{ route('user.avatardelete') }}',
+                url: '{{ route('boilerplate.user.avatardelete') }}',
                 type: 'post',
                 headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
                 cache: false,

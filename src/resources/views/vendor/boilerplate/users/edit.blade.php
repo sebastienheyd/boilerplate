@@ -2,16 +2,16 @@
     'title' => __('boilerplate::users.title'),
     'subtitle' => __('boilerplate::users.edit.title'),
     'breadcrumb' => [
-        __('boilerplate::users.title') => 'users.index',
+        __('boilerplate::users.title') => 'boilerplate.users.index',
         __('boilerplate::users.edit.title')
     ]
 ])
 
 @section('content')
-    {{ Form::open(['route' => ['users.update', $user->id], 'method' => 'put', 'autocomplete' => 'off']) }}
+    {{ Form::open(['route' => ['boilerplate.users.update', $user->id], 'method' => 'put', 'autocomplete' => 'off']) }}
         <div class="row">
             <div class="col-sm-12 mbl">
-                <a href="{{ route("users.index") }}" class="btn btn-default">
+                <a href="{{ route("boilerplate.users.index") }}" class="btn btn-default">
                     {{ __('boilerplate::users.returntolist') }}
                 </a>
                 <span class="btn-group pull-right">

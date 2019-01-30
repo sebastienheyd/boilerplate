@@ -2,7 +2,7 @@
     'title' => __('boilerplate::users.title'),
     'subtitle' => __('boilerplate::users.create.title'),
     'breadcrumb' => [
-        __('boilerplate::users.title') => 'users.index',
+        __('boilerplate::users.title') => 'boilerplate.users.index',
         __('boilerplate::users.create.title')
     ]
 ])
@@ -10,10 +10,10 @@
 @include('boilerplate::load.icheck')
 
 @section('content')
-    {{ Form::open(['route' => 'users.store', 'autocomplete' => 'off']) }}
+    {{ Form::open(['route' => 'boilerplate.users.store', 'autocomplete' => 'off']) }}
         <div class="row">
             <div class="col-sm-12 mbl">
-                <a href="{{ route("users.index") }}" class="btn btn-default">
+                <a href="{{ route("boilerplate.users.index") }}" class="btn btn-default">
                     {{ __('boilerplate::users.returntolist') }}
                 </a>
                 <span class="btn-group pull-right">

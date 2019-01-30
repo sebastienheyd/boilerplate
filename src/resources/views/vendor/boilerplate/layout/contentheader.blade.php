@@ -6,7 +6,7 @@
 </h1>
 <ol class="breadcrumb">
     <li>
-        <a href="{{ route('boilerplate.home') }}">
+        <a href="{{ route('boilerplate.dashboard') }}">
             <i class="fa fa-home"></i> {{ __('boilerplate::layout.home') }}
         </a>
     </li>

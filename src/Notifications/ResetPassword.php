@@ -20,7 +20,7 @@ class ResetPassword extends \Illuminate\Auth\Notifications\ResetPassword
             ->greeting(__('boilerplate::notifications.greeting', [ 'firstname' => $notifiable->first_name ]))
             ->subject(__('boilerplate::notifications.resetpassword.subject'))
             ->line(__('boilerplate::notifications.resetpassword.intro'))
-            ->action(__('boilerplate::notifications.resetpassword.button'), route('password.reset', $this->token))
+            ->action(__('boilerplate::notifications.resetpassword.button'), route('boilerplate.password.reset', $this->token))
             ->line(__('boilerplate::notifications.resetpassword.outro'));
     }
 }

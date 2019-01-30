@@ -21,7 +21,7 @@ class MenuComposer
 
             $menu->raw(__('boilerplate::layout.mainmenu'), [ 'class' => 'header text-uppercase' ])->order(0);
 
-            $menu->add(__('boilerplate::layout.dashboard'), [ 'route' => 'boilerplate.home', 'icon' => 'home' ])
+            $menu->add(__('boilerplate::layout.dashboard'), [ 'route' => 'boilerplate.dashboard', 'icon' => 'home' ])
                  ->id('home')
                  ->order(1);
 

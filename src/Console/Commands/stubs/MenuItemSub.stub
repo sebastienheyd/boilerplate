@@ -10,15 +10,15 @@ class {{NAME}}
     {
         $menu->add('{{NAME}}', [ 'permission' => 'backend', 'icon' => 'square' ])
              ->id('{{ID}}')
-             ->activeIfRoute('boilerplate.*')
+             ->activeIfRoute('boilerplate.dashboard')
              ->order({{ORDER}});
 
-        $menu->addTo('{{ID}}', '{{NAME}} sub item 1', [ 'route' => 'boilerplate.home', 'permission' => 'backend' ])
+        $menu->addTo('{{ID}}', '{{NAME}} sub item 1', [ 'route' => 'boilerplate.dashboard', 'permission' => 'backend' ])
              ->order({{ORDER+1}})
-             ->activeIfRoute(['boilerplate.home']);
+             ->activeIfRoute(['boilerplate.dashboard']);
 
-        $menu->addTo('{{ID}}', '{{NAME}} sub item 1', [ 'route' => 'boilerplate.home', 'permission' => 'backend' ])
+        $menu->addTo('{{ID}}', '{{NAME}} sub item 1', [ 'route' => 'boilerplate.dashboard', 'permission' => 'backend' ])
              ->order({{ORDER+2}})
-             ->activeIfRoute(['boilerplate.home']);
+             ->activeIfRoute(['boilerplate.dashboard']);
     }
 }

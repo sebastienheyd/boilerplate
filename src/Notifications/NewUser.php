@@ -46,7 +46,7 @@ class NewUser extends Notification
             ->greeting(__('boilerplate::notifications.greeting', [ 'firstname' => $notifiable->first_name ]))
             ->subject(__('boilerplate::notifications.newuser.subject', [ 'name' => config('app.name') ]))
             ->line(__('boilerplate::notifications.newuser.intro', [ 'name' => $currentUser->first_name.' '.$currentUser->last_name ]))
-            ->action(__('boilerplate::notifications.newuser.button'), route('users.firstlogin', $notifiable->remember_token))
+            ->action(__('boilerplate::notifications.newuser.button'), route('boilerplate.users.firstlogin', $notifiable->remember_token))
             ->salutation(__('boilerplate::notifications.salutation', [ 'name' => $currentUser->first_name.' '.$currentUser->last_name ]))
             ->line(__('boilerplate::notifications.newuser.outro'));
     }

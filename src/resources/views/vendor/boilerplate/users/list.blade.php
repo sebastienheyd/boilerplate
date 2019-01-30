@@ -2,7 +2,7 @@
     'title' => __('boilerplate::users.title'),
     'subtitle' => __('boilerplate::users.list.title'),
     'breadcrumb' => [
-        __('boilerplate::users.title') => 'users.index'
+        __('boilerplate::users.title') => 'boilerplate.users.index'
     ]
 ])
 
@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-sm-12 mbl">
             <span class="btn-group pull-right">
-                <a href="{{ route("users.create") }}" class="btn btn-primary">
+                <a href="{{ route("boilerplate.users.create") }}" class="btn btn-primary">
                     {{ __('boilerplate::users.create.title') }}
                 </a>
             </span>
@@ -49,7 +49,7 @@
             processing: false,
             serverSide: true,
             ajax: {
-                url: '{!! route('users.datatable') !!}',
+                url: '{!! route('boilerplate.users.datatable') !!}',
                 type: 'post',
                 headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'}
             },

@@ -8,7 +8,7 @@
 @section('content')
     @component('boilerplate::auth.loginbox')
         <p class="login-box-msg">{{ __('boilerplate::auth.login.intro') }}</p>
-        {!! Form::open(['route' => 'login', 'method' => 'post', 'autocomplete'=> 'off']) !!}
+        {!! Form::open(['route' => 'boilerplate.login', 'method' => 'post', 'autocomplete'=> 'off']) !!}
         <div class="form-group has-feedback">
             <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
                 {{ Form::email('email', old('email'), ['class' => 'form-control', 'placeholder' => __('boilerplate::auth.fields.email'), 'required', 'autofocus']) }}
@@ -26,8 +26,9 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                 <div class="checkbox icheck">
-                    <label>
-                        <input type="checkbox" name="remember" class="icheck" {{ old('remember') ? 'checked' : '' }}> {{ __('boilerplate::auth.login.rememberme') }}
+                    <label style="padding-left: 0">
+                        <input type="checkbox" name="remember" class="icheck" {{ old('remember') ? 'checked' : '' }}>
+                        {{ __('boilerplate::auth.login.rememberme') }}
                     </label>
                 </div>
             </div>
@@ -36,9 +37,9 @@
             </div>
         </div>
         {!! Form::close() !!}
-        <a href="{{ route('password.request') }}">{{ __('boilerplate::auth.login.forgotpassword') }}</a><br>
+        <a href="{{ route('boilerplate.password.request') }}">{{ __('boilerplate::auth.login.forgotpassword') }}</a><br>
         @if(config('boilerplate.auth.register'))
-            <a href="{{ route('register') }}" class="text-center">{{ __('boilerplate::auth.login.register') }}</a>
+            <a href="{{ route('boilerplate.register') }}" class="text-center">{{ __('boilerplate::auth.login.register') }}</a>
         @endif
     @endcomponent
 @endsection

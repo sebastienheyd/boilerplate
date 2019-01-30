@@ -8,10 +8,10 @@
             <p>
                 <a href="{{ URL::previous() }}" class="btn btn-primary">{{ __('boilerplate::errors.backlink') }}</a>
                 @if(Auth::check())
-                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-default">
+                    <a href="{{ route('boilerplate.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-default">
                         {{ __('boilerplate::layout.logout') }}
                     </a>
-                    {!! Form::open(['route' => 'logout', 'method' => 'post', 'id' => 'logout-form', 'style'=> 'display:none']) !!}
+                    {!! Form::open(['route' => 'boilerplate.logout', 'method' => 'post', 'id' => 'logout-form', 'style'=> 'display:none']) !!}
                     {!! Form::close() !!}
                 @endif
             </p>

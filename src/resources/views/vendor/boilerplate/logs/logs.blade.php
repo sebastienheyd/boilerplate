@@ -42,7 +42,7 @@
                                         @foreach($row as $key => $value)
                                             <td class="{{ $key == 'date' ? 'text-left' : 'text-center' }}">
                                                 @if ($key == 'date')
-                                                    <a href="{{ route('logs.show', [$date]) }}">
+                                                    <a href="{{ route('boilerplate.logs.show', [$date]) }}">
                                                         <span class="label label-primary">
                                                             {{ Date::createFromFormat('Y-m-d', $value)->format(__('boilerplate::date.Ymd')) }}
                                                         </span>
@@ -50,14 +50,14 @@
                                                 @elseif ($value == 0)
                                                     <span class="level level-empty">{{ $value }}</span>
                                                 @else
-                                                    <a href="{{ route('logs.filter', [$date, $key]) }}">
+                                                    <a href="{{ route('boilerplate.logs.filter', [$date, $key]) }}">
                                                         <span class="level level-{{ $key }}">{{ $value }}</span>
                                                     </a>
                                                 @endif
                                             </td>
                                         @endforeach
                                         <td class="text-right">
-                                            <a href="{{ route('logs.show', [$date]) }}" class="btn btn-sm btn-primary">
+                                            <a href="{{ route('boilerplate.logs.show', [$date]) }}" class="btn btn-sm btn-primary">
                                                 <i class="fa fa-search"></i>
                                             </a>
                                             <a href="#delete-log-modal" class="btn btn-sm btn-danger" data-log-date="{{ $date }}">
@@ -100,7 +100,7 @@
                     if(e === false) return;
 
                     $.ajax({
-                        url: '{{ route('logs.delete') }}',
+                        url: '{{ route('boilerplate.logs.delete') }}',
                         type: 'delete',
                         dataType: 'json',
                         data: {date:el.data('log-date')},

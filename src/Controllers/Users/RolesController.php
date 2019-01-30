@@ -69,7 +69,7 @@ class RolesController extends Controller
         $role = Role::create($input);
         $role->permissions()->sync(array_keys($request->input('permission', [ ])));
 
-        return redirect()->route('roles.edit', $role)->with('growl', [ __('boilerplate::role.successadd'), 'success' ]);
+        return redirect()->route('boilerplate.roles.edit', $role)->with('growl', [ __('boilerplate::role.successadd'), 'success' ]);
     }
 
     /**
@@ -80,7 +80,7 @@ class RolesController extends Controller
      */
     public function show($id)
     {
-        return redirect()->route('roles.edit', $id);
+        return redirect()->route('boilerplate.roles.edit', $id);
     }
 
     /**
@@ -114,7 +114,7 @@ class RolesController extends Controller
         $role->update($request->all());
         $role->permissions()->sync(array_keys($request->input('permission')));
 
-        return redirect()->route('roles.edit', $role)->with('growl', [ __('boilerplate::role.successmod'), 'success' ]);
+        return redirect()->route('boilerplate.roles.edit', $role)->with('growl', [ __('boilerplate::role.successmod'), 'success' ]);
     }
 
     /**
