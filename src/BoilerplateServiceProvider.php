@@ -37,7 +37,6 @@ class BoilerplateServiceProvider extends ServiceProvider
         $this->publishes([ __DIR__.'/config'                    => config_path()], 'config');
         $this->publishes([ __DIR__.'/public'                    => public_path()], 'public');
         $this->publishes([ __DIR__.'/resources/lang/laravel'    => resource_path('lang')], 'lang');
-        $this->publishes([ __DIR__.'/resources/views/errors'    => resource_path('views/errors')], 'errors');
 
         // If routes file has been published, load routes from the published file
         $routesPath = base_path('routes/boilerplate.php');
