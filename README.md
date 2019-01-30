@@ -20,7 +20,7 @@ For other Laravel versions : [5.6](https://github.com/sebastienheyd/boilerplate/
 * Forms & Html helpers by [laravelcollective/html](https://github.com/laravelcollective/html)
 * Menu dynamically builded by [lavary/laravel-menu](https://github.com/lavary/laravel-menu)
 * Menu items activated by [hieu-le/active](https://github.com/letrunghieu/active)
-* Server-sided datatables methods provided by [yajra/laravel-datatables](https://github.com/yajra/laravel-datatables)
+* Server-side datatables methods provided by [yajra/laravel-datatables](https://github.com/yajra/laravel-datatables)
 * Multi-language date support by [jenssegers/date](https://github.com/jenssegers/date)
 * Image manipulation by [intervention/image](https://github.com/intervention/image)
 * Localized English / French / Spanish / Turkish
@@ -103,10 +103,19 @@ php artisan boilerplate:menuitem {name} {-s} {-o=100}
 | -o --order | Menu item order in the backend menu |
 
 Once generated, the files can be edited to customize the item, it's quite easy to understand.
+
+You can also add a provider by adding its class name to the list of providers in the configuration file `config/boilerplate/menu.php`. 
+This can be useful if you are developing a package that is based on boilerplate.
+
 For more information, see the documentation of the following packages:
 
 - [lavary/laravel-menu](https://github.com/lavary/laravel-menu)
 - [hieu-le/active](https://github.com/letrunghieu/active)
+
+### Dashboard
+
+You can define your own controller to display the dashboard. To do this, set the `dashboard` parameter in the 
+configuration file `config/boilerplate/menu.php`.
 
 ### Customizing views
 

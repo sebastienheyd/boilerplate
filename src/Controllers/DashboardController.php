@@ -4,7 +4,7 @@ namespace Sebastienheyd\Boilerplate\Controllers;
 
 use App\Http\Controllers\Controller;
 
-class HomeController extends Controller
+class DashboardController extends Controller
 {
     /**
      * Create a new controller instance.

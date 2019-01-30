@@ -47,10 +47,7 @@ class MenuComposer
      */
     private function getProviders()
     {
-        $providers = [
-            \Sebastienheyd\Boilerplate\Menu\Users::class,
-            \Sebastienheyd\Boilerplate\Menu\Logs::class,
-        ];
+        $providers = config('boilerplate.menu.providers');
 
         if(is_dir(app_path('Menu'))) {
             $classes = glob(app_path('Menu').'/*.php');
