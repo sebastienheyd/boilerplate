@@ -1,17 +1,15 @@
 @if(!defined('LOAD_FILEINPUT'))
     @push('css')
-        <link rel="stylesheet" href="{!! asset('/js/plugins/bootstrap-fileinput/css/fileinput.min.css') !!}">
+        <link rel="stylesheet" href="{!! mix('/js/fileinput/bootstrap-fileinput.min.css', '/assets/vendor/boilerplate') !!}">
     @endpush
-
     @push('js')
-        <script src="{!! asset('/js/plugins/bootstrap-fileinput/js/fileinput.min.js') !!}"></script>
+        <script src="{!! mix('/js/fileinput/bootstrap-fileinput.min.js', '/assets/vendor/boilerplate') !!}"></script>
         @if(App::getLocale() !== 'en')
-            <script src="{!! asset('/js/plugins/bootstrap-fileinput/js/locales/'.App::getLocale().'.js') !!}"></script>
+            <script src="{!! asset('/assets/vendor/boilerplate/js/fileinput/locales/'.config('boilerplate.app.locale').'.js') !!}"></script>
             <script>
-                $.fn.fileinput.defaults.language = '{{ App::getLocale() }}';
+                $.fn.fileinput.defaults.language = '{{ config('boilerplate.app.locale') }}';
             </script>
         @endif
     @endpush
-
     @php define('LOAD_FILEINPUT', true) @endphp
 @endif

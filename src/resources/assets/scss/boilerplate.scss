@@ -12,6 +12,10 @@
     margin-left: 3px;
 }
 
+.btn.focus, .btn:focus {
+    outline: none;
+}
+
 table.dataTable {
     border-collapse: collapse !important;
     width: 100% !important;

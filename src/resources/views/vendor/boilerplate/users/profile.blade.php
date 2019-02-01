@@ -120,7 +120,7 @@
                 headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
                 cache: false,
                 success: function(res) {
-                    $('.avatar').attr('src', "{{ asset('/images/default_user.png') }}");
+                    $('.avatar').attr('src', "{{ asset('/assets/vendor/boilerplate/images/default-user.png') }}");
                     growl("{{ __('boilerplate::users.profile.successdelavatar') }}", "success");
                     $('#remove_avatar').remove();
                 }

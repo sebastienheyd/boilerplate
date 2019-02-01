@@ -1,10 +1,9 @@
 @if(!defined('LOAD_ICHECK'))
     @push('css')
-        <link rel="stylesheet" href="{!! asset('/js/plugins/iCheck/all.css') !!}">
+        <link rel="stylesheet" href="{!! mix('/js/icheck/icheck.min.css', '/assets/vendor/boilerplate') !!}">
     @endpush
-
     @push('js')
-        <script src="{!! asset('/js/plugins/iCheck/icheck.min.js') !!}"></script>
+        <script src="{!! mix('/js/icheck/icheck.min.js', '/assets/vendor/boilerplate') !!}"></script>
         <script>
             $(function(){
                 $('input[type="checkbox"].icheck, input[type="radio"].icheck').iCheck({
@@ -26,6 +25,5 @@
             });
         </script>
     @endpush
-
     @php define('LOAD_ICHECK', true) @endphp
 @endif

@@ -168,6 +168,6 @@ class User extends Authenticatable
             $ts = filemtime($this->avatar_path);
             return asset('images/avatars/'.md5($this->id.$this->email).'.jpg?t='.$ts);
         }
-        return asset("/images/default_user.png");
+        return asset("/assets/vendor/boilerplate/images/default-user.png");
     }
 }

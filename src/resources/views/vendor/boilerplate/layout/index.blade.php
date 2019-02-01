@@ -7,7 +7,7 @@
     <meta name="robots" content="noindex, nofollow">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $title }} | {{ config('app.name') }}</title>
-    <link rel="stylesheet" href="{{ asset('css/boilerplate.min.css') }}">
+    <link rel="stylesheet" href="{{ mix('/boilerplate.min.css', '/assets/vendor/boilerplate') }}">
     @stack('css')
 </head>
 <body class="sidebar-mini skin-{{ config('boilerplate.app.skin', 'blue') }}">
@@ -24,7 +24,7 @@
         </div>
         @include('boilerplate::layout.footer')
     </div>
-    <script src="{{ asset('/js/boilerplate.min.js') }}"></script>
+    <script src="{{ mix('/boilerplate.min.js', '/assets/vendor/boilerplate') }}"></script>
     <script>
         $(function() {
             $.ajaxSetup({headers:{'X-CSRF-TOKEN':'{{ csrf_token() }}'}});

@@ -62,7 +62,7 @@
                 {data: 'roles', name: 'roles', searchable: false},
                 {data: 'created_at', name: 'created_at', searchable: false},
                 {data: 'last_login', name: 'last_login', searchable: false},
-                {data: 'actions', name: 'actions', orderable: false, searchable: false, width : '60px'}
+                {data: 'actions', name: 'actions', orderable: false, searchable: false, width : '70px'}
             ]
         });
 

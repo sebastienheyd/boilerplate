@@ -16,10 +16,12 @@ class DatatablesComposer
     {
         $languages = [
             'en'    => 'English',
-            'fr'    => 'French'
+            'fr'    => 'French',
+            'es'    => 'Spanish',
+            'tr'    => 'Turkish'
         ];
 
-        $locale = config('app.locale');
+        $locale = config('boilerplate.app.locale');
 
         $view->with('locale', isset($languages[ $locale ]) ? $languages[ $locale ] : 'English');
     }
