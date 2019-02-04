@@ -59,7 +59,7 @@ of the Laravel's default page. Click on Login or Register to access the administ
 ## Update
 
 Boilerplate comes with assets such as Javascript, CSS, and images. Since you typically will need to overwrite the assets
-every time the package is updated, you may use the ```--force``` flag. For example :
+every time the package is updated, you may use the ```--force``` flag :
 
 ```
 php artisan vendor:publish --provider="Sebastienheyd\Boilerplate\BoilerplateServiceProvider" --tag=public --force
@@ -67,16 +67,15 @@ php artisan vendor:publish --provider="Sebastienheyd\Boilerplate\BoilerplateServ
 
 If needed, you can force update for these tags : ```config```, ```lang```, ```public```, ```errors```
 
-| name | description | path |
+| tag | description | destination path |
 |---|---|---|
-| config | Configuration files | app/config |
-| lang | Laravel default lang files for form validation | ressources/lang/[LANG] |
-| public | Public assets, update it after each package update | public |
-| errors | Laravel default error views | resources/views/errors |
+| config | Configuration files | app/config/boilerplate |
+| lang | Laravel default lang files for form validation | ressources/lang |
+| public | Public assets, you must update it after each package update | public/assets/vendor/boilerplate |
 
 ## Configuration
 
-Configuration files can be found in the `boilerplate` sub-folder of the Laravel `config` folder.
+Configuration files can be found in `config/boilerplate` folder.
 
 * [`app.php`](src/config/boilerplate/app.php) : name of the application (only backend), admin panel prefix,
 redirection after login (see comments in file), AdminLTE skin and more...
