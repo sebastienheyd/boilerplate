@@ -56,23 +56,6 @@ php artisan serve
 Now you can point your browser to [http://localhost:8000/](http://localhost:8000/) you will see buttons on the top right
 of the Laravel's default page. Click on Login or Register to access the administration panel.
 
-## Update
-
-Boilerplate comes with assets such as Javascript, CSS, and images. Since you typically will need to overwrite the assets
-every time the package is updated, you may use the ```--force``` flag :
-
-```
-php artisan vendor:publish --provider="Sebastienheyd\Boilerplate\BoilerplateServiceProvider" --tag=public --force
-```
-
-If needed, you can force update for these tags : ```config```, ```lang```, ```public```, ```errors```
-
-| tag | description | destination path |
-|---|---|---|
-| config | Configuration files | app/config/boilerplate |
-| lang | Laravel default lang files for form validation | ressources/lang |
-| public | Public assets, you must update it after each package update | public/assets/vendor/boilerplate |
-
 ## Configuration
 
 Configuration files can be found in `config/boilerplate` folder.
@@ -86,7 +69,12 @@ to a new user.
 default config.
 * [`menu.php`](src/config/boilerplate/menu.php) : dashboard and menu classes
 
-### Adding items to the backend menu
+### Dashboard
+
+You can define your own controller to display the dashboard. To do this, set the `dashboard` parameter in the 
+configuration file `config/boilerplate/menu.php`.
+
+### Adding items to the menu
 
 To add an item to the menu, nothing simpler, use the `artisan boilerplate:menuitem` command provided with boilerplate.
 
@@ -111,44 +99,6 @@ For more information, see the documentation of the following packages:
 
 - [lavary/laravel-menu](https://github.com/lavary/laravel-menu)
 - [hieu-le/active](https://github.com/letrunghieu/active)
-
-### Dashboard
-
-You can define your own controller to display the dashboard. To do this, set the `dashboard` parameter in the 
-configuration file `config/boilerplate/menu.php`.
-
-### Customizing views
-
-When published by `php artisan` error views are copied to the folder `resources/views/errors`. These files can be
-modified.
-
-If you need to modify default Boilerplate views (not recommended), you can copy boilerplate package
-[`vendor`](src/resources/views/vendor) folder in your `resources/views` folder.
-
-### Routes
-
-Routes are loaded from the file [`boilerplate.php`](src/routes/boilerplate.php).
-
-Routes can be overloaded by copying the file [`boilerplate.php`](src/routes/boilerplate.php) to your routes folder.
-
-A default prefix `admin` is set into the config file [`app.php`](src/config/boilerplate/app.php), this is why
-boilerplate is accessible by /admin url. You can set an empty prefix if you remove the default route / defined in
-`routes/web.php`
-
-### Language
-
-Language used by boilerplate is the application language declared into `config/app.php`.
-For the moment only English, French, Spanish and Turkish are supported.
-
-When you run `php artisan vendor:publish --provider="Sebastienheyd\Boilerplate\BoilerplateServiceProvider"`, only the
-language files for form validation are copied for supported languages. Thanks to
-[caouecs/Laravel-lang](https://github.com/caouecs/Laravel-lang) package !
-
-You can translate into a language not yet supported by copying the [`vendor`](src/resources/lang/vendor) folder into
-your resources/lang folder. After that, copy or rename one of the language folders in the new language folder to create.
-All you have to do is translate. If you want to share the language you have added, don't hesitate to make a pull-request.
-
-NB : Dates are translated by the package [jenssegers/date](https://github.com/jenssegers/date)
 
 ### Loading plugins assets
 
@@ -203,13 +153,45 @@ Some plugins are loaded by default :
 
 You can see examples on the default dashboard.
 
-### Updating assets
+### Language
 
-Boilerplate come with compiled assets. To do this, this package is frequently updated by using `npm` and `mix`.
+Language used by boilerplate is the application language declared into `config/app.php`.
+For the moment only English, French, Spanish and Turkish are supported.
 
-Updating assets after a package update is very simple :
+When you run `php artisan vendor:publish --provider="Sebastienheyd\Boilerplate\BoilerplateServiceProvider"`, only the
+language files for form validation are copied for supported languages. Thanks to
+[caouecs/Laravel-lang](https://github.com/caouecs/Laravel-lang) package !
 
-`php artisan vendor:publish --provider="Sebastienheyd\Boilerplate\BoilerplateServiceProvider" --tag=public --force`
+You can translate into a language not yet supported by copying the [`vendor`](src/resources/lang/vendor) folder into
+your resources/lang folder. After that, copy or rename one of the language folders in the new language folder to create.
+All you have to do is translate. If you want to share the language you have added, don't hesitate to make a pull-request.
+
+NB : Dates are translated by the package [jenssegers/date](https://github.com/jenssegers/date)
+
+### Routes
+
+Routes are loaded from the file [`boilerplate.php`](src/routes/boilerplate.php).
+
+A default prefix `admin` is set into the config file [`app.php`](src/config/boilerplate/app.php), this is why
+boilerplate is accessible by /admin url. You can set an empty prefix if you remove the default route / defined in
+`routes/web.php`
+
+## Package update
+
+Boilerplate comes with assets such as Javascript, CSS, and images. Since you typically will need to overwrite the assets
+every time the package is updated, you may use the ```--force``` flag :
+
+```
+php artisan vendor:publish --provider="Sebastienheyd\Boilerplate\BoilerplateServiceProvider" --tag=public --force
+```
+
+If needed, you can force update for these tags : ```config```, ```lang```, ```public```, ```errors```
+
+| tag | description | destination path |
+|---|---|---|
+| config | Configuration files | app/config/boilerplate |
+| lang | Laravel default lang files for form validation | ressources/lang |
+| public | Public assets, you must update it after each package update | public/assets/vendor/boilerplate |
 
 ## Troubleshooting
 
