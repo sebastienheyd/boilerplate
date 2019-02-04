@@ -16,6 +16,10 @@
     outline: none;
 }
 
+a:hover, a:focus {
+    text-decoration: none;
+}
+
 table.dataTable {
     border-collapse: collapse !important;
     width: 100% !important;
@@ -43,10 +47,10 @@ table.dataTable {
 @media (min-width: 768px) {
     .sidebar-mini.sidebar-collapse .sidebar-menu>li:hover>.treeview-menu,
     .sidebar-mini.sidebar-collapse .sidebar-menu>li:hover>a>span:not(.pull-right) {
-        width: 200px;
+        width: 220px !important;
     }
 
-    .sidebar-mini.sidebar-collapse .sidebar-menu>li:hover>a>.pull-right-container {
-        left: 200px !important;
+    .sidebar-mini:not(.sidebar-mini-expand-feature).sidebar-collapse .sidebar-menu>li:hover>a>.pull-right-container {
+        left: 220px !important;
     }
 }
