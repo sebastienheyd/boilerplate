@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title'             => 'Gestion des rôles',
+    'title'             => 'Rôles',
     'parameters'        => 'Paramètres',
     'label'             => 'Libellé',
     'description'       => 'Description',

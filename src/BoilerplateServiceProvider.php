@@ -38,14 +38,13 @@ class BoilerplateServiceProvider extends ServiceProvider
         $this->publishes([ __DIR__.'/public'                    => public_path()], 'public');
         $this->publishes([ __DIR__.'/resources/lang/laravel'    => resource_path('lang')], 'lang');
 
-        // If routes file has been published, load routes from the published file
-        $routesPath = base_path('routes/boilerplate.php');
-        $this->loadRoutesFrom(is_file($routesPath) ? $routesPath : __DIR__.'/routes/boilerplate.php');
+        // Load routes
+        $this->loadRoutesFrom(__DIR__.'/routes/boilerplate.php');
 
         // Load migrations, views and translations from current directory
         $this->loadMigrationsFrom(__DIR__.'/migrations');
-        $this->loadViewsFrom(__DIR__.'/resources/views/vendor/boilerplate', 'boilerplate');
-        $this->loadTranslationsFrom(__DIR__.'/resources/lang/vendor/boilerplate', 'boilerplate');
+        $this->loadViewsFrom(__DIR__.'/resources/views', 'boilerplate');
+        $this->loadTranslationsFrom(__DIR__.'/resources/lang/boilerplate', 'boilerplate');
 
         // Loading dynamic menu when calling the view
         View::composer('boilerplate::layout.mainsidebar', 'Sebastienheyd\Boilerplate\ViewComposers\MenuComposer');

@@ -11,6 +11,6 @@ class {{NAME}}
         $menu->add('{{NAME}}', ['route' => 'boilerplate.dashboard', 'permission' => 'backend', 'icon' => 'square'])
              ->id('{{NAME}}')
              ->activeIfRoute('boilerplate.dashboard')
-             ->order(100);
+             ->order({{ORDER}});
     }
 }

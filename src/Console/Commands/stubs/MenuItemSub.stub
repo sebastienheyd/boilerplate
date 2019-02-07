@@ -14,11 +14,9 @@ class {{NAME}}
              ->order({{ORDER}});
 
         $menu->addTo('{{ID}}', '{{NAME}} sub item 1', [ 'route' => 'boilerplate.dashboard', 'permission' => 'backend' ])
-             ->order({{ORDER+1}})
              ->activeIfRoute(['boilerplate.dashboard']);
 
         $menu->addTo('{{ID}}', '{{NAME}} sub item 1', [ 'route' => 'boilerplate.dashboard', 'permission' => 'backend' ])
-             ->order({{ORDER+2}})
              ->activeIfRoute(['boilerplate.dashboard']);
     }
 }

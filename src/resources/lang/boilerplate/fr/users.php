@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title'         => 'Gestion des utilisateurs',
+    'title'         => 'Utilisateurs',
     'returntolist'  => 'Liste des utilisateurs',
     'save'          => 'Enregistrer',
     'informations'  => 'Informations',
@@ -36,7 +36,7 @@ return [
         'deletesuccess' => "L'utilisateur à été correctement supprimé",
     ],
     'profile' => [
-        'title'         => 'Profil utilisateur',
+        'title'         => 'Votre profil',
         'subscribedsince' => 'Inscrit depuis le :date ( :since )',
         'avatar'        => 'Image de profil',
         'delavatar'     => "Supprimer l'image de profil",

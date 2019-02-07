@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'title'         => 'User management',
-    'returntolist'  => 'User list',
+    'title'         => 'Users',
+    'returntolist'  => 'Users list',
     'save'          => 'Save',
     'informations'  => 'Informations',
     'status'        => 'Status',
@@ -36,7 +36,7 @@ return [
         'deletesuccess' => "The user has been correctly deleted",
     ],
     'profile' => [
-        'title'         => 'User profile',
+        'title'         => 'Your profile',
         'subscribedsince' => 'Member since :date ( :since )',
         'avatar'        => 'Profile image',
         'delavatar'     => 'Remove the profile image',

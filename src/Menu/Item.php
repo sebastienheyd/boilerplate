@@ -8,7 +8,8 @@ class Item extends LavaryMenuItem
      * Set the item icon using font-awesome
      *
      * @param $icon
-     * @return Sebastienheyd\Boilerplate\Menu\Item
+     *
+     * @return self
      */
     public function icon($icon)
     {
@@ -20,7 +21,8 @@ class Item extends LavaryMenuItem
      * Set the item order
      *
      * @param $order
-     * @return Sebastienheyd\Boilerplate\Menu\Item
+     *
+     * @return self
      */
     public function order($order)
     {
@@ -31,20 +33,29 @@ class Item extends LavaryMenuItem
     /**
      * Make the item active
      *
-     * @return Lavary\Menu\Item
+     * @param string|array $routes
+     *
+     * @return self
      */
-    public function activeIfRoute($pattern = null){
+    public function activeIfRoute($routes = null)
+    {
+        if(!empty($routes)) {
 
-        if(!is_null($pattern)) {
+            if(is_string($routes)) {
+                $routes = [$routes];
+            }
 
-            if(if_route_pattern($pattern)) {
-                $this->activate();
-                
-                if(strstr($this->title, 'circle-o')) {
-                    $this->title = str_replace('fa-circle-o', 'fa-dot-circle-o', $this->title);
+            foreach($routes as $pattern) {
+                if(if_route_pattern($pattern)) {
+
+                    $this->activate();
+
+                    if(strstr($this->title, 'circle-o')) {
+                        $this->title = str_replace('fa-circle-o', 'fa-dot-circle-o', $this->title);
+                    }
+
+                    return $this;
                 }
-
-                return $this;
             }
 
             return $this;
