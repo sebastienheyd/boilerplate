@@ -8,7 +8,9 @@
 This package is to be served as a basis for a web application. It allows you to access to an administration panel to
 manage users, roles and permissions.
 
-For other Laravel versions : [5.6](https://github.com/sebastienheyd/boilerplate/blob/5.6/README.md) / [5.5](https://github.com/sebastienheyd/boilerplate/blob/5.5/README.md) /
+For other Laravel versions : 
+[5.6](https://github.com/sebastienheyd/boilerplate/blob/5.6/README.md) / 
+[5.5](https://github.com/sebastienheyd/boilerplate/blob/5.5/README.md) /
 [5.4](https://github.com/sebastienheyd/boilerplate/blob/5.4/README.md)
 
 ## Features
@@ -92,8 +94,8 @@ php artisan boilerplate:menuitem {name} {-s} {-o=100}
 
 Once generated, the files can be edited to customize the item, it's quite easy to understand.
 
-You can also add a provider by adding its class name to the list of providers in the configuration file `config/boilerplate/menu.php`. 
-This can be useful if you are developing a package that is based on boilerplate.
+You can also add a provider by adding its class name to the list of providers in the configuration file 
+`config/boilerplate/menu.php`. This can be useful if you are developing a package that is based on boilerplate.
 
 For more information, see the documentation of the following packages:
 
@@ -104,7 +106,7 @@ For more information, see the documentation of the following packages:
 
 By default, only jQuery, bootstrap 3, Font Awesome and AdminLTE scripts and css are loaded.
 
-To "activate" and use plugins like datatable, datepicker, icheck, ... you can use "loaders". These are blade templates
+To load and use plugins like datatable, datepicker, icheck, ... you can use "loaders". These are blade templates
 prepared to add the loading of scripts and styles for a plugin.
 
 For example, you want to use a datepicker on a text field :
@@ -155,16 +157,19 @@ You can see examples on the default dashboard.
 
 ### Language
 
-Language used by boilerplate is the application language declared into `config/app.php`.
-For the moment only English, French, Spanish and Turkish are supported.
+By default the language used by boilerplate is the application language declared into `config/app.php` (locale). You can 
+define another language only for the back-office by setting `locale` parameter in `config/boilerplate/app.php`.  
+Supported language are English, French, Spanish and Turkish.
 
 When you run `php artisan vendor:publish --provider="Sebastienheyd\Boilerplate\BoilerplateServiceProvider"`, only the
 language files for form validation are copied for supported languages. Thanks to
 [caouecs/Laravel-lang](https://github.com/caouecs/Laravel-lang) package !
 
-You can translate into a language not yet supported by copying the [`vendor`](src/resources/lang/boilerplate) folder into
- `resources/lang/vendor/boilerplate` folder. After that, copy or rename one of the language folders in the new language folder to create.
-All you have to do is translate. If you want to share the language you have added, don't hesitate to make a pull-request.
+You can translate into a language not yet supported by copying the 
+[`src/resources/lang/boilerplate`](src/resources/lang/boilerplate) folder content into 
+`resources/lang/vendor/boilerplate` folder. After that, copy or rename one of the language folders in the new language 
+folder to create. All you have to do is translate. If you want to share the language you have added, don't hesitate to 
+make a pull request.
 
 NB : Dates are translated by the package [jenssegers/date](https://github.com/jenssegers/date)
 
