@@ -1,6 +1,4 @@
-@php
-    $date = Date::createFromFormat('Y-m-d', $log->date)->format(__('boilerplate::date.lFdY'));
-@endphp
+@php($date = Date::createFromFormat('Y-m-d', $log->date)->format(__('boilerplate::date.lFdY')))
 
 @extends('boilerplate::layout.index', [
     'title' => __('boilerplate::logs.menu.category'),

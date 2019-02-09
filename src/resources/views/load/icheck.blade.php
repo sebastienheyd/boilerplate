@@ -25,5 +25,5 @@
             });
         </script>
     @endpush
-    @php define('LOAD_ICHECK', true) @endphp
+    @php(define('LOAD_ICHECK', true))
 @endif

@@ -13,5 +13,5 @@
             $.fn.datepicker.defaults.autoclose = true;
         </script>
     @endpush
-    @php define('LOAD_DATEPICKER', true) @endphp
+    @php(define('LOAD_DATEPICKER', true))
 @endif

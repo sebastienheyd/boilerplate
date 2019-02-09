@@ -13,5 +13,5 @@
         });
     </script>
     @endpush
-    @php define('LOAD_DATATABLES', true) @endphp
+    @php(define('LOAD_DATATABLES', true))
 @endif
