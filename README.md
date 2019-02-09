@@ -60,14 +60,14 @@ of the Laravel's default page. Click on Login or Register to access the administ
 
 Configuration files can be found in `config/boilerplate` folder.
 
-* [`app.php`](src/config/boilerplate/app.php) : name of the application (only backend), admin panel prefix,
+* [`app.php`](src/config/app.php) : name of the application (only backend), admin panel prefix,
 redirection after login (see comments in file), AdminLTE skin and more...
-* [`auth.php`](src/config/boilerplate/auth.php) : overriding of `config/auth.php` to use boilerplate models instead
+* [`auth.php`](src/config/auth.php) : overriding of `config/auth.php` to use boilerplate models instead
 of default Laravel models. Allow you to define if users can register from login page and which role will be assigned
 to a new user.
-* [`laratrust.php`](src/config/boilerplate/laratrust.php) : overriding of Laratrust (package santigarcor/laratrust)
+* [`laratrust.php`](src/config/laratrust.php) : overriding of Laratrust (package santigarcor/laratrust)
 default config.
-* [`menu.php`](src/config/boilerplate/menu.php) : dashboard and menu classes
+* [`menu.php`](src/config/menu.php) : dashboard and menu classes
 
 ### Dashboard
 
@@ -124,22 +124,22 @@ you can push your scripts on the `js` stack (or styles on the `css` stack).
 
 Available loaders are :
 
-* [`boilerplate::load.datatables`](src/resources/views/vendor/boilerplate/load/datatables.blade.php) :
+* [`boilerplate::load.datatables`](src/resources/views/load/datatables.blade.php) :
 [Datatables](https://www.datatables.net/) -
-[Example](src/resources/views/vendor/boilerplate/plugins/demo/datatables.blade.php)
-* [`boilerplate::load.datepicker`](src/resources/views/vendor/boilerplate/load/datepicker.blade.php) :
+[Example](src/resources/views/plugins/demo/datatables.blade.php)
+* [`boilerplate::load.datepicker`](src/resources/views/load/datepicker.blade.php) :
 [Datepicker](https://github.com/uxsolutions/bootstrap-datepicker) &
 [DateRangePicker](https://github.com/dangrossman/bootstrap-daterangepicker) -
-[Example](src/resources/views/vendor/boilerplate/plugins/demo/datepicker.blade.php)
-* [`boilerplate::load.icheck`](src/resources/views/vendor/boilerplate/load/icheck.blade.php) :
+[Example](src/resources/views/plugins/demo/datepicker.blade.php)
+* [`boilerplate::load.icheck`](src/resources/views/load/icheck.blade.php) :
 [iCheck](http://icheck.fronteed.com/) -
-[Example](src/resources/views/vendor/boilerplate/plugins/demo/icheck.blade.php)
-* [`boilerplate::load.select2`](src/resources/views/vendor/boilerplate/load/select2.blade.php) :
+[Example](src/resources/views/plugins/demo/icheck.blade.php)
+* [`boilerplate::load.select2`](src/resources/views/load/select2.blade.php) :
 [Select2](https://select2.github.io/) -
-[Example](src/resources/views/vendor/boilerplate/plugins/demo/select2.blade.php)
-* [`boilerplate::load.moment`](src/resources/views/vendor/boilerplate/load/moment.blade.php) :
+[Example](src/resources/views/plugins/demo/select2.blade.php)
+* [`boilerplate::load.moment`](src/resources/views/load/moment.blade.php) :
 [MomentJs](http://momentjs.com/)
-* [`boilerplate::load.fileinput`](src/resources/views/vendor/boilerplate/load/fileinput.blade.php) :
+* [`boilerplate::load.fileinput`](src/resources/views/load/fileinput.blade.php) :
 [Bootstrap FileInput](http://plugins.krajee.com/file-input)
 
 More will come...
@@ -147,9 +147,9 @@ More will come...
 Some plugins are loaded by default :
 
 * [Bootbox](https://github.com/makeusabrew/bootbox) -
-[Example](src/resources/views/vendor/boilerplate/plugins/demo/bootbox.blade.php)
+[Example](src/resources/views/plugins/demo/bootbox.blade.php)
 * [Notify](https://github.com/mouse0270/bootstrap-notify) -
-[Example](src/resources/views/vendor/boilerplate/plugins/demo/notify.blade.php)
+[Example](src/resources/views/plugins/demo/notify.blade.php)
 
 You can see examples on the default dashboard.
 
@@ -162,8 +162,8 @@ When you run `php artisan vendor:publish --provider="Sebastienheyd\Boilerplate\B
 language files for form validation are copied for supported languages. Thanks to
 [caouecs/Laravel-lang](https://github.com/caouecs/Laravel-lang) package !
 
-You can translate into a language not yet supported by copying the [`vendor`](src/resources/lang/vendor) folder into
-your resources/lang folder. After that, copy or rename one of the language folders in the new language folder to create.
+You can translate into a language not yet supported by copying the [`vendor`](src/resources/lang/boilerplate) folder into
+ `resources/lang/vendor/boilerplate` folder. After that, copy or rename one of the language folders in the new language folder to create.
 All you have to do is translate. If you want to share the language you have added, don't hesitate to make a pull-request.
 
 NB : Dates are translated by the package [jenssegers/date](https://github.com/jenssegers/date)
@@ -172,7 +172,7 @@ NB : Dates are translated by the package [jenssegers/date](https://github.com/je
 
 Routes are loaded from the file [`boilerplate.php`](src/routes/boilerplate.php).
 
-A default prefix `admin` is set into the config file [`app.php`](src/config/boilerplate/app.php), this is why
+A default prefix `admin` is set into the config file [`app.php`](src/config/app.php), this is why
 boilerplate is accessible by /admin url. You can set an empty prefix if you remove the default route / defined in
 `routes/web.php`
 

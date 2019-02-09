@@ -6,6 +6,10 @@
 @import "~css-spacing/css/css-spacing.min.css";
 @import "~animate.css/animate.min.css";
 
+.alert {
+    border:0;
+}
+
 .required label:after {
     content: '*';
     color: red;

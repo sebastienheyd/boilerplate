@@ -1,6 +1,6 @@
 <?php
 
-namespace Sebastienheyd\Boilerplate\Console\Commands;
+namespace Sebastienheyd\Boilerplate\Console;
 
 use Illuminate\Console\Command;
 
