@@ -12,6 +12,7 @@ mix.scripts([
     'node_modules/bootstrap-sass/assets/javascripts/bootstrap.min.js',
     'node_modules/admin-lte/dist/js/adminlte.min.js',
     'node_modules/bootbox/bootbox.min.js',
+    'resources/assets/js/bootbox.locales.js',
     'node_modules/bootstrap-notify/bootstrap-notify.min.js',
     'resources/assets/js/boilerplate.js'
 ], 'public/assets/vendor/boilerplate/boilerplate.min.js').version();
