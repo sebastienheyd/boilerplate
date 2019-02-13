@@ -11,5 +11,5 @@
             </script>
         @endif
     @endpush
-    @php define('LOAD_FILEINPUT', true) @endphp
+    @php(define('LOAD_FILEINPUT', true))
 @endif
