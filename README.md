@@ -190,7 +190,21 @@ every time the package is updated, you may use the ```--force``` flag :
 php artisan vendor:publish --provider="Sebastienheyd\Boilerplate\BoilerplateServiceProvider" --tag=public --force
 ```
 
-If needed, you can force update for these tags : ```config```, ```lang```, ```public```, ```errors```
+To auto update assets each time package is updated, you can add this command to `post-autoload-dump` into the 
+file `composer.json` at the root of your project.
+ 
+
+```json
+{
+    "scripts": {
+        "post-autoload-dump": [
+            "@php artisan vendor:publish --provider=\"Sebastienheyd\\Boilerplate\\BoilerplateServiceProvider\" --tag=public --force -q",
+        ]
+    }
+}
+```
+
+If needed, you can force update for these tags : ```config```, ```lang```, ```public```
 
 | tag | description | destination path |
 |---|---|---|
