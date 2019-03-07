@@ -1,6 +1,4 @@
-<?php
-
-namespace Sebastienheyd\Boilerplate\Menu;
+<?php namespace Sebastienheyd\Boilerplate\Menu;
 
 use Sebastienheyd\Boilerplate\Menu\Builder as Builder;
 
@@ -12,11 +10,15 @@ class Logs
             ->id('logs')
             ->order(1100);
 
-        $menu->addTo('logs', __('boilerplate::logs.menu.stats'), ['route' => 'boilerplate.logs.dashboard', 'permission' => 'logs'])
+        $menu->addTo('logs', __('boilerplate::logs.menu.stats'), [
+                'route'      => 'boilerplate.logs.dashboard',
+                'permission' => 'logs'])
             ->order(1110)
             ->activeIfRoute('boilerplate.logs.dashboard');
 
-        $menu->addTo('logs', __('boilerplate::logs.menu.reports'), ['route' => 'boilerplate.logs.list', 'permission' => 'logs'])
+        $menu->addTo('logs', __('boilerplate::logs.menu.reports'), [
+                'route'      => 'boilerplate.logs.list',
+                'permission' => 'logs'])
             ->order(1120)
             ->activeIfRoute(['boilerplate.logs.list', 'boilerplate.logs.show', 'boilerplate.logs.filter']);
     }

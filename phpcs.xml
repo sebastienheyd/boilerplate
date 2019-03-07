@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ruleset name="boilerplate-email-editor">
+    <description/>
+    <arg name="colors"/>
+    <arg value="p"/>
+    <file>src</file>
+    <rule ref="PSR2" />
+    <exclude-pattern>*/src/public/*$</exclude-pattern>
+    <exclude-pattern>*/src/resources/lang/*$</exclude-pattern>
+    <exclude-pattern>*/src/resources/views/*$</exclude-pattern>
+</ruleset>

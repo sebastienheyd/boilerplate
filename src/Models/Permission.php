@@ -1,6 +1,6 @@
-<?php
+<?php namespace Sebastienheyd\Boilerplate\Models;
 
-namespace Sebastienheyd\Boilerplate\Models;
+// phpcs:disable Generic.Files.LineLength
 
 use Laratrust\LaratrustPermission;
 

@@ -17,14 +17,12 @@ class MenuComposer
     public function compose(View $view)
     {
         $menu = new Menu();
-        $menu = $menu->make('AdminMenu', function(Builder $menu) {
+        $menu = $menu->make('AdminMenu', function (Builder $menu) {
+            $menu->raw(__('boilerplate::layout.mainmenu'), ['class' => 'header text-uppercase'])->order(0);
 
-            $menu->raw(__('boilerplate::layout.mainmenu'), [ 'class' => 'header text-uppercase' ])->order(0);
-
-            $menu->add(__('boilerplate::layout.dashboard'), [ 'route' => 'boilerplate.dashboard', 'icon' => 'home' ])
-                 ->id('home')
-                 ->order(1);
-
+            $menu->add(__('boilerplate::layout.dashboard'), ['route' => 'boilerplate.dashboard', 'icon' => 'home'])
+                ->id('home')
+                ->order(1);
 
             $providers = $this->getProviders();
 
@@ -35,9 +33,9 @@ class MenuComposer
         });
 
         $view->with('menu', $menu->sortBy('order')->asUl([
-            'class' => 'sidebar-menu',
+            'class'       => 'sidebar-menu',
             'data-widget' => "tree"
-        ], [ 'class' => 'treeview-menu' ]));
+        ], ['class' => 'treeview-menu']));
     }
 
     /**
@@ -49,10 +47,10 @@ class MenuComposer
     {
         $providers = config('boilerplate.menu.providers');
 
-        if(is_dir(app_path('Menu'))) {
+        if (is_dir(app_path('Menu'))) {
             $classes = glob(app_path('Menu').'/*.php');
 
-            if(!empty($classes)) {
+            if (!empty($classes)) {
                 foreach ($classes as $class) {
                     $providers[] = '\\App\\Menu\\'.preg_replace('#\.php$#i', '', basename($class));
                 }

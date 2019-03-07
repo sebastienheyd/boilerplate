@@ -63,45 +63,58 @@ class UsersController extends Controller
         return Datatables::of(User::select('*'))
             ->rawColumns(['actions', 'status'])
             ->editColumn('created_at', function ($user) {
-            return $user->created_at->format(__('boilerplate::date.YmdHis'));
-        })->editColumn('last_login', function ($user) {
-            return $user->getLastLogin(__('boilerplate::date.YmdHis'), '-');
-        })->editColumn('status', function ($user) {
-            if($user->active == 1) {
-                return '<span class="label label-success">'.__('boilerplate::users.active').'</span>';
-            }
-            return '<span class="label label-danger">'.__('boilerplate::users.inactive').'</span>';
-        })->editColumn('roles', function ($user) {
-            return $user->getRolesList();
-        })->editColumn('actions', function ($user) {
-            $currentUser = Auth::user();
-
-            // Admin can edit and delete anyone...
-            if ($currentUser->hasRole('admin')) {
-                $b = '<a href="' . route('boilerplate.users.edit', $user->id) . '" class="btn btn-primary btn-sm mrs"><i class="fa fa-pencil"></i></a>';
-
-                // ...except delete himself
-                if ($user->id !== $currentUser->id) {
-                    $b .= '<a href="' . route('boilerplate.users.destroy', $user->id) . '" class="btn btn-danger btn-sm destroy"><i class="fa fa-trash"></i></a>';
+                return $user->created_at->format(__('boilerplate::date.YmdHis'));
+            })->editColumn('last_login', function ($user) {
+                return $user->getLastLogin(__('boilerplate::date.YmdHis'), '-');
+            })->editColumn('status', function ($user) {
+                if ($user->active == 1) {
+                    return '<span class="label label-success">'.__('boilerplate::users.active').'</span>';
                 }
+                return '<span class="label label-danger">'.__('boilerplate::users.inactive').'</span>';
+            })->editColumn('roles', function ($user) {
+                return $user->getRolesList();
+            })->editColumn('actions', function ($user) {
+                $currentUser = Auth::user();
+
+                // Admin can edit and delete anyone...
+                if ($currentUser->hasRole('admin')) {
+                    $b = $this->button(route('boilerplate.users.edit', $user->id), 'primary mrs', 'pencil');
+
+                    // ...except delete himself
+                    if ($user->id !== $currentUser->id) {
+                        $b .= $this->button(route('boilerplate.users.destroy', $user->id), 'danger destroy', 'trash');
+                    }
+                    return $b;
+                }
+
+                // The user is the current user, you can't delete yourself
+                if ($user->id === $currentUser->id) {
+                    return $this->button(route('boilerplate.users.edit', $user->id), 'primary mrs', 'pencil');
+                }
+
+                $b = $this->button(route('boilerplate.users.edit', $user->id), 'primary mrs', 'pencil');
+
+                // Current user is not admin, only admin can delete another admin
+                if (!$user->hasRole('admin')) {
+                    $b .= $this->button(route('boilerplate.users.destroy', $user->id), 'danger destroy', 'trash');
+                }
+
                 return $b;
-            }
+            })->make(true);
+    }
 
-            // The user is the current user, you can't delete yourself
-            if ($user->id === $currentUser->id) {
-                return '<a href="' . route('boilerplate.users.edit', $user) . '" class="btn btn-primary btn-sm mrs"><i class="fa fa-pencil"></i></a>';
-            }
-
-            $b = '<a href="' . route('boilerplate.users.edit', $user->id) . '" class="btn btn-primary btn-sm mrs"><i class="fa fa-pencil"></i></a>';
-
-            // Current user is not admin, only admin can delete another admin
-            if(!$user->hasRole('admin')) {
-                $b .= '<a href="' . route('boilerplate.users.destroy', $user->id) . '" class="btn btn-danger btn-sm destroy"><i class="fa fa-trash"></i></a>';
-            }
-
-            return $b;
-
-        })->make(true);
+    /**
+     * Get html button for datatable
+     *
+     * @param string $route
+     * @param string $class
+     * @param string $icon
+     *
+     * @return string
+     */
+    private function button(string $route, string $class, string $icon): string
+    {
+        return sprintf('<a href="%s" class="btn btn-sm btn-%s"><i class="fa fa-%s" /></a>', $route, $class, $icon);
     }
 
     /**
@@ -113,56 +126,48 @@ class UsersController extends Controller
     {
         // Filter roles if not admin
         if (!Auth::user()->hasRole('admin')) {
-            $roles = Role::whereNotIn('name', [ 'admin' ])->get();
+            $roles = Role::whereNotIn('name', ['admin'])->get();
         } else {
             $roles = Role::all();
         }
-        return view('boilerplate::users.create', [ 'roles' => $roles ]);
+        return view('boilerplate::users.create', ['roles' => $roles]);
     }
 
     /**
      * Store a newly created user in storage.
      *
      * @param  \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
         $this->validate($request, [
-            'last_name' => 'required',
+            'last_name'  => 'required',
             'first_name' => 'required',
-            'email' => 'required|email|unique:users,email,NULL,id,deleted_at,NULL'
+            'email'      => 'required|email|unique:users,email,NULL,id,deleted_at,NULL'
         ]);
 
         $input = $request->all();
-        $input[ 'password' ] = bcrypt(str_random(8));
-        $input[ 'remember_token' ] = str_random(32);
-        $input[ 'deleted_at' ] = null;
+        $input['password'] = bcrypt(str_random(8));
+        $input['remember_token'] = str_random(32);
+        $input['deleted_at'] = null;
 
-        $user = User::withTrashed()->updateOrCreate([ 'email' => $input[ 'email' ] ], $input);
+        $user = User::withTrashed()->updateOrCreate(['email' => $input['email']], $input);
         $user->restore();
         $user->roles()->sync(array_keys($request->input('roles', [])));
 
-        $user->sendNewUserNotification($input[ 'remember_token' ], Auth::user());
+        $user->sendNewUserNotification($input['remember_token'], Auth::user());
 
-        return redirect()->route('boilerplate.users.edit', $user)->with('growl', [ __('boilerplate::users.successadd'), 'success' ]);
-    }
-
-    /**
-     * Display the specified user.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        abort('404');
+        return redirect()->route('boilerplate.users.edit', $user)
+            ->with('growl', [__('boilerplate::users.successadd'), 'success']);
     }
 
     /**
      * Show the form for editing the specified user.
      *
      * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -170,7 +175,7 @@ class UsersController extends Controller
         $user = User::findOrFail($id);
 
         if (!Auth::user()->hasRole('admin')) {
-            $roles = Role::whereNotIn('name', [ 'admin' ])->get();
+            $roles = Role::whereNotIn('name', ['admin'])->get();
         } else {
             $roles = Role::all();
         }
@@ -183,30 +188,33 @@ class UsersController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      * @param  int $id
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'last_name' => 'required',
+            'last_name'  => 'required',
             'first_name' => 'required',
-            'email' => 'required|email|unique:users,email,'.$id
+            'email'      => 'required|email|unique:users,email,'.$id
         ]);
 
         $user = User::findOrFail($id);
 
         $user->update($request->all());
-        
+
         // Mise à jour des rôles
         $user->roles()->sync(array_keys($request->input('roles', [])));
 
-        return redirect(route('boilerplate.users.edit', $user))->with('growl', [ __('boilerplate::users.successmod'), 'success' ]);
+        return redirect()->route('boilerplate.users.edit', $user)
+                         ->with('growl', [__('boilerplate::users.successmod'), 'success']);
     }
 
     /**
      * Remove the specified user from storage.
      *
      * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -219,12 +227,12 @@ class UsersController extends Controller
      *
      * @param $token
      * @param Request $request
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function firstLogin($token, Request $request)
     {
-        $user = User::where([ 'remember_token' => $token ])->first();
-        if (is_null($user)) abort(404);
+        $user = User::where(['remember_token' => $token])->firstOrFail();
         return view('boilerplate::auth.firstlogin', compact('user', 'token'));
     }
 
@@ -232,39 +240,41 @@ class UsersController extends Controller
      * Store a newly created password in storage after the first login.
      *
      * @param Request $request
+     *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function firstLoginPost(Request $request)
     {
         $this->validate($request, [
-            'token' => 'required',
-            'password' => 'required|min:8',
+            'token'                 => 'required',
+            'password'              => 'required|min:8',
             'password_confirmation' => 'required|same:password'
         ]);
 
-        $user = User::where([ 'remember_token' => $request->input('token') ])->first();
+        $user = User::where(['remember_token' => $request->input('token')])->first();
 
         $user->password = bcrypt($request->input('password'));
         $user->remember_token = str_random(32);
         $user->last_login = Carbon::now()->toDateTimeString();
         $user->save();
 
-        Auth::attempt([ 'email' => $user->email, 'password' => $request->input('password'), 'active' => 1 ]);
+        Auth::attempt(['email' => $user->email, 'password' => $request->input('password'), 'active' => 1]);
 
-        return redirect()->route('boilerplate.dashboard')->with('growl', [ __('boilerplate::users.newpassword'), 'success' ]);
+        return redirect()->route('boilerplate.dashboard')
+                         ->with('growl', [__('boilerplate::users.newpassword'), 'success']);
     }
 
     public function profile()
     {
-        return view('boilerplate::users.profile', [ 'user' => Auth::user() ]);
+        return view('boilerplate::users.profile', ['user' => Auth::user()]);
     }
 
     public function profilePost(Request $request)
     {
         $this->validate($request, [
-            'avatar' => 'mimes:jpeg,png|max:10000',
-            'last_name' => 'required',
-            'first_name' => 'required',
+            'avatar'                => 'mimes:jpeg,png|max:10000',
+            'last_name'             => 'required',
+            'first_name'            => 'required',
             'password_confirmation' => 'same:password'
         ]);
 
@@ -273,7 +283,9 @@ class UsersController extends Controller
 
         if ($avatar && $file = $avatar->isValid()) {
             $destinationPath = dirname($user->avatar_path);
-            if (!is_dir($destinationPath)) mkdir($destinationPath, 0766, true);
+            if (!is_dir($destinationPath)) {
+                mkdir($destinationPath, 0766, true);
+            }
             $extension = $avatar->getClientOriginalExtension();
             $fileName = md5($user->id.$user->email).'_tmp.'.$extension;
             $avatar->move($destinationPath, $fileName);
@@ -287,16 +299,17 @@ class UsersController extends Controller
 
         $input = $request->all();
 
-        if ($input[ 'password' ] !== null) {
-            $input[ 'password' ] = bcrypt($input[ 'password' ]);
-            $input[ 'remember_token' ] = str_random(32);
+        if ($input['password'] !== null) {
+            $input['password'] = bcrypt($input['password']);
+            $input['remember_token'] = str_random(32);
         } else {
-            unset($input[ 'password' ]);
+            unset($input['password']);
         }
 
         $user->update($input);
 
-        return redirect()->route('boilerplate.user.profile')->with('growl', [ __('boilerplate::users.profile.successupdate'), 'success' ]);
+        return redirect()->route('boilerplate.user.profile')
+                         ->with('growl', [__('boilerplate::users.profile.successupdate'), 'success']);
     }
 
     public function avatarDelete()

@@ -2,9 +2,11 @@
     "name": "sebastienheyd/boilerplate",
     "description": "Boilerplate with AdminLTE, user management, roles, permissions for Laravel >= 5.4",
     "keywords": ["laravel", "adminlte", "laratrust", "laravelcollective", "active", "admin"],
+    "type": "library",
     "license": "MIT",
     "require": {
-        "illuminate/support": "5.7.*",
+        "php": ">=7.1.3",
+        "laravel/framework": "5.7.*",
         "laravelcollective/html": "^5.5",
         "santigarcor/laratrust": "^3.2",
         "hieu-le/active": "^3.4",
@@ -15,14 +17,21 @@
         "arcanedev/log-viewer": "^4.3"
     },
     "require-dev": {
-        "phpunit/phpunit": "~4.0||~5.0"
+        "phpunit/phpunit": "^7.0",
+        "squizlabs/php_codesniffer": "^3.0",
+        "orchestra/testbench": "^3.7",
+        "doctrine/dbal": "^2.9"
     },
     "autoload": {
         "psr-4": {
             "Sebastienheyd\\Boilerplate\\": "src/"
         }
     },
-    "minimum-stability": "dev",
+    "autoload-dev": {
+        "psr-4": {
+            "Sebastienheyd\\Boilerplate\\Tests\\": "tests/"
+        }
+    },
     "authors": [
         {
             "name": "Sébastien HEYD",
@@ -35,5 +44,7 @@
                 "Sebastienheyd\\Boilerplate\\BoilerplateServiceProvider"
             ]
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

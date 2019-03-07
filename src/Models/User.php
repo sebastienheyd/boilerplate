@@ -1,6 +1,6 @@
-<?php
+<?php namespace Sebastienheyd\Boilerplate\Models;
 
-namespace Sebastienheyd\Boilerplate\Models;
+// phpcs:disable Generic.Files.LineLength
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
@@ -50,13 +50,14 @@ class User extends Authenticatable
     use LaratrustUserTrait;
     use SoftDeletes;
 
-    protected $fillable = [ 'active', 'last_name', 'first_name', 'email', 'password', 'remember_token', 'last_login' ];
-    protected $hidden = [ 'password', 'remember_token' ];
+    protected $fillable = ['active', 'last_name', 'first_name', 'email', 'password', 'remember_token', 'last_login'];
+    protected $hidden = ['password', 'remember_token'];
 
     /**
      * Send the password reset notification.
      *
-     * @param  string  $token
+     * @param  string $token
+     *
      * @return void
      */
     public function sendPasswordResetNotification($token)
@@ -78,6 +79,7 @@ class User extends Authenticatable
      * Return last name in uppercase by default
      *
      * @param $value
+     *
      * @return string
      */
     public function getLastNameAttribute($value)
@@ -89,6 +91,7 @@ class User extends Authenticatable
      * Return first name with first char of every word in uppercase
      *
      * @param $value
+     *
      * @return string
      */
     public function getFirstNameAttribute($value)
@@ -100,6 +103,7 @@ class User extends Authenticatable
      * Return instance of Jenssegers\Date\Date
      *
      * @param $value
+     *
      * @return \Jenssegers\Date\Date
      */
     public function getCreatedAtAttribute($value)
@@ -109,12 +113,14 @@ class User extends Authenticatable
 
     /**
      * Return a concatenation of first name and last_name if field name does not exists
+     *
      * @param $value
+     *
      * @return string
      */
     public function getNameAttribute($value)
     {
-        if(!empty($value)) {
+        if (!empty($value)) {
             return $value;
         }
 
@@ -126,11 +132,14 @@ class User extends Authenticatable
      *
      * @param string $format
      * @param string $default
+     *
      * @return mixed|string
      */
     public function getLastLogin($format = 'Y-m-d H:i:s', $default = '')
     {
-        if ($this->last_login === null) return $default;
+        if ($this->last_login === null) {
+            return $default;
+        }
         return Date::parse($this->last_login)->format($format);
     }
 
@@ -141,9 +150,13 @@ class User extends Authenticatable
      */
     public function getRolesList()
     {
-        $res = [ ];
-        foreach ($this->roles as $role) { $res[ ] = __($role->display_name); }
-        if (empty($res)) return '-';
+        $res = [];
+        foreach ($this->roles as $role) {
+            $res[] = __($role->display_name);
+        }
+        if (empty($res)) {
+            return '-';
+        }
         return join(', ', $res);
     }
 

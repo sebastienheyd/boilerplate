@@ -7,14 +7,14 @@ $default = [
     'as'         => 'boilerplate.'
 ];
 
-Route::group($default, function() {
+Route::group($default, function () {
 
     // Dashboard
-    Route::group(['middleware' => ['boilerplateauth', 'ability:admin,backend_access']], function() {
+    Route::group(['middleware' => ['boilerplateauth', 'ability:admin,backend_access']], function () {
         Route::get('/', ['as' => 'dashboard', 'uses' => config('boilerplate.menu.dashboard').'@index']);
     });
 
-    Route::group(['namespace' => '\Sebastienheyd\Boilerplate\Controllers'], function() {
+    Route::group(['namespace' => '\Sebastienheyd\Boilerplate\Controllers'], function () {
 
         // Login
         Route::get('login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);
@@ -22,41 +22,53 @@ Route::group($default, function() {
         Route::post('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']);
 
         // Registration
-        if(config('boilerplate.auth.register')) {
+        if (config('boilerplate.auth.register')) {
             Route::get('register', ['as' => 'register', 'uses' => 'Auth\RegisterController@showRegistrationForm']);
             Route::post('register', ['as' => 'register.post', 'uses' => 'Auth\RegisterController@register']);
         }
 
         // Password reset
-        Route::get('password/request', ['as' => 'password.request', 'uses' => 'Auth\ForgotPasswordController@showLinkRequestForm']);
-        Route::post('password/email', ['as' => 'password.email', 'uses' => 'Auth\ForgotPasswordController@sendResetLinkEmail']);
-        Route::get('password/reset/{token}', ['as' => 'password.reset', 'uses' => 'Auth\ResetPasswordController@showResetForm']);
+        Route::get('password/request', [
+            'as'   => 'password.request',
+            'uses' => 'Auth\ForgotPasswordController@showLinkRequestForm']);
+        Route::post('password/email', [
+            'as'   => 'password.email',
+            'uses' => 'Auth\ForgotPasswordController@sendResetLinkEmail']);
+        Route::get('password/reset/{token}', [
+            'as'   => 'password.reset',
+            'uses' => 'Auth\ResetPasswordController@showResetForm']);
         Route::post('password/reset', ['as' => 'password.reset.post', 'uses' => 'Auth\ResetPasswordController@reset']);
 
         // First login
-        Route::get('connect/{token?}', ['as' => 'users.firstlogin', 'uses' => 'Users\UsersController@firstLogin']);
-        Route::post('connect/{token?}', ['as' => 'users.firstlogin.post', 'uses' => 'Users\UsersController@firstLoginPost']);
+        Route::get('connect/{token?}', [
+            'as'   => 'users.firstlogin',
+            'uses' => 'Users\UsersController@firstLogin']);
+        Route::post('connect/{token?}', [
+            'as'   => 'users.firstlogin.post',
+            'uses' => 'Users\UsersController@firstLoginPost']);
 
         // Backend
-        Route::group(['middleware' => ['boilerplateauth', 'ability:admin,backend_access']], function() {
+        Route::group(['middleware' => ['boilerplateauth', 'ability:admin,backend_access']], function () {
 
             // Roles and users
-            Route::resource('roles', 'Users\RolesController');
-            Route::resource('users', 'Users\UsersController');
+            Route::resource('roles', 'Users\RolesController', ['except' => 'show']);
+            Route::resource('users', 'Users\UsersController', ['except' => 'show']);
             Route::any('users/dt', ['as' => 'users.datatable', 'uses' => 'Users\UsersController@datatable']);
             Route::get('userprofile', ['as' => 'user.profile', 'uses' => 'Users\UsersController@profile']);
             Route::post('userprofile', ['as' => 'user.profile.post', 'uses' => 'Users\UsersController@profilePost']);
-            Route::post('userprofile/avatardelete', ['as' => 'user.avatardelete', 'uses' => 'Users\UsersController@avatarDelete']);
+            Route::post('userprofile/avatardelete', [
+                'as'   => 'user.avatardelete',
+                'uses' => 'Users\UsersController@avatarDelete']);
 
             // Logs
-            Route::group(['prefix' => 'logs', 'as' => 'logs.'], function() {
+            Route::group(['prefix' => 'logs', 'as' => 'logs.'], function () {
                 Route::get('/', ['as' => 'dashboard', 'uses' => 'Logs\LogViewerController@index']);
-                Route::group(['prefix' => 'list'], function() {
+                Route::group(['prefix' => 'list'], function () {
 
                     Route::get('/', ['as' => 'list', 'uses' => 'Logs\LogViewerController@listLogs']);
                     Route::delete('delete', ['as' => 'delete', 'uses' => 'Logs\LogViewerController@delete']);
 
-                    Route::group(['prefix' => '{date}'], function() {
+                    Route::group(['prefix' => '{date}'], function () {
                         Route::get('/', ['as' => 'show', 'uses' => 'Logs\LogViewerController@show']);
                         Route::get('download', ['as' => 'download', 'uses' => 'Logs\LogViewerController@download']);
                         Route::get('{level}', ['as' => 'filter', 'uses' => 'Logs\LogViewerController@showByLevel']);
@@ -66,4 +78,3 @@ Route::group($default, function() {
         });
     });
 });
-

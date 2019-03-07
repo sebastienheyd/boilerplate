@@ -3,164 +3,164 @@
  * unlikely to be required. If this gets too large it can be split out into separate JS files.
  */
 var locales = {
-    bg_BG : {
-        OK      : "Ок",
-        CANCEL  : "Отказ",
-        CONFIRM : "Потвърждавам"
+    bg_BG: {
+        OK: "Ок",
+        CANCEL: "Отказ",
+        CONFIRM: "Потвърждавам"
     },
-    br : {
-        OK      : "OK",
-        CANCEL  : "Cancelar",
-        CONFIRM : "Sim"
+    br: {
+        OK: "OK",
+        CANCEL: "Cancelar",
+        CONFIRM: "Sim"
     },
-    cs : {
-        OK      : "OK",
-        CANCEL  : "Zrušit",
-        CONFIRM : "Potvrdit"
+    cs: {
+        OK: "OK",
+        CANCEL: "Zrušit",
+        CONFIRM: "Potvrdit"
     },
-    da : {
-        OK      : "OK",
-        CANCEL  : "Annuller",
-        CONFIRM : "Accepter"
+    da: {
+        OK: "OK",
+        CANCEL: "Annuller",
+        CONFIRM: "Accepter"
     },
-    de : {
-        OK      : "OK",
-        CANCEL  : "Abbrechen",
-        CONFIRM : "Akzeptieren"
+    de: {
+        OK: "OK",
+        CANCEL: "Abbrechen",
+        CONFIRM: "Akzeptieren"
     },
-    el : {
-        OK      : "Εντάξει",
-        CANCEL  : "Ακύρωση",
-        CONFIRM : "Επιβεβαίωση"
+    el: {
+        OK: "Εντάξει",
+        CANCEL: "Ακύρωση",
+        CONFIRM: "Επιβεβαίωση"
     },
-    en : {
-        OK      : "OK",
-        CANCEL  : "Cancel",
-        CONFIRM : "OK"
+    en: {
+        OK: "OK",
+        CANCEL: "Cancel",
+        CONFIRM: "OK"
     },
-    es : {
-        OK      : "OK",
-        CANCEL  : "Cancelar",
-        CONFIRM : "Aceptar"
+    es: {
+        OK: "OK",
+        CANCEL: "Cancelar",
+        CONFIRM: "Aceptar"
     },
-    et : {
-        OK      : "OK",
-        CANCEL  : "Katkesta",
-        CONFIRM : "OK"
+    et: {
+        OK: "OK",
+        CANCEL: "Katkesta",
+        CONFIRM: "OK"
     },
-    fa : {
-        OK      : "قبول",
-        CANCEL  : "لغو",
-        CONFIRM : "تایید"
+    fa: {
+        OK: "قبول",
+        CANCEL: "لغو",
+        CONFIRM: "تایید"
     },
-    fi : {
-        OK      : "OK",
-        CANCEL  : "Peruuta",
-        CONFIRM : "OK"
+    fi: {
+        OK: "OK",
+        CANCEL: "Peruuta",
+        CONFIRM: "OK"
     },
-    fr : {
-        OK      : "OK",
-        CANCEL  : "Annuler",
-        CONFIRM : "OK"
+    fr: {
+        OK: "OK",
+        CANCEL: "Annuler",
+        CONFIRM: "OK"
     },
-    he : {
-        OK      : "אישור",
-        CANCEL  : "ביטול",
-        CONFIRM : "אישור"
+    he: {
+        OK: "אישור",
+        CANCEL: "ביטול",
+        CONFIRM: "אישור"
     },
-    hu : {
-        OK      : "OK",
-        CANCEL  : "Mégsem",
-        CONFIRM : "Megerősít"
+    hu: {
+        OK: "OK",
+        CANCEL: "Mégsem",
+        CONFIRM: "Megerősít"
     },
-    hr : {
-        OK      : "OK",
-        CANCEL  : "Odustani",
-        CONFIRM : "Potvrdi"
+    hr: {
+        OK: "OK",
+        CANCEL: "Odustani",
+        CONFIRM: "Potvrdi"
     },
-    id : {
-        OK      : "OK",
-        CANCEL  : "Batal",
-        CONFIRM : "OK"
+    id: {
+        OK: "OK",
+        CANCEL: "Batal",
+        CONFIRM: "OK"
     },
-    it : {
-        OK      : "OK",
-        CANCEL  : "Annulla",
-        CONFIRM : "Conferma"
+    it: {
+        OK: "OK",
+        CANCEL: "Annulla",
+        CONFIRM: "Conferma"
     },
-    ja : {
-        OK      : "OK",
-        CANCEL  : "キャンセル",
-        CONFIRM : "確認"
+    ja: {
+        OK: "OK",
+        CANCEL: "キャンセル",
+        CONFIRM: "確認"
     },
-    lt : {
-        OK      : "Gerai",
-        CANCEL  : "Atšaukti",
-        CONFIRM : "Patvirtinti"
+    lt: {
+        OK: "Gerai",
+        CANCEL: "Atšaukti",
+        CONFIRM: "Patvirtinti"
     },
-    lv : {
-        OK      : "Labi",
-        CANCEL  : "Atcelt",
-        CONFIRM : "Apstiprināt"
+    lv: {
+        OK: "Labi",
+        CANCEL: "Atcelt",
+        CONFIRM: "Apstiprināt"
     },
-    nl : {
-        OK      : "OK",
-        CANCEL  : "Annuleren",
-        CONFIRM : "Accepteren"
+    nl: {
+        OK: "OK",
+        CANCEL: "Annuleren",
+        CONFIRM: "Accepteren"
     },
-    no : {
-        OK      : "OK",
-        CANCEL  : "Avbryt",
-        CONFIRM : "OK"
+    no: {
+        OK: "OK",
+        CANCEL: "Avbryt",
+        CONFIRM: "OK"
     },
-    pl : {
-        OK      : "OK",
-        CANCEL  : "Anuluj",
-        CONFIRM : "Potwierdź"
+    pl: {
+        OK: "OK",
+        CANCEL: "Anuluj",
+        CONFIRM: "Potwierdź"
     },
-    pt : {
-        OK      : "OK",
-        CANCEL  : "Cancelar",
-        CONFIRM : "Confirmar"
+    pt: {
+        OK: "OK",
+        CANCEL: "Cancelar",
+        CONFIRM: "Confirmar"
     },
-    ru : {
-        OK      : "OK",
-        CANCEL  : "Отмена",
-        CONFIRM : "Применить"
+    ru: {
+        OK: "OK",
+        CANCEL: "Отмена",
+        CONFIRM: "Применить"
     },
-    sq : {
-        OK : "OK",
-        CANCEL : "Anulo",
-        CONFIRM : "Prano"
+    sq: {
+        OK: "OK",
+        CANCEL: "Anulo",
+        CONFIRM: "Prano"
     },
-    sv : {
-        OK      : "OK",
-        CANCEL  : "Avbryt",
-        CONFIRM : "OK"
+    sv: {
+        OK: "OK",
+        CANCEL: "Avbryt",
+        CONFIRM: "OK"
     },
-    th : {
-        OK      : "ตกลง",
-        CANCEL  : "ยกเลิก",
-        CONFIRM : "ยืนยัน"
+    th: {
+        OK: "ตกลง",
+        CANCEL: "ยกเลิก",
+        CONFIRM: "ยืนยัน"
     },
-    tr : {
-        OK      : "Tamam",
-        CANCEL  : "İptal",
-        CONFIRM : "Onayla"
+    tr: {
+        OK: "Tamam",
+        CANCEL: "İptal",
+        CONFIRM: "Onayla"
     },
-    zh_CN : {
-        OK      : "OK",
-        CANCEL  : "取消",
-        CONFIRM : "确认"
+    zh_CN: {
+        OK: "OK",
+        CANCEL: "取消",
+        CONFIRM: "确认"
     },
-    zh_TW : {
-        OK      : "OK",
-        CANCEL  : "取消",
-        CONFIRM : "確認"
+    zh_TW: {
+        OK: "OK",
+        CANCEL: "取消",
+        CONFIRM: "確認"
     }
 };
 
-$.each(locales, function(i, e) {
+$.each(locales, function (i, e) {
     bootbox.addLocale(i, {
         OK: e.OK,
         CANCEL: e.CANCEL,

@@ -1,3 +1,6 @@
 .idea/
+vendor
+composer.phar
+composer.lock
 src/node_modules
 src/package-lock.json

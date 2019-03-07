@@ -37,7 +37,7 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->redirectTo = route(config('boilerplate.app.redirectTo', 'boilerplate.dashboard'));
-        $this->middleware('guest', [ 'except' => 'logout' ]);
+        $this->middleware('guest', ['except' => 'logout']);
     }
 
     /**
@@ -48,9 +48,10 @@ class LoginController extends Controller
     public function showLoginForm()
     {
         $userModel = config('auth.providers.users.model');
-        
+
         if ($userModel::whereRoleIs('admin')->count() === 0) {
-            return redirect(route('boilerplate.register')); }
+            return redirect(route('boilerplate.register'));
+        }
 
         return view('boilerplate::auth.login');
     }
@@ -58,7 +59,8 @@ class LoginController extends Controller
     /**
      * Validate the user login request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     *
      * @return void
      */
     protected function validateLogin(Request $request)
@@ -73,17 +75,15 @@ class LoginController extends Controller
     /**
      * Send the response after the user was authenticated.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     protected function sendLoginResponse(Request $request)
     {
         $request->session()->regenerate();
-
         $this->clearLoginAttempts($request);
-        
-        $this->guard()->user()->update([ 'last_login' => Carbon::now()->toDateTimeString() ]);
-
+        $this->guard()->user()->update(['last_login' => Carbon::now()->toDateTimeString()]);
         return $this->authenticated($request, $this->guard()->user())
             ?: redirect()->intended($this->redirectPath());
     }
@@ -91,8 +91,9 @@ class LoginController extends Controller
     /**
      * The user has been authenticated.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Illuminate\Contracts\Auth\Authenticatable|null  $user
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Contracts\Auth\Authenticatable|null $user
+     *
      * @return mixed
      */
     protected function authenticated(Request $request, $user)
@@ -103,15 +104,14 @@ class LoginController extends Controller
     /**
      * Log the user out of the application.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function logout(Request $request)
     {
         $this->guard()->logout();
-
         $request->session()->invalidate();
-
         return redirect('/'.config('boilerplate.app.prefix', ''));
     }
 }

@@ -35,7 +35,7 @@ class RolesController extends Controller
      */
     public function index()
     {
-        return view('boilerplate::roles.list', [ 'roles' => Role::all() ]);
+        return view('boilerplate::roles.list', ['roles' => Role::all()]);
     }
 
     /**
@@ -45,48 +45,40 @@ class RolesController extends Controller
      */
     public function create()
     {
-        return view('boilerplate::roles.create', [ 'permissions' => Permission::all() ]);
+        return view('boilerplate::roles.create', ['permissions' => Permission::all()]);
     }
 
     /**
      * Store a newly created role in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $input = $request->all();
-        $input[ 'name' ] = str_slug($input[ 'display_name' ]);
+        $input['name'] = str_slug($input['display_name']);
         $request->replace($input);
 
         $this->validate($request, [
-            'name' => 'required|unique:roles,name',
+            'name'         => 'required|unique:roles,name',
             'display_name' => 'required',
-            'description' => 'required'
+            'description'  => 'required'
         ]);
 
         $role = Role::create($input);
-        $role->permissions()->sync(array_keys($request->input('permission', [ ])));
+        $role->permissions()->sync(array_keys($request->input('permission', [])));
 
-        return redirect()->route('boilerplate.roles.edit', $role)->with('growl', [ __('boilerplate::role.successadd'), 'success' ]);
-    }
-
-    /**
-     * Display the specified role.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function show($id)
-    {
-        return redirect()->route('boilerplate.roles.edit', $id);
+        return redirect()->route('boilerplate.roles.edit', $role)
+                         ->with('growl', [__('boilerplate::role.successadd'), 'success']);
     }
 
     /**
      * Show the form for editing the specified role.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -99,28 +91,31 @@ class RolesController extends Controller
     /**
      * Update the specified role in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
         $this->validate($request, [
             'display_name' => 'required',
-            'description' => 'required'
+            'description'  => 'required'
         ]);
 
         $role = Role::find($id);
         $role->update($request->all());
         $role->permissions()->sync(array_keys($request->input('permission')));
 
-        return redirect()->route('boilerplate.roles.edit', $role)->with('growl', [ __('boilerplate::role.successmod'), 'success' ]);
+        return redirect()->route('boilerplate.roles.edit', $role)
+                         ->with('growl', [__('boilerplate::role.successmod'), 'success']);
     }
 
     /**
      * Remove the specified role from storage.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

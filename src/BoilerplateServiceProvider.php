@@ -53,7 +53,7 @@ class BoilerplateServiceProvider extends ServiceProvider
         // For datatables locales
         View::composer('boilerplate::load.datatables', 'Sebastienheyd\Boilerplate\ViewComposers\DatatablesComposer');
 
-        if($this->app->runningInConsole()) {
+        if ($this->app->runningInConsole()) {
             $this->commands([
                 Console\MenuItem::class,
             ]);
@@ -87,14 +87,14 @@ class BoilerplateServiceProvider extends ServiceProvider
         $this->router->aliasMiddleware('boilerplateauth', Middleware\BoilerplateAuthenticate::class);
 
         // Loading packages
-        $this->_registerLaratrust();
-        $this->_registerMenu();
+        $this->registerLaratrust();
+        $this->registerMenu();
     }
 
     /**
      * Register package lavary/laravel-menu
      */
-    private function _registerMenu()
+    private function registerMenu()
     {
         $this->app->register(\Lavary\Menu\ServiceProvider::class);
         $this->loader->alias('Menu', \Lavary\Menu\Facade::class);
@@ -103,7 +103,7 @@ class BoilerplateServiceProvider extends ServiceProvider
     /**
      * Register package lavary/laravel-menu
      */
-    private function _registerLaratrust()
+    private function registerLaratrust()
     {
         $this->app->register(\Laratrust\LaratrustServiceProvider::class);
         $this->loader->alias('Laratrust', \Laratrust\LaratrustFacade::class);

@@ -1,11 +1,11 @@
-var growl = function(message, type) {
-    if(typeof type === "undefined") {
+var growl = function (message, type) {
+    if (typeof type === "undefined") {
         type = 'info';
     }
-    $.notify({message: message}, { type: type, placement : { align : 'center'}, width: 'auto', allow_dismiss: false});
+    $.notify({message: message}, {type: type, placement: {align: 'center'}, width: 'auto', allow_dismiss: false});
 }
 
-$('.sidebar-toggle').on('click', function(event) {
+$('.sidebar-toggle').on('click', function (event) {
     event.preventDefault();
     if (Boolean(sessionStorage.getItem('sidebar-toggle-collapsed'))) {
         sessionStorage.setItem('sidebar-toggle-collapsed', '');

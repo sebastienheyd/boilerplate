@@ -2,8 +2,8 @@ let mix = require('laravel-mix');
 const Clean = require('clean-webpack-plugin');
 
 mix.webpackConfig({plugins: [new Clean(['public'], {verbose: false})]})
-   .setPublicPath("public")
-   .setResourceRoot('/assets/vendor/boilerplate');
+    .setPublicPath("public")
+    .setResourceRoot('/assets/vendor/boilerplate');
 
 // ============== Main ==============
 
@@ -37,8 +37,10 @@ mix.scripts([
 
 mix.copy('node_modules/drmonty-datatables-plugins/i18n', 'public/js/datatables/i18n/', false);
 
-mix.styles('node_modules/datatables.net-bs/css/dataTables.bootstrap.css',
-    'public/js/datatables/datatables.min.css').version();
+mix.styles(
+    'node_modules/datatables.net-bs/css/dataTables.bootstrap.css',
+    'public/js/datatables/datatables.min.css'
+).version();
 
 // ============== Select2 ==============
 
@@ -74,7 +76,8 @@ mix.copy('node_modules/bootstrap-datepicker/dist/locales', 'public/js/datepicker
 
 mix.sass(
     'node_modules/bootstrap-fileinput/scss/fileinput.scss',
-    'public/js/fileinput/bootstrap-fileinput.min.css').version();
+    'public/js/fileinput/bootstrap-fileinput.min.css'
+).version();
 
 mix.scripts([
     'node_modules/bootstrap-fileinput/js/fileinput.min.js',

@@ -39,18 +39,16 @@ class Item extends LavaryMenuItem
      */
     public function activeIfRoute($routes = null)
     {
-        if(!empty($routes)) {
-
-            if(is_string($routes)) {
+        if (!empty($routes)) {
+            if (is_string($routes)) {
                 $routes = [$routes];
             }
 
-            foreach($routes as $pattern) {
-                if(if_route_pattern($pattern)) {
-
+            foreach ($routes as $pattern) {
+                if (if_route_pattern($pattern)) {
                     $this->activate();
 
-                    if(strstr($this->title, 'circle-o')) {
+                    if (strstr($this->title, 'circle-o')) {
                         $this->title = str_replace('fa-circle-o', 'fa-dot-circle-o', $this->title);
                     }
 
@@ -65,7 +63,7 @@ class Item extends LavaryMenuItem
         $this->attributes['class'] = Builder::formatGroupClass(['class' => $activeClass], $this->attributes);
         $this->isActive = true;
 
-        if(strstr($this->title, 'circle-o')) {
+        if (strstr($this->title, 'circle-o')) {
             $this->title = str_replace('fa-circle-o', 'fa-dot-circle-o', $this->title);
         }
 

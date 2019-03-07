@@ -10,8 +10,9 @@ class Builder extends LavaryMenuBuilder
     /**
      * Adds an item to the menu
      *
-     * @param  string  $title
-     * @param  string|array  $acion
+     * @param  string $title
+     * @param  string|array $acion
+     *
      * @return Lavary\Menu\Item $item
      */
     public function add($title, $options = '')
@@ -27,7 +28,6 @@ class Builder extends LavaryMenuBuilder
         }
 
         if (isset($options['role']) || isset($options['permission'])) {
-
             $ability = ['admin'];
             if (isset($options['role'])) {
                 $ability = $ability + explode(',', $options['role']);
@@ -55,6 +55,7 @@ class Builder extends LavaryMenuBuilder
      * @param $id                   Id of the menu item to attach to
      * @param $title                Title of the sub item
      * @param string $options
+     *
      * @return Lavary\Menu\Item
      */
     public function addTo($id, $title, $options = '')
@@ -62,17 +63,15 @@ class Builder extends LavaryMenuBuilder
         $parent = $this->whereId($id)->first();
 
         if (isset($parent)) {
-
             if (!isset($this->root[$parent->id])) {
-                $parent->attr([ 'url' => '#', 'class' => 'treeview' ]);
-                $parent->append('<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>');
+                $parent->attr(['url' => '#', 'class' => 'treeview']);
+                $str = '<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>';
+                $parent->append($str);
                 $this->root[$parent->id] = true;
             }
 
             $item = $parent->add($title, $options);
-
         } else {
-
             $item = $this->add($title, $options);
         }
 
