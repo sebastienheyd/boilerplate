@@ -12,6 +12,7 @@
     <testsuites>
         <testsuite name="Boilerplate Test Suite">
             <directory suffix="Test.php">tests</directory>
+            <exclude>./tests/DuskTest.php</exclude>
         </testsuite>
     </testsuites>
     <filter>

@@ -36,12 +36,16 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->redirectTo = route(config('boilerplate.app.redirectTo', 'boilerplate.dashboard'));
-
         $userModel = config('auth.providers.users.model');
         $this->firstUser = $userModel::whereRoleIs('admin')->count() === 0;
+    }
 
-        $this->middleware('guest');
+    /**
+     * @return string
+     */
+    protected function redirectTo()
+    {
+        return route(config('boilerplate.app.redirectTo', 'boilerplate.dashboard'));
     }
 
     /**

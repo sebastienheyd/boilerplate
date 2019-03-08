@@ -22,10 +22,8 @@ Route::group($default, function () {
         Route::post('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']);
 
         // Registration
-        if (config('boilerplate.auth.register')) {
-            Route::get('register', ['as' => 'register', 'uses' => 'Auth\RegisterController@showRegistrationForm']);
-            Route::post('register', ['as' => 'register.post', 'uses' => 'Auth\RegisterController@register']);
-        }
+        Route::get('register', ['as' => 'register', 'uses' => 'Auth\RegisterController@showRegistrationForm']);
+        Route::post('register', ['as' => 'register.post', 'uses' => 'Auth\RegisterController@register']);
 
         // Password reset
         Route::get('password/request', [

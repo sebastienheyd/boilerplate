@@ -114,7 +114,7 @@ class UsersController extends Controller
      */
     private function button(string $route, string $class, string $icon): string
     {
-        return sprintf('<a href="%s" class="btn btn-sm btn-%s"><i class="fa fa-%s" /></a>', $route, $class, $icon);
+        return sprintf('<a href="%s" class="btn btn-sm btn-%s"><i class="fa fa-%s"></i></a>', $route, $class, $icon);
     }
 
     /**
