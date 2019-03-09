@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ruleset name="boilerplate-email-editor">
+<ruleset name="boilerplate">
     <description/>
     <arg name="colors"/>
     <arg value="p"/>
