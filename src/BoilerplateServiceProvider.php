@@ -53,7 +53,7 @@ class BoilerplateServiceProvider extends ServiceProvider
         // For datatables locales
         View::composer('boilerplate::load.datatables', 'Sebastienheyd\Boilerplate\ViewComposers\DatatablesComposer');
 
-        if($this->app->runningInConsole()) {
+        if ($this->app->runningInConsole()) {
             $this->commands([
                 Console\MenuItem::class,
             ]);
