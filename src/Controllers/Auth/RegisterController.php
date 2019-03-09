@@ -91,7 +91,7 @@ class RegisterController extends Controller
         }
 
         $userModel = config('auth.providers.users.model');
-        $roleModel = config('laratrust.role');
+        $roleModel = config('laratrust.models.role');
 
         $user = $userModel::withTrashed()->updateOrCreate([ 'email' => $data[ 'email' ] ], [
             'active' => true,

@@ -63,7 +63,7 @@ class UsersController extends Controller
         return Datatables::of(User::select('*'))
             ->rawColumns(['actions', 'status'])
             ->editColumn('created_at', function ($user) {
-                return $user->created_at->format(__('boilerplate::date.YmdHis'));
+                return $user->created_at->isoFormat(__('boilerplate::date.YmdHis'));
             })->editColumn('last_login', function ($user) {
                 return $user->getLastLogin(__('boilerplate::date.YmdHis'), '-');
             })->editColumn('status', function ($user) {

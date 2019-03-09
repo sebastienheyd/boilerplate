@@ -53,7 +53,7 @@ class BoilerplateServiceProvider extends ServiceProvider
         // For datatables locales
         View::composer('boilerplate::load.datatables', 'Sebastienheyd\Boilerplate\ViewComposers\DatatablesComposer');
 
-        if ($this->app->runningInConsole()) {
+        if($this->app->runningInConsole()) {
             $this->commands([
                 Console\MenuItem::class,
             ]);
@@ -111,8 +111,8 @@ class BoilerplateServiceProvider extends ServiceProvider
         // Overriding config
         config([
             'laratrust.user_models.users' => config('boilerplate.laratrust.user', 'App\User'),
-            'laratrust.role'              => config('boilerplate.laratrust.role', 'App\Role'),
-            'laratrust.permission'        => config('boilerplate.laratrust.permission', 'App\Permission'),
+            'laratrust.models.role'       => config('boilerplate.laratrust.role', 'App\Role'),
+            'laratrust.models.permission' => config('boilerplate.laratrust.permission', 'App\Permission'),
         ]);
 
         // Registering middlewares

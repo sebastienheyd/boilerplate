@@ -2,7 +2,7 @@
 
 // phpcs:disable Generic.Files.LineLength
 
-use Laratrust\LaratrustPermission;
+use Laratrust\Models\LaratrustPermission;
 
 /**
  * Sebastienheyd\Boilerplate\Models\Permission

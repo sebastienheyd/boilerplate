@@ -12,7 +12,6 @@
         "hieu-le/active": "^3.4",
         "yajra/laravel-datatables-oracle": "^9.0",
         "lavary/laravel-menu": "^1.7",
-        "jenssegers/date": "^3.4",
         "intervention/image": "^2.4",
         "arcanedev/log-viewer": "^4.7"
     },

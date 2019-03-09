@@ -44,7 +44,7 @@
                                                 @if ($key == 'date')
                                                     <a href="{{ route('boilerplate.logs.show', [$date]) }}">
                                                         <span class="label label-primary">
-                                                            {{ Date::createFromFormat('Y-m-d', $value)->format(__('boilerplate::date.Ymd')) }}
+                                                            {{ \Carbon\Carbon::createFromFormat('Y-m-d', $value)->isoFormat(__('boilerplate::date.Ymd')) }}
                                                         </span>
                                                     </a>
                                                 @elseif ($value == 0)

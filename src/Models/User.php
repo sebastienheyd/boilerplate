@@ -2,9 +2,9 @@
 
 // phpcs:disable Generic.Files.LineLength
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
-use Jenssegers\Date\Date as Date;
 use Laratrust\Traits\LaratrustUserTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Sebastienheyd\Boilerplate\Notifications\ResetPassword as ResetPasswordNotification;
@@ -20,7 +20,7 @@ use Sebastienheyd\Boilerplate\Notifications\NewUser as NewUserNotification;
  * @property string $email
  * @property string $password
  * @property string $remember_token
- * @property \Jenssegers\Date\Date $created_at
+ * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property string $deleted_at
  * @property string $last_login
@@ -100,18 +100,6 @@ class User extends Authenticatable
     }
 
     /**
-     * Return instance of Jenssegers\Date\Date
-     *
-     * @param $value
-     *
-     * @return \Jenssegers\Date\Date
-     */
-    public function getCreatedAtAttribute($value)
-    {
-        return Date::parse($value);
-    }
-
-    /**
      * Return a concatenation of first name and last_name if field name does not exists
      *
      * @param $value
@@ -135,12 +123,13 @@ class User extends Authenticatable
      *
      * @return mixed|string
      */
-    public function getLastLogin($format = 'Y-m-d H:i:s', $default = '')
+    public function getLastLogin($format = 'YYYY-MM-DD HH:mm:ss', $default = '')
     {
         if ($this->last_login === null) {
             return $default;
         }
-        return Date::parse($this->last_login)->format($format);
+
+        return Carbon::createFromTimeString($this->last_login)->isoFormat($format);
     }
 
     /**

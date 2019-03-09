@@ -24,7 +24,7 @@ class ConfigTest extends TestCase
     public function testLaratrustConfig()
     {
         $this->assertEquals('Sebastienheyd\Boilerplate\Models\User', config('laratrust.user_models.users'));
-        $this->assertEquals('Sebastienheyd\Boilerplate\Models\Role', config('laratrust.role'));
+        $this->assertEquals('Sebastienheyd\Boilerplate\Models\Role', config('laratrust.models.role'));
         $this->assertEquals('Sebastienheyd\Boilerplate\Models\Permission', config('laratrust.permission'));
     }
 }

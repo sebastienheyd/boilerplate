@@ -1,6 +1,6 @@
 <?php namespace Sebastienheyd\Boilerplate\Models;
 
-use Laratrust\LaratrustRole;
+use Laratrust\Models\LaratrustRole;
 use Sebastienheyd\Boilerplate\Models\User;
 
 /**

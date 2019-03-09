@@ -31,8 +31,8 @@
                         <span class="info-box-more">
                             <p class="mbn text-muted">
                                 {{ __('boilerplate::users.profile.subscribedsince', [
-                                    'date' => $user->created_at->format(__('boilerplate::date.lFdY')),
-                                    'since' => $user->created_at->ago()]) }}
+                                    'date' => $user->created_at->isoFormat(__('boilerplate::date.lFdY')),
+                                    'since' => $user->created_at->diffForHumans()]) }}
                             </p>
                         </span>
                     </div>

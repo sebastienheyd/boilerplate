@@ -54,7 +54,7 @@ class LaratrustSetupTables extends Migration
 
         // Create table for associating roles to users (Many To Many Polymorphic)
         Schema::create('role_user', function (Blueprint $table) {
-            $table->integer('user_id')->unsigned();
+            $table->unsignedBigInteger('user_id');
             $table->integer('role_id')->unsigned();
             $table->string('user_type');
 

@@ -1,7 +1,9 @@
 <?php
-
+/**
+ * @see https://carbon.nesbot.com/docs/#api-localization
+ */
 return [
-    "Ymd" => "d/m/Y",
-    "YmdHis" => "d/m/Y H:i:s",
-    "lFdY" => "d F Y l"
+    "Ymd"    => "DD/MM/YYYY",
+    "YmdHis" => "DD/MM/YYYY HH:mm:ss",
+    "lFdY"   => "D MMMM YYYY dddd"
 ];

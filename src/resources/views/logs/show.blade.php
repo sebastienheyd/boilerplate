@@ -1,4 +1,4 @@
-@php($date = Date::createFromFormat('Y-m-d', $log->date)->format(__('boilerplate::date.lFdY')))
+@php($date = \Carbon\Carbon::createFromFormat('Y-m-d', $log->date)->isoFormat(__('boilerplate::date.lFdY')))
 
 @extends('boilerplate::layout.index', [
     'title' => __('boilerplate::logs.menu.category'),
@@ -62,13 +62,13 @@
                                             <td>{{ __('boilerplate::logs.show.createdat') }}</td>
                                             <td>
                                                 <span class="label label-primary">
-                                                    {{ Date::createFromFormat('Y-m-d H:i:s', $log->createdAt())->format(__('boilerplate::date.YmdHis')) }}
+                                                    {{ $log->createdAt()->isoFormat(__('boilerplate::date.YmdHis')) }}
                                                 </span>
                                             </td>
                                             <td>{{ __('boilerplate::logs.show.updatedat') }}</td>
                                             <td>
                                                 <span class="label label-primary">
-                                                    {{ Date::createFromFormat('Y-m-d H:i:s', $log->updatedAt())->format(__('boilerplate::date.YmdHis')) }}
+                                                    {{ $log->updatedAt()->isoFormat(__('boilerplate::date.YmdHis')) }}
                                                 </span>
                                             </td>
                                         </tr>

@@ -1,7 +1,7 @@
 # Laravel/AdminLTE Boilerplate
 
 ![Package](https://img.shields.io/badge/Package-sebastienheyd%2Fboilerplate-lightgrey.svg)
-![Laravel](https://img.shields.io/badge/Laravel-5.7.x-green.svg)
+![Laravel](https://img.shields.io/badge/Laravel-5.8.x-green.svg)
 ![Nb downloads](https://img.shields.io/packagist/dt/sebastienheyd/boilerplate.svg)
 ![MIT License](https://img.shields.io/github/license/sebastienheyd/boilerplate.svg)
 
@@ -9,6 +9,7 @@ This package is to be served as a basis for a web application. It allows you to 
 manage users, roles and permissions.
 
 For other Laravel versions : 
+[5.7](https://github.com/sebastienheyd/boilerplate/blob/5.7/README.md) / 
 [5.6](https://github.com/sebastienheyd/boilerplate/blob/5.6/README.md) / 
 [5.5](https://github.com/sebastienheyd/boilerplate/blob/5.5/README.md) /
 [5.4](https://github.com/sebastienheyd/boilerplate/blob/5.4/README.md)
@@ -23,7 +24,6 @@ For other Laravel versions :
 * Menu dynamically builded by [lavary/laravel-menu](https://github.com/lavary/laravel-menu)
 * Menu items activated by [hieu-le/active](https://github.com/letrunghieu/active)
 * Server-side datatables methods provided by [yajra/laravel-datatables](https://github.com/yajra/laravel-datatables)
-* Multi-language date support by [jenssegers/date](https://github.com/jenssegers/date)
 * Image manipulation by [intervention/image](https://github.com/intervention/image)
 * Localized English / French / Spanish / Turkish
 
@@ -171,8 +171,6 @@ You can translate into a language not yet supported by copying the
 folder to create. All you have to do is translate. If you want to share the language you have added, don't hesitate to 
 make a pull request.
 
-NB : Dates are translated by the package [jenssegers/date](https://github.com/jenssegers/date)
-
 ### Routes
 
 Routes are loaded from the file [`boilerplate.php`](src/routes/boilerplate.php).
@@ -231,6 +229,15 @@ php artisan dusk vendor/sebastienheyd/boilerplate/tests/DuskTest.php
 **Important** : Never launch tests with Laravel Dusk if you have data in your database,  Dusk will wipeout all your datas
 
 ## Troubleshooting
+
+### Dates localization
+
+Since Laravel 5.8, this package use [Carbon](https://carbon.nesbot.com/docs/#api-localization) instead of [Jenssegers/Date](https://github.com/jenssegers/date) to translate dates. 
+
+Date format now use the format of momentjs. To translate your dates, you must now use the Carbon class method `isoFormat` 
+instead of `format`
+
+See [Carbon documentation](https://carbon.nesbot.com/docs/#api-localization)
 
 ### Migration error
 

@@ -3,7 +3,7 @@
 namespace Sebastienheyd\Boilerplate\Middleware;
 
 use Closure;
-use Jenssegers\Date\Date;
+use Carbon\Carbon;
 
 class BoilerplateLocale
 {
@@ -17,8 +17,7 @@ class BoilerplateLocale
     public function handle($request, Closure $next)
     {
         app()->setLocale(config('boilerplate.app.locale', config('app.locale')));
-        Date::setLocale(config('boilerplate.app.locale', config('app.locale')));
-
+        Carbon::setLocale(config('boilerplate.app.locale', config('app.locale')));
         return $next($request);
     }
 }
