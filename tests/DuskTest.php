@@ -119,6 +119,7 @@ class DuskTest extends DuskTestCase
             ->type('password', $this->password)
             ->type('password_confirmation', $this->password)
             ->press('Save')
+            ->waitFor('.alert-success')
             ->assertSee('The profile has been correctly updated');
     }
 
