@@ -10,7 +10,7 @@ abstract class TestCase extends OrchestraTestCase
      *
      * @param  \Illuminate\Foundation\Application $app
      *
-     * @return Sebastienheyd\Systempay\SystempayServiceProvider
+     * @return array
      */
     protected function getPackageProviders($app)
     {
