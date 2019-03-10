@@ -21,6 +21,10 @@
         "orchestra/testbench": "^3.8",
         "doctrine/dbal": "^2.9"
     },
+    "suggest": {
+        "sebastienheyd/boilerplate-media-manager": "Media manager",
+        "sebastienheyd/boilerplate-email-editor": "Visual editor for e-mails"
+    },
     "autoload": {
         "psr-4": {
             "Sebastienheyd\\Boilerplate\\": "src/"
