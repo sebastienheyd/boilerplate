@@ -1,9 +1,8 @@
-<?php
-
-namespace Sebastienheyd\Boilerplate\Controllers\Users;
+<?php namespace Sebastienheyd\Boilerplate\Controllers\Users;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 use Sebastienheyd\Boilerplate\Models\Permission;
 use Sebastienheyd\Boilerplate\Models\Role;
 
@@ -20,8 +19,6 @@ class RolesController extends Controller
 
     /**
      * Create a new controller instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -51,14 +48,15 @@ class RolesController extends Controller
     /**
      * Store a newly created role in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
         $input = $request->all();
-        $input['name'] = str_slug($input['display_name']);
+        $input['name'] = Str::slug($input['display_name']);
         $request->replace($input);
 
         $this->validate($request, [

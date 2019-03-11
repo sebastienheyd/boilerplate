@@ -1,10 +1,9 @@
-<?php
-
-namespace Sebastienheyd\Boilerplate\Controllers\Users;
+<?php namespace Sebastienheyd\Boilerplate\Controllers\Users;
 
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Yajra\DataTables\DataTables;
 use Sebastienheyd\Boilerplate\Models\Role;
 use Sebastienheyd\Boilerplate\Models\User;
@@ -14,19 +13,8 @@ use URL;
 
 class UsersController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Users Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the users management.
-    |
-    */
-
     /**
      * Create a new controller instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -57,6 +45,7 @@ class UsersController extends Controller
      * To display dynamic table by datatable
      *
      * @return mixed
+     * @throws \Exception
      */
     public function datatable()
     {
@@ -136,9 +125,10 @@ class UsersController extends Controller
     /**
      * Store a newly created user in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param Request $request
      *
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
@@ -149,8 +139,8 @@ class UsersController extends Controller
         ]);
 
         $input = $request->all();
-        $input['password'] = bcrypt(str_random(8));
-        $input['remember_token'] = str_random(32);
+        $input['password'] = bcrypt(Str::random(8));
+        $input['remember_token'] = Str::random(32);
         $input['deleted_at'] = null;
 
         $user = User::withTrashed()->updateOrCreate(['email' => $input['email']], $input);
@@ -186,10 +176,11 @@ class UsersController extends Controller
     /**
      * Update the specified user in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param Request $request
+     * @param $id
      *
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update(Request $request, $id)
     {
@@ -203,7 +194,6 @@ class UsersController extends Controller
 
         $user->update($request->all());
 
-        // Mise à jour des rôles
         $user->roles()->sync(array_keys($request->input('roles', [])));
 
         return redirect()->route('boilerplate.users.edit', $user)
@@ -241,7 +231,8 @@ class UsersController extends Controller
      *
      * @param Request $request
      *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function firstLoginPost(Request $request)
     {
@@ -254,7 +245,7 @@ class UsersController extends Controller
         $user = User::where(['remember_token' => $request->input('token')])->first();
 
         $user->password = bcrypt($request->input('password'));
-        $user->remember_token = str_random(32);
+        $user->remember_token = Str::random(32);
         $user->last_login = Carbon::now()->toDateTimeString();
         $user->save();
 
@@ -301,7 +292,7 @@ class UsersController extends Controller
 
         if ($input['password'] !== null) {
             $input['password'] = bcrypt($input['password']);
-            $input['remember_token'] = str_random(32);
+            $input['remember_token'] = Str::random(32);
         } else {
             unset($input['password']);
         }

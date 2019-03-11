@@ -1,11 +1,8 @@
-<?php
-
-namespace Sebastienheyd\Boilerplate;
+<?php namespace Sebastienheyd\Boilerplate;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\Facades\View;
-use Sebastienheyd\Middleware\BoilerplateLocale;
 
 class BoilerplateServiceProvider extends ServiceProvider
 {
@@ -16,15 +13,13 @@ class BoilerplateServiceProvider extends ServiceProvider
     /**
      * Create a new boilerplate service provider instance.
      *
-     * @param  \Illuminate\Foundation\Application $app
-     *
-     * @return void
+     * @param  \Illuminate\Contracts\Foundation\Application $app
      */
     public function __construct($app)
     {
         $this->loader = AliasLoader::getInstance();
         $this->router = app('router');
-        return parent::__construct($app);
+        parent::__construct($app);
     }
 
     /**

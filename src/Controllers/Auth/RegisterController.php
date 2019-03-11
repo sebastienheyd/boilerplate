@@ -1,6 +1,4 @@
-<?php
-
-namespace Sebastienheyd\Boilerplate\Controllers\Auth;
+<?php namespace Sebastienheyd\Boilerplate\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
@@ -31,8 +29,6 @@ class RegisterController extends Controller
 
     /**
      * Create a new controller instance.
-     *
-     * @return void
      */
     public function __construct()
     {

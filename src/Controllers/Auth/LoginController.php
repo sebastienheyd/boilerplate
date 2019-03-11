@@ -1,6 +1,4 @@
-<?php
-
-namespace Sebastienheyd\Boilerplate\Controllers\Auth;
+<?php namespace Sebastienheyd\Boilerplate\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
@@ -31,8 +29,6 @@ class LoginController extends Controller
 
     /**
      * Create a new controller instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -57,11 +53,9 @@ class LoginController extends Controller
     }
 
     /**
-     * Validate the user login request.
+     * @param Request $request
      *
-     * @param  \Illuminate\Http\Request $request
-     *
-     * @return void
+     * @throws \Illuminate\Validation\ValidationException
      */
     protected function validateLogin(Request $request)
     {
@@ -98,7 +92,9 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
-        \Log::info('User logged in : '.$user->name);
+        if (!empty($user->name)) {
+            \Log::info('User logged in : '.$user->name);
+        }
     }
 
     /**

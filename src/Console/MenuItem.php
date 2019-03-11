@@ -3,6 +3,7 @@
 namespace Sebastienheyd\Boilerplate\Console;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Str;
 
 class MenuItem extends Command
 {
@@ -24,8 +25,6 @@ class MenuItem extends Command
 
     /**
      * Create a new command instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -39,7 +38,10 @@ class MenuItem extends Command
      */
     public function handle()
     {
-        $name = ucfirst(camel_case($this->argument('name')));
+        if(is_string($this->argument('name'))) {
+            $name = ucfirst(Str::camel($this->argument('name')));
+        }
+
         $order = intval($this->option('order'));
         $stubFile = $this->option('submenu') ? 'MenuItemSub.stub' : 'MenuItem.stub';
 

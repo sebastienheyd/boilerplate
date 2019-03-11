@@ -5,23 +5,25 @@ use Arcanedev\LogViewer\Contracts\LogViewer as LogViewerContract;
 
 class LogViewerController extends ArcanedevController
 {
-
     /**
-     * Create a new controller instance.
+     * LogViewerController constructor.
      *
-     * @return void
+     * @param LogViewerContract $logViewer
      */
     public function __construct(LogViewerContract $logViewer)
     {
         $this->middleware('ability:admin,logs');
-        return parent::__construct($logViewer);
+        parent::__construct($logViewer);
     }
 
     protected $showRoute = 'logs.show';
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /**
+     * @param string $view
+     * @param array $data
+     * @param array $mergeData
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     protected function view($view, $data = [ ], $mergeData = [ ])
     {

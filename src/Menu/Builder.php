@@ -1,8 +1,15 @@
 <?php namespace Sebastienheyd\Boilerplate\Menu;
 
+use Illuminate\Support\Collection;
 use Lavary\Menu\Builder as LavaryMenuBuilder;
 use Auth;
 
+/**
+ * Class Builder
+ * @package Sebastienheyd\Boilerplate\Menu
+ *
+ * @property Collection $items;
+ */
 class Builder extends LavaryMenuBuilder
 {
     private $root = [];
@@ -10,10 +17,10 @@ class Builder extends LavaryMenuBuilder
     /**
      * Adds an item to the menu
      *
-     * @param  string $title
-     * @param  string|array $acion
+     * @param string $title
+     * @param string $options
      *
-     * @return Lavary\Menu\Item $item
+     * @return \Lavary\Menu\Item|Item
      */
     public function add($title, $options = '')
     {

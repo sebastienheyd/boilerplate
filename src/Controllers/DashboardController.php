@@ -1,6 +1,4 @@
-<?php
-
-namespace Sebastienheyd\Boilerplate\Controllers;
+<?php namespace Sebastienheyd\Boilerplate\Controllers;
 
 use App\Http\Controllers\Controller;
 
@@ -8,8 +6,6 @@ class DashboardController extends Controller
 {
     /**
      * Create a new controller instance.
-     *
-     * @return void
      */
     public function __construct()
     {
