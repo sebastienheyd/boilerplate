@@ -86,7 +86,7 @@ class LoginController extends Controller
      * The user has been authenticated.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \Illuminate\Contracts\Auth\Authenticatable|null $user
+     * @param  mixed $user
      *
      * @return mixed
      */

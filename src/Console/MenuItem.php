@@ -38,9 +38,7 @@ class MenuItem extends Command
      */
     public function handle()
     {
-        if(is_string($this->argument('name'))) {
-            $name = ucfirst(Str::camel($this->argument('name')));
-        }
+        $name = is_string($this->argument('name')) ? ucfirst(Str::camel($this->argument('name'))) : '';
 
         $order = intval($this->option('order'));
         $stubFile = $this->option('submenu') ? 'MenuItemSub.stub' : 'MenuItem.stub';
