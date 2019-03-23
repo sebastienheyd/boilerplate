@@ -1,4 +1,6 @@
-<?php namespace Sebastienheyd\Boilerplate\Menu;
+<?php
+
+namespace Sebastienheyd\Boilerplate\Menu;
 
 use Lavary\Menu\Menu as LavaryMenu;
 use View;

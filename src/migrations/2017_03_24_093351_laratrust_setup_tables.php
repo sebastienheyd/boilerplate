@@ -1,4 +1,6 @@
-<?php // phpcs:disable PSR1.Classes.ClassDeclaration.MissingNamespace
+<?php
+
+// phpcs:disable PSR1.Classes.ClassDeclaration.MissingNamespace
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -9,20 +11,20 @@ class LaratrustSetupTables extends Migration
         [
             'name'         => 'admin',
             'display_name' => 'boilerplate::role.admin.display_name',
-            'description'  => 'boilerplate::role.admin.description'
+            'description'  => 'boilerplate::role.admin.description',
         ],
         [
             'name'         => 'backend_user',
             'display_name' => 'boilerplate::role.backend_user.display_name',
-            'description'  => 'boilerplate::role.backend_user.description'
-        ]
+            'description'  => 'boilerplate::role.backend_user.description',
+        ],
     ];
 
     private $permissions = [
         [
             'name'         => 'backend_access',
             'display_name' => 'boilerplate::permissions.backend_access.display_name',
-            'description'  => 'boilerplate::permissions.backend_access.description'
+            'description'  => 'boilerplate::permissions.backend_access.description',
         ],
         [
             'name'         => 'users_crud',
@@ -32,14 +34,14 @@ class LaratrustSetupTables extends Migration
         [
             'name'         => 'roles_crud',
             'display_name' => 'boilerplate::permissions.roles_crud.display_name',
-            'description'  => 'boilerplate::permissions.roles_crud.description'
-        ]
+            'description'  => 'boilerplate::permissions.roles_crud.description',
+        ],
     ];
 
     /**
      * Run the migrations.
      *
-     * @return  void
+     * @return void
      */
     public function up()
     {
@@ -120,7 +122,7 @@ class LaratrustSetupTables extends Migration
     /**
      * Reverse the migrations.
      *
-     * @return  void
+     * @return void
      */
     public function down()
     {

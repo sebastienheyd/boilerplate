@@ -1,12 +1,13 @@
-<?php namespace Sebastienheyd\Boilerplate\Menu;
+<?php
 
+namespace Sebastienheyd\Boilerplate\Menu;
+
+use Auth;
 use Illuminate\Support\Collection;
 use Lavary\Menu\Builder as LavaryMenuBuilder;
-use Auth;
 
 /**
- * Class Builder
- * @package Sebastienheyd\Boilerplate\Menu
+ * Class Builder.
  *
  * @property Collection $items;
  */
@@ -15,7 +16,7 @@ class Builder extends LavaryMenuBuilder
     private $root = [];
 
     /**
-     * Adds an item to the menu
+     * Adds an item to the menu.
      *
      * @param string $title
      * @param string $options
@@ -57,7 +58,7 @@ class Builder extends LavaryMenuBuilder
     }
 
     /**
-     * Add an item to a existing menu item as a submenu item
+     * Add an item to a existing menu item as a submenu item.
      *
      * @param $id                   Id of the menu item to attach to
      * @param $title                Title of the sub item
@@ -83,6 +84,7 @@ class Builder extends LavaryMenuBuilder
         }
 
         $item->icon('circle-o');
+
         return $item;
     }
 }

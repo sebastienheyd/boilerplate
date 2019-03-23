@@ -1,10 +1,11 @@
-<?php namespace Sebastienheyd\Boilerplate\Models;
+<?php
+
+namespace Sebastienheyd\Boilerplate\Models;
 
 use Laratrust\Models\LaratrustRole;
-use Sebastienheyd\Boilerplate\Models\User;
 
 /**
- * Sebastienheyd\Boilerplate\Models\Role
+ * Sebastienheyd\Boilerplate\Models\Role.
  *
  * @property int $id
  * @property string $name
@@ -13,6 +14,7 @@ use Sebastienheyd\Boilerplate\Models\User;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\Sebastienheyd\Boilerplate\Models\Permission[] $permissions
+ *
  * @method static \Illuminate\Database\Query\Builder|\Sebastienheyd\Boilerplate\Models\Role whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Sebastienheyd\Boilerplate\Models\Role whereDescription($value)
  * @method static \Illuminate\Database\Query\Builder|\Sebastienheyd\Boilerplate\Models\Role whereDisplayName($value)
@@ -23,7 +25,7 @@ use Sebastienheyd\Boilerplate\Models\User;
  */
 class Role extends LaratrustRole
 {
-    protected $fillable = [ 'name', 'display_name', 'description' ];
+    protected $fillable = ['name', 'display_name', 'description'];
 
     public function getDisplayNameAttribute($value)
     {

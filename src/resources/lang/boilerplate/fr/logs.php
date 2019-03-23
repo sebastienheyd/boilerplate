@@ -1,17 +1,18 @@
 <?php
+
 return [
     'vendor'    => 'Log viewer par <a href="https://github.com/ARCANEDEV/LogViewer">Arcanedev</a>',
-    'menu' => [
-        'category'  => "Journaux",
+    'menu'      => [
+        'category'  => 'Journaux',
         'stats'     => 'Statistiques',
-        'reports'   => 'Rapports'
+        'reports'   => 'Rapports',
     ],
     'stats' => [
-        'entries'   => ':count entrées - :percent %'
+        'entries'   => ':count entrées - :percent %',
     ],
     'list' => [
-        'title'     => 'Liste des fichiers',
-        'actions'   => 'Actions',
+        'title'             => 'Liste des fichiers',
+        'actions'           => 'Actions',
         'deletequestion'    => 'Êtes vous sûr de vouloir supprimer ce fichier ?',
     ],
     'show' => [
@@ -31,6 +32,6 @@ return [
         'env'           => 'Env',
         'level'         => 'Niveau',
         'time'          => 'Heure',
-        'header'        => 'En-tête'
-    ]
+        'header'        => 'En-tête',
+    ],
 ];

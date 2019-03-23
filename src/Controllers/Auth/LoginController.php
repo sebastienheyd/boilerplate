@@ -1,4 +1,6 @@
-<?php namespace Sebastienheyd\Boilerplate\Controllers\Auth;
+<?php
+
+namespace Sebastienheyd\Boilerplate\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
@@ -62,14 +64,14 @@ class LoginController extends Controller
         $this->validate($request, [
             $this->username() => 'required|exists:users,'.$this->username().',active,1', 'password' => 'required',
         ], [
-            $this->username().'.exists' => __('auth.failed')
+            $this->username().'.exists' => __('auth.failed'),
         ]);
     }
 
     /**
      * Send the response after the user was authenticated.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -78,6 +80,7 @@ class LoginController extends Controller
         $request->session()->regenerate();
         $this->clearLoginAttempts($request);
         $this->guard()->user()->update(['last_login' => Carbon::now()->toDateTimeString()]);
+
         return $this->authenticated($request, $this->guard()->user())
             ?: redirect()->intended($this->redirectPath());
     }
@@ -85,8 +88,8 @@ class LoginController extends Controller
     /**
      * The user has been authenticated.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  mixed $user
+     * @param \Illuminate\Http\Request $request
+     * @param mixed                    $user
      *
      * @return mixed
      */
@@ -100,7 +103,7 @@ class LoginController extends Controller
     /**
      * Log the user out of the application.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -108,6 +111,7 @@ class LoginController extends Controller
     {
         $this->guard()->logout();
         $request->session()->invalidate();
+
         return redirect('/'.config('boilerplate.app.prefix', ''));
     }
 }

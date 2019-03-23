@@ -1,11 +1,13 @@
-<?php namespace Sebastienheyd\Boilerplate\Menu;
+<?php
+
+namespace Sebastienheyd\Boilerplate\Menu;
 
 use Lavary\Menu\Item as LavaryMenuItem;
 
 class Item extends LavaryMenuItem
 {
     /**
-     * Set the item icon using font-awesome
+     * Set the item icon using font-awesome.
      *
      * @param $icon
      *
@@ -14,11 +16,12 @@ class Item extends LavaryMenuItem
     public function icon($icon)
     {
         $this->prepend(sprintf('<i class="fa fa-%s"></i>', $icon));
+
         return $this;
     }
 
     /**
-     * Set the item order
+     * Set the item order.
      *
      * @param $order
      *
@@ -27,11 +30,12 @@ class Item extends LavaryMenuItem
     public function order($order)
     {
         $this->data('order', $order);
+
         return $this;
     }
 
     /**
-     * Make the item active
+     * Make the item active.
      *
      * @param string|array $routes
      *

@@ -5,5 +5,5 @@ return [
     'providers' => [
         \Sebastienheyd\Boilerplate\Menu\Users::class,
         \Sebastienheyd\Boilerplate\Menu\Logs::class,
-    ]
+    ],
 ];

@@ -1,8 +1,10 @@
-<?php namespace Sebastienheyd\Boilerplate;
+<?php
 
-use Illuminate\Support\ServiceProvider;
+namespace Sebastienheyd\Boilerplate;
+
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\ServiceProvider;
 
 class BoilerplateServiceProvider extends ServiceProvider
 {
@@ -13,7 +15,7 @@ class BoilerplateServiceProvider extends ServiceProvider
     /**
      * Create a new boilerplate service provider instance.
      *
-     * @param  \Illuminate\Contracts\Foundation\Application $app
+     * @param \Illuminate\Contracts\Foundation\Application $app
      */
     public function __construct($app)
     {
@@ -75,7 +77,7 @@ class BoilerplateServiceProvider extends ServiceProvider
             'auth.providers.users.table'      => config('boilerplate.auth.providers.users.table', 'users'),
             'logging.channels.stack.channels' => array_merge(['daily'], config('logging.channels.stack.channels')),
             'log-viewer.route.enabled'        => false,
-            'log-viewer.menu.filter-route'    => 'boilerplate.logs.filter'
+            'log-viewer.menu.filter-route'    => 'boilerplate.logs.filter',
         ]);
 
         $this->router->aliasMiddleware('boilerplatelocale', Middleware\BoilerplateLocale::class);
@@ -87,7 +89,7 @@ class BoilerplateServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register package lavary/laravel-menu
+     * Register package lavary/laravel-menu.
      */
     private function registerMenu()
     {
@@ -96,7 +98,7 @@ class BoilerplateServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register package lavary/laravel-menu
+     * Register package lavary/laravel-menu.
      */
     private function registerLaratrust()
     {

@@ -3,8 +3,8 @@
 namespace Sebastienheyd\Boilerplate\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 
 class NewUser extends Notification
 {
@@ -13,7 +13,7 @@ class NewUser extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed $notifiable
+     * @param mixed $notifiable
      *
      * @return string[]
      */
@@ -25,7 +25,7 @@ class NewUser extends Notification
     /**
      * Get the mail representation of the notification.
      *
-     * @param  mixed $notifiable
+     * @param mixed $notifiable
      *
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
@@ -33,19 +33,19 @@ class NewUser extends Notification
     {
         $currentUser = \Auth::user();
 
-        return (new MailMessage)
+        return (new MailMessage())
             ->markdown('boilerplate::notifications.email')
             ->greeting(__('boilerplate::notifications.greeting', ['firstname' => $notifiable->first_name]))
             ->subject(__('boilerplate::notifications.newuser.subject', ['name' => config('app.name')]))
             ->line(__('boilerplate::notifications.newuser.intro', [
-                'name' => $currentUser->first_name.' '.$currentUser->last_name
+                'name' => $currentUser->first_name.' '.$currentUser->last_name,
             ]))
             ->action(
                 __('boilerplate::notifications.newuser.button'),
                 route('boilerplate.users.firstlogin', $notifiable->remember_token)
             )
             ->salutation(__('boilerplate::notifications.salutation', [
-                'name' => $currentUser->first_name.' '.$currentUser->last_name
+                'name' => $currentUser->first_name.' '.$currentUser->last_name,
             ]))
             ->line(__('boilerplate::notifications.newuser.outro'));
     }
@@ -53,7 +53,7 @@ class NewUser extends Notification
     /**
      * Get the array representation of the notification.
      *
-     * @param  mixed $notifiable
+     * @param mixed $notifiable
      *
      * @return array
      */

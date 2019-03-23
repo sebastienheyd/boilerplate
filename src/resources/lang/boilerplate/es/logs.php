@@ -1,17 +1,18 @@
 <?php
+
 return [
     'vendor'    => 'Visualizador de Log por <a href="https://github.com/ARCANEDEV/LogViewer">Arcanedev</a>',
-    'menu' => [
-        'category'  => "Logs",
+    'menu'      => [
+        'category'  => 'Logs',
         'stats'     => 'Estadísticas',
-        'reports'   => 'Informes'
+        'reports'   => 'Informes',
     ],
     'stats' => [
-        'entries'   => ':count entradas - :percent %'
+        'entries'   => ':count entradas - :percent %',
     ],
     'list' => [
-        'title'     => 'Listado de Logs',
-        'actions'   => 'Actiones',
+        'title'             => 'Listado de Logs',
+        'actions'           => 'Actiones',
         'deletequestion'    => '¿Estas seguro de que deseas eliminar este fichero de log?',
     ],
     'show' => [
@@ -31,6 +32,6 @@ return [
         'env'           => 'Entorno',
         'level'         => 'Nivel',
         'time'          => 'Homa',
-        'header'        => 'Cabecera'
-    ]
+        'header'        => 'Cabecera',
+    ],
 ];

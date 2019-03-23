@@ -14,8 +14,8 @@ return [
     'roles'         => 'Rôle(s)',
     'successadd'    => "L'utilisateur a été correctement ajouté.",
     'successmod'    => "L'utilisateur a été correctement modifié.",
-    'newpassword'   => "Votre mot de passe a bien été enregistré.",
-    'create' => [
+    'newpassword'   => 'Votre mot de passe a bien été enregistré.',
+    'create'        => [
         'title'     => "Ajout d'un utilisateur",
         'help'      => "L'utilisateur recevra un e-mail d'invitation à se connecter qui lui permettra de saisir son nouveau mot de passe.",
     ],
@@ -36,12 +36,12 @@ return [
         'deletesuccess' => "L'utilisateur à été correctement supprimé",
     ],
     'profile' => [
-        'title'         => 'Votre profil',
-        'subscribedsince' => 'Inscrit depuis le :date ( :since )',
-        'avatar'        => 'Image de profil',
-        'delavatar'     => "Supprimer l'image de profil",
+        'title'            => 'Votre profil',
+        'subscribedsince'  => 'Inscrit depuis le :date ( :since )',
+        'avatar'           => 'Image de profil',
+        'delavatar'        => "Supprimer l'image de profil",
         'confirmdelavatar' => "Confirmez vous la suppression de l'image du profil ?",
         'successdelavatar' => "L'image du profil à été supprimée",
-        'successupdate' => "Le profil à été mis à jour"
-    ]
+        'successupdate'    => 'Le profil à été mis à jour',
+    ],
 ];

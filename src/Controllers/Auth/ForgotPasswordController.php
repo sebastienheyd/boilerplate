@@ -1,4 +1,6 @@
-<?php namespace Sebastienheyd\Boilerplate\Controllers\Auth;
+<?php
+
+namespace Sebastienheyd\Boilerplate\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;

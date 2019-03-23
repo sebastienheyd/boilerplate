@@ -9,7 +9,7 @@ return [
     'savebutton'        => 'Save',
     'successadd'        => 'The role has been correctly added',
     'successmod'        => 'The role has been correctly modified',
-    'admin' => [
+    'admin'             => [
         'display_name'  => 'Admin',
         'description'   => 'Admin (all permissions)',
     ],
@@ -21,12 +21,12 @@ return [
         'title'         => 'Add a role',
     ],
     'edit' => [
-        'title'         => "Edit a role",
+        'title'         => 'Edit a role',
     ],
     'list' => [
         'title'         => 'Role list',
         'nbusers'       => 'Nb users',
         'confirmdelete' => 'Do you confirm that you want to delete this role ?',
-        'deletesuccess' => 'The role has been correctly deleted'
-    ]
+        'deletesuccess' => 'The role has been correctly deleted',
+    ],
 ];

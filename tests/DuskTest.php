@@ -2,19 +2,16 @@
 
 namespace Tests\Browser;
 
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Faker\Factory;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Laravel\Dusk\Browser;
+use Tests\DuskTestCase;
 
 /**
- * Class DuskTest
+ * Class DuskTest.
  *
  * @property Faker\Factory $faker
  * @property Browser $browser
- *
- * @package Sebastienheyd\Boilerplate
- *
  */
 class DuskTest extends DuskTestCase
 {
@@ -28,7 +25,6 @@ class DuskTest extends DuskTestCase
         $this->password = $this->faker->password;
 
         $this->browse(function (Browser $browser) {
-
             $this->browser = $browser;
 
             $browser->maximize();
@@ -143,7 +139,7 @@ class DuskTest extends DuskTestCase
             ->assertSee("We can't find a user with that e-mail address.")
             ->type('email', 'test@test.tld')
             ->press('Send reset link')
-            ->assertSee("We have e-mailed your password reset link!")
+            ->assertSee('We have e-mailed your password reset link!')
             ->clickLink('Sign in with an existing user')
             ->assertPathIs('/admin/login');
     }
