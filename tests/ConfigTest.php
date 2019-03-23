@@ -1,4 +1,6 @@
-<?php namespace Sebastienheyd\Boilerplate\Tests;
+<?php
+
+namespace Sebastienheyd\Boilerplate\Tests;
 
 class ConfigTest extends TestCase
 {
@@ -9,7 +11,7 @@ class ConfigTest extends TestCase
         $this->assertEquals([
             'driver' => 'eloquent',
             'model'  => 'Sebastienheyd\Boilerplate\Models\User',
-            'table'  => 'users'
+            'table'  => 'users',
         ], $config);
     }
 
@@ -19,7 +21,6 @@ class ConfigTest extends TestCase
         $this->assertEquals(false, config('log-viewer.route.enabled'));
         $this->assertEquals('boilerplate.logs.filter', config('log-viewer.menu.filter-route'));
     }
-
 
     public function testLaratrustConfig()
     {

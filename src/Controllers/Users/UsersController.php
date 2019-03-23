@@ -1,15 +1,16 @@
-<?php namespace Sebastienheyd\Boilerplate\Controllers\Users;
+<?php
+
+namespace Sebastienheyd\Boilerplate\Controllers\Users;
 
 use App\Http\Controllers\Controller;
+use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Yajra\DataTables\DataTables;
+use Image;
 use Sebastienheyd\Boilerplate\Models\Role;
 use Sebastienheyd\Boilerplate\Models\User;
-use Image;
-use Auth;
-use URL;
+use Yajra\DataTables\DataTables;
 
 class UsersController extends Controller
 {
@@ -26,8 +27,8 @@ class UsersController extends Controller
                 'avatarDelete',
                 'avatarPost',
                 'profile',
-                'profilePost'
-            ]
+                'profilePost',
+            ],
         ]);
     }
 
@@ -42,10 +43,11 @@ class UsersController extends Controller
     }
 
     /**
-     * To display dynamic table by datatable
+     * To display dynamic table by datatable.
+     *
+     * @throws \Exception
      *
      * @return mixed
-     * @throws \Exception
      */
     public function datatable()
     {
@@ -59,6 +61,7 @@ class UsersController extends Controller
                 if ($user->active == 1) {
                     return '<span class="label label-success">'.__('boilerplate::users.active').'</span>';
                 }
+
                 return '<span class="label label-danger">'.__('boilerplate::users.inactive').'</span>';
             })->editColumn('roles', function ($user) {
                 return $user->getRolesList();
@@ -73,6 +76,7 @@ class UsersController extends Controller
                     if ($user->id !== $currentUser->id) {
                         $b .= $this->button(route('boilerplate.users.destroy', $user->id), 'danger destroy', 'trash');
                     }
+
                     return $b;
                 }
 
@@ -93,7 +97,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Get html button for datatable
+     * Get html button for datatable.
      *
      * @param string $route
      * @param string $class
@@ -119,6 +123,7 @@ class UsersController extends Controller
         } else {
             $roles = Role::all();
         }
+
         return view('boilerplate::users.create', ['roles' => $roles]);
     }
 
@@ -127,15 +132,16 @@ class UsersController extends Controller
      *
      * @param Request $request
      *
-     * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Validation\ValidationException
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
         $this->validate($request, [
             'last_name'  => 'required',
             'first_name' => 'required',
-            'email'      => 'required|email|unique:users,email,NULL,id,deleted_at,NULL'
+            'email'      => 'required|email|unique:users,email,NULL,id,deleted_at,NULL',
         ]);
 
         $input = $request->all();
@@ -156,7 +162,7 @@ class UsersController extends Controller
     /**
      * Show the form for editing the specified user.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -179,15 +185,16 @@ class UsersController extends Controller
      * @param Request $request
      * @param $id
      *
-     * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Validation\ValidationException
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
         $this->validate($request, [
             'last_name'  => 'required',
             'first_name' => 'required',
-            'email'      => 'required|email|unique:users,email,'.$id
+            'email'      => 'required|email|unique:users,email,'.$id,
         ]);
 
         $user = User::findOrFail($id);
@@ -203,7 +210,7 @@ class UsersController extends Controller
     /**
      * Remove the specified user from storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -213,7 +220,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Show the form to set a new password on the first login
+     * Show the form to set a new password on the first login.
      *
      * @param $token
      * @param Request $request
@@ -223,6 +230,7 @@ class UsersController extends Controller
     public function firstLogin($token, Request $request)
     {
         $user = User::where(['remember_token' => $token])->firstOrFail();
+
         return view('boilerplate::auth.firstlogin', compact('user', 'token'));
     }
 
@@ -231,15 +239,16 @@ class UsersController extends Controller
      *
      * @param Request $request
      *
-     * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Validation\ValidationException
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function firstLoginPost(Request $request)
     {
         $this->validate($request, [
             'token'                 => 'required',
             'password'              => 'required|min:8',
-            'password_confirmation' => 'required|same:password'
+            'password_confirmation' => 'required|same:password',
         ]);
 
         $user = User::where(['remember_token' => $request->input('token')])->first();
@@ -266,7 +275,7 @@ class UsersController extends Controller
             'avatar'                => 'mimes:jpeg,png|max:10000',
             'last_name'             => 'required',
             'first_name'            => 'required',
-            'password_confirmation' => 'same:password'
+            'password_confirmation' => 'same:password',
         ]);
 
         $avatar = $request->file('avatar');

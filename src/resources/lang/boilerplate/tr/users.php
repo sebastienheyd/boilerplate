@@ -12,15 +12,15 @@ return [
     'firstname'    => 'Adı',
     'email'        => 'E-posta',
     'roles'        => 'Rol',
-    'successadd'   => "Kullanıcı başarıyla eklendi.",
-    'successmod'   => "Kullanıcı başarıyla düzenlendi.",
-    'newpassword'  => "Şifreniz kaydedildi.",
-    'create' => [
-        'title' => "Kullanıcı Ekle",
-        'help'  => "Kullanıcı, yeni şifresini girmesine izin vereceği giriş için e-posta yoluyla bir davetiye alacak",
+    'successadd'   => 'Kullanıcı başarıyla eklendi.',
+    'successmod'   => 'Kullanıcı başarıyla düzenlendi.',
+    'newpassword'  => 'Şifreniz kaydedildi.',
+    'create'       => [
+        'title' => 'Kullanıcı Ekle',
+        'help'  => 'Kullanıcı, yeni şifresini girmesine izin vereceği giriş için e-posta yoluyla bir davetiye alacak',
     ],
     'edit' => [
-        'title' => "Kullanıcı Düzenle",
+        'title' => 'Kullanıcı Düzenle',
     ],
     'list' => [
         'title'         => 'Tüm Kullanıcılar',
@@ -32,8 +32,8 @@ return [
         'roles'         => 'Rol',
         'creationdate'  => 'Kayıt Tarihi',
         'lastconnect'   => 'Son giriş',
-        'confirmdelete' => "Kullanıcıyı silmek istediğinizden emin misiniz?",
-        'deletesuccess' => "Kullanıcı başarıyla silindi",
+        'confirmdelete' => 'Kullanıcıyı silmek istediğinizden emin misiniz?',
+        'deletesuccess' => 'Kullanıcı başarıyla silindi',
     ],
     'profile' => [
         'title'            => 'Kullanıcı Profili',
@@ -42,6 +42,6 @@ return [
         'delavatar'        => 'Profil resmini sil',
         'confirmdelavatar' => 'Profil resmi silinsin mi?',
         'successdelavatar' => 'Profil resmi silindi',
-        'successupdate'    => 'Profil başarıyla güncellendi'
-    ]
+        'successupdate'    => 'Profil başarıyla güncellendi',
+    ],
 ];

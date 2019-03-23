@@ -18,11 +18,11 @@ class DatatablesComposer
             'en'    => 'English',
             'fr'    => 'French',
             'es'    => 'Spanish',
-            'tr'    => 'Turkish'
+            'tr'    => 'Turkish',
         ];
 
         $locale = config('boilerplate.app.locale');
 
-        $view->with('locale', isset($languages[ $locale ]) ? $languages[ $locale ] : 'English');
+        $view->with('locale', isset($languages[$locale]) ? $languages[$locale] : 'English');
     }
 }

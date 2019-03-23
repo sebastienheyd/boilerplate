@@ -1,4 +1,6 @@
-<?php // phpcs:disable PSR1.Classes.ClassDeclaration.MissingNamespace
+<?php
+
+// phpcs:disable PSR1.Classes.ClassDeclaration.MissingNamespace
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -8,7 +10,7 @@ class UsersTableUpdate extends Migration
     /**
      * Run the migrations.
      *
-     * @return  void
+     * @return void
      */
     public function up()
     {
@@ -29,7 +31,7 @@ class UsersTableUpdate extends Migration
     /**
      * Reverse the migrations.
      *
-     * @return  void
+     * @return void
      */
     public function down()
     {

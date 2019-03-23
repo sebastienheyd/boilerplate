@@ -1,7 +1,9 @@
-<?php namespace Sebastienheyd\Boilerplate\Controllers\Users;
+<?php
 
-use Illuminate\Http\Request;
+namespace Sebastienheyd\Boilerplate\Controllers\Users;
+
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Sebastienheyd\Boilerplate\Models\Permission;
 use Sebastienheyd\Boilerplate\Models\Role;
@@ -50,8 +52,9 @@ class RolesController extends Controller
      *
      * @param Request $request
      *
-     * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Validation\ValidationException
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -62,7 +65,7 @@ class RolesController extends Controller
         $this->validate($request, [
             'name'         => 'required|unique:roles,name',
             'display_name' => 'required',
-            'description'  => 'required'
+            'description'  => 'required',
         ]);
 
         $role = Role::create($input);
@@ -75,7 +78,7 @@ class RolesController extends Controller
     /**
      * Show the form for editing the specified role.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -83,14 +86,15 @@ class RolesController extends Controller
     {
         $role = Role::find($id);
         $permissions = Permission::all();
+
         return view('boilerplate::roles.edit', compact('role', 'permissions'));
     }
 
     /**
      * Update the specified role in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
      *
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -98,7 +102,7 @@ class RolesController extends Controller
     {
         $this->validate($request, [
             'display_name' => 'required',
-            'description'  => 'required'
+            'description'  => 'required',
         ]);
 
         $role = Role::find($id);
@@ -112,7 +116,7 @@ class RolesController extends Controller
     /**
      * Remove the specified role from storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */

@@ -31,11 +31,11 @@ return [
         'rememberme'        => 'Se souvenir de moi',
         'signin'            => 'Connexion',
         'forgotpassword'    => "J'ai oublié mon mot de passe",
-        'register'          => 'Créer un nouveau compte'
+        'register'          => 'Créer un nouveau compte',
     ],
     'firstlogin' => [
         'title'             => 'Première connexion',
         'intro'             => 'Ceci est votre première connexion, merci de saisir un mot de passe pour activer votre compte.',
-        'button'            => 'Connexion'
-    ]
+        'button'            => 'Connexion',
+    ],
 ];

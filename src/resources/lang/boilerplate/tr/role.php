@@ -9,7 +9,7 @@ return [
     'savebutton'  => 'Kaydet',
     'successadd'  => 'Rol başarıyla eklendi',
     'successmod'  => 'Rol başarıyla düzenlendi',
-    'admin' => [
+    'admin'       => [
         'display_name' => 'Yönetici',
         'description'  => 'Yönetici (tüm izinler)',
     ],
@@ -21,12 +21,12 @@ return [
         'title' => 'Bir rol ekle',
     ],
     'edit' => [
-        'title' => "Bir rolü düzenle",
+        'title' => 'Bir rolü düzenle',
     ],
     'list' => [
         'title'         => 'Rol listesi',
         'nbusers'       => 'Kullanıcı Sayısı',
         'confirmdelete' => 'Bu rolü silmek istediğinizden emin misiniz?',
-        'deletesuccess' => 'Rol başarıyla silindi'
-    ]
+        'deletesuccess' => 'Rol başarıyla silindi',
+    ],
 ];

@@ -1,9 +1,11 @@
-<?php namespace Sebastienheyd\Boilerplate\Controllers\Auth;
+<?php
+
+namespace Sebastienheyd\Boilerplate\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
@@ -47,16 +49,17 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param array $data
+     *
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'last_name' => 'required|max:255',
+            'last_name'  => 'required|max:255',
             'first_name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users,email,NULL,id,deleted_at,NULL',
-            'password' => 'required|min:6|confirmed',
+            'email'      => 'required|email|max:255|unique:users,email,NULL,id,deleted_at,NULL',
+            'password'   => 'required|min:6|confirmed',
         ]);
     }
 
@@ -71,13 +74,14 @@ class RegisterController extends Controller
             abort('404');
         }
 
-        return view('boilerplate::auth.register', [ 'firstUser' => $this->firstUser ]);
+        return view('boilerplate::auth.register', ['firstUser' => $this->firstUser]);
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param array $data
+     *
      * @return User
      */
     protected function create(array $data)
@@ -89,13 +93,13 @@ class RegisterController extends Controller
         $userModel = config('auth.providers.users.model');
         $roleModel = config('laratrust.models.role');
 
-        $user = $userModel::withTrashed()->updateOrCreate([ 'email' => $data[ 'email' ] ], [
-            'active' => true,
-            'first_name' => $data[ 'first_name' ],
-            'last_name' => $data[ 'last_name' ],
-            'email' => $data[ 'email' ],
-            'password' => bcrypt($data[ 'password' ]),
-            'last_login' => Carbon::now()->toDateTimeString()
+        $user = $userModel::withTrashed()->updateOrCreate(['email' => $data['email']], [
+            'active'     => true,
+            'first_name' => $data['first_name'],
+            'last_name'  => $data['last_name'],
+            'email'      => $data['email'],
+            'password'   => bcrypt($data['password']),
+            'last_login' => Carbon::now()->toDateTimeString(),
         ]);
 
         if ($this->firstUser) {
@@ -104,7 +108,7 @@ class RegisterController extends Controller
         } else {
             $user->restore();
             $role = $roleModel::whereName(config('boilerplate.auth.register_role'))->first();
-            $user->roles()->sync([ $role->id ]);
+            $user->roles()->sync([$role->id]);
         }
 
         return $user;

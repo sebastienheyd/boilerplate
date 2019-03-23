@@ -1,13 +1,14 @@
 <?php
+
 return [
     'vendor' => '<a href="https://github.com/ARCANEDEV/LogViewer">Arcanedev</a> tarafından Günlük görüntüleyici',
-    'menu' => [
-        'category' => "Günlükler",
+    'menu'   => [
+        'category' => 'Günlükler',
         'stats'    => 'İstatistikler',
-        'reports'  => 'Raporlar'
+        'reports'  => 'Raporlar',
     ],
     'stats' => [
-        'entries' => ':count kayıt - % :percent'
+        'entries' => ':count kayıt - % :percent',
     ],
     'list' => [
         'title'          => 'Günlük listesi',
@@ -31,6 +32,6 @@ return [
         'env'        => 'Ortam',
         'level'      => 'Seviye',
         'time'       => 'Tarih',
-        'header'     => 'Başlık'
-    ]
+        'header'     => 'Başlık',
+    ],
 ];

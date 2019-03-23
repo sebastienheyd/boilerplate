@@ -9,7 +9,7 @@ return [
     'savebutton'        => 'Enregistrer',
     'successadd'        => 'Le rôle a été correctement ajouté',
     'successmod'        => 'Le role a été correctement modifié',
-    'admin' => [
+    'admin'             => [
         'display_name'  => 'Administrateur',
         'description'   => 'Administrateur (toutes les permissions)',
     ],
@@ -27,6 +27,6 @@ return [
         'title'         => 'Liste des rôles',
         'nbusers'       => 'Nb utilisateurs',
         'confirmdelete' => 'Confirmez vous la suppression du rôle ?',
-        'deletesuccess' => 'Le rôle a été correctement supprimé'
-    ]
+        'deletesuccess' => 'Le rôle a été correctement supprimé',
+    ],
 ];

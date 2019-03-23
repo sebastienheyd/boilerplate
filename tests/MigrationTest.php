@@ -1,11 +1,13 @@
-<?php namespace Sebastienheyd\Boilerplate\Tests;
+<?php
+
+namespace Sebastienheyd\Boilerplate\Tests;
 
 class MigrationTest extends TestCase
 {
     /**
      * Define environment setup.
      *
-     * @param  \Illuminate\Foundation\Application $app
+     * @param \Illuminate\Foundation\Application $app
      *
      * @return void
      */

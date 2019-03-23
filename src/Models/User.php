@@ -1,17 +1,19 @@
-<?php namespace Sebastienheyd\Boilerplate\Models;
+<?php
+
+namespace Sebastienheyd\Boilerplate\Models;
 
 // phpcs:disable Generic.Files.LineLength
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laratrust\Traits\LaratrustUserTrait;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Sebastienheyd\Boilerplate\Notifications\ResetPassword as ResetPasswordNotification;
 use Sebastienheyd\Boilerplate\Notifications\NewUser as NewUserNotification;
+use Sebastienheyd\Boilerplate\Notifications\ResetPassword as ResetPasswordNotification;
 
 /**
- * Sebastienheyd\Boilerplate\Models\User
+ * Sebastienheyd\Boilerplate\Models\User.
  *
  * @property int $id
  * @property bool $active
@@ -30,6 +32,7 @@ use Sebastienheyd\Boilerplate\Notifications\NewUser as NewUserNotification;
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read \Illuminate\Database\Eloquent\Collection|\Sebastienheyd\Boilerplate\Models\Permission[] $permissions
  * @property-read \Illuminate\Database\Eloquent\Collection|\Sebastienheyd\Boilerplate\Models\Role[] $roles
+ *
  * @method static \Illuminate\Database\Query\Builder|\Sebastienheyd\Boilerplate\Models\User whereActive($value)
  * @method static \Illuminate\Database\Query\Builder|\Sebastienheyd\Boilerplate\Models\User whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Sebastienheyd\Boilerplate\Models\User whereDeletedAt($value)
@@ -56,7 +59,7 @@ class User extends Authenticatable
     /**
      * Send the password reset notification.
      *
-     * @param  string $token
+     * @param string $token
      *
      * @return void
      */
@@ -66,7 +69,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Send notification when a new user is created
+     * Send notification when a new user is created.
      *
      * @param string $token
      */
@@ -76,7 +79,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Return last name in uppercase by default
+     * Return last name in uppercase by default.
      *
      * @param $value
      *
@@ -88,7 +91,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Return first name with first char of every word in uppercase
+     * Return first name with first char of every word in uppercase.
      *
      * @param $value
      *
@@ -100,7 +103,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Return a concatenation of first name and last_name if field name does not exists
+     * Return a concatenation of first name and last_name if field name does not exists.
      *
      * @param $value
      *
@@ -116,7 +119,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Return last login date formatted
+     * Return last login date formatted.
      *
      * @param string $format
      * @param string $default
@@ -133,7 +136,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Return role list as a string
+     * Return role list as a string.
      *
      * @return string
      */
@@ -146,11 +149,12 @@ class User extends Authenticatable
         if (empty($res)) {
             return '-';
         }
-        return join(', ', $res);
+
+        return implode(', ', $res);
     }
 
     /**
-     * Check if current user has an avatar
+     * Check if current user has an avatar.
      *
      * @return string|false
      */
@@ -160,7 +164,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Return current user avatar uri
+     * Return current user avatar uri.
      *
      * @return string
      */
@@ -168,8 +172,10 @@ class User extends Authenticatable
     {
         if (is_file($this->avatar_path)) {
             $ts = filemtime($this->avatar_path);
+
             return asset('images/avatars/'.md5($this->id.$this->email).'.jpg?t='.$ts);
         }
-        return asset("/assets/vendor/boilerplate/images/default-user.png");
+
+        return asset('/assets/vendor/boilerplate/images/default-user.png');
     }
 }

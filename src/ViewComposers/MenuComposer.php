@@ -27,19 +27,19 @@ class MenuComposer
             $providers = $this->getProviders();
 
             foreach ($providers as $provider) {
-                $class = new $provider;
+                $class = new $provider();
                 $class->make($menu);
             }
         });
 
         $view->with('menu', $menu->sortBy('order')->asUl([
             'class'       => 'sidebar-menu',
-            'data-widget' => "tree"
+            'data-widget' => 'tree',
         ], ['class' => 'treeview-menu']));
     }
 
     /**
-     * Get menu items providers
+     * Get menu items providers.
      *
      * @return array
      */
