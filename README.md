@@ -1,6 +1,8 @@
 # Laravel/AdminLTE Boilerplate
 
 ![Package](https://img.shields.io/badge/Package-sebastienheyd%2Fboilerplate-lightgrey.svg)
+![Build](https://travis-ci.org/sebastienheyd/boilerplate.svg?branch=master)
+[![StyleCI](https://github.styleci.io/repos/86598046/shield?branch=master)](https://github.styleci.io/repos/86598046)
 ![Scrutinizer](https://scrutinizer-ci.com/g/sebastienheyd/boilerplate/badges/quality-score.png?b=master)
 ![Laravel](https://img.shields.io/badge/Laravel-5.8.x-green.svg)
 ![Nb downloads](https://img.shields.io/packagist/dt/sebastienheyd/boilerplate.svg)
