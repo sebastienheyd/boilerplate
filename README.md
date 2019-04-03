@@ -11,9 +11,9 @@
 This package is to be served as a basis for a web application. It allows you to access to an administration panel to
 manage users, roles and permissions.
 
-For other Laravel versions : 
-[5.7](https://github.com/sebastienheyd/boilerplate/blob/5.7/README.md) / 
-[5.6](https://github.com/sebastienheyd/boilerplate/blob/5.6/README.md) / 
+For other Laravel versions :
+[5.7](https://github.com/sebastienheyd/boilerplate/blob/5.7/README.md) /
+[5.6](https://github.com/sebastienheyd/boilerplate/blob/5.6/README.md) /
 [5.5](https://github.com/sebastienheyd/boilerplate/blob/5.5/README.md) /
 [5.4](https://github.com/sebastienheyd/boilerplate/blob/5.4/README.md)
 
@@ -76,7 +76,7 @@ default config.
 
 ### Dashboard
 
-You can define your own controller to display the dashboard. To do this, set the `dashboard` parameter in the 
+You can define your own controller to display the dashboard. To do this, set the `dashboard` parameter in the
 configuration file `config/boilerplate/menu.php`.
 
 ### Adding items to the menu
@@ -97,7 +97,7 @@ php artisan boilerplate:menuitem {name} {-s} {-o=100}
 
 Once generated, the files can be edited to customize the item, it's quite easy to understand.
 
-You can also add a provider by adding its class name to the list of providers in the configuration file 
+You can also add a provider by adding its class name to the list of providers in the configuration file
 `config/boilerplate/menu.php`. This can be useful if you are developing a package that is based on boilerplate.
 
 For more information, see the documentation of the following packages:
@@ -160,7 +160,7 @@ You can see examples on the default dashboard.
 
 ### Language
 
-By default the language used by boilerplate is the application language declared into `config/app.php` (locale). You can 
+By default the language used by boilerplate is the application language declared into `config/app.php` (locale). You can
 define another language only for the back-office by setting `locale` parameter in `config/boilerplate/app.php`.  
 Supported language are English, French, Spanish and Turkish.
 
@@ -168,10 +168,10 @@ When you run `php artisan vendor:publish --provider="Sebastienheyd\Boilerplate\B
 language files for form validation are copied for supported languages. Thanks to
 [caouecs/Laravel-lang](https://github.com/caouecs/Laravel-lang) package !
 
-You can translate into a language not yet supported by copying the 
-[`src/resources/lang/boilerplate`](src/resources/lang/boilerplate) folder content into 
-`resources/lang/vendor/boilerplate` folder. After that, copy or rename one of the language folders in the new language 
-folder to create. All you have to do is translate. If you want to share the language you have added, don't hesitate to 
+You can translate into a language not yet supported by copying the
+[`src/resources/lang/boilerplate`](src/resources/lang/boilerplate) folder content into
+`resources/lang/vendor/boilerplate` folder. After that, copy or rename one of the language folders in the new language
+folder to create. All you have to do is translate. If you want to share the language you have added, don't hesitate to
 make a pull request.
 
 ### Routes
@@ -191,9 +191,9 @@ every time the package is updated, you may use the ```--force``` flag :
 php artisan vendor:publish --provider="Sebastienheyd\Boilerplate\BoilerplateServiceProvider" --tag=public --force
 ```
 
-To auto update assets each time package is updated, you can add this command to `post-autoload-dump` into the 
+To auto update assets each time package is updated, you can add this command to `post-autoload-dump` into the
 file `composer.json` at the root of your project.
- 
+
 
 ```json
 {
@@ -217,7 +217,7 @@ If needed, you can force update for these tags : ```config```, ```lang```, ```pu
 
 This package is delivered with a `Makefile` used to launch checks for the respect of coding standards and the unit tests
 
-Just call `make` to see the list of commands. 
+Just call `make` to see the list of commands.
 
 ### Laravel Dusk functionnal tests
 
@@ -235,12 +235,12 @@ php artisan dusk vendor/sebastienheyd/boilerplate/tests/DuskTest.php
 
 ### Dates localization
 
-Since Laravel 5.8, this package use [Carbon](https://carbon.nesbot.com/docs/#api-localization) instead of [Jenssegers/Date](https://github.com/jenssegers/date) to translate dates. 
+Since Laravel 5.8, this package use [Carbon 2](https://carbon.nesbot.com/docs/#api-localization) instead of [Jenssegers/Date](https://github.com/jenssegers/date) to translate dates.
 
-Date format now use the format of momentjs. To translate your dates, you must now use the Carbon class method `isoFormat` 
+Date format now use the format of momentjs. To translate your dates, you must now use the Carbon 2 class method `isoFormat`
 instead of `format`
 
-See [Carbon documentation](https://carbon.nesbot.com/docs/#api-localization)
+See [Carbon 2 documentation](https://carbon.nesbot.com/docs/#api-localization)
 
 ### Migration error
 
