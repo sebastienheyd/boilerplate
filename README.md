@@ -7,6 +7,7 @@
 ![Laravel](https://img.shields.io/badge/Laravel-5.8.x-green.svg)
 ![Nb downloads](https://img.shields.io/packagist/dt/sebastienheyd/boilerplate.svg)
 ![MIT License](https://img.shields.io/github/license/sebastienheyd/boilerplate.svg)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fsebastienheyd%2Fboilerplate.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fsebastienheyd%2Fboilerplate?ref=badge_shield)
 
 This package is to be served as a basis for a web application. It allows you to access to an administration panel to
 manage users, roles and permissions.
@@ -274,3 +275,6 @@ public function boot()
 ## License
 
 This package is free software distributed under the terms of the [MIT license](LICENSE.md).
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fsebastienheyd%2Fboilerplate.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fsebastienheyd%2Fboilerplate?ref=badge_large)
