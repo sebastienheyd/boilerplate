@@ -81,7 +81,7 @@ class BoilerplateServiceProvider extends ServiceProvider
 
         if (!in_array('daily', config('logging.channels.stack.channels'))) {
             config([
-                'logging.channels.stack.channels' => array_merge(['daily'], config('logging.channels.stack.channels'))
+                'logging.channels.stack.channels' => array_merge(['daily'], config('logging.channels.stack.channels')),
             ]);
         }
 
