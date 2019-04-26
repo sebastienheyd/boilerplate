@@ -75,10 +75,13 @@ class BoilerplateServiceProvider extends ServiceProvider
             'auth.providers.users.driver'     => config('boilerplate.auth.providers.users.driver', 'eloquent'),
             'auth.providers.users.model'      => config('boilerplate.auth.providers.users.model', 'App\User'),
             'auth.providers.users.table'      => config('boilerplate.auth.providers.users.table', 'users'),
-            'logging.channels.stack.channels' => array_merge(['daily'], config('logging.channels.stack.channels')),
             'log-viewer.route.enabled'        => false,
             'log-viewer.menu.filter-route'    => 'boilerplate.logs.filter',
         ]);
+        
+        if(!in_array('daily', config('logging.channels.stack.channels'))) {
+            config(['logging.channels.stack.channels' => array_merge(['daily'], config('logging.channels.stack.channels'))]);
+        }
 
         $this->router->aliasMiddleware('boilerplatelocale', Middleware\BoilerplateLocale::class);
         $this->router->aliasMiddleware('boilerplateauth', Middleware\BoilerplateAuthenticate::class);
