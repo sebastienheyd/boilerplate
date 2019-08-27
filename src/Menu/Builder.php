@@ -4,7 +4,6 @@ namespace Sebastienheyd\Boilerplate\Menu;
 
 use Auth;
 use Illuminate\Support\Collection;
-use Laratrust\Laratrust;
 use Lavary\Menu\Builder as LavaryMenuBuilder;
 
 /**
