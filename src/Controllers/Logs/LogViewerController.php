@@ -18,7 +18,7 @@ class LogViewerController extends ArcanedevController
         parent::__construct($logViewer);
     }
 
-    protected $showRoute = 'logs.show';
+    protected $showRoute = 'boilerplate.logs.show';
 
     /**
      * @param string $view
