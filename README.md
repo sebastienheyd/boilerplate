@@ -4,7 +4,7 @@
 [![Build Status](https://scrutinizer-ci.com/g/sebastienheyd/boilerplate/badges/build.png?b=master)](https://scrutinizer-ci.com/g/sebastienheyd/boilerplate/build-status/master)
 [![StyleCI](https://github.styleci.io/repos/86598046/shield?branch=master)](https://github.styleci.io/repos/86598046)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/sebastienheyd/boilerplate/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/sebastienheyd/boilerplate/?branch=master)
-![Laravel](https://img.shields.io/badge/Laravel-5.8.x-green.svg)
+![Laravel](https://img.shields.io/badge/Laravel-6.x-green.svg)
 ![Nb downloads](https://img.shields.io/packagist/dt/sebastienheyd/boilerplate.svg)
 ![MIT License](https://img.shields.io/github/license/sebastienheyd/boilerplate.svg)
 
@@ -12,6 +12,7 @@ This package is to be served as a basis for a web application. It allows you to 
 manage users, roles and permissions.
 
 For other Laravel versions :
+[5.8](https://github.com/sebastienheyd/boilerplate/blob/5.8/README.md) /
 [5.7](https://github.com/sebastienheyd/boilerplate/blob/5.7/README.md) /
 [5.6](https://github.com/sebastienheyd/boilerplate/blob/5.6/README.md) /
 [5.5](https://github.com/sebastienheyd/boilerplate/blob/5.5/README.md) /
