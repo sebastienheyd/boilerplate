@@ -11,7 +11,7 @@
 This package is to be served as a basis for a web application. It allows you to access to an administration panel to
 manage users, roles and permissions.
 
-For other Laravel versions :
+For older Laravel versions :
 [5.8](https://github.com/sebastienheyd/boilerplate/blob/5.8/README.md) /
 [5.7](https://github.com/sebastienheyd/boilerplate/blob/5.7/README.md) /
 [5.6](https://github.com/sebastienheyd/boilerplate/blob/5.6/README.md) /
@@ -20,8 +20,8 @@ For other Laravel versions :
 
 ## Features
 
-* Backend theme [Admin LTE](https://almsaeedstudio.com/)
-* Css framework [Bootstrap 3](http://getbootstrap.com/)
+* Backend theme [AdminLTE](https://almsaeedstudio.com/)
+* Css framework [Bootstrap](http://getbootstrap.com/)
 * Additional icons by [Font Awesome](http://fontawesome.io/)
 * Role-based permissions provided by [santigarcor/laratrust](https://github.com/santigarcor/laratrust)
 * Forms & Html helpers by [laravelcollective/html](https://github.com/laravelcollective/html)
@@ -59,8 +59,7 @@ If you want to quickly test your Laravel application.
 php artisan serve
 ```
 
-Now you can point your browser to [http://localhost:8000/](http://localhost:8000/) you will see buttons on the top right
-of the Laravel's default page. Click on Login or Register to access the administration panel.
+Now you can point your browser to [http://localhost:8000/admin](http://localhost:8000/admin)
 
 ## Configuration
 
@@ -110,16 +109,16 @@ For more information, see the documentation of the following packages:
 
 By default, only jQuery, bootstrap 3, Font Awesome and AdminLTE scripts and css are loaded.
 
-To load and use plugins like datatable, datepicker, icheck, ... you can use "loaders". These are blade templates
+To load and use plugins like datatables, datepicker, icheck, ... you can use "loaders". These are blade templates
 prepared to add the loading of scripts and styles for a plugin.
 
 For example, you want to use a datepicker on a text field :
 
 ```blade
 @include('boilerplate::load.datepicker')
+
 @push('js')
     <script>
-        $('.daterangepicker').daterangepicker();
         $('.datepicker').datepicker();
     </script>
 @endpush
@@ -130,11 +129,14 @@ you can push your scripts on the `js` stack (or styles on the `css` stack).
 
 Available loaders are :
 
+* [`boilerplate::load.tinymce`](src/resources/views/load/tinymce.blade.php) :
+[TinyMCE](https://www.tiny.cloud) - [Example](src/resources/views/plugins/demo/tinymce.blade.php)
 * [`boilerplate::load.datatables`](src/resources/views/load/datatables.blade.php) :
 [Datatables](https://www.datatables.net/) -
 [Example](src/resources/views/plugins/demo/datatables.blade.php)
 * [`boilerplate::load.datepicker`](src/resources/views/load/datepicker.blade.php) :
-[Datepicker](https://github.com/uxsolutions/bootstrap-datepicker) &
+[DatePicker](https://github.com/uxsolutions/bootstrap-datepicker) /
+[DateTimePicker](http://eonasdan.github.io/bootstrap-datetimepicker/) /
 [DateRangePicker](https://github.com/dangrossman/bootstrap-daterangepicker) -
 [Example](src/resources/views/plugins/demo/datepicker.blade.php)
 * [`boilerplate::load.icheck`](src/resources/views/load/icheck.blade.php) :

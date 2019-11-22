@@ -79,8 +79,7 @@
             </div>
         </div>
     </div>
-    <div class="box-footer">
-        Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples and information about
-        the plugin.
+    <div class="box-footer small text-muted text-right">
+        <a href="https://select2.github.io/">select2</a>
     </div>
 </div>

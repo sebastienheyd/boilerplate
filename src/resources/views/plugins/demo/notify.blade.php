@@ -18,4 +18,7 @@
         <p><button class="btn btn-success" onclick="growl('Example', 'success')">growl success</button></p>
         <pre class="prettyprint">growl('Example', 'success')</pre>
     </div>
+    <div class="box-footer small text-muted text-right">
+        <a href="https://github.com/mouse0270/bootstrap-notify">notify</a>
+    </div>
 </div>

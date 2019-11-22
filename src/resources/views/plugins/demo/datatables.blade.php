@@ -63,4 +63,7 @@
             </tbody>
         </table>
     </div>
+    <div class="box-footer small text-muted text-right">
+        <a href="https://datatables.net/manual/index">datatables</a>
+    </div>
 </div>

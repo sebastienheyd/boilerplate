@@ -69,6 +69,8 @@
                 </tr>
             </tbody>
         </table>
-
+    </div>
+    <div class="box-footer small text-muted text-right">
+        <a href="http://icheck.fronteed.com/" target="_blank">iCheck</a>
     </div>
 </div>

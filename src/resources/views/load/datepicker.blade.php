@@ -11,6 +11,7 @@
         <script>
             $.fn.datepicker.defaults.language = '{{ config('boilerplate.app.locale') }}';
             $.fn.datepicker.defaults.autoclose = true;
+            $.fn.datetimepicker.defaults.locale = '{{ config('boilerplate.app.locale') }}';
         </script>
     @endpush
     @php(define('LOAD_DATEPICKER', true))
