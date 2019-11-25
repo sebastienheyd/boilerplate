@@ -5,9 +5,12 @@
             tinymce.defaultSettings = {
                 plugins: 'code autoresize noneditable fullscreen codemirror',
                 codemirror: {
-                    path: '{{ asset('assets/vendor/boilerplate/js/codemirror') }}'
+                    config: {
+                        theme: 'storm'
+                    }
                 },
-                forced_root_block: "",
+                remove_linebreaks : false,
+                forced_root_block: false,
                 verify_html:false,
                 branding: false,
                 browser_spellcheck: true,

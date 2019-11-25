@@ -2,6 +2,7 @@
     "/boilerplate.min.css": "/boilerplate.min.css?id=d1b2fad051af82e2b665",
     "/js/icheck/icheck.min.css": "/js/icheck/icheck.min.css?id=ca8d2c7c37016eec0a3c",
     "/js/fileinput/bootstrap-fileinput.min.css": "/js/fileinput/bootstrap-fileinput.min.css?id=c07f16dea7976bc26383",
+    "/js/codemirror/theme/storm.css": "/js/codemirror/theme/storm.css?id=4c2bad61f9fd6e2737d7",
     "/boilerplate.min.js": "/boilerplate.min.js?id=aac36811afa15c28890b",
     "/images/default-user.png": "/images/default-user.png?id=7166630dfd6db16b4582",
     "/js/moment/moment-with-locales.min.js": "/js/moment/moment-with-locales.min.js?id=1b1c80b617bfcaf8c076",
@@ -13,6 +14,8 @@
     "/js/datepicker/bootstrap-datepicker.min.js": "/js/datepicker/bootstrap-datepicker.min.js?id=6e8b06196856175b237e",
     "/js/fileinput/bootstrap-fileinput.min.js": "/js/fileinput/bootstrap-fileinput.min.js?id=909569aee2fdf8470c2c",
     "/js/codemirror/codemirror.min.js": "/js/codemirror/codemirror.min.js?id=82b9491f7e4ecd8ce578",
+    "/js/codemirror/jquery.codemirror.min.js": "/js/codemirror/jquery.codemirror.min.js?id=3e1c22d6559f21b92b71",
     "/js/codemirror/codemirror.min.css": "/js/codemirror/codemirror.min.css?id=fc217d502b05f6561635",
+    "/js/tinymce/plugins/codemirror/plugin.min.js": "/js/tinymce/plugins/codemirror/plugin.min.js?id=0f1360d13af988f05c77",
     "/js/tinymce/tinymce.min.js": "/js/tinymce/tinymce.min.js?id=6ab314fdc44500b95c52"
 }

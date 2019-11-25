@@ -89,22 +89,25 @@ mix.scripts([
 mix.copy('node_modules/bootstrap-fileinput/js/locales', 'public/js/fileinput/locales', false);
 
 // ======= Code Mirror
-mix.scripts([
-    'node_modules/codemirror/lib/codemirror.js'
-], 'public/js/codemirror/codemirror.min.js').version();
+mix.scripts(['node_modules/codemirror/lib/codemirror.js'], 'public/js/codemirror/codemirror.min.js').version();
+mix.scripts(['resources/assets/js/vendor/codemirror/jquery.codemirror.js'], 'public/js/codemirror/jquery.codemirror.min.js').version();
 
 mix.copy('node_modules/codemirror/addon', 'public/js/codemirror/addon');
 mix.copy('node_modules/codemirror/mode', 'public/js/codemirror/mode');
 mix.copy('node_modules/codemirror/theme', 'public/js/codemirror/theme');
 
+mix.sass('resources/assets/js/vendor/codemirror/theme/storm.scss', 'public/js/codemirror/theme/storm.css');
+
 mix.styles(
     'node_modules/codemirror/lib/codemirror.css',
-    'public/js//codemirror/codemirror.min.css'
+    'public/js/codemirror/codemirror.min.css'
 ).version();
 
 // ============== TinyMCE ==============
 
 mix.copy('node_modules/tinymce/plugins', 'public/js/tinymce/plugins');
+mix.scripts('resources/assets/js/vendor/tinymce/plugins/codemirror/plugin.js',
+    'public/js/tinymce/plugins/codemirror/plugin.min.js')
 mix.copy('resources/assets/js/vendor/tinymce/plugins', 'public/js/tinymce/plugins');
 mix.copy('node_modules/tinymce/skins', 'public/js/tinymce/skins');
 mix.copy('node_modules/tinymce/themes', 'public/js/tinymce/themes');
