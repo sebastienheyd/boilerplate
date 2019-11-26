@@ -33,10 +33,15 @@ tinymce.PluginManager.add('codemirror', function (editor, url) {
         }
 
         config.onAction = function (dialogApi, actionData) {
-
             if (actionData.name === 'codemirrorOk') {
                 var doc = document.querySelectorAll('.tox-dialog__body-iframe iframe')[0]
                 doc.contentWindow.submit()
+
+                // Callback
+                if(typeof editor.settings.code_change_callback === 'function') {
+                    editor.settings.code_change_callback(editor);
+                }
+
                 win.close()
             }
         }

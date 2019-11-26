@@ -1,6 +1,6 @@
 {
     "name": "sebastienheyd/boilerplate",
-    "description": "Laravel ≥5.4 Boilerplate based on AdminLTE with user management, roles, permissions, logs viewer, ...",
+    "description": "Laravel Boilerplate based on AdminLTE with user management, roles, permissions, logs viewer, ...",
     "keywords": ["laravel", "boilerplate", "adminlte", "laratrust", "laravelcollective", "active", "admin"],
     "type": "library",
     "license": "MIT",
