@@ -50,6 +50,7 @@ class BoilerplateServiceProvider extends ServiceProvider
         // For datatables locales
         View::composer('boilerplate::load.datatables', 'Sebastienheyd\Boilerplate\ViewComposers\DatatablesComposer');
 
+        // Add console commands
         if ($this->app->runningInConsole()) {
             $this->commands([
                 Console\MenuItem::class,
@@ -100,6 +101,16 @@ class BoilerplateServiceProvider extends ServiceProvider
     {
         $this->app->register(\Lavary\Menu\ServiceProvider::class);
         $this->loader->alias('Menu', \Lavary\Menu\Facade::class);
+
+        // Menu items repository singleton
+        $this->app->singleton('boilerplate.menu.items', function () {
+            return new Menu\MenuItemsRepository();
+        });
+
+        app('boilerplate.menu.items')->registerMenuItem([
+            Menu\Users::class,
+            Menu\Logs::class,
+        ]);
     }
 
     /**

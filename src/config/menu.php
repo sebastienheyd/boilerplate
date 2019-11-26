@@ -1,9 +1,6 @@
 <?php
 
 return [
-    'dashboard' => \Sebastienheyd\Boilerplate\Controllers\DashboardController::class,
-    'providers' => [
-        \Sebastienheyd\Boilerplate\Menu\Users::class,
-        \Sebastienheyd\Boilerplate\Menu\Logs::class,
-    ],
+    'dashboard' => \Sebastienheyd\Boilerplate\Controllers\DashboardController::class, // Dashboard controller to use
+    'providers' => [],                                                                // Additional menu items providers
 ];

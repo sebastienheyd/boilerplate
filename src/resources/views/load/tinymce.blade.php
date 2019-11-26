@@ -13,6 +13,7 @@
                 forced_root_block: false,
                 verify_html:false,
                 branding: false,
+                statusbar: false,
                 browser_spellcheck: true,
                 encoding: 'UTF-8',
                 @if(config('boilerplate.app.locale') !== 'en')

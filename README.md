@@ -76,8 +76,7 @@ default config.
 
 ### Dashboard
 
-You can define your own controller to display the dashboard. To do this, set the `dashboard` parameter in the
-configuration file `config/boilerplate/menu.php`.
+You can define your own controller to display the dashboard by setting the `dashboard` parameter in `config/boilerplate/menu.php`.
 
 ### Adding items to the menu
 
@@ -95,10 +94,24 @@ php artisan boilerplate:menuitem {name} {-s} {-o=100}
 | -s --submenu | Menu item must have sub item(s) |
 | -o --order | Menu item order in the backend menu |
 
-Once generated, the files can be edited to customize the item, it's quite easy to understand.
+Once generated, the files can be edited to customize the item.
 
-You can also add a provider by adding its class name to the list of providers in the configuration file
-`config/boilerplate/menu.php`. This can be useful if you are developing a package that is based on boilerplate.
+You can also add your own providers by adding their classnames to the array of providers in the configuration file
+`config/boilerplate/menu.php`. This can be useful if you don't want to use the default directory `app/Menu` in your 
+application.
+
+For package developers, menu items providers can be added by using the `boilerplate.menu.items` singleton in your 
+package service provider. Example : 
+
+```php
+public function register()
+{
+    app('boilerplate.menu.items')->registerMenuItem([
+        Users::class,
+        Logs::class,
+    ]);
+}
+```
 
 For more information, see the documentation of the following packages:
 
@@ -129,26 +142,16 @@ you can push your scripts on the `js` stack (or styles on the `css` stack).
 
 Available loaders are :
 
-* [`boilerplate::load.tinymce`](src/resources/views/load/tinymce.blade.php) :
-[TinyMCE](https://www.tiny.cloud) - [Example](src/resources/views/plugins/demo/tinymce.blade.php)
-* [`boilerplate::load.datatables`](src/resources/views/load/datatables.blade.php) :
-[Datatables](https://www.datatables.net/) -
-[Example](src/resources/views/plugins/demo/datatables.blade.php)
-* [`boilerplate::load.datepicker`](src/resources/views/load/datepicker.blade.php) :
-[DatePicker](https://github.com/uxsolutions/bootstrap-datepicker) /
-[DateTimePicker](http://eonasdan.github.io/bootstrap-datetimepicker/) /
-[DateRangePicker](https://github.com/dangrossman/bootstrap-daterangepicker) -
-[Example](src/resources/views/plugins/demo/datepicker.blade.php)
-* [`boilerplate::load.icheck`](src/resources/views/load/icheck.blade.php) :
-[iCheck](http://icheck.fronteed.com/) -
-[Example](src/resources/views/plugins/demo/icheck.blade.php)
-* [`boilerplate::load.select2`](src/resources/views/load/select2.blade.php) :
-[Select2](https://select2.github.io/) -
-[Example](src/resources/views/plugins/demo/select2.blade.php)
-* [`boilerplate::load.moment`](src/resources/views/load/moment.blade.php) :
-[MomentJs](http://momentjs.com/)
-* [`boilerplate::load.fileinput`](src/resources/views/load/fileinput.blade.php) :
-[Bootstrap FileInput](http://plugins.krajee.com/file-input)
+| Loader  | Documentation  |  |
+|---|---|---|
+| [`boilerplate::load.tinymce`](src/resources/views/load/tinymce.blade.php) | [TinyMCE](https://www.tiny.cloud)  | [Example](src/resources/views/plugins/demo/tinymce.blade.php) |
+| [`boilerplate::load.codemirror`](src/resources/views/load/codemirror.blade.php) | [CodeMirror](https://codemirror.net/) | [Example](src/resources/views/plugins/demo/codemirror.blade.php) |
+| [`boilerplate::load.datatables`](src/resources/views/load/datatables.blade.php) | [Datatables](https://www.datatables.net/) | [Example](src/resources/views/plugins/demo/datatables.blade.php) |
+| [`boilerplate::load.datepicker`](src/resources/views/load/datepicker.blade.php) | [DatePicker](https://github.com/uxsolutions/bootstrap-datepicker) / [DateTimePicker](http://eonasdan.github.io/bootstrap-datetimepicker/) / [DateRangePicker](https://github.com/dangrossman/bootstrap-daterangepicker) | [Example](src/resources/views/plugins/demo/datepicker.blade.php) |
+| [`boilerplate::load.icheck`](src/resources/views/load/icheck.blade.php) | [iCheck](http://icheck.fronteed.com/) | [Example](src/resources/views/plugins/demo/icheck.blade.php) |
+| [`boilerplate::load.select2`](src/resources/views/load/select2.blade.php) | [Select2](https://select2.github.io/) | [Example](src/resources/views/plugins/demo/select2.blade.php) |
+| [`boilerplate::load.moment`](src/resources/views/load/moment.blade.php) | [MomentJs](http://momentjs.com/) | |
+| [`boilerplate::load.fileinput`](src/resources/views/load/fileinput.blade.php) | [Bootstrap FileInput](http://plugins.krajee.com/file-input) | |  
 
 More will come...
 
