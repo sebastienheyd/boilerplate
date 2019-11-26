@@ -20,6 +20,7 @@ class MenuItemsRepository
         } elseif (is_string($menuitem)) {
             $this->items[] = $menuitem;
         }
+
         return $this;
     }
 
