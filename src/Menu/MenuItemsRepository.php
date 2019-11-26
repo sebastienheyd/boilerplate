@@ -7,7 +7,7 @@ class MenuItemsRepository
     protected $items = [];
 
     /**
-     * Register menu items to display in the main menu
+     * Register menu items to display in the main menu.
      *
      * @param string|array $menuitem
      * @return $this
@@ -23,7 +23,7 @@ class MenuItemsRepository
     }
 
     /**
-     * Get menu items classes
+     * Get menu items classes.
      *
      * @return array
      */
