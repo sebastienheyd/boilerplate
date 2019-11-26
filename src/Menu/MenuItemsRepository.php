@@ -10,7 +10,7 @@ class MenuItemsRepository
      * Register menu items to display in the main menu.
      *
      * @param string|array $menuitem
-     * 
+     *
      * @return $this
      */
     public function registerMenuItem($menuitem)
