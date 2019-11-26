@@ -2,7 +2,7 @@
 
 @push('js')
     <script>
-        $(function() {
+        $(function () {
             $('#code').codemirror();
         })
     </script>
@@ -18,7 +18,8 @@
 &commat;include('boilerplate::load.codemirror', ['theme' => 'storm'])
 &commat;push('js')
     &lt;script>
-        $('#code').codemirror();
+        var myCode = $('#code').codemirror();
+        // To get the value : myCode.getValue();
     &lt;/script>
 &commat;endpush</pre>
         <textarea id="code"><h1>CodeMirror demo</h1>
@@ -28,7 +29,7 @@
     }
 </style>
 <script>
-    $(function() {
+    $(function () {
         alert('demo');
     });
 </script></textarea>
