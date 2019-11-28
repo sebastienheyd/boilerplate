@@ -4,13 +4,6 @@ namespace Sebastienheyd\Boilerplate\Menu;
 
 class MenuItemsRepository
 {
-    protected $items = [];
-
-    public function __construct()
-    {
-        $this->items = config('boilerplate.menu.providers', []);
-    }
-
     /**
      * Register menu items to display in the main menu.
      *
