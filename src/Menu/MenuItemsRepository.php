@@ -45,6 +45,7 @@ class MenuItemsRepository
         $items = config('boilerplate.menu.providers', []);
         unset($items[array_search($menuitem, $items)]);
         config(['boilerplate.menu.providers' => $items]);
+
         return $this;
     }
 
