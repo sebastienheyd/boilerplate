@@ -6,6 +6,11 @@ class MenuItemsRepository
 {
     protected $items = [];
 
+    public function __construct()
+    {
+        $this->items = config('boilerplate.menu.providers', []);
+    }
+
     /**
      * Register menu items to display in the main menu.
      *
@@ -15,12 +20,31 @@ class MenuItemsRepository
      */
     public function registerMenuItem($menuitem)
     {
+        $items = config('boilerplate.menu.providers', []);
+
         if (is_array($menuitem)) {
-            $this->items = array_merge($this->items, $menuitem);
+            $items = array_merge($items, $menuitem);
         } elseif (is_string($menuitem)) {
-            $this->items[] = $menuitem;
+            $items[] = $menuitem;
         }
 
+        config(['boilerplate.menu.providers' => array_unique($items)]);
+
+        return $this;
+    }
+
+    /**
+     * Unregister the given menu item.
+     *
+     * @param string $menuitem
+     *
+     * return $this;
+     */
+    public function unregisterMenuItem($menuitem)
+    {
+        $items = config('boilerplate.menu.providers', []);
+        unset($items[array_search($menuitem, $items)]);
+        config(['boilerplate.menu.providers' => $items]);
         return $this;
     }
 
@@ -31,6 +55,6 @@ class MenuItemsRepository
      */
     public function getMenuItems()
     {
-        return array_unique($this->items);
+        return array_unique(config('boilerplate.menu.providers', []));
     }
 }

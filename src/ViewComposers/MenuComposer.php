@@ -45,8 +45,7 @@ class MenuComposer
      */
     private function getProviders()
     {
-        $providers = config('boilerplate.menu.providers', []);
-        $providers = array_unique(array_merge($providers, app('boilerplate.menu.items')->getMenuItems()));
+        $providers = app('boilerplate.menu.items')->getMenuItems();
 
         if (is_dir(app_path('Menu'))) {
             $classes = glob(app_path('Menu').'/*.php');
