@@ -1,0 +1,68 @@
+$string: #E8BF6A;
+$property: #BABABA;
+$keyword: #6897BB;
+$number: #A5C261;
+$variable: #CC7833;
+
+.cm-s-storm {
+
+    font-family: Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, serif;
+    font-size: 12px;
+
+    &.CodeMirror {
+        background: #2B2B2B;
+        color: $property;
+    }
+
+    div.CodeMirror-selected {
+        background: #214283;
+    }
+
+    .CodeMirror {
+        &-cursor { border-left: 1px solid #A9B7C6; }
+        &-activeline-background { background: #323232; }
+        &-activeline-gutter {
+            .CodeMirror-linenumber {
+                color: #A9B7C6;
+            }
+        }
+        &-gutters { background: #313335; border-right: 1px solid #313335; }
+        &-guttermarker { color: #FFEE80; }
+        &-guttermarker-subtle { color: #D0D0D0; }
+        &-linenumber { color: #606366; }
+        &-matchingbracket { background-color: #3B514D; color: #FFEF28 !important; font-weight: bold; }
+        &-matchingtag { background-color: #52503A; }
+    }
+
+    span.cm {
+        &-meta { color: #BBB529; }
+        &-number { color: $number; }
+        &-keyword { color: $keyword }
+        &-def { color: #A9B7C6; font-style: italic; }
+        &-variable { color: $variable; }
+        &-variable-2 { color: $variable; }
+        &-variable-3 { color: #9876AA; }
+        &-type { color: #AABBCC; font-weight: bold; }
+        &-property { color: $property; }
+        &-operator { color: #A9B7C6; }
+        &-string { color: $number; }
+        &-string-2 { color: $string; }
+        &-comment { color: #61A151; font-style: italic; }
+        &-link { color: $keyword; }
+        &-atom { color: $number; }
+        &-error { color: #BC3F3C; }
+        &-tag {
+            color: $string;
+            &.cm-bracket {
+                color: $string;
+            }
+        }
+        &-attribute { color: $string; }
+        &-qualifier { color: $string; }
+        &-bracket { color: #A9B7C6; }
+        &-builtin { color: #FF9E59; }
+        &-special { color: #FF9E59; }
+        &-matchhighlight { color: #FFFFFF; background-color: rgba(50, 89, 48, .7); font-weight: normal;}
+        &-searching { color: #FFFFFF; background-color: rgba(61, 115, 59, .7); font-weight: normal;}
+    }
+}
