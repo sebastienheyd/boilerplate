@@ -4,7 +4,7 @@
         <script>
             tinymce.defaultSettings = {
                 plugins: "autoresize fullscreen codemirror link lists table media image imagetools customalign",
-                toolbar: "code fullscreen | undo redo | styleselect | bold italic underline | customalignleft aligncenter customalignright alignjustify | table | bullist numlist outdent indent | link media image",
+                toolbar: "undo redo | styleselect | bold italic underline | customalignleft aligncenter customalignright | link media image | bullist numlist outdent indent | table | code fullscreen",
                 codemirror: { config: { theme: 'storm' } },
                 menubar: false,
                 removed_menuitems: 'newdocument',
