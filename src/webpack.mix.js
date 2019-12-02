@@ -104,6 +104,7 @@ mix.styles('node_modules/codemirror/lib/codemirror.css', 'public/js/codemirror/c
 
 mix.copy('node_modules/tinymce/plugins', 'public/js/tinymce/plugins');
 mix.scripts('resources/assets/js/vendor/tinymce/plugins/codemirror/plugin.js', 'public/js/tinymce/plugins/codemirror/plugin.min.js');
+mix.scripts('resources/assets/js/vendor/tinymce/plugins/customalign/plugin.js', 'public/js/tinymce/plugins/customalign/plugin.min.js');
 mix.copy('resources/assets/js/vendor/tinymce/plugins', 'public/js/tinymce/plugins');
 mix.copy('node_modules/tinymce/skins', 'public/js/tinymce/skins');
 mix.copy('node_modules/tinymce/themes', 'public/js/tinymce/themes');

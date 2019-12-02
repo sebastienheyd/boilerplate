@@ -17,5 +17,6 @@
     "/js/codemirror/jquery.codemirror.min.js": "/js/codemirror/jquery.codemirror.min.js?id=32b51d35c65b6150cf61",
     "/js/codemirror/codemirror.min.css": "/js/codemirror/codemirror.min.css?id=fc217d502b05f6561635",
     "/js/tinymce/plugins/codemirror/plugin.min.js": "/js/tinymce/plugins/codemirror/plugin.min.js?id=71b519be98bc089caebc",
+    "/js/tinymce/plugins/customalign/plugin.min.js": "/js/tinymce/plugins/customalign/plugin.min.js?id=812981287312cce364e1",
     "/js/tinymce/tinymce.min.js": "/js/tinymce/tinymce.min.js?id=6ab314fdc44500b95c52"
 }
