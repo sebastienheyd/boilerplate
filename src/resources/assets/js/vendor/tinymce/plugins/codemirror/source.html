@@ -26,7 +26,6 @@
 
             CMsettings = {
                 path: '/assets/vendor/boilerplate/js/codemirror/',
-                indentOnInit: true,
                 disableFilesMerge: false,
                 config: {
                     mode: 'htmlmixed',
@@ -38,7 +37,8 @@
                     saveCursorPosition: true,
                     styleActiveLine: true,
                     autoCloseTags: true,
-                    matchTags: true
+                    matchTags: true,
+                    lineWrapping: true
                 },
                 jsFiles: [
                     'codemirror.min.js',
@@ -125,21 +125,27 @@
             });
 
             CodeMirror.defineInitHook(function (inst) {
-                // Move cursor to correct position:
                 inst.focus();
+
+                inst.setSelection({
+                        'line': inst.firstLine(),
+                        'ch': 0,
+                        'sticky': null
+                    }, {
+                        'line': inst.lastLine(),
+                        'ch': 0,
+                        'sticky': null
+                    },
+                    {scroll: false});
+
+                inst.indentSelection("smart");
+
+                // Move cursor to correct position:
                 var cursor = inst.getSearchCursor(String.fromCharCode(chr), false);
                 if (cursor.findNext()) {
                     inst.setCursor(cursor.to());
                     cursor.replace('');
                 }
-
-                // Indent all code, if so requested:
-                var last = inst.lineCount();
-                inst.operation(function () {
-                    for (var i = 0; i < last; ++i) {
-                        inst.indentLine(i);
-                    }
-                });
             });
 
             CMsettings.config.value = html;
