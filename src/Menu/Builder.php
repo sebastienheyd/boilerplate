@@ -60,8 +60,8 @@ class Builder extends LavaryMenuBuilder
     /**
      * Add an item to a existing menu item as a submenu item.
      *
-     * @param string $id                   Id of the menu item to attach to
-     * @param string $title                Title of the sub item
+     * @param string $id      Id of the menu item to attach to
+     * @param string $title   Title of the sub item
      * @param array  $options
      *
      * @return Lavary\Menu\Item
