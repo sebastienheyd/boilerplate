@@ -541,30 +541,36 @@ button::-moz-focus-inner {
   background-color: inherit;
   color: contrast(inherit, #222f3e, #fff);
 }
-.tox .tox-collection--list .tox-collection__item--active:not(.tox-collection__item--state-disabled) {
+.tox .tox-collection--list .tox-collection__item--active {
   background-color: #dee0e2;
-  color: #222f3e;
 }
 .tox .tox-collection--toolbar .tox-collection__item--enabled {
   background-color: #c8cbcf;
   color: #222f3e;
 }
-.tox .tox-collection--toolbar .tox-collection__item--active:not(.tox-collection__item--state-disabled) {
+.tox .tox-collection--toolbar .tox-collection__item--active {
   background-color: #dee0e2;
-  color: #222f3e;
 }
 .tox .tox-collection--grid .tox-collection__item--enabled {
   background-color: #c8cbcf;
   color: #222f3e;
 }
-.tox .tox-collection--grid .tox-collection__item--active:not(.tox-collection__item--state-disabled) {
+.tox .tox-collection--grid .tox-collection__item--active {
   background-color: #dee0e2;
+}
+.tox .tox-collection--list .tox-collection__item--active:not(.tox-collection__item--state-disabled) {
+  color: #222f3e;
+}
+.tox .tox-collection--toolbar .tox-collection__item--active:not(.tox-collection__item--state-disabled) {
+  color: #222f3e;
+}
+.tox .tox-collection--grid .tox-collection__item--active:not(.tox-collection__item--state-disabled) {
   color: #222f3e;
 }
 .tox .tox-collection__item--state-disabled {
   background-color: transparent;
   color: rgba(34, 47, 62, 0.5);
-  cursor: default;
+  cursor: not-allowed;
 }
 .tox .tox-collection__item-icon {
   align-items: center;

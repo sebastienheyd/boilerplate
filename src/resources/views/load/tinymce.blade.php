@@ -3,7 +3,7 @@
         <script src="{!! mix('/js/tinymce/tinymce.min.js', '/assets/vendor/boilerplate') !!}"></script>
         <script>
             tinymce.defaultSettings = {
-                plugins: "autoresize fullscreen codemirror link lists table media image imagetools customalign",
+                plugins: "autoresize fullscreen codemirror link lists table media image imagetools customalign stickytoolbar",
                 toolbar: "undo redo | styleselect | bold italic | customalignleft aligncenter customalignright | link media image | bullist numlist | table | code fullscreen",
                 codemirror: { config: { theme: 'storm' } },
                 menubar: false,

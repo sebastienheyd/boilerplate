@@ -19,11 +19,11 @@ class Builder extends LavaryMenuBuilder
      * Adds an item to the menu.
      *
      * @param string $title
-     * @param string $options
+     * @param array $options
      *
      * @return \Lavary\Menu\Item|Item
      */
-    public function add($title, $options = '')
+    public function add($title, $options = [])
     {
         $title = sprintf('<span>%s</span>', $title);
 

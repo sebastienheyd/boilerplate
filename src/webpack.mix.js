@@ -108,6 +108,7 @@ mix.scripts('resources/assets/js/vendor/tinymce/plugins/customalign/plugin.js', 
 mix.copy('resources/assets/js/vendor/tinymce/plugins', 'public/js/tinymce/plugins');
 mix.copy('node_modules/tinymce/skins', 'public/js/tinymce/skins');
 mix.copy('node_modules/tinymce/themes', 'public/js/tinymce/themes');
+mix.copy('node_modules/stickytoolbar/dist', 'public/js/tinymce/plugins');
 
 // https://www.tiny.cloud/get-tiny/language-packages/
 mix.copy('resources/assets/js/vendor/tinymce/langs', 'public/js/tinymce/langs');
