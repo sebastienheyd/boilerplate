@@ -5,6 +5,7 @@
             tinymce.defaultSettings = {
                 plugins: "autoresize fullscreen codemirror link lists table media image imagetools customalign stickytoolbar",
                 toolbar: "undo redo | styleselect | bold italic | customalignleft aligncenter customalignright | link media image | bullist numlist | table | code fullscreen",
+                sticky_toolbar_container: '.tox-toolbar-overlord',
                 codemirror: { config: { theme: 'storm' } },
                 menubar: false,
                 removed_menuitems: 'newdocument',
