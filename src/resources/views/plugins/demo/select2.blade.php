@@ -2,7 +2,9 @@
 
 @push('js')
 <script>
-    $(".select2").select2();
+    $(function() {
+        $(".select2").select2();
+    });
 </script>
 @endpush
 
