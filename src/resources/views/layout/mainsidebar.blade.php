@@ -1,5 +1,5 @@
 <aside class="main-sidebar">
-    <section class="sidebar" style="height: auto;">
+    <section class="sidebar">
         <div class="user-panel">
             <div class="pull-left image">
                 <a href="{{ route('boilerplate.user.profile') }}">

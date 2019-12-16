@@ -400,7 +400,6 @@ button::-moz-focus-inner {
 .tox .tox-checkbox__input {
   /* Hide from view but visible to screen readers */
   height: 1px;
-  left: -10000px;
   overflow: hidden;
   position: absolute;
   top: auto;
@@ -462,11 +461,17 @@ button::-moz-focus-inner {
 .tox:not([dir=rtl]) .tox-checkbox__label {
   margin-left: 4px;
 }
+.tox:not([dir=rtl]) .tox-checkbox__input {
+  left: -10000px;
+}
 .tox:not([dir=rtl]) .tox-bar .tox-checkbox {
   margin-left: 4px;
 }
 .tox[dir=rtl] .tox-checkbox__label {
   margin-right: 4px;
+}
+.tox[dir=rtl] .tox-checkbox__input {
+  right: -10000px;
 }
 .tox[dir=rtl] .tox-bar .tox-checkbox {
   margin-right: 4px;

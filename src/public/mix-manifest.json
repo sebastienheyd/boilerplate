@@ -1,10 +1,10 @@
 {
     "/boilerplate.min.css": "/boilerplate.min.css?id=d1b2fad051af82e2b665",
     "/js/icheck/icheck.min.css": "/js/icheck/icheck.min.css?id=ca8d2c7c37016eec0a3c",
-    "/js/fileinput/bootstrap-fileinput.min.css": "/js/fileinput/bootstrap-fileinput.min.css?id=c07f16dea7976bc26383",
+    "/js/fileinput/bootstrap-fileinput.min.css": "/js/fileinput/bootstrap-fileinput.min.css?id=d9b8100ebc7ab940c8db",
     "/js/codemirror/theme/storm.css": "/js/codemirror/theme/storm.css?id=b988f521d0aa6f900126",
-    "/boilerplate.min.js": "/boilerplate.min.js?id=aac36811afa15c28890b",
-    "/images/default-user.png": "/images/default-user.png?id=8e8b972fe0f9a90f93bc",
+    "/boilerplate.min.js": "/boilerplate.min.js?id=b0edfcba53114abdf37f",
+    "/images/default-user.png": "/images/default-user.png?id=7166630dfd6db16b4582",
     "/js/moment/moment-with-locales.min.js": "/js/moment/moment-with-locales.min.js?id=1b1c80b617bfcaf8c076",
     "/js/datatables/datatables.min.js": "/js/datatables/datatables.min.js?id=e90c2eaf337f01ff3234",
     "/js/datatables/datatables.min.css": "/js/datatables/datatables.min.css?id=3d97a50cd14dd0e9c685",
@@ -12,11 +12,11 @@
     "/js/icheck/icheck.min.js": "/js/icheck/icheck.min.js?id=b49273b51dae7361e02d",
     "/js/datepicker/bootstrap-datepicker3.min.css": "/js/datepicker/bootstrap-datepicker3.min.css?id=742eac62ca7d8ac48c65",
     "/js/datepicker/bootstrap-datepicker.min.js": "/js/datepicker/bootstrap-datepicker.min.js?id=6e8b06196856175b237e",
-    "/js/fileinput/bootstrap-fileinput.min.js": "/js/fileinput/bootstrap-fileinput.min.js?id=909569aee2fdf8470c2c",
+    "/js/fileinput/bootstrap-fileinput.min.js": "/js/fileinput/bootstrap-fileinput.min.js?id=77a8ae3cbf0ef38a980c",
     "/js/codemirror/codemirror.min.js": "/js/codemirror/codemirror.min.js?id=82b9491f7e4ecd8ce578",
     "/js/codemirror/jquery.codemirror.min.js": "/js/codemirror/jquery.codemirror.min.js?id=32b51d35c65b6150cf61",
     "/js/codemirror/codemirror.min.css": "/js/codemirror/codemirror.min.css?id=fc217d502b05f6561635",
     "/js/tinymce/plugins/codemirror/plugin.min.js": "/js/tinymce/plugins/codemirror/plugin.min.js?id=71b519be98bc089caebc",
     "/js/tinymce/plugins/customalign/plugin.min.js": "/js/tinymce/plugins/customalign/plugin.min.js?id=812981287312cce364e1",
-    "/js/tinymce/tinymce.min.js": "/js/tinymce/tinymce.min.js?id=388e4af75847c50bb6cf"
+    "/js/tinymce/tinymce.min.js": "/js/tinymce/tinymce.min.js?id=117542263e3897859337"
 }

@@ -10,6 +10,7 @@ mix.webpackConfig({plugins: [new clean(['public'], {verbose: false})]})
 mix.scripts([
     'node_modules/jquery/dist/jquery.min.js',
     'node_modules/bootstrap-sass/assets/javascripts/bootstrap.min.js',
+    'node_modules/jquery-slimscroll/jquery.slimscroll.min.js',
     'node_modules/admin-lte/dist/js/adminlte.min.js',
     'node_modules/bootbox/bootbox.min.js',
     'resources/assets/js/vendor/bootbox/bootbox.locales.js',
