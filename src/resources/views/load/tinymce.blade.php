@@ -6,6 +6,7 @@
                 plugins: "autoresize fullscreen codemirror link lists table media image imagetools customalign stickytoolbar",
                 toolbar: "undo redo | styleselect | bold italic | customalignleft aligncenter customalignright | link media image | bullist numlist | table | code fullscreen",
                 sticky_toolbar_container: '.tox-toolbar-overlord',
+                sticky_offset: $('header').height(),
                 codemirror: { config: { theme: 'storm' } },
                 menubar: false,
                 removed_menuitems: 'newdocument',

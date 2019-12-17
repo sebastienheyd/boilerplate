@@ -6,6 +6,10 @@
 @import "~css-spacing/css/css-spacing.min.css";
 @import "~animate.css/animate.min.css";
 
+.fixed .wrapper {
+    overflow: initial;
+}
+
 .alert {
     border:0;
 }
