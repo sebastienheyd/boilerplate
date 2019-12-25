@@ -2,10 +2,17 @@
 
 namespace Sebastienheyd\Boilerplate\Menu;
 
+use Illuminate\Support\Arr;
 use Lavary\Menu\Item as LavaryMenuItem;
 
 class Item extends LavaryMenuItem
 {
+    public function __construct($builder, $id, $title, $options)
+    {
+        Arr::forget($options, ['role', 'permission', 'icon', 'active']);
+        parent::__construct($builder, $id, $title, $options);
+    }
+
     /**
      * Set the item icon using font-awesome.
      *
