@@ -66,6 +66,9 @@ class RolesController extends Controller
             'name'         => 'required|unique:roles,name',
             'display_name' => 'required',
             'description'  => 'required',
+        ], [], [
+            'display_name' => mb_strtolower(__('boilerplate::role.label')),
+            'description'  => mb_strtolower(__('boilerplate::role.description'))
         ]);
 
         $role = Role::create($input);
@@ -103,6 +106,9 @@ class RolesController extends Controller
         $this->validate($request, [
             'display_name' => 'required',
             'description'  => 'required',
+        ], [], [
+            'display_name' => mb_strtolower(__('boilerplate::role.label')),
+            'description'  => mb_strtolower(__('boilerplate::role.description'))
         ]);
 
         $role = Role::find($id);

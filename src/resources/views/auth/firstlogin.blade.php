@@ -8,17 +8,29 @@
         {{ Form::open(['route' => 'boilerplate.users.firstlogin', 'autocomplete' => 'off']) }}
         <input type="hidden" name="token" value="{{ $token }}">
         <div class="alert alert-info">
-            <p>{{ __('boilerplate::auth.firstlogin.intro') }}</p>
+            {{ __('boilerplate::auth.firstlogin.intro') }}
         </div>
-        <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
-            {{ Form::label('password', __('boilerplate::auth.fields.password')) }}
-            {{ Form::input('password', 'password', Request::old('password'), ['class' => 'form-control', 'autofocus']) }}
-            {!! $errors->first('password','<p class="text-danger">:message</p>') !!}
+        <div class="form-group">
+            <div class="input-group">
+                {{ Form::input('password', 'password', Request::old('password'), ['class' => 'form-control'.$errors->first('password', ' is-invalid'), 'autofocus', 'placeholder' => __('boilerplate::auth.fields.password')]) }}
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-lock"></span>
+                    </div>
+                </div>
+            </div>
+            {!! $errors->first('password','<div class="error-bubble"><div>:message</div></div>') !!}
         </div>
-        <div class="form-group {{ $errors->has('password_confirmation') ? 'has-error' : '' }}">
-            {{ Form::label('password_confirmation', __('boilerplate::auth.fields.password_confirm')) }}
-            {{ Form::input('password', 'password_confirmation', Request::old('password_confirmation'), ['class' => 'form-control']) }}
-            {!! $errors->first('password_confirmation','<p class="text-danger">:message</p>') !!}
+        <div class="form-group">
+            <div class="input-group">
+                {{ Form::input('password', 'password_confirmation', Request::old('password_confirmation'), ['class' => 'form-control'.$errors->first('password_confirmation', ' is-invalid'), 'placeholder' => __('boilerplate::auth.fields.password_confirm')]) }}
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-lock"></span>
+                    </div>
+                </div>
+            </div>
+            {!! $errors->first('password_confirmation','<div class="error-bubble"><div>:message</div></div>') !!}
         </div>
         <div class="form-group text-center">
             <button type="submit" class="btn btn-primary">

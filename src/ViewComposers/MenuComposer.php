@@ -18,11 +18,10 @@ class MenuComposer
     {
         $menu = new Menu();
         $menu = $menu->make('AdminMenu', function (Builder $menu) {
-            $menu->raw(__('boilerplate::layout.mainmenu'), ['class' => 'header text-uppercase'])->order(0);
-
             $menu->add(__('boilerplate::layout.dashboard'), ['route' => 'boilerplate.dashboard', 'icon' => 'home'])
+                ->activeIfRoute('boilerplate.dashboard')
                 ->id('home')
-                ->order(1);
+                ->order(0);
 
             $providers = $this->getProviders();
 
@@ -32,10 +31,14 @@ class MenuComposer
             }
         });
 
+        $compact = config('boilerplate.theme.sidebar.compact') === true ? ' nav-compact' : '';
+
         $view->with('menu', $menu->sortBy('order')->asUl([
-            'class'       => 'sidebar-menu',
-            'data-widget' => 'tree',
-        ], ['class' => 'treeview-menu']));
+            'class'          => 'nav nav-pills nav-sidebar flex-column nav-child-indent'.$compact,
+            'data-widget'    => 'treeview',
+            'data-accordion' => 'false',
+            'role'           => 'menu',
+        ], ['class' => 'nav nav-treeview']));
     }
 
     /**

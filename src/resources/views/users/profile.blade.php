@@ -9,8 +9,8 @@
 @section('content')
     {{ Form::open(['route' => ['boilerplate.user.profile'], 'method' => 'post', 'autocomplete' => 'off', 'files' => true]) }}
         <div class="row">
-            <div class="col-sm-12 mbl">
-                <span class="btn-group pull-right">
+            <div class="col-12 mb-3">
+                <span class="btn-group float-right">
                     <button type="submit" class="btn btn-primary">
                         {{ __('boilerplate::users.save') }}
                     </button>
@@ -18,79 +18,69 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-12 col-md-5">
-                <div class="info-box">
-                    <span class="info-box-icon" style="line-height: normal">
-                        <img src="{{ $user->avatar_url }}" class="avatar" alt="avatar"/>
-                    </span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">
-                            <p class="mbn"><strong class="h3">{{ $user->name  }}</strong></p>
-                            <p class="">{{ $user->getRolesList() }}</p>
-                        </span>
-                        <span class="info-box-more">
-                            <p class="mbn text-muted">
-                                {{ __('boilerplate::users.profile.subscribedsince', [
-                                    'date' => $user->created_at->isoFormat(__('boilerplate::date.lFdY')),
-                                    'since' => $user->created_at->diffForHumans()]) }}
-                            </p>
-                        </span>
+            <div class="col-md-5">
+                <div class="card card-info">
+                    <div class="card-header">
+                         <h3 class="card-title">{{ __('boilerplate::users.profile.title') }}</h3>
                     </div>
-                </div>
-                <div class="box box-info">
-                    <div class="box-header">
-                        @if(is_file($user->avatar_path))
-                        <span class="pull-right">
-                            <button class="btn btn-xs btn-default" id="remove_avatar">
-                                {{ __('boilerplate::users.profile.delavatar') }}
-                            </button>
-                        </span>
-                        @endif
-                        <h3 class="box-title">{{ __('boilerplate::users.profile.avatar') }}</h3>
-                    </div>
-                    <div class="box-body">
-                        <div class="form-group {{ $errors->has('avatar') ? 'has-error' : '' }}">
-                            {!! Form::file('avatar', ['id' => 'avatar']) !!}
-                            {!! $errors->first('avatar','<p class="text-danger"><strong>:message</strong></p>') !!}
+                    <div class="d-flex p-3">
+                        <div id="avatar-wrapper">
+                            @include('boilerplate::users.avatar')
+                        </div>
+                        <div class="pl-3">
+                            <span class="info-box-text">
+                                <p class="mb-0"><strong class="h3">{{ $user->name  }}</strong></p>
+                                <p class="">{{ $user->getRolesList() }}</p>
+                            </span>
+                            <span class="info-box-more">
+                                <p class="text-muted">
+                                    <span class="far fa-fw fa-envelope"></span> {{ $user->email }}
+                                </p>
+                                <p class="mb-0 text-muted">
+                                    {{ __('boilerplate::users.profile.subscribedsince', [
+                                        'date' => $user->created_at->isoFormat(__('boilerplate::date.lFdY')),
+                                        'since' => $user->created_at->diffForHumans()]) }}
+                                </p>
+                            </span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-sm-12 col-md-7">
-                <div class="box box-primary">
-                    <div class="box-header">
-                        <h3 class="box-title">{{ __('boilerplate::users.informations') }}</h3>
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">{{ __('boilerplate::users.informations') }}</h3>
                     </div>
-                    <div class="box-body">
+                    <div class="card-body">
                         <div class="row">
                             <div class="col-sm-12 col-md-6">
-                                <div class="form-group {{ $errors->has('first_name') ? 'has-error' : '' }}">
+                                <div class="form-group">
                                     {{ Form::label('first_name', __('boilerplate::users.firstname')) }}
-                                    {{ Form::text('first_name', old('first_name', $user->first_name), ['class' => 'form-control']) }}
-                                    {!! $errors->first('first_name','<p class="text-danger"><strong>:message</strong></p>') !!}
+                                    {{ Form::text('first_name', old('first_name', $user->first_name), ['class' => 'form-control'.$errors->first('first_name', ' is-invalid')]) }}
+                                    {!! $errors->first('first_name','<div class="error-bubble"><div>:message</div></div>') !!}
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-6">
-                                <div class="form-group {{ $errors->has('last_name') ? 'has-error' : '' }}">
+                                <div class="form-group">
                                     {{ Form::label('last_name', __('boilerplate::users.lastname')) }}
-                                    {{ Form::text('last_name', old('last_name', $user->last_name), ['class' => 'form-control', 'autofocus']) }}
-                                    {!! $errors->first('last_name','<p class="text-danger"><strong>:message</strong></p>') !!}
+                                    {{ Form::text('last_name', old('last_name', $user->last_name), ['class' => 'form-control'.$errors->first('last_name', ' is-invalid'), 'autofocus']) }}
+                                    {!! $errors->first('last_name','<div class="error-bubble"><div>:message</div></div>') !!}
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-6">
-                                <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
+                                <div class="form-group">
                                     {{ Form::label('password', ucfirst(__('boilerplate::auth.fields.password'))) }}
-                                    {{ Form::password('password', ['class' => 'form-control']) }}
-                                    {!! $errors->first('password','<p class="text-danger"><strong>:message</strong></p>') !!}
+                                    {{ Form::password('password', ['class' => 'form-control'.$errors->first('password', ' is-invalid')]) }}
+                                    {!! $errors->first('password','<div class="error-bubble"><div>:message</div></div>') !!}
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-6">
-                                <div class="form-group {{ $errors->has('password_confirmation') ? 'has-error' : '' }}">
+                                <div class="form-group">
                                     {{ Form::label('password_confirmation', ucfirst(__('boilerplate::auth.fields.password_confirm'))) }}
-                                    {{ Form::password('password_confirmation', ['class' => 'form-control']) }}
-                                    {!! $errors->first('password_confirmation','<p class="text-danger"><strong>:message</strong></p>') !!}
+                                    {{ Form::password('password_confirmation', ['class' => 'form-control'.$errors->first('password_confirmation', ' is-invalid')]) }}
+                                    {!! $errors->first('password_confirmation','<div class="error-bubble"><div>:message</div></div>') !!}
                                 </div>
-                            </div>                            
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -99,34 +89,25 @@
     {{ Form::close() }}
 @endsection
 
-@include('boilerplate::load.fileinput')
-
 @push('js')
-<script>
-    $('#avatar').fileinput({
-        showUpload: false,
-        uploadAsync: false
-    });
-
-    $('#remove_avatar').on('click', function(e){
-        e.preventDefault();
-
-        bootbox.confirm("{{ __('boilerplate::users.profile.confirmdelavatar') }}", function(e){
-            if(e === false) return;
-
-            $.ajax({
-                url: '{{ route('boilerplate.user.avatardelete') }}',
-                type: 'post',
-                headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
-                cache: false,
-                success: function(res) {
-                    $('.avatar').attr('src', "{{ asset('/assets/vendor/boilerplate/images/default-user.png') }}");
-                    growl("{{ __('boilerplate::users.profile.successdelavatar') }}", "success");
-                    $('#remove_avatar').remove();
+    <script>
+        var avatar = {
+            url: "{{ route('boilerplate.user.avatar.url', null, false) }}",
+            locales: {
+                delete: "{{ __('boilerplate::avatar.delete') }}",
+                gravatar: {
+                    success: "{{ __('boilerplate::avatar.gravatar.success') }}",
+                    error: "{{ __('boilerplate::avatar.gravatar.error') }}",
+                },
+                upload: {
+                    success: "{{ __('boilerplate::avatar.upload.success') }}",
+                    error: "{{ __('boilerplate::avatar.upload.error') }}",
                 }
-            });
-        })
-    });
+            }
+        }
+    </script>
+    <script src="{{ mix('/avatar.min.js', '/assets/vendor/boilerplate') }}"></script>
+    <script>
 
-</script>
+    </script>
 @endpush

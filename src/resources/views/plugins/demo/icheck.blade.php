@@ -1,76 +1,149 @@
-@include('boilerplate::load.icheck')
-
-<div class="box box-success">
-    <div class="box-header">
-        <h3 class="box-title">iCheck - Checkbox &amp; Radio</h3>
-        <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+<div class="card card-outline card-success">
+    <div class="card-header border-bottom-0">
+        <h3 class="card-title">iCheck Bootstrap</h3>
+        <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fa fa-minus"></i></button>
         </div>
     </div>
-    <div class="box-body">
-        Usage :
-        <pre>
-&commat;include('boilerplate::load.icheck')
-&ltinput type="checkbox" class="icheck">
-</pre>
-        <p>
-            Skins : minimal, square, flat<br />
-            Colors : black, red, green, blue, aero, grey, orange, yellow, pink, purple
-        </p>
-        <table class="table">
-            <thead>
-            <tr>
-                <th>CSS classes</th>
-                <th>Results</th>
-            </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        icheck (= icheck square blue)
-                    </td>
-                    <td>
-                        <input type="checkbox" class="icheck" checked>
-                        <input type="checkbox" class="icheck">
-                        <input type="checkbox" class="icheck" disabled>
-                        <span class="mrm">&nbsp;</span>
-                        <input type="radio" name="r1" class="icheck" checked>
-                        <input type="radio" name="r1" class="icheck">
-                        <input type="radio" name="r1" class="icheck" disabled>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        icheck minimal red
-                    </td>
-                    <td>
-                        <input type="checkbox" class="icheck minimal red" checked>
-                        <input type="checkbox" class="icheck minimal red">
-                        <input type="checkbox" class="icheck minimal red" disabled>
-                        <span class="mrm">&nbsp;</span>
-                        <input type="radio" name="r2" class="icheck minimal red" checked>
-                        <input type="radio" name="r2" class="icheck minimal red">
-                        <input type="radio" name="r2" class="icheck minimal red" disabled>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        icheck flat green
-                    </td>
-                    <td>
-                        <input type="checkbox" class="icheck flat green" checked>
-                        <input type="checkbox" class="icheck flat green">
-                        <input type="checkbox" class="icheck flat green" disabled>
-                        <span class="mrm">&nbsp;</span>
-                        <input type="radio" name="r3" class="icheck flat green" checked>
-                        <input type="radio" name="r3" class="icheck flat green">
-                        <input type="radio" name="r3" class="icheck flat green" disabled>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="card-body pt-0">
+        <div class="row mb-3">
+            <div class="col-12">
+                Usage :
+                <pre>
+&lt;div class="icheck-primary d-inline">
+    &lt;input type="checkbox" id="checkboxPrimary1">
+    &lt;label for="checkboxPrimary1">&lt;/label>
+&lt;/div></pre>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group clearfix">
+                    <div class="icheck-primary d-inline">
+                        <input type="checkbox" id="checkboxPrimary1" checked>
+                        <label for="checkboxPrimary1">
+                        </label>
+                    </div>
+                    <div class="icheck-primary d-inline">
+                        <input type="checkbox" id="checkboxPrimary2">
+                        <label for="checkboxPrimary2">
+                        </label>
+                    </div>
+                    <div class="icheck-primary d-inline">
+                        <input type="checkbox" id="checkboxPrimary3" disabled>
+                        <label for="checkboxPrimary3">
+                            Primary checkbox
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group clearfix">
+                    <div class="icheck-primary d-inline">
+                        <input type="radio" id="radioPrimary1" name="r1" checked>
+                        <label for="radioPrimary1">
+                        </label>
+                    </div>
+                    <div class="icheck-primary d-inline">
+                        <input type="radio" id="radioPrimary2" name="r1">
+                        <label for="radioPrimary2">
+                        </label>
+                    </div>
+                    <div class="icheck-primary d-inline">
+                        <input type="radio" id="radioPrimary3" name="r1" disabled>
+                        <label for="radioPrimary3">
+                            Primary radio
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group clearfix">
+                    <div class="icheck-danger d-inline">
+                        <input type="checkbox" checked id="checkboxDanger1">
+                        <label for="checkboxDanger1">
+                        </label>
+                    </div>
+                    <div class="icheck-danger d-inline">
+                        <input type="checkbox" id="checkboxDanger2">
+                        <label for="checkboxDanger2">
+                        </label>
+                    </div>
+                    <div class="icheck-danger d-inline">
+                        <input type="checkbox" disabled id="checkboxDanger3">
+                        <label for="checkboxDanger3">
+                            Danger checkbox
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group clearfix">
+                    <div class="icheck-danger d-inline">
+                        <input type="radio" name="r2" checked id="radioDanger1">
+                        <label for="radioDanger1">
+                        </label>
+                    </div>
+                    <div class="icheck-danger d-inline">
+                        <input type="radio" name="r2" id="radioDanger2">
+                        <label for="radioDanger2">
+                        </label>
+                    </div>
+                    <div class="icheck-danger d-inline">
+                        <input type="radio" name="r2" disabled id="radioDanger3">
+                        <label for="radioDanger3">
+                            Danger radio
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group clearfix">
+                    <div class="icheck-success d-inline">
+                        <input type="checkbox" checked id="checkboxSuccess1">
+                        <label for="checkboxSuccess1">
+                        </label>
+                    </div>
+                    <div class="icheck-success d-inline">
+                        <input type="checkbox" id="checkboxSuccess2">
+                        <label for="checkboxSuccess2">
+                        </label>
+                    </div>
+                    <div class="icheck-success d-inline">
+                        <input type="checkbox" disabled id="checkboxSuccess3">
+                        <label for="checkboxSuccess3">
+                            Success checkbox
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group clearfix">
+                    <div class="icheck-success d-inline">
+                        <input type="radio" name="r3" checked id="radioSuccess1">
+                        <label for="radioSuccess1">
+                        </label>
+                    </div>
+                    <div class="icheck-success d-inline">
+                        <input type="radio" name="r3" id="radioSuccess2">
+                        <label for="radioSuccess2">
+                        </label>
+                    </div>
+                    <div class="icheck-success d-inline">
+                        <input type="radio" name="r3" disabled id="radioSuccess3">
+                        <label for="radioSuccess3">
+                            Success radio
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="box-footer small text-muted text-right">
-        <a href="http://icheck.fronteed.com/" target="_blank">iCheck</a>
+    <div class="card-footer text-right small">
+        <a href="https://bantikyan.github.io/icheck-bootstrap/">iCheck Bootstrap</a>
     </div>
 </div>

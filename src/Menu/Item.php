@@ -2,20 +2,32 @@
 
 namespace Sebastienheyd\Boilerplate\Menu;
 
+use Illuminate\Support\Arr;
 use Lavary\Menu\Item as LavaryMenuItem;
+use phpDocumentor\Reflection\DocBlock\Tags\Uses;
 
 class Item extends LavaryMenuItem
 {
+    public function __construct($builder, $id, $title, $options)
+    {
+        Arr::forget($options, ['role', 'permission', 'icon', 'active']);
+        $options['class'] = 'nav-item';
+        parent::__construct($builder, $id, $title, $options);
+    }
+
     /**
      * Set the item icon using font-awesome.
      *
-     * @param $icon
+     * @param string $icon
+     * @param string $type
+     *
      *
      * @return self
      */
-    public function icon($icon)
+    public function icon($icon, $type = 'fas')
     {
-        $this->prepend(sprintf('<i class="fa fa-%s"></i>', $icon));
+        $this->title = preg_replace('#<i.*?</i>#', '', $this->title);
+        $this->prepend(sprintf('<i class="nav-icon %s fa-%s"></i>', $type, $icon));
 
         return $this;
     }
@@ -35,40 +47,49 @@ class Item extends LavaryMenuItem
     }
 
     /**
+     * Add a class to the current link
+     *
+     * @param string $class
+     *
+     * @return $this
+     */
+    public function addLinkClass($class)
+    {
+        $classes = [];
+        if (!empty($this->link->attributes['class'])) {
+            $classes = explode(' ', $this->link->attributes['class']);
+        }
+
+        $classes[] = $class;
+        $this->link->attr(['class' => implode(' ', array_unique($classes))]);
+
+        return $this;
+    }
+
+    /**
      * Make the item active.
      *
      * @param string|array $routes
      *
      * @return self
      */
-    public function activeIfRoute($routes = null)
+    public function activeIfRoute($routes)
     {
-        if (!empty($routes)) {
-            if (is_string($routes)) {
-                $routes = [$routes];
-            }
-
-            foreach ($routes as $pattern) {
-                if (if_route_pattern($pattern)) {
-                    $this->activate();
-
-                    if (strstr($this->title, 'circle-o')) {
-                        $this->title = str_replace('fa-circle-o', 'fa-dot-circle-o', $this->title);
-                    }
-
-                    return $this;
-                }
-            }
-
-            return $this;
+        if (is_string($routes)) {
+            $routes = explode(',', $routes);
         }
 
-        $activeClass = $this->builder->conf('active_class');
-        $this->attributes['class'] = Builder::formatGroupClass(['class' => $activeClass], $this->attributes);
-        $this->isActive = true;
+        foreach ($routes as $pattern) {
+            if (if_route_pattern($pattern)) {
+                $this->addLinkClass('active elevation-'.config('boilerplate.theme.sidebar.links.shadow'));
 
-        if (strstr($this->title, 'circle-o')) {
-            $this->title = str_replace('fa-circle-o', 'fa-dot-circle-o', $this->title);
+                if ($this->hasParent()) {
+                    $this->parent()->attr(['class' => 'nav-item has-treeview menu-open'])->addLinkClass('active');
+                }
+
+                $this->isActive = true;
+                return $this;
+            }
         }
 
         return $this;

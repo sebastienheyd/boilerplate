@@ -8,23 +8,21 @@
 
 @section('content')
     <div class="row">
-        <div class="col-sm-12 mbl">
-            <span class="btn-group pull-right">
+        <div class="col-12 mbl">
+            <span class="btn-group float-right pb-3">
                 <a href="{{ route("boilerplate.users.create") }}" class="btn btn-primary">
                     {{ __('boilerplate::users.create.title') }}
                 </a>
             </span>
         </div>
     </div>
-    <div class="box box-info">
-        <div class="box-header">
-            <h3 class="box-title">{{ __('boilerplate::users.list.title') }}</h3>
-        </div>
-        <div class="box-body">
+    <div class="card card-outline card-info">
+        <div class="card-body">
             <table class="table table-striped table-hover va-middle" id="users-table">
                 <thead>
                 <tr>
-                    <th>{{ __('boilerplate::users.list.id') }}</th>
+                    <th>{{-- id --}}</th>
+                    <th>{{-- avatar --}}</th>
                     <th>{{ __('boilerplate::users.list.state') }}</th>
                     <th>{{ __('boilerplate::users.list.lastname') }}</th>
                     <th>{{ __('boilerplate::users.list.firstname') }}</th>
@@ -43,48 +41,67 @@
 @include('boilerplate::load.datatables')
 
 @push('js')
-<script>
-    $(function () {
-        oTable = $('#users-table').DataTable({
-            processing: false,
-            serverSide: true,
-            ajax: {
-                url: '{!! route('boilerplate.users.datatable') !!}',
-                type: 'post',
-                headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'}
-            },
-            columns: [
-                {data: 'id', name: 'id'},
-                {data: 'status', name: 'status', searchable: false},
-                {data: 'last_name', name: 'last_name'},
-                {data: 'first_name', name: 'first_name'},
-                {data: 'email', name: 'email'},
-                {data: 'roles', name: 'roles', searchable: false},
-                {data: 'created_at', name: 'created_at', searchable: false},
-                {data: 'last_login', name: 'last_login', searchable: false},
-                {data: 'actions', name: 'actions', orderable: false, searchable: false, width : '70px'}
-            ]
-        });
-
-        $('#users-table').on('click', '.destroy', function (e) {
-            e.preventDefault();
-
-            var href = $(this).attr('href');
-
-            bootbox.confirm("{{ __('boilerplate::users.list.confirmdelete') }}", function (result) {
-                if (result === false) return;
-
-                $.ajax({
-                    url: href,
-                    method: 'delete',
-                    headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
-                    success: function(){
-                        oTable.ajax.reload();
-                        growl("{{ __('boilerplate::users.list.deletesuccess') }}", "success");
+    <script>
+        $(function () {
+            oTable = $('#users-table').DataTable({
+                processing: true,
+                serverSide: true,
+                stateSave: true,
+                order: [[7, "desc"]],
+                ajax: {
+                    url: '{!! route('boilerplate.users.datatable') !!}',
+                    type: 'post',
+                    headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'}
+                },
+                columns: [
+                    {data: 'id', name: 'id', visible: false},
+                    {data: 'avatar', name: 'avatar', searchable: false, sortable: false},
+                    {data: 'status', name: 'status', searchable: false},
+                    {data: 'last_name', name: 'last_name'},
+                    {data: 'first_name', name: 'first_name'},
+                    {data: 'email', name: 'email'},
+                    {data: 'roles', name: 'roles', searchable: false},
+                    {
+                        data: 'created_at',
+                        name: 'created_at',
+                        searchable: false,
+                        render: $.fn.dataTable.render.moment('{{ __('boilerplate::date.YmdHis') }}')
+                    },
+                    {
+                        data: 'last_login',
+                        name: 'last_login',
+                        searchable: false,
+                        render: $.fn.dataTable.render.fromNow()
+                    },
+                    {
+                        data: 'actions',
+                        name: 'actions',
+                        orderable: false,
+                        searchable: false,
+                        width: '80px',
+                        class: 'visible-on-hover'
                     }
+                ]
+            });
+
+            $('#users-table').on('click', '.destroy', function (e) {
+                e.preventDefault();
+
+                var href = $(this).attr('href');
+
+                bootbox.confirm("{{ __('boilerplate::users.list.confirmdelete') }}", function (result) {
+                    if (result === false) return;
+
+                    $.ajax({
+                        url: href,
+                        method: 'delete',
+                        success: function () {
+                            oTable.ajax.reload();
+                            growl("{{ __('boilerplate::users.list.deletesuccess') }}", "success");
+                        }
+                    });
                 });
             });
         });
-    });
-</script>
+    </script>
 @endpush

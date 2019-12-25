@@ -8,11 +8,14 @@
     </script>
 @endpush
 
-<div class="box box-info">
-    <div class="box-header">
-        <h3 class="box-title">TinyMCE</h3>
+<div class="card card-outline card-info">
+    <div class="card-header border-bottom-0">
+        <h3 class="card-title">TinyMCE</h3>
+        <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
     </div>
-    <div class="box-body">
+    <div class="card-body pt-0">
         Usage :
         <pre>
 &commat;include('boilerplate::load.tinymce')
@@ -25,7 +28,7 @@
             <h1>TinyMCE demo</h1>
         </textarea>
     </div>
-    <div class="box-footer small text-muted text-right">
+    <div class="card-footer text-sm text-right">
         <a href="https://www.tiny.cloud/docs/" target="_blank">tinyMCE</a>
     </div>
 </div>

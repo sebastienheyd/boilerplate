@@ -10,17 +10,17 @@
 
 @section('content')
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div class="box box-primary">
-                <div class="box-body">
-                    <div class="col-md-3">
-                        <canvas id="stats-doughnut-chart" height="300"></canvas>
-                    </div>
-                    <div class="col-md-9">
-                        <section class="box-body">
+        <div class="col-12">
+            <div class="card card-outline card-info">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="mb-3 ml-auto mr-auto col-md-6 col-lg-3">
+                            <canvas id="stats-doughnut-chart" height="300"></canvas>
+                        </div>
+                        <div class="col-lg-9">
                             <div class="row">
                                 @foreach($percents as $level => $item)
-                                    <div class="col-md-4">
+                                    <div class="col-sm-6 col-lg-4">
                                         <div class="info-box level level-{{ $level }} {{ $item['count'] === 0 ? 'level-empty' : '' }}">
                                             <span class="info-box-icon">
                                                 {!! log_styler()->icon($level) !!}
@@ -39,13 +39,11 @@
                                     </div>
                                 @endforeach
                             </div>
-                        </section>
+                        </div>
                     </div>
                 </div>
-                <div class="box-footer">
-                    <span class="pull-right text-muted small">
-                        {!! __('boilerplate::logs.vendor') !!}
-                    </span>
+                <div class="card-footer text-right text-muted text-sm">
+                    {!! __('boilerplate::logs.vendor') !!}
                 </div>
             </div>
         </div>

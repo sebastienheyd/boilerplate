@@ -3,7 +3,9 @@
         {!! config('boilerplate.app.logo-lg') ?? $title !!}
     </div>
 
-    <div class="login-box-body">
-        {{ $slot }}
+    <div class="card">
+        <div class="card-body login-card-body">
+            {{ $slot }}
+        </div>
     </div>
 </div>

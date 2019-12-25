@@ -1,4 +1,4 @@
-# Laravel/AdminLTE Boilerplate
+# Laravel / AdminLTE 3 Boilerplate
 
 ![Package](https://img.shields.io/badge/Package-sebastienheyd%2Fboilerplate-lightgrey.svg)
 [![Build Status](https://scrutinizer-ci.com/g/sebastienheyd/boilerplate/badges/build.png?b=master)](https://scrutinizer-ci.com/g/sebastienheyd/boilerplate/build-status/master)
@@ -8,27 +8,27 @@
 ![Nb downloads](https://img.shields.io/packagist/dt/sebastienheyd/boilerplate.svg)
 ![MIT License](https://img.shields.io/github/license/sebastienheyd/boilerplate.svg)
 
-This package is to be served as a basis for a web application. It allows you to access to an administration panel to
-manage users, roles and permissions.
+This package serves as a basis for quickly creating a back-office. 
+It includes profile creation and his management, user management, roles, permissions and log viewing.
 
-For older Laravel versions :
-[5.8](https://github.com/sebastienheyd/boilerplate/blob/5.8/README.md) /
-[5.7](https://github.com/sebastienheyd/boilerplate/blob/5.7/README.md) /
-[5.6](https://github.com/sebastienheyd/boilerplate/blob/5.6/README.md) /
-[5.5](https://github.com/sebastienheyd/boilerplate/blob/5.5/README.md) /
-[5.4](https://github.com/sebastienheyd/boilerplate/blob/5.4/README.md)
+It also makes it easy to add other packages to extend the features.
+
+For AdminLTE 2 and Bootstrap 3 please use version < 7.0 of this package.
 
 ## Features
 
-* Backend theme [AdminLTE](https://almsaeedstudio.com/)
-* Css framework [Bootstrap](http://getbootstrap.com/)
-* Additional icons by [Font Awesome](http://fontawesome.io/)
+* Configurable backend theme [AdminLTE 3](https://adminlte.io/docs/3.0/)
+* Css framework [Bootstrap 4](https://getbootstrap.com/)
+* Icons by [Font Awesome 5](https://fontawesome.com/)
 * Role-based permissions provided by [santigarcor/laratrust](https://github.com/santigarcor/laratrust)
 * Forms & Html helpers by [laravelcollective/html](https://github.com/laravelcollective/html)
 * Menu dynamically builded by [lavary/laravel-menu](https://github.com/lavary/laravel-menu)
 * Menu items activated by [hieu-le/active](https://github.com/letrunghieu/active)
 * Server-side datatables methods provided by [yajra/laravel-datatables](https://github.com/yajra/laravel-datatables)
 * Image manipulation by [intervention/image](https://github.com/intervention/image)
+* Logs visualization by [arcanedev/log-viewer](https://github.com/ARCANEDEV/LogViewer)
+* Gravatar import by [thomaswelton/laravel-gravatar](https://github.com/thomaswelton/laravel-gravatar)
+* Javascript session keep-alive
 * Localized English / French / Spanish / Turkish
 
 ## Installation
@@ -65,14 +65,14 @@ Now you can point your browser to [http://localhost:8000/admin](http://localhost
 
 Configuration files can be found in `config/boilerplate` folder.
 
-* [`app.php`](src/config/app.php) : name of the application (only backend), admin panel prefix,
-redirection after login (see comments in file), AdminLTE skin and more...
+* [`app.php`](src/config/app.php) : url admin prefix, backend locale, redirection after login (see comments in file), ...
 * [`auth.php`](src/config/auth.php) : overriding of `config/auth.php` to use boilerplate models instead
 of default Laravel models. Allow you to define if users can register from login page and which role will be assigned
 to a new user.
 * [`laratrust.php`](src/config/laratrust.php) : overriding of Laratrust (package santigarcor/laratrust)
 default config.
-* [`menu.php`](src/config/menu.php) : dashboard and menu classes
+* [`menu.php`](src/config/menu.php) : dashboard to use and menu classes
+* [`theme.php`](src/config/theme.php) : backend theme configuration
 
 ### Dashboard
 
@@ -120,9 +120,9 @@ For more information, see the documentation of the following packages:
 
 ### Loading plugins assets
 
-By default, only jQuery, bootstrap 3, Font Awesome and AdminLTE scripts and css are loaded.
+By default, only jQuery, Bootstrap, Font Awesome and AdminLTE scripts and styles are loaded.
 
-To load and use plugins like datatables, datepicker, icheck, ... you can use "loaders". These are blade templates
+To load and use plugins like Datatables, Date Picker, TinyMCE, ... you can use "loaders". These are blade templates
 prepared to add the loading of scripts and styles for a plugin.
 
 For example, you want to use a datepicker on a text field :
@@ -147,20 +147,18 @@ Available loaders are :
 | [`boilerplate::load.tinymce`](src/resources/views/load/tinymce.blade.php) | [TinyMCE](https://www.tiny.cloud)  | [Example](src/resources/views/plugins/demo/tinymce.blade.php) |
 | [`boilerplate::load.codemirror`](src/resources/views/load/codemirror.blade.php) | [CodeMirror](https://codemirror.net/) | [Example](src/resources/views/plugins/demo/codemirror.blade.php) |
 | [`boilerplate::load.datatables`](src/resources/views/load/datatables.blade.php) | [Datatables](https://www.datatables.net/) | [Example](src/resources/views/plugins/demo/datatables.blade.php) |
-| [`boilerplate::load.datepicker`](src/resources/views/load/datepicker.blade.php) | [DatePicker](https://github.com/uxsolutions/bootstrap-datepicker) / [DateTimePicker](http://eonasdan.github.io/bootstrap-datetimepicker/) / [DateRangePicker](https://github.com/dangrossman/bootstrap-daterangepicker) | [Example](src/resources/views/plugins/demo/datepicker.blade.php) |
-| [`boilerplate::load.icheck`](src/resources/views/load/icheck.blade.php) | [iCheck](http://icheck.fronteed.com/) | [Example](src/resources/views/plugins/demo/icheck.blade.php) |
+| [`boilerplate::load.datepicker`](src/resources/views/load/datepicker.blade.php) | [Tempus Dominus](https://tempusdominus.github.io/bootstrap-4/) / [Date Range Picker](https://www.daterangepicker.com) | [Example](src/resources/views/plugins/demo/datepicker.blade.php) |
 | [`boilerplate::load.select2`](src/resources/views/load/select2.blade.php) | [Select2](https://select2.github.io/) | [Example](src/resources/views/plugins/demo/select2.blade.php) |
 | [`boilerplate::load.moment`](src/resources/views/load/moment.blade.php) | [MomentJs](http://momentjs.com/) | |
 | [`boilerplate::load.fileinput`](src/resources/views/load/fileinput.blade.php) | [Bootstrap FileInput](http://plugins.krajee.com/file-input) | |  
-
-More will come...
 
 Some plugins are loaded by default :
 
 * [Bootbox](https://github.com/makeusabrew/bootbox) -
 [Example](src/resources/views/plugins/demo/bootbox.blade.php)
-* [Notify](https://github.com/mouse0270/bootstrap-notify) -
+* [Toastr](https://codeseven.github.io/toastr/) -
 [Example](src/resources/views/plugins/demo/notify.blade.php)
+* [iCheck](https://github.com/bantikyan/icheck-bootstrap) - [Example](src/resources/views/plugins/demo/icheck.blade.php)
 
 You can see examples on the default dashboard.
 

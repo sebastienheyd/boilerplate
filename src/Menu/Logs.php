@@ -13,15 +13,15 @@ class Logs
             ->order(1100);
 
         $menu->addTo('logs', __('boilerplate::logs.menu.stats'), [
-                'route'      => 'boilerplate.logs.dashboard',
-                'permission' => 'logs', ])
-            ->order(1110)
-            ->activeIfRoute('boilerplate.logs.dashboard');
+            'route'      => 'boilerplate.logs.dashboard',
+            'active'     => 'boilerplate.logs.dashboard',
+            'permission' => 'logs',
+        ])->order(1110);
 
         $menu->addTo('logs', __('boilerplate::logs.menu.reports'), [
-                'route'      => 'boilerplate.logs.list',
-                'permission' => 'logs', ])
-            ->order(1120)
-            ->activeIfRoute(['boilerplate.logs.list', 'boilerplate.logs.show', 'boilerplate.logs.filter']);
+            'route'      => 'boilerplate.logs.list',
+            'active'     => 'boilerplate.logs.list,boilerplate.logs.show,boilerplate.logs.filter',
+            'permission' => 'logs',
+        ])->order(1120);
     }
 }

@@ -1,18 +1,18 @@
-<footer class="main-footer">
-    <div class="pull-right hidden-xs">
+<footer class="main-footer text-sm">
+    <strong>
+        &copy; {{ date('Y') }}
+        @if(config('boilerplate.theme.footer.vendorlink'))
+            <a href="{{ config('boilerplate.theme.footer.vendorlink') }}">
+                {!! config('boilerplate.theme.footer.vendorname') !!}
+            </a>.
+        @else
+            {!! config('boilerplate.theme.footer.vendorname') !!}.
+        @endif
+    </strong>
+    {{ __('boilerplate::layout.rightsres') }}
+    <div class="float-right d-none d-sm-inline">
         <a href="https://github.com/sebastienheyd/boilerplate">
             Boilerplate
         </a>
     </div>
-    <strong>
-        &copy; {{ date('Y') }}
-        @if(config('boilerplate.app.vendorlink'))
-            <a href="{{ config('boilerplate.app.vendorlink') }}">
-                {!! config('boilerplate.app.vendorname') !!}
-            </a>.
-        @else
-            {!! config('boilerplate.app.vendorname') !!}.
-        @endif
-    </strong>
-    {{ __('boilerplate::layout.rightsres') }}
 </footer>

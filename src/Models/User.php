@@ -5,10 +5,13 @@ namespace Sebastienheyd\Boilerplate\Models;
 // phpcs:disable Generic.Files.LineLength
 
 use Carbon\Carbon;
+use Gravatar;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laratrust\Traits\LaratrustUserTrait;
+use Sebastienheyd\Boilerplate\Events\UserCreated;
+use Sebastienheyd\Boilerplate\Events\UserDeleted;
 use Sebastienheyd\Boilerplate\Notifications\NewUser as NewUserNotification;
 use Sebastienheyd\Boilerplate\Notifications\ResetPassword as ResetPasswordNotification;
 
@@ -55,6 +58,11 @@ class User extends Authenticatable
 
     protected $fillable = ['active', 'last_name', 'first_name', 'email', 'password', 'remember_token', 'last_login'];
     protected $hidden = ['password', 'remember_token'];
+
+    protected $dispatchesEvents = [
+        'forceDeleted' => UserDeleted::class,
+        'created'      => UserCreated::class
+    ];
 
     /**
      * Send the password reset notification.
@@ -154,6 +162,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Return true if user has an avatar image.
+     *
+     * @return bool
+     */
+    public function hasAvatar()
+    {
+        return is_file($this->getAvatarPathAttribute());
+    }
+
+    /**
      * Check if current user has an avatar.
      *
      * @return string|false
@@ -161,6 +179,20 @@ class User extends Authenticatable
     public function getAvatarPathAttribute()
     {
         return public_path('images/avatars/'.md5($this->id.$this->email).'.jpg');
+    }
+
+    /**
+     * Delete avatar image.
+     *
+     * @return bool
+     */
+    public function deleteAvatar()
+    {
+        if ($this->hasAvatar()) {
+            return unlink($this->getAvatarPathAttribute());
+        }
+
+        return false;
     }
 
     /**
@@ -177,5 +209,26 @@ class User extends Authenticatable
         }
 
         return asset('/assets/vendor/boilerplate/images/default-user.png');
+    }
+
+    /**
+     * Get avatar image from Gravatar.com.
+     *
+     * @return bool
+     */
+    public function getAvatarFromGravatar()
+    {
+        if (!Gravatar::exists($this->getAttribute('email'))) {
+            return false;
+        }
+
+        if ($this->hasAvatar()) {
+            unlink($this->getAvatarPathAttribute());
+        }
+
+        $src = Gravatar::src($this->getAttribute('email'), 250);
+        $img = file_get_contents($src);
+        file_put_contents($this->getAvatarPathAttribute(), $img);
+        return true;
     }
 }

@@ -13,74 +13,75 @@
 
 @section('content')
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mbm">
+        <div class="col-12 py-2 sticky-toolbar">
             <a href="{{ route('boilerplate.logs.list') }}" class="btn btn-default">
-                {{ __('boilerplate::logs.show.backtolist') }}
+                <span class="far fa-arrow-alt-circle-left text-muted"></span>
             </a>
-            <span class="pull-right btn-group">
-                <a href="{{ route('boilerplate.logs.download', [$log->date]) }}" class="btn btn-default">
-                    {{ __('boilerplate::logs.show.download') }}
+            <span class="float-right">
+                <span class="btn-group">
+                <a href="{{ route('boilerplate.logs.download', [$log->date]) }}" class="btn btn-default" data-toggle="tooltip" title="{{ __('boilerplate::logs.show.download') }}">
+                    <span class="fa fa-download text-muted"></span>
                 </a>
-                <a href="#delete-log-modal" class="btn btn-danger" data-log-date="{{ $log->date }}">
-                    {{ __('boilerplate::logs.show.delete') }}
+                <a href="#delete-log-modal" class="btn btn-danger" data-log-date="{{ $log->date }}" data-toggle="tooltip" title="{{ __('boilerplate::logs.show.delete') }}">
+                    <span class="fa fa-trash"></span>
                 </a>
+                    </span>
             </span>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div class="box box-primary">
-                <div class="box-header">
-                    <h3 class="box-title">{{ ucfirst(__('boilerplate::logs.show.file', ['date' => $date])) }}</h3>
+        <div class="col-12">
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title">{{ ucfirst(__('boilerplate::logs.show.file', ['date' => $date])) }}</h3>
                 </div>
-                <div class="box-body">
+                <div class="card-body">
                     <div class="row">
                         <div class="col-md-2">
                             @include('boilerplate::logs._partials.menu')
                         </div>
                         <div class="col-md-10">
-                            <div class="panel panel-info">
-                                <div class="panel-heading">
+                            <div class="card no-shadow">
+                                <div class="card-header bg-gray font-weight-bold py-1">
                                     {{ __('boilerplate::logs.show.loginfo') }}
                                 </div>
-                                <div class="table-responsive">
-                                    <table class="table table-condensed">
-                                        <thead>
-                                        <tr>
-                                            <td>{{ __('boilerplate::logs.show.filepath') }}</td>
-                                            <td colspan="5">{{ $log->getPath() }}</td>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>{{ __('boilerplate::logs.show.logentries') }}</td>
-                                            <td>
-                                                <span class="label label-primary">{{ $entries->total() }}</span>
-                                            </td>
-                                            <td>{{ __('boilerplate::logs.show.size') }}</td>
-                                            <td>
-                                                <span class="label label-primary">{{ $log->size() }}</span>
-                                            </td>
-                                            <td>{{ __('boilerplate::logs.show.createdat') }}</td>
-                                            <td>
-                                                <span class="label label-primary">
-                                                    {{ $log->createdAt()->isoFormat(__('boilerplate::date.YmdHis')) }}
-                                                </span>
-                                            </td>
-                                            <td>{{ __('boilerplate::logs.show.updatedat') }}</td>
-                                            <td>
-                                                <span class="label label-primary">
-                                                    {{ $log->updatedAt()->isoFormat(__('boilerplate::date.YmdHis')) }}
-                                                </span>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                                <div class="card-body py-1 px-0">
+                                    <div class="table-responsive">
+                                        <table class="table no-border table-sm mb-0">
+                                            <tbody>
+                                                <tr class="border-bottom">
+                                                    <td class="pl-2">{{ __('boilerplate::logs.show.filepath') }}</td>
+                                                    <td colspan="7">{{ $log->getPath() }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="pl-2">{{ __('boilerplate::logs.show.logentries') }}</td>
+                                                    <td>
+                                                        <span class="badge badge-secondary">{{ $entries->total() }}</span>
+                                                    </td>
+                                                    <td>{{ __('boilerplate::logs.show.size') }}</td>
+                                                    <td>
+                                                        <span class="badge badge-secondary">{{ $log->size() }}</span>
+                                                    </td>
+                                                    <td>{{ __('boilerplate::logs.show.createdat') }}</td>
+                                                    <td>
+                                                        <span class="badge badge-secondary">
+                                                            {{ $log->createdAt()->isoFormat(__('boilerplate::date.YmdHis')) }}
+                                                        </span>
+                                                    </td>
+                                                    <td>{{ __('boilerplate::logs.show.updatedat') }}</td>
+                                                    <td>
+                                                        <span class="badge badge-secondary">
+                                                            {{ $log->updatedAt()->isoFormat(__('boilerplate::date.YmdHis')) }}
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="panel panel-default">
                                 @if ($entries->hasPages())
-                                    <div class="panel-heading">
-                                        <span class="pull-right small text-muted mtm">
+                                    <div class="d-flex justify-content-between text-sm align-items-center mb-3">
+                                        <span class="text-sm text-muted ">
                                             {{ __('boilerplate::logs.show.page', ['current' => $entries->currentPage(), 'last' => $entries->lastPage()]) }}
                                         </span>
                                         {!! $entries->render() !!}
@@ -88,38 +89,38 @@
                                 @endif
 
                                 <div class="table-responsive">
-                                    <table id="entries" class="table table-hover table-condensed">
-                                        <thead>
-                                        <tr>
-                                            <th>{{ __('boilerplate::logs.show.env') }}</th>
-                                            <th style="width: 120px;">{{ __('boilerplate::logs.show.level') }}</th>
-                                            <th style="width: 65px;">{{ __('boilerplate::logs.show.time') }}</th>
-                                            <th>{{ __('boilerplate::logs.show.header') }}</th>
-                                            <th></th>
-                                        </tr>
+                                    <table id="entries" class="table table-hover table-sm border-left border-right">
+                                        <thead class="bg-gray">
+                                            <tr class="text-center">
+                                                <th>{{ __('boilerplate::logs.show.env') }}</th>
+                                                <th style="width: 120px;">{{ __('boilerplate::logs.show.level') }}</th>
+                                                <th style="width: 65px;">{{ __('boilerplate::logs.show.time') }}</th>
+                                                <th>{{ __('boilerplate::logs.show.header') }}</th>
+                                                <th></th>
+                                            </tr>
                                         </thead>
                                         <tbody>
                                         @foreach($entries as $key => $entry)
                                             <tr class="{{ $key %2 ? 'even' : 'odd' }}">
-                                                <td>
-                                                    <span class="label label-env">
+                                                <td class="px-2">
+                                                    <span class="badge bg-purple">
                                                         {{ $entry->env }}
                                                     </span>
                                                 </td>
-                                                <td>
-                                                    <span class="level level-{{ $entry->level }}">
+                                                <td class="px-2">
+                                                    <span class="badge level-{{ $entry->level }}">
                                                         {!! $entry->level() !!}
                                                     </span>
                                                 </td>
-                                                <td>
-                                                    <span class="label label-default">
+                                                <td class="px-2">
+                                                    <span class="badge bg-secondary">
                                                         {{ $entry->datetime->format('H:i:s') }}
                                                     </span>
                                                 </td>
-                                                <td>
-                                                    <p>{{ $entry->header }}</p>
+                                                <td class="text-sm">
+                                                    {{ $entry->header }}
                                                 </td>
-                                                <td class="text-right">
+                                                <td class="text-right px-2">
                                                     @if ($entry->hasStack())
                                                         <a class="btn btn-xs btn-default" role="button" data-toggle="collapse" href="#log-stack-{{ $key }}" aria-expanded="false" aria-controls="log-stack-{{ $key }}">
                                                             Stack
@@ -142,21 +143,18 @@
                                 </div>
 
                                 @if ($entries->hasPages())
-                                    <div class="panel-footer">
+                                    <div class="panel-footer d-flex justify-content-between align-items-center text-sm">
                                         <span class="pull-right small text-muted mtm">
                                             {{ __('boilerplate::logs.show.page', ['current' => $entries->currentPage(), 'last' => $entries->lastPage()]) }}
                                         </span>
                                         {!! $entries->render() !!}
                                     </div>
                                 @endif
-                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="box-footer">
-                    <span class="pull-right text-muted small">
-                        {!! __('boilerplate::logs.vendor') !!}
-                    </span>
+                <div class="card-footer text-right text-sm">
+                    {!! __('boilerplate::logs.vendor') !!}
                 </div>
             </div>
         </div>

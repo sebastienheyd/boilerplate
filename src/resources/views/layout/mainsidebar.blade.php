@@ -1,18 +1,23 @@
-<aside class="main-sidebar">
-    <section class="sidebar">
-        <div class="user-panel">
-            <div class="pull-left image">
-                <a href="{{ route('boilerplate.user.profile') }}">
-                    <img src="{{ Auth::user()->avatar_url }}" class="img-circle avatar" alt="{{ Auth::user()->name }}"/>
-                </a>
+<aside class="main-sidebar {{ config('boilerplate.theme.sidebar.border') ? 'border-right' : ''}} sidebar-{{ config('boilerplate.theme.sidebar.type') }}-{{ config('boilerplate.theme.sidebar.links.bg') }} elevation-{{ config('boilerplate.theme.sidebar.shadow') }}">
+    <a href="{{ route('boilerplate.dashboard') }}" class="brand-link {{ !empty(config('boilerplate.theme.sidebar.brand.bg')) ? 'bg-'.config('boilerplate.theme.sidebar.brand.bg') : ''}}">
+        <span class="brand-logo bg-{{ config('boilerplate.theme.sidebar.brand.logo.bg') }} elevation-{{ config('boilerplate.theme.sidebar.brand.logo.shadow') }}">
+            {!! config('boilerplate.theme.sidebar.brand.logo.icon') !!}
+        </span>
+        <span class="brand-text">{!! config('boilerplate.theme.sidebar.brand.logo.text') !!}</span>
+    </a>
+    <div class="sidebar">
+        @if(config('boilerplate.theme.sidebar.user.visible'))
+            <div class="user-panel py-3 d-flex">
+                <div class="image">
+                    <img src="{{ Auth::user()->avatar_url }}" class="avatar-img img-circle elevation-{{ config('boilerplate.theme.sidebar.user.shadow') }}" alt="{{ Auth::user()->name }}">
+                </div>
+                <div class="info">
+                    <a href="{{ route('boilerplate.user.profile') }}" class="d-block">{{ Auth::user()->name }}</a>
+                </div>
             </div>
-            <div class="pull-left info">
-                <p>{{ Auth::user()->name }}</p>
-                <a href="{{ route('boilerplate.logout') }}" class="logout">
-                    <i class="fa fa-circle text-success"></i> {{ __('boilerplate::layout.online') }}
-                </a>
-            </div>
-        </div>
-        {!! $menu !!}
-    </section>
+        @endif
+        <nav class="mt-3">
+            {!! $menu !!}
+        </nav>
+    </div>
 </aside>

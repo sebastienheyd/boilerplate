@@ -1,0 +1,12 @@
+@import "~admin-lte/plugins/daterangepicker/daterangepicker.css";
+@import "~admin-lte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css";
+
+.daterangepicker {
+    font-family: Source Sans Pro,Helvetica Neue,Helvetica,Arial,sans-serif;
+}
+
+.datepicker-days {
+    th, td {
+        border: 0;
+    }
+}

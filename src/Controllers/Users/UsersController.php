@@ -5,6 +5,7 @@ namespace Sebastienheyd\Boilerplate\Controllers\Users;
 use App\Http\Controllers\Controller;
 use Auth;
 use Carbon\Carbon;
+use Gravatar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Image;
@@ -23,11 +24,13 @@ class UsersController extends Controller
             'except' => [
                 'firstLogin',
                 'firstLoginPost',
-                'avatar',
-                'avatarDelete',
-                'avatarPost',
                 'profile',
                 'profilePost',
+                'getAvatarUrl',
+                'getAvatarFromGravatar',
+                'avatarDelete',
+                'avatarUpload',
+                'keepAlive'
             ],
         ]);
     }
@@ -52,17 +55,15 @@ class UsersController extends Controller
     public function datatable()
     {
         return Datatables::of(User::select('*'))
-            ->rawColumns(['actions', 'status'])
-            ->editColumn('created_at', function ($user) {
-                return $user->created_at->isoFormat(__('boilerplate::date.YmdHis'));
-            })->editColumn('last_login', function ($user) {
-                return $user->getLastLogin(__('boilerplate::date.YmdHis'), '-');
+            ->rawColumns(['actions', 'status', 'avatar', 'roles'])
+            ->editColumn('avatar', function ($user) {
+                return  '<img src="'.$user->avatar_url.'" class="img-circle bg-gray" width="32" />';
             })->editColumn('status', function ($user) {
                 if ($user->active == 1) {
-                    return '<span class="label label-success">'.__('boilerplate::users.active').'</span>';
+                    return '<span class="badge badge-success">'.__('boilerplate::users.active').'</span>';
                 }
 
-                return '<span class="label label-danger">'.__('boilerplate::users.inactive').'</span>';
+                return '<span class="badge badge-danger">'.__('boilerplate::users.inactive').'</span>';
             })->editColumn('roles', function ($user) {
                 return $user->getRolesList();
             })->editColumn('actions', function ($user) {
@@ -70,7 +71,7 @@ class UsersController extends Controller
 
                 // Admin can edit and delete anyone...
                 if ($currentUser->hasRole('admin')) {
-                    $b = $this->button(route('boilerplate.users.edit', $user->id), 'primary mrs', 'pencil');
+                    $b = $this->button(route('boilerplate.users.edit', $user->id), 'primary mr-1', 'pencil-alt');
 
                     // ...except delete himself
                     if ($user->id !== $currentUser->id) {
@@ -82,10 +83,10 @@ class UsersController extends Controller
 
                 // The user is the current user, you can't delete yourself
                 if ($user->id === $currentUser->id) {
-                    return $this->button(route('boilerplate.users.edit', $user->id), 'primary mrs', 'pencil');
+                    return $this->button(route('boilerplate.users.edit', $user->id), 'primary mr-1', 'pencil');
                 }
 
-                $b = $this->button(route('boilerplate.users.edit', $user->id), 'primary mrs', 'pencil');
+                $b = $this->button(route('boilerplate.users.edit', $user->id), 'primary mr1', 'pencil');
 
                 // Current user is not admin, only admin can delete another admin
                 if (!$user->hasRole('admin')) {
@@ -107,7 +108,9 @@ class UsersController extends Controller
      */
     private function button(string $route, string $class, string $icon): string
     {
-        return sprintf('<a href="%s" class="btn btn-sm btn-%s"><i class="fa fa-%s"></i></a>', $route, $class, $icon);
+        $str = '<a href="%s" class="btn btn-sm btn-%s"><i class="fa fa-fw fa-%s"></i></a>';
+
+        return sprintf($str, $route, $class, $icon);
     }
 
     /**
@@ -260,7 +263,7 @@ class UsersController extends Controller
 
         Auth::attempt(['email' => $user->email, 'password' => $request->input('password'), 'active' => 1]);
 
-        return redirect()->route('boilerplate.dashboard')
+        return redirect()->route(config('boilerplate.app.redirectTo', 'boilerplate.dashboard'))
                          ->with('growl', [__('boilerplate::users.newpassword'), 'success']);
     }
 
@@ -278,24 +281,7 @@ class UsersController extends Controller
             'password_confirmation' => 'same:password',
         ]);
 
-        $avatar = $request->file('avatar');
         $user = Auth::user();
-
-        if ($avatar && $file = $avatar->isValid()) {
-            $destinationPath = dirname($user->avatar_path);
-            if (!is_dir($destinationPath)) {
-                mkdir($destinationPath, 0766, true);
-            }
-            $extension = $avatar->getClientOriginalExtension();
-            $fileName = md5($user->id.$user->email).'_tmp.'.$extension;
-            $avatar->move($destinationPath, $fileName);
-
-            Image::make($destinationPath.DIRECTORY_SEPARATOR.$fileName)
-                ->fit(100, 100)
-                ->save($user->avatar_path);
-
-            unlink($destinationPath.DIRECTORY_SEPARATOR.$fileName);
-        }
 
         $input = $request->all();
 
@@ -312,11 +298,68 @@ class UsersController extends Controller
                          ->with('growl', [__('boilerplate::users.profile.successupdate'), 'success']);
     }
 
+    /**
+     * Get avatar url for ajax refresh.
+     *
+     * @return string
+     */
+    public function getAvatarUrl()
+    {
+        return Auth::user()->avatar_url;
+    }
+
+    /**
+     * Delete avatar image.
+     */
     public function avatarDelete()
     {
         $user = Auth::user();
-        if (is_file($user->avatar_path)) {
-            unlink($user->avatar_path);
+        $user->deleteAvatar();
+    }
+
+    public function avatarUpload(Request $request)
+    {
+        $user = Auth::user();
+        $avatar = $request->file('avatar');
+
+        try {
+            if ($avatar && $file = $avatar->isValid()) {
+                $destinationPath = dirname($user->avatar_path);
+                if (!is_dir($destinationPath)) {
+                    mkdir($destinationPath, 0766, true);
+                }
+                $extension = $avatar->getClientOriginalExtension();
+                $fileName = md5($user->id.$user->email).'_tmp.'.$extension;
+                $avatar->move($destinationPath, $fileName);
+
+                Image::make($destinationPath.DIRECTORY_SEPARATOR.$fileName)
+                    ->fit(170, 170)
+                    ->save($user->avatar_path);
+
+                unlink($destinationPath.DIRECTORY_SEPARATOR.$fileName);
+
+                return response()->json(['success' => true]);
+            }
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }
+
+        return response()->json(['success' => false]);
+    }
+
+    /**
+     * Get avatar from Gravatar.com
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getAvatarFromGravatar()
+    {
+        return response()->json(['success' => Auth::user()->getAvatarFromGravatar() ]);
+    }
+
+    public function keepAlive(Request $request)
+    {
+        session()->setId($request->post('id'));
+        session()->start();
     }
 }

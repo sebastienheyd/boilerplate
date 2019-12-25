@@ -14,14 +14,14 @@
 </script>
 @endpush
 
-<div class="box box-warning">
-    <div class="box-header">
-        <h3 class="box-title">Datatables</h3>
-        <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+<div class="card card-outline card-warning">
+    <div class="card-header border-bottom-0">
+        <h3 class="card-title">Datatables</h3>
+        <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fa fa-minus"></i></button>
         </div>
     </div>
-    <div class="box-body">
+    <div class="card-body pt-0">
         Usage :
         <pre>
 &commat;include('boilerplate::load.datatables')
@@ -31,7 +31,7 @@
     &lt;/script>
 &commat;endpush</pre>
 
-        <table class="table table-condensed table-hover" id="dt">
+        <table class="table table-sm table-striped table-hover" id="dt">
             <thead>
             <tr>
                 <th>Name</th>
@@ -63,7 +63,7 @@
             </tbody>
         </table>
     </div>
-    <div class="box-footer small text-muted text-right">
+    <div class="card-footer small text-muted text-right">
         <a href="https://datatables.net/manual/index">datatables</a>
     </div>
 </div>

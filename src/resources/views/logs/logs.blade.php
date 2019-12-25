@@ -10,30 +10,27 @@
 
 @section('content')
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div class="box box-primary">
-                <div class="box-header">
-                    <h3 class="box-title">{{ __('boilerplate::logs.list.title') }}</h3>
-                </div>
-                <div class="box-body">
+        <div class="col-12">
+            <div class="card card-outline card-info">
+                <div class="card-body">
                     {!! $rows->render() !!}
                     <div class="table-responsive">
-                        <table class="table table-hover table-striped table-stats">
+                        <table class="table table-hover table-striped table-sm">
                             <thead>
-                            <tr>
-                                @foreach($headers as $key => $header)
-                                    <th class="{{ $key == 'date' ? 'text-left' : 'text-center' }}">
-                                        @if ($key == 'date')
-                                            {{ $header }}
-                                        @else
-                                            <span class="level level-{{ $key }}">
-                                                {!! log_styler()->icon($key) . ' ' . $header !!}
-                                            </span>
-                                        @endif
-                                    </th>
-                                @endforeach
-                                <th class="text-right">{{ __('boilerplate::logs.list.actions') }}</th>
-                            </tr>
+                                <tr>
+                                    @foreach($headers as $key => $header)
+                                        <th class="{{ $key == 'date' ? 'text-left' : 'text-center' }}">
+                                            @if ($key == 'date')
+
+                                            @else
+                                                <span class="badge level-{{ $key }}">
+                                                    {!! log_styler()->icon($key) . ' ' . $header !!}
+                                                </span>
+                                            @endif
+                                        </th>
+                                    @endforeach
+                                    <th class="text-right"></th>
+                                </tr>
                             </thead>
                             <tbody>
                             @if ($rows->count() > 0)
@@ -43,25 +40,25 @@
                                             <td class="{{ $key == 'date' ? 'text-left' : 'text-center' }}">
                                                 @if ($key == 'date')
                                                     <a href="{{ route('boilerplate.logs.show', [$date]) }}">
-                                                        <span class="label label-primary">
+                                                        <span class="badge badge-info">
                                                             {{ \Carbon\Carbon::createFromFormat('Y-m-d', $value)->isoFormat(__('boilerplate::date.Ymd')) }}
                                                         </span>
                                                     </a>
                                                 @elseif ($value == 0)
-                                                    <span class="level level-empty">{{ $value }}</span>
+                                                    <span class="badge level-empty">{{ $value }}</span>
                                                 @else
                                                     <a href="{{ route('boilerplate.logs.filter', [$date, $key]) }}">
-                                                        <span class="level level-{{ $key }}">{{ $value }}</span>
+                                                        <span class="badge level-{{ $key }}">{{ $value }}</span>
                                                     </a>
                                                 @endif
                                             </td>
                                         @endforeach
-                                        <td class="text-right">
+                                        <td class="text-right visible-on-hover no-wrap">
                                             <a href="{{ route('boilerplate.logs.show', [$date]) }}" class="btn btn-sm btn-primary">
                                                 <i class="fa fa-search"></i>
                                             </a>
                                             <a href="#delete-log-modal" class="btn btn-sm btn-danger" data-log-date="{{ $date }}">
-                                                <i class="fa fa-trash-o"></i>
+                                                <i class="fas fa-trash"></i>
                                             </a>
                                         </td>
                                     </tr>
@@ -69,7 +66,7 @@
                             @else
                                 <tr>
                                     <td colspan="11" class="text-center">
-                                        <span class="label label-default">{{ trans('log-viewer::general.empty-logs') }}</span>
+                                        <span class="badge badge-default">{{ trans('log-viewer::general.empty-logs') }}</span>
                                     </td>
                                 </tr>
                             @endif
@@ -78,15 +75,17 @@
                     </div>
                     {!! $rows->render() !!}
                 </div>
-                <div class="box-footer">
-                    <span class="pull-right text-muted small">
-                        {!! __('boilerplate::logs.vendor') !!}
-                    </span>
+                <div class="card-footer text-right text-sm text-muted">
+                    {!! __('boilerplate::logs.vendor') !!}
                 </div>
             </div>
         </div>
     </div>
 @endsection
+
+@push('css')
+    <style> table tr th { border-top:0 !important } </style>
+@endpush
 
 @push('js')
     <script>
@@ -104,7 +103,6 @@
                         type: 'delete',
                         dataType: 'json',
                         data: {date:el.data('log-date')},
-                        headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
                         cache: false,
                         success: function(res) {
                             location.reload();

@@ -1,24 +1,34 @@
-<h1>
-    {{ $title }}
-    @if(isset($subtitle))
-        <small>{{ $subtitle }}</small>
-    @endif
-</h1>
-<ol class="breadcrumb">
-    <li>
-        <a href="{{ route('boilerplate.dashboard') }}">
-            <i class="fa fa-home"></i> {{ __('boilerplate::layout.home') }}
-        </a>
-    </li>
-    @if(isset($breadcrumb))
-        @foreach($breadcrumb as $label => $route)
-            @if(is_numeric($label))
-                <li class="active">{{ $route }}</li>
-            @elseif(is_array($route))
-                <li><a href="{{ route($route[0], $route[1]) }}">{{ $label }}</a></li>
-            @else
-                <li><a href="{{ route($route) }}">{{ $label }}</a></li>
-            @endif
-        @endforeach
-    @endif
-</ol>
+<div class="content-header pt-2 pb-1">
+    <div class="container-fluid">
+        <div class="row mb-2 align-items-end">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">
+                    {{ $title }}
+                    @if(isset($subtitle))
+                        <small class="font-weight-light ml-1 text-md">{{ $subtitle }}</small>
+                    @endif
+                </h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right text-sm">
+                    <li class="breadcrumb-item">
+                        <a href="{{ route('boilerplate.dashboard') }}">
+                            {{ __('boilerplate::layout.home') }}
+                        </a>
+                    </li>
+                    @if(isset($breadcrumb))
+                        @foreach($breadcrumb as $label => $route)
+                            @if(is_numeric($label))
+                                <li class="breadcrumb-item active">{{ $route }}</li>
+                            @elseif(is_array($route))
+                                <li class="breadcrumb-item"><a href="{{ route($route[0], $route[1]) }}">{{ $label }}</a></li>
+                            @else
+                                <li class="breadcrumb-item"><a href="{{ route($route) }}">{{ $label }}</a></li>
+                            @endif
+                        @endforeach
+                    @endif
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>

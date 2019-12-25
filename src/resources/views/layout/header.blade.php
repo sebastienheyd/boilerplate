@@ -1,30 +1,24 @@
-<header class="main-header">
-    <a href="{{ route('boilerplate.dashboard') }}" class="logo">
-        <span class="logo-mini">{!! config('boilerplate.app.logo-mini') !!}</span>
-        <span class="logo-lg">{!! config('boilerplate.app.logo-lg') !!}</span>
-    </a>
-    <nav class="navbar navbar-static-top">
-        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-            <span class="sr-only">Toggle</span>
-        </a>
-        <div class="navbar-custom-menu">
-            <ul class="nav navbar-nav">
-                <li>
-                    <a href="{{ route('boilerplate.user.profile') }}">
-                        <img src="{{ Auth::user()->avatar_url }}" class="user-image avatar" alt="User Image"/>
-                        <span class="hidden-xs">{{ Auth::user()->name }}</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('boilerplate.logout') }}" class="logout">
-                        <span class="hidden-xs">
-                            <span class="fa fa-power-off"></span> {{ __('boilerplate::layout.logout') }}
-                        </span>
-                    </a>
-                    {!! Form::open(['route' => 'boilerplate.logout', 'method' => 'post', 'id' => 'logout-form', 'style'=> 'display:none']) !!}
-                    {!! Form::close() !!}
-                </li>
-            </ul>
-        </div>
-    </nav>
-</header>
+<nav class="main-header navbar navbar-expand navbar-{{ config('boilerplate.theme.navbar.bg') }} navbar-{{ config('boilerplate.theme.navbar.type') }} {{ config('boilerplate.theme.navbar.border') ? "" : "border-bottom-0" }}">
+    <ul class="nav navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link sidebar-toggle" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+        </li>
+    </ul>
+    <ul class="nav navbar-nav ml-auto d-flex">
+        @if(config('boilerplate.theme.navbar.user.visible'))
+        <li class="nav-item">
+            <a href="{{ route('boilerplate.user.profile') }}" class="nav-link d-flex align-items-center">
+                <img src="{{ Auth::user()->avatar_url }}" class="avatar-img img-circle bg-gray mr-2 elevation-{{ config('boilerplate.theme.navbar.user.shadow') }}" alt="{{ Auth::user()->name }}" height="32">
+                {{ Auth::user()->name }}
+            </a>
+        </li>
+        @endif
+        <li class="nav-item">
+            {!! Form::open(['route' => 'boilerplate.logout', 'method' => 'post', 'id' => 'logout-form']) !!}
+            <button type="submit" class="btn nav-link d-flex align-items-center logout" data-question="{{ __('boilerplate::layout.logoutconfirm') }}">
+                <span class="fa fa-power-off hidden-xs pr-1"></span> {{ __('boilerplate::layout.logout') }}
+            </button>
+            {!! Form::close() !!}
+        </li>
+    </ul>
+</nav>

@@ -27,28 +27,27 @@
         );
 
         // Date picker
-        $('#datepicker').datepicker();
-
-        // Datetime picker
-        $('#datetimepicker').datetimepicker();
+        $('.datepicker').datetimepicker({
+            format: 'L'
+        });
     });
 </script>
 @endpush
 
-<div class="box box-primary">
-    <div class="box-header">
-        <h3 class="box-title">Date picker</h3>
-        <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+<div class="card card-outline card-primary">
+    <div class="card-header border-bottom-0">
+        <h3 class="card-title">Date picker</h3>
+        <div class="card-tools pull-right">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fa fa-minus"></i></button>
         </div>
     </div>
-    <div class="box-body">
+    <div class="card-body pt-0">
         Usage
         <pre>
 &commat;include('boilerplate::load.datepicker')
 &commat;push('js')
     &lt;script>
-        $('.datepicker').datepicker();
+        $('.datepicker').datetimepicker({ format: "L" });
         $('.datetimepicker').datetimepicker();
         $('.daterangepicker').daterangepicker();
     &lt;/script>
@@ -58,10 +57,10 @@
         <div class="form-group">
             <label>Date</label>
             <div class="input-group date">
-                <div class="input-group-addon">
-                    <i class="fa fa-calendar"></i>
+                <div class="input-group-append">
+                    <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
                 </div>
-                <input type="text" class="form-control pull-right" id="datepicker">
+                <input type="text" class="form-control datepicker" id="datepicker" data-toggle="datetimepicker" data-target="#datepicker">
             </div>
         </div>
 
@@ -69,10 +68,10 @@
         <div class="form-group">
             <label>Datetime</label>
             <div class="input-group date">
-                <div class="input-group-addon">
-                    <i class="fa fa-calendar"></i>
+                <div class="input-group-append">
+                    <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
                 </div>
-                <input type="text" class="form-control pull-right" id="datetimepicker">
+                <input type="text" class="form-control pull-right" id="datetimepicker" data-toggle="datetimepicker" data-target="#datetimepicker">
             </div>
         </div>
 
@@ -80,8 +79,8 @@
         <div class="form-group">
             <label>Date range</label>
             <div class="input-group">
-                <div class="input-group-addon">
-                    <i class="fa fa-calendar"></i>
+                <div class="input-group-append">
+                    <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
                 </div>
                 <input type="text" class="form-control pull-right" id="reservation">
             </div>
@@ -91,8 +90,8 @@
         <div class="form-group">
             <label>Date and time range</label>
             <div class="input-group">
-                <div class="input-group-addon">
-                    <i class="fa fa-clock-o"></i>
+                <div class="input-group-append">
+                    <div class="input-group-text"><i class="far fa-clock"></i></div>
                 </div>
                 <input type="text" class="form-control pull-right" id="reservationtime">
             </div>
@@ -104,7 +103,7 @@
             <div class="input-group">
                 <button type="button" class="btn btn-default pull-right" id="daterange-btn">
                     <span>
-                      <i class="fa fa-calendar"></i> Date range picker
+                      <i class="far fa-calendar-alt mr-2"></i>Date range picker
                     </span>
                     <i class="fa fa-caret-down"></i>
                 </button>
@@ -112,9 +111,8 @@
         </div>
 
     </div>
-    <div class="box-footer small text-muted text-right">
-        <a href="https://bootstrap-datepicker.readthedocs.io/en/latest/" target="_blank">datepicker</a> /
-        <a href="http://eonasdan.github.io/bootstrap-datetimepicker/" target="_blank">datetimepicker</a> /
-        <a href="https://www.daterangepicker.com" target="_blank">daterangepicker</a>
+    <div class="card-footer small text-muted text-right">
+        <a href="https://tempusdominus.github.io/bootstrap-4/" target="_blank">Tempus Dominus</a> /
+        <a href="https://www.daterangepicker.com" target="_blank">Date Range Picker</a>
     </div>
 </div>

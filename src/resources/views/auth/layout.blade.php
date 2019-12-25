@@ -7,12 +7,9 @@
     <meta name="robots" content="noindex, nofollow">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $title }} | {{ config('app.name') }}</title>
-    <link rel="stylesheet" href="{{ mix('/boilerplate.min.css', '/assets/vendor/boilerplate') }}">
-    @stack('css')
+    <link rel="stylesheet" href="{{ mix('/adminlte.min.css', '/assets/vendor/boilerplate') }}">
 </head>
-<body class="{{ $bodyClass ?? 'login-page'}}">
+<body class="hold-transition {{ $bodyClass ?? 'login-page'}}">
     @yield('content')
-    <script src="{{ mix('/boilerplate.min.js', '/assets/vendor/boilerplate') }}"></script>
-    @stack('js')
 </body>
 </html>

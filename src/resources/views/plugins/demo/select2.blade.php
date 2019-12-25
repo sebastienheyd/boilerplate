@@ -8,14 +8,14 @@
 </script>
 @endpush
 
-<div class="box box-default">
-    <div class="box-header with-border">
-        <h3 class="box-title">Select2</h3>
-        <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+<div class="card card-primary card-outline card-default">
+    <div class="card-header border-bottom-0">
+        <h3 class="card-title">Select2</h3>
+        <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fa fa-minus"></i></button>
         </div>
     </div>
-    <div class="box-body">
+    <div class="card-body pt-0">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 Usage :
@@ -56,7 +56,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label>Multiple</label>
-                    <select class="form-control select2" multiple="multiple" data-placeholder="Sélectionnez un/des État(s)" style="width: 100%;">
+                    <select class="form-control select2" multiple="multiple" data-placeholder="Multiple select" style="width: 100%;">
                         <option>Alabama</option>
                         <option>Alaska</option>
                         <option>California</option>
@@ -81,7 +81,7 @@
             </div>
         </div>
     </div>
-    <div class="box-footer small text-muted text-right">
+    <div class="card-footer small text-muted text-right">
         <a href="https://select2.github.io/">select2</a>
     </div>
 </div>

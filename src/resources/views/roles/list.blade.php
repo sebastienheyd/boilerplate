@@ -6,17 +6,14 @@
 
 @section('content')
     <div class="row">
-        <div class="col-sm-12 mbl">
-            <span class="pull-right">
+        <div class="col-sm-12 mb-3">
+            <span class="float-right">
                 <a href="{{ route("boilerplate.roles.create") }}" class="btn btn-primary">{{ __('boilerplate::role.create.title') }}</a>
             </span>
         </div>
     </div>
-    <div class="box box-info">
-        <div class="box-header">
-            <h3 class="box-title">{{ __('boilerplate::role.list.title') }}</h3>
-        </div>
-        <div class="box-body">
+    <div class="card card-outline card-info">
+        <div class="card-body">
             <table class="table table-striped table-hover va-middle" id="roles-table">
                 <thead>
                 <tr>
@@ -42,15 +39,15 @@
                         <td>
                             {{ $role->getNbUsers() }}
                         </td>
-                        <td>
+                        <td class="visible-on-hover" style="width:80px">
                             <a href="{{ route('boilerplate.roles.edit', $role->id) }}" class="btn btn-sm btn-primary">
-                                <span class="fa fa-pencil"></span>
+                                <span class="fa fa-fw fa-pencil-alt"></span>
                             </a>
                             @if($role->name !== 'admin' &&
                                 !(config('boilerplate.auth.register') && $role->name === config('boilerplate.auth.register_role')) &&
                                 $role->getNbUsers() === 0)
                                 <a href="{{ route('boilerplate.roles.destroy', $role->id) }}" class="btn btn-sm btn-danger destroy">
-                                    <span class="fa fa-trash"></span>
+                                    <span class="fa fa-fw fa-trash"></span>
                                 </a>
                             @endif
                         </td>

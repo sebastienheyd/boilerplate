@@ -1,7 +1,7 @@
 {
     "name": "sebastienheyd/boilerplate",
-    "description": "Laravel Boilerplate based on AdminLTE with user management, roles, permissions, logs viewer, ...",
-    "keywords": ["laravel", "boilerplate", "adminlte", "laratrust", "laravelcollective", "active", "admin"],
+    "description": "Laravel Boilerplate based on AdminLTE 3 with user management, roles, permissions, logs viewer, ...",
+    "keywords": ["laravel", "boilerplate", "backend","adminlte", "laratrust", "laravelcollective", "active", "admin"],
     "type": "library",
     "license": "MIT",
     "require": {
@@ -14,7 +14,8 @@
         "lavary/laravel-menu": "^1.7",
         "intervention/image": "^2.5",
         "arcanedev/log-viewer": "^5.0",
-        "nesbot/carbon": "^2.0"
+        "nesbot/carbon": "^2.0",
+        "thomaswelton/laravel-gravatar": "^1.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.3",

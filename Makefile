@@ -13,8 +13,11 @@ $(COMPOSER):
 vendor: $(COMPOSER) composer.json
 	$(COMPOSER) update
 
-check: vendor ## Check for coding standards
+cs: vendor ## Check for coding standards
 	php vendor/bin/phpcs
+
+csfix: vendor ## Check and fix for coding standards
+	php vendor/bin/phpcbf
 
 test: vendor phpunit.xml ## Unit testing
 	php vendor/bin/phpunit --stop-on-error

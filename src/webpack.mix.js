@@ -1,45 +1,40 @@
 const mix = require('laravel-mix');
-const clean = require('clean-webpack-plugin');
-
-mix.webpackConfig({plugins: [new clean(['public'], {verbose: false})]})
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+mix.webpackConfig({plugins: [new CleanWebpackPlugin()]})
     .setPublicPath("public")
     .setResourceRoot('/assets/vendor/boilerplate');
 
-// ============== Main ==============
+// ============== AdminLTE & default ==============
 
-mix.scripts([
-    'node_modules/jquery/dist/jquery.min.js',
-    'node_modules/bootstrap-sass/assets/javascripts/bootstrap.min.js',
-    'node_modules/jquery-slimscroll/jquery.slimscroll.min.js',
-    'node_modules/admin-lte/dist/js/adminlte.min.js',
-    'node_modules/bootbox/bootbox.min.js',
-    'resources/assets/js/vendor/bootbox/bootbox.locales.js',
-    'node_modules/bootstrap-notify/bootstrap-notify.min.js',
-    'resources/assets/js/boilerplate.js'
-], 'public/boilerplate.min.js').version();
+mix.js('resources/assets/js/bootstrap.js', 'public/bootstrap.min.js').version();
+mix.js('resources/assets/js/admin-lte.js', 'public/admin-lte.min.js').version();
+mix.js('resources/assets/js/boilerplate.js', 'public/boilerplate.min.js').version();
 
-mix.sass('resources/assets/scss/boilerplate.scss', 'public/boilerplate.min.css').version();
+mix.sass('resources/assets/scss/adminlte.scss', 'public/adminlte.min.css').version();
 
+mix.js('resources/assets/js/avatar.js', 'public/avatar.min.js').version();
 mix.copy('resources/images/default-user.png', 'public/images/default-user.png', false);
 
 // ============== Moment ==============
 
 mix.scripts([
-    'node_modules/moment/min/moment-with-locales.min.js'
+    'node_modules/moment/min/moment-with-locales.min.js',
 ], 'public/js/moment/moment-with-locales.min.js').version();
 
 // ============== Datatables ==============
 
 mix.scripts([
     'node_modules/datatables.net/js/jquery.dataTables.min.js',
-    'node_modules/datatables.net-bs/js/dataTables.bootstrap.js',
-    'node_modules/drmonty-datatables-plugins/sorting/datetime-moment.js'
+    'node_modules/datatables.net-bs4/js/dataTables.bootstrap4.js',
+    'node_modules/drmonty-datatables-plugins/dataRender/datetime.js',
+    'node_modules/drmonty-datatables-plugins/sorting/datetime-moment.js',
+    'resources/assets/js/datatables.js',
 ], 'public/js/datatables/datatables.min.js').version();
 
 mix.copy('node_modules/drmonty-datatables-plugins/i18n', 'public/js/datatables/i18n/', false);
 
 mix.styles(
-    'node_modules/datatables.net-bs/css/dataTables.bootstrap.css',
+    'node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css',
     'public/js/datatables/datatables.min.css'
 ).version();
 
@@ -51,30 +46,17 @@ mix.scripts([
 
 mix.copy('node_modules/select2/dist/js/i18n', 'public/js/select2/i18n/', false);
 
-// ============== iCheck ==============
-
-mix.scripts([
-    'node_modules/icheck/icheck.min.js'
-], 'public/js/icheck/icheck.min.js').version();
-
-mix.sass('resources/assets/scss/icheck.scss', 'public/js/icheck/icheck.min.css').version();
 
 // ============== DatePicker ==============
 
-mix.styles([
-    'node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css',
-    'node_modules/bootstrap-daterangepicker/daterangepicker.css',
-    'node_modules/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css',
-    'resources/assets/scss/daterangepicker.css'
-], 'public/js/datepicker/bootstrap-datepicker3.min.css').version();
+mix.sass('resources/assets/scss/daterangepicker.scss', 'public/js/datepicker/datepicker.min.css').version();
 
 mix.scripts([
-    'node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
-    'node_modules/bootstrap-daterangepicker/daterangepicker.js',
-    'node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'
-], 'public/js/datepicker/bootstrap-datepicker.min.js').version();
+    'node_modules/admin-lte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.js',
+    'node_modules/admin-lte/plugins/daterangepicker/daterangepicker.js',
+], 'public/js/datepicker/datepicker.min.js').version();
 
-mix.copy('node_modules/bootstrap-datepicker/dist/locales', 'public/js/datepicker/locales', false);
+// mix.copy('node_modules/bootstrap-datepicker/dist/locales', 'public/js/datepicker/locales', false);
 
 // ============== FileInput ==============
 
@@ -100,7 +82,7 @@ mix.copy('node_modules/codemirror/theme', 'public/js/codemirror/theme');
 mix.sass('resources/assets/js/vendor/codemirror/theme/storm.scss', 'public/js/codemirror/theme/storm.css');
 
 mix.styles('node_modules/codemirror/lib/codemirror.css', 'public/js/codemirror/codemirror.min.css').version();
-
+//
 // ============== TinyMCE ==============
 
 mix.copy('node_modules/tinymce/plugins', 'public/js/tinymce/plugins');

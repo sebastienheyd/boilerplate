@@ -2,30 +2,65 @@
 
 @section('content')
     @component('boilerplate::auth.loginbox')
-        <p class="login-box-msg">{{ __('boilerplate::auth.register.intro') }}</p>
+        <p class="login-box-msg text-sm">{{ __('boilerplate::auth.register.intro') }}</p>
         {!! Form::open(['route' => 'boilerplate.register', 'method' => 'post', 'autocomplete'=> 'off']) !!}
-            <div class="form-group {{ $errors->has('first_name') ? 'has-error' : '' }}">
-                {{ Form::text('first_name', old('first_name'), ['class' => 'form-control', 'placeholder' => __('boilerplate::auth.fields.first_name'), 'required', 'autofocus']) }}
-                {!! $errors->first('first_name','<p class="text-danger"><strong>:message</strong></p>') !!}
+            <div class="mb-3">
+                <div class="input-group">
+                    {{ Form::text('first_name', old('first_name'), ['class' => 'form-control'.$errors->first('first_name', ' is-invalid'), 'placeholder' => __('boilerplate::auth.fields.first_name'), 'required', 'autofocus']) }}
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+                        </div>
+                    </div>
+                </div>
+                {!! $errors->first('first_name','<div class="error-bubble"><div>:message</div></div>') !!}
             </div>
-            <div class="form-group {{ $errors->has('last_name') ? 'has-error' : '' }}">
-                {{ Form::text('last_name', old('last_name'), ['class' => 'form-control', 'placeholder' => __('boilerplate::auth.fields.last_name'), 'required']) }}
-                {!! $errors->first('last_name','<p class="text-danger"><strong>:message</strong></p>') !!}
+            <div class="mb-3">
+                <div class="input-group">
+                    {{ Form::text('last_name', old('last_name'), ['class' => 'form-control'.$errors->first('last_name', ' is-invalid'), 'placeholder' => __('boilerplate::auth.fields.last_name'), 'required']) }}
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+                        </div>
+                    </div>
+                </div>
+                {!! $errors->first('last_name','<div class="error-bubble"><div>:message</div></div>') !!}
             </div>
-            <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
-                {{ Form::email('email', old('email'), ['class' => 'form-control', 'placeholder' => __('boilerplate::auth.fields.email'), 'required']) }}
-                {!! $errors->first('email','<p class="text-danger"><strong>:message</strong></p>') !!}
+            <div class="mb-3">
+                <div class="input-group">
+                    {{ Form::email('email', old('email'), ['class' => 'form-control'.$errors->first('email', ' is-invalid'), 'placeholder' => __('boilerplate::auth.fields.email'), 'required']) }}
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-envelope"></span>
+                        </div>
+                    </div>
+                </div>
+                {!! $errors->first('email','<div class="error-bubble"><div>:message</div></div>') !!}
             </div>
-            <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
-                {{ Form::password('password', ['class' => 'form-control', 'placeholder' => __('boilerplate::auth.fields.password'), 'required']) }}
-                {!! $errors->first('password','<p class="text-danger"><strong>:message</strong></p>') !!}
+            <div class="mb-3">
+                <div class="input-group">
+                    {{ Form::password('password', ['class' => 'form-control'.$errors->first('password', ' is-invalid'), 'placeholder' => __('boilerplate::auth.fields.password'), 'required']) }}
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+                {!! $errors->first('password','<div class="error-bubble"><div>:message</div></div>') !!}
             </div>
-            <div class="form-group {{ $errors->has('password_confirmation') ? 'has-error' : '' }}">
-                {{ Form::password('password_confirmation', ['class' => 'form-control', 'placeholder' => __('boilerplate::auth.fields.password_confirm'), 'required']) }}
-                {!! $errors->first('password_confirmation','<p class="text-danger"><strong>:message</strong></p>') !!}
+            <div class="mb-3">
+                <div class="input-group">
+                    {{ Form::password('password_confirmation', ['class' => 'form-control'.$errors->first('password_confirmation', ' is-invalid'), 'placeholder' => __('boilerplate::auth.fields.password_confirm'), 'required']) }}
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+                {!! $errors->first('password_confirmation','<div class="error-bubble"><div>:message</div></div>') !!}
             </div>
-            <div class="row mbm">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+            <div class="mb-3">
+                <div class="col-12 text-right">
                     <button type="submit" class="btn btn-primary">
                         {{ __('boilerplate::auth.register.register_button') }}
                     </button>
@@ -33,7 +68,9 @@
             </div>
         {!! Form::close() !!}
         @if(!$firstUser)
-            <a href="{{ route('boilerplate.login') }}">{{ __('boilerplate::auth.register.login_link') }}</a><br>
+            <p class="mb-0 text-sm">
+                <a href="{{ route('boilerplate.login') }}">{{ __('boilerplate::auth.register.login_link') }}</a><br>
+            </p>
         @endif
     @endcomponent
 @endsection

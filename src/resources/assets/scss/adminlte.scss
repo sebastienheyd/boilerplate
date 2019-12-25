@@ -1,0 +1,207 @@
+@import "~admin-lte/plugins/select2/css/select2.min.css";
+@import "~admin-lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css";
+@import "~admin-lte/dist/css/adminlte.min.css";
+@import "~admin-lte/plugins/fontawesome-free/css/all.min.css";
+@import "~admin-lte/plugins/overlayScrollbars/css/OverlayScrollbars.css";
+@import "~toastr/toastr";
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=swap');
+
+$red: #dc3545;
+
+// Toastr opacity
+#toast-container > div {
+  opacity: 1;
+  border: 0;
+  box-shadow: none;
+}
+
+// Remove dots around buttons
+:focus {
+  outline: none !important;
+}
+
+// Remove cross
+.form-control.is-invalid, .was-validated .form-control:invalid {
+  padding-right: 0;
+  background-image: none;
+}
+
+// Less margin for labels
+label {
+  margin-bottom: .25rem
+}
+
+.nav-pills .nav-link:not(.active):hover {
+  color: #777;
+}
+
+// Brand logo with text
+.brand {
+  &-logo {
+    background: #CCC;
+    border-radius: 50%;
+    color: #333;
+    width: 2.1rem;
+    height: 2.1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: .8rem;
+    margin-right: .5rem;
+    margin-top: -2px;
+    font-weight: bold;
+    position: absolute;
+  }
+
+  &-text {
+    padding-left: 3.5rem;
+  }
+}
+
+// Custom error bubble for form-control
+.error-bubble {
+  position: relative;
+  display: block;
+  margin-top: 7px;
+
+  div {
+    border-radius: 3px;
+    background: $red;
+    color: #FFF;
+    padding: 1px 10px;
+    font-size: .875rem !important;
+    position: relative;
+    top: -1px;
+    display: inline-block;
+    border: 1px solid $red;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 20px;
+    width: 0;
+    height: 0;
+    border: 7px solid transparent;
+    border-bottom-color: $red;
+    border-top: 0;
+    margin-left: -7px;
+    margin-top: -7px;
+  }
+}
+
+pre {
+  display: block;
+  padding: 9.5px;
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.428571429;
+  color: #333;
+  word-break: break-all;
+  word-wrap: break-word;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+}
+
+.no-wrap { white-space: nowrap !important; }
+.no-shadow { box-shadow: none !important; }
+.nav-link { cursor: pointer }
+
+.sticky-toolbar {
+  position: sticky;
+  top: 57px;
+  z-index: 2;
+  background: #f4f6f9;
+}
+
+.breadcrumb-item {
+  a {
+    color: #6c757d;
+  }
+}
+
+.card .card {
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: .25rem;
+}
+
+.avatar {
+  position: relative;
+  background: #6c757d;
+
+  a {
+    cursor: pointer;
+  }
+
+  &-label {
+    width:170px;
+    height: 170px;
+  }
+
+  &-img {
+    max-width: 170px;
+    max-height: 170px;
+  }
+
+  &-buttons {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0);
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 150ms ease-in-out;
+
+    .btn-group {
+      position: absolute;
+      transition: all 300ms ease-in-out;
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+
+    &:hover {
+      background: rgba(0,0,0,.6);
+
+      .btn-group {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+
+  &-progress {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    display:none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+
+    span {
+      position: absolute;
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  tr {
+    td.visible-on-hover {
+      * {
+        opacity: 0;
+        transition: opacity 50ms ease-in-out;
+      }
+    }
+
+    &:hover {
+      td.visible-on-hover {
+        * {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
