@@ -4,7 +4,6 @@ namespace Sebastienheyd\Boilerplate\Menu;
 
 use Illuminate\Support\Arr;
 use Lavary\Menu\Item as LavaryMenuItem;
-use phpDocumentor\Reflection\DocBlock\Tags\Uses;
 
 class Item extends LavaryMenuItem
 {
@@ -20,7 +19,6 @@ class Item extends LavaryMenuItem
      *
      * @param string $icon
      * @param string $type
-     *
      *
      * @return self
      */
@@ -47,7 +45,7 @@ class Item extends LavaryMenuItem
     }
 
     /**
-     * Add a class to the current link
+     * Add a class to the current link.
      *
      * @param string $class
      *
@@ -88,6 +86,7 @@ class Item extends LavaryMenuItem
                 }
 
                 $this->isActive = true;
+
                 return $this;
             }
         }

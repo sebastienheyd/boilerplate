@@ -61,7 +61,7 @@ class User extends Authenticatable
 
     protected $dispatchesEvents = [
         'forceDeleted' => UserDeleted::class,
-        'created'      => UserCreated::class
+        'created'      => UserCreated::class,
     ];
 
     /**
@@ -229,6 +229,7 @@ class User extends Authenticatable
         $src = Gravatar::src($this->getAttribute('email'), 250);
         $img = file_get_contents($src);
         file_put_contents($this->getAvatarPathAttribute(), $img);
+
         return true;
     }
 }

@@ -30,7 +30,7 @@ class UsersController extends Controller
                 'getAvatarFromGravatar',
                 'avatarDelete',
                 'avatarUpload',
-                'keepAlive'
+                'keepAlive',
             ],
         ]);
     }
@@ -348,13 +348,13 @@ class UsersController extends Controller
     }
 
     /**
-     * Get avatar from Gravatar.com
+     * Get avatar from Gravatar.com.
      *
      * @return \Illuminate\Http\JsonResponse
      */
     public function getAvatarFromGravatar()
     {
-        return response()->json(['success' => Auth::user()->getAvatarFromGravatar() ]);
+        return response()->json(['success' => Auth::user()->getAvatarFromGravatar()]);
     }
 
     public function keepAlive(Request $request)

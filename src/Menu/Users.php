@@ -30,7 +30,7 @@ class Users
         ]);
 
         $menu->addTo('access', __('boilerplate::users.profile.title'), [
-            'route' => 'boilerplate.user.profile'
+            'route' => 'boilerplate.user.profile',
         ]);
     }
 }

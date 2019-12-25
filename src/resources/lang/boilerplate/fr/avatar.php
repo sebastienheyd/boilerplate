@@ -8,6 +8,6 @@ return [
     ],
     'upload'   => [
         'success' => 'Fichier correctement téléchargé',
-        'error'   => 'Erreur de téléchargement'
-    ]
+        'error'   => 'Erreur de téléchargement',
+    ],
 ];
