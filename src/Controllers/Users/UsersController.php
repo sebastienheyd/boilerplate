@@ -260,7 +260,7 @@ class UsersController extends Controller
 
         Auth::attempt(['email' => $user->email, 'password' => $request->input('password'), 'active' => 1]);
 
-        return redirect()->route('boilerplate.dashboard')
+        return redirect()->route(config('boilerplate.app.redirectTo', 'boilerplate.dashboard'))
                          ->with('growl', [__('boilerplate::users.newpassword'), 'success']);
     }
 
