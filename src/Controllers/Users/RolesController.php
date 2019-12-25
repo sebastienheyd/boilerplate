@@ -68,7 +68,7 @@ class RolesController extends Controller
             'description'  => 'required',
         ], [], [
             'display_name' => mb_strtolower(__('boilerplate::role.label')),
-            'description'  => mb_strtolower(__('boilerplate::role.description'))
+            'description'  => mb_strtolower(__('boilerplate::role.description')),
         ]);
 
         $role = Role::create($input);
@@ -108,7 +108,7 @@ class RolesController extends Controller
             'description'  => 'required',
         ], [], [
             'display_name' => mb_strtolower(__('boilerplate::role.label')),
-            'description'  => mb_strtolower(__('boilerplate::role.description'))
+            'description'  => mb_strtolower(__('boilerplate::role.description')),
         ]);
 
         $role = Role::find($id);

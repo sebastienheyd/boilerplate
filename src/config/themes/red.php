@@ -3,7 +3,7 @@
 /**
  * BG : blue, indigo, purple, pink, red, orange, yellow, green, teal, cyan, gray, gray-dark, black
  * Type : dark, light
- * Shadow : 0-4
+ * Shadow : 0-4.
  */
 return [
     'navbar'  => [
@@ -12,7 +12,7 @@ return [
         'border' => true,
         'user'   => [
             'visible' => true,
-            'shadow'  => 0
+            'shadow'  => 0,
         ],
     ],
     'sidebar' => [
@@ -22,7 +22,7 @@ return [
         'compact' => false,
         'links'   => [
             'bg'     => 'red',
-            'shadow' => 0
+            'shadow' => 0,
         ],
         'brand'   => [
             'bg'   => 'red',
@@ -35,7 +35,7 @@ return [
         ],
         'user'    => [
             'visible' => false,
-            'shadow'  => 2
+            'shadow'  => 2,
         ],
     ],
     'footer'  => [
