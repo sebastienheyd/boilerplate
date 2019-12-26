@@ -12,7 +12,7 @@ return [
         'border' => true,
         'user'   => [
             'visible' => false,
-            'shadow'  => 0
+            'shadow'  => 0,
         ],
     ],
     'sidebar' => [
@@ -22,7 +22,7 @@ return [
         'compact' => false,
         'links'   => [
             'bg'     => 'gray-dark',
-            'shadow' => 0
+            'shadow' => 0,
         ],
         'brand'   => [
             'bg'   => 'gray-dark',
@@ -35,11 +35,15 @@ return [
         ],
         'user'    => [
             'visible' => true,
-            'shadow'  => 0
+            'shadow'  => 0,
         ],
     ],
     'footer'  => [
         'vendorname' => 'Boilerplate',
         'vendorlink' => '',
+    ],
+    'card' => [
+        'outline' => true,
+        'default_color' => 'info',
     ],
 ];

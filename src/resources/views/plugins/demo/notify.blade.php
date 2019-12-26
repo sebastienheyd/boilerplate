@@ -1,11 +1,8 @@
-<div class="card card-outline card-danger">
-    <div class="card-header border-bottom-0">
-        <h3 class="card-title">Notify / Growl</h3>
-        <div class="card-tools pull-right">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fa fa-minus"></i></button>
-        </div>
-    </div>
-    <div class="card-body pt-0">
+@component('boilerplate::card', ['color' => 'danger', 'title' => 'Toastr / Growl'])
+    @slot('tools')
+        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fa fa-minus"></i></button>
+    @endslot
+
         Usage :
         <pre>
 &lt;button class="btn btn-primary" onclick="growl('Example')">growl&lt;/button>
@@ -21,8 +18,10 @@
             <button class="btn btn-danger" onclick="growl('Example', 'error')">growl error</button>
         </p>
         <pre class="prettyprint">growl('Example', 'success')</pre>
+
+    @slot('footer')
+    <div class="small text-muted text-right">
+        <a href="https://codeseven.github.io/toastr/">Toastr</a>
     </div>
-    <div class="card-footer small text-muted text-right">
-        <a href="https://github.com/mouse0270/bootstrap-notify">notify</a>
-    </div>
-</div>
+    @endslot
+@endcomponent

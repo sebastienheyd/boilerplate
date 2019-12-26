@@ -19,11 +19,8 @@
         </div>
         <div class="row">
             <div class="col-md-5">
-                <div class="card card-info">
-                    <div class="card-header">
-                         <h3 class="card-title">{{ __('boilerplate::users.profile.title') }}</h3>
-                    </div>
-                    <div class="d-flex p-3">
+                @component('boilerplate::card', ['title' => __('boilerplate::users.profile.title')])
+                    <div class="d-flex">
                         <div id="avatar-wrapper">
                             @include('boilerplate::users.avatar')
                         </div>
@@ -44,46 +41,41 @@
                             </span>
                         </div>
                     </div>
-                </div>
+            @endcomponent
             </div>
-            <div class="col-sm-12 col-md-7">
-                <div class="card card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">{{ __('boilerplate::users.informations') }}</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-12 col-md-6">
-                                <div class="form-group">
-                                    {{ Form::label('first_name', __('boilerplate::users.firstname')) }}
-                                    {{ Form::text('first_name', old('first_name', $user->first_name), ['class' => 'form-control'.$errors->first('first_name', ' is-invalid')]) }}
-                                    {!! $errors->first('first_name','<div class="error-bubble"><div>:message</div></div>') !!}
-                                </div>
+            <div class="col-md-7">
+                @component('boilerplate::card', ['color' => 'teal', 'title' => __('boilerplate::users.informations')])
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="form-group">
+                                {{ Form::label('first_name', __('boilerplate::users.firstname')) }}
+                                {{ Form::text('first_name', old('first_name', $user->first_name), ['class' => 'form-control'.$errors->first('first_name', ' is-invalid')]) }}
+                                {!! $errors->first('first_name','<div class="error-bubble"><div>:message</div></div>') !!}
                             </div>
-                            <div class="col-sm-12 col-md-6">
-                                <div class="form-group">
-                                    {{ Form::label('last_name', __('boilerplate::users.lastname')) }}
-                                    {{ Form::text('last_name', old('last_name', $user->last_name), ['class' => 'form-control'.$errors->first('last_name', ' is-invalid'), 'autofocus']) }}
-                                    {!! $errors->first('last_name','<div class="error-bubble"><div>:message</div></div>') !!}
-                                </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="form-group">
+                                {{ Form::label('last_name', __('boilerplate::users.lastname')) }}
+                                {{ Form::text('last_name', old('last_name', $user->last_name), ['class' => 'form-control'.$errors->first('last_name', ' is-invalid'), 'autofocus']) }}
+                                {!! $errors->first('last_name','<div class="error-bubble"><div>:message</div></div>') !!}
                             </div>
-                            <div class="col-sm-12 col-md-6">
-                                <div class="form-group">
-                                    {{ Form::label('password', ucfirst(__('boilerplate::auth.fields.password'))) }}
-                                    {{ Form::password('password', ['class' => 'form-control'.$errors->first('password', ' is-invalid')]) }}
-                                    {!! $errors->first('password','<div class="error-bubble"><div>:message</div></div>') !!}
-                                </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="form-group">
+                                {{ Form::label('password', ucfirst(__('boilerplate::auth.fields.password'))) }}
+                                {{ Form::password('password', ['class' => 'form-control'.$errors->first('password', ' is-invalid')]) }}
+                                {!! $errors->first('password','<div class="error-bubble"><div>:message</div></div>') !!}
                             </div>
-                            <div class="col-sm-12 col-md-6">
-                                <div class="form-group">
-                                    {{ Form::label('password_confirmation', ucfirst(__('boilerplate::auth.fields.password_confirm'))) }}
-                                    {{ Form::password('password_confirmation', ['class' => 'form-control'.$errors->first('password_confirmation', ' is-invalid')]) }}
-                                    {!! $errors->first('password_confirmation','<div class="error-bubble"><div>:message</div></div>') !!}
-                                </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="form-group">
+                                {{ Form::label('password_confirmation', ucfirst(__('boilerplate::auth.fields.password_confirm'))) }}
+                                {{ Form::password('password_confirmation', ['class' => 'form-control'.$errors->first('password_confirmation', ' is-invalid')]) }}
+                                {!! $errors->first('password_confirmation','<div class="error-bubble"><div>:message</div></div>') !!}
                             </div>
                         </div>
                     </div>
-                </div>
+                @endcomponent
             </div>
         </div>
     {{ Form::close() }}

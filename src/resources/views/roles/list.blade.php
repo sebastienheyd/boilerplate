@@ -12,51 +12,49 @@
             </span>
         </div>
     </div>
-    <div class="card card-outline card-info">
-        <div class="card-body">
-            <table class="table table-striped table-hover va-middle" id="roles-table">
-                <thead>
+    @component('boilerplate::card')
+        <table class="table table-striped table-hover va-middle" id="roles-table">
+            <thead>
+            <tr>
+                <th>{{ __('boilerplate::role.label') }}</th>
+                <th>{{ __('boilerplate::role.description') }}</th>
+                <th>{{ __('boilerplate::role.permissions') }}</th>
+                <th>{{ __('boilerplate::role.list.nbusers') }}</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($roles as $role)
                 <tr>
-                    <th>{{ __('boilerplate::role.label') }}</th>
-                    <th>{{ __('boilerplate::role.description') }}</th>
-                    <th>{{ __('boilerplate::role.permissions') }}</th>
-                    <th>{{ __('boilerplate::role.list.nbusers') }}</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($roles as $role)
-                    <tr>
-                        <td>
-                            <strong>{{ $role->display_name }}</strong>
-                        </td>
-                        <td>
-                            {{ $role->description }}<br />
-                        </td>
-                        <td>
-                            {!! $role->permissions->implode('display_name', ', ') !!}
-                        </td>
-                        <td>
-                            {{ $role->getNbUsers() }}
-                        </td>
-                        <td class="visible-on-hover" style="width:80px">
-                            <a href="{{ route('boilerplate.roles.edit', $role->id) }}" class="btn btn-sm btn-primary">
-                                <span class="fa fa-fw fa-pencil-alt"></span>
+                    <td>
+                        <strong>{{ $role->display_name }}</strong>
+                    </td>
+                    <td>
+                        {{ $role->description }}<br />
+                    </td>
+                    <td>
+                        {!! $role->permissions->implode('display_name', ', ') !!}
+                    </td>
+                    <td>
+                        {{ $role->getNbUsers() }}
+                    </td>
+                    <td class="visible-on-hover" style="width:80px">
+                        <a href="{{ route('boilerplate.roles.edit', $role->id) }}" class="btn btn-sm btn-primary">
+                            <span class="fa fa-fw fa-pencil-alt"></span>
+                        </a>
+                        @if($role->name !== 'admin' &&
+                            !(config('boilerplate.auth.register') && $role->name === config('boilerplate.auth.register_role')) &&
+                            $role->getNbUsers() === 0)
+                            <a href="{{ route('boilerplate.roles.destroy', $role->id) }}" class="btn btn-sm btn-danger destroy">
+                                <span class="fa fa-fw fa-trash"></span>
                             </a>
-                            @if($role->name !== 'admin' &&
-                                !(config('boilerplate.auth.register') && $role->name === config('boilerplate.auth.register_role')) &&
-                                $role->getNbUsers() === 0)
-                                <a href="{{ route('boilerplate.roles.destroy', $role->id) }}" class="btn btn-sm btn-danger destroy">
-                                    <span class="fa fa-fw fa-trash"></span>
-                                </a>
-                            @endif
-                        </td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
-        </div>
-    </div>
+                        @endif
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    @endcomponent
 @endsection
 
 @include('boilerplate::load.datatables')

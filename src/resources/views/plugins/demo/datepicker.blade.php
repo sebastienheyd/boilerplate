@@ -34,14 +34,10 @@
 </script>
 @endpush
 
-<div class="card card-outline card-primary">
-    <div class="card-header border-bottom-0">
-        <h3 class="card-title">Date picker</h3>
-        <div class="card-tools pull-right">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fa fa-minus"></i></button>
-        </div>
-    </div>
-    <div class="card-body pt-0">
+@component('boilerplate::card', ['color' => 'indigo', 'title' => 'Date picker'])
+    @slot('tools')
+        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fa fa-minus"></i></button>
+    @endslot
         Usage
         <pre>
 &commat;include('boilerplate::load.datepicker')
@@ -110,9 +106,11 @@
             </div>
         </div>
 
-    </div>
-    <div class="card-footer small text-muted text-right">
-        <a href="https://tempusdominus.github.io/bootstrap-4/" target="_blank">Tempus Dominus</a> /
-        <a href="https://www.daterangepicker.com" target="_blank">Date Range Picker</a>
-    </div>
-</div>
+
+    @slot('footer')
+        <div class="small text-muted text-right">
+            <a href="https://tempusdominus.github.io/bootstrap-4/" target="_blank">Tempus Dominus</a> /
+            <a href="https://www.daterangepicker.com" target="_blank">Date Range Picker</a>
+        </div>
+    @endslot
+@endcomponent

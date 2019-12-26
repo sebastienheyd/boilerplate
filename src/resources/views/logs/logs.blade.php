@@ -11,74 +11,75 @@
 @section('content')
     <div class="row">
         <div class="col-12">
-            <div class="card card-outline card-info">
-                <div class="card-body">
-                    {!! $rows->render() !!}
-                    <div class="table-responsive">
-                        <table class="table table-hover table-striped table-sm">
-                            <thead>
-                                <tr>
-                                    @foreach($headers as $key => $header)
-                                        <th class="{{ $key == 'date' ? 'text-left' : 'text-center' }}">
-                                            @if ($key == 'date')
+            @component('boilerplate::card')
+                {!! $rows->render() !!}
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped table-sm">
+                        <thead>
+                            <tr>
+                                @foreach($headers as $key => $header)
+                                    <th class="{{ $key == 'date' ? 'text-left' : 'text-center' }}">
+                                        @if ($key == 'date')
 
-                                            @else
-                                                <span class="badge level-{{ $key }}">
-                                                    {!! log_styler()->icon($key) . ' ' . $header !!}
-                                                </span>
-                                            @endif
-                                        </th>
-                                    @endforeach
-                                    <th class="text-right"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            @if ($rows->count() > 0)
-                                @foreach($rows as $date => $row)
-                                    <tr>
-                                        @foreach($row as $key => $value)
-                                            <td class="{{ $key == 'date' ? 'text-left' : 'text-center' }}">
-                                                @if ($key == 'date')
-                                                    <a href="{{ route('boilerplate.logs.show', [$date]) }}">
-                                                        <span class="badge badge-info">
-                                                            {{ \Carbon\Carbon::createFromFormat('Y-m-d', $value)->isoFormat(__('boilerplate::date.Ymd')) }}
-                                                        </span>
-                                                    </a>
-                                                @elseif ($value == 0)
-                                                    <span class="badge level-empty">{{ $value }}</span>
-                                                @else
-                                                    <a href="{{ route('boilerplate.logs.filter', [$date, $key]) }}">
-                                                        <span class="badge level-{{ $key }}">{{ $value }}</span>
-                                                    </a>
-                                                @endif
-                                            </td>
-                                        @endforeach
-                                        <td class="text-right visible-on-hover no-wrap">
-                                            <a href="{{ route('boilerplate.logs.show', [$date]) }}" class="btn btn-sm btn-primary">
-                                                <i class="fa fa-search"></i>
-                                            </a>
-                                            <a href="#delete-log-modal" class="btn btn-sm btn-danger" data-log-date="{{ $date }}">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                        @else
+                                            <span class="badge level-{{ $key }}">
+                                                {!! log_styler()->icon($key) . ' ' . $header !!}
+                                            </span>
+                                        @endif
+                                    </th>
                                 @endforeach
-                            @else
+                                <th class="text-right"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @if ($rows->count() > 0)
+                            @foreach($rows as $date => $row)
                                 <tr>
-                                    <td colspan="11" class="text-center">
-                                        <span class="badge badge-default">{{ trans('log-viewer::general.empty-logs') }}</span>
+                                    @foreach($row as $key => $value)
+                                        <td class="{{ $key == 'date' ? 'text-left' : 'text-center' }}">
+                                            @if ($key == 'date')
+                                                <a href="{{ route('boilerplate.logs.show', [$date]) }}">
+                                                    <span class="badge badge-info">
+                                                        {{ \Carbon\Carbon::createFromFormat('Y-m-d', $value)->isoFormat(__('boilerplate::date.Ymd')) }}
+                                                    </span>
+                                                </a>
+                                            @elseif ($value == 0)
+                                                <span class="badge level-empty">{{ $value }}</span>
+                                            @else
+                                                <a href="{{ route('boilerplate.logs.filter', [$date, $key]) }}">
+                                                    <span class="badge level-{{ $key }}">{{ $value }}</span>
+                                                </a>
+                                            @endif
+                                        </td>
+                                    @endforeach
+                                    <td class="text-right visible-on-hover no-wrap">
+                                        <a href="{{ route('boilerplate.logs.show', [$date]) }}" class="btn btn-sm btn-primary">
+                                            <i class="fa fa-search"></i>
+                                        </a>
+                                        <a href="#delete-log-modal" class="btn btn-sm btn-danger" data-log-date="{{ $date }}">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
                                     </td>
                                 </tr>
-                            @endif
-                            </tbody>
-                        </table>
-                    </div>
-                    {!! $rows->render() !!}
+                            @endforeach
+                        @else
+                            <tr>
+                                <td colspan="11" class="text-center">
+                                    <span class="badge badge-default">{{ trans('log-viewer::general.empty-logs') }}</span>
+                                </td>
+                            </tr>
+                        @endif
+                        </tbody>
+                    </table>
                 </div>
-                <div class="card-footer text-right text-sm text-muted">
+                {!! $rows->render() !!}
+
+            @slot('footer')
+                <div class="text-right small text-muted">
                     {!! __('boilerplate::logs.vendor') !!}
                 </div>
-            </div>
+            @endslot
+        @endcomponent
         </div>
     </div>
 @endsection

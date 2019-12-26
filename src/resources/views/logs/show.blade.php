@@ -29,135 +29,132 @@
             </span>
         </div>
         <div class="col-12">
-            <div class="card card-info">
-                <div class="card-header">
-                    <h3 class="card-title">{{ ucfirst(__('boilerplate::logs.show.file', ['date' => $date])) }}</h3>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-2">
-                            @include('boilerplate::logs._partials.menu')
-                        </div>
-                        <div class="col-md-10">
-                            <div class="card no-shadow">
-                                <div class="card-header bg-gray font-weight-bold py-1">
-                                    {{ __('boilerplate::logs.show.loginfo') }}
-                                </div>
-                                <div class="card-body py-1 px-0">
-                                    <div class="table-responsive">
-                                        <table class="table no-border table-sm mb-0">
-                                            <tbody>
-                                                <tr class="border-bottom">
-                                                    <td class="pl-2">{{ __('boilerplate::logs.show.filepath') }}</td>
-                                                    <td colspan="7">{{ $log->getPath() }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="pl-2">{{ __('boilerplate::logs.show.logentries') }}</td>
-                                                    <td>
-                                                        <span class="badge badge-secondary">{{ $entries->total() }}</span>
-                                                    </td>
-                                                    <td>{{ __('boilerplate::logs.show.size') }}</td>
-                                                    <td>
-                                                        <span class="badge badge-secondary">{{ $log->size() }}</span>
-                                                    </td>
-                                                    <td>{{ __('boilerplate::logs.show.createdat') }}</td>
-                                                    <td>
-                                                        <span class="badge badge-secondary">
-                                                            {{ $log->createdAt()->isoFormat(__('boilerplate::date.YmdHis')) }}
-                                                        </span>
-                                                    </td>
-                                                    <td>{{ __('boilerplate::logs.show.updatedat') }}</td>
-                                                    <td>
-                                                        <span class="badge badge-secondary">
-                                                            {{ $log->updatedAt()->isoFormat(__('boilerplate::date.YmdHis')) }}
-                                                        </span>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+            @component('boilerplate::card', ['title' => ucfirst(__('boilerplate::logs.show.file', ['date' => $date]))])
+                <div class="row">
+                    <div class="col-md-2">
+                        @include('boilerplate::logs._partials.menu')
+                    </div>
+                    <div class="col-md-10">
+                        <div class="card no-shadow">
+                            <div class="card-header bg-gray font-weight-bold py-1">
+                                {{ __('boilerplate::logs.show.loginfo') }}
                             </div>
-
-                                @if ($entries->hasPages())
-                                    <div class="d-flex justify-content-between text-sm align-items-center mb-3">
-                                        <span class="text-sm text-muted ">
-                                            {{ __('boilerplate::logs.show.page', ['current' => $entries->currentPage(), 'last' => $entries->lastPage()]) }}
-                                        </span>
-                                        {!! $entries->render() !!}
-                                    </div>
-                                @endif
-
+                            <div class="card-body py-1 px-0">
                                 <div class="table-responsive">
-                                    <table id="entries" class="table table-hover table-sm border-left border-right">
-                                        <thead class="bg-gray">
-                                            <tr class="text-center">
-                                                <th>{{ __('boilerplate::logs.show.env') }}</th>
-                                                <th style="width: 120px;">{{ __('boilerplate::logs.show.level') }}</th>
-                                                <th style="width: 65px;">{{ __('boilerplate::logs.show.time') }}</th>
-                                                <th>{{ __('boilerplate::logs.show.header') }}</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
+                                    <table class="table no-border table-sm mb-0">
                                         <tbody>
-                                        @foreach($entries as $key => $entry)
-                                            <tr class="{{ $key %2 ? 'even' : 'odd' }}">
-                                                <td class="px-2">
-                                                    <span class="badge bg-purple">
-                                                        {{ $entry->env }}
+                                            <tr class="border-bottom">
+                                                <td class="pl-2">{{ __('boilerplate::logs.show.filepath') }}</td>
+                                                <td colspan="7">{{ $log->getPath() }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="pl-2">{{ __('boilerplate::logs.show.logentries') }}</td>
+                                                <td>
+                                                    <span class="badge badge-secondary">{{ $entries->total() }}</span>
+                                                </td>
+                                                <td>{{ __('boilerplate::logs.show.size') }}</td>
+                                                <td>
+                                                    <span class="badge badge-secondary">{{ $log->size() }}</span>
+                                                </td>
+                                                <td>{{ __('boilerplate::logs.show.createdat') }}</td>
+                                                <td>
+                                                    <span class="badge badge-secondary">
+                                                        {{ $log->createdAt()->isoFormat(__('boilerplate::date.YmdHis')) }}
                                                     </span>
                                                 </td>
-                                                <td class="px-2">
-                                                    <span class="badge level-{{ $entry->level }}">
-                                                        {!! $entry->level() !!}
+                                                <td>{{ __('boilerplate::logs.show.updatedat') }}</td>
+                                                <td>
+                                                    <span class="badge badge-secondary">
+                                                        {{ $log->updatedAt()->isoFormat(__('boilerplate::date.YmdHis')) }}
                                                     </span>
-                                                </td>
-                                                <td class="px-2">
-                                                    <span class="badge bg-secondary">
-                                                        {{ $entry->datetime->format('H:i:s') }}
-                                                    </span>
-                                                </td>
-                                                <td class="text-sm">
-                                                    {{ $entry->header }}
-                                                </td>
-                                                <td class="text-right px-2">
-                                                    @if ($entry->hasStack())
-                                                        <a class="btn btn-xs btn-default" role="button" data-toggle="collapse" href="#log-stack-{{ $key }}" aria-expanded="false" aria-controls="log-stack-{{ $key }}">
-                                                            Stack
-                                                        </a>
-                                                    @endif
                                                 </td>
                                             </tr>
-                                            @if ($entry->hasStack())
-                                                <tr>
-                                                    <td colspan="5" class="stack">
-                                                        <div class="stack-content collapse" id="log-stack-{{ $key }}">
-                                                            {!! preg_replace('`#([0-9]*)\s`', "<br /><strong>#$1</strong> ", $entry->stack()) !!}
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            @endif
-                                        @endforeach
                                         </tbody>
                                     </table>
                                 </div>
-
-                                @if ($entries->hasPages())
-                                    <div class="panel-footer d-flex justify-content-between align-items-center text-sm">
-                                        <span class="pull-right small text-muted mtm">
-                                            {{ __('boilerplate::logs.show.page', ['current' => $entries->currentPage(), 'last' => $entries->lastPage()]) }}
-                                        </span>
-                                        {!! $entries->render() !!}
-                                    </div>
-                                @endif
+                            </div>
                         </div>
+
+                            @if ($entries->hasPages())
+                                <div class="d-flex justify-content-between text-sm align-items-center mb-3">
+                                    <span class="text-sm text-muted ">
+                                        {{ __('boilerplate::logs.show.page', ['current' => $entries->currentPage(), 'last' => $entries->lastPage()]) }}
+                                    </span>
+                                    {!! $entries->render() !!}
+                                </div>
+                            @endif
+
+                            <div class="table-responsive">
+                                <table id="entries" class="table table-hover table-sm border-left border-right">
+                                    <thead class="bg-gray">
+                                        <tr class="text-center">
+                                            <th>{{ __('boilerplate::logs.show.env') }}</th>
+                                            <th style="width: 120px;">{{ __('boilerplate::logs.show.level') }}</th>
+                                            <th style="width: 65px;">{{ __('boilerplate::logs.show.time') }}</th>
+                                            <th>{{ __('boilerplate::logs.show.header') }}</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($entries as $key => $entry)
+                                        <tr class="{{ $key %2 ? 'even' : 'odd' }}">
+                                            <td class="px-2">
+                                                <span class="badge bg-purple">
+                                                    {{ $entry->env }}
+                                                </span>
+                                            </td>
+                                            <td class="px-2">
+                                                <span class="badge level-{{ $entry->level }}">
+                                                    {!! $entry->level() !!}
+                                                </span>
+                                            </td>
+                                            <td class="px-2">
+                                                <span class="badge bg-secondary">
+                                                    {{ $entry->datetime->format('H:i:s') }}
+                                                </span>
+                                            </td>
+                                            <td class="text-sm">
+                                                {{ $entry->header }}
+                                            </td>
+                                            <td class="text-right px-2">
+                                                @if ($entry->hasStack())
+                                                    <a class="btn btn-xs btn-default" role="button" data-toggle="collapse" href="#log-stack-{{ $key }}" aria-expanded="false" aria-controls="log-stack-{{ $key }}">
+                                                        Stack
+                                                    </a>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        @if ($entry->hasStack())
+                                            <tr>
+                                                <td colspan="5" class="stack">
+                                                    <div class="stack-content collapse" id="log-stack-{{ $key }}">
+                                                        {!! preg_replace('`#([0-9]*)\s`', "<br /><strong>#$1</strong> ", $entry->stack()) !!}
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            @if ($entries->hasPages())
+                                <div class="panel-footer d-flex justify-content-between align-items-center text-sm">
+                                    <span class="pull-right small text-muted mtm">
+                                        {{ __('boilerplate::logs.show.page', ['current' => $entries->currentPage(), 'last' => $entries->lastPage()]) }}
+                                    </span>
+                                    {!! $entries->render() !!}
+                                </div>
+                            @endif
                     </div>
                 </div>
-                <div class="card-footer text-right text-sm">
+
+            @slot('footer')
+                <div class="text-muted text-right small">
                     {!! __('boilerplate::logs.vendor') !!}
                 </div>
-            </div>
-        </div>
+            @endslot
+        @endcomponent
     </div>
 @endsection
 

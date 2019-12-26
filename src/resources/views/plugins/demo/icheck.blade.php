@@ -1,11 +1,7 @@
-<div class="card card-outline card-success">
-    <div class="card-header border-bottom-0">
-        <h3 class="card-title">iCheck Bootstrap</h3>
-        <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fa fa-minus"></i></button>
-        </div>
-    </div>
-    <div class="card-body pt-0">
+@component('boilerplate::card', ['color' => 'success', 'title' => 'iCheck Bootstrap'])
+    @slot('tools')
+        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fa fa-minus"></i></button>
+    @endslot
         <div class="row mb-3">
             <div class="col-12">
                 Usage :
@@ -142,8 +138,10 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="card-footer text-right small">
-        <a href="https://bantikyan.github.io/icheck-bootstrap/">iCheck Bootstrap</a>
-    </div>
-</div>
+
+    @slot('footer')
+        <div class="text-right small text-muted">
+            <a href="https://bantikyan.github.io/icheck-bootstrap/">iCheck Bootstrap</a>
+        </div>
+    @endslot
+@endcomponent

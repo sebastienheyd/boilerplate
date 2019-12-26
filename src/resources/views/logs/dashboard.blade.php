@@ -11,41 +11,41 @@
 @section('content')
     <div class="row">
         <div class="col-12">
-            <div class="card card-outline card-info">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="mb-3 ml-auto mr-auto col-md-6 col-lg-3">
-                            <canvas id="stats-doughnut-chart" height="300"></canvas>
-                        </div>
-                        <div class="col-lg-9">
-                            <div class="row">
-                                @foreach($percents as $level => $item)
-                                    <div class="col-sm-6 col-lg-4">
-                                        <div class="info-box level level-{{ $level }} {{ $item['count'] === 0 ? 'level-empty' : '' }}">
-                                            <span class="info-box-icon">
-                                                {!! log_styler()->icon($level) !!}
+            @component('boilerplate::card')
+                <div class="row">
+                    <div class="mb-3 ml-auto mr-auto col-md-6 col-lg-3">
+                        <canvas id="stats-doughnut-chart" height="300"></canvas>
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="row">
+                            @foreach($percents as $level => $item)
+                                <div class="col-sm-6 col-lg-4">
+                                    <div class="info-box level level-{{ $level }} {{ $item['count'] === 0 ? 'level-empty' : '' }}">
+                                        <span class="info-box-icon">
+                                            {!! log_styler()->icon($level) !!}
+                                        </span>
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">{{ $item['name'] }}</span>
+                                            <span class="info-box-number">
+                                                {{ __('boilerplate::logs.stats.entries', $item) }}
                                             </span>
-                                            <div class="info-box-content">
-                                                <span class="info-box-text">{{ $item['name'] }}</span>
-                                                <span class="info-box-number">
-                                                    {{ __('boilerplate::logs.stats.entries', $item) }}
-                                                </span>
-                                                <div class="progress">
-                                                    <div class="progress-bar"
-                                                         style="width: {{ $item['percent'] }}%"></div>
-                                                </div>
+                                            <div class="progress">
+                                                <div class="progress-bar"
+                                                     style="width: {{ $item['percent'] }}%"></div>
                                             </div>
                                         </div>
                                     </div>
-                                @endforeach
-                            </div>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
-                <div class="card-footer text-right text-muted text-sm">
-                    {!! __('boilerplate::logs.vendor') !!}
-                </div>
-            </div>
+                @slot('footer')
+                    <div class="text-right text-muted small">
+                        {!! __('boilerplate::logs.vendor') !!}
+                    </div>
+                @endslot
+            @endcomponent
         </div>
     </div>
 @endsection

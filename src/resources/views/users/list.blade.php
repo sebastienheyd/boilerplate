@@ -16,26 +16,24 @@
             </span>
         </div>
     </div>
-    <div class="card card-outline card-info">
-        <div class="card-body">
-            <table class="table table-striped table-hover va-middle" id="users-table">
-                <thead>
-                <tr>
-                    <th>{{-- id --}}</th>
-                    <th>{{-- avatar --}}</th>
-                    <th>{{ __('boilerplate::users.list.state') }}</th>
-                    <th>{{ __('boilerplate::users.list.lastname') }}</th>
-                    <th>{{ __('boilerplate::users.list.firstname') }}</th>
-                    <th>{{ __('boilerplate::users.list.email') }}</th>
-                    <th>{{ __('boilerplate::users.list.roles') }}</th>
-                    <th>{{ __('boilerplate::users.list.creationdate') }}</th>
-                    <th>{{ __('boilerplate::users.list.lastconnect') }}</th>
-                    <th></th>
-                </tr>
-                </thead>
-            </table>
-        </div>
-    </div>
+    @component('boilerplate::card')
+        <table class="table table-striped table-hover va-middle" id="users-table">
+            <thead>
+            <tr>
+                <th>{{-- id --}}</th>
+                <th>{{-- avatar --}}</th>
+                <th>{{ __('boilerplate::users.list.state') }}</th>
+                <th>{{ __('boilerplate::users.list.lastname') }}</th>
+                <th>{{ __('boilerplate::users.list.firstname') }}</th>
+                <th>{{ __('boilerplate::users.list.email') }}</th>
+                <th>{{ __('boilerplate::users.list.roles') }}</th>
+                <th>{{ __('boilerplate::users.list.creationdate') }}</th>
+                <th>{{ __('boilerplate::users.list.lastconnect') }}</th>
+                <th></th>
+            </tr>
+            </thead>
+        </table>
+    @endcomponent
 @endsection
 
 @include('boilerplate::load.datatables')
