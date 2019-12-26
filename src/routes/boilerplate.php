@@ -14,7 +14,6 @@ Route::group($default, function () {
     });
 
     Route::group(['namespace' => '\Sebastienheyd\Boilerplate\Controllers'], function () {
-
         Route::post('keep-alive', ['as' => 'keepalive', 'uses' => 'Users\UsersController@keepAlive']);
 
         // Login
@@ -63,19 +62,19 @@ Route::group($default, function () {
             // Avatar
             Route::get(
                 'userprofile/avatar/url',
-                ['as' => 'user.avatar.url', 'uses' => 'Users\UsersController@getAvatarUrl',]
+                ['as' => 'user.avatar.url', 'uses' => 'Users\UsersController@getAvatarUrl']
             );
             Route::post(
                 'userprofile/avatar/upload',
-                ['as' => 'user.avatar.upload', 'uses' => 'Users\UsersController@avatarUpload',]
+                ['as' => 'user.avatar.upload', 'uses' => 'Users\UsersController@avatarUpload']
             );
             Route::post(
                 'userprofile/avatar/gravatar',
-                ['as' => 'user.avatar.gravatar', 'uses' => 'Users\UsersController@getAvatarFromGravatar',]
+                ['as' => 'user.avatar.gravatar', 'uses' => 'Users\UsersController@getAvatarFromGravatar']
             );
             Route::post(
                 'userprofile/avatar/delete',
-                ['as' => 'user.avatar.delete', 'uses' => 'Users\UsersController@avatarDelete',]
+                ['as' => 'user.avatar.delete', 'uses' => 'Users\UsersController@avatarDelete']
             );
 
             // Logs

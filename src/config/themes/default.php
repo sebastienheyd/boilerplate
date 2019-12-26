@@ -3,7 +3,7 @@
 /**
  * BG : blue, indigo, purple, pink, red, orange, yellow, green, teal, cyan, gray, gray-dark, black
  * Type : dark, light
- * Shadow : 0-4
+ * Shadow : 0-4.
  */
 return [
     'navbar'  => [
