@@ -42,8 +42,8 @@ return [
         'vendorname' => 'Boilerplate',
         'vendorlink' => '',
     ],
-    'card' => [
-        'outline' => true,
+    'card'    => [
+        'outline'       => true,
         'default_color' => 'info',
     ],
 ];
