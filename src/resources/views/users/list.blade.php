@@ -17,22 +17,24 @@
         </div>
     </div>
     @component('boilerplate::card')
-        <table class="table table-striped table-hover va-middle" id="users-table">
-            <thead>
-            <tr>
-                <th>{{-- id --}}</th>
-                <th>{{-- avatar --}}</th>
-                <th>{{ __('boilerplate::users.list.state') }}</th>
-                <th>{{ __('boilerplate::users.list.lastname') }}</th>
-                <th>{{ __('boilerplate::users.list.firstname') }}</th>
-                <th>{{ __('boilerplate::users.list.email') }}</th>
-                <th>{{ __('boilerplate::users.list.roles') }}</th>
-                <th>{{ __('boilerplate::users.list.creationdate') }}</th>
-                <th>{{ __('boilerplate::users.list.lastconnect') }}</th>
-                <th></th>
-            </tr>
-            </thead>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover va-middle" id="users-table" style="width:100%">
+                <thead>
+                <tr>
+                    <th>{{-- id --}}</th>
+                    <th>{{-- avatar --}}</th>
+                    <th>{{ __('boilerplate::users.list.state') }}</th>
+                    <th>{{ __('boilerplate::users.list.lastname') }}</th>
+                    <th>{{ __('boilerplate::users.list.firstname') }}</th>
+                    <th>{{ __('boilerplate::users.list.email') }}</th>
+                    <th>{{ __('boilerplate::users.list.roles') }}</th>
+                    <th>{{ __('boilerplate::users.list.creationdate') }}</th>
+                    <th>{{ __('boilerplate::users.list.lastconnect') }}</th>
+                    <th></th>
+                </tr>
+                </thead>
+            </table>
+        </div>
     @endcomponent
 @endsection
 
@@ -53,7 +55,7 @@
                 },
                 columns: [
                     {data: 'id', name: 'id', visible: false},
-                    {data: 'avatar', name: 'avatar', searchable: false, sortable: false},
+                    {data: 'avatar', name: 'avatar', searchable: false, sortable: false, width : '32px'},
                     {data: 'status', name: 'status', searchable: false},
                     {data: 'last_name', name: 'last_name'},
                     {data: 'first_name', name: 'first_name'},
