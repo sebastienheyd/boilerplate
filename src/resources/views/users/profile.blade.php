@@ -41,7 +41,7 @@
                             </span>
                         </div>
                     </div>
-            @endcomponent
+                @endcomponent
             </div>
             <div class="col-md-7">
                 @component('boilerplate::card', ['color' => 'teal', 'title' => __('boilerplate::users.informations')])
