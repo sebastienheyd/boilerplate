@@ -56,8 +56,6 @@ mix.scripts([
     'node_modules/admin-lte/plugins/daterangepicker/daterangepicker.js',
 ], 'public/js/datepicker/datepicker.min.js').version();
 
-// mix.copy('node_modules/bootstrap-datepicker/dist/locales', 'public/js/datepicker/locales', false);
-
 // ============== FileInput ==============
 
 mix.sass(
