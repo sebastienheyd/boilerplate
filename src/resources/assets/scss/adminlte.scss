@@ -1,6 +1,6 @@
 @import "~admin-lte/plugins/select2/css/select2.min.css";
 @import "~admin-lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css";
-@import "~admin-lte/dist/css/adminlte.min.css";
+@import "~admin-lte/dist/css/adminlte.css";
 @import "~admin-lte/plugins/fontawesome-free/css/all.min.css";
 @import "~admin-lte/plugins/overlayScrollbars/css/OverlayScrollbars.css";
 @import "~toastr/toastr";
@@ -185,6 +185,11 @@ pre {
       position: absolute;
     }
   }
+}
+
+// Temporary fix
+.card.card-outline-tabs {
+    border-top: 0 !important;
 }
 
 @media (min-width: 992px) {

@@ -17,6 +17,7 @@
         @include('boilerplate::plugins.demo.datatables')
         @include('boilerplate::plugins.demo.bootbox')
         @include('boilerplate::plugins.demo.notify')
+        @include('boilerplate::plugins.demo.tabs')
     </div>
 </div>
 @endsection

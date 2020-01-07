@@ -17,9 +17,10 @@
     },
     "dependencies": {
         "admin-lte": "^3.0.1",
+        "bootstrap": "^4.4.1",
         "bootbox": "^5.3.4",
         "bootstrap-fileinput": "^5.0.8",
-        "codemirror": "^5.50.0",
+        "codemirror": "^5.50.2",
         "datatables.net": "^1.10.20",
         "datatables.net-bs4": "^1.10.20",
         "drmonty-datatables-plugins": "^1.10.12",

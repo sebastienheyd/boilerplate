@@ -22,7 +22,7 @@
                 </div>
             </section>
         </div>
-        @include('boilerplate::layout.footer')
+        @includeWhen(config('boilerplate.theme.footer.visible', true), 'boilerplate::layout.footer')
     </div>
     <script src="{{ mix('/bootstrap.min.js', '/assets/vendor/boilerplate') }}"></script>
     <script src="{{ mix('/admin-lte.min.js', '/assets/vendor/boilerplate') }}"></script>
