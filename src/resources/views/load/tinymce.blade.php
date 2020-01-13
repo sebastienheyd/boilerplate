@@ -4,8 +4,8 @@
         <script>
             tinymce.defaultSettings = {
                 plugins: "autoresize fullscreen codemirror link lists table media image imagetools paste customalign stickytoolbar",
-                toolbar: "undo redo | styleselect | bold italic | customalignleft aligncenter customalignright | link media image | bullist numlist | table | code fullscreen",
-                contextmenu: "link image imagetools table spellchecker removeformat",
+                toolbar: "undo redo | styleselect | bold italic underline | customalignleft aligncenter customalignright | link media image | bullist numlist | table | code fullscreen",
+                contextmenu: "link image imagetools table spellchecker bold italic underline",
                 sticky_toolbar_container: '.tox-editor-header',
                 toolbar_drawer: "sliding",
                 sticky_offset: $('nav.main-header').outerHeight(),
@@ -25,6 +25,7 @@
                     args.content = args.content.replace(/\s(class|style|type|start)=("(.*?)"|(\w*))/gi, ''); // Unwanted attributes
                     args.content = args.content.replace(/<(p|a|div|span|strike|strong|i|u)[^>]*?>(\s|&nbsp;|<br\/>|\r|\n)*?<\/(p|a|div|span|strike|strong|i|u)>/gi, ''); // Empty tags
                 },
+                skin : "boilerplate",
                 @if(config('boilerplate.app.locale') !== 'en')
                 language: '{{ config('boilerplate.app.locale') }}'
                 @endif

@@ -1,0 +1,27 @@
+/* Note: this file is used inside the content, so isn't part of theming */
+
+.tinymce-mobile-unfocused-selections .tinymce-mobile-unfocused-selection {
+    background-color: green;
+    display: inline-block;
+    opacity: 0.5;
+    position: absolute;
+}
+
+body {
+    -webkit-text-size-adjust: none;
+
+    img {
+        /* this is related to the content margin */
+        max-width: 96vw;
+    }
+
+    table img {
+        max-width: 95%;
+    }
+
+    font-family: sans-serif;
+}
+
+table {
+    border-collapse: collapse;
+}

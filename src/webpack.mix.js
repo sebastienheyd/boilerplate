@@ -80,7 +80,7 @@ mix.copy('node_modules/codemirror/theme', 'public/js/codemirror/theme');
 mix.sass('resources/assets/js/vendor/codemirror/theme/storm.scss', 'public/js/codemirror/theme/storm.css');
 
 mix.styles('node_modules/codemirror/lib/codemirror.css', 'public/js/codemirror/codemirror.min.css').version();
-//
+
 // ============== TinyMCE ==============
 
 mix.copy('node_modules/tinymce/plugins', 'public/js/tinymce/plugins');
@@ -90,6 +90,14 @@ mix.copy('resources/assets/js/vendor/tinymce/plugins', 'public/js/tinymce/plugin
 mix.copy('node_modules/tinymce/skins', 'public/js/tinymce/skins');
 mix.copy('node_modules/tinymce/themes', 'public/js/tinymce/themes');
 mix.copy('node_modules/stickytoolbar/dist', 'public/js/tinymce/plugins');
+
+// Boilerplate skin
+mix.copy('resources/assets/js/vendor/tinymce/skins/boilerplate/fonts', 'public/js/tinymce/skins/ui/boilerplate/fonts');
+mix.sass('resources/assets/js/vendor/tinymce/skins/boilerplate/content.inline.scss', 'public/js/tinymce/skins/ui/boilerplate/content.inline.min.css');
+mix.sass('resources/assets/js/vendor/tinymce/skins/boilerplate/content.mobile.scss', 'public/js/tinymce/skins/ui/boilerplate/content.mobile.min.css');
+mix.sass('resources/assets/js/vendor/tinymce/skins/boilerplate/content.scss', 'public/js/tinymce/skins/ui/boilerplate/content.min.css');
+mix.sass('resources/assets/js/vendor/tinymce/skins/boilerplate/skin.scss', 'public/js/tinymce/skins/ui/boilerplate/skin.min.css');
+mix.sass('resources/assets/js/vendor/tinymce/skins/boilerplate/skin.mobile.scss', 'public/js/tinymce/skins/ui/boilerplate/skin.mobile.min.css');
 
 // https://www.tiny.cloud/get-tiny/language-packages/
 mix.copy('resources/assets/js/vendor/tinymce/langs', 'public/js/tinymce/langs');
