@@ -19,13 +19,13 @@
             </a>
             <span class="float-right">
                 <span class="btn-group">
-                <a href="{{ route('boilerplate.logs.download', [$log->date]) }}" class="btn btn-default" data-toggle="tooltip" title="{{ __('boilerplate::logs.show.download') }}">
-                    <span class="fa fa-download text-muted"></span>
-                </a>
-                <a href="#delete-log-modal" class="btn btn-danger" data-log-date="{{ $log->date }}" data-toggle="tooltip" title="{{ __('boilerplate::logs.show.delete') }}">
-                    <span class="fa fa-trash"></span>
-                </a>
-                    </span>
+                    <a href="{{ route('boilerplate.logs.download', [$log->date]) }}" class="btn btn-default" data-toggle="tooltip" title="{{ __('boilerplate::logs.show.download') }}">
+                        <span class="fa fa-download text-muted"></span>
+                    </a>
+                    <a href="#delete-log-modal" class="btn btn-danger" data-log-date="{{ $log->date }}" data-toggle="tooltip" title="{{ __('boilerplate::logs.show.delete') }}">
+                        <span class="fa fa-trash"></span>
+                    </a>
+                </span>
             </span>
         </div>
         <div class="col-12">
@@ -50,21 +50,21 @@
                                             <tr>
                                                 <td class="pl-2">{{ __('boilerplate::logs.show.logentries') }}</td>
                                                 <td>
-                                                    <span class="badge badge-secondary">{{ $entries->total() }}</span>
+                                                    <span class="badge badge-pill badge-secondary">{{ $entries->total() }}</span>
                                                 </td>
                                                 <td>{{ __('boilerplate::logs.show.size') }}</td>
                                                 <td>
-                                                    <span class="badge badge-secondary">{{ $log->size() }}</span>
+                                                    <span class="badge badge-pill badge-secondary">{{ $log->size() }}</span>
                                                 </td>
                                                 <td>{{ __('boilerplate::logs.show.createdat') }}</td>
                                                 <td>
-                                                    <span class="badge badge-secondary">
+                                                    <span class="badge badge-pill badge-secondary">
                                                         {{ $log->createdAt()->isoFormat(__('boilerplate::date.YmdHis')) }}
                                                     </span>
                                                 </td>
                                                 <td>{{ __('boilerplate::logs.show.updatedat') }}</td>
                                                 <td>
-                                                    <span class="badge badge-secondary">
+                                                    <span class="badge badge-pill badge-secondary">
                                                         {{ $log->updatedAt()->isoFormat(__('boilerplate::date.YmdHis')) }}
                                                     </span>
                                                 </td>
@@ -99,17 +99,17 @@
                                     @foreach($entries as $key => $entry)
                                         <tr class="{{ $key %2 ? 'even' : 'odd' }}">
                                             <td class="px-2">
-                                                <span class="badge bg-purple">
+                                                <span class="badge badge-pill bg-purple">
                                                     {{ $entry->env }}
                                                 </span>
                                             </td>
                                             <td class="px-2">
-                                                <span class="badge level-{{ $entry->level }}">
+                                                <span class="badge badge-pill level-{{ $entry->level }}">
                                                     {!! $entry->level() !!}
                                                 </span>
                                             </td>
                                             <td class="px-2">
-                                                <span class="badge bg-secondary">
+                                                <span class="badge badge-pill bg-secondary">
                                                     {{ $entry->datetime->format('H:i:s') }}
                                                 </span>
                                             </td>

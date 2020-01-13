@@ -60,10 +60,10 @@ class UsersController extends Controller
                 return  '<img src="'.$user->avatar_url.'" class="img-circle bg-gray" width="32" />';
             })->editColumn('status', function ($user) {
                 if ($user->active == 1) {
-                    return '<span class="badge badge-success">'.__('boilerplate::users.active').'</span>';
+                    return '<span class="badge badge-pill badge-success">'.__('boilerplate::users.active').'</span>';
                 }
 
-                return '<span class="badge badge-danger">'.__('boilerplate::users.inactive').'</span>';
+                return '<span class="badge badge-pill badge-danger">'.__('boilerplate::users.inactive').'</span>';
             })->editColumn('roles', function ($user) {
                 return $user->getRolesList();
             })->editColumn('actions', function ($user) {

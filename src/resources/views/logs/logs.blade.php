@@ -22,7 +22,7 @@
                                         @if ($key == 'date')
 
                                         @else
-                                            <span class="badge level-{{ $key }}">
+                                            <span class="badge badge-pill level-{{ $key }}">
                                                 {!! log_styler()->icon($key) . ' ' . $header !!}
                                             </span>
                                         @endif
@@ -39,15 +39,15 @@
                                         <td class="{{ $key == 'date' ? 'text-left' : 'text-center' }}">
                                             @if ($key == 'date')
                                                 <a href="{{ route('boilerplate.logs.show', [$date]) }}">
-                                                    <span class="badge badge-info">
+                                                    <span class="badge badge-pill badge-info">
                                                         {{ \Carbon\Carbon::createFromFormat('Y-m-d', $value)->isoFormat(__('boilerplate::date.Ymd')) }}
                                                     </span>
                                                 </a>
                                             @elseif ($value == 0)
-                                                <span class="badge level-empty">{{ $value }}</span>
+                                                <span class="badge badge-pill level-empty">{{ $value }}</span>
                                             @else
                                                 <a href="{{ route('boilerplate.logs.filter', [$date, $key]) }}">
-                                                    <span class="badge level-{{ $key }}">{{ $value }}</span>
+                                                    <span class="badge badge-pill level-{{ $key }}">{{ $value }}</span>
                                                 </a>
                                             @endif
                                         </td>
@@ -65,7 +65,7 @@
                         @else
                             <tr>
                                 <td colspan="11" class="text-center">
-                                    <span class="badge badge-default">{{ trans('log-viewer::general.empty-logs') }}</span>
+                                    <span class="badge badge-pill badge-default">{{ trans('log-viewer::general.empty-logs') }}</span>
                                 </td>
                             </tr>
                         @endif

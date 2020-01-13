@@ -7,7 +7,7 @@
             @if ($item['count'] === 0)
                 <li>
                     <a href="#" class="list-group-item py-2 d-flex justify-content-between" style="opacity:.5;background: #F0F0F0; border-radius:0">
-                        <span class="badge text-secondary">
+                        <span class="badge badge-pill text-secondary">
                         {!! $item['icon'] !!} {{ $item['name'] }}
                         </span>
                         <span class="badge badge-pill badge-secondary">
@@ -18,7 +18,7 @@
             @else
                 <li>
                 <a href="{{ $item['url'] }}" class="list-group-item py-2 {{ $level }}  d-flex justify-content-between" style="border-radius: 0">
-                    <span class="badge level-{{ $level }}">
+                    <span class="badge badge-pill level-{{ $level }}">
                         {!! $item['icon'] !!} {{ $item['name'] }}
                     </span>
                     <span class="badge badge-pill level-{{ $level }}">
