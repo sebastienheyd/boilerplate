@@ -49,8 +49,9 @@ class RolesController extends Controller
 
         $permissions_categories = [];
         foreach ($permissions as $category_id => $perms) {
+            $name = $perms->first()->category->display_name ?? __('boilerplate::permissions.categories.default');
             $permissions_categories[] = (object) [
-                'name' => $perms->first()->category->display_name ?? __('boilerplate::permissions.categories.default'),
+                'name'        => $name,
                 'permissions' => $perms,
             ];
         }
@@ -104,8 +105,9 @@ class RolesController extends Controller
 
         $permissions_categories = [];
         foreach ($permissions as $category_id => $perms) {
+            $name = $perms->first()->category->display_name ?? __('boilerplate::permissions.categories.default');
             $permissions_categories[] = (object) [
-                'name' => $perms->first()->category->display_name ?? __('boilerplate::permissions.categories.default'),
+                'name'        => $name,
                 'permissions' => $perms,
             ];
         }
