@@ -37,31 +37,38 @@
                     </div>
                 @endcomponent
             </div>
-            @if(count($permissions) > 0)
+            @if(count($permissions_categories) > 0)
             <div class="col-md-7">
                 @component('boilerplate::card', ['color' => 'teal', 'title' => __('boilerplate::role.permissions')])
-                    <table class="table table-hover table-sm">
-                        <tbody>
-                        @foreach($permissions as $permission)
-                            <tr>
-                                <td style="width:25px;">
-                                    <div class="icheck-primary">
-                                    @if($role->id == 1)
-                                        <input type="checkbox" checked disabled class="icheck"/>
-                                    @else
-                                        {{ Form::checkbox('permission['.$permission->id.']', 1, old('permission['.$permission->id.']', $role->permissions()->where(['id' => $permission->id])->count()), ['id' => 'permission_'.$permission->id, 'class' => 'icheck']) }}
-                                    @endif
-                                        <label for="{{ 'permission_'.$permission->id }}"></label>
-                                    </div>
-                                </td>
-                                <td>
-                                    {{ Form::label('permission_'.$permission->id, $permission->display_name, ['class' => 'mb-0']) }}<br />
-                                    <small>{{ $permission->description }}</small>
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+                    @foreach($permissions_categories as $category)
+                        <div class="permission_category">
+                            <div class="h6">
+                                {{ $category->name }}
+                            </div>
+                            <table class="table table-hover table-sm">
+                                <tbody>
+                                @foreach($category->permissions as $permission)
+                                    <tr>
+                                        <td style="width:25px;">
+                                            <div class="icheck-primary">
+                                            @if($role->id == 1)
+                                                <input type="checkbox" checked disabled class="icheck"/>
+                                            @else
+                                                {{ Form::checkbox('permission['.$permission->id.']', 1, old('permission['.$permission->id.']', $role->permissions()->where(['id' => $permission->id])->count()), ['id' => 'permission_'.$permission->id, 'class' => 'icheck']) }}
+                                            @endif
+                                                <label for="{{ 'permission_'.$permission->id }}"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            {{ Form::label('permission_'.$permission->id, $permission->display_name, ['class' => 'mb-0']) }}<br />
+                                            <small class="text-muted">{{ $permission->description }}</small>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    @endforeach
                 @endcomponent
             </div>
             @endif

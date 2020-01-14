@@ -1,6 +1,10 @@
 <?php
 
 return [
+    'categories' => [
+        'default' => 'Panel de administración',
+        'users'   => 'Gestión de usuarios',
+    ],
     'backend_access' => [
         'display_name' => 'Acceso al panel de administración',
         'description'  => 'El usuario puede acceder al panel de administración',

@@ -44,7 +44,18 @@ class RolesController extends Controller
      */
     public function create()
     {
-        return view('boilerplate::roles.create', ['permissions' => Permission::all()]);
+        $permissions = Permission::with('category')->orderBy('category_id')->get();
+        $permissions = $permissions->groupBy('category_id');
+
+        $permissions_categories = [];
+        foreach ($permissions as $category_id => $perms) {
+            $permissions_categories[] = (object) [
+                'name' => $perms->first()->category->display_name ?? __('boilerplate::permissions.categories.default'),
+                'permissions' => $perms,
+            ];
+        }
+
+        return view('boilerplate::roles.create', compact('permissions_categories'));
     }
 
     /**
@@ -88,9 +99,18 @@ class RolesController extends Controller
     public function edit($id)
     {
         $role = Role::find($id);
-        $permissions = Permission::all();
+        $permissions = Permission::with('category')->orderBy('category_id')->get();
+        $permissions = $permissions->groupBy('category_id');
 
-        return view('boilerplate::roles.edit', compact('role', 'permissions'));
+        $permissions_categories = [];
+        foreach ($permissions as $category_id => $perms) {
+            $permissions_categories[] = (object) [
+                'name' => $perms->first()->category->display_name ?? __('boilerplate::permissions.categories.default'),
+                'permissions' => $perms,
+            ];
+        }
+
+        return view('boilerplate::roles.edit', compact('role', 'permissions_categories'));
     }
 
     /**

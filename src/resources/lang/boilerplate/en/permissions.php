@@ -1,6 +1,10 @@
 <?php
 
 return [
+    'categories' => [
+        'default' => 'Back Office',
+        'users'   => 'Users',
+    ],
     'backend_access' => [
         'display_name' => 'Access to the back office',
         'description'  => 'User can access to the administration panel',

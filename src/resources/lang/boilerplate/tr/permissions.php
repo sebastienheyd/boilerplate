@@ -1,6 +1,10 @@
 <?php
 
 return [
+    'categories' => [
+        'default' => 'Yönetim paneli erişimi',
+        'users'   => 'Kullanıcı yönetimi',
+    ],
     'backend_access' => [
         'display_name' => 'Yönetim paneli erişimi',
         'description'  => 'Kullanıcı yönetim paneline erişebilir',
