@@ -8,7 +8,7 @@ class NavbarItemsRepository
      * Register navbar items to display.
      *
      * @param string|array $item
-     * @param string $side
+     * @param string       $side
      *
      * @return $this
      */
