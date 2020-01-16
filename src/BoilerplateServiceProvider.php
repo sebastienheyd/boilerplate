@@ -93,6 +93,17 @@ class BoilerplateServiceProvider extends ServiceProvider
         // Loading packages
         $this->registerLaratrust();
         $this->registerMenu();
+        $this->registerNavbarItems();
+    }
+
+    /**
+     * Register navbar items repository.
+     */
+    private function registerNavbarItems()
+    {
+        $this->app->singleton('boilerplate.navbar.items', function () {
+            return new Navbar\NavbarItemsRepository();
+        });
     }
 
     /**
