@@ -19,7 +19,11 @@ $('.sidebar-toggle').on('click', function (event) {
 });
 
 $(function () {
-    $('[data-toggle="tooltip"]').tooltip()
+    $('[data-toggle="tooltip"]').tooltip({
+        container: 'body',
+        delay: { "show": 500, "hide": 100 },
+        html: true
+    })
 
     setInterval(function () {
         var timestamp = Math.round(+new Date() / 1000);
