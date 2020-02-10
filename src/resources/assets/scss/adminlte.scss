@@ -15,6 +15,16 @@ $red: #dc3545;
   box-shadow: none;
 }
 
+.nav-sidebar .nav-item > .nav-link .right,
+.sidebar-mini.sidebar-collapse .nav-sidebar:hover .nav-item > .nav-link .right {
+    transition: all 0.3s ease;
+    opacity: 1;
+}
+
+.sidebar-mini.sidebar-collapse .nav-sidebar .nav-item > .nav-link .right {
+    opacity: 0;
+}
+
 // Remove dots around buttons
 :focus {
   outline: none !important;

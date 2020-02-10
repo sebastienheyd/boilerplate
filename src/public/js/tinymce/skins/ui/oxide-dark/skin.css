@@ -2795,7 +2795,8 @@ body.tox-dialog__disable-scroll {
   border: 1px solid #000000;
   border-radius: 3px;
   display: flex;
-  height: 525px;
+  flex: 1;
+  position: relative;
 }
 /* stylelint-disable */
 .tox {
