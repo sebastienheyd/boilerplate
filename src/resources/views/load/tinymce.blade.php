@@ -14,6 +14,8 @@
                 removed_menuitems: 'newdocument',
                 remove_linebreaks: false,
                 forced_root_block: false,
+                force_p_newlines: true,
+                relative_urls: false,
                 verify_html: false,
                 branding: false,
                 statusbar: false,
