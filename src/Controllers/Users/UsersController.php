@@ -5,13 +5,13 @@ namespace Sebastienheyd\Boilerplate\Controllers\Users;
 use App\Http\Controllers\Controller;
 use Auth;
 use Carbon\Carbon;
+use DataTables;
 use Gravatar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Image;
 use Sebastienheyd\Boilerplate\Models\Role;
 use Sebastienheyd\Boilerplate\Models\User;
-use Yajra\DataTables\DataTables;
 
 class UsersController extends Controller
 {
@@ -38,23 +38,33 @@ class UsersController extends Controller
     /**
      * Display a listing of users.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-        return view('boilerplate::users.list');
+        $roles = Role::all();
+
+        return view('boilerplate::users.list', compact('roles'));
     }
 
     /**
      * To display dynamic table by datatable.
      *
+     * @param Request $request
+     *
      * @throws \Exception
      *
      * @return mixed
      */
-    public function datatable()
+    public function datatable(Request $request)
     {
-        return Datatables::of(User::select('*'))
+        $users = User::with('roles');
+
+        if ($request->input('columns.6.search.value') !== null) {
+            $users->whereRoleIs($request->input('columns.6.search.value'));
+        }
+
+        return Datatables::eloquent($users)
             ->rawColumns(['actions', 'status', 'avatar', 'roles'])
             ->editColumn('avatar', function ($user) {
                 return  '<img src="'.$user->avatar_url.'" class="img-circle bg-gray" width="32" />';

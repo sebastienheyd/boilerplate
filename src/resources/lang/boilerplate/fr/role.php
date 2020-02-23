@@ -2,6 +2,7 @@
 
 return [
     'title'             => 'Rôles',
+    'role'              => 'Rôle',
     'parameters'        => 'Paramètres',
     'label'             => 'Libellé',
     'description'       => 'Description',

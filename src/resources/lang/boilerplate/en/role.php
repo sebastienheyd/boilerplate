@@ -2,6 +2,7 @@
 
 return [
     'title'             => 'Role management',
+    'role'              => 'Role',
     'parameters'        => 'Parameters',
     'label'             => 'Label',
     'description'       => 'Description',

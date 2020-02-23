@@ -2,6 +2,7 @@
 
 return [
     'title'             => 'Gestión de roles',
+    'role'              => 'Rol',
     'parameters'        => 'Parametros',
     'label'             => 'Etiqueta',
     'description'       => 'Descripción',

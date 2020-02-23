@@ -2,6 +2,7 @@
 
 return [
     'title'       => 'Rol yönetimi',
+    'role'        => 'Rol',
     'parameters'  => 'Parametreler',
     'label'       => 'Etiket',
     'description' => 'Açıklama',
