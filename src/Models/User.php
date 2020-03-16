@@ -228,6 +228,12 @@ class User extends Authenticatable
 
         $src = Gravatar::src($this->getAttribute('email'), 250);
         $img = file_get_contents($src);
+        $destDir = public_path('images/avatars/');
+
+        if (!is_dir($destDir)) {
+            mkdir($destDir, 0644, true);
+        }
+
         file_put_contents($this->getAvatarPathAttribute(), $img);
 
         return true;
