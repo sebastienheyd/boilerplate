@@ -7,9 +7,9 @@ use Illuminate\Foundation\Application as Laravel;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-use Sebastienheyd\Boilerplate\View\Composers\MenuComposer;
-use Sebastienheyd\Boilerplate\View\Composers\DatatablesComposer;
 use Sebastienheyd\Boilerplate\View\Components\Card;
+use Sebastienheyd\Boilerplate\View\Composers\DatatablesComposer;
+use Sebastienheyd\Boilerplate\View\Composers\MenuComposer;
 
 class BoilerplateServiceProvider extends ServiceProvider
 {
