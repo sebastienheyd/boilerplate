@@ -1,6 +1,6 @@
 <?php
 
-namespace Sebastienheyd\Boilerplate\ViewComposers;
+namespace Sebastienheyd\Boilerplate\View\Composers;
 
 use Illuminate\View\View;
 use Sebastienheyd\Boilerplate\Menu\Builder;

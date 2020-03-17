@@ -3,8 +3,13 @@
 namespace Sebastienheyd\Boilerplate;
 
 use Illuminate\Foundation\AliasLoader;
+use Illuminate\Foundation\Application as Laravel;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Sebastienheyd\Boilerplate\View\Composers\MenuComposer;
+use Sebastienheyd\Boilerplate\View\Composers\DatatablesComposer;
+use Sebastienheyd\Boilerplate\View\Components\Card;
 
 class BoilerplateServiceProvider extends ServiceProvider
 {
@@ -45,10 +50,15 @@ class BoilerplateServiceProvider extends ServiceProvider
         $this->loadTranslationsFrom(__DIR__.'/resources/lang/boilerplate', 'boilerplate');
 
         // Loading dynamic menu when calling the view
-        View::composer('boilerplate::layout.mainsidebar', 'Sebastienheyd\Boilerplate\ViewComposers\MenuComposer');
+        View::composer('boilerplate::layout.mainsidebar', MenuComposer::class);
 
         // For datatables locales
-        View::composer('boilerplate::load.datatables', 'Sebastienheyd\Boilerplate\ViewComposers\DatatablesComposer');
+        View::composer('boilerplate::load.datatables', DatatablesComposer::class);
+
+        // Register component
+        if (version_compare(Laravel::VERSION, '7.0', '>=')) {
+            Blade::component(Card::class, 'card');
+        }
 
         // Add console commands
         if ($this->app->runningInConsole()) {
