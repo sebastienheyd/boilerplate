@@ -6,10 +6,30 @@
     ]
 ])
 
+@section('right-sidebar')
+    <div id="filters">
+        <div class="form-group">
+            <select name="state" class="form-control form-control-sm select2" data-placeholder="{{ __('boilerplate::users.list.state') }}">
+                <option></option>
+                <option value="1">{{ __('boilerplate::users.active') }}</option>
+                <option value="0">{{ __('boilerplate::users.inactive') }}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <select name="role" class="form-control input-sm select2" data-placeholder="{{ __('boilerplate::role.role') }}">
+                <option></option>
+                @foreach($roles as $role)
+                    <option value="{{ $role->name }}">{{ $role->display_name }}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+@endsection
+
 @section('content')
     <div class="row">
         <div class="col-12 mbl">
-            <span class="btn-group float-right pb-3">
+            <span class="float-right pb-3">
                 <a href="{{ route("boilerplate.users.create") }}" class="btn btn-primary">
                     {{ __('boilerplate::users.create.title') }}
                 </a>
@@ -17,25 +37,6 @@
         </div>
     </div>
     @component('boilerplate::card')
-        <div id="filters" class="pb-4">
-            <form class="form-inline">
-                <div class="form-group mr-2">
-                    <select name="state" class="form-control form-control-sm select2" data-placeholder="{{ __('boilerplate::users.list.state') }}">
-                        <option></option>
-                        <option value="1">{{ __('boilerplate::users.active') }}</option>
-                        <option value="0">{{ __('boilerplate::users.inactive') }}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <select name="role" class="form-control input-sm select2" data-placeholder="{{ __('boilerplate::role.role') }}">
-                        <option></option>
-                        @foreach($roles as $role)
-                            <option value="{{ $role->name }}">{{ $role->display_name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </form>
-        </div>
         <div class="table-responsive">
             <table class="table table-striped table-hover va-middle" id="users-list" style="width:100%">
                 <thead>
@@ -65,7 +66,8 @@
         $('.select2').select2({
             minimumResultsForSearch: -1,
             allowClear: true,
-            placeholder: $(this).data('placeholder')
+            placeholder: $(this).data('placeholder'),
+            width: '100%'
         });
 
         $(function () {
@@ -108,7 +110,10 @@
                         width: '80px',
                         class: 'visible-on-hover'
                     }
-                ]
+                ],
+                fnInitComplete: function() {
+                    $('#users-list_filter').append('<button class="btn btn-default btn-sm ml-2" data-widget="control-sidebar" data-slide="true"><span class="fa fa-filter"></span></button>')
+                }
             });
 
             $('#filters select').on('change', function() {

@@ -197,9 +197,19 @@ pre {
   }
 }
 
-// Temporary fix
-.card.card-outline-tabs {
-    border-top: 0 !important;
+aside.control-sidebar {
+  & > .btn {
+    position: absolute;
+    transform: translateX(-100%);
+    background: #343a40;
+    border-radius: 5px 0 0 5px;
+    color: #999;
+    padding-right: 3px;
+
+    &:hover {
+      color: #FFF;
+    }
+  }
 }
 
 @media (min-width: 992px) {

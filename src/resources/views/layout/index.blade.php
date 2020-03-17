@@ -23,6 +23,15 @@
             </section>
         </div>
         @includeWhen(config('boilerplate.theme.footer.visible', true), 'boilerplate::layout.footer')
+        <aside class="control-sidebar control-sidebar-{{ config('boilerplate.theme.sidebar.type') }} elevation-{{ config('boilerplate.theme.sidebar.shadow') }}">
+            <button class="btn btn-sm" data-widget="control-sidebar"><span class="fa fa-times"></span></button>
+            <div class="control-sidebar-content">
+                <div class="p-3">
+                    @yield('right-sidebar')
+                </div>
+            </div>
+        </aside>
+        <div class="control-sidebar-bg"></div>
     </div>
     <script src="{{ mix('/bootstrap.min.js', '/assets/vendor/boilerplate') }}"></script>
     <script src="{{ mix('/admin-lte.min.js', '/assets/vendor/boilerplate') }}"></script>
