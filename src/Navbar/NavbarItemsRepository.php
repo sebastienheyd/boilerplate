@@ -2,6 +2,8 @@
 
 namespace Sebastienheyd\Boilerplate\Navbar;
 
+use Illuminate\View\View;
+
 class NavbarItemsRepository
 {
     /**
@@ -18,7 +20,7 @@ class NavbarItemsRepository
 
         if (is_array($item)) {
             $items = array_merge($items, $item);
-        } elseif (is_string($item)) {
+        } else {
             $items[] = $item;
         }
 
@@ -36,6 +38,16 @@ class NavbarItemsRepository
      */
     public function getItems($side = 'left')
     {
-        return array_unique(config('boilerplate.theme.navbar.'.$side, []));
+        $views = array_unique(config('boilerplate.theme.navbar.'.$side, []));
+
+        foreach ($views as $k => $view) {
+            if (is_string($view)) {
+                $views[$k] = view($view);
+            } elseif (!($view instanceof View)) {
+                unset($views[$k]);
+            }
+        }
+
+        return $views;
     }
 }

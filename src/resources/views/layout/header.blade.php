@@ -1,10 +1,12 @@
 <nav class="main-header navbar navbar-expand navbar-{{ config('boilerplate.theme.navbar.bg') }} navbar-{{ config('boilerplate.theme.navbar.type') }} {{ config('boilerplate.theme.navbar.border') ? "" : "border-bottom-0" }}">
     <ul class="nav navbar-nav">
         <li class="nav-item">
-            <a class="nav-link sidebar-toggle" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+            <a class="nav-link sidebar-toggle px-2" data-widget="pushmenu" href="#">
+                <i class="fas fa-fw fa-bars"></i>
+            </a>
         </li>
         @foreach(app('boilerplate.navbar.items')->getItems('left') as $view)
-            @include($view)
+            {!! $view !!}
         @endforeach
     </ul>
     <ul class="nav navbar-nav ml-auto d-flex">
@@ -17,11 +19,11 @@
         </li>
         @endif
         @foreach(app('boilerplate.navbar.items')->getItems('right') as $view)
-            @include($view)
+            {!! $view !!}
         @endforeach
         <li class="nav-item">
             {!! Form::open(['route' => 'boilerplate.logout', 'method' => 'post', 'id' => 'logout-form']) !!}
-            <button type="submit" class="btn nav-link d-flex align-items-center logout" data-question="{{ __('boilerplate::layout.logoutconfirm') }}" data-toggle="tooltip" title="{{ __('boilerplate::layout.logout') }}">
+            <button type="submit" class="btn nav-link d-flex align-items-center logout px-2" data-question="{{ __('boilerplate::layout.logoutconfirm') }}" data-toggle="tooltip" title="{{ __('boilerplate::layout.logout') }}">
                 <span class="fa fa-power-off hidden-xs pr-1"></span>
             </button>
             {!! Form::close() !!}
