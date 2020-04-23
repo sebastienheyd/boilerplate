@@ -22,7 +22,8 @@ $(function () {
     $('[data-toggle="tooltip"]').tooltip({
         container: 'body',
         delay: { "show": 500, "hide": 100 },
-        html: true
+        html: true,
+        trigger: 'hover',
     })
 
     setInterval(function () {
