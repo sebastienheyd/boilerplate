@@ -16,7 +16,8 @@
         "arcanedev/log-viewer": "^5.0|^7.0",
         "nesbot/carbon": "^2.0",
         "thomaswelton/laravel-gravatar": "^1.2",
-        "laravel/ui": "^1.2|^2.0"
+        "laravel/ui": "^1.2|^2.0",
+        "caouecs/laravel-lang": "^5.0|^6.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.5",
