@@ -8,7 +8,7 @@
         "php": "^7.2.5",
         "laravel/framework": "^6.0|^7.0",
         "laravelcollective/html": "^6.0|^7.0",
-        "santigarcor/laratrust": "^5.2",
+        "santigarcor/laratrust": "^6.0",
         "hieu-le/active": "^4.0|^7.0",
         "yajra/laravel-datatables-oracle": "^9.0",
         "lavary/laravel-menu": "^1.7",
