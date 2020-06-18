@@ -19,8 +19,9 @@ $('.sidebar-toggle').on('click', function (event) {
 });
 
 $(function () {
-    $('[data-toggle="tooltip"]').tooltip({
+    $(document).tooltip({
         container: 'body',
+        selector: '[data-toggle="tooltip"]',
         delay: { "show": 500, "hide": 100 },
         html: true,
         trigger: 'hover',
