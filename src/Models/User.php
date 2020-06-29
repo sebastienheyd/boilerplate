@@ -231,7 +231,7 @@ class User extends Authenticatable
         $destDir = public_path('images/avatars/');
 
         if (!is_dir($destDir)) {
-            mkdir($destDir, 0644, true);
+            mkdir($destDir, 0766, true);
         }
 
         file_put_contents($this->getAvatarPathAttribute(), $img);
