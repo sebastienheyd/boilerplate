@@ -11,7 +11,7 @@ use Tests\DuskTestCase;
  * Class DuskTest.
  *
  * @property Faker\Factory $faker
- * @property Browser $browser
+ * @property Browser       $browser
  */
 class DuskTest extends DuskTestCase
 {

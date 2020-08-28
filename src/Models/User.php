@@ -18,17 +18,17 @@ use Sebastienheyd\Boilerplate\Notifications\ResetPassword as ResetPasswordNotifi
 /**
  * Sebastienheyd\Boilerplate\Models\User.
  *
- * @property int $id
- * @property bool $active
- * @property string $first_name
- * @property string $last_name
- * @property string $email
- * @property string $password
- * @property string $remember_token
+ * @property int            $id
+ * @property bool           $active
+ * @property string         $first_name
+ * @property string         $last_name
+ * @property string         $email
+ * @property string         $password
+ * @property string         $remember_token
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * @property string $deleted_at
- * @property string $last_login
+ * @property string         $deleted_at
+ * @property string         $last_login
  * @property-read string|false $avatar_path
  * @property-read string $avatar_url
  * @property-read mixed $name
