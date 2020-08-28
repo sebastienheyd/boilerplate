@@ -60,7 +60,7 @@
                                             </div>
                                         </td>
                                         <td>
-                                            {{ Form::label('permission_'.$permission->id, $permission->display_name, ['class' => 'mb-0']) }}<br />
+                                            {{ Form::label('permission_'.$permission->id, $permission->display_name, ['class' => 'mb-0', 'data-toggle' => 'tooltip', 'data-title' => $permission->name]) }}<br />
                                             <small class="text-muted">{{ $permission->description }}</small>
                                         </td>
                                     </tr>

@@ -28,7 +28,7 @@
                 @foreach($roles as $role)
                     <tr>
                         <td>
-                            <strong>{{ $role->display_name }}</strong>
+                            <strong data-toggle="tooltip" data-title="{{ $role->name }}">{{ $role->display_name }}</strong>
                         </td>
                         <td>
                             {{ $role->description }}<br />

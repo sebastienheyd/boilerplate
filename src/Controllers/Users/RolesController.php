@@ -71,7 +71,7 @@ class RolesController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        $input['name'] = Str::slug($input['display_name']);
+        $input['name'] = Str::slug($input['display_name'], '_');
         $request->replace($input);
 
         $this->validate($request, [
