@@ -68,6 +68,7 @@ mix.scripts([
 ], 'public/js/fileinput/bootstrap-fileinput.min.js').version();
 
 mix.copy('node_modules/bootstrap-fileinput/js/locales', 'public/js/fileinput/locales', false);
+mix.copy('node_modules/bootstrap-fileinput/themes', 'public/js/fileinput/themes', false);
 
 // ======= Code Mirror
 mix.scripts(['node_modules/codemirror/lib/codemirror.js'], 'public/js/codemirror/codemirror.min.js').version();

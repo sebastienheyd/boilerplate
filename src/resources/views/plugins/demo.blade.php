@@ -11,6 +11,7 @@
         @include('boilerplate::plugins.demo.datepicker')
         @include('boilerplate::plugins.demo.icheck')
         @include('boilerplate::plugins.demo.codemirror')
+        @include('boilerplate::plugins.demo.fileinput')
     </div>
     <div class="col-md-6">
         @include('boilerplate::plugins.demo.tinymce')
