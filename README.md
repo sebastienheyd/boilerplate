@@ -149,8 +149,9 @@ Available loaders are :
 | [`boilerplate::load.datatables`](src/resources/views/load/datatables.blade.php) | [Datatables](https://www.datatables.net/) | [Example](src/resources/views/plugins/demo/datatables.blade.php) |
 | [`boilerplate::load.datepicker`](src/resources/views/load/datepicker.blade.php) | [Tempus Dominus](https://tempusdominus.github.io/bootstrap-4/) / [Date Range Picker](https://www.daterangepicker.com) | [Example](src/resources/views/plugins/demo/datepicker.blade.php) |
 | [`boilerplate::load.select2`](src/resources/views/load/select2.blade.php) | [Select2](https://select2.github.io/) | [Example](src/resources/views/plugins/demo/select2.blade.php) |
+| [`boilerplate::load.fileinput`](src/resources/views/load/fileinput.blade.php) | [Bootstrap FileInput](http://plugins.krajee.com/file-input) | [Example](src/resources/views/plugins/demo/fileinput.blade.php) | 
+| [`boilerplate::load.fullcalendar`](src/resources/views/load/fullcalendar.blade.php) | [FullCalendar](https://fullcalendar.io/) | [Example](src/resources/views/plugins/demo/fullcalendar.blade.php) |  
 | [`boilerplate::load.moment`](src/resources/views/load/moment.blade.php) | [MomentJs](http://momentjs.com/) | |
-| [`boilerplate::load.fileinput`](src/resources/views/load/fileinput.blade.php) | [Bootstrap FileInput](http://plugins.krajee.com/file-input) | |  
 
 Some plugins are loaded by default :
 

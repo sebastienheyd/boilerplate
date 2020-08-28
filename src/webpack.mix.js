@@ -108,3 +108,10 @@ mix.scripts([
     'node_modules/tinymce/tinymce.min.js',
     'node_modules/tinymce/jquery.tinymce.min.js'
 ], 'public/js/tinymce/tinymce.min.js').version();
+
+// ============== FullCalendar ==============
+
+mix.copy('node_modules/fullcalendar/main.min.css', 'public/js/fullcalendar/main.min.css').version();
+mix.copy('node_modules/fullcalendar/main.min.js', 'public/js/fullcalendar/main.min.js').version();
+mix.copy('node_modules/fullcalendar/locales/*', 'public/js/fullcalendar/locales').version();
+mix.js('resources/assets/js/vendor/fullcalendar/jquery.fullcalendar.js', 'public/js/fullcalendar/jquery.fullcalendar.min.js').version();
