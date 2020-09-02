@@ -36,10 +36,17 @@ class BoilerplateServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Publish files when calling php artisan vendor:publish
-        $this->publishes([__DIR__.'/config' => config_path('boilerplate')], 'config');
-        $this->publishes([__DIR__.'/public' => public_path('assets/vendor/boilerplate')], 'public');
-        $this->publishLang();
+        if ($this->app->runningInConsole()) {
+            // Publish files when calling php artisan vendor:publish
+            $this->publishes([__DIR__.'/config' => config_path('boilerplate')], 'config');
+            $this->publishes([__DIR__.'/public' => public_path('assets/vendor/boilerplate')], 'public');
+            $this->publishLang();
+
+            // Add console commands
+            $this->commands([
+                Console\MenuItem::class,
+            ]);
+        }
 
         // Load routes
         $this->loadRoutesFrom(__DIR__.'/routes/boilerplate.php');
@@ -58,13 +65,6 @@ class BoilerplateServiceProvider extends ServiceProvider
         // Register component
         if (version_compare(Laravel::VERSION, '7.0', '>=')) {
             Blade::component(Card::class, 'card');
-        }
-
-        // Add console commands
-        if ($this->app->runningInConsole()) {
-            $this->commands([
-                Console\MenuItem::class,
-            ]);
         }
     }
 
@@ -116,7 +116,7 @@ class BoilerplateServiceProvider extends ServiceProvider
             if ($lang === 'en') {
                 continue;
             }
-            $toPublish[base_path('vendor/caouecs/laravel-lang/src/'.$lang)] = resource_path('lang/'.$lang);
+            $toPublish[base_path('vendor/laravel-lang/lang/src/'.$lang)] = resource_path('lang/'.$lang);
         }
 
         $this->publishes($toPublish, 'lang');
