@@ -11,6 +11,7 @@
         "santigarcor/laratrust": "^6.0",
         "hieu-le/active": "^4.0|^7.0",
         "yajra/laravel-datatables-oracle": "^9.0",
+        "yajra/laravel-datatables-html": "^4.0",
         "lavary/laravel-menu": "^1.7",
         "intervention/image": "^2.5",
         "arcanedev/log-viewer": "^5.0|^7.0",
