@@ -8,8 +8,8 @@ composer.phar:
 	@curl -sS https://getcomposer.org/installer | php -- --filename=composer.phar
 	@chmod +x composer.phar
 
-vendor: $(COMPOSER) composer.json
-	@.composer.phar update --optimize-autoloader --no-suggest
+vendor: composer.phar composer.json
+	@./composer.phar update --optimize-autoloader --no-suggest
 
 cs: vendor ## Check for coding standards
 	@php vendor/bin/phpcs
