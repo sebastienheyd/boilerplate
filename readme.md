@@ -276,6 +276,16 @@ public function boot()
 }
 ```
 
+## Contributing
+
+Please see [contributing.md](contributing.md) for details and a todolist.
+
+## Credits
+
+- [Sébastien HEYD](https://github.com/sebastienheyd)
+- [All Contributors](https://github.com/sebastienheyd/boilerplate/contributors)
+
+
 ## License
 
-This package is free software distributed under the terms of the [MIT license](LICENSE.md).
+This package is free software distributed under the terms of the [MIT license](license.md).
