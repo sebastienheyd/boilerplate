@@ -40,7 +40,7 @@ class BoilerplateServiceProvider extends ServiceProvider
             // Publish files when calling php artisan vendor:publish
             $this->publishes([__DIR__.'/config' => config_path('boilerplate')], ['config', 'boilerplate']);
             $this->publishes([
-                __DIR__.'/public' => public_path('assets/vendor/boilerplate')
+                __DIR__.'/public' => public_path('assets/vendor/boilerplate'),
             ], ['public', 'boilerplate']);
             $this->publishLang();
 
@@ -93,7 +93,7 @@ class BoilerplateServiceProvider extends ServiceProvider
             'log-viewer.menu.filter-route' => 'boilerplate.logs.filter',
         ]);
 
-        if (!in_array('daily', config('logging.channels.stack.channels'))) {
+        if (! in_array('daily', config('logging.channels.stack.channels'))) {
             config([
                 'logging.channels.stack.channels' => array_merge(['daily'], config('logging.channels.stack.channels')),
             ]);

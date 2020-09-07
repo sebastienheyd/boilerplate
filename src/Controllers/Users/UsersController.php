@@ -99,7 +99,7 @@ class UsersController extends Controller
                 $b = $this->button(route('boilerplate.users.edit', $user->id), 'primary mr1', 'pencil');
 
                 // Current user is not admin, only admin can delete another admin
-                if (!$user->hasRole('admin')) {
+                if (! $user->hasRole('admin')) {
                     $b .= $this->button(route('boilerplate.users.destroy', $user->id), 'danger destroy', 'trash');
                 }
 
@@ -131,7 +131,7 @@ class UsersController extends Controller
     public function create()
     {
         // Filter roles if not admin
-        if (!Auth::user()->hasRole('admin')) {
+        if (! Auth::user()->hasRole('admin')) {
             $roles = Role::whereNotIn('name', ['admin'])->get();
         } else {
             $roles = Role::all();
@@ -183,7 +183,7 @@ class UsersController extends Controller
     {
         $user = User::findOrFail($id);
 
-        if (!Auth::user()->hasRole('admin')) {
+        if (! Auth::user()->hasRole('admin')) {
             $roles = Role::whereNotIn('name', ['admin'])->get();
         } else {
             $roles = Role::all();
@@ -335,7 +335,7 @@ class UsersController extends Controller
         try {
             if ($avatar && $file = $avatar->isValid()) {
                 $destinationPath = dirname($user->avatar_path);
-                if (!is_dir($destinationPath)) {
+                if (! is_dir($destinationPath)) {
                     mkdir($destinationPath, 0766, true);
                 }
                 $extension = $avatar->getClientOriginalExtension();

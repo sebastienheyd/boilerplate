@@ -53,7 +53,7 @@ class MenuComposer
         if (is_dir(app_path('Menu'))) {
             $classes = glob(app_path('Menu').'/*.php');
 
-            if (!empty($classes)) {
+            if (! empty($classes)) {
                 foreach ($classes as $class) {
                     $providers[] = '\\App\\Menu\\'.preg_replace('#\.php$#i', '', basename($class));
                 }

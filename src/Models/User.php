@@ -119,7 +119,7 @@ class User extends Authenticatable
      */
     public function getNameAttribute($value)
     {
-        if (!empty($value)) {
+        if (! empty($value)) {
             return $value;
         }
 
@@ -218,7 +218,7 @@ class User extends Authenticatable
      */
     public function getAvatarFromGravatar()
     {
-        if (!Gravatar::exists($this->getAttribute('email'))) {
+        if (! Gravatar::exists($this->getAttribute('email'))) {
             return false;
         }
 
@@ -230,7 +230,7 @@ class User extends Authenticatable
         $img = file_get_contents($src);
         $destDir = public_path('images/avatars/');
 
-        if (!is_dir($destDir)) {
+        if (! is_dir($destDir)) {
             mkdir($destDir, 0766, true);
         }
 

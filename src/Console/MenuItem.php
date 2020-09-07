@@ -51,7 +51,7 @@ class MenuItem extends Command
         $content = preg_replace('#{{ORDER\+1}}#', $order + 1, $content);
         $content = preg_replace('#{{ORDER\+2}}#', $order + 2, $content);
 
-        if (!is_dir(app_path('Menu'))) {
+        if (! is_dir(app_path('Menu'))) {
             mkdir(app_path('Menu'), 0775);
         }
 

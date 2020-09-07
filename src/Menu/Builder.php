@@ -31,15 +31,15 @@ class Builder extends LavaryMenuBuilder
         $item = new Item($this, $id, $title, $options);
         $item->addLinkClass('nav-link');
 
-        if (!empty($options['active'])) {
+        if (! empty($options['active'])) {
             $item->activeIfRoute($options['active']);
-        } elseif (!empty($options['route'])) {
+        } elseif (! empty($options['route'])) {
             $item->activeIfRoute($options['route']);
         }
 
         if ($item->hasParent()) {
             $item->icon($item->isActive ? 'dot-circle ' : 'circle', 'far');
-        } elseif (!empty($options['icon'])) {
+        } elseif (! empty($options['icon'])) {
             $item->icon($options['icon'] ?? false);
         } else {
             $item->icon('cube');
@@ -81,7 +81,7 @@ class Builder extends LavaryMenuBuilder
         $parent = $this->whereId($id)->first();
 
         if (isset($parent)) {
-            if (!isset($this->root[$parent->id])) {
+            if (! isset($this->root[$parent->id])) {
                 $parent->attr(['url' => '#', 'class' => 'nav-item has-treeview']);
                 $parent->append('<i class="fa fa-angle-left right"></i>');
                 $this->root[$parent->id] = true;

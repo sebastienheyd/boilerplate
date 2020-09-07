@@ -70,7 +70,7 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm()
     {
-        if (!$this->firstUser && !config('boilerplate.auth.register')) {
+        if (! $this->firstUser && ! config('boilerplate.auth.register')) {
             abort('404');
         }
 
@@ -86,7 +86,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        if (!$this->firstUser && !config('boilerplate.auth.register')) {
+        if (! $this->firstUser && ! config('boilerplate.auth.register')) {
             abort('404');
         }
 

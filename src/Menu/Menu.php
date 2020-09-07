@@ -10,7 +10,7 @@ class Menu extends LavaryMenu
     public function make($name, $callback)
     {
         if (is_callable($callback)) {
-            if (!array_key_exists($name, $this->menu)) {
+            if (! array_key_exists($name, $this->menu)) {
                 $this->menu[$name] = new Builder($name, $this->loadConf($name));
             }
 

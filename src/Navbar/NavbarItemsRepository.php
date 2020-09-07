@@ -43,7 +43,7 @@ class NavbarItemsRepository
         foreach ($views as $k => $view) {
             if (is_string($view)) {
                 $views[$k] = view($view);
-            } elseif (!($view instanceof View)) {
+            } elseif (! ($view instanceof View)) {
                 unset($views[$k]);
             }
         }

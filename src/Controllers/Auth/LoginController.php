@@ -95,7 +95,7 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
-        if (!empty($user->name)) {
+        if (! empty($user->name)) {
             \Log::info('User logged in : '.$user->name);
         }
     }

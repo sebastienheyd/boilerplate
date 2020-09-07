@@ -54,7 +54,7 @@ class Item extends LavaryMenuItem
     public function addLinkClass($class)
     {
         $classes = [];
-        if (!empty($this->link->attributes['class'])) {
+        if (! empty($this->link->attributes['class'])) {
             $classes = explode(' ', $this->link->attributes['class']);
         }
 
