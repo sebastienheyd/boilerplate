@@ -39,7 +39,9 @@ class BoilerplateServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             // Publish files when calling php artisan vendor:publish
             $this->publishes([__DIR__.'/config' => config_path('boilerplate')], ['config', 'boilerplate']);
-            $this->publishes([__DIR__.'/public' => public_path('assets/vendor/boilerplate')], ['public', 'boilerplate']);
+            $this->publishes([
+                __DIR__.'/public' => public_path('assets/vendor/boilerplate')
+            ], ['public', 'boilerplate']);
             $this->publishLang();
 
             // Add console commands
