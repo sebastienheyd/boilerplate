@@ -38,8 +38,8 @@ class BoilerplateServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             // Publish files when calling php artisan vendor:publish
-            $this->publishes([__DIR__.'/config' => config_path('boilerplate')], 'config');
-            $this->publishes([__DIR__.'/public' => public_path('assets/vendor/boilerplate')], 'public');
+            $this->publishes([__DIR__.'/config' => config_path('boilerplate')], ['config', 'boilerplate']);
+            $this->publishes([__DIR__.'/public' => public_path('assets/vendor/boilerplate')], ['public', 'boilerplate']);
             $this->publishLang();
 
             // Add console commands
@@ -112,14 +112,14 @@ class BoilerplateServiceProvider extends ServiceProvider
     private function publishLang()
     {
         $toPublish = [];
-        foreach (array_diff(scandir(__DIR__.'/resources/lang/boilerplate'), ['..', '.']) as $lang) {
+        foreach (array_diff(scandir(__DIR__.'/resources/lang'), ['..', '.']) as $lang) {
             if ($lang === 'en') {
                 continue;
             }
             $toPublish[base_path('vendor/laravel-lang/lang/src/'.$lang)] = resource_path('lang/'.$lang);
         }
 
-        $this->publishes($toPublish, 'lang');
+        $this->publishes($toPublish, ['lang', 'locale', 'boilerplate']);
     }
 
     /**
