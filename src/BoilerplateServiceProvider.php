@@ -56,7 +56,7 @@ class BoilerplateServiceProvider extends ServiceProvider
         // Load migrations, views and translations from current directory
         $this->loadMigrationsFrom(__DIR__.'/migrations');
         $this->loadViewsFrom(__DIR__.'/resources/views', 'boilerplate');
-        $this->loadTranslationsFrom(__DIR__.'/resources/lang/boilerplate', 'boilerplate');
+        $this->loadTranslationsFrom(__DIR__.'/resources/lang', 'boilerplate');
 
         // Loading dynamic menu when calling the view
         View::composer('boilerplate::layout.mainsidebar', MenuComposer::class);
