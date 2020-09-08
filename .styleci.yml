@@ -1,9 +1,1 @@
-php:
-  preset: laravel
-  disabled:
-    - unused_use
-js:
-  finder:
-    not-name:
-      - webpack.mix.js
-css: true
+preset: laravel
