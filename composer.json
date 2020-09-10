@@ -6,7 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.2.5",
-        "laravel/framework": "^6.0|^7.0",
+        "illuminate/support": "^6.0|^7.0",
         "laravelcollective/html": "^6.0|^7.0",
         "santigarcor/laratrust": "^6.0",
         "hieu-le/active": "^4.0|^7.0",
