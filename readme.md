@@ -104,7 +104,7 @@ For package developers, menu items providers can be added by using the `boilerpl
 package service provider. Example : 
 
 ```php
-public function register()
+public function boot()
 {
     app('boilerplate.menu.items')->registerMenuItem([
         Users::class,
