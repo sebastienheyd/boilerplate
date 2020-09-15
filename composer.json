@@ -1,23 +1,22 @@
 {
     "name": "sebastienheyd/boilerplate",
     "description": "Laravel Boilerplate based on AdminLTE 3 with user management, roles, permissions, logs viewer, ...",
-    "keywords": ["laravel", "boilerplate", "backend","adminlte", "laratrust", "laravelcollective", "active", "admin"],
+    "keywords": ["laravel", "boilerplate", "backend", "adminlte", "laratrust", "laravelcollective", "active", "admin"],
     "type": "library",
     "license": "MIT",
     "require": {
         "php": "^7.2.5",
-        "illuminate/support": "^6.0|^7.0",
-        "laravelcollective/html": "^6.0|^7.0",
+        "illuminate/support": "^6.0|^7.0|^8.0",
+        "laravelcollective/html": "^6.0|^7.0|^8.0",
         "santigarcor/laratrust": "^6.0",
-        "hieu-le/active": "^4.0|^7.0",
+        "hieu-le/active": "^4.0|^7.0|^8.0",
         "yajra/laravel-datatables-oracle": "^9.0",
-        "yajra/laravel-datatables-html": "^4.0",
         "lavary/laravel-menu": "^1.7",
         "intervention/image": "^2.5",
-        "arcanedev/log-viewer": "^5.0|^7.0",
+        "arcanedev/log-viewer": "^5.0|^7.0|^8.0",
         "nesbot/carbon": "^2.0",
         "thomaswelton/laravel-gravatar": "^1.2",
-        "laravel/ui": "^1.2|^2.0",
+        "laravel/ui": "^1.2|^2.0|^3.0",
         "laravel-lang/lang": "^7.0"
     },
     "require-dev": {
@@ -27,8 +26,9 @@
         "doctrine/dbal": "^2.9"
     },
     "suggest": {
-        "sebastienheyd/boilerplate-media-manager": "Media manager",
-        "sebastienheyd/boilerplate-email-editor": "Visual editor for e-mails"
+        "sebastienheyd/boilerplate-packager": "Package manager for sebastienheyd/boilerplate",
+        "sebastienheyd/boilerplate-media-manager": "Media manager for sebastienheyd/boilerplate",
+        "sebastienheyd/boilerplate-email-editor": "Visual editor for e-mails for sebastienheyd/boilerplate"
     },
     "autoload": {
         "psr-4": {
