@@ -133,7 +133,7 @@
                 oTable.column(6).search(value).draw();
             }
 
-            $('#users-table').on('click', '.destroy', function (e) {
+            $(document).on('click', '#users-list .destroy', function (e) {
                 e.preventDefault();
 
                 var href = $(this).attr('href');
