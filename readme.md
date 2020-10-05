@@ -13,8 +13,6 @@ It includes profile creation and his management, user management, roles, permiss
 
 It also makes it easy to add other packages to extend the features.
 
-For AdminLTE 2 and Bootstrap 3 please use version < 7.0 of this package.
-
 ## Features
 
 * Configurable backend theme [AdminLTE 3](https://adminlte.io/docs/3.0/)
@@ -30,6 +28,12 @@ For AdminLTE 2 and Bootstrap 3 please use version < 7.0 of this package.
 * Gravatar import by [thomaswelton/laravel-gravatar](https://github.com/thomaswelton/laravel-gravatar)
 * Javascript session keep-alive
 * Localized English / French / Spanish / Turkish
+
+To complete the features, take a look at the following packages:
+
+* [sebastienheyd/boilerplate-packager](https://packagist.org/packages/sebastienheyd/boilerplate-packager) : helps you to create and manage packages for boilerplate.
+* [sebastienheyd/boilerplate-media-manager](https://packagist.org/packages/sebastienheyd/boilerplate-media-manager) : storage media manager
+* [sebastienheyd/boilerplate-email-editor](https://packagist.org/packages/sebastienheyd/boilerplate-email-editor) : e-mail visual editor
 
 ## Installation
 
