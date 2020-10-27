@@ -9,7 +9,7 @@ composer.phar:
 	@chmod +x composer.phar
 
 vendor: composer.phar composer.json
-	@./composer.phar update --optimize-autoloader
+	@./composer.phar install --prefer-source --no-interaction --optimize-autoloader
 
 cs: vendor ## Check for coding standards
 	@php vendor/bin/phpcs
