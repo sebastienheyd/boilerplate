@@ -2,18 +2,19 @@
 
 namespace Sebastienheyd\Boilerplate\Console;
 
-use Illuminate\Console\Command;
 use Illuminate\Support\Str;
+use Sebastienheyd\Boilerplate\Menu\Builder;
+use Sebastienheyd\Boilerplate\Menu\Builder as Menu;
 
-class MenuItem extends Command
+class MenuItem extends BoilerplateCommand
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'boilerplate:menuitem {name} 
-                            {--s|submenu : Add sub items to menu item} 
+    protected $signature = 'boilerplate:menuitem {name? : Name of the menu item to add}
+                            {--s|submenu : Add sub items to menu item}
                             {--o|order=100 : Order in the backend menu}';
 
     /**
@@ -38,29 +39,39 @@ class MenuItem extends Command
      */
     public function handle()
     {
-        $name = is_string($this->argument('name')) ? ucfirst(Str::camel($this->argument('name'))) : '';
+        $this->title();
 
+        $name = $this->argument('name');
+
+        if (empty($name)) {
+            $name = $this->forceAnswer('Name of the menu item to create');
+        }
+
+        $camelName = ucfirst(Str::camel(Str::slug($name)));
         $order = intval($this->option('order'));
         $stubFile = $this->option('submenu') ? 'MenuItemSub.stub' : 'MenuItem.stub';
+        $filePath = app_path('Menu/'.$camelName.'.php');
 
-        $stub = file_get_contents(__DIR__.'/stubs/'.$stubFile);
+        $content = file_get_contents(__DIR__.'/stubs/'.$stubFile);
 
-        $content = preg_replace('#{{NAME}}#', $name, $stub);
-        $content = preg_replace('#{{ID}}#', mb_strtolower($name), $content);
-        $content = preg_replace('#{{ORDER}}#', $order, $content);
-        $content = preg_replace('#{{ORDER\+1}}#', $order + 1, $content);
-        $content = preg_replace('#{{ORDER\+2}}#', $order + 2, $content);
+        $toReplace = [
+            '{{NAME}}' => $name,
+            '{{ID}}' => $camelName,
+            '{{ORDER}}' => $order,
+        ];
+
+        $content = str_replace(array_keys($toReplace), array_values($toReplace), $content);
+
+        if (is_file($filePath)) {
+            $this->error('Menu item '.$camelName.' already exists');
+            exit;
+        }
 
         if (! is_dir(app_path('Menu'))) {
             mkdir(app_path('Menu'), 0775);
         }
 
-        if (is_file(app_path('Menu/'.$name.'.php'))) {
-            $this->error('Menu item '.$name.' already exists');
-            exit;
-        }
-
-        file_put_contents(app_path('Menu/'.$name.'.php'), $content);
-        $this->info('Menu item generated with success : app/Menu/'.$name.'.php');
+        file_put_contents($filePath, $content);
+        $this->info('Menu item generated with success : '.$filePath);
     }
 }

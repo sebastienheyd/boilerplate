@@ -4,13 +4,16 @@ namespace App\Menu;
 
 use Sebastienheyd\Boilerplate\Menu\Builder;
 
-class {{NAME}}
+class {{ID}}
 {
     public function make(Builder $menu)
     {
-        $menu->add('{{NAME}}', ['route' => 'boilerplate.dashboard', 'permission' => 'backend', 'icon' => 'square'])
-             ->id('{{NAME}}')
-             ->activeIfRoute('boilerplate.dashboard')
-             ->order({{ORDER}});
+        $menu->add('{{NAME}}', [
+            'route' => 'boilerplate.dashboard',
+            'active' => 'boilerplate.dashboard',
+            'permission' => 'backend',
+            'icon' => 'square',
+            'order' => {{ORDER}},
+        ]);
     }
 }

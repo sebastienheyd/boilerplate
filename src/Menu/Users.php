@@ -8,28 +8,29 @@ class Users
 {
     public function make(Builder $menu)
     {
-        $menu->add(__('boilerplate::layout.access'), ['icon' => 'users'])
-            ->id('access')
-            ->order(1000);
-
-        $menu->addTo('access', __('boilerplate::users.list.title'), [
-            'route'      => 'boilerplate.users.index',
-            'active'     => 'boilerplate.users.index,boilerplate.users.edit',
-            'permission' => 'users_crud',
+        $item = $menu->add('boilerplate::layout.access', [
+            'icon' => 'users',
+            'order' => 1000,
         ]);
 
-        $menu->addTo('access', __('boilerplate::users.create.title'), [
-            'route'      => 'boilerplate.users.create',
+        $item->add('boilerplate::users.list.title', [
+            'active' => 'boilerplate.users.index,boilerplate.users.edit',
             'permission' => 'users_crud',
+            'route' => 'boilerplate.users.index',
         ]);
 
-        $menu->addTo('access', __('boilerplate::layout.role_management'), [
-            'route'      => 'boilerplate.roles.index',
-            'active'     => 'boilerplate.roles.*',
+        $item->add('boilerplate::users.create.title', [
+            'permission' => 'users_crud',
+            'route' => 'boilerplate.users.create',
+        ]);
+
+        $item->add('boilerplate::layout.role_management', [
+            'active' => 'boilerplate.roles.*',
             'permission' => 'roles_crud',
+            'route' => 'boilerplate.roles.index',
         ]);
 
-        $menu->addTo('access', __('boilerplate::users.profile.title'), [
+        $item->add('boilerplate::users.profile.title', [
             'route' => 'boilerplate.user.profile',
         ]);
     }

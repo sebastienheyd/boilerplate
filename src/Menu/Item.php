@@ -24,7 +24,14 @@ class Item extends LavaryMenuItem
      */
     public function icon($icon, $type = 'fas')
     {
-        $this->title = preg_replace('#<i.*?</i>#', '', $this->title);
+        if (preg_match('#^(fa[bsr])\s#', $icon, $m)) {
+            $type = $m[1];
+        }
+
+        if (preg_match('#fa-(.*)$#', $icon, $m)) {
+            $icon = $m[1];
+        }
+
         $this->prepend(sprintf('<i class="nav-icon %s fa-%s"></i>', $type, $icon));
 
         return $this;
@@ -92,5 +99,20 @@ class Item extends LavaryMenuItem
         }
 
         return $this;
+    }
+
+    /**
+     * Creates a sub Item.
+     *
+     * @param string $title
+     * @param string|array $options
+     * @return \Lavary\Menu\Item
+     */
+    public function add($title, $options = [])
+    {
+        $options['parent'] = $this->id;
+        $this->append('<i class="fa fa-angle-left right"></i>');
+
+        return $this->builder->add($title, $options);
     }
 }

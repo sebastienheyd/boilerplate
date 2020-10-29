@@ -19,13 +19,13 @@ class Builder extends LavaryMenuBuilder
      * Adds an item to the menu.
      *
      * @param string $title
-     * @param array  $options
+     * @param array $options
      *
      * @return Item
      */
     public function add($title, $options = [])
     {
-        $title = sprintf('<p>%s</p>', $title);
+        $title = sprintf('<p>%s</p>', __($title));
         $id = isset($options['id']) ? $options['id'] : $this->id();
 
         $item = new Item($this, $id, $title, $options);
@@ -43,6 +43,10 @@ class Builder extends LavaryMenuBuilder
             $item->icon($options['icon'] ?? false);
         } else {
             $item->icon('cube');
+        }
+
+        if (! empty($options['order'])) {
+            $item->order($options['order']);
         }
 
         if (isset($options['role']) || isset($options['permission'])) {
@@ -70,9 +74,9 @@ class Builder extends LavaryMenuBuilder
     /**
      * Add an item to a existing menu item as a submenu item.
      *
-     * @param string $id      Id of the menu item to attach to
-     * @param string $title   Title of the sub item
-     * @param array  $options
+     * @param string $id Id of the menu item to attach to
+     * @param string $title Title of the sub item
+     * @param array $options
      *
      * @return Item
      */

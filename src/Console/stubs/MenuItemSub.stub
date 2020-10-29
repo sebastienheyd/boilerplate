@@ -4,19 +4,27 @@ namespace App\Menu;
 
 use Sebastienheyd\Boilerplate\Menu\Builder;
 
-class {{NAME}}
+class {{ID}}
 {
     public function make(Builder $menu)
     {
-        $menu->add('{{NAME}}', [ 'permission' => 'backend', 'icon' => 'square' ])
-             ->id('{{ID}}')
-             ->activeIfRoute('boilerplate.dashboard')
-             ->order({{ORDER}});
+        $item = $menu->add('{{NAME}}', [
+            'permission' => 'backend',
+            'active' => 'boilerplate.dashboard',
+            'icon' => 'square',
+            'order' => {{ORDER}},
+        ]);
 
-        $menu->addTo('{{ID}}', '{{NAME}} sub item 1', [ 'route' => 'boilerplate.dashboard', 'permission' => 'backend' ])
-             ->activeIfRoute(['boilerplate.dashboard']);
+        $item->add('Sub item 1', [
+            'permission' => 'backend',
+            'active' => 'boilerplate.dashboard',
+            'route' => 'boilerplate.dashboard',
+        ]);
 
-        $menu->addTo('{{ID}}', '{{NAME}} sub item 1', [ 'route' => 'boilerplate.dashboard', 'permission' => 'backend' ])
-             ->activeIfRoute(['boilerplate.dashboard']);
+        $item->add('Sub item 2', [
+            'permission' => 'backend',
+            'active' => 'boilerplate.dashboard',
+            'route' => 'boilerplate.dashboard',
+        ]);
     }
 }
