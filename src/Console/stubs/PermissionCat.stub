@@ -1,0 +1,43 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+
+class PERMISSION_CLASS extends Migration
+{
+    private $permissions = [
+        [
+            'name' => 'PERMISSION_NAME',
+            'display_name' => 'PERMISSION_DISPLAY_NAME',
+            'description' => 'PERMISSION_DESC',
+        ],
+    ];
+
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        $catId = DB::table('permissions_categories')->where('name', 'CATEGORY_NAME')->first('id')->id;
+
+        foreach ($this->permissions as $permission) {
+            $permission['created_at'] = date('Y-m-d H:i:s');
+            $permission['updated_at'] = date('Y-m-d H:i:s');
+            $permission['category_id'] = $catId;
+            DB::table('permissions')->insert($permission);
+        }
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        foreach ($this->permissions as $permission) {
+            DB::table('permissions')->where('name', $permission['name'])->delete();
+        }
+    }
+}

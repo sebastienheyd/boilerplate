@@ -10,7 +10,7 @@ class PermissionCategory extends Model
 {
     protected $fillable = ['name', 'display_name'];
     protected $table = 'permissions_categories';
-    protected $dates = false;
+    protected $dates = [];
 
     public function getDisplayNameAttribute($value)
     {
