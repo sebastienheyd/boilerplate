@@ -3,8 +3,6 @@
 namespace Sebastienheyd\Boilerplate\Console;
 
 use Illuminate\Support\Str;
-use Sebastienheyd\Boilerplate\Menu\Builder;
-use Sebastienheyd\Boilerplate\Menu\Builder as Menu;
 
 class MenuItem extends BoilerplateCommand
 {

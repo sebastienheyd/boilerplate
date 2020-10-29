@@ -25,7 +25,7 @@ class Builder extends LavaryMenuBuilder
      */
     public function add($title, $options = [])
     {
-        $title = sprintf('<p>%s</p>', __($title));
+        $title = sprintf('<p>%s</p>', /** @scrutinizer ignore-type */ __($title));
         $id = isset($options['id']) ? $options['id'] : $this->id();
 
         $item = new Item($this, $id, $title, $options);
@@ -40,7 +40,7 @@ class Builder extends LavaryMenuBuilder
         if ($item->hasParent()) {
             $item->icon($item->isActive ? 'dot-circle ' : 'circle', 'far');
         } elseif (! empty($options['icon'])) {
-            $item->icon($options['icon'] ?? false);
+            $item->icon($options['icon']);
         } else {
             $item->icon('cube');
         }
@@ -60,8 +60,7 @@ class Builder extends LavaryMenuBuilder
                 $permission = explode(',', $options['permission']);
             }
 
-            $currentUser = Auth::user();
-            if ($currentUser->ability($ability, $permission)) {
+            if (Auth::user()->ability($ability, $permission)) {
                 $this->items->push($item);
             }
         } else {

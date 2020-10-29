@@ -38,7 +38,9 @@ class Permission extends BoilerplateCommand
 
         if ($this->confirm('Create or assign to a permission category ?')) {
             $categories = PermissionCategory::pluck('name')->toArray();
-            $categoryName = $this->choice("Permission categories", array_merge(['Create a new category'], $categories));
+            $categoryName = (string) $this->choice('Permission categories', array_merge([
+                'Create a new category',
+            ], $categories));
 
             if ($categoryName === 'Create a new category') {
                 $categoryName = $this->forceAnswer('Name of the category (snake_case)');
