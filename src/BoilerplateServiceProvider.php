@@ -7,6 +7,13 @@ use Illuminate\Foundation\Application as Laravel;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Laratrust\LaratrustFacade;
+use Laratrust\LaratrustServiceProvider;
+use Laratrust\Middleware\LaratrustAbility;
+use Laratrust\Middleware\LaratrustPermission;
+use Laratrust\Middleware\LaratrustRole;
+use Lavary\Menu\Facade;
+use Lavary\Menu\ServiceProvider as MenuServiceProvider;
 use Sebastienheyd\Boilerplate\View\Components\Card;
 use Sebastienheyd\Boilerplate\View\Composers\DatatablesComposer;
 use Sebastienheyd\Boilerplate\View\Composers\MenuComposer;
@@ -14,7 +21,15 @@ use Sebastienheyd\Boilerplate\View\Composers\MenuComposer;
 class BoilerplateServiceProvider extends ServiceProvider
 {
     protected $defer = false;
+
+    /**
+     * @var \Illuminate\Foundation\AliasLoader
+     */
     protected $loader;
+
+    /**
+     * @var \Illuminate\Routing\Router
+     */
     protected $router;
 
     /**
@@ -47,6 +62,7 @@ class BoilerplateServiceProvider extends ServiceProvider
             // Add console commands
             $this->commands([
                 Console\MenuItem::class,
+                Console\Permission::class,
             ]);
         }
 
@@ -71,6 +87,22 @@ class BoilerplateServiceProvider extends ServiceProvider
     }
 
     /**
+     * Publish Laravel lang files.
+     */
+    private function publishLang()
+    {
+        $toPublish = [];
+        foreach (array_diff(scandir(__DIR__.'/resources/lang'), ['..', '.']) as $lang) {
+            if ($lang === 'en') {
+                continue;
+            }
+            $toPublish[base_path('vendor/laravel-lang/lang/src/'.$lang)] = resource_path('lang/'.$lang);
+        }
+
+        $this->publishes($toPublish, ['lang', 'locale', 'boilerplate']);
+    }
+
+    /**
      * Register the application services.
      *
      * @return void
@@ -86,10 +118,10 @@ class BoilerplateServiceProvider extends ServiceProvider
 
         // Overriding Laravel config
         config([
-            'auth.providers.users.driver'  => config('boilerplate.auth.providers.users.driver', 'eloquent'),
-            'auth.providers.users.model'   => config('boilerplate.auth.providers.users.model', 'App\User'),
-            'auth.providers.users.table'   => config('boilerplate.auth.providers.users.table', 'users'),
-            'log-viewer.route.enabled'     => false,
+            'auth.providers.users.driver' => config('boilerplate.auth.providers.users.driver', 'eloquent'),
+            'auth.providers.users.model' => config('boilerplate.auth.providers.users.model', 'App\User'),
+            'auth.providers.users.table' => config('boilerplate.auth.providers.users.table', 'users'),
+            'log-viewer.route.enabled' => false,
             'log-viewer.menu.filter-route' => 'boilerplate.logs.filter',
         ]);
 
@@ -109,40 +141,24 @@ class BoilerplateServiceProvider extends ServiceProvider
     }
 
     /**
-     * Publish Laravel lang files.
-     */
-    private function publishLang()
-    {
-        $toPublish = [];
-        foreach (array_diff(scandir(__DIR__.'/resources/lang'), ['..', '.']) as $lang) {
-            if ($lang === 'en') {
-                continue;
-            }
-            $toPublish[base_path('vendor/laravel-lang/lang/src/'.$lang)] = resource_path('lang/'.$lang);
-        }
-
-        $this->publishes($toPublish, ['lang', 'locale', 'boilerplate']);
-    }
-
-    /**
      * Register package lavary/laravel-menu.
      */
     private function registerLaratrust()
     {
-        $this->app->register(\Laratrust\LaratrustServiceProvider::class);
-        $this->loader->alias('Laratrust', \Laratrust\LaratrustFacade::class);
+        $this->app->register(LaratrustServiceProvider::class);
+        $this->loader->alias('Laratrust', LaratrustFacade::class);
 
         // Overriding config
         config([
             'laratrust.user_models.users' => config('boilerplate.laratrust.user', 'App\User'),
-            'laratrust.models.role'       => config('boilerplate.laratrust.role', 'App\Role'),
+            'laratrust.models.role' => config('boilerplate.laratrust.role', 'App\Role'),
             'laratrust.models.permission' => config('boilerplate.laratrust.permission', 'App\Permission'),
         ]);
 
         // Registering middlewares
-        $this->router->aliasMiddleware('role', \Laratrust\Middleware\LaratrustRole::class);
-        $this->router->aliasMiddleware('permission', \Laratrust\Middleware\LaratrustPermission::class);
-        $this->router->aliasMiddleware('ability', \Laratrust\Middleware\LaratrustAbility::class);
+        $this->router->aliasMiddleware('role', LaratrustRole::class);
+        $this->router->aliasMiddleware('permission', LaratrustPermission::class);
+        $this->router->aliasMiddleware('ability', LaratrustAbility::class);
     }
 
     /**
@@ -150,8 +166,8 @@ class BoilerplateServiceProvider extends ServiceProvider
      */
     private function registerMenu()
     {
-        $this->app->register(\Lavary\Menu\ServiceProvider::class);
-        $this->loader->alias('Menu', \Lavary\Menu\Facade::class);
+        $this->app->register(MenuServiceProvider::class);
+        $this->loader->alias('Menu', Facade::class);
 
         // Menu items repository singleton
         $this->app->singleton('boilerplate.menu.items', function () {
