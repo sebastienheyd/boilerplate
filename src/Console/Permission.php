@@ -36,16 +36,16 @@ class Permission extends BoilerplateCommand
         $categoryName = '';
         $categoryDescription = '';
 
-        if ($this->confirm('Create or assign to a permission category ?')) {
+        if ($this->confirm('Create or assign to a permissions group ?')) {
             $categories = PermissionCategory::pluck('name')->toArray();
-            $categoryName = (string) $this->choice('Permission categories', array_merge([
-                'Create a new category',
+            $categoryName = (string) $this->choice('Permissions groups', array_merge([
+                'Create a new group',
             ], $categories));
 
-            if ($categoryName === 'Create a new category') {
-                $categoryName = $this->forceAnswer('Name of the category (snake_case)');
+            if ($categoryName === 'Create a new group') {
+                $categoryName = $this->forceAnswer('Name of the group (snake_case)');
                 $categoryName = Str::slug($categoryName, '_');
-                $categoryDescription = $this->forceAnswer('Full name of the category');
+                $categoryDescription = $this->forceAnswer('Full name of the group (can be a locale string)');
             }
         }
 
