@@ -10,12 +10,12 @@
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
-        "axios": "^0.19.1",
+        "axios": "^0.21.1",
         "clean-webpack-plugin": "^3.0.0",
         "cross-env": "^6.0.3",
         "laravel-mix": "^5.0.1",
         "resolve-url-loader": "^3.1.0",
-        "sass": "^1.26.3",
+        "sass": "^1.32.4",
         "sass-loader": "^8.0.2",
         "vue-template-compiler": "^2.6.11"
     },
@@ -23,12 +23,12 @@
         "admin-lte": "^3.0.2",
         "bootbox": "^5.3.4",
         "bootstrap": "^4.4.1",
-        "bootstrap-fileinput": "^5.0.8",
-        "codemirror": "^5.51.0",
-        "datatables.net": "^1.10.20",
-        "datatables.net-bs4": "^1.10.20",
+        "bootstrap-fileinput": "^5.1.4",
+        "codemirror": "^5.59.1",
+        "datatables.net": "^1.10.23",
+        "datatables.net-bs4": "^1.10.23",
         "drmonty-datatables-plugins": "^1.10.12",
-        "fullcalendar": "^5.3.0",
+        "fullcalendar": "^5.5.0",
         "select2": "^4.0.13",
         "stickytoolbar": "^2.2.1",
         "tinymce": "^5.2.0"
