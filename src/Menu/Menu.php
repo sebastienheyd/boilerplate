@@ -7,11 +7,11 @@ use View;
 
 class Menu extends LavaryMenu
 {
-    public function make($name, $callback)
+    public function make($name, $callback, array $options = [])
     {
         if (is_callable($callback)) {
             if (! array_key_exists($name, $this->menu)) {
-                $this->menu[$name] = new Builder($name, $this->loadConf($name));
+                $this->menu[$name] = new Builder($name, array_merge($this->loadConf($name), $options));
             }
 
             // Registering the items
