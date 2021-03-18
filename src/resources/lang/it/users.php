@@ -1,0 +1,47 @@
+<?php
+
+return [
+    'title'         => 'Users',
+    'returntolist'  => 'Elenco Utenti',
+    'save'          => 'Salva',
+    'informations'  => 'Informazioni',
+    'status'        => 'Stato',
+    'active'        => 'Attivo',
+    'inactive'      => 'Disabilitato',
+    'lastname'      => 'Cognome',
+    'firstname'     => 'Nome',
+    'email'         => 'E-mail',
+    'roles'         => 'Ruolo',
+    'successadd'    => 'Utente aggiunto correttamente.',
+    'successmod'    => 'Utente modificato correttamente.',
+    'newpassword'   => 'La tua password è stata salvata.',
+    'create'        => [
+        'title'     => 'Aggiungi Utente',
+        'help'      => 'L\'utente riceverà una mail di conferma dove dovrà inserire la sua password',
+    ],
+    'edit' => [
+        'title'     => 'Modifica utente',
+    ],
+    'list' => [
+        'title'         => 'Lista Utenti',
+        'id'            => 'Id',
+        'state'         => 'Stato',
+        'lastname'      => 'Cognome',
+        'firstname'     => 'Nome',
+        'email'         => 'E-mail',
+        'roles'         => 'Ruolo',
+        'creationdate'  => 'Creato il',
+        'lastconnect'   => 'Ultimo Accesso',
+        'confirmdelete' => 'Sei sicuro di voler cancellare l\'utente?',
+        'deletesuccess' => 'Utente cancellato correttamente',
+    ],
+    'profile' => [
+        'title'            => 'Profilo utente',
+        'subscribedsince'  => 'Registrato dal :date ( :since )',
+        'avatar'           => 'Immagine profilo',
+        'delavatar'        => 'Rimuovi immagine profilo',
+        'confirmdelavatar' => 'Sicuro di voler rimuovere l\'immagine di profilo ?',
+        'successdelavatar' => 'Immagine di profilo rimossa',
+        'successupdate'    => 'Profilo aggiornato correttamente',
+    ],
+];
