@@ -17,6 +17,6 @@ return [
     'sent' => 'Ti abbiamo inviato una mail con il link per il reset password!',
     'throttled' => 'Attendi qualche istante prima di riprovare.',
     'token' => 'Il link di reset password non è valido.',
-    'user' => "Non ci sono utenti registrati con questa mail.",
+    'user' => 'Non ci sono utenti registrati con questa mail.',
 
 ];
