@@ -29,7 +29,7 @@ For AdminLTE 2 and Bootstrap 3 please use version < 7.0 of this package.
 * Logs visualization by [arcanedev/log-viewer](https://github.com/ARCANEDEV/LogViewer)
 * Gravatar import by [thomaswelton/laravel-gravatar](https://github.com/thomaswelton/laravel-gravatar)
 * Javascript session keep-alive
-* Localized English / French / Spanish / Turkish
+* Localized English / French / Italian / Spanish / Turkish
 
 ## Installation
 
