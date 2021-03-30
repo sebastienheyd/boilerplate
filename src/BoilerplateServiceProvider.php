@@ -54,7 +54,7 @@ class BoilerplateServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             // Publish files when calling php artisan vendor:publish
             $this->publishes([
-                __DIR__.'/config' => config_path('boilerplate')
+                __DIR__.'/config' => config_path('boilerplate'),
             ], ['config', 'boilerplate', 'boilerplate-config']);
 
             $this->publishes([
@@ -110,7 +110,7 @@ class BoilerplateServiceProvider extends ServiceProvider
         $this->publishes($toPublish, ['boilerplate', 'boilerplate-lang']);
 
         $this->publishes([
-            __DIR__.'/resources/lang' => resource_path('lang/vendor/boilerplate')
+            __DIR__.'/resources/lang' => resource_path('lang/vendor/boilerplate'),
         ], ['boilerplate-lang']);
     }
 
