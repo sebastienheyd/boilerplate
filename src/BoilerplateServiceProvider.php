@@ -53,10 +53,18 @@ class BoilerplateServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             // Publish files when calling php artisan vendor:publish
-            $this->publishes([__DIR__.'/config' => config_path('boilerplate')], ['config', 'boilerplate']);
+            $this->publishes([
+                __DIR__.'/config' => config_path('boilerplate')
+            ], ['config', 'boilerplate', 'boilerplate-config']);
+
             $this->publishes([
                 __DIR__.'/public' => public_path('assets/vendor/boilerplate'),
-            ], ['public', 'boilerplate']);
+            ], ['public', 'boilerplate', 'boilerplate-public']);
+
+            $this->publishes([
+                __DIR__.'/resources/views' => resource_path('views/vendor/boilerplate'),
+            ], ['boilerplate-views']);
+
             $this->publishLang();
 
             // Add console commands
@@ -99,7 +107,11 @@ class BoilerplateServiceProvider extends ServiceProvider
             $toPublish[base_path('vendor/laravel-lang/lang/src/'.$lang)] = resource_path('lang/'.$lang);
         }
 
-        $this->publishes($toPublish, ['lang', 'locale', 'boilerplate']);
+        $this->publishes($toPublish, ['boilerplate', 'boilerplate-lang']);
+
+        $this->publishes([
+            __DIR__.'/resources/lang' => resource_path('lang/vendor/boilerplate')
+        ], ['boilerplate-lang']);
     }
 
     /**

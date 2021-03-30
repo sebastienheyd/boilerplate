@@ -39,13 +39,13 @@ For AdminLTE 2 and Bootstrap 3 please use version < 7.0 of this package.
 composer require sebastienheyd/boilerplate
 ```
 
-2. Run the command below to publish assets, views, lang files, ...
+2. Run the command below to publish assets, lang and configuration files
 
 ```
-php artisan vendor:publish --provider="Sebastienheyd\Boilerplate\BoilerplateServiceProvider"
+php artisan vendor:publish --tag=boilerplate
 ```
 
-3. After you set your database parameters in your ```.env``` file run :
+3. After you set your database parameters file run :
 
 ```
 php artisan migrate
@@ -167,17 +167,15 @@ You can see examples on the default dashboard.
 
 By default the language used by boilerplate is the application language declared into `config/app.php` (locale). You can
 define another language only for the back-office by setting `locale` parameter in `config/boilerplate/app.php`.  
-Supported language are English, French, Spanish and Turkish.
+Supported language are English, French, Italian, Spanish and Turkish.
 
-When you run `php artisan vendor:publish --provider="Sebastienheyd\Boilerplate\BoilerplateServiceProvider"`, only the
-language files for form validation are copied for supported languages. Thanks to
-[Laravel-Lang/lang](https://github.com/Laravel-Lang/lang) package !
+When you run `php artisan vendor:publish --tag=boilerplate`, only the language files for form validation are copied 
+for supported languages. Thanks to [Laravel-Lang/lang](https://github.com/Laravel-Lang/lang) package !
 
-You can translate into a language not yet supported by copying the
-[`src/resources/lang/boilerplate`](src/resources/lang/boilerplate) folder content into
-`resources/lang/vendor/boilerplate` folder. After that, copy or rename one of the language folders in the new language
-folder to create. All you have to do is translate. If you want to share the language you have added, don't hesitate to
-make a pull request.
+You can translate or change translations by running `php artisan vendor:publish --tag=boilerplate-lang`. After running 
+this command, you will find translations folders into `resources/lang/vendor/boilerplate`. Copy one of the language 
+folders in the new language you want to create and all you have to do is to translate. If you want to share the 
+language you have added, don't hesitate to make a pull request.
 
 ### Routes
 
@@ -187,36 +185,32 @@ A default prefix `admin` is set into the config file [`app.php`](src/config/app.
 boilerplate is accessible by /admin url. You can set an empty prefix if you remove the default route / defined in
 `routes/web.php`
 
+### Views
+
+You can override views by running `php artisan vendor:publish --tag=boilerplate-views`. You will then find the views 
+in the `resources/views/vendor/boilerplate` folder.
+
 ## Package update
 
 Boilerplate comes with assets such as Javascript, CSS, and images. Since you typically will need to overwrite the assets
 every time the package is updated, you may use the ```--force``` flag :
 
 ```
-php artisan vendor:publish --provider="Sebastienheyd\Boilerplate\BoilerplateServiceProvider" --tag=public --force
+php artisan vendor:publish --tag=boilerplate-public --force
 ```
 
 To auto update assets each time package is updated, you can add this command to `post-autoload-dump` into the
 file `composer.json` at the root of your project.
 
-
 ```json
 {
     "scripts": {
         "post-autoload-dump": [
-            "@php artisan vendor:publish --provider=\"Sebastienheyd\\Boilerplate\\BoilerplateServiceProvider\" --tag=public --force -q",
+            "@php artisan vendor:publish --tag=boilerplate-public --force -q"
         ]
     }
 }
 ```
-
-If needed, you can force update for these tags : ```config```, ```lang```, ```public```
-
-| tag | description | destination path |
-|---|---|---|
-| config | Configuration files | app/config/boilerplate |
-| lang | Laravel default lang files for form validation | ressources/lang |
-| public | Public assets, you must update it after each package update | public/assets/vendor/boilerplate |
 
 ## Tests / Coding standards
 
