@@ -55,15 +55,15 @@ class BoilerplateServiceProvider extends ServiceProvider
             // Publish files when calling php artisan vendor:publish
             $this->publishes([
                 __DIR__.'/config' => config_path('boilerplate'),
-            ], ['config', 'boilerplate', 'boilerplate-config']);
+            ], ['boilerplate', 'boilerplate-config']);
 
             $this->publishes([
                 __DIR__.'/public' => public_path('assets/vendor/boilerplate'),
-            ], ['public', 'boilerplate', 'boilerplate-public']);
+            ], ['boilerplate', 'boilerplate-public']);
 
             $this->publishes([
                 __DIR__.'/resources/views' => resource_path('views/vendor/boilerplate'),
-            ], ['boilerplate-views']);
+            ], 'boilerplate-views');
 
             $this->publishLang();
 
@@ -107,7 +107,7 @@ class BoilerplateServiceProvider extends ServiceProvider
             $toPublish[base_path('vendor/laravel-lang/lang/src/'.$lang)] = resource_path('lang/'.$lang);
         }
 
-        $this->publishes($toPublish, ['boilerplate', 'boilerplate-lang']);
+        $this->publishes($toPublish, 'boilerplate');
 
         $this->publishes([
             __DIR__.'/resources/lang' => resource_path('lang/vendor/boilerplate'),
