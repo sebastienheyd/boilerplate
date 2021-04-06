@@ -21,6 +21,8 @@ Other packages to extend the features :
 
 For AdminLTE 2 and Bootstrap 3 please use version < 7.0 of this package.
 
+A more detailed documentation can be found [on Github pages](https://sebastienheyd.github.io/boilerplate/)
+
 ## Features
 
 * Configurable backend theme [AdminLTE 3](https://adminlte.io/docs/3.0/)
