@@ -15,6 +15,10 @@ $red: #dc3545;
   box-shadow: none;
 }
 
+.modal-open .modal {
+  backdrop-filter: blur(2px);
+}
+
 .nav-sidebar .nav-item > .nav-link .right,
 .sidebar-mini.sidebar-collapse .nav-sidebar:hover .nav-item > .nav-link .right {
     transition: all 0.3s ease;
