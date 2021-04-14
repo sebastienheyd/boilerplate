@@ -1681,6 +1681,10 @@
         -ms-flex-preferred-size: auto;
         height: 100%;
       }
+
+      iframe {
+        width: 100%;
+      }
     }
   }
   .tox-dialog-dock-fadeout {
