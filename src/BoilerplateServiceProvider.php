@@ -104,14 +104,14 @@ class BoilerplateServiceProvider extends ServiceProvider
             if ($lang === 'en') {
                 continue;
             }
-            $toPublish[base_path('vendor/laravel-lang/lang/src/'.$lang)] = resource_path('lang/'.$lang);
+            $toPublish[base_path('vendor/laravel-lang/lang/locales/'.$lang)] = resource_path('lang/'.$lang);
         }
 
-        $this->publishes($toPublish, 'boilerplate');
+        $this->publishes($toPublish, ['boilerplate', 'boilerplate-lang']);
 
         $this->publishes([
             __DIR__.'/resources/lang' => resource_path('lang/vendor/boilerplate'),
-        ], ['boilerplate-lang']);
+        ], 'boilerplate-lang');
     }
 
     /**
