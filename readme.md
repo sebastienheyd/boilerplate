@@ -101,6 +101,8 @@ php artisan boilerplate:dashboard
 This will publish for you the view, the `DashboardController.php` file in the `app/Http/Controllers/Boilerplate` folder and 
 modify the configuration file `config/boilerplate/menu.php`.
 
+You can also use your own dashboard controller by changing the `dashboard` value in `config/boilerplate/menu.php`.
+
 ### Adding items to the menu
 
 To add an item to the menu, nothing simpler, use the `artisan boilerplate:menuitem` command provided with boilerplate.
