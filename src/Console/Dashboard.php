@@ -44,7 +44,7 @@ class Dashboard extends BoilerplateCommand
 
         // Create controller folder
         $controllerPath = app_path('Http/Controllers/Boilerplate');
-        if (!is_dir($controllerPath)) {
+        if (! is_dir($controllerPath)) {
             mkdir($controllerPath);
         }
 
@@ -55,7 +55,7 @@ class Dashboard extends BoilerplateCommand
         // Changes dashboard controller path in configuration file
         $configFile = config_path('boilerplate/menu.php');
 
-        if (!is_file($configFile)) {
+        if (! is_file($configFile)) {
             $this->callSilent('vendor:publish', ['--tag' => 'boilerplate-config']);
         }
 
@@ -65,7 +65,7 @@ class Dashboard extends BoilerplateCommand
             file_get_contents($configFile)
         );
 
-        if (!file_put_contents($configFile, $config)) {
+        if (! file_put_contents($configFile, $config)) {
             $this->error('Error writing to configuration file '.$configFile);
             exit;
         }

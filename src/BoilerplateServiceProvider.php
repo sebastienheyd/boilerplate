@@ -132,7 +132,7 @@ class BoilerplateServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/config/auth.php', 'boilerplate.auth');
         $this->mergeConfigFrom(__DIR__.'/config/menu.php', 'boilerplate.menu');
         $this->mergeConfigFrom(__DIR__.'/config/theme.php', 'boilerplate.theme');
-        
+
         // Overriding Laravel config
         config([
             'auth.providers.users.driver' => config('boilerplate.auth.providers.users.driver', 'eloquent'),
