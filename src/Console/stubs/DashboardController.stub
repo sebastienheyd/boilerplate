@@ -1,6 +1,6 @@
 <?php
 
-namespace Sebastienheyd\Boilerplate\Controllers;
+namespace App\Http\Controllers\Boilerplate;
 
 use App\Http\Controllers\Controller;
 

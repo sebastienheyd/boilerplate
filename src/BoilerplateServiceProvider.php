@@ -65,10 +65,15 @@ class BoilerplateServiceProvider extends ServiceProvider
                 __DIR__.'/resources/views' => resource_path('views/vendor/boilerplate'),
             ], 'boilerplate-views');
 
+            $this->publishes([
+                __DIR__.'/resources/views/dashboard.blade.php' => resource_path('views/vendor/boilerplate/dashboard.blade.php'),
+            ], 'boilerplate-dashboard');
+
             $this->publishLang();
 
             // Add console commands
             $this->commands([
+                Console\Dashboard::class,
                 Console\MenuItem::class,
                 Console\Permission::class,
             ]);
@@ -127,7 +132,7 @@ class BoilerplateServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/config/auth.php', 'boilerplate.auth');
         $this->mergeConfigFrom(__DIR__.'/config/menu.php', 'boilerplate.menu');
         $this->mergeConfigFrom(__DIR__.'/config/theme.php', 'boilerplate.theme');
-
+        
         // Overriding Laravel config
         config([
             'auth.providers.users.driver' => config('boilerplate.auth.providers.users.driver', 'eloquent'),

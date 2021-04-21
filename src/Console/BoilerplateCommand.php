@@ -16,7 +16,8 @@ abstract class BoilerplateCommand extends Command
  | |_) | (_) | | |  __/ |  | |_) | | (_| | ||  __/
  |____/ \___/|_|_|\___|_|  | .__/|_|\__,_|\__\___/
                            | |
-                           |_|");
+                           |_|
+");
     }
 
     protected function forceAnswer($question, $default = null)

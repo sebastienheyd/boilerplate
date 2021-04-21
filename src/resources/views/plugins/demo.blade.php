@@ -1,10 +1,3 @@
-@extends('boilerplate::layout.index', [
-    'title' => 'Plugins',
-    'subtitle' => 'Demo',
-    'breadcrumb' => ['Plugins']]
-)
-
-@section('content')
 <div class="row">
     <div class="col-md-6">
         @include('boilerplate::plugins.demo.select2')
@@ -22,4 +15,3 @@
         @include('boilerplate::plugins.demo.fullcalendar')
     </div>
 </div>
-@endsection
