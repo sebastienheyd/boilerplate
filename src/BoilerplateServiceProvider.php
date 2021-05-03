@@ -15,8 +15,14 @@ use Laratrust\Middleware\LaratrustRole;
 use Lavary\Menu\Facade;
 use Lavary\Menu\ServiceProvider as MenuServiceProvider;
 use Sebastienheyd\Boilerplate\View\Components\Card;
+use Sebastienheyd\Boilerplate\View\Composers\CardComposer;
 use Sebastienheyd\Boilerplate\View\Composers\DatatablesComposer;
+use Sebastienheyd\Boilerplate\View\Composers\FormComposer;
+use Sebastienheyd\Boilerplate\View\Composers\IcheckComposer;
+use Sebastienheyd\Boilerplate\View\Composers\InfoboxComposer;
+use Sebastienheyd\Boilerplate\View\Composers\InputComposer;
 use Sebastienheyd\Boilerplate\View\Composers\MenuComposer;
+use Sebastienheyd\Boilerplate\View\Composers\SmallboxComposer;
 
 class BoilerplateServiceProvider extends ServiceProvider
 {
@@ -84,19 +90,33 @@ class BoilerplateServiceProvider extends ServiceProvider
 
         // Load migrations, views and translations from current directory
         $this->loadMigrationsFrom(__DIR__.'/migrations');
-        $this->loadViewsFrom(__DIR__.'/resources/views', 'boilerplate');
+        $this->loadViewsFrom([__DIR__.'/resources/views', __DIR__.'/resources/views/components'], 'boilerplate');
         $this->loadTranslationsFrom(__DIR__.'/resources/lang', 'boilerplate');
 
+        // Load view composers
+        $this->viewComposers();
+
+        // Register component
+        if (version_compare(Laravel::VERSION, '7.0', '>=')) {
+            Blade::component(Card::class, 'card');
+        }
+    }
+
+    private function viewComposers()
+    {
         // Loading dynamic menu when calling the view
         View::composer('boilerplate::layout.mainsidebar', MenuComposer::class);
 
         // For datatables locales
         View::composer('boilerplate::load.datatables', DatatablesComposer::class);
 
-        // Register component
-        if (version_compare(Laravel::VERSION, '7.0', '>=')) {
-            Blade::component(Card::class, 'card');
-        }
+        // Components
+        View::composer(['boilerplate::icheck', 'boilerplate::components.icheck'], IcheckComposer::class);
+        View::composer(['boilerplate::input', 'boilerplate::components.input'], InputComposer::class);
+        View::composer(['boilerplate::card', 'boilerplate::components.card'], CardComposer::class);
+        View::composer(['boilerplate::form', 'boilerplate::components.form'], FormComposer::class);
+        View::composer(['boilerplate::infobox', 'boilerplate::components.infobox'], InfoboxComposer::class);
+        View::composer(['boilerplate::smallbox', 'boilerplate::components.smallbox'], SmallboxComposer::class);
     }
 
     /**

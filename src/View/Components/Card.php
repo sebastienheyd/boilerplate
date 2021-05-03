@@ -7,14 +7,36 @@ use Illuminate\View\Component;
 class Card extends Component
 {
     public $color;
+    public $bgColor;
     public $title;
     public $tabs;
+    public $outline;
+    public $maximize;
+    public $reduce;
+    public $close;
 
-    public function __construct($color = null, $title = null, $tabs = false)
-    {
+    public function __construct(
+        $color = null,
+        $title = null,
+        $tabs = false,
+        $outline = null,
+        $bgColor = null,
+        $maximize = null,
+        $reduce = null,
+        $close = null
+    ) {
         $this->color = $color ?? config('boilerplate.theme.card.default_color', 'info');
         $this->title = $title;
         $this->tabs = $tabs ? true : null;
+        $this->outline = config('boilerplate.theme.card.outline', false);
+        $this->bgColor = $bgColor ?? 'white';
+        $this->maximize = $maximize;
+        $this->reduce = $reduce;
+        $this->close = $close;
+
+        if ($outline !== null) {
+            $this->outline = !(($outline === false || $outline === 'false'));
+        }
     }
 
     /**
@@ -24,6 +46,6 @@ class Card extends Component
      */
     public function render()
     {
-        return view('boilerplate::card');
+        return view('boilerplate::components.card');
     }
 }
