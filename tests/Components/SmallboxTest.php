@@ -6,7 +6,7 @@ class SmallboxTest extends TestComponent
 {
     public function testSmallboxComponentEmpty()
     {
-        $expected = <<<HTML
+        $expected = <<<'HTML'
 <div class="small-box bg-info">
     <div class="inner">
         <h3>0</h3>
@@ -27,7 +27,7 @@ HTML;
 
     public function testSmallboxComponentFull()
     {
-        $expected = <<<HTML
+        $expected = <<<'HTML'
 <div class="small-box bg-primary" id="test">
     <div class="inner">
         <h3>1234</h3>

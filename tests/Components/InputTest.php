@@ -6,7 +6,7 @@ class InputTest extends TestComponent
 {
     public function testInputComponentNoName()
     {
-        $expected = <<<HTML
+        $expected = <<<'HTML'
 <code>
     &lt;x-boilerplate::input>
     The name attribute has not been set
@@ -24,7 +24,7 @@ HTML;
 
     public function testInputComponent()
     {
-        $expected = <<<HTML
+        $expected = <<<'HTML'
 <div class="form-group">
     <label for="test">Test</label>
     <input class="form-control" name="test" type="text" value="" id="test">
@@ -42,7 +42,7 @@ HTML;
 
     public function testInputComponentWithClass()
     {
-        $expected = <<<HTML
+        $expected = <<<'HTML'
 <div class="form-group">
     <label for="test">Test</label>
     <input class="form-control test-field" name="test" type="text" value="" id="test">
@@ -60,7 +60,7 @@ HTML;
 
     public function testInputComponentWithAttributes()
     {
-        $expected = <<<HTML
+        $expected = <<<'HTML'
 <div class="form-group">
     <label for="test">Test</label>
     <input class="form-control test-field" data-attr="test" name="test" type="text" value="" id="test">
@@ -78,7 +78,7 @@ HTML;
 
     public function testInputComponentPassword()
     {
-        $expected = <<<HTML
+        $expected = <<<'HTML'
 <div class="form-group">
     <label for="test">Test</label>
     <input class="form-control" name="test" type="password" value="" id="test">
@@ -96,7 +96,7 @@ HTML;
 
     public function testInputComponentError()
     {
-        $expected = <<<HTML
+        $expected = <<<'HTML'
 <div class="form-group">
     <label for="fielderror">Fielderror</label>
     <input class="form-control is-invalid" name="fielderror" type="text" value="" id="fielderror">
@@ -115,7 +115,7 @@ HTML;
 
     public function testInputComponentHelp()
     {
-        $expected = <<<HTML
+        $expected = <<<'HTML'
 <div class="form-group">
     <label for="fielderror">Fielderror</label>
     <input class="form-control is-invalid" name="fielderror" type="text" value="" id="fielderror">

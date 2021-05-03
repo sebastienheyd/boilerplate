@@ -2,11 +2,11 @@
 
 namespace Sebastienheyd\Boilerplate\Tests\Components;
 
+use Illuminate\Foundation\Application as Laravel;
 use Illuminate\Support\Facades\View as ViewFacade;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\ViewErrorBag;
 use Sebastienheyd\Boilerplate\Tests\TestCase;
-use Illuminate\Foundation\Application as Laravel;
 
 abstract class TestComponent extends TestCase
 {
@@ -38,10 +38,9 @@ abstract class TestComponent extends TestCase
         $tempFile = $tempFileInfo['dirname'].'/'.$tempFileInfo['filename'].'.blade.php';
         file_put_contents($tempFile, $template);
 
-
         ViewFacade::share('errors', (new ViewErrorBag)->put('default', new MessageBag([
-            'fielderror' => ['Error message']
-        ])));;
+            'fielderror' => ['Error message'],
+        ])));
 
         return trim(view($tempFileInfo['filename'], $data)->render());
     }

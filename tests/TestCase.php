@@ -25,8 +25,8 @@ abstract class TestCase extends OrchestraTestCase
 
     protected function getPackageAliases($app)
     {
-        return array(
-            'Form' => 'Collective\Html\FormFacade'
-        );
+        return [
+            'Form' => 'Collective\Html\FormFacade',
+        ];
     }
 }

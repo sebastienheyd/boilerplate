@@ -6,7 +6,7 @@ class IcheckTest extends TestComponent
 {
     public function testIcheckComponent()
     {
-$expected = <<<HTML
+        $expected = <<<'HTML'
 <div class="form-group">
     <div class="icheck-primary d-inline">
         <input type="checkbox" id="test" name="test">

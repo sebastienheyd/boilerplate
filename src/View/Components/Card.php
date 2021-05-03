@@ -35,7 +35,7 @@ class Card extends Component
         $this->close = $close;
 
         if ($outline !== null) {
-            $this->outline = !(($outline === false || $outline === 'false'));
+            $this->outline = ! (($outline === false || $outline === 'false'));
         }
     }
 

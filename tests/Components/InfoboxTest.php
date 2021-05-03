@@ -6,7 +6,7 @@ class InfoboxTest extends TestComponent
 {
     public function testInfoboxComponentEmpty()
     {
-        $expected = <<<HTML
+        $expected = <<<'HTML'
 <div class="info-box bg-white">
     <span class="info-box-icon bg-info">
         <i class="fas fa-cubes"></i>
@@ -29,7 +29,7 @@ HTML;
 
     public function testInputFull()
     {
-        $expected = <<<HTML
+        $expected = <<<'HTML'
 <div class="info-box bg-red" id="test">
     <span class="info-box-icon bg-red">
         <i class="far fa-envelope"></i>

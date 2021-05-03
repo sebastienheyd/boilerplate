@@ -12,7 +12,7 @@ abstract class ComponentComposer
     protected $attributes = [];
 
     /**
-     * For Laravel 6, replace @props directive to specify which attribute should be considered as data variables
+     * For Laravel 6, replace @props directive to specify which attribute should be considered as data variables.
      *
      * @param View $view
      *
@@ -29,7 +29,7 @@ abstract class ComponentComposer
         $filter = array_merge($this->props, ['componentName', 'slot', '__laravel_slots']);
 
         foreach ($attributes as $k => $v) {
-            if (!in_array($k, $filter)) {
+            if (! in_array($k, $filter)) {
                 continue;
             }
 
