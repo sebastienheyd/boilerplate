@@ -133,6 +133,34 @@ HTML;
         $this->assertEquals($expected, $view);
     }
 
+    public function testCardComponentWithAllTools()
+    {
+        $expected = <<<'HTML'
+<div class="card card-outline card-info bg-white collapsed-card">
+    <div class="card-header border-bottom-0">
+        <h3 class="card-title">title</h3>
+        <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
+            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+    <div class="card-body pt-0">test</div>
+</div>
+HTML;
+
+        if ($this->isLaravelEqualOrGreaterThan7) {
+            $view = $this->blade('<x-card title="title" maximize reduce close collapsed>test</x-card>');
+            $this->assertEquals($expected, $view);
+
+            $view = $this->blade('<x-boilerplate::card title="title" maximize reduce close collapsed>test</x-boilerplate::card>');
+            $this->assertEquals($expected, $view);
+        }
+
+        $view = $this->blade("@component('boilerplate::card', ['title' => 'title', 'maximize' => true, 'reduce' => true, 'close' => true, 'collapsed' => true]) test @endcomponent");
+        $this->assertEquals($expected, $view);
+    }
+
     public function testCardComponentWithHeader()
     {
         $expected = <<<'HTML'
@@ -200,20 +228,20 @@ HTML;
     public function testCardComponentWithAttributes()
     {
         $expected = <<<'HTML'
-<div class="card card-info bg-white" id="test" data-test="ok">
+<div class="card card-info bg-white extra-class" id="test" data-test="ok">
     <div class="card-body">test</div>
 </div>
 HTML;
 
         if ($this->isLaravelEqualOrGreaterThan7) {
-            $view = $this->blade('<x-card outline=false id="test" data-test="ok">test</x-card>');
+            $view = $this->blade('<x-card outline=false id="test" class="extra-class" data-test="ok">test</x-card>');
             $this->assertEquals($expected, $view);
 
-            $view = $this->blade('<x-boilerplate::card :outline=false id="test" data-test="ok">test</x-boilerplate::card>');
+            $view = $this->blade('<x-boilerplate::card :outline=false id="test" class="extra-class" data-test="ok">test</x-boilerplate::card>');
             $this->assertEquals($expected, $view);
         }
 
-        $view = $this->blade("@component('boilerplate::card', ['outline' => false, 'id' => 'test', 'data-test' => 'ok']) test @endcomponent");
+        $view = $this->blade("@component('boilerplate::card', ['outline' => false, 'id' => 'test', 'data-test' => 'ok', 'class' => 'extra-class']) test @endcomponent");
         $this->assertEquals($expected, $view);
     }
 }

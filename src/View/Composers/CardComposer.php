@@ -7,18 +7,20 @@ use Illuminate\View\View;
 class CardComposer extends ComponentComposer
 {
     protected $props = [
-        'color',
         'bg-color',
+        'class',
+        'close',
+        'collapsed',
+        'color',
         'footer',
         'header',
+        'maximize',
         'outline',
+        'reduce',
         'slot',
         'tabs',
         'title',
         'tools',
-        'maximize',
-        'reduce',
-        'close',
     ];
 
     public function compose(View $view)
@@ -35,8 +37,12 @@ class CardComposer extends ComponentComposer
 
         $view->with('outline', $outline);
 
-        foreach (['maximize', 'reduce', 'close'] as $action) {
+        foreach (['maximize', 'reduce', 'close', 'collapsed'] as $action) {
             $view->with($action, isset($data[$action]));
+        }
+
+        if (empty($data['class'])) {
+            $view->with('class', '');
         }
     }
 }

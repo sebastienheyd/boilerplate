@@ -7,6 +7,7 @@ use Illuminate\View\View;
 class SmallboxComposer extends ComponentComposer
 {
     protected $props = [
+        'class',
         'color',
         'nb',
         'text',
@@ -18,5 +19,11 @@ class SmallboxComposer extends ComponentComposer
     public function compose(View $view)
     {
         parent::compose($view);
+
+        $data = $view->getData();
+
+        if (empty($data['class'])) {
+            $view->with('class', '');
+        }
     }
 }

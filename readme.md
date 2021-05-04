@@ -8,6 +8,8 @@
 [![Nb downloads](https://img.shields.io/packagist/dt/sebastienheyd/boilerplate.svg?style=flat-square)](https://packagist.org/packages/sebastienheyd/boilerplate)
 [![MIT License](https://img.shields.io/github/license/sebastienheyd/boilerplate.svg?style=flat-square)](license.md)
 
+[Read the full documentation on Github pages](https://sebastienheyd.github.io/boilerplate/)
+
 This package serves as a basis for quickly creating a back-office. 
 It includes profile creation and his management, user management, roles, permissions and log viewing.
 
@@ -20,8 +22,6 @@ Other packages to extend the features :
 * [sebastienheyd/boilerplate-email-editor](https://github.com/sebastienheyd/boilerplate-email-editor)
 
 For AdminLTE 2 and Bootstrap 3 please use version < 7.0 of this package.
-
-A more detailed documentation can be found [on Github pages](https://sebastienheyd.github.io/boilerplate/)
 
 ## Features
 
@@ -36,6 +36,7 @@ A more detailed documentation can be found [on Github pages](https://sebastienhe
 * Image manipulation by [intervention/image](https://github.com/intervention/image)
 * Logs visualization by [arcanedev/log-viewer](https://github.com/ARCANEDEV/LogViewer)
 * Gravatar import by [thomaswelton/laravel-gravatar](https://github.com/thomaswelton/laravel-gravatar)
+* Laravel Blade components for AdminLTE 3
 * Javascript session keep-alive
 * Localized English / French / Italian / Spanish / Turkish
 

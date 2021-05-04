@@ -28,7 +28,7 @@ HTML;
     public function testSmallboxComponentFull()
     {
         $expected = <<<'HTML'
-<div class="small-box bg-primary" id="test">
+<div class="small-box bg-primary extra-class" id="test">
     <div class="inner">
         <h3>1234</h3>
         <p>Dashboard</p>
@@ -41,11 +41,11 @@ HTML;
 HTML;
 
         if ($this->isLaravelEqualOrGreaterThan7) {
-            $view = $this->blade('<x-boilerplate::smallbox id="test" color="primary" nb="1234" text="boilerplate::layout.dashboard" icon="far fa-envelope" link="#" link-text="boilerplate::layout.dashboard" />');
+            $view = $this->blade('<x-boilerplate::smallbox id="test" color="primary" class="extra-class" nb="1234" text="boilerplate::layout.dashboard" icon="far fa-envelope" link="#" link-text="boilerplate::layout.dashboard" />');
             $this->assertEquals($expected, $view);
         }
 
-        $view = $this->blade("@component('boilerplate::smallbox', ['id' => 'test', 'color' => 'primary', 'nb' => '1234', 'text' => 'boilerplate::layout.dashboard', 'icon' => 'far fa-envelope', 'link' => '#', 'link-text' => 'boilerplate::layout.dashboard']) @endcomponent");
+        $view = $this->blade("@component('boilerplate::smallbox', ['id' => 'test', 'color' => 'primary', 'class' => 'extra-class', 'nb' => '1234', 'text' => 'boilerplate::layout.dashboard', 'icon' => 'far fa-envelope', 'link' => '#', 'link-text' => 'boilerplate::layout.dashboard']) @endcomponent");
         $this->assertEquals($expected, $view);
     }
 }

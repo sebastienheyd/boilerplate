@@ -23,6 +23,7 @@ use Sebastienheyd\Boilerplate\View\Composers\InfoboxComposer;
 use Sebastienheyd\Boilerplate\View\Composers\InputComposer;
 use Sebastienheyd\Boilerplate\View\Composers\MenuComposer;
 use Sebastienheyd\Boilerplate\View\Composers\SmallboxComposer;
+use Sebastienheyd\Boilerplate\View\Composers\ToggleComposer;
 
 class BoilerplateServiceProvider extends ServiceProvider
 {
@@ -117,6 +118,7 @@ class BoilerplateServiceProvider extends ServiceProvider
         View::composer(['boilerplate::form', 'boilerplate::components.form'], FormComposer::class);
         View::composer(['boilerplate::infobox', 'boilerplate::components.infobox'], InfoboxComposer::class);
         View::composer(['boilerplate::smallbox', 'boilerplate::components.smallbox'], SmallboxComposer::class);
+        View::composer(['boilerplate::toggle', 'boilerplate::components.toggle'], ToggleComposer::class);
     }
 
     /**

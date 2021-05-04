@@ -4,17 +4,18 @@ namespace Sebastienheyd\Boilerplate\View\Composers;
 
 use Illuminate\View\View;
 
-class IcheckComposer extends ComponentComposer
+class ToggleComposer extends ComponentComposer
 {
     protected $props = [
-        'type',
-        'color',
+        'class',
+        'color-on',
+        'color-off',
+        'color-off',
         'id',
         'label',
-        'for',
         'checked',
-        'class',
         'name',
+        'type',
         'value',
     ];
 

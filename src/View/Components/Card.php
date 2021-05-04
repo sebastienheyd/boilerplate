@@ -14,6 +14,8 @@ class Card extends Component
     public $maximize;
     public $reduce;
     public $close;
+    public $collapsed;
+    public $class;
 
     public function __construct(
         $color = null,
@@ -23,7 +25,9 @@ class Card extends Component
         $bgColor = null,
         $maximize = null,
         $reduce = null,
-        $close = null
+        $close = null,
+        $collapsed = null,
+        $class = null
     ) {
         $this->color = $color ?? config('boilerplate.theme.card.default_color', 'info');
         $this->title = $title;
@@ -33,6 +37,8 @@ class Card extends Component
         $this->maximize = $maximize;
         $this->reduce = $reduce;
         $this->close = $close;
+        $this->collapsed = $collapsed;
+        $this->class = $class;
 
         if ($outline !== null) {
             $this->outline = ! (($outline === false || $outline === 'false'));

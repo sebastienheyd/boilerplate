@@ -30,7 +30,7 @@ HTML;
     public function testInputFull()
     {
         $expected = <<<'HTML'
-<div class="info-box bg-red" id="test">
+<div class="info-box bg-red extra-class" id="test">
     <span class="info-box-icon bg-red">
         <i class="far fa-envelope"></i>
     </span>
@@ -44,11 +44,11 @@ HTML;
 HTML;
 
         if ($this->isLaravelEqualOrGreaterThan7) {
-            $view = $this->blade('<x-boilerplate::infobox icon="far fa-envelope" color="red" bg-color="red" message="test" number="1234" progress="50" description="desc" id="test" />');
+            $view = $this->blade('<x-boilerplate::infobox icon="far fa-envelope" class="extra-class" color="red" bg-color="red" text="test" number="1234" progress="50" description="desc" id="test" />');
             $this->assertEquals($expected, $view);
         }
 
-        $view = $this->blade("@component('boilerplate::infobox', ['icon' => 'far fa-envelope', 'color' => 'red', 'bg-color' => 'red' , 'message' => 'test', 'number' => '1234', 'progress' => '50', 'description' => 'desc', 'id' => 'test']) @endcomponent");
+        $view = $this->blade("@component('boilerplate::infobox', ['icon' => 'far fa-envelope', 'class' => 'extra-class', 'color' => 'red', 'bg-color' => 'red' , 'text' => 'test', 'number' => '1234', 'progress' => '50', 'description' => 'desc', 'id' => 'test']) @endcomponent");
         $this->assertEquals($expected, $view);
     }
 }

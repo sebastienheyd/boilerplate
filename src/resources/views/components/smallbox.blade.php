@@ -1,4 +1,4 @@
-<div class="small-box bg-{{ $color ?? 'info' }}"{!! empty($attributes) ? '' : ' '.$attributes !!}>
+<div class="small-box bg-{{ $color ?? 'info' }}{{ !empty($class) ? ' '.$class : '' }}"{!! empty($attributes) ? '' : ' '.$attributes !!}>
     <div class="inner">
         <h3>{{ $nb ?? 0 }}</h3>
         <p>@lang($text ?? '&nbsp;')</p>
