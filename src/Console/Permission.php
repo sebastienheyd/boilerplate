@@ -19,7 +19,7 @@ class Permission extends BoilerplateCommand
      *
      * @var string
      */
-    protected $description = 'Add a menu item to the backend menu';
+    protected $description = 'Create a migration file to add a new permission';
 
     /**
      * Execute the console command.
@@ -36,7 +36,7 @@ class Permission extends BoilerplateCommand
         $categoryName = '';
         $categoryDescription = '';
 
-        if ($this->confirm('Create or assign to a permissions group ?')) {
+        if ($this->confirm('Create or assign to a permissions group?')) {
             $categories = PermissionCategory::pluck('name')->toArray();
             $categoryName = (string) $this->choice('Permissions groups', array_merge([
                 'Create a new group',
