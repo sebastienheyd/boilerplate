@@ -4,8 +4,13 @@ namespace Sebastienheyd\Boilerplate\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
+use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
+use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
@@ -23,25 +28,27 @@ class LoginController extends Controller
     use AuthenticatesUsers;
 
     /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo;
-
-    /**
      * Create a new controller instance.
      */
     public function __construct()
     {
-        $this->redirectTo = route(config('boilerplate.app.redirectTo', 'boilerplate.dashboard'));
-        $this->middleware('guest', ['except' => 'logout']);
+        $this->middleware('boilerplateguest', ['except' => 'logout']);
+    }
+
+    /**
+     * Where to redirect after login / register.
+     *
+     * @return string
+     */
+    public function redirectTo()
+    {
+        return route(config('boilerplate.app.redirectTo', 'boilerplate.dashboard'));
     }
 
     /**
      * Show the application's login form.
      *
-     * @return \Illuminate\Http\Response
+     * @return View|Redirector
      */
     public function showLoginForm()
     {
@@ -57,7 +64,7 @@ class LoginController extends Controller
     /**
      * @param Request $request
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     protected function validateLogin(Request $request)
     {
@@ -71,25 +78,32 @@ class LoginController extends Controller
     /**
      * Send the response after the user was authenticated.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse|JsonResponse
      */
     protected function sendLoginResponse(Request $request)
     {
         $request->session()->regenerate();
+
         $this->clearLoginAttempts($request);
+
+        if ($response = $this->authenticated($request, $this->guard()->user())) {
+            return $response;
+        }
+
         $this->guard()->user()->update(['last_login' => Carbon::now()->toDateTimeString()]);
 
-        return $this->authenticated($request, $this->guard()->user())
-            ?: redirect()->intended($this->redirectPath());
+        return $request->wantsJson()
+            ? new JsonResponse([], 204)
+            : redirect()->intended($this->redirectPath());
     }
 
     /**
      * The user has been authenticated.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param mixed                    $user
+     * @param Request $request
+     * @param mixed   $user
      *
      * @return mixed
      */
@@ -103,15 +117,27 @@ class LoginController extends Controller
     /**
      * Log the user out of the application.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse|JsonResponse
      */
     public function logout(Request $request)
     {
+        $user = $this->guard()->user();
+        \Log::info('User logged out : '.$user->name);
+
         $this->guard()->logout();
+
         $request->session()->invalidate();
 
-        return redirect('/'.config('boilerplate.app.prefix', ''));
+        $request->session()->regenerateToken();
+
+        if ($response = $this->loggedOut($request)) {
+            return $response;
+        }
+
+        return $request->wantsJson()
+            ? new JsonResponse([], 204)
+            : redirect('/'.config('boilerplate.app.prefix', ''));
     }
 }
