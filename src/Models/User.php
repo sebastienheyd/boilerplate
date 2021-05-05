@@ -2,61 +2,33 @@
 
 namespace Sebastienheyd\Boilerplate\Models;
 
-// phpcs:disable Generic.Files.LineLength
-
 use Carbon\Carbon;
-use Gravatar;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laratrust\Traits\LaratrustUserTrait;
 use Sebastienheyd\Boilerplate\Events\UserCreated;
 use Sebastienheyd\Boilerplate\Events\UserDeleted;
-use Sebastienheyd\Boilerplate\Notifications\NewUser as NewUserNotification;
-use Sebastienheyd\Boilerplate\Notifications\ResetPassword as ResetPasswordNotification;
+use Sebastienheyd\Boilerplate\Notifications\NewUser;
+use Sebastienheyd\Boilerplate\Notifications\ResetPassword;
+use Thomaswelton\LaravelGravatar\Facades\Gravatar;
 
-/**
- * Sebastienheyd\Boilerplate\Models\User.
- *
- * @property int            $id
- * @property bool           $active
- * @property string         $first_name
- * @property string         $last_name
- * @property string         $email
- * @property string         $password
- * @property string         $remember_token
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
- * @property string         $deleted_at
- * @property string         $last_login
- * @property-read string|false $avatar_path
- * @property-read string $avatar_url
- * @property-read mixed $name
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
- * @property-read \Illuminate\Database\Eloquent\Collection|\Sebastienheyd\Boilerplate\Models\Permission[] $permissions
- * @property-read \Illuminate\Database\Eloquent\Collection|\Sebastienheyd\Boilerplate\Models\Role[] $roles
- *
- * @method static \Illuminate\Database\Query\Builder|\Sebastienheyd\Boilerplate\Models\User whereActive($value)
- * @method static \Illuminate\Database\Query\Builder|\Sebastienheyd\Boilerplate\Models\User whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Sebastienheyd\Boilerplate\Models\User whereDeletedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Sebastienheyd\Boilerplate\Models\User whereEmail($value)
- * @method static \Illuminate\Database\Query\Builder|\Sebastienheyd\Boilerplate\Models\User whereFirstName($value)
- * @method static \Illuminate\Database\Query\Builder|\Sebastienheyd\Boilerplate\Models\User whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\Sebastienheyd\Boilerplate\Models\User whereLastLogin($value)
- * @method static \Illuminate\Database\Query\Builder|\Sebastienheyd\Boilerplate\Models\User whereLastName($value)
- * @method static \Illuminate\Database\Query\Builder|\Sebastienheyd\Boilerplate\Models\User wherePassword($value)
- * @method static \Illuminate\Database\Query\Builder|\Sebastienheyd\Boilerplate\Models\User whereRememberToken($value)
- * @method static \Illuminate\Database\Query\Builder|\Sebastienheyd\Boilerplate\Models\User whereRoleIs($role = '')
- * @method static \Illuminate\Database\Query\Builder|\Sebastienheyd\Boilerplate\Models\User whereUpdatedAt($value)
- * @mixin \Eloquent
- */
 class User extends Authenticatable
 {
     use Notifiable;
     use LaratrustUserTrait;
     use SoftDeletes;
 
-    protected $fillable = ['active', 'last_name', 'first_name', 'email', 'password', 'remember_token', 'last_login'];
+    protected $fillable = [
+        'active',
+        'last_name',
+        'first_name',
+        'email',
+        'password',
+        'remember_token',
+        'last_login'
+    ];
+
     protected $hidden = ['password', 'remember_token'];
 
     protected $dispatchesEvents = [
@@ -73,7 +45,7 @@ class User extends Authenticatable
      */
     public function sendPasswordResetNotification($token)
     {
-        $this->notify(new ResetPasswordNotification($token));
+        $this->notify(new ResetPassword($token));
     }
 
     /**
@@ -83,7 +55,7 @@ class User extends Authenticatable
      */
     public function sendNewUserNotification($token)
     {
-        $this->notify(new NewUserNotification($token, $this));
+        $this->notify(new NewUser($token, $this));
     }
 
     /**
@@ -113,17 +85,11 @@ class User extends Authenticatable
     /**
      * Return a concatenation of first name and last_name if field name does not exists.
      *
-     * @param $value
-     *
      * @return string
      */
-    public function getNameAttribute($value)
+    public function getNameAttribute()
     {
-        if (! empty($value)) {
-            return $value;
-        }
-
-        return $this->first_name.' '.$this->last_name;
+        return $this->getAttribute('first_name').' '.$this->getAttribute('last_name');
     }
 
     /**
@@ -154,11 +120,8 @@ class User extends Authenticatable
         foreach ($this->roles as $role) {
             $res[] = __($role->display_name);
         }
-        if (empty($res)) {
-            return '-';
-        }
 
-        return implode(', ', $res);
+        return empty($res) ? '-' : implode(', ', $res);
     }
 
     /**
@@ -203,12 +166,15 @@ class User extends Authenticatable
     public function getAvatarUrlAttribute()
     {
         if (is_file($this->avatar_path)) {
-            $ts = filemtime($this->avatar_path);
-
-            return asset('images/avatars/'.md5($this->id.$this->email).'.jpg?t='.$ts);
+            return asset('images/avatars/'.md5($this->id.$this->email).'.jpg?t='.filemtime($this->avatar_path));
         }
 
-        return asset('/assets/vendor/boilerplate/images/default-user.png');
+        return 'https://ui-avatars.com/api/?'.http_build_query([
+            'background' => 'F0F0F0',
+            'color' => '333',
+            'size' => 170,
+            'name' => $this->getNameAttribute(),
+        ]);
     }
 
     /**
