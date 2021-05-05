@@ -13,9 +13,6 @@ class CardTest extends TestComponent
 HTML;
 
         if ($this->isLaravelEqualOrGreaterThan7) {
-            $view = $this->blade('<x-card>test</x-card>');
-            $this->assertEquals($expected, $view);
-
             $view = $this->blade('<x-boilerplate::card>test</x-boilerplate::card>');
             $this->assertEquals($expected, $view);
         }
@@ -33,9 +30,6 @@ HTML;
 HTML;
 
         if ($this->isLaravelEqualOrGreaterThan7) {
-            $view = $this->blade('<x-card color="primary">test</x-card>');
-            $this->assertEquals($expected, $view);
-
             $view = $this->blade('<x-boilerplate::card color="primary">test</x-boilerplate::card>');
             $this->assertEquals($expected, $view);
         }
@@ -53,9 +47,6 @@ HTML;
 HTML;
 
         if ($this->isLaravelEqualOrGreaterThan7) {
-            $view = $this->blade('<x-card color="primary" bg-color="primary">test</x-card>');
-            $this->assertEquals($expected, $view);
-
             $view = $this->blade('<x-boilerplate::card color="primary" bg-color="primary">test</x-boilerplate::card>');
             $this->assertEquals($expected, $view);
         }
@@ -73,9 +64,6 @@ HTML;
 HTML;
 
         if ($this->isLaravelEqualOrGreaterThan7) {
-            $view = $this->blade('<x-card outline=false>test</x-card>');
-            $this->assertEquals($expected, $view);
-
             $view = $this->blade('<x-boilerplate::card :outline=false>test</x-boilerplate::card>');
             $this->assertEquals($expected, $view);
         }
@@ -96,9 +84,6 @@ HTML;
 HTML;
 
         if ($this->isLaravelEqualOrGreaterThan7) {
-            $view = $this->blade('<x-card title="boilerplate::layout.dashboard">test</x-card>');
-            $this->assertEquals($expected, $view);
-
             $view = $this->blade('<x-boilerplate::card title="boilerplate::layout.dashboard">test</x-boilerplate::card>');
             $this->assertEquals($expected, $view);
         }
@@ -122,9 +107,6 @@ HTML;
 HTML;
 
         if ($this->isLaravelEqualOrGreaterThan7) {
-            $view = $this->blade('<x-card title="title"><x-slot name="tools"><a href="#">close</a></x-slot> test</x-card>');
-            $this->assertEquals($expected, $view);
-
             $view = $this->blade('<x-boilerplate::card title="title"><x-slot name="tools"><a href="#">close</a></x-slot> test</x-boilerplate::card>');
             $this->assertEquals($expected, $view);
         }
@@ -150,9 +132,6 @@ HTML;
 HTML;
 
         if ($this->isLaravelEqualOrGreaterThan7) {
-            $view = $this->blade('<x-card title="title" maximize reduce close collapsed>test</x-card>');
-            $this->assertEquals($expected, $view);
-
             $view = $this->blade('<x-boilerplate::card title="title" maximize reduce close collapsed>test</x-boilerplate::card>');
             $this->assertEquals($expected, $view);
         }
@@ -173,9 +152,6 @@ HTML;
 HTML;
 
         if ($this->isLaravelEqualOrGreaterThan7) {
-            $view = $this->blade('<x-card><x-slot name="header"><a href="#">link</a></x-slot> test</x-card>');
-            $this->assertEquals($expected, $view);
-
             $view = $this->blade('<x-boilerplate::card><x-slot name="header"><a href="#">link</a></x-slot> test</x-boilerplate::card>');
             $this->assertEquals($expected, $view);
         }
@@ -194,9 +170,6 @@ HTML;
 HTML;
 
         if ($this->isLaravelEqualOrGreaterThan7) {
-            $view = $this->blade('<x-card><x-slot name="footer"><a href="#">link</a></x-slot> test</x-card>');
-            $this->assertEquals($expected, $view);
-
             $view = $this->blade('<x-boilerplate::card><x-slot name="footer"><a href="#">link</a></x-slot> test</x-boilerplate::card>');
             $this->assertEquals($expected, $view);
         }
@@ -214,9 +187,6 @@ HTML;
 HTML;
 
         if ($this->isLaravelEqualOrGreaterThan7) {
-            $view = $this->blade('<x-card tabs="true">test</x-card>');
-            $this->assertEquals($expected, $view);
-
             $view = $this->blade('<x-boilerplate::card tabs="true">test</x-boilerplate::card>');
             $this->assertEquals($expected, $view);
         }
@@ -234,9 +204,6 @@ HTML;
 HTML;
 
         if ($this->isLaravelEqualOrGreaterThan7) {
-            $view = $this->blade('<x-card outline=false id="test" class="extra-class" data-test="ok">test</x-card>');
-            $this->assertEquals($expected, $view);
-
             $view = $this->blade('<x-boilerplate::card :outline=false id="test" class="extra-class" data-test="ok">test</x-boilerplate::card>');
             $this->assertEquals($expected, $view);
         }
