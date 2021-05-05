@@ -9,14 +9,14 @@
 @section('right-sidebar')
     <div id="filters">
         <div class="form-group">
-            <select name="state" class="form-control form-control-sm select2" data-placeholder="{{ __('boilerplate::users.list.state') }}">
+            <select name="state" class="form-control select2" data-placeholder="{{ __('boilerplate::users.list.state') }}">
                 <option></option>
                 <option value="1">{{ __('boilerplate::users.active') }}</option>
                 <option value="0">{{ __('boilerplate::users.inactive') }}</option>
             </select>
         </div>
         <div class="form-group">
-            <select name="role" class="form-control input-sm select2" data-placeholder="{{ __('boilerplate::role.role') }}">
+            <select name="role" class="form-control select2" data-placeholder="{{ __('boilerplate::role.role') }}">
                 <option></option>
                 @foreach($roles as $role)
                     <option value="{{ $role->name }}">{{ $role->display_name }}</option>
