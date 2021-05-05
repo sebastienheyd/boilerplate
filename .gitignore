@@ -1,5 +1,6 @@
 .idea/
 /vendor
+/testbench
 composer.phar
 composer.lock
 src/node_modules

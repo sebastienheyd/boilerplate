@@ -4,7 +4,7 @@ namespace Sebastienheyd\Boilerplate;
 
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Foundation\Application as Laravel;
-use Illuminate\Support\Facades\Blade;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Laratrust\LaratrustFacade;
@@ -14,7 +14,6 @@ use Laratrust\Middleware\LaratrustPermission;
 use Laratrust\Middleware\LaratrustRole;
 use Lavary\Menu\Facade;
 use Lavary\Menu\ServiceProvider as MenuServiceProvider;
-use Sebastienheyd\Boilerplate\View\Components\Card;
 use Sebastienheyd\Boilerplate\View\Composers\CardComposer;
 use Sebastienheyd\Boilerplate\View\Composers\DatatablesComposer;
 use Sebastienheyd\Boilerplate\View\Composers\FormComposer;
@@ -83,24 +82,24 @@ class BoilerplateServiceProvider extends ServiceProvider
                 Console\Dashboard::class,
                 Console\MenuItem::class,
                 Console\Permission::class,
+                Console\Scaffold::class,
             ]);
         }
 
         // Load routes
         $this->loadRoutesFrom(__DIR__.'/routes/boilerplate.php');
+        if (file_exists(base_path('routes/boilerplate.php'))) {
+            $this->loadRoutesFrom(base_path('routes/boilerplate.php'));
+        }
 
         // Load migrations, views and translations from current directory
         $this->loadMigrationsFrom(__DIR__.'/migrations');
-        $this->loadViewsFrom([__DIR__.'/resources/views', __DIR__.'/resources/views/components'], 'boilerplate');
+        $this->loadViewsFrom(__DIR__.'/resources/views/components', 'boilerplate');
+        $this->loadViewsFrom(__DIR__.'/resources/views', 'boilerplate');
         $this->loadTranslationsFrom(__DIR__.'/resources/lang', 'boilerplate');
 
         // Load view composers
         $this->viewComposers();
-
-        // Register component
-        if (version_compare(Laravel::VERSION, '7.0', '>=')) {
-            Blade::component(Card::class, 'card');
-        }
     }
 
     private function viewComposers()
@@ -134,7 +133,7 @@ class BoilerplateServiceProvider extends ServiceProvider
             $toPublish[base_path('vendor/laravel-lang/lang/locales/'.$lang)] = resource_path('lang/'.$lang);
         }
 
-        $this->publishes($toPublish, ['boilerplate', 'boilerplate-lang']);
+        $this->publishes($toPublish, 'boilerplate');
 
         $this->publishes([
             __DIR__.'/resources/lang' => resource_path('lang/vendor/boilerplate'),
@@ -172,11 +171,16 @@ class BoilerplateServiceProvider extends ServiceProvider
 
         $this->router->aliasMiddleware('boilerplatelocale', Middleware\BoilerplateLocale::class);
         $this->router->aliasMiddleware('boilerplateauth', Middleware\BoilerplateAuthenticate::class);
+        $this->router->aliasMiddleware('boilerplateguest', Middleware\BoilerplateGuest::class);
 
         // Loading packages
         $this->registerLaratrust();
         $this->registerMenu();
         $this->registerNavbarItems();
+
+        if (version_compare(Laravel::VERSION, '8.0', '>=')) {
+            Paginator::useBootstrap();
+        }
     }
 
     /**

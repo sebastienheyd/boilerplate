@@ -21,4 +21,4 @@ test: vendor phpunit.xml ## Unit testing
 	@php vendor/bin/phpunit --stop-on-failure
 
 clean: ## Remove files needed for tests
-	@rm -rf composer.phar composer.lock vendor
+	@rm -rf composer.phar composer.lock vendor testbench
