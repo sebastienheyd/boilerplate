@@ -109,11 +109,11 @@ class Scaffold extends BoilerplateCommand
         }
 
         $this->replaceInFile([
-            'Sebastienheyd\Boilerplate\Models' => 'App\Models\Boilerplate'
+            'Sebastienheyd\Boilerplate\Models' => 'App\Models\Boilerplate',
         ], config_path('boilerplate/laratrust.php'));
 
         $this->replaceInFile([
-            'Sebastienheyd\Boilerplate\Models' => 'App\Models\Boilerplate'
+            'Sebastienheyd\Boilerplate\Models' => 'App\Models\Boilerplate',
         ], config_path('boilerplate/auth.php'));
     }
 
@@ -141,7 +141,7 @@ class Scaffold extends BoilerplateCommand
 
         foreach ($files as $file) {
             $this->replaceInFile([
-                'Sebastienheyd\Boilerplate\Notifications' => 'App\Notifications\Boilerplate'
+                'Sebastienheyd\Boilerplate\Notifications' => 'App\Notifications\Boilerplate',
             ], $file->getRealPath());
         }
     }

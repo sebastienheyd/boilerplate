@@ -31,7 +31,7 @@ trait TestHelper
         $composer['require-dev'] = new \StdClass();
         $composer['minimum-stability'] = 'stable';
         $composer['prefer-stable'] = true;
-        $composer["repositories"] = [['type' => 'path', 'url' => 'packages/*/*', 'symlink' => true]];
+        $composer['repositories'] = [['type' => 'path', 'url' => 'packages/*/*', 'symlink' => true]];
         $files->put(self::TEST_APP.'/composer.json', json_encode($composer, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
 
         // Install dependencies
