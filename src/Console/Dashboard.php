@@ -2,6 +2,8 @@
 
 namespace Sebastienheyd\Boilerplate\Console;
 
+use Illuminate\Filesystem\Filesystem;
+
 class Dashboard extends BoilerplateCommand
 {
     /**
@@ -31,41 +33,43 @@ class Dashboard extends BoilerplateCommand
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(Filesystem $fileSystem)
     {
         $this->title();
 
         $controller = app_path('Http/Controllers/Boilerplate/DashboardController.php');
 
-        if (file_exists($controller)) {
+        if ($fileSystem->exists($controller)) {
             $this->error('DashboardController.php already exists in '.app_path('Http/Controllers/Boilerplate'));
             exit;
         }
 
         // Create controller folder
         $controllerPath = app_path('Http/Controllers/Boilerplate');
-        if (! is_dir($controllerPath)) {
-            mkdir($controllerPath);
-        }
+        $fileSystem->makeDirectory($controllerPath);
 
         // Copy and publish files
-        copy(__DIR__.'/stubs/DashboardController.stub', $controller);
+        $fileSystem->copy(__DIR__.'/../Controllers/DashboardController.php', $controller);
+        $content = $fileSystem->get($controller);
+        $content = str_replace('Sebastienheyd\Boilerplate\Controllers', 'App\Http\Controllers\Boilerplate', $content);
+        $fileSystem->put($controller, $content);
+
         $this->callSilent('vendor:publish', ['--tag' => 'boilerplate-dashboard']);
 
         // Changes dashboard controller path in configuration file
         $configFile = config_path('boilerplate/menu.php');
 
-        if (! is_file($configFile)) {
+        if (! $fileSystem->exists($configFile)) {
             $this->callSilent('vendor:publish', ['--tag' => 'boilerplate-config']);
         }
 
         $config = preg_replace(
             "#('dashboard'\s*=>\s*)([^,]*)#",
             '$1\App\Http\Controllers\Boilerplate\DashboardController::class',
-            file_get_contents($configFile)
+            $fileSystem->get($configFile)
         );
 
-        if (! file_put_contents($configFile, $config)) {
+        if (! $fileSystem->put($configFile, $config)) {
             $this->error('Error writing to configuration file '.$configFile);
             exit;
         }
