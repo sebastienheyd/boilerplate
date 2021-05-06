@@ -13,7 +13,6 @@ mix.js('resources/assets/js/boilerplate.js', 'public/boilerplate.min.js').versio
 mix.sass('resources/assets/scss/adminlte.scss', 'public/adminlte.min.css').version();
 
 mix.js('resources/assets/js/avatar.js', 'public/avatar.min.js').version();
-mix.copy('resources/images/default-user.png', 'public/images/default-user.png', false);
 
 // ============== Moment ==============
 
