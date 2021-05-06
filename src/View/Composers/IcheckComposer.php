@@ -7,14 +7,15 @@ use Illuminate\View\View;
 class IcheckComposer extends ComponentComposer
 {
     protected $props = [
-        'type',
-        'color',
-        'id',
-        'label',
-        'for',
         'checked',
         'class',
+        'color',
+        'disabled',
+        'for',
+        'id',
+        'label',
         'name',
+        'type',
         'value',
     ];
 
@@ -30,6 +31,10 @@ class IcheckComposer extends ComponentComposer
 
         if (empty($data['checked']) || $data['checked'] === false) {
             $view->with('checked', false);
+        }
+
+        if (empty($data['disabled']) || $data['disabled'] === false) {
+            $view->with('disabled', false);
         }
 
         foreach (['class', 'name', 'value'] as $empty) {

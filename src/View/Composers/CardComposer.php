@@ -36,9 +36,12 @@ class CardComposer extends ComponentComposer
         }
 
         $view->with('outline', $outline);
-
         foreach (['maximize', 'reduce', 'close', 'collapsed'] as $action) {
             $view->with($action, isset($data[$action]));
+        }
+
+        if (empty($data['header'])) {
+            $view->with('header', false);
         }
 
         if (empty($data['class'])) {
