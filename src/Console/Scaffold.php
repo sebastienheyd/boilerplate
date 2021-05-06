@@ -2,6 +2,7 @@
 
 namespace Sebastienheyd\Boilerplate\Console;
 
+use FilesystemIterator;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -13,7 +14,7 @@ class Scaffold extends BoilerplateCommand
      *
      * @var string
      */
-    protected $signature = 'boilerplate:scaffold';
+    protected $signature = 'boilerplate:scaffold {--r|remove : restore configuration and files to the original state}';
 
     /**
      * The console command description.
@@ -45,9 +46,18 @@ class Scaffold extends BoilerplateCommand
     {
         $this->title();
 
-        $this->error('-------------------------------------------------------------------------------------------------');
-        $this->error(' This command will copy several files in your project. All files will be overwritten if exists ! ');
-        $this->error('-------------------------------------------------------------------------------------------------');
+        if ($this->option('remove')) {
+            $this->remove();
+        } else {
+            $this->install();
+        }
+    }
+
+    private function install()
+    {
+        $this->warn('-------------------------------------------------------------------------------------------------------------------------------');
+        $this->warn(' This command will install files in your project and configure your project to customize the use of sebastienheyd/boilerplate. ');
+        $this->warn('-------------------------------------------------------------------------------------------------------------------------------');
 
         if (! $this->confirm('Continue?')) {
             exit;
@@ -66,6 +76,47 @@ class Scaffold extends BoilerplateCommand
                 DB::table('role_user')
                     ->where('user_type', 'Sebastienheyd\Boilerplate\Models\User')
                     ->update(['user_type' => 'App\Models\Boilerplate\User']);
+            }
+        } catch (\Exception $e) {
+        }
+    }
+
+    private function remove()
+    {
+        $this->warn('---------------------------------------------------------------------------------------');
+        $this->warn(' This command will remove all files published by boilerplate:scaffold in your project. ');
+        $this->warn('---------------------------------------------------------------------------------------');
+
+        if (! $this->confirm('Continue?')) {
+            exit;
+        }
+
+        $this->fileSystem->delete(base_path('routes/boilerplate.php'));
+        $this->fileSystem->deleteDirectory(app_path('Http/Controllers/Boilerplate'));
+        $this->fileSystem->deleteDirectory(app_path('Models/Boilerplate'));
+        $this->fileSystem->deleteDirectory(app_path('Events/Boilerplate'));
+        $this->fileSystem->deleteDirectory(app_path('Notifications/Boilerplate'));
+        $this->fileSystem->deleteDirectory(resource_path('lang/vendor/boilerplate'));
+        $this->fileSystem->deleteDirectory(resource_path('views/vendor/boilerplate'));
+
+        $this->replaceInFile([
+            'App\Models\Boilerplate' => 'Sebastienheyd\Boilerplate\Models',
+        ], config_path('boilerplate/laratrust.php'));
+
+        $this->replaceInFile([
+            'App\Models\Boilerplate' => 'Sebastienheyd\Boilerplate\Models',
+        ], config_path('boilerplate/auth.php'));
+
+        $this->replaceInFile([
+            '\App\Http\Controllers\Boilerplate' => '\Sebastienheyd\Boilerplate\Controllers',
+        ], config_path('boilerplate/menu.php'));
+
+        try {
+            if (Schema::hasTable('role_user')) {
+                $this->info('Updating user_type in database complete');
+                DB::table('role_user')
+                    ->where('user_type', 'App\Models\Boilerplate\User')
+                    ->update(['user_type' => 'Sebastienheyd\Boilerplate\Models\User']);
             }
         } catch (\Exception $e) {
         }
@@ -91,6 +142,10 @@ class Scaffold extends BoilerplateCommand
                 'Sebastienheyd\Boilerplate\Models' => 'App\Models\Boilerplate',
             ], $file->getRealPath());
         }
+
+        $this->replaceInFile([
+            '\Sebastienheyd\Boilerplate\Controllers' => '\App\Http\Controllers\Boilerplate',
+        ], config_path('boilerplate/menu.php'));
     }
 
     private function publishModels()
@@ -173,14 +228,55 @@ class Scaffold extends BoilerplateCommand
     {
         if (is_dir($from)) {
             $type = 'Directory';
-            $this->fileSystem->copyDirectory($from, $to);
+            $this->copyDirectory($from, $to);
         } else {
             $type = 'File';
-            $this->fileSystem->copy($from, $to);
+            if (! $this->fileSystem->exists($to)) {
+                $this->fileSystem->copy($from, $to);
+            }
         }
 
         $from = str_replace(base_path(), '', realpath($from));
         $to = str_replace(base_path(), '', realpath($to));
         $this->line('<info>Copied '.$type.'</info> <comment>['.$from.']</comment> <info>To</info> <comment>['.$to.']</comment>');
+    }
+
+    /**
+     * Secure copy that will not override existing files.
+     *
+     * @param string $directory
+     * @param string $destination
+     *
+     * @return bool
+     */
+    private function copyDirectory($directory, $destination)
+    {
+        if (! $this->fileSystem->isDirectory($directory)) {
+            return false;
+        }
+
+        $this->fileSystem->ensureDirectoryExists($destination, 0777);
+
+        $items = new FilesystemIterator($directory, FilesystemIterator::SKIP_DOTS);
+
+        foreach ($items as $item) {
+            $target = $destination.'/'.$item->getBasename();
+
+            if ($item->isDir()) {
+                $path = $item->getPathname();
+
+                if (! $this->copyDirectory($path, $target)) {
+                    return false;
+                }
+            } else {
+                if (! $this->fileSystem->exists($target)) {
+                    if (! $this->fileSystem->copy($item->getPathname(), $target)) {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return true;
     }
 }
