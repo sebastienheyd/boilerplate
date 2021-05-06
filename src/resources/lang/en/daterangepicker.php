@@ -1,9 +1,9 @@
 <?php
 
 return [
-    "applyLabel" => "Apply",
-    "cancelLabel" => "Cancel",
-    "fromLabel" => "From",
-    "toLabel" => "To",
-    "customRangeLabel" => "Custom",
+    'applyLabel' => 'Apply',
+    'cancelLabel' => 'Cancel',
+    'fromLabel' => 'From',
+    'toLabel' => 'To',
+    'customRangeLabel' => 'Custom',
 ];
