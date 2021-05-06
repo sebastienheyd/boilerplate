@@ -15,8 +15,8 @@ class ArtisanTest extends ArtisanTestCase
 
     public static function tearDownAfterClass(): void
     {
-//        self::removeTestbench();
-//        parent::tearDownAfterClass();
+        self::removeTestbench();
+        parent::tearDownAfterClass();
     }
 
     public function testBoilerplatePublish()
