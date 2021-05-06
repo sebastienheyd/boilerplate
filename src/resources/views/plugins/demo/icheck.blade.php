@@ -1,7 +1,4 @@
 @component('boilerplate::card', ['color' => 'success', 'title' => 'iCheck Bootstrap'])
-    @slot('tools')
-        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fa fa-minus"></i></button>
-    @endslot
         <div class="row mb-3">
             <div class="col-12">
                 Usage :

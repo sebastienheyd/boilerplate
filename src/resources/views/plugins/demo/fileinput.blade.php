@@ -7,9 +7,6 @@
 @endpush
 
 @component('boilerplate::card', ['color' => 'primary', 'title' => 'Fileinput'])
-    @slot('tools')
-        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fa fa-minus"></i></button>
-    @endslot
     Usage :
     <pre>
 &commat;include('boilerplate::load.fileinput')

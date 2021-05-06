@@ -1,10 +1,6 @@
 @component('boilerplate::card', ['color' => 'danger', 'title' => 'Toastr / Growl'])
-    @slot('tools')
-        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fa fa-minus"></i></button>
-    @endslot
-
-        Usage :
-        <pre>
+Usage :
+<pre>
 &lt;button class="btn btn-primary" onclick="growl('Example')">growl&lt;/button>
 </pre>
 

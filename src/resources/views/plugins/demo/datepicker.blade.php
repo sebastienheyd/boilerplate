@@ -30,14 +30,13 @@
         $('.datepicker').datetimepicker({
             format: 'L'
         });
+
+        $('.datetimepicker').datetimepicker();
     });
 </script>
 @endpush
 
 @component('boilerplate::card', ['color' => 'indigo', 'title' => 'Date picker'])
-    @slot('tools')
-        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fa fa-minus"></i></button>
-    @endslot
         Usage
         <pre>
 &commat;include('boilerplate::load.datepicker')
@@ -67,7 +66,7 @@
                 <div class="input-group-append">
                     <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
                 </div>
-                <input type="text" class="form-control pull-right" id="datetimepicker" data-toggle="datetimepicker" data-target="#datetimepicker">
+                <input type="text" class="form-control pull-right datetimepicker" id="datetimepicker" data-toggle="datetimepicker" data-target="#datetimepicker">
             </div>
         </div>
 

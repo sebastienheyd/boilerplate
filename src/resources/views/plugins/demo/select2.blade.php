@@ -9,10 +9,6 @@
 @endpush
 
 @component('boilerplate::card', ['color' => 'primary', 'title' => 'Select 2'])
-    @slot('tools')
-        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fa fa-minus"></i></button>
-    @endslot
-
     <div class="row">
         <div class="col-12">
             Usage :
@@ -57,9 +53,9 @@
                     <option>Alabama</option>
                     <option>Alaska</option>
                     <option>California</option>
-                    <option>Delaware</option>
+                    <option selected>Delaware</option>
                     <option>Tennessee</option>
-                    <option>Texas</option>
+                    <option selected>Texas</option>
                     <option>Washington</option>
                 </select>
             </div>
@@ -77,7 +73,6 @@
             </div>
         </div>
     </div>
-
     @slot('footer')
         <div class="small text-muted text-right">
             <a href="https://select2.github.io/">select2</a>

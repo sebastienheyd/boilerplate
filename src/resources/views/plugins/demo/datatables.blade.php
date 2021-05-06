@@ -15,9 +15,6 @@
 @endpush
 
 @component('boilerplate::card', ['color' => 'orange', 'title' => 'Datatables'])
-    @slot('tools')
-        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fa fa-minus"></i></button>
-    @endslot
         Usage :
         <pre class="mb-3">
 &commat;include('boilerplate::load.datatables')
