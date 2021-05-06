@@ -5,7 +5,21 @@
 </code>
 @else
 <div class="form-group">
-    {{ Form::label($name, $label ?? '' ? __($label) : mb_convert_case($name, MB_CASE_TITLE)) }}
+@isset($label)
+    {{ Form::label($name, __($label)) }}
+@endisset
+@if($prepend || $prependText || $append || $appendText)
+    <div class="input-group">
+@endif
+@if($prepend || $prependText)
+        <div class="input-group-prepend">
+@if($prepend)
+            {!! $prepend !!}
+@else
+            <span class="input-group-text">{!! $prependText !!}</span>
+@endif
+        </div>
+@endif
 @if($type === 'password')
     {{ Form::password($name, array_merge(['class' => 'form-control'.$errors->first($name,' is-invalid').(isset($class) ? ' '.$class : '')], $attributes)) }}
 @elseif($type === 'file')
@@ -15,11 +29,23 @@
 @else
     {{ Form::{$type ?? 'text'}($name, old($name, $value ?? ''), array_merge(['class' => 'form-control'.$errors->first($name,' is-invalid').(isset($class) ? ' '.$class : '')], $attributes)) }}
 @endif
-@error($name)
-    <div class="error-bubble"><div>{{ $message }}</div></div>
-@enderror
+@if($append || $appendText)
+        <div class="input-group-append">
+@if($append)
+            {!! $append !!}
+@else
+            <span class="input-group-text">{!! $appendText !!}</span>
+@endif
+        </div>
+@endif
+@if($prepend || $prependText || $append || $appendText)
+    </div>
+@endif
 @if($help ?? false)
     <small class="form-text text-muted">@lang($help)</small>
 @endif
+@error($name)
+    <div class="error-bubble"><div>{{ $message }}</div></div>
+@enderror
 </div>
 @endif
