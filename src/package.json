@@ -24,12 +24,9 @@
         "bootbox": "^5.3.4",
         "bootstrap": "^4.6.0",
         "bootstrap-fileinput": "^5.1.5",
-        "codemirror": "^5.59.4",
-        "datatables.net": "^1.10.24",
-        "datatables.net-bs4": "^1.10.24",
         "drmonty-datatables-plugins": "^1.10.12",
         "fullcalendar": "^5.5.1",
-        "select2": "^4.0.13",
+        "moment": "^2.29.1",
         "stickytoolbar": "^2.2.1",
         "tinymce": "^5.7.1"
     }

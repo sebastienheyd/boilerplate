@@ -1,12 +1,20 @@
-@import "~admin-lte/plugins/select2/css/select2.min.css";
+@import "~bootstrap/scss/functions";
+@import "~admin-lte/build/scss/bootstrap-variables";
+@import "~bootstrap/scss/bootstrap";
+@import "~admin-lte/build/scss/variables";
+@import "~admin-lte/build/scss/variables-alt";
+@import "~admin-lte/build/scss/mixins";
+@import "~admin-lte/build/scss/parts/core";
+@import "~admin-lte/build/scss/parts/components";
+@import "~admin-lte/build/scss/parts/extra-components";
+@import "~admin-lte/build/scss/parts/pages";
+@import "~admin-lte/build/scss/parts/plugins";
+@import "~admin-lte/build/scss/parts/miscellaneous";
+
+// Default plugins
 @import "~admin-lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css";
-@import "~admin-lte/dist/css/adminlte.css";
-@import "~admin-lte/plugins/fontawesome-free/css/all.min.css";
 @import "~admin-lte/plugins/overlayScrollbars/css/OverlayScrollbars.css";
 @import "~toastr/toastr";
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=swap');
-
-$red: #dc3545;
 
 // Toastr opacity
 #toast-container > div {
@@ -14,6 +22,8 @@ $red: #dc3545;
   border: 0;
   box-shadow: none;
 }
+
+$red: #dc3545;
 
 .modal-open .modal {
   backdrop-filter: blur(2px);
