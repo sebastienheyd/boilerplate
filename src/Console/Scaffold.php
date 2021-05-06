@@ -60,7 +60,7 @@ class Scaffold extends BoilerplateCommand
         $this->warn('-------------------------------------------------------------------------------------------------------------------------------');
 
         if (! $this->confirm('Continue?')) {
-            exit;
+            return;
         }
 
         $this->publishRoutes();
@@ -88,7 +88,7 @@ class Scaffold extends BoilerplateCommand
         $this->warn('---------------------------------------------------------------------------------------');
 
         if (! $this->confirm('Continue?')) {
-            exit;
+            return;
         }
 
         $this->fileSystem->delete(base_path('routes/boilerplate.php'));
