@@ -28,6 +28,7 @@ abstract class TestComponent extends TestCase
      */
     protected function blade(string $template, array $data = [])
     {
+        $this->withoutMix();
         $tempDirectory = sys_get_temp_dir();
 
         if (! in_array($tempDirectory, ViewFacade::getFinder()->getPaths())) {

@@ -1,13 +1,3 @@
-@include('boilerplate::load.tinymce')
-
-@push('js')
-    <script>
-        $(function() {
-            $('#tiny').tinymce({});
-        })
-    </script>
-@endpush
-
 @component('boilerplate::card', ['color' => 'info', 'title' => 'TinyMCE'])
         Usage :
         <pre>
@@ -17,10 +7,7 @@
         $('#tiny').tinymce({});
     &lt;/script>
 &commat;endpush</pre>
-        <textarea id="tiny">
-            <h1>TinyMCE demo</h1>
-        </textarea>
-
+    @component('boilerplate::tinymce') @endcomponent
     @slot('footer')
         <div class="text-muted small text-right">
             <a href="https://www.tiny.cloud/docs/" target="_blank">tinyMCE</a>

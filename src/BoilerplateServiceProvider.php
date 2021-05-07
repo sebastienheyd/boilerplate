@@ -22,6 +22,7 @@ use Sebastienheyd\Boilerplate\View\Composers\InfoboxComposer;
 use Sebastienheyd\Boilerplate\View\Composers\InputComposer;
 use Sebastienheyd\Boilerplate\View\Composers\MenuComposer;
 use Sebastienheyd\Boilerplate\View\Composers\SmallboxComposer;
+use Sebastienheyd\Boilerplate\View\Composers\TinymceComposer;
 use Sebastienheyd\Boilerplate\View\Composers\ToggleComposer;
 
 class BoilerplateServiceProvider extends ServiceProvider
@@ -118,6 +119,7 @@ class BoilerplateServiceProvider extends ServiceProvider
         View::composer(['boilerplate::infobox', 'boilerplate::components.infobox'], InfoboxComposer::class);
         View::composer(['boilerplate::smallbox', 'boilerplate::components.smallbox'], SmallboxComposer::class);
         View::composer(['boilerplate::toggle', 'boilerplate::components.toggle'], ToggleComposer::class);
+        View::composer(['boilerplate::tinymce', 'boilerplate::components.tinymce'], TinymceComposer::class);
     }
 
     /**
@@ -178,7 +180,7 @@ class BoilerplateServiceProvider extends ServiceProvider
         $this->registerMenu();
         $this->registerNavbarItems();
 
-        if (version_compare(Laravel::VERSION, '8.0', '>=')) {
+        if (version_compare($this->app->version(), '8.0', '>=')) {
             Paginator::useBootstrap();
         }
     }
