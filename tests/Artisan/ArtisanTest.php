@@ -59,15 +59,24 @@ class ArtisanTest extends ArtisanTestCase
     public function testDashboard()
     {
         $this->artisan('boilerplate:dashboard')
-            ->expectsOutput('Dashboard controller and view has been successfully published !')
+            ->expectsOutput('Dashboard controller and view has been successfully published!')
             ->assertExitCode(0);
 
         $this->assertTrue(is_file(self::TEST_APP.'/app/Http/Controllers/Boilerplate/DashboardController.php'));
         $this->assertTrue(is_file(self::TEST_APP.'/resources/views/vendor/boilerplate/dashboard.blade.php'));
+    }
 
-        $files = new Filesystem();
-        $files->deleteDirectory(self::TEST_APP.'/app/Http/Controllers/Boilerplate');
-        $files->deleteDirectory(self::TEST_APP.'/resources/views/vendor/');
+    public function testDashboardRemove()
+    {
+        $this->artisan('boilerplate:dashboard', ['--remove' => true])
+            ->expectsConfirmation('Continue?', 'yes')
+            ->expectsOutput('Custom dashboard has been removed!')
+            ->assertExitCode(0);
+
+        $this->assertTrue(!is_file(self::TEST_APP.'/app/Http/Controllers/Boilerplate/DashboardController.php'));
+        $this->assertTrue(!is_file(self::TEST_APP.'/resources/views/vendor/boilerplate/dashboard.blade.php'));
+        $this->assertTrue(!is_dir(self::TEST_APP.'/app/Http/Controllers/Boilerplate'));
+        $this->assertTrue(!is_dir(self::TEST_APP.'/resources/views/vendor/boilerplate'));
     }
 
     public function testScaffold()
@@ -83,5 +92,45 @@ class ArtisanTest extends ArtisanTestCase
         $this->assertTrue(is_dir(self::TEST_APP.'/resources/lang/vendor/boilerplate'));
         $this->assertTrue(is_dir(self::TEST_APP.'/resources/views/vendor/boilerplate'));
         $this->assertTrue(is_dir(self::TEST_APP.'/public/assets/vendor/boilerplate'));
+    }
+
+    public function testScaffoldRemove()
+    {
+        $this->artisan('boilerplate:scaffold', ['--remove' => true])
+            ->expectsConfirmation('Continue?', 'yes')
+            ->expectsConfirmation('Remove custom dashboard?')
+            ->assertExitCode(0);
+
+        $this->assertTrue(is_file(self::TEST_APP.'/app/Http/Controllers/Boilerplate/DashboardController.php'));
+        $this->assertTrue(is_file(self::TEST_APP.'/resources/views/vendor/boilerplate/dashboard.blade.php'));
+
+        $this->artisan('boilerplate:scaffold', ['--remove' => true])
+            ->expectsConfirmation('Continue?', 'yes')
+            ->expectsConfirmation('Remove custom dashboard?', 'yes')
+            ->assertExitCode(0);
+
+        $this->assertTrue(!is_dir(self::TEST_APP.'/app/Http/Controllers/Boilerplate'));
+        $this->assertTrue(!is_dir(self::TEST_APP.'/resources/views/vendor/boilerplate'));
+        $this->assertTrue(!is_dir(self::TEST_APP.'/app/Events/Boilerplate'));
+        $this->assertTrue(!is_dir(self::TEST_APP.'/app/Models/Boilerplate'));
+        $this->assertTrue(!is_dir(self::TEST_APP.'/app/Notifications/Boilerplate'));
+        $this->assertTrue(!is_dir(self::TEST_APP.'/resources/lang/vendor/boilerplate'));
+    }
+
+    public function testDashboardRemoveWithScaffold()
+    {
+        $this->artisan('boilerplate:scaffold')
+            ->expectsConfirmation('Continue?', 'yes')
+            ->assertExitCode(0);
+
+        $this->artisan('boilerplate:dashboard', ['--remove' => true])
+            ->expectsConfirmation('Continue?', 'yes')
+            ->expectsOutput('Custom dashboard has been removed!')
+            ->assertExitCode(0);
+
+        $this->assertTrue(!is_file(self::TEST_APP.'/app/Http/Controllers/Boilerplate/DashboardController.php'));
+        $this->assertTrue(!is_file(self::TEST_APP.'/resources/views/vendor/boilerplate/dashboard.blade.php'));
+        $this->assertTrue(is_dir(self::TEST_APP.'/app/Http/Controllers/Boilerplate'));
+        $this->assertTrue(is_dir(self::TEST_APP.'/resources/views/vendor/boilerplate'));
     }
 }

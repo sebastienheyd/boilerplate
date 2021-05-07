@@ -78,6 +78,7 @@ class Scaffold extends BoilerplateCommand
                     ->update(['user_type' => 'App\Models\Boilerplate\User']);
             }
         } catch (\Exception $e) {
+            // Nothing to do
         }
     }
 
@@ -91,13 +92,33 @@ class Scaffold extends BoilerplateCommand
             return;
         }
 
-        $this->fileSystem->delete(base_path('routes/boilerplate.php'));
-        $this->fileSystem->deleteDirectory(app_path('Http/Controllers/Boilerplate'));
-        $this->fileSystem->deleteDirectory(app_path('Models/Boilerplate'));
-        $this->fileSystem->deleteDirectory(app_path('Events/Boilerplate'));
-        $this->fileSystem->deleteDirectory(app_path('Notifications/Boilerplate'));
-        $this->fileSystem->deleteDirectory(resource_path('lang/vendor/boilerplate'));
-        $this->fileSystem->deleteDirectory(resource_path('views/vendor/boilerplate'));
+        $backupDashboard = [];
+        if (! $this->confirm('Remove custom dashboard?')) {
+            $backupDashboard = [
+                app_path('Http/Controllers/Boilerplate/DashboardController.php') => storage_path('scaffold/DashboardController.php'),
+                resource_path('views/vendor/boilerplate/dashboard.blade.php') => storage_path('scaffold/dashboard.blade.php'),
+            ];
+
+            $this->fileSystem->makeDirectory(storage_path('scaffold'));
+
+            foreach ($backupDashboard as $from => $to) {
+                $this->copy($from, $to, false);
+            }
+        } else {
+            $this->replaceInFile([
+                '\App\Http\Controllers\Boilerplate' => '\Sebastienheyd\Boilerplate\Controllers',
+            ], config_path('boilerplate/menu.php'));
+        }
+
+        $this->delete([
+            base_path('routes/boilerplate.php'),
+            app_path('Http/Controllers/Boilerplate'),
+            app_path('Models/Boilerplate'),
+            app_path('Events/Boilerplate'),
+            app_path('Notifications/Boilerplate'),
+            resource_path('lang/vendor/boilerplate'),
+            resource_path('views/vendor/boilerplate'),
+        ]);
 
         $this->replaceInFile([
             'App\Models\Boilerplate' => 'Sebastienheyd\Boilerplate\Models',
@@ -107,9 +128,14 @@ class Scaffold extends BoilerplateCommand
             'App\Models\Boilerplate' => 'Sebastienheyd\Boilerplate\Models',
         ], config_path('boilerplate/auth.php'));
 
-        $this->replaceInFile([
-            '\App\Http\Controllers\Boilerplate' => '\Sebastienheyd\Boilerplate\Controllers',
-        ], config_path('boilerplate/menu.php'));
+        if (! empty($backupDashboard)) {
+            $this->fileSystem->makeDirectory(app_path('Http/Controllers/Boilerplate'));
+            $this->fileSystem->makeDirectory(resource_path('views/vendor/boilerplate'));
+            foreach (array_flip($backupDashboard) as $from => $to) {
+                $this->copy($from, $to);
+            }
+            $this->fileSystem->deleteDirectory(storage_path('scaffold'));
+        }
 
         try {
             if (Schema::hasTable('role_user')) {
@@ -119,6 +145,7 @@ class Scaffold extends BoilerplateCommand
                     ->update(['user_type' => 'Sebastienheyd\Boilerplate\Models\User']);
             }
         } catch (\Exception $e) {
+            // Nothing to do
         }
     }
 
@@ -219,12 +246,36 @@ class Scaffold extends BoilerplateCommand
     }
 
     /**
+     * Delete files or directories.
+     *
+     * @param mixed $fileOrDirectory    String or array of files or directories to delete
+     */
+    private function delete($fileOrDirectory)
+    {
+        if (is_string($fileOrDirectory)) {
+            $fileOrDirectory = [$fileOrDirectory];
+        }
+
+        foreach ($fileOrDirectory as $path) {
+            if ($this->fileSystem->isFile($path)) {
+                $type = 'File';
+                $this->fileSystem->delete($path);
+            } else {
+                $type = 'Directory';
+                $this->fileSystem->deleteDirectory($path);
+            }
+
+            $this->line('<info>Deleted '.$type.'</info> <comment>['.$path.']</comment>');
+        }
+    }
+
+    /**
      * Copy a file or a directory and display a message.
      *
      * @param string $from
      * @param string $to
      */
-    private function copy($from, $to)
+    private function copy($from, $to, $log = true)
     {
         if (is_dir($from)) {
             $type = 'Directory';
@@ -236,9 +287,11 @@ class Scaffold extends BoilerplateCommand
             }
         }
 
-        $from = str_replace(base_path(), '', realpath($from));
-        $to = str_replace(base_path(), '', realpath($to));
-        $this->line('<info>Copied '.$type.'</info> <comment>['.$from.']</comment> <info>To</info> <comment>['.$to.']</comment>');
+        if ($log) {
+            $from = str_replace(base_path(), '', realpath($from));
+            $to = str_replace(base_path(), '', realpath($to));
+            $this->line('<info>Copied '.$type.'</info> <comment>['.$from.']</comment> <info>To</info> <comment>['.$to.']</comment>');
+        }
     }
 
     /**
