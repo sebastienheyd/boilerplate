@@ -23,7 +23,7 @@
         "admin-lte": "^3.1.0",
         "bootbox": "^5.3.4",
         "bootstrap": "^4.6.0",
-        "bootstrap-fileinput": "^5.1.5",
+        "bootstrap-fileinput": "^5.2.0",
         "drmonty-datatables-plugins": "^1.10.12",
         "fullcalendar": "^5.5.1",
         "moment": "^2.29.1",
