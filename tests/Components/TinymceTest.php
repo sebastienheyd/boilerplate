@@ -9,13 +9,13 @@ class TinymceTest extends TestComponent
         if ($this->isLaravelEqualOrGreaterThan7) {
             $view = $this->blade('<x-boilerplate::tinymce id="test" /> @stack("js")');
             $this->assertTrue(preg_match("#tinymce\.defaultSettings#", $view) !== false);
-            $this->assertTrue(preg_match("#<textarea id=\"test\"></textarea>#", $view) !== false);
+            $this->assertTrue(preg_match('#<textarea id="test"></textarea>#', $view) !== false);
             $this->assertTrue(preg_match("#$\('\#test'\)\.tinymce\(\{\}\)#", $view) !== false);
         }
 
         $view = $this->blade("@component('boilerplate::tinymce', ['id' => 'test']) @endcomponent");
         $this->assertTrue(preg_match("#tinymce\.defaultSettings#", $view) !== false);
-        $this->assertTrue(preg_match("#<textarea id=\"test\"></textarea>#", $view) !== false);
+        $this->assertTrue(preg_match('#<textarea id="test"></textarea>#', $view) !== false);
         $this->assertTrue(preg_match("#$\('\#test'\).tinymce\(\{\}\)#", $view) !== false);
     }
 }

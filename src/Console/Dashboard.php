@@ -95,6 +95,7 @@ class Dashboard extends BoilerplateCommand
         $path = app_path('Http/Controllers/Boilerplate');
         if (! $this->fileSystem->exists($path.'/DashboardController.php')) {
             $this->info('Custom dashboard is not present, nothing to remove');
+
             return;
         }
 
