@@ -108,7 +108,7 @@
                         orderable: false,
                         searchable: false,
                         width: '80px',
-                        class: 'visible-on-hover'
+                        class: 'visible-on-hover text-nowrap'
                     }
                 ],
                 fnInitComplete: function() {
