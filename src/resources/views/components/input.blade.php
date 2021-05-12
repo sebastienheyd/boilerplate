@@ -25,7 +25,7 @@
 @elseif($type === 'file')
     {{ Form::file($name, array_merge(['class' => 'form-control-file'.$errors->first($name,' is-invalid').(isset($class) ? ' '.$class : '')], $attributes)) }}
 @elseif($type === 'select')
-    {{ Form::select($name, $options ?? [], old($name, $value ?? ''), array_merge(['class' => 'form-control-file'.$errors->first($name,' is-invalid').(isset($class) ? ' '.$class : '')], $attributes)) }}
+    {{ Form::select($name, $options ?? [], old($name, $value ?? ''), array_merge(['class' => 'form-control'.$errors->first($name,' is-invalid').(isset($class) ? ' '.$class : '')], $attributes)) }}
 @else
     {{ Form::{$type ?? 'text'}($name, old($name, $value ?? ''), array_merge(['class' => 'form-control'.$errors->first($name,' is-invalid').(isset($class) ? ' '.$class : '')], $attributes)) }}
 @endif
