@@ -107,7 +107,7 @@ class BoilerplateServiceProvider extends ServiceProvider
         foreach ($components as $component) {
             View::composer([
                 "boilerplate::$component",
-                "boilerplate::components.$component"
+                "boilerplate::components.$component",
             ], 'Sebastienheyd\Boilerplate\View\Composers\\'.ucfirst($component).'Composer');
         }
     }
