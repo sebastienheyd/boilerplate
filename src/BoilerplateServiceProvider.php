@@ -3,7 +3,6 @@
 namespace Sebastienheyd\Boilerplate;
 
 use Illuminate\Foundation\AliasLoader;
-use Illuminate\Foundation\Application as Laravel;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -14,16 +13,8 @@ use Laratrust\Middleware\LaratrustPermission;
 use Laratrust\Middleware\LaratrustRole;
 use Lavary\Menu\Facade;
 use Lavary\Menu\ServiceProvider as MenuServiceProvider;
-use Sebastienheyd\Boilerplate\View\Composers\CardComposer;
 use Sebastienheyd\Boilerplate\View\Composers\DatatablesComposer;
-use Sebastienheyd\Boilerplate\View\Composers\FormComposer;
-use Sebastienheyd\Boilerplate\View\Composers\IcheckComposer;
-use Sebastienheyd\Boilerplate\View\Composers\InfoboxComposer;
-use Sebastienheyd\Boilerplate\View\Composers\InputComposer;
 use Sebastienheyd\Boilerplate\View\Composers\MenuComposer;
-use Sebastienheyd\Boilerplate\View\Composers\SmallboxComposer;
-use Sebastienheyd\Boilerplate\View\Composers\TinymceComposer;
-use Sebastienheyd\Boilerplate\View\Composers\ToggleComposer;
 
 class BoilerplateServiceProvider extends ServiceProvider
 {
@@ -112,14 +103,13 @@ class BoilerplateServiceProvider extends ServiceProvider
         View::composer('boilerplate::load.datatables', DatatablesComposer::class);
 
         // Components
-        View::composer(['boilerplate::icheck', 'boilerplate::components.icheck'], IcheckComposer::class);
-        View::composer(['boilerplate::input', 'boilerplate::components.input'], InputComposer::class);
-        View::composer(['boilerplate::card', 'boilerplate::components.card'], CardComposer::class);
-        View::composer(['boilerplate::form', 'boilerplate::components.form'], FormComposer::class);
-        View::composer(['boilerplate::infobox', 'boilerplate::components.infobox'], InfoboxComposer::class);
-        View::composer(['boilerplate::smallbox', 'boilerplate::components.smallbox'], SmallboxComposer::class);
-        View::composer(['boilerplate::toggle', 'boilerplate::components.toggle'], ToggleComposer::class);
-        View::composer(['boilerplate::tinymce', 'boilerplate::components.tinymce'], TinymceComposer::class);
+        $components = ['icheck', 'input', 'card', 'form', 'infobox', 'smallbox', 'toggle', 'tinymce', 'select2'];
+        foreach ($components as $component) {
+            View::composer([
+                "boilerplate::$component",
+                "boilerplate::components.$component"
+            ], 'Sebastienheyd\Boilerplate\View\Composers\\'.ucfirst($component).'Composer');
+        }
     }
 
     /**
