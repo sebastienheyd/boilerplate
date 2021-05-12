@@ -1,0 +1,47 @@
+<?php
+
+return [
+    'title'         => 'کاربرها',
+    'returntolist'  => 'لیست کاربرها',
+    'save'          => 'ذخیره',
+    'informations'  => 'اطلاعات',
+    'status'        => 'وضعیت',
+    'active'        => 'فعال',
+    'inactive'      => 'غیر فعال',
+    'lastname'      => 'نام خانوادگی',
+    'firstname'     => 'نام',
+    'email'         => 'ایمیل',
+    'roles'         => 'نقش',
+    'successadd'    => 'کاربر با موفقیت اضافه شد.',
+    'successmod'    => 'کاربر ویرایش شد.',
+    'newpassword'   => 'رمز عبور ذخیره شد.',
+    'create'        => [
+        'title'     => 'افزودن کاربر',
+        'help'      => 'ایمیل دعوت جهت تنظیم رمز عبور برای کاربر ارسال می شود.',
+    ],
+    'edit' => [
+        'title'     => 'ویرایش کاربر',
+    ],
+    'list' => [
+        'title'         => 'لیست کاربرها',
+        'id'            => 'شماره',
+        'state'         => 'وضعیت',
+        'lastname'      => 'نام خانوادگی',
+        'firstname'     => 'نام',
+        'email'         => 'ایمیل',
+        'roles'         => 'نقش',
+        'creationdate'  => 'تاریخ ایجاد',
+        'lastconnect'   => 'آخرین ورود',
+        'confirmdelete' => 'آیا از حذف اطمینان دارید؟',
+        'deletesuccess' => 'کاربر با موفقیت حذف شد.',
+    ],
+    'profile' => [
+        'title'            => 'پرو فایل شما',
+        'subscribedsince'  => 'عضو از تاریخ:date ( :since )',
+        'avatar'           => 'تصویر شخصی',
+        'delavatar'        => 'حذف تصویر شخصی',
+        'confirmdelavatar' => 'تصویر شخصی را حذف کنم؟',
+        'successdelavatar' => 'تصویر شخصی حذف شد.',
+        'successupdate'    => 'پروفایل بروز رسانی شد.',
+    ],
+];

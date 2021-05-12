@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'direction'       => 'ltr',
     'mainmenu'        => 'Ana menü',
     'online'          => 'Çevrimiçi',
     'logout'          => 'Çıkış yap',

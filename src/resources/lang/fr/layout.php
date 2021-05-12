@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'direction'         => 'ltr',
     'mainmenu'          => 'Menu principal',
     'online'            => 'Connecté',
     'logout'            => 'Déconnexion',
