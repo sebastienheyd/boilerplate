@@ -48,6 +48,9 @@ HTML;
     </script>
 HTML;
 
+        $view = $this->blade("@component('boilerplate::select2', ['name' => 'test', 'id' => 'test', 'data-test' => 'test'])<option value=\"1\">Value 1</option>@endcomponent()@stack('js')");
+        $this->assertEquals($expected, $view);
+
         // Additionnal space on PHP 7.2
         if (version_compare(PHP_VERSION, '7.3', '<')) {
             $expected = preg_replace('#</div>([^<]+)<script#', '</div>$1 <script', $expected);
@@ -57,8 +60,5 @@ HTML;
             $view = $this->blade('<x-boilerplate::select2 name="test" id="test" data-test="test"><option value="1">Value 1</option></x-boilerplate::select2>@stack("js")');
             $this->assertEquals($expected, $view);
         }
-
-        $view = $this->blade("@component('boilerplate::select2', ['name' => 'test', 'id' => 'test', 'data-test' => 'test'])<option value=\"1\">Value 1</option>@endcomponent()@stack('js')");
-        $this->assertEquals($expected, $view);
     }
 }
