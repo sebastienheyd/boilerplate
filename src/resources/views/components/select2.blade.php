@@ -24,17 +24,22 @@
 @include('boilerplate::load.select2')
 @push('js')
     <script>
-        $('#{{ $id }}').select2({
-            placeholder: '{{ $placeholder ?? '—' }}',
-            allowClear: {{ $allowClear }},
-            language: "{{ config('boilerplate.app.locale') }}",
-            direction: "@lang('boilerplate::layout.direction')",
-            @isset($ajax)
-            ajax: {
-                url: '{{ $ajax }}',
-                method: 'post'
-            }
-            @endisset
+        $(function () {
+            $('#{{ $id }}').select2({
+                placeholder: '{{ $placeholder ?? '—' }}',
+                allowClear: {{ $allowClear }},
+                language: "{{ config('boilerplate.app.locale') }}",
+                direction: "@lang('boilerplate::layout.direction')",
+                minimumInputLength: {{ $minimumInputLength ?? 0 }},
+                width: '100%',
+                @isset($ajax)
+                ajax: {
+                    delay: 200,
+                    url: '{{ $ajax }}',
+                    method: 'post'
+                }
+                @endisset
+            });
         });
     </script>
 @endpush

@@ -7,14 +7,17 @@ use Illuminate\View\View;
 class Select2Composer extends ComponentComposer
 {
     protected $props = [
-        'id',
-        'name',
-        'label',
-        'value',
-        'errors',
+        'allow-clear',
         'class',
+        'errors',
         'help',
+        'id',
+        'label',
+        'minimum-input-length',
+        'name',
         'options',
+        'placeholder',
+        'value',
     ];
 
     public function compose(View $view)
