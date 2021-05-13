@@ -105,6 +105,7 @@ class BoilerplateServiceProvider extends ServiceProvider
         if (version_compare($this->app->version(), '7.0', '<')) {
             Blade::directive('once', function () {
                 $id = Str::uuid();
+
                 return '<?php if(!defined("'.$id.'")): define("'.$id.'", true); ?>';
             });
 
