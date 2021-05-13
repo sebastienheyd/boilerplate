@@ -8,7 +8,7 @@ class IcheckTest extends TestComponent
     {
         $expected = <<<'HTML'
 <div class="form-group">
-    <div class="icheck-primary d-inline">
+    <div class="icheck-primary">
         <input type="checkbox" id="test" name="test">
         <label for="test" class="font-weight-normal">Dashboard</label>
     </div>
@@ -31,7 +31,7 @@ HTML;
     {
         $expected = <<<'HTML'
 <div class="form-group">
-    <div class="icheck-primary d-inline">
+    <div class="icheck-primary">
         <input type="checkbox" id="test" checked>
         <label for="test" class="font-weight-normal"></label>
     </div>
@@ -54,7 +54,7 @@ HTML;
     {
         $expected = <<<'HTML'
 <div class="form-group bg-red">
-    <div class="icheck-primary d-inline" data-toggle="tooltip">
+    <div class="icheck-primary" data-toggle="tooltip">
         <input type="checkbox" id="test" value="1">
         <label for="test" class="font-weight-normal"></label>
     </div>

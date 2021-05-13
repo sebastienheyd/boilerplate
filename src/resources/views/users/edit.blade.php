@@ -11,12 +11,12 @@
     {{ Form::open(['route' => ['boilerplate.users.update', $user->id], 'method' => 'put', 'autocomplete' => 'off']) }}
         <div class="row">
             <div class="col-12 pb-3">
-                <a href="{{ route("boilerplate.users.index") }}" class="btn btn-default" title="{{ __('boilerplate::users.returntolist') }}">
+                <a href="{{ route("boilerplate.users.index") }}" class="btn btn-default" data-toggle="tooltip" title="@lang('boilerplate::users.returntolist')">
                     <span class="far fa-arrow-alt-circle-left text-muted"></span>
                 </a>
                 <span class="btn-group float-right">
                     <button type="submit" class="btn btn-primary">
-                        {{ __('boilerplate::users.save') }}
+                        @lang('boilerplate::users.save')
                     </button>
                 </span>
             </div>
@@ -26,33 +26,20 @@
             <div class="col-md-6">
                 @component('boilerplate::card', ['title' => __('boilerplate::users.informations')])
                     @if(Auth::user()->id !== $user->id)
-                        <div class="form-group">
-                            {{ Form::label('active', __('boilerplate::users.status')) }}
-                            {{ Form::select('active', ['0' => __('boilerplate::users.inactive'), '1' => __('boilerplate::users.active')], old('active', $user->active), ['class' => 'form-control'.$errors->first('active', ' is-invalid')]) }}
-                            {!! $errors->first('active','<div class="error-bubble"><div>:message</div></div>') !!}
-                        </div>
+                        @component('boilerplate::select2', ['name' => 'active', 'label' => 'boilerplate::users.status', 'minimum-results-for-search' => '-1'])
+                            <option value="1" @if (old('active', $user->active) == '1') selected="selected" @endif>@lang('boilerplate::users.active')</option>
+                            <option value="0" @if (old('active', $user->active) == '0') selected="selected" @endif>@lang('boilerplate::users.inactive')</option>
+                        @endcomponent
                     @endif
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="form-group">
-                                {{ Form::label('last_name', __('boilerplate::users.lastname')) }}
-                                {{ Form::text('last_name', old('last_name', $user->last_name), ['class' => 'form-control'.$errors->first('last_name', ' is-invalid'), 'autofocus']) }}
-                                {!! $errors->first('last_name','<div class="error-bubble"><div>:message</div></div>') !!}
-                            </div>
+                            @component('boilerplate::input', ['name' => 'first_name', 'label' => 'boilerplate::users.firstname', 'value' => $user->first_name])@endcomponent
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
-                                {{ Form::label('first_name', __('boilerplate::users.firstname')) }}
-                                {{ Form::text('first_name', old('first_name', $user->first_name), ['class' => 'form-control'.$errors->first('first_name', ' is-invalid')]) }}
-                                {!! $errors->first('first_name','<div class="error-bubble"><div>:message</div></div>') !!}
-                            </div>
+                            @component('boilerplate::input', ['name' => 'last_name', 'label' => 'boilerplate::users.lastname', 'value' => $user->last_name])@endcomponent
                         </div>
                     </div>
-                    <div class="form-group">
-                        {{ Form::label('email', __('boilerplate::users.email')) }}
-                        {{ Form::email('email', old('email', $user->email), ['class' => 'form-control'.$errors->first('email', ' is-invalid')]) }}
-                        {!! $errors->first('email','<div class="error-bubble"><div>:message</div></div>') !!}
-                    </div>
+                        @component('boilerplate::input', ['name' => 'email', 'label' => 'boilerplate::users.email', 'value' => $user->email])@endcomponent
                 @endcomponent
             </div>
             <div class="col-md-6">

@@ -12,16 +12,16 @@
             <div class="col-12 mb-3">
                 <span class="btn-group float-right">
                     <button type="submit" class="btn btn-primary">
-                        {{ __('boilerplate::users.save') }}
+                        @lang('boilerplate::users.save')
                     </button>
                 </span>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-5">
+            <div class="col-xl-5">
                 @component('boilerplate::card', ['title' => __('boilerplate::users.profile.title')])
-                    <div class="d-flex">
-                        <div id="avatar-wrapper">
+                    <div class="d-flex flex-wrap">
+                        <div id="avatar-wrapper" class="mb-3">
                             @include('boilerplate::users.avatar')
                         </div>
                         <div class="pl-3">
@@ -43,36 +43,20 @@
                     </div>
                 @endcomponent
             </div>
-            <div class="col-md-7">
+            <div class="col-xl-7">
                 @component('boilerplate::card', ['color' => 'teal', 'title' => __('boilerplate::users.informations')])
                     <div class="row">
-                        <div class="col-sm-12 col-md-6">
-                            <div class="form-group">
-                                {{ Form::label('first_name', __('boilerplate::users.firstname')) }}
-                                {{ Form::text('first_name', old('first_name', $user->first_name), ['class' => 'form-control'.$errors->first('first_name', ' is-invalid')]) }}
-                                {!! $errors->first('first_name','<div class="error-bubble"><div>:message</div></div>') !!}
-                            </div>
+                        <div class="col-md-6">
+                            @component('boilerplate::input', ['name' => 'first_name', 'label' => 'boilerplate::users.firstname', 'value' => $user->first_name, 'autofocus' => true])@endcomponent
                         </div>
-                        <div class="col-sm-12 col-md-6">
-                            <div class="form-group">
-                                {{ Form::label('last_name', __('boilerplate::users.lastname')) }}
-                                {{ Form::text('last_name', old('last_name', $user->last_name), ['class' => 'form-control'.$errors->first('last_name', ' is-invalid'), 'autofocus']) }}
-                                {!! $errors->first('last_name','<div class="error-bubble"><div>:message</div></div>') !!}
-                            </div>
+                        <div class="col-md-6">
+                            @component('boilerplate::input', ['name' => 'last_name', 'label' => 'boilerplate::users.lastname', 'value' => $user->last_name])@endcomponent
                         </div>
-                        <div class="col-sm-12 col-md-6">
-                            <div class="form-group">
-                                {{ Form::label('password', ucfirst(__('boilerplate::auth.fields.password'))) }}
-                                {{ Form::password('password', ['class' => 'form-control'.$errors->first('password', ' is-invalid')]) }}
-                                {!! $errors->first('password','<div class="error-bubble"><div>:message</div></div>') !!}
-                            </div>
+                        <div class="col-md-6">
+                            @component('boilerplate::input', ['type' => 'password', 'name' => 'password', 'label' => ucfirst(__('boilerplate::auth.fields.password'))])@endcomponent
                         </div>
-                        <div class="col-sm-12 col-md-6">
-                            <div class="form-group">
-                                {{ Form::label('password_confirmation', ucfirst(__('boilerplate::auth.fields.password_confirm'))) }}
-                                {{ Form::password('password_confirmation', ['class' => 'form-control'.$errors->first('password_confirmation', ' is-invalid')]) }}
-                                {!! $errors->first('password_confirmation','<div class="error-bubble"><div>:message</div></div>') !!}
-                            </div>
+                        <div class="col-md-6">
+                            @component('boilerplate::input', ['type' => 'password', 'name' => 'password_confirmation', 'label' => ucfirst(__('boilerplate::auth.fields.password_confirm'))])@endcomponent
                         </div>
                     </div>
                 @endcomponent
@@ -86,20 +70,17 @@
         var avatar = {
             url: "{{ route('boilerplate.user.avatar.url', null, false) }}",
             locales: {
-                delete: "{{ __('boilerplate::avatar.delete') }}",
+                delete: "@lang('boilerplate::avatar.delete')",
                 gravatar: {
-                    success: "{{ __('boilerplate::avatar.gravatar.success') }}",
-                    error: "{{ __('boilerplate::avatar.gravatar.error') }}",
+                    success: "@lang('boilerplate::avatar.gravatar.success')",
+                    error: "@lang('boilerplate::avatar.gravatar.error')",
                 },
                 upload: {
-                    success: "{{ __('boilerplate::avatar.upload.success') }}",
-                    error: "{{ __('boilerplate::avatar.upload.error') }}",
+                    success: "@lang('boilerplate::avatar.upload.success')",
+                    error: "@lang('boilerplate::avatar.upload.error')",
                 }
             }
         }
     </script>
     <script src="{{ mix('/avatar.min.js', '/assets/vendor/boilerplate') }}"></script>
-    <script>
-
-    </script>
 @endpush

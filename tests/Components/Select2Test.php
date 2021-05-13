@@ -26,7 +26,7 @@ HTML;
     {
         $expected = <<<'HTML'
 <div class="form-group">
-    <select id="test" class="form-control" data-test="test">
+    <select id="test" name="test" class="form-control" data-test="test">
         <option></option>
         <option value="1">Value 1</option>
     </select>
@@ -42,6 +42,7 @@ HTML;
                 language: "en",
                 direction: "ltr",
                 minimumInputLength: 0,
+                minimumResultsForSearch: 0,
                 width: '100%',
             });
         });

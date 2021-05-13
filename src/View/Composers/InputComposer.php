@@ -39,6 +39,10 @@ class InputComposer extends ComponentComposer
             }
         }
 
+        if (isset($data['placeholder'])) {
+            $this->attributes['placeholder'] = __($data['placeholder']);
+        }
+
         $view->with('attributes', $this->attributes);
     }
 }

@@ -8,34 +8,12 @@
         {{ Form::open(['route' => 'boilerplate.users.firstlogin', 'autocomplete' => 'off']) }}
         <input type="hidden" name="token" value="{{ $token }}">
         <div class="alert alert-info">
-            {{ __('boilerplate::auth.firstlogin.intro') }}
+            @lang('boilerplate::auth.firstlogin.intro')
         </div>
-        <div class="form-group">
-            <div class="input-group">
-                {{ Form::input('password', 'password', Request::old('password'), ['class' => 'form-control'.$errors->first('password', ' is-invalid'), 'autofocus', 'placeholder' => __('boilerplate::auth.fields.password')]) }}
-                <div class="input-group-append">
-                    <div class="input-group-text">
-                        <span class="fas fa-lock"></span>
-                    </div>
-                </div>
-            </div>
-            {!! $errors->first('password','<div class="error-bubble"><div>:message</div></div>') !!}
-        </div>
-        <div class="form-group">
-            <div class="input-group">
-                {{ Form::input('password', 'password_confirmation', Request::old('password_confirmation'), ['class' => 'form-control'.$errors->first('password_confirmation', ' is-invalid'), 'placeholder' => __('boilerplate::auth.fields.password_confirm')]) }}
-                <div class="input-group-append">
-                    <div class="input-group-text">
-                        <span class="fas fa-lock"></span>
-                    </div>
-                </div>
-            </div>
-            {!! $errors->first('password_confirmation','<div class="error-bubble"><div>:message</div></div>') !!}
-        </div>
+        @component('boilerplate::input', ['name' => 'password', 'placeholder' => 'boilerplate::auth.fields.password', 'append-text' => 'fas fa-lock', 'type' => 'password', 'autofocus' => true])@endcomponent
+        @component('boilerplate::input', ['name' => 'password_confirmation', 'placeholder' => 'boilerplate::auth.fields.password_confirm', 'append-text' => 'fas fa-lock', 'type' => 'password'])@endcomponent
         <div class="form-group text-center">
-            <button type="submit" class="btn btn-primary">
-                {{ __('boilerplate::auth.firstlogin.button') }}
-            </button>
+            <button type="submit" class="btn btn-primary">@lang('boilerplate::auth.firstlogin.button')</button>
         </div>
         </form>
     @endcomponent

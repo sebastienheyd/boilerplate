@@ -9,14 +9,14 @@
 @section('right-sidebar')
     <div id="filters">
         <div class="form-group">
-            <select name="state" class="form-control select2" data-placeholder="{{ __('boilerplate::users.list.state') }}">
+            <select name="state" class="form-control select2" data-placeholder="@lang('boilerplate::users.list.state')">
                 <option></option>
-                <option value="1">{{ __('boilerplate::users.active') }}</option>
-                <option value="0">{{ __('boilerplate::users.inactive') }}</option>
+                <option value="1">@lang('boilerplate::users.active')</option>
+                <option value="0">@lang('boilerplate::users.inactive')</option>
             </select>
         </div>
         <div class="form-group">
-            <select name="role" class="form-control select2" data-placeholder="{{ __('boilerplate::role.role') }}">
+            <select name="role" class="form-control select2" data-placeholder="@lang('boilerplate::role.role')">
                 <option></option>
                 @foreach($roles as $role)
                     <option value="{{ $role->name }}">{{ $role->display_name }}</option>
@@ -31,25 +31,25 @@
         <div class="col-12 mbl">
             <span class="float-right pb-3">
                 <a href="{{ route("boilerplate.users.create") }}" class="btn btn-primary">
-                    {{ __('boilerplate::users.create.title') }}
+                    @lang('boilerplate::users.create.title')
                 </a>
             </span>
         </div>
     </div>
     @component('boilerplate::card')
         <div class="table-responsive">
-            <table class="table table-striped table-hover va-middle" id="users-list" style="width:100%">
+            <table class="table table-striped table-hover va-middle" id="users-list">
                 <thead>
                     <tr>
                         <th>{{-- id --}}</th>
                         <th>{{-- avatar --}}</th>
-                        <th>{{ __('boilerplate::users.list.state') }}</th>
-                        <th>{{ __('boilerplate::users.list.lastname') }}</th>
-                        <th>{{ __('boilerplate::users.list.firstname') }}</th>
-                        <th>{{ __('boilerplate::users.list.email') }}</th>
-                        <th>{{ __('boilerplate::users.list.roles') }}</th>
-                        <th>{{ __('boilerplate::users.list.creationdate') }}</th>
-                        <th>{{ __('boilerplate::users.list.lastconnect') }}</th>
+                        <th>@lang('boilerplate::users.list.state')</th>
+                        <th>@lang('boilerplate::users.list.lastname')</th>
+                        <th>@lang('boilerplate::users.list.firstname')</th>
+                        <th>@lang('boilerplate::users.list.email')</th>
+                        <th>@lang('boilerplate::users.list.roles')</th>
+                        <th>@lang('boilerplate::users.list.creationdate')</th>
+                        <th>@lang('boilerplate::users.list.lastconnect')</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -92,7 +92,7 @@
                         data: 'created_at',
                         name: 'users.created_at',
                         searchable: false,
-                        render: $.fn.dataTable.render.moment('{{ __('boilerplate::date.YmdHis') }}')
+                        render: $.fn.dataTable.render.moment('@lang('boilerplate::date.YmdHis')')
                     },
                     {
                         data: 'last_login',
@@ -138,7 +138,7 @@
 
                 var href = $(this).attr('href');
 
-                bootbox.confirm("{{ __('boilerplate::users.list.confirmdelete') }}", function (result) {
+                bootbox.confirm("@lang('boilerplate::users.list.confirmdelete')", function (result) {
                     if (result === false) return;
 
                     $.ajax({
@@ -146,7 +146,7 @@
                         method: 'delete',
                         success: function () {
                             oTable.ajax.reload();
-                            growl("{{ __('boilerplate::users.list.deletesuccess') }}", "success");
+                            growl("@lang('boilerplate::users.list.deletesuccess')", "success");
                         }
                     });
                 });

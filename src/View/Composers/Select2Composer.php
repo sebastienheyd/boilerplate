@@ -14,6 +14,7 @@ class Select2Composer extends ComponentComposer
         'id',
         'label',
         'minimum-input-length',
+        'minimum-results-for-search',
         'name',
         'options',
         'placeholder',
