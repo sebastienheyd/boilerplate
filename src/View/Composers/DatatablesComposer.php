@@ -16,8 +16,10 @@ class DatatablesComposer
     {
         $languages = [
             'en'    => 'English',
-            'fr'    => 'French',
             'es'    => 'Spanish',
+            'fa'    => 'Persian',
+            'fr'    => 'French',
+            'it'    => 'Italian',
             'tr'    => 'Turkish',
         ];
 
