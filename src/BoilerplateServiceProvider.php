@@ -103,16 +103,14 @@ class BoilerplateServiceProvider extends ServiceProvider
     {
         // Once directive for Laravel 6
         if (version_compare($this->app->version(), '7.0', '<')) {
-            Blade::directive('once',
-                function () {
-                    $id = Str::uuid();
-                    return '<?php if(!defined("'.$id.'")): define("'.$id.'", true); ?>';
-                });
+            Blade::directive('once', function () {
+                $id = Str::uuid();
+                return '<?php if(!defined("'.$id.'")): define("'.$id.'", true); ?>';
+            });
 
-            Blade::directive('endonce',
-                function () {
+            Blade::directive('endonce', function () {
                     return '<?php endif; ?>';
-                });
+            });
         }
     }
 
