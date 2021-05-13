@@ -31,14 +31,29 @@ HTML;
         <option value="1">Value 1</option>
     </select>
 </div>
+     <script src=""></script>
+    <script src=""></script>
+    <script>$.extend(true,$.fn.select2.defaults,{language:'en',direction:'ltr'});</script>
+    <script>
+        $(function () {
+            $('#test').select2({
+                placeholder: '—',
+                allowClear: false,
+                language: "en",
+                direction: "ltr",
+                minimumInputLength: 0,
+                width: '100%',
+            });
+        });
+    </script>
 HTML;
 
         if ($this->isLaravelEqualOrGreaterThan7) {
-            $view = $this->blade('<x-boilerplate::select2 name="test" id="test" data-test="test"><option value="1">Value 1</option></x-boilerplate::select2>');
+            $view = $this->blade('<x-boilerplate::select2 name="test" id="test" data-test="test"><option value="1">Value 1</option></x-boilerplate::select2> @stack("js")');
             $this->assertEquals($expected, $view);
         }
 
-        $view = $this->blade("@component('boilerplate::select2', ['name' => 'test', 'id' => 'test', 'data-test' => 'test']) <option value=\"1\">Value 1</option> @endcomponent");
+        $view = $this->blade("@component('boilerplate::select2', ['name' => 'test', 'id' => 'test', 'data-test' => 'test']) <option value=\"1\">Value 1</option> @endcomponent @stack('js')");
         $this->assertEquals($expected, $view);
     }
 }

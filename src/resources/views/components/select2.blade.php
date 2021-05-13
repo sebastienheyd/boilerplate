@@ -32,13 +32,13 @@
                 direction: "@lang('boilerplate::layout.direction')",
                 minimumInputLength: {{ $minimumInputLength ?? 0 }},
                 width: '100%',
-                @isset($ajax)
+@isset($ajax)
                 ajax: {
                     delay: 200,
                     url: '{{ $ajax }}',
                     method: 'post'
                 }
-                @endisset
+@endisset
             });
         });
     </script>
