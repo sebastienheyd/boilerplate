@@ -26,15 +26,43 @@ mix.scripts([
     'node_modules/drmonty-datatables-plugins/sorting/datetime-moment.js',
     'resources/assets/js/datatables.js',
 ], 'public/plugins/datatables/datatables.min.js');
-mix.copy('node_modules/drmonty-datatables-plugins/i18n', 'public/plugins/datatables/i18n/', false);
+mix.copy('node_modules/drmonty-datatables-plugins/i18n/*', 'public/plugins/datatables/i18n/');
 mix.styles(
     'node_modules/admin-lte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css',
     'public/plugins/datatables/datatables.min.css'
 );
+mix.copy([
+    'node_modules/admin-lte/plugins/datatables-autofill/css/*.min.css',
+    'node_modules/admin-lte/plugins/datatables-autofill/js/*.min.js',
+    'node_modules/admin-lte/plugins/datatables-buttons/css/*.min.css',
+    'node_modules/admin-lte/plugins/datatables-buttons/js/*.min.js',
+    'node_modules/admin-lte/plugins/datatables-colreorder/css/*.min.css',
+    'node_modules/admin-lte/plugins/datatables-colreorder/js/*.min.js',
+    'node_modules/admin-lte/plugins/datatables-fixedcolumns/css/*.min.css',
+    'node_modules/admin-lte/plugins/datatables-fixedcolumns/css/*.min.css',
+    'node_modules/admin-lte/plugins/datatables-fixedheader/css/*.min.css',
+    'node_modules/admin-lte/plugins/datatables-fixedheader/js/*.min.js',
+    'node_modules/admin-lte/plugins/datatables-keytable/css/*.min.css',
+    'node_modules/admin-lte/plugins/datatables-keytable/js/*.min.js',
+    'node_modules/admin-lte/plugins/datatables-responsive/css/*.min.css',
+    'node_modules/admin-lte/plugins/datatables-responsive/js/*.min.js',
+    'node_modules/admin-lte/plugins/datatables-rowgroup/css/*.min.css',
+    'node_modules/admin-lte/plugins/datatables-rowgroup/js/*.min.js',
+    'node_modules/admin-lte/plugins/datatables-rowreorder/css/*.min.css',
+    'node_modules/admin-lte/plugins/datatables-rowreorder/js/*.min.js',
+    'node_modules/admin-lte/plugins/datatables-scroller/css/*.min.css',
+    'node_modules/admin-lte/plugins/datatables-scroller/js/*.min.js',
+    'node_modules/admin-lte/plugins/datatables-searchbuilder/css/*.min.css',
+    'node_modules/admin-lte/plugins/datatables-searchbuilder/js/*.min.js',
+    'node_modules/admin-lte/plugins/datatables-searchpanes/css/*.min.css',
+    'node_modules/admin-lte/plugins/datatables-searchpanes/js/*.min.js',
+    'node_modules/admin-lte/plugins/datatables-select/css/*.min.css',
+    'node_modules/admin-lte/plugins/datatables-select/js/*.min.js',
+], 'public/plugins/datatables/plugins/');
 
 // ============== Select2 ==============
 mix.copy('node_modules/admin-lte/plugins/select2/js/select2.full.min.js', 'public/plugins/select2/select2.full.min.js');
-mix.copy('node_modules/admin-lte/plugins/select2/js/i18n/*', 'public/plugins/select2/i18n', false);
+mix.copy('node_modules/admin-lte/plugins/select2/js/i18n/*', 'public/plugins/select2/i18n');
 mix.sass('resources/assets/scss/select2.scss', 'public/plugins/select2/select2.min.css');
 
 // ============== DatePicker ==============
@@ -47,8 +75,8 @@ mix.scripts([
 // ============== FileInput ==============
 mix.sass('node_modules/bootstrap-fileinput/scss/fileinput.scss', 'public/plugins/fileinput/bootstrap-fileinput.min.css');
 mix.scripts(['node_modules/bootstrap-fileinput/js/fileinput.min.js'], 'public/plugins/fileinput/bootstrap-fileinput.min.js');
-mix.copy('node_modules/bootstrap-fileinput/js/locales', 'public/plugins/fileinput/locales', false);
-mix.copy('node_modules/bootstrap-fileinput/themes', 'public/plugins/fileinput/themes', false);
+mix.copy('node_modules/bootstrap-fileinput/js/locales', 'public/plugins/fileinput/locales');
+mix.copy('node_modules/bootstrap-fileinput/themes', 'public/plugins/fileinput/themes');
 
 // ======= Code Mirror
 mix.js('resources/assets/js/vendor/codemirror/jquery.codemirror.js', 'public/plugins/codemirror/jquery.codemirror.min.js');

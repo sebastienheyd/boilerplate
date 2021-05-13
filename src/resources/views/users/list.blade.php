@@ -37,26 +37,28 @@
         </div>
     </div>
     @component('boilerplate::card')
-        <table class="table table-striped table-hover va-middle" id="users-list" style="width:100%">
-            <thead>
-                <tr>
-                    <th>{{-- id --}}</th>
-                    <th>{{-- avatar --}}</th>
-                    <th>{{ __('boilerplate::users.list.state') }}</th>
-                    <th>{{ __('boilerplate::users.list.lastname') }}</th>
-                    <th>{{ __('boilerplate::users.list.firstname') }}</th>
-                    <th>{{ __('boilerplate::users.list.email') }}</th>
-                    <th>{{ __('boilerplate::users.list.roles') }}</th>
-                    <th>{{ __('boilerplate::users.list.creationdate') }}</th>
-                    <th>{{ __('boilerplate::users.list.lastconnect') }}</th>
-                    <th></th>
-                </tr>
-            </thead>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover va-middle" id="users-list" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>{{-- id --}}</th>
+                        <th>{{-- avatar --}}</th>
+                        <th>{{ __('boilerplate::users.list.state') }}</th>
+                        <th>{{ __('boilerplate::users.list.lastname') }}</th>
+                        <th>{{ __('boilerplate::users.list.firstname') }}</th>
+                        <th>{{ __('boilerplate::users.list.email') }}</th>
+                        <th>{{ __('boilerplate::users.list.roles') }}</th>
+                        <th>{{ __('boilerplate::users.list.creationdate') }}</th>
+                        <th>{{ __('boilerplate::users.list.lastconnect') }}</th>
+                        <th></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
     @endcomponent
 @endsection
 
-@include('boilerplate::load.datatables', ['responsive' => true])
+@include('boilerplate::load.datatables')
 @include('boilerplate::load.select2')
 
 @push('js')
@@ -73,7 +75,6 @@
                 processing: true,
                 serverSide: true,
                 stateSave: true,
-                responsive: true,
                 order: [[7, "desc"]],
                 ajax: {
                     url: '{!! route('boilerplate.users.datatable') !!}',

@@ -15,16 +15,33 @@ class DatatablesComposer
     public function compose(View $view)
     {
         $languages = [
-            'en'    => 'English',
-            'es'    => 'Spanish',
-            'fa'    => 'Persian',
-            'fr'    => 'French',
-            'it'    => 'Italian',
-            'tr'    => 'Turkish',
+            'en' => 'English',
+            'es' => 'Spanish',
+            'fa' => 'Persian',
+            'fr' => 'French',
+            'it' => 'Italian',
+            'tr' => 'Turkish',
         ];
 
         $locale = config('boilerplate.app.locale');
 
         $view->with('locale', isset($languages[$locale]) ? $languages[$locale] : 'English');
+
+        $plugins = [
+            'select',
+            'autoFill',
+            'buttons',
+            'colReorder',
+            'fixedHeader',
+            'keyTable',
+            'responsive',
+            'rowGroup',
+            'rowReorder',
+            'scroller',
+            'searchBuilder',
+            'searchPanes',
+        ];
+
+        $view->with('plugins', $plugins);
     }
 }
