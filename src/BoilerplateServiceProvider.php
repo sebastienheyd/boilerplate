@@ -109,7 +109,7 @@ class BoilerplateServiceProvider extends ServiceProvider
             });
 
             Blade::directive('endonce', function () {
-                    return '<?php endif; ?>';
+                return '<?php endif; ?>';
             });
         }
     }
