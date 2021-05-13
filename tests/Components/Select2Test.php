@@ -18,7 +18,7 @@ HTML;
             $this->assertEquals($expected, $view);
         }
 
-        $view = $this->blade("@component('boilerplate::select2') @endcomponent");
+        $view = $this->blade("@component('boilerplate::select2')@endcomponent()");
         $this->assertEquals($expected, $view);
     }
 
@@ -31,7 +31,7 @@ HTML;
         <option value="1">Value 1</option>
     </select>
 </div>
-     <script src=""></script>
+    <script src=""></script>
     <script src=""></script>
     <script>$.extend(true,$.fn.select2.defaults,{language:'en',direction:'ltr'});</script>
     <script>
@@ -49,11 +49,11 @@ HTML;
 HTML;
 
         if ($this->isLaravelEqualOrGreaterThan7) {
-            $view = $this->blade('<x-boilerplate::select2 name="test" id="test" data-test="test"><option value="1">Value 1</option></x-boilerplate::select2> @stack("js")');
+            $view = $this->blade('<x-boilerplate::select2 name="test" id="test" data-test="test"><option value="1">Value 1</option></x-boilerplate::select2>@stack("js")');
             $this->assertEquals($expected, $view);
         }
 
-        $view = $this->blade("@component('boilerplate::select2', ['name' => 'test', 'id' => 'test', 'data-test' => 'test']) <option value=\"1\">Value 1</option> @endcomponent @stack('js')");
+        $view = $this->blade("@component('boilerplate::select2', ['name' => 'test', 'id' => 'test', 'data-test' => 'test'])<option value=\"1\">Value 1</option>@endcomponent()@stack('js')");
         $this->assertEquals($expected, $view);
     }
 }
