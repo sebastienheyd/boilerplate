@@ -4,8 +4,10 @@ namespace Sebastienheyd\Boilerplate;
 
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 use Laratrust\LaratrustFacade;
 use Laratrust\LaratrustServiceProvider;
 use Laratrust\Middleware\LaratrustAbility;
@@ -92,6 +94,26 @@ class BoilerplateServiceProvider extends ServiceProvider
 
         // Load view composers
         $this->viewComposers();
+
+        // Load directives
+        $this->bladeDirectives();
+    }
+
+    private function bladeDirectives()
+    {
+        // Once directive for Laravel 6
+        if (version_compare($this->app->version(), '7.0', '<')) {
+            Blade::directive('once',
+                function () {
+                    $id = Str::uuid();
+                    return '<?php if(!defined("'.$id.'")): define("'.$id.'", true); ?>';
+                });
+
+            Blade::directive('endonce',
+                function () {
+                    return '<?php endif; ?>';
+                });
+        }
     }
 
     private function viewComposers()
@@ -164,6 +186,9 @@ class BoilerplateServiceProvider extends ServiceProvider
         $this->router->aliasMiddleware('boilerplatelocale', Middleware\BoilerplateLocale::class);
         $this->router->aliasMiddleware('boilerplateauth', Middleware\BoilerplateAuthenticate::class);
         $this->router->aliasMiddleware('boilerplateguest', Middleware\BoilerplateGuest::class);
+        if (version_compare($this->app->version(), '7.0', '<')) {
+            $this->router->aliasMiddleware('boilerplateguest', Middleware\BoilerplateGuestL6::class);
+        }
 
         // Loading packages
         $this->registerLaratrust();

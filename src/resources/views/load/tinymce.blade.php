@@ -1,4 +1,4 @@
-@if(!defined('LOAD_TINYMCE'))
+@once
 @push('js')
     <script src="{!! mix('/plugins/tinymce/tinymce.min.js', '/assets/vendor/boilerplate') !!}"></script>
     <script>
@@ -34,5 +34,4 @@
         };
     </script>
 @endpush
-@php(define('LOAD_TINYMCE', true))
-@endif
+@endonce

@@ -1,4 +1,4 @@
-@if(!defined('LOAD_FILEINPUT'))
+@once
 @push('css')
     <link rel="stylesheet" href="{!! mix('/plugins/fileinput/bootstrap-fileinput.min.css', '/assets/vendor/boilerplate') !!}">
 @endpush
@@ -11,5 +11,4 @@
     <script>$.fn.fileinput.defaults.language='{{ config('boilerplate.app.locale') }}';</script>
 @endif
 @endpush
-@php(define('LOAD_FILEINPUT', true))
-@endif
+@endonce

@@ -1,4 +1,4 @@
-@if(!defined('LOAD_CODEMIRROR'))
+@once
 @push('css')
     <link rel="stylesheet" href="{{ mix('/plugins/codemirror/codemirror.min.css', '/assets/vendor/boilerplate') }}">
 @endpush
@@ -37,5 +37,4 @@
     <script>$.fn.codemirror.defaults.theme='{{ $theme }}';</script>
 @endpush
 @endisset
-@php(define('LOAD_CODEMIRROR', true))
-@endif
+@endonce

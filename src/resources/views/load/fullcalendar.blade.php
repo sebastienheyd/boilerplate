@@ -1,4 +1,4 @@
-@if(!defined('LOAD_FULLCALENDAR'))
+@once
 @push('css')
     <link rel="stylesheet" href="{!! mix('/plugins/fullcalendar/main.min.css', '/assets/vendor/boilerplate') !!}">
 @endpush
@@ -9,5 +9,4 @@
     <script>$.fn.fullCalendar.options = {locale:"{{ App::getLocale() }}"}</script>
 @endif
 @endpush
-@php(define('LOAD_FULLCALENDAR', true))
-@endif
+@endonce

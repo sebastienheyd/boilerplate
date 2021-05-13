@@ -1,4 +1,4 @@
-@if(!defined('LOAD_DATEPICKER'))
+@once
 @push('css')
     <link rel="stylesheet" href="{!! mix('/plugins/datepicker/datepicker.min.css', '/assets/vendor/boilerplate') !!}">
 @endpush
@@ -26,5 +26,4 @@
         };
     </script>
 @endpush
-@php(define('LOAD_DATEPICKER', true))
-@endif
+@endonce
