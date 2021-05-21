@@ -115,6 +115,9 @@ class BoilerplateServiceProvider extends ServiceProvider
         }
     }
 
+    /**
+     * Load all necessary view composers, this also allows the compatibility with Laravel 6.
+     */
     private function viewComposers()
     {
         // Loading dynamic menu when calling the view
@@ -176,7 +179,7 @@ class BoilerplateServiceProvider extends ServiceProvider
             'log-viewer.menu.filter-route' => 'boilerplate.logs.filter',
         ]);
 
-        if (! in_array('daily', config('logging.channels.stack.channels'))) {
+        if (config('boilerplate.app.logs', true) && ! in_array('daily', config('logging.channels.stack.channels'))) {
             config([
                 'logging.channels.stack.channels' => array_merge(['daily'], config('logging.channels.stack.channels')),
             ]);
@@ -233,10 +236,11 @@ class BoilerplateServiceProvider extends ServiceProvider
             return new Menu\MenuItemsRepository();
         });
 
-        app('boilerplate.menu.items')->registerMenuItem([
-            Menu\Users::class,
-            Menu\Logs::class,
-        ]);
+        app('boilerplate.menu.items')->registerMenuItem(Menu\Users::class);
+
+        if (config('boilerplate.app.logs', true)) {
+            app('boilerplate.menu.items')->registerMenuItem(Menu\Logs::class);
+        }
     }
 
     /**

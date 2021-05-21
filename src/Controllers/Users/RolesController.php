@@ -49,6 +49,10 @@ class RolesController extends Controller
 
         $permissions_categories = [];
         foreach ($permissions as $category_id => $perms) {
+            $perms = $perms->filter(function ($perm) {
+                return config('boilerplate.app.logs', true) || $perm->name !== 'logs';
+            });
+
             $name = $perms->first()->category->display_name ?? __('boilerplate::permissions.categories.default');
             $permissions_categories[] = (object) [
                 'name'        => $name,

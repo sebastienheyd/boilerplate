@@ -12,4 +12,7 @@ return [
 
     // Backend locale
     'locale'     => config('app.locale'),
+
+    // Activating daily logs and showing log viewer
+    'logs'       => true,
 ];
