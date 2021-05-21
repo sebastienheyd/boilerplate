@@ -18,7 +18,7 @@ class Select2Composer extends ComponentComposer
         'name',
         'options',
         'placeholder',
-        'value',
+        'selected',
     ];
 
     public function compose(View $view)

@@ -12,7 +12,13 @@
 @if(!isset($multiple))
         <option></option>
 @endif
+@if(!empty($options) && is_array($options))
+@foreach($options as $k => $v)
+        <option value="{{ $k }}"{{ collect($selected ?? [])->contains($k) ? ' selected' : '' }}>{{ $v }}</option>
+@endforeach
+@else
         {{ $slot }}
+@endisset
     </select>
 @if($help ?? false)
     <small class="form-text text-muted">@lang($help)</small>
@@ -31,7 +37,7 @@
                 language: "{{ config('boilerplate.app.locale') }}",
                 direction: "@lang('boilerplate::layout.direction')",
                 minimumInputLength: {{ $minimumInputLength ?? 0 }},
-                minimumResultsForSearch: {{ $minimumResultsForSearch ?? 0 }},
+                minimumResultsForSearch: {{ $minimumResultsForSearch ?? 10 }},
                 width: '100%',
 @isset($ajax)
                 ajax: {
