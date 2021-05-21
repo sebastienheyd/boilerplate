@@ -59,7 +59,7 @@ class Dashboard extends BoilerplateCommand
 
         // Create controller folder
         $controllerPath = app_path('Http/Controllers/Boilerplate');
-        $this->fileSystem->makeDirectory($controllerPath);
+        $this->fileSystem->makeDirectory($controllerPath, 0755, true, true);
 
         // Copy and publish files
         $this->copy(__DIR__.'/../Controllers/DashboardController.php', $controller);
