@@ -4,6 +4,7 @@ namespace Sebastienheyd\Boilerplate\Middleware;
 
 use Carbon\Carbon;
 use Closure;
+use Illuminate\Support\Facades\App;
 
 class BoilerplateLocale
 {
@@ -17,8 +18,17 @@ class BoilerplateLocale
      */
     public function handle($request, Closure $next)
     {
-        app()->setLocale(config('boilerplate.app.locale', config('app.locale')));
-        Carbon::setLocale(config('boilerplate.app.locale', config('app.locale')));
+        App::setLocale(config('boilerplate.locale.default', config('app.locale')));
+        Carbon::setLocale(config('boilerplate.locale.default', config('app.locale')));
+
+        if (! Session()->has('boilerplate_locale')) {
+            return $next($request);
+        }
+
+        if (in_array(Session()->get('boilerplate_locale'), config('boilerplate.locale.allowed'))) {
+            App::setLocale(Session()->get('boilerplate_locale'));
+            Carbon::setLocale(Session()->get('boilerplate_locale'));
+        }
 
         return $next($request);
     }

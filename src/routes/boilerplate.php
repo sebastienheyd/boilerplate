@@ -15,6 +15,7 @@ Route::group($default, function () {
 
     Route::group(['namespace' => '\Sebastienheyd\Boilerplate\Controllers'], function () {
         Route::post('keep-alive', ['as' => 'keepalive', 'uses' => 'Users\UsersController@keepAlive']);
+        Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'LanguageController@switch']);
 
         // Login
         Route::get('login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);

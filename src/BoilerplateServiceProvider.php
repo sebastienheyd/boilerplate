@@ -169,6 +169,7 @@ class BoilerplateServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/config/auth.php', 'boilerplate.auth');
         $this->mergeConfigFrom(__DIR__.'/config/menu.php', 'boilerplate.menu');
         $this->mergeConfigFrom(__DIR__.'/config/theme.php', 'boilerplate.theme');
+        $this->mergeConfigFrom(__DIR__.'/config/locale.php', 'boilerplate.locale');
 
         // Overriding Laravel config
         config([
@@ -177,6 +178,7 @@ class BoilerplateServiceProvider extends ServiceProvider
             'auth.providers.users.table' => config('boilerplate.auth.providers.users.table', 'users'),
             'log-viewer.route.enabled' => false,
             'log-viewer.menu.filter-route' => 'boilerplate.logs.filter',
+            'boilerplate.app.locale' => config('boilerplate.app.locale', config('boilerplate.locale.default')),
         ]);
 
         if (config('boilerplate.app.logs', true) && ! in_array('daily', config('logging.channels.stack.channels'))) {

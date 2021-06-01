@@ -24,6 +24,22 @@
                 </a>
             </li>
             @endif
+            @if(config('boilerplate.locale.switcher', false))
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                    {{ Config::get('boilerplate.locale.languages.'.App::getLocale()) }}
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" style="left: inherit; right: 0px;">
+                    @foreach(config('boilerplate.locale.allowed') as $lang)
+                        @if ($lang !== App::getLocale())
+                            <a href="{{ route('boilerplate.lang.switch', $lang) }}" class="dropdown-item">
+                                {{ config('boilerplate.locale.languages.'.$lang) }}
+                            </a>
+                        @endif
+                    @endforeach
+                </div>
+            </li>
+            @endif
             @if(config('boilerplate.theme.navbar.fullscreen'))
             <li class="nav-item">
                 <a class="nav-link" data-widget="fullscreen" href="#" role="button">
