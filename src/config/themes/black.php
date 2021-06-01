@@ -10,6 +10,7 @@ return [
         'bg'     => 'gray-dark',
         'type'   => 'dark',
         'border' => true,
+        'fullscreen' => true,
         'user'   => [
             'visible' => false,
             'shadow'  => 0,

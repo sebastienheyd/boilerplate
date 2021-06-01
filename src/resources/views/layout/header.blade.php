@@ -24,6 +24,13 @@
                 </a>
             </li>
             @endif
+            @if(config('boilerplate.theme.navbar.fullscreen'))
+            <li class="nav-item">
+                <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                    <i class="fas fa-expand-arrows-alt"></i>
+                </a>
+            </li>
+            @endif
             <li class="nav-item">
                 {!! Form::open(['route' => 'boilerplate.logout', 'method' => 'post', 'id' => 'logout-form']) !!}
                 <button type="submit" class="btn nav-link d-flex align-items-center logout px-2" data-question="{{ __('boilerplate::layout.logoutconfirm') }}" data-toggle="tooltip" title="{{ __('boilerplate::layout.logout') }}">
