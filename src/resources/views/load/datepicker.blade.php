@@ -7,7 +7,7 @@
     <script src="{!! mix('/plugins/datepicker/datepicker.min.js', '/assets/vendor/boilerplate') !!}"></script>
     <script>
         $.fn.datetimepicker.Constructor.Default = $.extend({}, $.fn.datetimepicker.Constructor.Default, {
-            locale: "{{ config('boilerplate.app.locale') }}",
+            locale: "{{ App::getLocale() }}",
             icons: $.extend({}, $.fn.datetimepicker.Constructor.Default.icons, {
                 time: "far fa-clock",
                 date: "far fa-calendar-alt",

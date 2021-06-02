@@ -28,8 +28,8 @@
                 args.content = args.content.replace(/<(p|a|div|span|strike|strong|i|u)[^>]*?>(\s|&nbsp;|<br\/>|\r|\n)*?<\/(p|a|div|span|strike|strong|i|u)>/gi, ''); // Empty tags
             },
             skin : "boilerplate",
-@if(config('boilerplate.app.locale') !== 'en')
-            language: '{{ config('boilerplate.app.locale') }}'
+@if(App::getLocale() !== 'en')
+            language: '{{ App::getLocale() }}'
 @endif
         };
     </script>

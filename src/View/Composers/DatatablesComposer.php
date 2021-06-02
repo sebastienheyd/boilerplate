@@ -2,6 +2,7 @@
 
 namespace Sebastienheyd\Boilerplate\View\Composers;
 
+use Illuminate\Support\Facades\App;
 use Illuminate\View\View;
 
 class DatatablesComposer
@@ -23,7 +24,7 @@ class DatatablesComposer
             'tr' => 'Turkish',
         ];
 
-        $locale = config('boilerplate.app.locale');
+        $locale = App::getLocale();
 
         $view->with('locale', isset($languages[$locale]) ? $languages[$locale] : 'English');
 

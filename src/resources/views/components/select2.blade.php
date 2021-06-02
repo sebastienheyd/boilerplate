@@ -34,7 +34,7 @@
             $('#{{ $id }}').select2({
                 placeholder: '{{ $placeholder ?? '—' }}',
                 allowClear: {{ $allowClear }},
-                language: "{{ config('boilerplate.app.locale') }}",
+                language: "{{ App::getLocale() }}",
                 direction: "@lang('boilerplate::layout.direction')",
                 minimumInputLength: {{ $minimumInputLength ?? 0 }},
                 minimumResultsForSearch: {{ $minimumResultsForSearch ?? 10 }},
