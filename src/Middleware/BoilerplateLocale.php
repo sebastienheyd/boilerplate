@@ -18,16 +18,13 @@ class BoilerplateLocale
      */
     public function handle($request, Closure $next)
     {
-        App::setLocale(config('boilerplate.locale.default', config('app.locale')));
-        Carbon::setLocale(config('boilerplate.locale.default', config('app.locale')));
+        App::setLocale(config('boilerplate.app.locale', config('app.locale')));
+        Carbon::setLocale(config('boilerplate.app.locale', config('app.locale')));
 
-        if (! Session()->has('boilerplate_locale')) {
-            return $next($request);
-        }
-
-        if (in_array(Session()->get('boilerplate_locale'), config('boilerplate.locale.allowed'))) {
-            App::setLocale(Session()->get('boilerplate_locale'));
-            Carbon::setLocale(Session()->get('boilerplate_locale'));
+        $lang = $request->cookie('boilerplate_lang');
+        if (in_array($lang, config('boilerplate.locale.allowed'))) {
+            App::setLocale($lang);
+            Carbon::setLocale($lang);
         }
 
         return $next($request);
