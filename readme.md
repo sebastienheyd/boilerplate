@@ -191,17 +191,17 @@ You can see examples on the default dashboard.
 
 ### Language
 
-By default the language used by boilerplate is the application language declared into `config/app.php` (locale). You can
-define another language only for the back-office by setting `locale` parameter in `config/boilerplate/app.php`.  
+The default language used by boilerplate is the global application language declared as `locale` in `config/app.php`. 
+
+You can define another default language for the admin panel by setting the `default` parameter in `config/boilerplate/locale.php`.
+
+You can activate a language switch by setting to true the `switch` parameter in `config/boilerplate/locale.php`. A language 
+selector will so be shown on the login page and in the top bar. Select allowed switchable languages by setting the `allowed` parameter
+in `config/boilerplate/locale.php`
+
+[See the full documentation](https://sebastienheyd.github.io/boilerplate/language)
+
 Supported language are English, French, Italian, Spanish and Turkish.
-
-When you run `php artisan vendor:publish --tag=boilerplate`, only the language files for form validation are copied 
-for supported languages. Thanks to [Laravel-Lang/lang](https://github.com/Laravel-Lang/lang) package !
-
-You can translate or change translations by running `php artisan vendor:publish --tag=boilerplate-lang`. After running 
-this command, you will find translations folders into `resources/lang/vendor/boilerplate`. Copy one of the language 
-folders in the new language you want to create and all you have to do is to translate. If you want to share the 
-language you have added, don't hesitate to make a pull request.
 
 ### Routes
 

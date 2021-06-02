@@ -29,8 +29,8 @@
             <div class="dropdown-wrapper">
                 <div class="form-group">
                     <select class="form-control form-control-sm" onchange="if (this.value) window.location.href=this.value">
-                        @foreach(config('boilerplate.locale.allowed') as $lang)
-                            <option value="{{ route('boilerplate.lang.switch', $lang) }}" {{ $lang === App::getLocale() ? 'selected' : '' }}>{{ config('boilerplate.locale.languages.'.$lang) }}</option>
+                        @foreach(collect(config('boilerplate.locale.languages'))->map(function($e){return $e['label'];})->toArray() as $lang => $label)
+                            <option value="{{ route('boilerplate.lang.switch', $lang) }}" {{ $lang === App::getLocale() ? 'selected' : '' }}>{{ $label }}</option>
                         @endforeach
                     </select>
                 </div>

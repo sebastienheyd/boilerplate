@@ -15,18 +15,11 @@ class DatatablesComposer
      */
     public function compose(View $view)
     {
-        $languages = [
-            'en' => 'English',
-            'es' => 'Spanish',
-            'fa' => 'Persian',
-            'fr' => 'French',
-            'it' => 'Italian',
-            'tr' => 'Turkish',
-        ];
+        $languages = collect(config('boilerplate.locale.languages'))->map(function($element) {
+            return $element['datatable'];
+        })->toArray();
 
-        $locale = App::getLocale();
-
-        $view->with('locale', isset($languages[$locale]) ? $languages[$locale] : 'English');
+        $view->with('locale', $languages[App::getLocale()] ?? 'English');
 
         $plugins = [
             'select',

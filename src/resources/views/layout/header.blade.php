@@ -27,13 +27,13 @@
             @if(config('boilerplate.locale.switcher', false))
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                    {{ Config::get('boilerplate.locale.languages.'.App::getLocale()) }}
+                    {{ Config::get('boilerplate.locale.languages.'.App::getLocale().'.label') }}
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" style="left: inherit; right: 0px;">
-                    @foreach(config('boilerplate.locale.allowed') as $lang)
+                    @foreach(collect(config('boilerplate.locale.languages'))->map(function($e){return $e['label'];})->toArray() as $lang => $label)
                         @if ($lang !== App::getLocale())
                             <a href="{{ route('boilerplate.lang.switch', $lang) }}" class="dropdown-item">
-                                {{ config('boilerplate.locale.languages.'.$lang) }}
+                                {{ $label }}
                             </a>
                         @endif
                     @endforeach
