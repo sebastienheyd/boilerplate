@@ -5,7 +5,6 @@ namespace Sebastienheyd\Boilerplate\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Session;
 
 class LanguageController extends Controller
 {
