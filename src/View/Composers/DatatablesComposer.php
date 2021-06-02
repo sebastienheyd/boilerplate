@@ -15,7 +15,7 @@ class DatatablesComposer
      */
     public function compose(View $view)
     {
-        $languages = collect(config('boilerplate.locale.languages'))->map(function($element) {
+        $languages = collect(config('boilerplate.locale.languages'))->map(function ($element) {
             return $element['datatable'];
         })->toArray();
 
