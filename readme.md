@@ -38,7 +38,7 @@ The full documentation is readable on [Github pages](https://sebastienheyd.githu
 * Gravatar import by [thomaswelton/laravel-gravatar](https://github.com/thomaswelton/laravel-gravatar)
 * Laravel Blade components for AdminLTE 3
 * Javascript session keep-alive
-* Localized English / French / Italian / Persian / Spanish / Turkish
+* Localized
 
 ## Installation
 
@@ -191,7 +191,7 @@ You can see examples on the default dashboard.
 
 ### Language
 
-The default language used by boilerplate is the global application language declared as `locale` in `config/app.php`. 
+The default language used by boilerplate is the global application language set as `locale` in `config/app.php`. 
 
 You can define another default language for the admin panel by setting the `default` parameter in `config/boilerplate/locale.php`.
 
@@ -200,8 +200,6 @@ selector will so be shown on the login page and in the top bar. Select allowed s
 in `config/boilerplate/locale.php`
 
 [See the full documentation](https://sebastienheyd.github.io/boilerplate/language)
-
-Supported language are English, French, Italian, Spanish and Turkish.
 
 ### Routes
 

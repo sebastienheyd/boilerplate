@@ -25,7 +25,7 @@
                     </p>
                 @endif
             </div>
-            @if(config('boilerplate.locale.switcher', false))
+            @if(config('boilerplate.locale.switch', false))
             <div class="dropdown-wrapper">
                 <div class="form-group">
                     <select class="form-control form-control-sm" onchange="if (this.value) window.location.href=this.value">

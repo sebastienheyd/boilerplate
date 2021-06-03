@@ -24,7 +24,7 @@
                 </a>
             </li>
             @endif
-            @if(config('boilerplate.locale.switcher', false))
+            @if(config('boilerplate.locale.switch', false))
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
                     {{ Config::get('boilerplate.locale.languages.'.App::getLocale().'.label') }}

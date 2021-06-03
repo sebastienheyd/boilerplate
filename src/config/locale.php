@@ -2,7 +2,7 @@
 
 return [
     'default' => config('app.locale'),
-    'switcher' => false,
+    'switch' => false,
     'allowed' => ['en', 'es', 'fa', 'fr', 'it', 'tr'],
     'languages' => [
         'en' => ['label' => 'English', 'datatable' => 'English'],
