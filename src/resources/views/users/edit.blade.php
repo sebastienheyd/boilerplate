@@ -21,16 +21,47 @@
                 </span>
             </div>
         </div>
-
         <div class="row">
             <div class="col-md-6">
+                @component('boilerplate::card', ['color' => 'orange'])
+                    <div class="d-flex flex-column flex-md-row">
+                        <div id="avatar-wrapper">
+                            <img src="{{ $user->avatar_url }}" class="avatar-img" alt="avatar" />
+                        </div>
+                        <div class="mt-3 mt-md-0 pl-md-3">
+                            <span class="info-box-text">
+                                <p class="mb-0"><strong class="h3">{{ $user->name  }}</strong></p>
+                                <p class="">{{ $user->getRolesList() }}</p>
+                            </span>
+                            <span class="info-box-more">
+                                <p>
+                                    <a href="mailto:{{ $user->email }}" class="btn btn-default">
+                                        <span class="far fa-fw fa-envelope"></span> {{ $user->email }}
+                                    </a>
+                                </p>
+                                <p class="mb-0 text-muted">
+                                    {{ __('boilerplate::users.profile.subscribedsince', [
+                                        'date' => $user->created_at->isoFormat(__('boilerplate::date.lFdY')),
+                                        'since' => $user->created_at->diffForHumans()]) }}
+                                </p>
+                            </span>
+                        </div>
+                    </div>
+                @endcomponent
                 @component('boilerplate::card', ['title' => __('boilerplate::users.informations')])
-                    @if(Auth::user()->id !== $user->id)
-                        @component('boilerplate::select2', ['name' => 'active', 'label' => 'boilerplate::users.status', 'minimum-results-for-search' => '-1'])
-                            <option value="1" @if (old('active', $user->active) == '1') selected="selected" @endif>@lang('boilerplate::users.active')</option>
-                            <option value="0" @if (old('active', $user->active) == '0') selected="selected" @endif>@lang('boilerplate::users.inactive')</option>
-                        @endcomponent
-                    @endif
+                    <div class="row">
+                        <div class="col-md-6">
+                        @if(Auth::user()->id !== $user->id)
+                            @component('boilerplate::select2', ['name' => 'active', 'label' => 'boilerplate::users.status', 'minimum-results-for-search' => '-1'])
+                                <option value="1" @if (old('active', $user->active) == '1') selected="selected" @endif>@lang('boilerplate::users.active')</option>
+                                <option value="0" @if (old('active', $user->active) == '0') selected="selected" @endif>@lang('boilerplate::users.inactive')</option>
+                            @endcomponent
+                        @endif
+                        </div>
+                        <div class="col-md-6">
+                            @component('boilerplate::input', ['name' => 'email', 'label' => 'boilerplate::users.email', 'value' => $user->email])@endcomponent
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-6">
                             @component('boilerplate::input', ['name' => 'first_name', 'label' => 'boilerplate::users.firstname', 'value' => $user->first_name])@endcomponent
@@ -39,7 +70,7 @@
                             @component('boilerplate::input', ['name' => 'last_name', 'label' => 'boilerplate::users.lastname', 'value' => $user->last_name])@endcomponent
                         </div>
                     </div>
-                        @component('boilerplate::input', ['name' => 'email', 'label' => 'boilerplate::users.email', 'value' => $user->email])@endcomponent
+
                 @endcomponent
             </div>
             <div class="col-md-6">
