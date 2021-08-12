@@ -116,7 +116,7 @@ class UsersController extends Controller
      *
      * @return string
      */
-    private function button(string $route, string $class, string $icon): string
+    protected function button(string $route, string $class, string $icon): string
     {
         $str = '<a href="%s" class="btn btn-sm btn-%s"><i class="fa fa-fw fa-%s"></i></a>';
 
