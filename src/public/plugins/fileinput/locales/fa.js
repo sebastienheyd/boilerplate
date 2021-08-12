@@ -13,6 +13,8 @@
     "use strict";
 
     $.fn.fileinputLocales['fa'] = {
+        sizeUnits: ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'], 
+        bitRateUnits: ['B/s', 'KB/s', 'MB/s', 'GB/s', 'TB/s', 'PB/s', 'EB/s', 'ZB/s', 'YB/s'],
         fileSingle: 'فایل',
         filePlural: 'فایل‌ها',
         browseLabel: 'مرور &hellip;',
@@ -67,6 +69,7 @@
         msgLoading: 'بارگیری فایل {index} از {files} &hellip;',
         msgProgress: 'بارگیری فایل {index} از {files} - {name} - {percent}% تمام شد.',
         msgSelected: '{n} {files} انتخاب شده',
+        msgProcessing: 'Processing ...',
         msgFoldersNotAllowed: 'فقط فایل‌ها را بکشید و رها کنید! {n} پوشه نادیده گرفته شد.',
         msgImageWidthSmall: 'عرض فایل تصویر "{name}" باید حداقل {size} پیکسل باشد.',
         msgImageHeightSmall: 'ارتفاع فایل تصویر "{name}" باید حداقل {size} پیکسل باشد.',

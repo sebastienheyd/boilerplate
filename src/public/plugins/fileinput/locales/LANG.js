@@ -12,6 +12,8 @@
     "use strict";
 
     $.fn.fileinputLocales['_LANG_'] = {
+        sizeUnits: ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'], 
+        bitRateUnits: ['B/s', 'KB/s', 'MB/s', 'GB/s', 'TB/s', 'PB/s', 'EB/s', 'ZB/s', 'YB/s'],
         fileSingle: 'file',
         filePlural: 'files',
         browseLabel: 'Browse &hellip;',
@@ -66,6 +68,7 @@
         msgLoading: 'Loading file {index} of {files} &hellip;',
         msgProgress: 'Loading file {index} of {files} - {name} - {percent}% completed.',
         msgSelected: '{n} {files} selected',
+        msgProcessing: 'Processing ...',
         msgFoldersNotAllowed: 'Drag & drop files only! Skipped {n} dropped folder(s).',
         msgImageWidthSmall: 'Width of image file "{name}" must be at least {size} px.',
         msgImageHeightSmall: 'Height of image file "{name}" must be at least {size} px.',

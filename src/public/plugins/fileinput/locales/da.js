@@ -12,6 +12,8 @@
     "use strict";
 
     $.fn.fileinputLocales['da'] = {
+        sizeUnits: ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'], 
+        bitRateUnits: ['B/s', 'KB/s', 'MB/s', 'GB/s', 'TB/s', 'PB/s', 'EB/s', 'ZB/s', 'YB/s'],
         fileSingle: 'fil',
         filePlural: 'filer',
         browseLabel: 'Browse &hellip;',
@@ -66,6 +68,7 @@
         msgLoading: 'Henter fil {index} af {files} &hellip;',
         msgProgress: 'Henter fil {index} af {files} - {name} - {percent}% færdiggjort.',
         msgSelected: '{n} {files} valgt',
+        msgProcessing: 'Processing ...',
         msgFoldersNotAllowed: 'Drag & drop kun filer! {n} mappe(r) sprunget over.',
         msgImageWidthSmall: 'Bredden af billedet "{name}" skal være på mindst {size} px.',
         msgImageHeightSmall: 'Højden af billedet "{name}" skal være på mindst {size} px.',

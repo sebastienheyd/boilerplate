@@ -13,6 +13,8 @@
     "use strict";
 
     $.fn.fileinputLocales['zh-TW'] = {
+        sizeUnits: ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'], 
+        bitRateUnits: ['B/s', 'KB/s', 'MB/s', 'GB/s', 'TB/s', 'PB/s', 'EB/s', 'ZB/s', 'YB/s'],
         fileSingle: '單一檔案',
         filePlural: '複選檔案',
         browseLabel: '瀏覽 &hellip;',
@@ -68,6 +70,7 @@
         msgLoading: '載入第 {index} 個檔案，共 {files} &hellip;',
         msgProgress: '載入第 {index} 個檔案，共 {files} - {name} - {percent}% 成功.',
         msgSelected: '{n} {files} 選取',
+        msgProcessing: 'Processing ...',
         msgFoldersNotAllowed: '只支援單檔拖曳! 無法使用 {n} 拖拽的資料夹.',
         msgImageWidthSmall: '圖檔寬度"{name}"必須至少為{size}像素(px).',
         msgImageHeightSmall: '圖檔高度"{name}"必須至少為{size}像素(px).',

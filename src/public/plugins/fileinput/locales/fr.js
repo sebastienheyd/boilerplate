@@ -12,6 +12,8 @@
     "use strict";
 
     $.fn.fileinputLocales['fr'] = {
+        sizeUnits: ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'], 
+        bitRateUnits: ['B/s', 'KB/s', 'MB/s', 'GB/s', 'TB/s', 'PB/s', 'EB/s', 'ZB/s', 'YB/s'],
         fileSingle: 'fichier',
         filePlural: 'fichiers',
         browseLabel: 'Parcourir &hellip;',
@@ -66,6 +68,7 @@
         msgLoading: 'Transmission du fichier {index} sur {files} &hellip;',
         msgProgress: 'Transmission du fichier {index} sur {files} - {name} - {percent}%.',
         msgSelected: '{n} {files} sélectionné(s)',
+        msgProcessing: 'Processing ...',
         msgFoldersNotAllowed: 'Glissez et déposez uniquement des fichiers ! {n} répertoire(s) exclu(s).',
         msgImageWidthSmall: 'La largeur de l\'image "{name}" doit être d\'au moins {size} px.',
         msgImageHeightSmall: 'La hauteur de l\'image "{name}" doit être d\'au moins {size} px.',

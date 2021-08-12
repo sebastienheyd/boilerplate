@@ -13,6 +13,8 @@
     "use strict";
 
     $.fn.fileinputLocales['he'] = {
+        sizeUnits: ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'], 
+        bitRateUnits: ['B/s', 'KB/s', 'MB/s', 'GB/s', 'TB/s', 'PB/s', 'EB/s', 'ZB/s', 'YB/s'],
         fileSingle: 'קובץ',
         filePlural: 'קבצים',
         browseLabel: 'העלאה &hellip;',
@@ -63,6 +65,7 @@
         msgLoading: 'טוען קובץ {index} של {files} &hellip;',
         msgProgress: 'טוען קובץ {index} של {files} - {name} - {percent}% הושלמה.',
         msgSelected: '{n} {files} נבחרו',
+        msgProcessing: 'Processing ...',
         msgFoldersNotAllowed: 'גרירת קבצים ושחרורם בלבד! דילוג {n} גרירת תיקיה(s).',
         msgImageWidthSmall: 'רוחב קובץ התמונה "{name}" חייב להיות לפחות {size} px.',
         msgImageHeightSmall: 'גובה קובץ התמונה "{name}" חייב להיות לפחות {size} px.',

@@ -12,6 +12,8 @@
     "use strict";
 
     $.fn.fileinputLocales['hu'] = {
+        sizeUnits: ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'], 
+        bitRateUnits: ['B/s', 'KB/s', 'MB/s', 'GB/s', 'TB/s', 'PB/s', 'EB/s', 'ZB/s', 'YB/s'],
         fileSingle: 'fájl',
         filePlural: 'fájlok',
         browseLabel: 'Tallózás&hellip;',
@@ -66,6 +68,7 @@
         msgLoading: '{index}. fájl töltése&hellip;',
         msgProgress: '{index}. fájl töltése&hellip; - {name} - {percent}% kész.',
         msgSelected: '{n} fájl kiválasztva',
+        msgProcessing: 'Processing ...',
         msgFoldersNotAllowed: 'Csak fájlokat húzzon ide! Kihagyva {n} könyvtár.',
         msgImageWidthSmall: '"{name}" kép szélességének legalább {size} pixelnek kell lennie.',
         msgImageHeightSmall: '"{name}" kép magasságának legalább {size} pixelnek kell lennie.',

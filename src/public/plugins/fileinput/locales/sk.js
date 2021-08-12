@@ -12,6 +12,8 @@
     "use strict";
 
     $.fn.fileinputLocales['sk'] = {
+        sizeUnits: ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'], 
+        bitRateUnits: ['B/s', 'KB/s', 'MB/s', 'GB/s', 'TB/s', 'PB/s', 'EB/s', 'ZB/s', 'YB/s'],
         fileSingle: 'súbor',
         filePlural: 'súbory',
         browseLabel: 'Vybrať &hellip;',
@@ -66,6 +68,7 @@
         msgLoading: 'Nahrávanie súboru {index} z {files} &hellip;',
         msgProgress: 'Nahrávanie súboru {index} z {files} - {name} - {percent}% dokončené.',
         msgSelected: '{n} {files} vybraté',
+        msgProcessing: 'Spracovávam ...',
         msgFoldersNotAllowed: 'Tiahni a pusť iba súbory! Vynechané {n} pustené prečinok(y).',
         msgImageWidthSmall: 'Šírka obrázku "{name}", musí byť minimálne {size} px.',
         msgImageHeightSmall: 'Výška obrázku "{name}", musí byť minimálne {size} px.',

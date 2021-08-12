@@ -13,6 +13,8 @@
     "use strict";
 
     $.fn.fileinputLocales['lv'] = {
+        sizeUnits: ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'], 
+        bitRateUnits: ['B/s', 'KB/s', 'MB/s', 'GB/s', 'TB/s', 'PB/s', 'EB/s', 'ZB/s', 'YB/s'],
         fileSingle: 'failu',
         filePlural: 'faili',
         browseLabel: 'Izvēlaties &hellip;',
@@ -60,6 +62,7 @@
         msgLoading: 'Lejupielādē failu {index} no {files} &hellip;',
         msgProgress: 'Notiek faila {index} ielāde no {files} - {name} - pabeigts {percent}%.',
         msgSelected: 'Atlasīti faili: {n}',
+        msgProcessing: 'Processing ...',
         msgFoldersNotAllowed: 'Atļauts ievilkt un noņemt vienīgi failus! Trūkst {n} mapes.',
         msgImageWidthSmall: 'Attēla platumam {name} jābūt vismaz {size} px.',
         msgImageHeightSmall: 'Attēla augstumam {name} jābūt vismaz {size} px.',

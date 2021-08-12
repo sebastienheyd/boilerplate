@@ -13,6 +13,8 @@
     "use strict";
 
     $.fn.fileinputLocales['ka'] = {
+        sizeUnits: ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'], 
+        bitRateUnits: ['B/s', 'KB/s', 'MB/s', 'GB/s', 'TB/s', 'PB/s', 'EB/s', 'ZB/s', 'YB/s'],
         fileSingle: 'ფაილი',
         filePlural: 'ფაილები',
         browseLabel: 'არჩევა &hellip;',
@@ -67,6 +69,7 @@
         msgLoading: 'ატვირთვა {index} / {files} &hellip;',
         msgProgress: 'ფაილის ატვირთვა დასრულებულია {index} / {files} - {name} - {percent}%.',
         msgSelected: 'არჩეულია {n} {file}',
+        msgProcessing: 'Processing ...',
         msgFoldersNotAllowed: 'დაშვებულია მხოლოდ ფაილების გადმოთრევა! გამოტოვებულია {n} გადმოთრეული ფოლდერი.',
         msgImageWidthSmall: 'სურათის "{name}" სიგანე უნდა იყოს არანაკლებ {size} px.',
         msgImageHeightSmall: 'სურათის "{name}" სიმაღლე უნდა იყოს არანაკლებ {size} px.',
