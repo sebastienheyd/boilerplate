@@ -16,7 +16,7 @@ class LogViewerController extends ArcanedevController
     {
         $this->middleware('ability:admin,logs');
 
-        if (!config('boilerplate.app.logs')) {
+        if (! config('boilerplate.app.logs')) {
             abort('404');
         }
 
