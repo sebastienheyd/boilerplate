@@ -15,6 +15,11 @@ class LogViewerController extends ArcanedevController
     public function __construct(LogViewerContract $logViewer)
     {
         $this->middleware('ability:admin,logs');
+
+        if (!config('boilerplate.app.logs')) {
+            abort('404');
+        }
+
         parent::__construct($logViewer);
     }
 
