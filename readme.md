@@ -38,7 +38,7 @@ The full documentation is readable on [Github pages](https://sebastienheyd.githu
 * Gravatar import by [thomaswelton/laravel-gravatar](https://github.com/thomaswelton/laravel-gravatar)
 * Laravel Blade components for AdminLTE 3
 * Javascript session keep-alive
-* Localized
+* [Localized](https://github.com/sebastienheyd/boilerplate/tree/master/src/resources/lang)
 
 ## Installation
 
