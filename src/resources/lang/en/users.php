@@ -36,7 +36,7 @@ return [
         'deletesuccess' => 'The user has been correctly deleted',
     ],
     'profile' => [
-        'title'            => 'Your profile',
+        'title'            => 'My profile',
         'subscribedsince'  => 'Member since :date ( :since )',
         'avatar'           => 'Profile image',
         'delavatar'        => 'Remove the profile image',
