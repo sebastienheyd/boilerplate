@@ -67,7 +67,7 @@ class UsersController extends Controller
         return Datatables::eloquent($users)
             ->rawColumns(['actions', 'status', 'avatar', 'roles'])
             ->editColumn('avatar', function ($user) {
-                return  '<img src="'.$user->avatar_url.'" class="img-circle bg-gray" width="32" />';
+                return  '<img src="'.$user->avatar_url.'" class="img-circle" width="32" height="32" />';
             })->editColumn('status', function ($user) {
                 if ($user->active == 1) {
                     return '<span class="badge badge-pill badge-success">'.__('boilerplate::users.active').'</span>';

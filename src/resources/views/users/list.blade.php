@@ -154,3 +154,7 @@
         });
     </script>
 @endpush
+
+@push('css')
+    <style>.img-circle { border:1px solid #CCC }</style>
+@endpush
