@@ -14,17 +14,6 @@ use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
     use AuthenticatesUsers;
 
     /**
@@ -139,5 +128,25 @@ class LoginController extends Controller
         return $request->wantsJson()
             ? new JsonResponse([], 204)
             : redirect('/'.config('boilerplate.app.prefix', ''));
+    }
+
+    /**
+     * Get the maximum number of attempts to allow.
+     *
+     * @return \Illuminate\Config\Repository|\Illuminate\Contracts\Foundation\Application|mixed
+     */
+    public function maxAttempts()
+    {
+        return config('boilerplate.auth.throttle.maxAttempts', 3);
+    }
+
+    /**
+     * Get the number of minutes to throttle for.
+     *
+     * @return \Illuminate\Config\Repository|\Illuminate\Contracts\Foundation\Application|mixed
+     */
+    public function decayMinutes()
+    {
+        return config('boilerplate.auth.throttle.decayMinutes', 1);
     }
 }
