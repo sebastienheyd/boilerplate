@@ -35,7 +35,7 @@ class InputComposer extends ComponentComposer
             if (! isset($data[$prop])) {
                 $view->with($prop, false);
             } elseif (in_array($prop, ['prependText', 'appendText']) && preg_match('#^fa[srb] fa-.+$#', $data[$prop])) {
-                $view->with($prop, '<span class="'.$data[$prop].'" />');
+                $view->with($prop, '<span class="'.$data[$prop].'"></span>');
             }
         }
 

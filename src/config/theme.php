@@ -8,4 +8,7 @@ $theme['navbar'] += [
     'right' => [],
 ];
 
+// Url to favicon
+$theme['favicon'] = null;
+
 return $theme;
