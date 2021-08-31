@@ -127,7 +127,7 @@ class LoginController extends Controller
 
         return $request->wantsJson()
             ? new JsonResponse([], 204)
-            : redirect('/'.config('boilerplate.app.prefix', ''));
+            : redirect(route('boilerplate.login'));
     }
 
     /**
