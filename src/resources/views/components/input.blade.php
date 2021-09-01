@@ -4,7 +4,7 @@
     The name attribute has not been set
 </code>
 @else
-<div class="form-group">
+<div class="form-group{{ isset($groupClass) ? ' '.$groupClass : '' }}"{{ isset($groupId) ? ' id="'.$groupId.'"' : '' }}>
 @isset($label)
     {{ Form::label($name, __($label)) }}
 @endisset
