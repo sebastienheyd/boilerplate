@@ -51,11 +51,11 @@
         <!-- Date -->
         <div class="form-group">
             <label>Date</label>
-            <div class="input-group date">
+            <div class="input-group">
                 <div class="input-group-append">
                     <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
                 </div>
-                <input type="text" class="form-control datepicker" id="datepicker" data-toggle="datetimepicker" data-target="#datepicker">
+                <input type="text" class="form-control datepicker datetimepicker-input" id="datepicker" data-toggle="datetimepicker" data-target="#datepicker">
             </div>
         </div>
 
@@ -66,7 +66,7 @@
                 <div class="input-group-append">
                     <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
                 </div>
-                <input type="text" class="form-control pull-right datetimepicker" id="datetimepicker" data-toggle="datetimepicker" data-target="#datetimepicker">
+                <input type="text" class="form-control pull-right datetimepicker datetimepicker-input" id="datetimepicker" data-toggle="datetimepicker" data-target="#datetimepicker">
             </div>
         </div>
 

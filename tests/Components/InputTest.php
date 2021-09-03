@@ -176,11 +176,11 @@ HTML;
 <div class="form-group">
     <div class="input-group">
         <div class="input-group-prepend">
-            <span class="input-group-text"><span class="fas fa-envelope" /></span>
+            <span class="input-group-text"><span class="fas fa-envelope"></span></span>
         </div>
     <input class="form-control" name="test" type="text" value="">
         <div class="input-group-append">
-            <span class="input-group-text"><span class="fas fa-envelope" /></span>
+            <span class="input-group-text"><span class="fas fa-envelope"></span></span>
         </div>
     </div>
 </div>

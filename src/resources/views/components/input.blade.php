@@ -6,7 +6,7 @@
 @else
 <div class="form-group{{ isset($groupClass) ? ' '.$groupClass : '' }}"{{ isset($groupId) ? ' id="'.$groupId.'"' : '' }}>
 @isset($label)
-    {{ Form::label($name, __($label)) }}
+    {!! Form::label($name, __($label)) !!}
 @endisset
 @if($prepend || $prependText || $append || $appendText)
     <div class="input-group">
@@ -21,13 +21,13 @@
         </div>
 @endif
 @if($type === 'password')
-    {{ Form::password($name, array_merge(['class' => 'form-control'.$errors->first($name,' is-invalid').(isset($class) ? ' '.$class : '')], $attributes)) }}
+    {!! Form::password($name, array_merge(['class' => 'form-control'.$errors->first($name,' is-invalid').(isset($class) ? ' '.$class : '')], $attributes)) !!}
 @elseif($type === 'file')
-    {{ Form::file($name, array_merge(['class' => 'form-control-file'.$errors->first($name,' is-invalid').(isset($class) ? ' '.$class : '')], $attributes)) }}
+    {!! Form::file($name, array_merge(['class' => 'form-control-file'.$errors->first($name,' is-invalid').(isset($class) ? ' '.$class : '')], $attributes)) !!}
 @elseif($type === 'select')
-    {{ Form::select($name, $options ?? [], old($name, $value ?? ''), array_merge(['class' => 'form-control'.$errors->first($name,' is-invalid').(isset($class) ? ' '.$class : '')], $attributes)) }}
+    {!! Form::select($name, $options ?? [], old($name, $value ?? ''), array_merge(['class' => 'form-control'.$errors->first($name,' is-invalid').(isset($class) ? ' '.$class : '')], $attributes)) !!}
 @else
-    {{ Form::{$type ?? 'text'}($name, old($name, $value ?? ''), array_merge(['class' => 'form-control'.$errors->first($name,' is-invalid').(isset($class) ? ' '.$class : '')], $attributes)) }}
+    {!! Form::{$type ?? 'text'}($name, old($name, $value ?? ''), array_merge(['class' => 'form-control'.$errors->first($name,' is-invalid').(isset($class) ? ' '.$class : '')], $attributes)) !!}
 @endif
 @if($append || $appendText)
         <div class="input-group-append">

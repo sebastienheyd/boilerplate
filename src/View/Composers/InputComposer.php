@@ -7,18 +7,24 @@ use Illuminate\View\View;
 class InputComposer extends ComponentComposer
 {
     protected $props = [
-        'type',
-        'name',
-        'label',
-        'value',
-        'errors',
+        'append',
+        'appendText',
+        'append-text',
         'class',
+        'errors',
+        'groupClass',
+        'group-class',
+        'groupId',
+        'group-id',
         'help',
+        'label',
+        'name',
         'options',
         'prepend',
         'prepend-text',
-        'append',
-        'append-text',
+        'prependText',
+        'type',
+        'value',
     ];
 
     public function compose(View $view)

@@ -9,10 +9,15 @@
         $.fn.datetimepicker.Constructor.Default = $.extend({}, $.fn.datetimepicker.Constructor.Default, {
             locale: "{{ App::getLocale() }}",
             icons: $.extend({}, $.fn.datetimepicker.Constructor.Default.icons, {
-                time: "far fa-clock",
-                date: "far fa-calendar-alt",
-                up: "fa fa-chevron-up",
-                down: "fa fa-chevron-down"
+                time: 'far fa-clock',
+                date: 'far fa-calendar',
+                up: 'fas fa-arrow-up',
+                down: 'fas fa-arrow-down',
+                previous: 'fas fa-chevron-left',
+                next: 'fas fa-chevron-right',
+                today: 'far fa-calendar-check',
+                clear: 'fas fa-trash',
+                close: 'fas fa-times'
             })
         });
         $.fn.daterangepicker.defaultOptions = {

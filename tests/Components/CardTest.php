@@ -7,7 +7,7 @@ class CardTest extends TestComponent
     public function testCardComponent()
     {
         $expected = <<<'HTML'
-<div class="card card-outline card-info bg-white">
+<div class="card card-outline card-info">
     <div class="card-body">test</div>
 </div>
 HTML;
@@ -24,7 +24,7 @@ HTML;
     public function testCardComponentColor()
     {
         $expected = <<<'HTML'
-<div class="card card-outline card-primary bg-white">
+<div class="card card-outline card-primary">
     <div class="card-body">test</div>
 </div>
 HTML;
@@ -58,7 +58,7 @@ HTML;
     public function testCardComponentWithoutOutline()
     {
         $expected = <<<'HTML'
-<div class="card card-info bg-white">
+<div class="card card-info">
     <div class="card-body">test</div>
 </div>
 HTML;
@@ -75,7 +75,7 @@ HTML;
     public function testCardComponentWithTitle()
     {
         $expected = <<<'HTML'
-<div class="card card-outline card-info bg-white">
+<div class="card card-outline card-info">
     <div class="card-header border-bottom-0">
         <h3 class="card-title">Dashboard</h3>
     </div>
@@ -95,7 +95,7 @@ HTML;
     public function testCardComponentWithTitleAndTools()
     {
         $expected = <<<'HTML'
-<div class="card card-outline card-info bg-white">
+<div class="card card-outline card-info">
     <div class="card-header border-bottom-0">
         <h3 class="card-title">title</h3>
         <div class="card-tools">
@@ -118,7 +118,7 @@ HTML;
     public function testCardComponentWithAllTools()
     {
         $expected = <<<'HTML'
-<div class="card card-outline card-info bg-white collapsed-card">
+<div class="card card-outline card-info collapsed-card">
     <div class="card-header border-bottom-0">
         <h3 class="card-title">title</h3>
         <div class="card-tools">
@@ -143,7 +143,7 @@ HTML;
     public function testCardComponentWithHeader()
     {
         $expected = <<<'HTML'
-<div class="card card-outline card-info bg-white">
+<div class="card card-outline card-info">
     <div class="card-header border-bottom-0">
         <a href="#">link</a>
     </div>
@@ -163,7 +163,7 @@ HTML;
     public function testCardComponentWithFooter()
     {
         $expected = <<<'HTML'
-<div class="card card-outline card-info bg-white">
+<div class="card card-outline card-info">
     <div class="card-body">test</div>
     <div class="card-footer"><a href="#">link</a></div>
 </div>
@@ -181,7 +181,7 @@ HTML;
     public function testCardComponentWithTabs()
     {
         $expected = <<<'HTML'
-<div class="card card-outline card-outline-tabs card-info bg-white">
+<div class="card card-outline card-outline-tabs card-info">
     <div class="card-body">test</div>
 </div>
 HTML;
@@ -198,7 +198,7 @@ HTML;
     public function testCardComponentWithAttributes()
     {
         $expected = <<<'HTML'
-<div class="card card-info bg-white extra-class" id="test" data-test="ok">
+<div class="card card-info extra-class" id="test" data-test="ok">
     <div class="card-body">test</div>
 </div>
 HTML;

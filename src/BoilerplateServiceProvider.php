@@ -127,7 +127,19 @@ class BoilerplateServiceProvider extends ServiceProvider
         View::composer('boilerplate::load.datatables', DatatablesComposer::class);
 
         // Components
-        $components = ['icheck', 'input', 'card', 'form', 'infobox', 'smallbox', 'toggle', 'tinymce', 'select2'];
+        $components = [
+            'card',
+            'datepicker',
+            'form',
+            'icheck',
+            'infobox',
+            'input',
+            'select2',
+            'smallbox',
+            'tinymce',
+            'toggle',
+        ];
+
         foreach ($components as $component) {
             View::composer([
                 "boilerplate::$component",
