@@ -64,6 +64,9 @@ mix.copy([
 // ============== Select2 ==============
 mix.copy('node_modules/admin-lte/plugins/select2/js/select2.full.min.js', 'public/plugins/select2/select2.full.min.js');
 mix.copy('node_modules/admin-lte/plugins/select2/js/i18n/*', 'public/plugins/select2/i18n');
+mix.copy('node_modules/admin-lte/plugins/select2/css/select2.min.css', 'public/plugins/select2/select2.min.css');
+mix.copy('node_modules/admin-lte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css', 'public/plugins/select2/select2-bootstrap4.min.css');
+//mix.sass('resources/assets/scss/select2.scss', 'public/plugins/select2/select2.min.css');
 
 // ============== DatePicker ==============
 mix.sass('resources/assets/scss/daterangepicker.scss', 'public/plugins/datepicker/datepicker.min.css');

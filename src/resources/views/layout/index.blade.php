@@ -7,9 +7,10 @@
     <meta name="robots" content="noindex, nofollow">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $title }} | {{ config('app.name') }}</title>
+    <link rel="shortcut icon" href="{{ config('boilerplate.theme.favicon') ?? mix('favicon.svg', '/assets/vendor/boilerplate') }}">
+@stack('plugin-css')
     <link rel="stylesheet" href="{{ mix('/plugins/fontawesome/fontawesome.min.css', '/assets/vendor/boilerplate') }}">
     <link rel="stylesheet" href="{{ mix('/adminlte.min.css', '/assets/vendor/boilerplate') }}">
-    <link rel="shortcut icon" href="{{ config('boilerplate.theme.favicon') ?? mix('favicon.svg', '/assets/vendor/boilerplate') }}">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
 @stack('css')
@@ -49,18 +50,14 @@
             lifetime:  {{ config('session.lifetime') * 60 }},
             id: "{{ session()->getId() }}"
         }
-    </script>
 @if(Session::has('growl'))
-    <script>
-        $(function() {
-            @if(is_array(Session::get('growl')))
-                growl("{!! Session::get('growl')[0] !!}", "{{ Session::get('growl')[1] }}");
-            @else
-                growl("{{Session::get('growl')}}");
-            @endif
-        });
-    </script>
+@if(is_array(Session::get('growl')))
+        growl("{!! Session::get('growl')[0] !!}", "{{ Session::get('growl')[1] }}");
+@else
+        growl("{{Session::get('growl')}}");
 @endif
+@endif
+    </script>
 @stack('js')
 </body>
 </html>

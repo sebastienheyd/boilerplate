@@ -1,5 +1,5 @@
 @once
-@push('css')
+@push('plugin-css')
     <link rel="stylesheet" href="{!! mix('/plugins/fullcalendar/main.min.css', '/assets/vendor/boilerplate') !!}">
 @endpush
 @push('js')

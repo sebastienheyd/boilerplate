@@ -1,5 +1,5 @@
 @once
-@push('css')
+@push('plugin-css')
     <link rel="stylesheet" href="{{ mix('/plugins/codemirror/codemirror.min.css', '/assets/vendor/boilerplate') }}">
 @endpush
 @php

@@ -223,13 +223,13 @@ every time the package is updated, you may use the ```--force``` flag :
 php artisan vendor:publish --tag=boilerplate-public --force
 ```
 
-To auto update assets each time package is updated, you can add this command to `post-autoload-dump` into the
+To auto update assets each time package is updated, you can add this command to `post-update-cmd` into the
 file `composer.json` at the root of your project.
 
 ```json
 {
     "scripts": {
-        "post-autoload-dump": [
+        "post-update-cmd": [
             "@php artisan vendor:publish --tag=boilerplate-public --force -q"
         ]
     }

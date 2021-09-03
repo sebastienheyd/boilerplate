@@ -20,6 +20,7 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+        "@ttskch/select2-bootstrap4-theme": "^1.5.2",
         "admin-lte": "^3.1.0",
         "bootbox": "^5.3.4",
         "bootstrap": "^4.6.0",

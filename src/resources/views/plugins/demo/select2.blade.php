@@ -23,7 +23,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label>Minimal</label>
-                <select class="form-control select2" style="width: 100%;">
+                <select class="form-control select2"
                     <option selected="selected">Alabama</option>
                     <option>Alaska</option>
                     <option>California</option>
@@ -35,7 +35,7 @@
             </div>
             <div class="form-group">
                 <label>Disabled</label>
-                <select class="form-control select2" disabled="disabled" style="width: 100%;">
+                <select class="form-control select2" disabled="disabled">
                     <option selected="selected">Alabama</option>
                     <option>Alaska</option>
                     <option>California</option>
@@ -49,7 +49,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label>Multiple</label>
-                <select class="form-control select2" multiple="multiple" data-placeholder="Multiple select" style="width: 100%;">
+                <select class="form-control select2" multiple="multiple" data-placeholder="Multiple select">
                     <option>Alabama</option>
                     <option>Alaska</option>
                     <option>California</option>
@@ -61,7 +61,7 @@
             </div>
             <div class="form-group">
                 <label>Disabled Result</label>
-                <select class="form-control select2" style="width: 100%;">
+                <select class="form-control select2">
                     <option selected="selected">Alabama</option>
                     <option>Alaska</option>
                     <option disabled="disabled">California (disabled)</option>
