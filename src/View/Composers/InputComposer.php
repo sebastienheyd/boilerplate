@@ -2,6 +2,7 @@
 
 namespace Sebastienheyd\Boilerplate\View\Composers;
 
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class InputComposer extends ComponentComposer
@@ -37,11 +38,12 @@ class InputComposer extends ComponentComposer
             $view->with('type', 'text');
         }
 
-        foreach (['append', 'prepend', 'prependText', 'appendText'] as $prop) {
-            if (! isset($data[$prop])) {
-                $view->with($prop, false);
-            } elseif (in_array($prop, ['prependText', 'appendText']) && preg_match('#^fa[srb] fa-.+$#', $data[$prop])) {
-                $view->with($prop, '<span class="'.$data[$prop].'"></span>');
+        foreach (['append', 'prepend', 'prependText', 'appendText', 'append-text', 'prepend-text'] as $p) {
+            $p = Str::camel($p);
+            if (! isset($data[$p])) {
+                $view->with($p, false);
+            } elseif (in_array($p, ['prependText', 'appendText']) && preg_match('#^fa[srb]? fa-.+$#', $data[$p])) {
+                $view->with($p, '<span class="'.$data[$p].'"></span>');
             }
         }
 
