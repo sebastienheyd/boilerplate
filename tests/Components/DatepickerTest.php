@@ -24,7 +24,7 @@ HTML;
 
     public function testDatepickerName()
     {
-        $expected = <<<HTML
+        $expected = <<<'HTML'
 <div class="form-group">
     <div class="input-group" id="test" data-target-input="nearest">
         <input data-toggle="datetimepicker" data-target="#test" class="form-control datetimepicker-input" name="test_local" type="text">
@@ -43,7 +43,7 @@ HTML;
 
     public function testDatepickerLabel()
     {
-        $expected = <<<HTML
+        $expected = <<<'HTML'
 <div class="form-group">
     <label for="test_localized">Test</label>
     <div class="input-group" id="test" data-target-input="nearest">
@@ -63,7 +63,7 @@ HTML;
 
     public function testDatepickerClass()
     {
-        $expected = <<<HTML
+        $expected = <<<'HTML'
 <div class="form-group">
     <div class="input-group" id="test" data-target-input="nearest">
         <input data-toggle="datetimepicker" data-target="#test" class="form-control datetimepicker-input test-class" name="test_local" type="text">
@@ -82,7 +82,7 @@ HTML;
 
     public function testDatepickerHelp()
     {
-        $expected = <<<HTML
+        $expected = <<<'HTML'
 <div class="form-group">
     <div class="input-group" id="test" data-target-input="nearest">
         <input data-toggle="datetimepicker" data-target="#test" class="form-control datetimepicker-input" name="test_local" type="text">
@@ -102,7 +102,7 @@ HTML;
 
     public function testDatepickerError()
     {
-        $expected = <<<HTML
+        $expected = <<<'HTML'
 <div class="form-group">
     <div class="input-group" id="test" data-target-input="nearest">
         <input data-toggle="datetimepicker" data-target="#test" class="form-control datetimepicker-input is-invalid" name="fielderror_local" type="text">
@@ -122,7 +122,7 @@ HTML;
 
     public function testDatepickerPrependAppendText()
     {
-        $expected = <<<HTML
+        $expected = <<<'HTML'
 <div class="form-group">
     <div class="input-group" id="test" data-target-input="nearest">
         <div class="input-group-prepend" data-toggle="datetimepicker" data-target="#test">
@@ -147,7 +147,7 @@ HTML;
 
     public function testDatepickerPrependAppendIcon()
     {
-        $expected = <<<HTML
+        $expected = <<<'HTML'
 <div class="form-group">
     <div class="input-group" id="test" data-target-input="nearest">
         <div class="input-group-prepend" data-toggle="datetimepicker" data-target="#test">
@@ -172,7 +172,7 @@ HTML;
 
     public function testDatepickerPrependAppend()
     {
-        $expected = <<<HTML
+        $expected = <<<'HTML'
 <div class="form-group">
     <div class="input-group" id="test" data-target-input="nearest">
         <div class="input-group-prepend" data-toggle="datetimepicker" data-target="#test">
@@ -197,7 +197,7 @@ HTML;
 
     public function testDatepickerJs()
     {
-        $expected = <<<HTML
+        $expected = <<<'HTML'
 <div class="form-group">
     <div class="input-group" id="test" data-target-input="nearest">
         <input data-toggle="datetimepicker" data-target="#test" class="form-control datetimepicker-input" name="test_local" type="text">
