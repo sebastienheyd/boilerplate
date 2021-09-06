@@ -66,6 +66,11 @@ class DatepickerComposer extends ComponentComposer
                 $rawValue = $data['value'];
                 $data['value'] = Carbon::createFromFormat('Y-m-d', $data['value'])->isoFormat($data['format']);
             }
+
+            if ($data['value'] instanceof Carbon) {
+                $rawValue = $data['value']->format('Y-m-d H:i:s');
+                $data['value'] = $data['value']->isoFormat($data['format']);
+            }
         }
 
         $view->with('value', $data['value'] ?? null);
