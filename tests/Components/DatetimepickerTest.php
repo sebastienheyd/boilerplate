@@ -8,17 +8,17 @@ class DatepickerTest extends TestComponent
     {
         $expected = <<<'HTML'
 <code>
-    &lt;x-boilerplate::datepicker>
+    &lt;x-boilerplate::datetimepicker>
     The name attribute has not been set
 </code>
 HTML;
 
         if ($this->isLaravelEqualOrGreaterThan7) {
-            $view = $this->blade('<x-boilerplate::datepicker />');
+            $view = $this->blade('<x-boilerplate::datetimepicker />');
             $this->assertEquals($expected, $view);
         }
 
-        $view = $this->blade("@component('boilerplate::datepicker') @endcomponent");
+        $view = $this->blade("@component('boilerplate::datetimepicker') @endcomponent");
         $this->assertEquals($expected, $view);
     }
 
@@ -33,11 +33,11 @@ HTML;
 </div>
 HTML;
         if ($this->isLaravelEqualOrGreaterThan7) {
-            $view = $this->blade('<x-boilerplate::datepicker id="test" name="test" />');
+            $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" />');
             $this->assertEquals($expected, $view);
         }
 
-        $view = $this->blade("@component('boilerplate::datepicker', ['id' => 'test', 'name' => 'test']) @endcomponent");
+        $view = $this->blade("@component('boilerplate::datetimepicker', ['id' => 'test', 'name' => 'test']) @endcomponent");
         $this->assertEquals($expected, $view);
     }
 
@@ -53,11 +53,11 @@ HTML;
 </div>
 HTML;
         if ($this->isLaravelEqualOrGreaterThan7) {
-            $view = $this->blade('<x-boilerplate::datepicker id="test" name="test" label="Test" />');
+            $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" label="Test" />');
             $this->assertEquals($expected, $view);
         }
 
-        $view = $this->blade("@component('boilerplate::datepicker', ['id' => 'test', 'name' => 'test', 'label' => 'Test']) @endcomponent");
+        $view = $this->blade("@component('boilerplate::datetimepicker', ['id' => 'test', 'name' => 'test', 'label' => 'Test']) @endcomponent");
         $this->assertEquals($expected, $view);
     }
 
@@ -72,11 +72,11 @@ HTML;
 </div>
 HTML;
         if ($this->isLaravelEqualOrGreaterThan7) {
-            $view = $this->blade('<x-boilerplate::datepicker id="test" name="test" class="test-class" />');
+            $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" class="test-class" />');
             $this->assertEquals($expected, $view);
         }
 
-        $view = $this->blade("@component('boilerplate::datepicker', ['id' => 'test', 'name' => 'test', 'class' => 'test-class']) @endcomponent");
+        $view = $this->blade("@component('boilerplate::datetimepicker', ['id' => 'test', 'name' => 'test', 'class' => 'test-class']) @endcomponent");
         $this->assertEquals($expected, $view);
     }
 
@@ -92,11 +92,11 @@ HTML;
 </div>
 HTML;
         if ($this->isLaravelEqualOrGreaterThan7) {
-            $view = $this->blade('<x-boilerplate::datepicker id="test" name="test" help="boilerplate::users.create.help" />');
+            $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" help="boilerplate::users.create.help" />');
             $this->assertEquals($expected, $view);
         }
 
-        $view = $this->blade("@component('boilerplate::datepicker', ['id' => 'test', 'name' => 'test', 'help' => 'boilerplate::users.create.help']) @endcomponent");
+        $view = $this->blade("@component('boilerplate::datetimepicker', ['id' => 'test', 'name' => 'test', 'help' => 'boilerplate::users.create.help']) @endcomponent");
         $this->assertEquals($expected, $view);
     }
 
@@ -112,11 +112,11 @@ HTML;
 </div>
 HTML;
         if ($this->isLaravelEqualOrGreaterThan7) {
-            $view = $this->blade('<x-boilerplate::datepicker id="test" name="fielderror" />');
+            $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="fielderror" />');
             $this->assertEquals($expected, $view);
         }
 
-        $view = $this->blade("@component('boilerplate::datepicker', ['id' => 'test', 'name' => 'fielderror']) @endcomponent");
+        $view = $this->blade("@component('boilerplate::datetimepicker', ['id' => 'test', 'name' => 'fielderror']) @endcomponent");
         $this->assertEquals($expected, $view);
     }
 
@@ -137,11 +137,11 @@ HTML;
 </div>
 HTML;
         if ($this->isLaravelEqualOrGreaterThan7) {
-            $view = $this->blade('<x-boilerplate::datepicker id="test" name="test" prepend-text="test" append-text="test" />');
+            $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" prepend-text="test" append-text="test" />');
             $this->assertEquals($expected, $view);
         }
 
-        $view = $this->blade("@component('boilerplate::datepicker', ['id' => 'test', 'name' => 'test', 'prepend-text' => 'test', 'append-text' => 'test']) @endcomponent");
+        $view = $this->blade("@component('boilerplate::datetimepicker', ['id' => 'test', 'name' => 'test', 'prepend-text' => 'test', 'append-text' => 'test']) @endcomponent");
         $this->assertEquals($expected, $view);
     }
 
@@ -162,11 +162,11 @@ HTML;
 </div>
 HTML;
         if ($this->isLaravelEqualOrGreaterThan7) {
-            $view = $this->blade('<x-boilerplate::datepicker id="test" name="test" prepend-text="fas fa-calendar" append-text="fas fa-calendar" />');
+            $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" prepend-text="fas fa-calendar" append-text="fas fa-calendar" />');
             $this->assertEquals($expected, $view);
         }
 
-        $view = $this->blade("@component('boilerplate::datepicker', ['id' => 'test', 'name' => 'test', 'prepend-text' => 'fas fa-calendar', 'append-text' => 'fas fa-calendar']) @endcomponent");
+        $view = $this->blade("@component('boilerplate::datetimepicker', ['id' => 'test', 'name' => 'test', 'prepend-text' => 'fas fa-calendar', 'append-text' => 'fas fa-calendar']) @endcomponent");
         $this->assertEquals($expected, $view);
     }
 
@@ -187,11 +187,11 @@ HTML;
 </div>
 HTML;
         if ($this->isLaravelEqualOrGreaterThan7) {
-            $view = $this->blade('<x-boilerplate::datepicker id="test" name="test"><x-slot name="prepend">test</x-slot><x-slot name="append">test</x-slot></x-boilerplate::datepicker>');
+            $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test"><x-slot name="prepend">test</x-slot><x-slot name="append">test</x-slot></x-boilerplate::datetimepicker>');
             $this->assertEquals($expected, $view);
         }
 
-        $view = $this->blade("@component('boilerplate::datepicker', ['id' => 'test', 'name' => 'test']) @slot('prepend') test @endslot @slot('append') test @endslot @endcomponent");
+        $view = $this->blade("@component('boilerplate::datetimepicker', ['id' => 'test', 'name' => 'test']) @slot('prepend') test @endslot @slot('append') test @endslot @endcomponent");
         $this->assertEquals($expected, $view);
     }
 
@@ -253,11 +253,11 @@ HTML;
     </script>
 HTML;
         if ($this->isLaravelEqualOrGreaterThan7) {
-            $view = $this->blade('<x-boilerplate::datepicker id="test" name="test" />@stack("js")');
+            $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" />@stack("js")');
             $this->assertEquals($expected, $view);
         }
 
-        $view = $this->blade("@component('boilerplate::datepicker', ['id' => 'test', 'name' => 'test']) @endcomponent()@stack('js')");
+        $view = $this->blade("@component('boilerplate::datetimepicker', ['id' => 'test', 'name' => 'test']) @endcomponent()@stack('js')");
         $this->assertEquals($expected, $view);
     }
 }

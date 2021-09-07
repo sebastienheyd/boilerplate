@@ -6,7 +6,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
-class DatepickerComposer extends ComponentComposer
+class DatetimepickerComposer extends ComponentComposer
 {
     protected $props = [
         'append',
@@ -77,7 +77,7 @@ class DatepickerComposer extends ComponentComposer
         $view->with('rawValue', $rawValue ?? $data['value'] ?? null);
 
         if (empty($data['id'])) {
-            $view->with('id', uniqid('datepicker'));
+            $view->with('id', uniqid('datetimepicker'));
         }
 
         $view->with('attributes', $this->attributes);

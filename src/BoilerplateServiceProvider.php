@@ -129,7 +129,7 @@ class BoilerplateServiceProvider extends ServiceProvider
         // Components
         $components = [
             'card',
-            'datepicker',
+            'datetimepicker',
             'form',
             'icheck',
             'infobox',
