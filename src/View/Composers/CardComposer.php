@@ -40,12 +40,7 @@ class CardComposer extends ComponentComposer
             $view->with($action, isset($data[$action]));
         }
 
-        if (empty($data['header'])) {
-            $view->with('header', false);
-        }
-
-        if (empty($data['class'])) {
-            $view->with('class', '');
-        }
+        $view->with('header', $data['header'] ?? false);
+        $view->with('class', $data['class'] ?? '');
     }
 }

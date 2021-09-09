@@ -1,6 +1,7 @@
 @once
 @push('plugin-css')
     <link rel="stylesheet" href="{{ mix('/plugins/codemirror/codemirror.min.css', '/assets/vendor/boilerplate') }}">
+    <link rel="stylesheet" href="/assets/vendor/boilerplate/plugins/codemirror/theme/{{ $theme ?? 'storm' }}.css">
 @endpush
 @php
     $default = [
@@ -28,13 +29,6 @@
     <script src="/assets/vendor/boilerplate/plugins/codemirror/{{ $script }}"></script>
 @endforeach
 @endif
+    <script>$.fn.codemirror.defaults.theme='{{ $theme ?? 'storm' }}';</script>
 @endpush
-@isset($theme)
-@push('css')
-    <link rel="stylesheet" href="/assets/vendor/boilerplate/plugins/codemirror/theme/{{ $theme }}.css">
-@endpush
-@push('js')
-    <script>$.fn.codemirror.defaults.theme='{{ $theme }}';</script>
-@endpush
-@endisset
 @endonce

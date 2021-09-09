@@ -75,11 +75,7 @@ class DatetimepickerComposer extends ComponentComposer
 
         $view->with('value', $data['value'] ?? null);
         $view->with('rawValue', $rawValue ?? $data['value'] ?? null);
-
-        if (empty($data['id'])) {
-            $view->with('id', uniqid('datetimepicker'));
-        }
-
+        $view->with('id', $data['id'] ?? uniqid('datetimepicker_'));
         $view->with('attributes', $this->attributes);
     }
 }

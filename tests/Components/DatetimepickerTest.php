@@ -7,10 +7,7 @@ class DatepickerTest extends TestComponent
     public function testDatepickerNoArgs()
     {
         $expected = <<<'HTML'
-<code>
-    &lt;x-boilerplate::datetimepicker>
-    The name attribute has not been set
-</code>
+<code>&lt;x-boilerplate::datetimepicker> The name attribute has not been set</code>
 HTML;
 
         if ($this->isLaravelEqualOrGreaterThan7) {
@@ -222,15 +219,6 @@ HTML;
                 close: 'fas fa-times'
             })
         });
-        $.fn.daterangepicker.defaultOptions = {
-            locale: {
-                "applyLabel": "Apply",
-                "cancelLabel": "Cancel",
-                "fromLabel": "From",
-                "toLabel": "To",
-                "customRangeLabel": "Custom",
-            }
-        };
     </script>
     <script>
         $('#test').datetimepicker({

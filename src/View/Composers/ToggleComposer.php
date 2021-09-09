@@ -25,18 +25,11 @@ class ToggleComposer extends ComponentComposer
 
         $data = $view->getData();
 
-        if (empty($data['id'])) {
-            $view->with('id', uniqid('icheck_'));
-        }
-
-        if (empty($data['checked']) || $data['checked'] === false) {
-            $view->with('checked', false);
-        }
+        $view->with('id', $data['id'] ?? uniqid('icheck_'));
+        $view->with('checked', $data['checked'] ?? false);
 
         foreach (['class', 'name', 'value'] as $empty) {
-            if (empty($data[$empty])) {
-                $view->with($empty, '');
-            }
+            $view->with($empty, $data[$empty] ?? '');
         }
     }
 }

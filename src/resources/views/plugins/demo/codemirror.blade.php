@@ -1,24 +1,7 @@
-@include('boilerplate::load.codemirror', ['theme' => 'storm'])
-
-@push('js')
-    <script>
-        $(function () {
-            $('#code').codemirror();
-        })
-    </script>
-@endpush
-
 @component('boilerplate::card', ['color' => 'warning', 'title' => 'CodeMirror'])
         Usage :
-        <pre>
-&commat;include('boilerplate::load.codemirror', ['theme' => 'storm'])
-&commat;push('js')
-    &lt;script>
-        var myCode = $('#code').codemirror();
-        // To get the value : myCode.getValue();
-    &lt;/script>
-&commat;endpush</pre>
-        <textarea id="code"><h1>CodeMirror demo</h1>
+        <pre>&lt;x-boilerplate::codemirror name="code">&lt;php echo "My code"; ?>&lt;/x-boilerplate::codemirror></pre>
+<x-boilerplate::codemirror name="code"><h1>CodeMirror demo</h1>
 <style>
     .color {
         color: red;
@@ -29,10 +12,11 @@
         alert('demo');
     });
 </script>
-</textarea>
-
+</x-boilerplate::codemirror>
     @slot('footer')
         <div class="small text-muted text-right">
+            <a href="https://sebastienheyd.github.io/boilerplate/components/codemirror" target="_blank">component</a> /
+            <a href="https://sebastienheyd.github.io/boilerplate/plugins/codemirror" target="_blank">plugin</a> /
             <a href="https://codemirror.net/" target="_blank">CodeMirror</a>
         </div>
     @endslot

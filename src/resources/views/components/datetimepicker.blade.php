@@ -1,8 +1,5 @@
 @if(empty($name))
-<code>
-    &lt;x-boilerplate::datepicker>
-    The name attribute has not been set
-</code>
+<code>&lt;x-boilerplate::datetimepicker> The name attribute has not been set</code>
 @else
 <div class="form-group{{ isset($groupClass) ? ' '.$groupClass : '' }}"{{ isset($groupId) ? ' id="'.$groupId.'"' : '' }}>
 @isset($label)

@@ -64,16 +64,19 @@ mix.copy([
 // ============== Select2 ==============
 mix.copy('node_modules/admin-lte/plugins/select2/js/select2.full.min.js', 'public/plugins/select2/select2.full.min.js');
 mix.copy('node_modules/admin-lte/plugins/select2/js/i18n/*', 'public/plugins/select2/i18n');
-mix.copy('node_modules/admin-lte/plugins/select2/css/select2.min.css', 'public/plugins/select2/select2.min.css');
-mix.copy('node_modules/admin-lte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css', 'public/plugins/select2/select2-bootstrap4.min.css');
-//mix.sass('resources/assets/scss/select2.scss', 'public/plugins/select2/select2.min.css');
+mix.sass('resources/assets/scss/select2.scss', 'public/plugins/select2/select2.min.css');
 
-// ============== DatePicker ==============
-mix.sass('resources/assets/scss/daterangepicker.scss', 'public/plugins/datepicker/datepicker.min.css');
+// ============== DateTimePicker ==============
+mix.copy('node_modules/admin-lte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css', 'public/plugins/datepicker/datetimepicker.min.css')
 mix.scripts([
     'node_modules/admin-lte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.js',
+], 'public/plugins/datepicker/datetimepicker.min.js');
+
+// ============== DateRangePicker ==============
+mix.sass('resources/assets/scss/daterangepicker.scss', 'public/plugins/datepicker/daterangepicker.min.css');
+mix.scripts([
     'node_modules/admin-lte/plugins/daterangepicker/daterangepicker.js',
-], 'public/plugins/datepicker/datepicker.min.js');
+], 'public/plugins/datepicker/daterangepicker.min.js');
 
 // ============== FileInput ==============
 mix.sass('node_modules/bootstrap-fileinput/scss/fileinput.scss', 'public/plugins/fileinput/bootstrap-fileinput.min.css');

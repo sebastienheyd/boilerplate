@@ -25,22 +25,12 @@ class IcheckComposer extends ComponentComposer
 
         $data = $view->getData();
 
-        if (empty($data['id'])) {
-            $view->with('id', uniqid('icheck_'));
-        }
-
-        if (empty($data['checked']) || $data['checked'] === false) {
-            $view->with('checked', false);
-        }
-
-        if (empty($data['disabled']) || $data['disabled'] === false) {
-            $view->with('disabled', false);
-        }
+        $view->with('id', $data['id'] ?? uniqid('icheck_'));
+        $view->with('checked', $data['checked'] ?? false);
+        $view->with('disabled', $data['disabled'] ?? false);
 
         foreach (['class', 'name', 'value'] as $empty) {
-            if (empty($data[$empty])) {
-                $view->with($empty, '');
-            }
+            $view->with($empty, $data[$empty] ?? '');
         }
     }
 }

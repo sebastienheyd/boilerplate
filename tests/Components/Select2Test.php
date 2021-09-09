@@ -7,10 +7,7 @@ class Select2Test extends TestComponent
     public function testSelect2ComponentNoName()
     {
         $expected = <<<'HTML'
-<code>
-    &lt;x-boilerplate::select2>
-    The name attribute has not been set
-</code>
+<code>&lt;x-boilerplate::select2> The name attribute has not been set</code>
 HTML;
 
         if ($this->isLaravelEqualOrGreaterThan7) {
@@ -26,7 +23,7 @@ HTML;
     {
         $expected = <<<'HTML'
 <div class="form-group">
-    <select id="test" name="test" class="form-control" data-test="test">
+    <select id="test" name="test" class="form-control" data-test="test" style="visibility:hidden;height:1rem">
         <option></option>
         <option value="1">Value 1</option>
     </select>
@@ -67,7 +64,7 @@ HTML;
     {
         $expected = <<<'HTML'
 <div class="form-group">
-    <select id="test" name="test" class="form-control" data-test="test">
+    <select id="test" name="test" class="form-control" data-test="test" style="visibility:hidden;height:1rem">
         <option></option>
         <option value="1">Value 1</option>
     </select>

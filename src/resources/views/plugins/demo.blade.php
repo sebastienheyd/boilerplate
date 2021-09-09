@@ -1,8 +1,9 @@
 <div class="row">
     <div class="col-md-6">
         @include('boilerplate::plugins.demo.select2')
-        @include('boilerplate::plugins.demo.datepicker')
+        @include('boilerplate::plugins.demo.datetimepicker')
         @include('boilerplate::plugins.demo.icheck')
+        @include('boilerplate::plugins.demo.daterangepicker')
         @include('boilerplate::plugins.demo.codemirror')
         @include('boilerplate::plugins.demo.fileinput')
         @include('boilerplate::plugins.demo.tabs')

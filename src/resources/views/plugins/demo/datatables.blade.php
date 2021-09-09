@@ -58,6 +58,7 @@
 
     @slot('footer')
         <div class="small text-muted text-right">
+            <a href="https://sebastienheyd.github.io/boilerplate/plugins/datatables" target="_blank">plugin</a> /
             <a href="https://datatables.net/manual/index">datatables</a>
         </div>
     @endslot
