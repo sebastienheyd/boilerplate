@@ -51,7 +51,7 @@ class LoginController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      *
      * @throws ValidationException
      */
@@ -67,7 +67,7 @@ class LoginController extends Controller
     /**
      * Send the response after the user was authenticated.
      *
-     * @param Request $request
+     * @param  Request  $request
      *
      * @return RedirectResponse|JsonResponse
      */
@@ -91,8 +91,8 @@ class LoginController extends Controller
     /**
      * The user has been authenticated.
      *
-     * @param Request $request
-     * @param mixed   $user
+     * @param  Request  $request
+     * @param  mixed  $user
      *
      * @return mixed
      */
@@ -106,7 +106,7 @@ class LoginController extends Controller
     /**
      * Log the user out of the application.
      *
-     * @param Request $request
+     * @param  Request  $request
      *
      * @return RedirectResponse|JsonResponse
      */

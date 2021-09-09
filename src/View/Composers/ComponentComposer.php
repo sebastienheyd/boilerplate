@@ -14,7 +14,7 @@ abstract class ComponentComposer
     /**
      * For Laravel 6, replace @props directive to specify which attribute should be considered as data variables.
      *
-     * @param View $view
+     * @param  View  $view
      *
      * @return View
      */

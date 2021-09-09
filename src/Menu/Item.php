@@ -17,8 +17,8 @@ class Item extends LavaryMenuItem
     /**
      * Set the item icon using font-awesome.
      *
-     * @param string $icon
-     * @param string $type
+     * @param  string  $icon
+     * @param  string  $type
      *
      * @return self
      */
@@ -54,7 +54,7 @@ class Item extends LavaryMenuItem
     /**
      * Add a class to the current link.
      *
-     * @param string $class
+     * @param  string  $class
      *
      * @return $this
      */
@@ -74,7 +74,7 @@ class Item extends LavaryMenuItem
     /**
      * Make the item active.
      *
-     * @param string|array $routes
+     * @param  string|array  $routes
      *
      * @return self
      */
@@ -104,8 +104,8 @@ class Item extends LavaryMenuItem
     /**
      * Creates a sub Item.
      *
-     * @param string $title
-     * @param string|array $options
+     * @param  string  $title
+     * @param  string|array  $options
      * @return \Lavary\Menu\Item
      */
     public function add($title, $options = [])

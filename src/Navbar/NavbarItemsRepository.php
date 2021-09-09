@@ -9,8 +9,8 @@ class NavbarItemsRepository
     /**
      * Register navbar items to display.
      *
-     * @param string|array $item
-     * @param string       $side
+     * @param  string|array  $item
+     * @param  string  $side
      *
      * @return $this
      */
@@ -32,7 +32,7 @@ class NavbarItemsRepository
     /**
      * Get navbar items views for the given side.
      *
-     * @param string $side
+     * @param  string  $side
      *
      * @return array
      */

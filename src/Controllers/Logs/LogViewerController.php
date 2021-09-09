@@ -10,7 +10,7 @@ class LogViewerController extends ArcanedevController
     /**
      * LogViewerController constructor.
      *
-     * @param LogViewerContract $logViewer
+     * @param  LogViewerContract  $logViewer
      */
     public function __construct(LogViewerContract $logViewer)
     {
@@ -26,9 +26,9 @@ class LogViewerController extends ArcanedevController
     protected $showRoute = 'boilerplate.logs.show';
 
     /**
-     * @param string $view
-     * @param array  $data
-     * @param array  $mergeData
+     * @param  string  $view
+     * @param  array  $data
+     * @param  array  $mergeData
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */

@@ -136,8 +136,8 @@ class Dashboard extends BoilerplateCommand
     /**
      * Copy a file and display a message.
      *
-     * @param string $from
-     * @param string $to
+     * @param  string  $from
+     * @param  string  $to
      */
     private function copy($from, $to)
     {
@@ -150,8 +150,8 @@ class Dashboard extends BoilerplateCommand
     /**
      * Delete a file and display a message.
      *
-     * @param string $from
-     * @param string $to
+     * @param  string  $from
+     * @param  string  $to
      */
     private function delete($file)
     {

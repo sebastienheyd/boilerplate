@@ -7,7 +7,7 @@ class MenuItemsRepository
     /**
      * Register menu items to display in the main menu.
      *
-     * @param string|array $menuitem
+     * @param  string|array  $menuitem
      *
      * @return $this
      */
@@ -29,7 +29,7 @@ class MenuItemsRepository
     /**
      * Unregister the given menu item.
      *
-     * @param string $menuitem
+     * @param  string  $menuitem
      *
      * return $this;
      */

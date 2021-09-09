@@ -50,7 +50,7 @@ class UsersController extends Controller
     /**
      * To display dynamic table by datatable.
      *
-     * @param Request $request
+     * @param  Request  $request
      *
      * @throws \Exception
      *
@@ -110,9 +110,9 @@ class UsersController extends Controller
     /**
      * Get html button for datatable.
      *
-     * @param string $route
-     * @param string $class
-     * @param string $icon
+     * @param  string  $route
+     * @param  string  $class
+     * @param  string  $icon
      *
      * @return string
      */
@@ -143,7 +143,7 @@ class UsersController extends Controller
     /**
      * Store a newly created user in storage.
      *
-     * @param Request $request
+     * @param  Request  $request
      *
      * @throws \Illuminate\Validation\ValidationException
      *
@@ -175,7 +175,7 @@ class UsersController extends Controller
     /**
      * Show the form for editing the specified user.
      *
-     * @param int $id
+     * @param  int  $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -195,7 +195,7 @@ class UsersController extends Controller
     /**
      * Update the specified user in storage.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @param $id
      *
      * @throws \Illuminate\Validation\ValidationException
@@ -223,7 +223,7 @@ class UsersController extends Controller
     /**
      * Remove the specified user from storage.
      *
-     * @param int $id
+     * @param  int  $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -236,7 +236,7 @@ class UsersController extends Controller
      * Show the form to set a new password on the first login.
      *
      * @param $token
-     * @param Request $request
+     * @param  Request  $request
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -250,7 +250,7 @@ class UsersController extends Controller
     /**
      * Store a newly created password in storage after the first login.
      *
-     * @param Request $request
+     * @param  Request  $request
      *
      * @throws \Illuminate\Validation\ValidationException
      *

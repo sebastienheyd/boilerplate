@@ -231,8 +231,8 @@ class Scaffold extends BoilerplateCommand
     /**
      * Replace content in the given file.
      *
-     * @param array $values
-     * @param string $file
+     * @param  array  $values
+     * @param  string  $file
      *
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
@@ -248,7 +248,7 @@ class Scaffold extends BoilerplateCommand
     /**
      * Delete files or directories.
      *
-     * @param mixed $fileOrDirectory    String or array of files or directories to delete
+     * @param  mixed  $fileOrDirectory  String or array of files or directories to delete
      */
     private function delete($fileOrDirectory)
     {
@@ -272,8 +272,8 @@ class Scaffold extends BoilerplateCommand
     /**
      * Copy a file or a directory and display a message.
      *
-     * @param string $from
-     * @param string $to
+     * @param  string  $from
+     * @param  string  $to
      */
     private function copy($from, $to, $log = true)
     {
@@ -297,8 +297,8 @@ class Scaffold extends BoilerplateCommand
     /**
      * Secure copy that will not override existing files.
      *
-     * @param string $directory
-     * @param string $destination
+     * @param  string  $directory
+     * @param  string  $destination
      *
      * @return bool
      */

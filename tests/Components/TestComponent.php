@@ -21,8 +21,8 @@ abstract class TestComponent extends TestCase
     /**
      * Render the contents of the given Blade template string.
      *
-     * @param string $template
-     * @param array  $data
+     * @param  string  $template
+     * @param  array  $data
      *
      * @return string
      */

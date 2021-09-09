@@ -12,7 +12,7 @@ class MenuComposer
      * Called when view layout/mainsidebar.blade.php is called.
      * This is defined in BoilerPlateServiceProvider.
      *
-     * @param View $view
+     * @param  View  $view
      */
     public function compose(View $view)
     {

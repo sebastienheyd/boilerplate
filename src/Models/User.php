@@ -39,7 +39,7 @@ class User extends Authenticatable
     /**
      * Send the password reset notification.
      *
-     * @param string $token
+     * @param  string  $token
      *
      * @return void
      */
@@ -51,7 +51,7 @@ class User extends Authenticatable
     /**
      * Send notification when a new user is created.
      *
-     * @param string $token
+     * @param  string  $token
      */
     public function sendNewUserNotification($token)
     {
@@ -95,8 +95,8 @@ class User extends Authenticatable
     /**
      * Return last login date formatted.
      *
-     * @param string $format
-     * @param string $default
+     * @param  string  $format
+     * @param  string  $default
      *
      * @return mixed|string
      */
