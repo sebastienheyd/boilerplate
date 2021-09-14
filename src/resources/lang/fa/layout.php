@@ -12,4 +12,5 @@ return [
     'user_management'   => 'مدیریت کاربرها',
     'logoutconfirm'     => 'آیا از خروج مطمئن هستید؟',
     'rightsres'         => 'کلیه حقوق محفوظ است',
+    'darkmode'          => 'حالت تاریک',
 ];

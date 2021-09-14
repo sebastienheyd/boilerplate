@@ -12,4 +12,5 @@ return [
     'user_management'   => 'Utilisateurs',
     'logoutconfirm'     => 'Êtes vous sûr de vouloir vous déconnecter ?',
     'rightsres'         => 'Tous droits réservés.',
+    'darkmode'          => 'Mode sombre',
 ];

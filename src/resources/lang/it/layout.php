@@ -12,4 +12,5 @@ return [
     'user_management'   => 'User management',
     'logoutconfirm'     => 'Sicuro di voler uscire ?',
     'rightsres'         => 'All rights reserved.',
+    'darkmode'          => 'Modalità scura',
 ];

@@ -12,4 +12,5 @@ return [
     'user_management' => 'Kullanıcı yönetimi',
     'logoutconfirm'   => 'Çıkış yapmak istediğinizden emin misiniz?',
     'rightsres'       => 'Tüm hakları saklıdır.',
+    'darkmode'        => 'Karanlık mod',
 ];

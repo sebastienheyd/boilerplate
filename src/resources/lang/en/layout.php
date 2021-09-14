@@ -12,4 +12,5 @@ return [
     'user_management'   => 'User management',
     'logoutconfirm'     => 'Are you sure you want to logout ?',
     'rightsres'         => 'All rights reserved.',
+    'darkmode'          => 'Dark mode',
 ];

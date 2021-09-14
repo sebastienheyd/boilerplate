@@ -42,7 +42,7 @@
             @endif
             @if(config('boilerplate.theme.darkmode', false))
                 <li class="nav-item d-flex align-items-center justify-content-center">
-                    @component('boilerplate::toggle', ['colorOn' => 'dark', 'class' => 'mb-0', 'id' => 'dark-mode', 'checked' => setting('darkmode', false), 'data-toggle' => 'tooltip', 'title' => 'Test'])@endcomponent
+                    @component('boilerplate::toggle', ['colorOn' => 'dark', 'class' => 'mb-0', 'id' => 'dark-mode', 'checked' => setting('darkmode', false), 'data-toggle' => 'tooltip', 'title' => __('boilerplate::layout.darkmode')])@endcomponent
                 </li>
             @endif
             @if(config('boilerplate.theme.fullscreen', false))

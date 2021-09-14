@@ -12,4 +12,5 @@ return [
     'user_management'   => 'Gestión de usuarios',
     'logoutconfirm'     => '¿Estas seguro que deseas salir de la sesión?',
     'rightsres'         => 'Todos los derechos reservados.',
+    'darkmode'          => 'Modo oscuro',
 ];
