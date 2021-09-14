@@ -11,7 +11,6 @@ class NavbarItemsRepository
      *
      * @param  string|array  $item
      * @param  string  $side
-     *
      * @return $this
      */
     public function registerItem($item, $side = 'left')
@@ -33,7 +32,6 @@ class NavbarItemsRepository
      * Get navbar items views for the given side.
      *
      * @param  string  $side
-     *
      * @return array
      */
     public function getItems($side = 'left')

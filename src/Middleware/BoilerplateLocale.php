@@ -13,7 +13,6 @@ class BoilerplateLocale
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
-     *
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -21,7 +20,7 @@ class BoilerplateLocale
         App::setLocale(config('boilerplate.app.locale', config('app.locale')));
         Carbon::setLocale(config('boilerplate.app.locale', config('app.locale')));
 
-        if (!config('boilerplate.locale.switch')) {
+        if (! config('boilerplate.locale.switch')) {
             return $next($request);
         }
 

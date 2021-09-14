@@ -68,7 +68,6 @@ class LoginController extends Controller
      * Send the response after the user was authenticated.
      *
      * @param  Request  $request
-     *
      * @return RedirectResponse|JsonResponse
      */
     protected function sendLoginResponse(Request $request)
@@ -93,7 +92,6 @@ class LoginController extends Controller
      *
      * @param  Request  $request
      * @param  mixed  $user
-     *
      * @return mixed
      */
     protected function authenticated(Request $request, $user)
@@ -107,7 +105,6 @@ class LoginController extends Controller
      * Log the user out of the application.
      *
      * @param  Request  $request
-     *
      * @return RedirectResponse|JsonResponse
      */
     public function logout(Request $request)

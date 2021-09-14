@@ -19,7 +19,6 @@ class Item extends LavaryMenuItem
      *
      * @param  string  $icon
      * @param  string  $type
-     *
      * @return self
      */
     public function icon($icon, $type = 'fas')
@@ -41,7 +40,6 @@ class Item extends LavaryMenuItem
      * Set the item order.
      *
      * @param $order
-     *
      * @return self
      */
     public function order($order)
@@ -55,7 +53,6 @@ class Item extends LavaryMenuItem
      * Add a class to the current link.
      *
      * @param  string  $class
-     *
      * @return $this
      */
     public function addLinkClass($class)
@@ -75,7 +72,6 @@ class Item extends LavaryMenuItem
      * Make the item active.
      *
      * @param  string|array  $routes
-     *
      * @return self
      */
     public function activeIfRoute($routes)

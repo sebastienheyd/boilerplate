@@ -43,7 +43,6 @@ class User extends Authenticatable
      * Send the password reset notification.
      *
      * @param  string  $token
-     *
      * @return void
      */
     public function sendPasswordResetNotification($token)
@@ -65,7 +64,6 @@ class User extends Authenticatable
      * Return last name in uppercase by default.
      *
      * @param $value
-     *
      * @return string
      */
     public function getLastNameAttribute($value)
@@ -77,7 +75,6 @@ class User extends Authenticatable
      * Return first name with first char of every word in uppercase.
      *
      * @param $value
-     *
      * @return string
      */
     public function getFirstNameAttribute($value)
@@ -100,7 +97,6 @@ class User extends Authenticatable
      *
      * @param  string  $format
      * @param  string  $default
-     *
      * @return mixed|string
      */
     public function getLastLogin($format = 'YYYY-MM-DD HH:mm:ss', $default = '')
@@ -211,25 +207,25 @@ class User extends Authenticatable
     /**
      * Retrieve or store a setting with a given name or fall back to the default.
      *
-     * @param string|array $name
-     * @param mixed  $default
-     *
+     * @param  string|array  $name
+     * @param  mixed  $default
      * @return mixed|null
      */
     public function setting($name, $default = null)
     {
         if (is_array($name)) {
             $this->settings = array_merge($this->settings ?? [], $name);
+
             return $this->save();
         }
 
         $setting = $this->settings[$name] ?? $default;
 
-        if ($setting === "true") {
+        if ($setting === 'true') {
             return true;
         }
 
-        if ($setting === "false") {
+        if ($setting === 'false') {
             return false;
         }
 

@@ -67,10 +67,9 @@ class RolesController extends Controller
      * Store a newly created role in storage.
      *
      * @param  Request  $request
+     * @return \Illuminate\Http\RedirectResponse
      *
      * @throws \Illuminate\Validation\ValidationException
-     *
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -98,7 +97,6 @@ class RolesController extends Controller
      * Show the form for editing the specified role.
      *
      * @param  int  $id
-     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -124,7 +122,6 @@ class RolesController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
@@ -149,7 +146,6 @@ class RolesController extends Controller
      * Remove the specified role from storage.
      *
      * @param  int  $id
-     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

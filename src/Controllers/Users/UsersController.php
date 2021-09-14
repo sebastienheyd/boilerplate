@@ -51,10 +51,9 @@ class UsersController extends Controller
      * To display dynamic table by datatable.
      *
      * @param  Request  $request
+     * @return mixed
      *
      * @throws \Exception
-     *
-     * @return mixed
      */
     public function datatable(Request $request)
     {
@@ -113,7 +112,6 @@ class UsersController extends Controller
      * @param  string  $route
      * @param  string  $class
      * @param  string  $icon
-     *
      * @return string
      */
     protected function button(string $route, string $class, string $icon): string
@@ -144,10 +142,9 @@ class UsersController extends Controller
      * Store a newly created user in storage.
      *
      * @param  Request  $request
+     * @return \Illuminate\Http\RedirectResponse
      *
      * @throws \Illuminate\Validation\ValidationException
-     *
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -176,7 +173,6 @@ class UsersController extends Controller
      * Show the form for editing the specified user.
      *
      * @param  int  $id
-     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -197,10 +193,9 @@ class UsersController extends Controller
      *
      * @param  Request  $request
      * @param $id
+     * @return \Illuminate\Http\RedirectResponse
      *
      * @throws \Illuminate\Validation\ValidationException
-     *
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
@@ -224,7 +219,6 @@ class UsersController extends Controller
      * Remove the specified user from storage.
      *
      * @param  int  $id
-     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -237,7 +231,6 @@ class UsersController extends Controller
      *
      * @param $token
      * @param  Request  $request
-     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function firstLogin($token, Request $request)
@@ -251,10 +244,9 @@ class UsersController extends Controller
      * Store a newly created password in storage after the first login.
      *
      * @param  Request  $request
+     * @return \Illuminate\Http\RedirectResponse
      *
      * @throws \Illuminate\Validation\ValidationException
-     *
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function firstLoginPost(Request $request)
     {
@@ -370,7 +362,7 @@ class UsersController extends Controller
     /**
      * Session keep-alive.
      *
-     * @param Request $request
+     * @param  Request  $request
      */
     public function keepAlive(Request $request)
     {
@@ -381,11 +373,11 @@ class UsersController extends Controller
     /**
      * Store setting for the current user.
      *
-     * @param Request $request
+     * @param  Request  $request
      */
     public function storeSetting(Request $request)
     {
-        if (!$request->isXmlHttpRequest()) {
+        if (! $request->isXmlHttpRequest()) {
             abort(404);
         }
 

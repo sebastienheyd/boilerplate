@@ -23,7 +23,6 @@ abstract class TestComponent extends TestCase
      *
      * @param  string  $template
      * @param  array  $data
-     *
      * @return string
      */
     protected function blade(string $template, array $data = [])

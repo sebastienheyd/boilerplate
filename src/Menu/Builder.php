@@ -20,7 +20,6 @@ class Builder extends LavaryMenuBuilder
      *
      * @param  string  $title
      * @param  array  $options
-     *
      * @return Item
      */
     public function add($title, $options = [])
@@ -76,7 +75,6 @@ class Builder extends LavaryMenuBuilder
      * @param  string  $id  Id of the menu item to attach to
      * @param  string  $title  Title of the sub item
      * @param  array  $options
-     *
      * @return Item
      */
     public function addTo($id, $title, $options = [])

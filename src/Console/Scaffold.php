@@ -299,7 +299,6 @@ class Scaffold extends BoilerplateCommand
      *
      * @param  string  $directory
      * @param  string  $destination
-     *
      * @return bool
      */
     private function copyDirectory($directory, $destination)

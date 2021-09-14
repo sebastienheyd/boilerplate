@@ -29,7 +29,6 @@ class LogViewerController extends ArcanedevController
      * @param  string  $view
      * @param  array  $data
      * @param  array  $mergeData
-     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     protected function view($view, $data = [], $mergeData = [])
