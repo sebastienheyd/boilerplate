@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
 @stack('css')
 </head>
-<body class="layout-fixed layout-navbar-fixed sidebar-mini">
+<body class="layout-fixed layout-navbar-fixed sidebar-mini{{ setting('darkmode', false) && config('boilerplate.theme.darkmode') ? ' dark-mode accent-light' : '' }}{{ setting('sidebar-collapsed', false) ? ' sidebar-collapse' : '' }}">
     <div class="wrapper">
         @include('boilerplate::layout.header')
         @include('boilerplate::layout.mainsidebar')
@@ -44,6 +44,9 @@
     <script>
         $.ajaxSetup({headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'}});
         bootbox.setLocale('{{ App::getLocale() }}');
+        var routes = {
+            settings: "{{ route('boilerplate.settings') }}",
+        }
         var session = {
             keepalive: "{{ route('boilerplate.keepalive', null, false) }}",
             expire: {{ time() +  config('session.lifetime') * 60 }},

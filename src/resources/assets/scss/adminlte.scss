@@ -136,7 +136,6 @@ pre {
   position: sticky;
   top: 57px;
   z-index: 2;
-  background: #f4f6f9;
 }
 
 .breadcrumb-item {
@@ -223,6 +222,24 @@ aside.control-sidebar {
     &:hover {
       color: #FFF;
     }
+  }
+}
+
+#dark-mode {
+  & ~ .custom-control-label::before {
+    box-shadow: none !important;
+  }
+}
+
+body.dark-mode {
+  pre {
+    background: #222;
+    color: #CCC;
+    border-color: #444;
+  }
+
+  .card.card-outline-tabs {
+    border-top: 0;
   }
 }
 

@@ -10,14 +10,13 @@ return [
         'bg'     => 'gray-dark',
         'type'   => 'dark',
         'border' => true,
-        'fullscreen' => true,
         'user'   => [
             'visible' => false,
             'shadow'  => 0,
         ],
     ],
     'sidebar' => [
-        'type'    => 'light',
+        'type'    => 'dark',
         'shadow'  => 0,
         'border'  => false,
         'compact' => false,

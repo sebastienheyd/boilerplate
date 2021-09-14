@@ -2,13 +2,14 @@
 
 $theme = include __DIR__.'/themes/default.php';
 
-// Additionnal views to append items to the navbar
-$theme['navbar'] += [
-    'left'  => [],
-    'right' => [],
+$theme += [
+    'navbar' => [               // Additionnal views to append items to the navbar
+        'left' => [],
+        'right' => [],
+    ],
+    'favicon' => null,          // Favicon url
+    'fullscreen' => true,       // Fullscreen switch
+    'darkmode' => true,         // Dark mode switch
 ];
-
-// Url to favicon
-$theme['favicon'] = null;
 
 return $theme;

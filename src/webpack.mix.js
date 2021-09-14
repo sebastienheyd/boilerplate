@@ -13,6 +13,9 @@ mix.js('resources/assets/js/boilerplate.js', 'public/boilerplate.min.js');
 mix.js('resources/assets/js/avatar.js', 'public/avatar.min.js');
 mix.copy('resources/assets/img/favicon.svg', 'public/favicon.svg');
 
+// ============== Log viewer ==============
+mix.sass('resources/assets/scss/logviewer.scss', 'public/logviewer.min.css');
+
 // ============== Font Awesome ==============
 mix.sass('resources/assets/scss/fontawesome.scss', 'public/plugins/fontawesome/fontawesome.min.css');
 
@@ -102,13 +105,9 @@ mix.copy('node_modules/tinymce/skins', 'public/plugins/tinymce/skins');
 mix.copy('node_modules/tinymce/themes', 'public/plugins/tinymce/themes');
 mix.copy('node_modules/stickytoolbar/dist', 'public/plugins/tinymce/plugins');
 
-// Boilerplate skin
-mix.copy('resources/assets/js/vendor/tinymce/skins/boilerplate/fonts', 'public/plugins/tinymce/skins/ui/boilerplate/fonts');
-mix.sass('resources/assets/js/vendor/tinymce/skins/boilerplate/content.inline.scss', 'public/plugins/tinymce/skins/ui/boilerplate/content.inline.min.css');
-mix.sass('resources/assets/js/vendor/tinymce/skins/boilerplate/content.mobile.scss', 'public/plugins/tinymce/skins/ui/boilerplate/content.mobile.min.css');
-mix.sass('resources/assets/js/vendor/tinymce/skins/boilerplate/content.scss', 'public/plugins/tinymce/skins/ui/boilerplate/content.min.css');
-mix.sass('resources/assets/js/vendor/tinymce/skins/boilerplate/skin.scss', 'public/plugins/tinymce/skins/ui/boilerplate/skin.min.css');
-mix.sass('resources/assets/js/vendor/tinymce/skins/boilerplate/skin.mobile.scss', 'public/plugins/tinymce/skins/ui/boilerplate/skin.mobile.min.css');
+// Boilerplate dark mode
+mix.copy('resources/assets/js/vendor/tinymce/skins/boilerplate-dark/skins/content', 'public/plugins/tinymce/skins/content');
+mix.copy('resources/assets/js/vendor/tinymce/skins/boilerplate-dark/skins/ui', 'public/plugins/tinymce/skins/ui');
 
 // https://www.tiny.cloud/get-tiny/language-packages/
 mix.copy('resources/assets/js/vendor/tinymce/langs', 'public/plugins/tinymce/langs');

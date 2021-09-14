@@ -1,0 +1,197 @@
+.table thead th {
+  border-bottom: none;
+}
+
+.list-levels {
+  border-radius: 0 !important;
+
+  .list-group-item {
+    border: 0;
+    border-radius: 0;
+    border-bottom: 1px solid #CCC;
+  }
+
+  li {
+    border-radius: 0 !important;
+  }
+
+  li:last-child .list-group-item {
+    border-bottom: 0;
+  }
+}
+
+.table > tbody > tr.even > td {
+  background: #F7F7F7;
+}
+
+.table > tbody > tr > td.stack {
+  padding: 0;
+  border-top: none !important;
+}
+
+.stack-content {
+  padding: 15px;
+  color: #666;
+  font-family: consolas, sans-serif;
+  font-size: 11px;
+  background: #333;
+  color: #CCC;
+
+  strong {
+    color: #FFF;
+  }
+}
+
+.info-box.level {
+  display: block;
+  padding: 0;
+  margin-bottom: 15px;
+  min-height: 70px;
+  background: #fff;
+  width: 100%;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+}
+
+.info-box.level .info-box-text,
+.info-box.level .info-box-number,
+.info-box.level .info-box-icon > i {
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.info-box.level .info-box-text {
+  display: block;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.info-box.level .info-box-content {
+  padding: 5px 10px;
+  margin-left: 70px;
+}
+
+.info-box.level .info-box-number {
+  display: block;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.info-box.level .info-box-icon {
+  border-radius: 2px 0 0 2px;
+  display: block;
+  float: left;
+  height: 70px;
+  width: 70px;
+  text-align: center;
+  font-size: 40px;
+  line-height: 70px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.info-box.level .progress {
+  background: rgba(0, 0, 0, 0.2);
+  margin: 5px -10px 5px -10px;
+  height: 2px;
+}
+
+.info-box.level .progress .progress-bar {
+  background: #fff;
+}
+
+.info-box.level-empty {
+  opacity: .6;
+  -webkit-filter: grayscale(1);
+  -moz-filter: grayscale(1);
+  -ms-filter: grayscale(1);
+  filter: grayscale(1);
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  -webkit-transition-property: -webkit-filter, opacity;
+  -moz-transition-property: -moz-filter, opacity;
+  -o-transition-property: filter, opacity;
+  transition-property: -webkit-filter, -moz-filter, -o-filter, filter, opacity;
+}
+
+.info-box.level-empty:hover {
+  opacity: 1;
+  -webkit-filter: grayscale(0);
+  -moz-filter: grayscale(0);
+  -ms-filter: grayscale(0);
+  filter: grayscale(0);
+}
+
+.level {
+  padding: 2px 6px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+  font-size: .9em;
+  font-weight: 600;
+}
+
+.badge.level-all,
+.badge.level-emergency,
+.badge.level-alert,
+.badge.level-critical,
+.badge.level-error,
+.badge.level-warning,
+.badge.level-notice,
+.badge.level-info,
+.badge.level-debug,
+.level, .level i,
+.info-box.level-all,
+.info-box.level-emergency,
+.info-box.level-alert,
+.info-box.level-critical,
+.info-box.level-error,
+.info-box.level-warning,
+.info-box.level-notice,
+.info-box.level-info,
+.info-box.level-debug {
+  color: #FFF;
+}
+
+.label-env {
+  font-size: .85em;
+}
+
+$levels: (
+  "all":"#8A8A8A",
+  "emergency":"#B71C1C",
+  "alert":"#D32F2F",
+  "critical":"#F44336",
+  "error":"#FF5722",
+  "warning":"#FF9100",
+  "notice":"#4CAF50",
+  "info":"#1976D2",
+  "debug":"#90CAF9",
+  "empty":"#D1D1D1"
+);
+
+@each $name, $color in $levels {
+  .badge.level-#{$name}, .level.level-#{$name}, .info-box.level-#{$name} {
+    background-color: #{$color};
+  }
+
+  .text-#{$name} {
+    color: #{$color};
+  }
+}
+
+.badge.label-env, .label.label-env {
+  background-color: #6A1B9A;
+}
+
+body.dark-mode {
+  .stack-content {
+    background: darken(#343a40, 10%);
+    color: #CCC;
+  }
+
+  .table > tbody > tr.even > td {
+    background: #31373d;
+  }
+}

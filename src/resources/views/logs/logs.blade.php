@@ -38,16 +38,12 @@
                                     @foreach($row as $key => $value)
                                         <td class="{{ $key == 'date' ? 'text-left' : 'text-center' }}">
                                             @if ($key == 'date')
-                                                <a href="{{ route('boilerplate.logs.show', [$date]) }}">
-                                                    <span class="badge badge-pill badge-info">
-                                                        {{ \Carbon\Carbon::createFromFormat('Y-m-d', $value)->isoFormat(__('boilerplate::date.Ymd')) }}
-                                                    </span>
-                                                </a>
+                                                {{ \Carbon\Carbon::createFromFormat('Y-m-d', $value)->isoFormat(__('boilerplate::date.Ymd')) }}
                                             @elseif ($value == 0)
-                                                <span class="badge badge-pill level-empty">{{ $value }}</span>
+                                                <span class="text-muted">.</span>
                                             @else
                                                 <a href="{{ route('boilerplate.logs.filter', [$date, $key]) }}">
-                                                    <span class="badge badge-pill level-{{ $key }}">{{ $value }}</span>
+                                                    <span class="text-{{ $key }} text-bold">{{ $value }}</span>
                                                 </a>
                                             @endif
                                         </td>

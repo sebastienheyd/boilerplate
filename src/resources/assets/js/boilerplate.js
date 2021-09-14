@@ -1,6 +1,6 @@
 window.toastr.options = {}
 
-window.growl = function (message, type) {
+window.growl = (message, type) => {
     types = ['info', 'error', 'warning', 'success'];
 
     if (typeof type === "undefined" || !types.includes(type)) {
@@ -9,20 +9,38 @@ window.growl = function (message, type) {
     window.toastr[type](message);
 }
 
-$('.sidebar-toggle').on('click', function (event) {
-    event.preventDefault();
-    if (Boolean(sessionStorage.getItem('sidebar-toggle-collapsed'))) {
-        sessionStorage.setItem('sidebar-toggle-collapsed', '');
-    } else {
-        sessionStorage.setItem('sidebar-toggle-collapsed', '1');
-    }
-});
+function storeSetting(settingName, settingValue) {
+    $.ajax({
+        url: routes.settings,
+        type: 'post',
+        data: {name: settingName, value: settingValue},
+    });
+}
 
-$(function () {
+function toggleTinyMceSkin(skin, css)
+{
+    if(tinymce.get().length === 0) {
+        return false;
+    }
+
+    tinymce.get().forEach(e => {
+        e.settings.skin = skin;
+        e.settings.content_css = css;
+        $('#'+e.settings.id).tinymce().remove();
+        $('#'+e.settings.id).tinymce(e.settings);
+    })
+}
+
+$('.sidebar-toggle').on('click', (event) => {
+    event.preventDefault();
+    storeSetting('sidebar-collapsed', !$('body').hasClass('sidebar-collapse'));
+})
+
+$(() => {
     $(document).tooltip({
         container: 'body',
         selector: '[data-toggle="tooltip"]',
-        delay: { "show": 500, "hide": 100 },
+        delay: {"show": 500, "hide": 100},
         html: true,
         trigger: 'hover',
     })
@@ -37,7 +55,22 @@ $(function () {
                 data: {id: session.id}
             })
         }
-    }, 1000)
+    }, 1000);
+
+    $('#dark-mode').on('change', () => {
+        if ($('#dark-mode').is(':checked')) {
+            $('body').addClass('dark-mode accent-light');
+            $('nav.main-header').addClass('navbar-dark');
+            storeSetting('darkmode', true);
+            toggleTinyMceSkin('boilerplate-dark', 'boilerplate-dark');
+        } else {
+            $('body').removeClass('dark-mode accent-light');
+            $('nav.main-header').removeClass('navbar-dark');
+            $('nav.main-header').addClass('navbar-' + $('nav.main-header').data('type'));
+            storeSetting('darkmode', false);
+            toggleTinyMceSkin('oxide', null);
+        }
+    })
 })
 
 $('.logout').click(function (e) {
@@ -50,10 +83,3 @@ $('.logout').click(function (e) {
     })) {
     }
 });
-
-(function () {
-    if (Boolean(sessionStorage.getItem('sidebar-toggle-collapsed'))) {
-        var body = document.getElementsByTagName('body')[0];
-        body.className = body.className + ' sidebar-collapse';
-    }
-})();

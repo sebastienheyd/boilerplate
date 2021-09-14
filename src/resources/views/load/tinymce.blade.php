@@ -27,7 +27,12 @@
                 args.content = args.content.replace(/\s(class|style|type|start)=("(.*?)"|(\w*))/gi, ''); // Unwanted attributes
                 args.content = args.content.replace(/<(p|a|div|span|strike|strong|i|u)[^>]*?>(\s|&nbsp;|<br\/>|\r|\n)*?<\/(p|a|div|span|strike|strong|i|u)>/gi, ''); // Empty tags
             },
-            skin : "boilerplate",
+@if(setting('darkmode', false) && config('boilerplate.theme.darkmode'))
+            skin : "boilerplate-dark",
+            content_css: 'boilerplate-dark',
+@else
+            skin : "oxide",
+@endif
 @if(App::getLocale() !== 'en')
             language: '{{ App::getLocale() }}'
 @endif

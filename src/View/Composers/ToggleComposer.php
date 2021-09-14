@@ -8,8 +8,9 @@ class ToggleComposer extends ComponentComposer
 {
     protected $props = [
         'class',
+        'colorOn',
         'color-on',
-        'color-off',
+        'colorOff',
         'color-off',
         'id',
         'label',
@@ -25,7 +26,7 @@ class ToggleComposer extends ComponentComposer
 
         $data = $view->getData();
 
-        $view->with('id', $data['id'] ?? uniqid('icheck_'));
+        $view->with('id', $data['id'] ?? uniqid('toggle_'));
         $view->with('checked', $data['checked'] ?? false);
 
         foreach (['class', 'name', 'value'] as $empty) {

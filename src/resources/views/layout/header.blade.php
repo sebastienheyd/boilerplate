@@ -1,4 +1,4 @@
-<nav class="main-header navbar navbar-expand navbar-{{ config('boilerplate.theme.navbar.bg') }} navbar-{{ config('boilerplate.theme.navbar.type') }} {{ config('boilerplate.theme.navbar.border') ? "" : "border-bottom-0" }}">
+<nav class="main-header navbar navbar-expand{{ config('boilerplate.theme.navbar.bg') === 'white' ? '' : ' navbar-'.config('boilerplate.theme.navbar.bg') }} navbar-{{ setting('darkmode', false) && config('boilerplate.theme.darkmode') ? 'dark' : config('boilerplate.theme.navbar.type') }} {{ config('boilerplate.theme.navbar.border') ? "" : "border-bottom-0" }}" data-type="{{ config('boilerplate.theme.navbar.type') }}">
     <div class="navbar-left d-flex">
         <ul class="nav navbar-nav">
             <li class="nav-item">
@@ -40,7 +40,12 @@
                 </div>
             </li>
             @endif
-            @if(config('boilerplate.theme.navbar.fullscreen'))
+            @if(config('boilerplate.theme.darkmode', false))
+                <li class="nav-item d-flex align-items-center justify-content-center">
+                    @component('boilerplate::toggle', ['colorOn' => 'dark', 'class' => 'mb-0', 'id' => 'dark-mode', 'checked' => setting('darkmode', false), 'data-toggle' => 'tooltip', 'title' => 'Test'])@endcomponent
+                </li>
+            @endif
+            @if(config('boilerplate.theme.fullscreen', false))
             <li class="nav-item">
                 <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                     <i class="fas fa-expand-arrows-alt"></i>

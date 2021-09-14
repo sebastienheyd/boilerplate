@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row mb-2 align-items-end">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">
+                <h1 class="m-0">
                     {{ $title }}
                     @if(isset($subtitle))
                         <small class="font-weight-light ml-1 text-md">{{ $subtitle }}</small>
