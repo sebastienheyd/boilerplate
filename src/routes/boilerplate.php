@@ -59,6 +59,7 @@ Route::group($default, function () {
             Route::any('users/dt', ['as' => 'users.datatable', 'uses' => 'Users\UsersController@datatable']);
             Route::get('userprofile', ['as' => 'user.profile', 'uses' => 'Users\UsersController@profile']);
             Route::post('userprofile', ['as' => 'user.profile.post', 'uses' => 'Users\UsersController@profilePost']);
+            Route::post('userprofile/settings', ['as' => 'settings', 'uses' => 'Users\UsersController@storeSetting']);
 
             // Avatar
             Route::get(

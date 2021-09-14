@@ -19,6 +19,8 @@ class User extends Authenticatable
     use LaratrustUserTrait;
     use SoftDeletes;
 
+    protected $casts = ['settings' => 'array'];
+
     protected $fillable = [
         'active',
         'last_name',
@@ -27,6 +29,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
         'last_login',
+        'settings',
     ];
 
     protected $hidden = ['password', 'remember_token'];
@@ -203,5 +206,33 @@ class User extends Authenticatable
         file_put_contents($this->getAvatarPathAttribute(), $img);
 
         return true;
+    }
+
+    /**
+     * Retrieve or store a setting with a given name or fall back to the default.
+     *
+     * @param string|array $name
+     * @param mixed  $default
+     *
+     * @return mixed|null
+     */
+    public function setting($name, $default = null)
+    {
+        if (is_array($name)) {
+            $this->settings = array_merge($this->settings ?? [], $name);
+            return $this->save();
+        }
+
+        $setting = $this->settings[$name] ?? $default;
+
+        if ($setting === "true") {
+            return true;
+        }
+
+        if ($setting === "false") {
+            return false;
+        }
+
+        return $setting;
     }
 }

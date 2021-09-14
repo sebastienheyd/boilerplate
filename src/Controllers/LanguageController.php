@@ -17,6 +17,7 @@ class LanguageController extends Controller
     public function switch($lang): RedirectResponse
     {
         if (in_array($lang, config('boilerplate.locale.allowed'))) {
+            setting(['locale' => $lang]);
             return Redirect::back()->withCookie(cookie()->forever('boilerplate_lang', $lang));
         }
 

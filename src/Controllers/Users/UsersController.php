@@ -367,9 +367,28 @@ class UsersController extends Controller
         return response()->json(['success' => Auth::user()->getAvatarFromGravatar()]);
     }
 
+    /**
+     * Session keep-alive.
+     *
+     * @param Request $request
+     */
     public function keepAlive(Request $request)
     {
         session()->setId($request->post('id'));
         session()->start();
+    }
+
+    /**
+     * Store setting for the current user.
+     *
+     * @param Request $request
+     */
+    public function storeSetting(Request $request)
+    {
+        if (!$request->isXmlHttpRequest()) {
+            abort(404);
+        }
+
+        return response()->json(['success' => setting([$request->post('name') => $request->post('value')])]);
     }
 }

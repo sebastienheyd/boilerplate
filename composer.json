@@ -31,6 +31,9 @@
         "sebastienheyd/boilerplate-email-editor": "Visual editor for e-mails for sebastienheyd/boilerplate"
     },
     "autoload": {
+        "files": [
+            "src/helpers.php"
+        ],
         "psr-4": {
             "Sebastienheyd\\Boilerplate\\": "src/"
         }

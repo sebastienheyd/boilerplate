@@ -21,7 +21,12 @@ class BoilerplateLocale
         App::setLocale(config('boilerplate.app.locale', config('app.locale')));
         Carbon::setLocale(config('boilerplate.app.locale', config('app.locale')));
 
-        $lang = $request->cookie('boilerplate_lang');
+        if (!config('boilerplate.locale.switch')) {
+            return $next($request);
+        }
+
+        $lang = setting('locale', $request->cookie('boilerplate_lang'));
+
         if (in_array($lang, config('boilerplate.locale.allowed'))) {
             App::setLocale($lang);
             Carbon::setLocale($lang);
