@@ -243,6 +243,10 @@ body.dark-mode {
   }
 }
 
+.custom-switch label {
+  cursor: pointer;
+}
+
 @media (min-width: 992px) {
   tr {
     td.visible-on-hover {

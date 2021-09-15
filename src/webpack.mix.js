@@ -1,6 +1,6 @@
 const mix = require('laravel-mix');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-mix.webpackConfig({plugins: [new CleanWebpackPlugin()]})
+mix.webpackConfig({plugins: [new CleanWebpackPlugin()],stats:'errors-only'})
     .setPublicPath("public")
     .setResourceRoot('/assets/vendor/boilerplate')
     .version();
