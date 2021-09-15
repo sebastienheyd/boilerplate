@@ -11,7 +11,7 @@ window.growl = (message, type) => {
 
 function storeSetting(settingName, settingValue) {
     $.ajax({
-        url: routes.settings,
+        url: bpRoutes.settings,
         type: 'post',
         data: {name: settingName, value: settingValue},
     });
