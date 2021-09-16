@@ -44,6 +44,12 @@
                 }
 @endisset
             });
+        }).on('select2:open', (e) => {
+            const t = $(e.target);
+            if (t && t.length) {
+                const id = t[0].id || t[0].name;
+                document.querySelector(`input[aria-controls*='${id}']`).focus();
+            }
         });
     </script>
 @endpush
