@@ -30,7 +30,6 @@
         "drmonty-datatables-plugins": "^1.10.12",
         "fullcalendar": "^5.5.1",
         "moment": "^2.29.1",
-        "stickytoolbar": "^2.2.1",
         "tinymce": "^5.9.1"
     }
 }

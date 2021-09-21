@@ -3,12 +3,12 @@
     <script src="{!! mix('/plugins/tinymce/tinymce.min.js', '/assets/vendor/boilerplate') !!}"></script>
     <script>
         tinymce.defaultSettings = {
-            plugins: "autoresize fullscreen codemirror link lists table media image imagetools paste customalign stickytoolbar",
+            plugins: "autoresize fullscreen codemirror link lists table media image imagetools paste customalign",
             toolbar: "undo redo | styleselect | bold italic underline | customalignleft aligncenter customalignright | link media image | bullist numlist | table | code fullscreen",
             contextmenu: "link image imagetools table spellchecker bold italic underline",
-            sticky_toolbar_container: '.tox-editor-header',
             toolbar_drawer: "sliding",
-            sticky_offset: $('nav.main-header').outerHeight(),
+            toolbar_sticky: true,
+            toolbar_sticky_offset: $('nav.main-header').outerHeight(),
             codemirror: { config: { theme: 'storm' } },
             menubar: false,
             removed_menuitems: 'newdocument',

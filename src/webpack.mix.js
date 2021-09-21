@@ -103,7 +103,6 @@ mix.copy('resources/assets/js/vendor/tinymce/plugins', 'public/plugins/tinymce/p
 mix.copy('node_modules/tinymce/icons', 'public/plugins/tinymce/icons');
 mix.copy('node_modules/tinymce/skins', 'public/plugins/tinymce/skins');
 mix.copy('node_modules/tinymce/themes', 'public/plugins/tinymce/themes');
-mix.copy('node_modules/stickytoolbar/dist', 'public/plugins/tinymce/plugins');
 
 // Boilerplate dark mode
 mix.copy('resources/assets/js/vendor/tinymce/skins/boilerplate-dark/skins/content', 'public/plugins/tinymce/skins/content');

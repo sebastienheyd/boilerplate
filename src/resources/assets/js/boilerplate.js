@@ -19,20 +19,22 @@ function storeSetting(settingName, settingValue) {
 
 function toggleTinyMceSkin(skin, css)
 {
-    if(tinymce.get().length === 0) {
+    if(typeof tinymce === 'undefined' || tinymce.get().length === 0) {
         return false;
     }
+
+    //window.removeEventListener('scroll', () => {});
 
     tinymce.get().forEach(e => {
         e.settings.skin = skin;
         e.settings.content_css = css;
-        $('#'+e.settings.id).tinymce().remove();
+        $('#'+e.settings.id).tinymce().destroy(false);
         $('#'+e.settings.id).tinymce(e.settings);
     })
 }
 
-$('.sidebar-toggle').on('click', (event) => {
-    event.preventDefault();
+$('.sidebar-toggle').on('click', e => {
+    e.preventDefault();
     storeSetting('sidebar-collapsed', !$('body').hasClass('sidebar-collapse'));
 })
 
@@ -57,29 +59,30 @@ $(() => {
         }
     }, 1000);
 
-    $('#dark-mode').on('change', () => {
-        if ($('#dark-mode').is(':checked')) {
+    $('[data-widget="darkmode"]').on('click', function(e) {
+        e.preventDefault();
+        if($('body').hasClass('dark-mode')) {
+            $(this).html('<i class="far fa-moon"></i>');
+            $('body').removeClass('dark-mode accent-light');
+            $('nav.main-header').removeClass('navbar-dark').addClass('navbar-' + $('nav.main-header').data('type'));
+            storeSetting('darkmode', false);
+            toggleTinyMceSkin('oxide', null);
+        } else {
+            $(this).html('<i class="fas fa-fw fa-sun"></i>');
             $('body').addClass('dark-mode accent-light');
             $('nav.main-header').addClass('navbar-dark');
             storeSetting('darkmode', true);
             toggleTinyMceSkin('boilerplate-dark', 'boilerplate-dark');
-        } else {
-            $('body').removeClass('dark-mode accent-light');
-            $('nav.main-header').removeClass('navbar-dark');
-            $('nav.main-header').addClass('navbar-' + $('nav.main-header').data('type'));
-            storeSetting('darkmode', false);
-            toggleTinyMceSkin('oxide', null);
         }
-    })
+    });
 })
 
-$('.logout').click(function (e) {
+$('.logout').click(function(e) {
     e.preventDefault();
-    if (bootbox.confirm($(this).attr('data-question'), function (e) {
-        if (e === false) {
+    bootbox.confirm($(this).attr('data-question'), res => {
+        if (res === false) {
             return;
         }
         $('#logout-form').submit();
-    })) {
-    }
+    });
 });
