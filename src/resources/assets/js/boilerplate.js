@@ -23,8 +23,6 @@ function toggleTinyMceSkin(skin, css)
         return false;
     }
 
-    //window.removeEventListener('scroll', () => {});
-
     tinymce.get().forEach(e => {
         e.settings.skin = skin;
         e.settings.content_css = css;
@@ -62,7 +60,7 @@ $(() => {
     $('[data-widget="darkmode"]').on('click', function(e) {
         e.preventDefault();
         if($('body').hasClass('dark-mode')) {
-            $(this).html('<i class="far fa-moon"></i>');
+            $(this).html('<i class="far fa-fw fa-moon"></i>');
             $('body').removeClass('dark-mode accent-light');
             $('nav.main-header').removeClass('navbar-dark').addClass('navbar-' + $('nav.main-header').data('type'));
             storeSetting('darkmode', false);

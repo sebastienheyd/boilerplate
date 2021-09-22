@@ -1,0 +1,111 @@
+$background: #343a40;
+$border: #6c757d;
+
+#dark-mode {
+  & ~ .custom-control-label::before {
+    box-shadow: none !important;
+  }
+}
+
+body.dark-mode {
+  pre {
+    background: #222;
+    color: #CCC;
+    border-color: #444;
+  }
+
+  .card.card-outline-tabs {
+    border-top: 0;
+  }
+
+  &.accent-light {
+    .page-item.active a, .page-item.active .page-link {
+      color: #333;
+
+      &:hover, &:focus {
+        background-color: #ffffff !important;
+        color: #000 !important;
+      }
+    }
+  }
+
+  .bootstrap-datetimepicker-widget {
+    &.dropdown-menu {
+      border: 1px solid $border;
+    }
+
+    table {
+      td {
+        &.day:hover {
+          color: #333;
+        }
+
+        &.active, &.active:hover {
+          background-color: #ebecec;
+          color: #000;
+        }
+
+        span {
+          &:hover {
+            color: #333;
+          }
+
+          &.active, &.active:hover {
+            background-color: #ebecec;
+          }
+        }
+      }
+
+      thead tr:first-child th:hover {
+        color: #333;
+      }
+    }
+
+    &.dropdown-menu.bottom {
+      &::before {
+        border-bottom: 7px solid $border;
+      }
+
+      &::after {
+        border-bottom: 6px solid $border;
+      }
+    }
+  }
+
+  .daterangepicker {
+    background: $background;
+    color: #FFF;
+    border-color: $border;
+
+    &:after, &:before {
+      border-bottom: 6px solid $border;
+    }
+
+    .drp-buttons {
+      border-top: none;
+    }
+
+    .calendar-table {
+      background: darken($background, 5%);
+      border: none;
+    }
+
+    td.off, td.off.in-range, td.off.start-date, td.off.end-date {
+      background: #222;
+    }
+
+    select.hourselect, select.minuteselect, select.secondselect, select.ampmselect {
+      background: #292d32;
+      color: #FFF;
+      border-color: $border;
+    }
+
+    td.available:hover, th.available:hover {
+      color: #333;
+    }
+
+    .ranges li:hover {
+      color: #333;
+    }
+  }
+}

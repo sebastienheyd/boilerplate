@@ -225,24 +225,6 @@ aside.control-sidebar {
   }
 }
 
-#dark-mode {
-  & ~ .custom-control-label::before {
-    box-shadow: none !important;
-  }
-}
-
-body.dark-mode {
-  pre {
-    background: #222;
-    color: #CCC;
-    border-color: #444;
-  }
-
-  .card.card-outline-tabs {
-    border-top: 0;
-  }
-}
-
 .custom-switch label {
   cursor: pointer;
 }
@@ -265,3 +247,5 @@ body.dark-mode {
     }
   }
 }
+
+@import "darkmode";

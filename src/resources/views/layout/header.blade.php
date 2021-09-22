@@ -46,7 +46,7 @@
                     @if(setting('darkmode', false))
                     <i class="fas fa-fw fa-sun"></i>
                     @else
-                    <i class="far fa-moon"></i>
+                    <i class="far fa-fw fa-moon"></i>
                     @endif
                 </a>
             </li>
