@@ -1,5 +1,5 @@
 /*!
- * bootstrap-fileinput v5.2.3
+ * bootstrap-fileinput v5.2.5
  * http://plugins.krajee.com/file-input
  *
  * Font Awesome icon theme configuration for bootstrap-fileinput. Requires font awesome assets to be loaded.
@@ -10,7 +10,16 @@
  * Licensed under the BSD-3-Clause
  * https://github.com/kartik-v/bootstrap-fileinput/blob/master/LICENSE.md
  */
-(function ($) {
+(function (factory) {
+    'use strict';
+    if (typeof define === 'function' && define.amd) {
+        define(['jquery'],factory);
+    } else if (typeof module === 'object' && typeof module.exports === 'object') {
+        factory(require('jquery'));
+    } else {
+        factory(window.jQuery);
+    }
+}(function ($) {
     "use strict";
 
     $.fn.fileinputThemes.fa = {
@@ -46,4 +55,4 @@
         uploadIcon: '<i class="fa fa-upload"></i>',
         msgValidationErrorIcon: '<i class="fa fa-exclamation-circle"></i> '
     };
-})(window.jQuery);
+}));
