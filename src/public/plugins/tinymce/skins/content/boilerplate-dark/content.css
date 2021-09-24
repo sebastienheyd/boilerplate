@@ -14,11 +14,6 @@ body {
 table {
   border-collapse: collapse;
 }
-table th,
-table td {
-  border: 1px solid #ccc;
-  padding: 0.4rem;
-}
 figure {
   display: table;
   margin: 1rem auto;
