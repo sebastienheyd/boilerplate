@@ -52,7 +52,7 @@
             $('input[name="{{ $name }}"]').val('');
             if ($('input[name="{{ $name }}_local"]').val() !== '') {
                 let date = $('#{{ $id }}').datetimepicker('viewDate').format('{{ $format === 'L' ? 'YYYY-MM-DD' : 'YYYY-MM-DD HH:mm:ss' }}');
-                $('input[name="{{ $name }}"]').val(date);
+                $('input[name="{{ $name }}"]').val(date).trigger('change');
             }
         })
     </script>
