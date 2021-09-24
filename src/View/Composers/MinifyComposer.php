@@ -8,7 +8,7 @@ use MatthiasMullie\Minify;
 class MinifyComposer extends ComponentComposer
 {
     protected $props = [
-        'type' => 'js'
+        'type' => 'js',
     ];
 
     public function compose(View $view)
