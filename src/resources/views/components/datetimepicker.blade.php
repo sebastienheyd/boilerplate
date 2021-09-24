@@ -36,6 +36,7 @@
 </div>
 @include('boilerplate::load.datepicker')
 @push('js')
+@component('boilerplate::minify')
     <script>
         $('#{{ $id }}').datetimepicker({
             format: "{{ $format }}",
@@ -54,5 +55,7 @@
                 $('input[name="{{ $name }}"]').val(date);
             }
         })
-    </script>@endpush
+    </script>
+@endcomponent
+@endpush
 @endif

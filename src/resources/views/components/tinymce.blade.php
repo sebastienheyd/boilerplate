@@ -7,7 +7,5 @@
 @else
 @include('boilerplate::load.tinymce')
 @endif
-@push('js')
-    <script>$(function(){$('#{{ $id }}').tinymce({})});</script>
-@endpush
+@push('js')<script>$(function(){$('#{{ $id }}').tinymce({})});</script>@endpush()
 @endif

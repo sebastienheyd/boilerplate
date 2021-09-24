@@ -1,6 +1,7 @@
 @include('boilerplate::load.datatables')
 
 @push('js')
+@component('boilerplate::minify')
 <script>
     $(function() {
         $('#dt').dataTable({
@@ -12,6 +13,7 @@
         });
     });
 </script>
+@endcomponent
 @endpush
 
 @component('boilerplate::card', ['color' => 'orange', 'title' => 'Datatables'])

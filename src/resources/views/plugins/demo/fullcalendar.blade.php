@@ -1,6 +1,7 @@
 @include('boilerplate::load.fullcalendar')
 
 @push('js')
+@component('boilerplate::minify')
     <script>
         $('#calendar').fullCalendar({
             headerToolbar: {
@@ -15,6 +16,7 @@
             events: 'https://fullcalendar.io/demo-events.json?overload-day'
         })
     </script>
+@endcomponent
 @endpush
 
 @component('boilerplate::card', ['color' => 'success', 'title' => 'FullCalendar'])

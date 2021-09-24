@@ -41,26 +41,16 @@
     <script src="{{ mix('/bootstrap.min.js', '/assets/vendor/boilerplate') }}"></script>
     <script src="{{ mix('/admin-lte.min.js', '/assets/vendor/boilerplate') }}"></script>
     <script src="{{ mix('/boilerplate.min.js', '/assets/vendor/boilerplate') }}"></script>
-    <script>
-        $.ajaxSetup({headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'}});
-        bootbox.setLocale('{{ App::getLocale() }}');
-        var bpRoutes = {
-            settings: "{{ route('boilerplate.settings', null, false) }}",
-        }
-        var session = {
-            keepalive: "{{ route('boilerplate.keepalive', null, false) }}",
-            expire: {{ time() +  config('session.lifetime') * 60 }},
-            lifetime:  {{ config('session.lifetime') * 60 }},
-            id: "{{ session()->getId() }}"
-        }
+    <script>$.ajaxSetup({headers:{'X-CSRF-TOKEN':'{{ csrf_token() }}'}});bootbox.setLocale('{{ App::getLocale() }}');var bpRoutes={settings:"{{ route('boilerplate.settings',null,false) }}"};var session={keepalive:"{{ route('boilerplate.keepalive', null, false) }}",expire:{{ time() +  config('session.lifetime') * 60 }},lifetime:{{ config('session.lifetime') * 60 }},id:"{{ session()->getId() }}"}</script>
 @if(Session::has('growl'))
+    <script>
 @if(is_array(Session::get('growl')))
         growl("{!! Session::get('growl')[0] !!}", "{{ Session::get('growl')[1] }}");
 @else
         growl("{{Session::get('growl')}}");
 @endif
-@endif
     </script>
+@endif
 @stack('js')
 </body>
 </html>

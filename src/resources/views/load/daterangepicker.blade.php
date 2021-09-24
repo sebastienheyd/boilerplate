@@ -5,6 +5,7 @@
 @push('js')
     @include('boilerplate::load.moment')
     <script src="{!! mix('/plugins/datepicker/daterangepicker.min.js', '/assets/vendor/boilerplate') !!}"></script>
+    @component('boilerplate::minify')
     <script>
         $.fn.daterangepicker.defaultOptions = {
             locale: {
@@ -16,5 +17,6 @@
             }
         };
     </script>
+    @endcomponent
 @endpush
 @endonce

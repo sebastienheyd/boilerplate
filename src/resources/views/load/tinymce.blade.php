@@ -1,5 +1,6 @@
 @once
 @push('js')
+@component('boilerplate::minify')
     <script src="{!! mix('/plugins/tinymce/tinymce.min.js', '/assets/vendor/boilerplate') !!}"></script>
     <script>
         tinymce.defaultSettings = {
@@ -38,5 +39,6 @@
 @endif
         };
     </script>
+@endcomponent
 @endpush
 @endonce

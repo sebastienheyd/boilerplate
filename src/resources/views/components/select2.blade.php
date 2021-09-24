@@ -26,6 +26,7 @@
 </div>
 @include('boilerplate::load.select2')
 @push('js')
+@component('boilerplate::minify')
     <script>
         $(function () {
             $('#{{ $id }}').select2({
@@ -43,8 +44,9 @@
                     method: 'post'
                 }
 @endisset
-            });
-        });
+            })
+        })
     </script>
+@endcomponent
 @endpush
 @endif

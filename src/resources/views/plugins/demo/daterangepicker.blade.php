@@ -1,5 +1,6 @@
 @include('boilerplate::load.daterangepicker')
 @push('js')
+@component('boilerplate::minify')
 <script>
     $(function() {
         // Date range picker
@@ -26,6 +27,7 @@
         );
     });
 </script>
+@endcomponent
 @endpush
 
 @component('boilerplate::card', ['color' => 'red', 'title' => 'Daterangepicker'])

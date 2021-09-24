@@ -5,6 +5,7 @@
 @push('js')
     @include('boilerplate::load.moment')
     <script src="{!! mix('/plugins/datepicker/datetimepicker.min.js', '/assets/vendor/boilerplate') !!}"></script>
+    @component('boilerplate::minify')
     <script>
         $.fn.datetimepicker.Constructor.Default = $.extend({}, $.fn.datetimepicker.Constructor.Default, {
             locale: "{{ App::getLocale() }}",
@@ -21,5 +22,6 @@
             })
         });
     </script>
+    @endcomponent
 @endpush
 @endonce
