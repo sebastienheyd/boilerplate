@@ -19,12 +19,7 @@ class MinifyComposer extends ComponentComposer
             return;
         }
 
-        if ($this->props['type'] === 'js') {
-            $minifier = new Minify\JS($view->slot);
-        } else {
-            $minifier = new Minify\CSS($view->slot);
-        }
-
+        $minifier = $this->props['type'] === 'js' ? new Minify\JS($view->slot) : new Minify\CSS($view->slot);
         $view->slot = $minifier->minify();
     }
 }
