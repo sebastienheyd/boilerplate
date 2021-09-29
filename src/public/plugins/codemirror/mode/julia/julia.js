@@ -12,10 +12,9 @@
 "use strict";
 
 CodeMirror.defineMode("julia", function(config, parserConf) {
-  function wordRegexp(words, end, pre) {
-    if (typeof pre === "undefined") { pre = ""; }
+  function wordRegexp(words, end) {
     if (typeof end === "undefined") { end = "\\b"; }
-    return new RegExp("^" + pre + "((" + words.join(")|(") + "))" + end);
+    return new RegExp("^((" + words.join(")|(") + "))" + end);
   }
 
   var octChar = "\\\\[0-7]{1,3}";
@@ -23,18 +22,13 @@ CodeMirror.defineMode("julia", function(config, parserConf) {
   var sChar = "\\\\[abefnrtv0%?'\"\\\\]";
   var uChar = "([^\\u0027\\u005C\\uD800-\\uDFFF]|[\\uD800-\\uDFFF][\\uDC00-\\uDFFF])";
 
-  var asciiOperatorsList = [
-    "[<>]:", "[<>=]=", "<<=?", ">>>?=?", "=>", "--?>", "<--[->]?", "\\/\\/",
-    "\\.{2,3}", "[\\.\\\\%*+\\-<>!\\/^|&]=?", "\\?", "\\$", "~", ":"
-  ];
   var operators = parserConf.operators || wordRegexp([
-    "[<>]:", "[<>=]=", "<<=?", ">>>?=?", "=>", "--?>", "<--[->]?", "\\/\\/",
-    "[\\\\%*+\\-<>!\\/^|&\\u00F7\\u22BB]=?", "\\?", "\\$", "~", ":",
-    "\\u00D7", "\\u2208", "\\u2209", "\\u220B", "\\u220C", "\\u2218",
-    "\\u221A", "\\u221B", "\\u2229", "\\u222A", "\\u2260", "\\u2264",
-    "\\u2265", "\\u2286", "\\u2288", "\\u228A", "\\u22C5",
-    "\\b(in|isa)\\b(?!\.?\\()"
-  ], "");
+        "[<>]:", "[<>=]=", "<<=?", ">>>?=?", "=>", "->", "\\/\\/",
+        "[\\\\%*+\\-<>!=\\/^|&\\u00F7\\u22BB]=?", "\\?", "\\$", "~", ":",
+        "\\u00D7", "\\u2208", "\\u2209", "\\u220B", "\\u220C", "\\u2218",
+        "\\u221A", "\\u221B", "\\u2229", "\\u222A", "\\u2260", "\\u2264",
+        "\\u2265", "\\u2286", "\\u2288", "\\u228A", "\\u22C5",
+        "\\b(in|isa)\\b(?!\.?\\()"], "");
   var delimiters = parserConf.delimiters || /^[;,()[\]{}]/;
   var identifiers = parserConf.identifiers ||
         /^[_A-Za-z\u00A1-\u2217\u2219-\uFFFF][\w\u00A1-\u2217\u2219-\uFFFF]*!*/;
@@ -63,12 +57,9 @@ CodeMirror.defineMode("julia", function(config, parserConf) {
   var keywords = wordRegexp(keywordsList);
   var builtins = wordRegexp(builtinsList);
 
-  var macro = /^@[_A-Za-z\u00A1-\uFFFF][\w\u00A1-\uFFFF]*!*/;
+  var macro = /^@[_A-Za-z][\w]*/;
   var symbol = /^:[_A-Za-z\u00A1-\uFFFF][\w\u00A1-\uFFFF]*!*/;
   var stringPrefixes = /^(`|([_A-Za-z\u00A1-\uFFFF]*"("")?))/;
-
-  var macroOperators = wordRegexp(asciiOperatorsList, "", "@");
-  var symbolOperators = wordRegexp(asciiOperatorsList, "", ":");
 
   function inArray(state) {
     return (state.nestedArrays > 0);
@@ -174,7 +165,8 @@ CodeMirror.defineMode("julia", function(config, parserConf) {
     }
 
     // Handle symbols
-    if (!leavingExpr && (stream.match(symbol) || stream.match(symbolOperators))) {
+    if (!leavingExpr && stream.match(symbol) ||
+        stream.match(/:([<>]:|<<=?|>>>?=?|->|\/\/|\.{2,3}|[\.\\%*+\-<>!\/^|&]=?|[~\?\$])/)) {
       return "builtin";
     }
 
@@ -220,7 +212,7 @@ CodeMirror.defineMode("julia", function(config, parserConf) {
       return state.tokenize(stream, state);
     }
 
-    if (stream.match(macro) || stream.match(macroOperators)) {
+    if (stream.match(macro)) {
       return "meta";
     }
 
