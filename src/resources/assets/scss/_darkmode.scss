@@ -112,4 +112,34 @@ body.dark-mode {
       color: #333;
     }
   }
+
+  .input-group-append .btn-outline-secondary {
+    border-color: #6c757d;
+    background-color: #3a4147;
+  }
+
+  .popover {
+    background: $background;
+    border-color: $border;
+
+    .arrow {
+      &:after {
+        border-bottom-color: $border;
+        border-top-color: $border;
+      }
+    }
+
+    &-header {
+      background: darken($background, 5%);
+      border-bottom: 0;
+
+      &:before {
+        border-color: darken($background, 5%);
+      }
+    }
+
+    &-body {
+      color: #FFF;
+    }
+  }
 }

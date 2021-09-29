@@ -5,13 +5,20 @@ namespace Sebastienheyd\Boilerplate\Controllers\Users;
 use App\Http\Controllers\Controller;
 use Auth;
 use Carbon\Carbon;
-use DataTables;
-use Gravatar;
+use Exception;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Image;
+use Illuminate\Validation\ValidationException;
+use Intervention\Image\Facades\Image;
 use Sebastienheyd\Boilerplate\Models\Role;
 use Sebastienheyd\Boilerplate\Models\User;
+use Sebastienheyd\Boilerplate\Rules\Password;
+use Yajra\DataTables\Facades\DataTables;
 
 class UsersController extends Controller
 {
@@ -38,13 +45,11 @@ class UsersController extends Controller
     /**
      * Display a listing of users.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Application|Factory|View
      */
     public function index()
     {
-        $roles = Role::all();
-
-        return view('boilerplate::users.list', compact('roles'));
+        return view('boilerplate::users.list', ['roles' => Role::all()]);
     }
 
     /**
@@ -53,7 +58,7 @@ class UsersController extends Controller
      * @param  Request  $request
      * @return mixed
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function datatable(Request $request)
     {
@@ -124,27 +129,22 @@ class UsersController extends Controller
     /**
      * Show the form for creating a new user.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function create()
     {
-        // Filter roles if not admin
-        if (! Auth::user()->hasRole('admin')) {
-            $roles = Role::whereNotIn('name', ['admin'])->get();
-        } else {
-            $roles = Role::all();
-        }
-
-        return view('boilerplate::users.create', ['roles' => $roles]);
+        return view('boilerplate::users.create', [
+            'roles' => Auth::user()->hasRole('admin') ? Role::all() : Role::whereNotIn('name', ['admin'])->get()
+        ]);
     }
 
     /**
      * Store a newly created user in storage.
      *
      * @param  Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function store(Request $request)
     {
@@ -163,7 +163,7 @@ class UsersController extends Controller
         $user->restore();
         $user->roles()->sync(array_keys($request->input('roles', [])));
 
-        $user->sendNewUserNotification($input['remember_token'], Auth::user());
+        $user->sendNewUserNotification($input['remember_token']);
 
         return redirect()->route('boilerplate.users.edit', $user)
             ->with('growl', [__('boilerplate::users.successadd'), 'success']);
@@ -172,40 +172,35 @@ class UsersController extends Controller
     /**
      * Show the form for editing the specified user.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param User $user
+     *
+     * @return Application|Factory|View
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        $user = User::findOrFail($id);
-
-        if (! Auth::user()->hasRole('admin')) {
-            $roles = Role::whereNotIn('name', ['admin'])->get();
-        } else {
-            $roles = Role::all();
-        }
-
-        return view('boilerplate::users.edit', compact('user', 'roles'));
+        return view('boilerplate::users.edit', [
+            'user' => $user,
+            'roles' => Auth::user()->hasRole('admin') ? Role::all() : Role::whereNotIn('name', ['admin'])->get(),
+        ]);
     }
 
     /**
      * Update the specified user in storage.
      *
-     * @param  Request  $request
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @param User    $user
+     * @param Request $request
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @return RedirectResponse
+     *
+     * @throws ValidationException
      */
-    public function update(Request $request, $id)
+    public function update(User $user, Request $request): RedirectResponse
     {
         $this->validate($request, [
             'last_name'  => 'required',
             'first_name' => 'required',
-            'email'      => 'required|email|unique:users,email,'.$id,
+            'email'      => 'required|email|unique:users,email,'.$user->id,
         ]);
-
-        $user = User::findOrFail($id);
 
         $user->update($request->all());
 
@@ -218,22 +213,23 @@ class UsersController extends Controller
     /**
      * Remove the specified user from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param User $user
+     *
+     * @return JsonResponse
      */
-    public function destroy($id)
+    public function destroy(User $user): JsonResponse
     {
-        User::destroy($id);
+        return response()->json(['success' => $user->delete() ?? false]);
     }
 
     /**
      * Show the form to set a new password on the first login.
      *
      * @param $token
-     * @param  Request  $request
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
+     * @return Application|Factory|View
      */
-    public function firstLogin($token, Request $request)
+    public function firstLogin($token)
     {
         $user = User::where(['remember_token' => $token])->firstOrFail();
 
@@ -244,9 +240,9 @@ class UsersController extends Controller
      * Store a newly created password in storage after the first login.
      *
      * @param  Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function firstLoginPost(Request $request)
     {
@@ -269,17 +265,30 @@ class UsersController extends Controller
                          ->with('growl', [__('boilerplate::users.newpassword'), 'success']);
     }
 
+    /**
+     * Show user profile page.
+     *
+     * @return Application|Factory|View
+     */
     public function profile()
     {
         return view('boilerplate::users.profile', ['user' => Auth::user()]);
     }
 
+    /**
+     * Post user profile.
+     *
+     * @param Request $request
+     *
+     * @return RedirectResponse
+     */
     public function profilePost(Request $request)
     {
         $this->validate($request, [
             'avatar'                => 'mimes:jpeg,png|max:10000',
             'last_name'             => 'required',
             'first_name'            => 'required',
+            'password'              => ['nullable', new Password()],
             'password_confirmation' => 'same:password',
         ]);
 
@@ -301,7 +310,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Get avatar url for ajax refresh.
+     * Get profile picture url.
      *
      * @return string
      */
@@ -311,21 +320,29 @@ class UsersController extends Controller
     }
 
     /**
-     * Delete avatar image.
+     * Delete profile picture.
+     *
+     * @return JsonResponse
      */
     public function avatarDelete()
     {
-        $user = Auth::user();
-        $user->deleteAvatar();
+        return response()->json(['success' => Auth::user()->deleteAvatar()]);
     }
 
+    /**
+     * Avatar upload post.
+     *
+     * @param Request $request
+     *
+     * @return JsonResponse
+     */
     public function avatarUpload(Request $request)
     {
         $user = Auth::user();
         $avatar = $request->file('avatar');
 
         try {
-            if ($avatar && $file = $avatar->isValid()) {
+            if ($avatar && $avatar->isValid()) {
                 $destinationPath = dirname($user->avatar_path);
                 if (! is_dir($destinationPath)) {
                     mkdir($destinationPath, 0766, true);
@@ -352,7 +369,7 @@ class UsersController extends Controller
     /**
      * Get avatar from Gravatar.com.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function getAvatarFromGravatar()
     {
@@ -373,7 +390,9 @@ class UsersController extends Controller
     /**
      * Store setting for the current user.
      *
-     * @param  Request  $request
+     * @param Request $request
+     *
+     * @return JsonResponse
      */
     public function storeSetting(Request $request)
     {

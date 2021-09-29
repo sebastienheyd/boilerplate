@@ -53,10 +53,10 @@
                             @component('boilerplate::input', ['name' => 'last_name', 'label' => 'boilerplate::users.lastname', 'value' => $user->last_name])@endcomponent
                         </div>
                         <div class="col-md-6">
-                            @component('boilerplate::input', ['type' => 'password', 'name' => 'password', 'label' => ucfirst(__('boilerplate::auth.fields.password'))])@endcomponent
+                            @component('boilerplate::password', ['name' => 'password', 'label' => ucfirst(__('boilerplate::auth.fields.password'))])@endcomponent
                         </div>
                         <div class="col-md-6">
-                            @component('boilerplate::input', ['type' => 'password', 'name' => 'password_confirmation', 'label' => ucfirst(__('boilerplate::auth.fields.password_confirm'))])@endcomponent
+                            @component('boilerplate::password', ['name' => 'password_confirmation', 'label' => ucfirst(__('boilerplate::auth.fields.password_confirm')), 'check' => false])@endcomponent
                         </div>
                     </div>
                 @endcomponent

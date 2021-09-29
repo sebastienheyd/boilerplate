@@ -34,6 +34,7 @@ return [
         'lastconnect'   => 'Last log',
         'confirmdelete' => 'Do you confirm that you want to delete this user ?',
         'deletesuccess' => 'The user has been correctly deleted',
+        'deleteerror'   => 'An error occured when trying to delete the user',
     ],
     'profile' => [
         'title'            => 'My profile',

@@ -136,6 +136,7 @@ class BoilerplateServiceProvider extends ServiceProvider
             'infobox',
             'input',
             'minify',
+            'password',
             'select2',
             'smallbox',
             'tinymce',

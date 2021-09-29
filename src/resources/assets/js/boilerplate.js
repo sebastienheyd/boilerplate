@@ -84,3 +84,10 @@ $('.logout').click(function(e) {
         $('#logout-form').submit();
     });
 });
+
+$('[data-toggle=password]').on('click', function(e) {
+    e.preventDefault();
+    $(this).children().toggleClass('fa-eye fa-eye-slash');
+    let p = $(this).closest('.input-group').find('input');
+    p.attr('type', p.attr('type') === 'text' ? 'password' : 'text');
+});

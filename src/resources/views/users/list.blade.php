@@ -62,6 +62,7 @@
 @include('boilerplate::load.select2')
 
 @push('js')
+@component('boilerplate::minify')
     <script>
         $('.select2').select2({
             minimumResultsForSearch: -1,
@@ -98,7 +99,7 @@
                         data: 'last_login',
                         name: 'last_login',
                         searchable: false,
-                        render: function(date) {
+                        render: (date) => {
                             return date === null ? '-' : moment(date).fromNow(date)
                         }
                     },
@@ -144,15 +145,20 @@
                     $.ajax({
                         url: href,
                         method: 'delete',
-                        success: function () {
-                            oTable.ajax.reload();
-                            growl("@lang('boilerplate::users.list.deletesuccess')", "success");
+                        success: function (res) {
+                            if(res.success) {
+                                oTable.ajax.reload();
+                                growl("@lang('boilerplate::users.list.deletesuccess')", "success");
+                            } else {
+                                growl("@lang('boilerplate::users.list.deleteerror')", "error");
+                            }
                         }
                     });
                 });
             });
         });
     </script>
+@endcomponent
 @endpush
 
 @push('css')

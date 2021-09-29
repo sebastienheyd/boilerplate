@@ -1,0 +1,41 @@
+<?php
+
+namespace Sebastienheyd\Boilerplate\View\Composers;
+
+use Illuminate\Support\Str;
+use Illuminate\View\View;
+
+class PasswordComposer extends ComponentComposer
+{
+    protected $props = [
+        'check',
+        'class',
+        'errors',
+        'groupClass',
+        'group-class',
+        'groupId',
+        'group-id',
+        'label',
+        'length',
+        'name',
+        'options',
+        'value',
+    ];
+
+    public function compose(View $view)
+    {
+        parent::compose($view);
+
+        $data = $view->getData();
+
+        $view->with('name', $data['name'] ?? '');
+        $view->with('check', $data['check'] ?? true);
+        $view->with('length', $data['length'] ?? 8);
+
+        if (isset($data['placeholder'])) {
+            $this->attributes['placeholder'] = __($data['placeholder']);
+        }
+
+        $view->with('attributes', $this->attributes);
+    }
+}

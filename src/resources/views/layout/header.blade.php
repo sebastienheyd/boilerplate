@@ -22,13 +22,11 @@
                     {{ Config::get('boilerplate.locale.languages.'.App::getLocale().'.label') }}
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" style="left: inherit; right: 0px;">
-                    @foreach(collect(config('boilerplate.locale.languages'))->map(function($e){return $e['label'];})->toArray() as $lang => $label)
-                        @if ($lang !== App::getLocale())
-                            <a href="{{ route('boilerplate.lang.switch', $lang) }}" class="dropdown-item">
-                                {{ $label }}
-                            </a>
-                        @endif
-                    @endforeach
+@foreach(collect(config('boilerplate.locale.languages'))->map(function($e){return $e['label'];})->toArray() as $lang => $label)
+@if ($lang !== App::getLocale())
+                    <a href="{{ route('boilerplate.lang.switch', $lang) }}" class="dropdown-item">{{ $label }}</a>
+@endif
+@endforeach
                 </div>
             </li>
             @endif

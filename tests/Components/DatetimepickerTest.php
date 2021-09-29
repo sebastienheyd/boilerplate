@@ -202,43 +202,9 @@ HTML;
     <input name="test" type="hidden">
 </div>
     <script src=""></script>
-    <script>moment.locale('en');</script>
+<script>moment.locale('en')</script>
     <script src=""></script>
-    <script>
-        $.fn.datetimepicker.Constructor.Default = $.extend({}, $.fn.datetimepicker.Constructor.Default, {
-            locale: "en",
-            icons: $.extend({}, $.fn.datetimepicker.Constructor.Default.icons, {
-                time: 'far fa-clock',
-                date: 'far fa-calendar',
-                up: 'fas fa-arrow-up',
-                down: 'fas fa-arrow-down',
-                previous: 'fas fa-chevron-left',
-                next: 'fas fa-chevron-right',
-                today: 'far fa-calendar-check',
-                clear: 'fas fa-trash',
-                close: 'fas fa-times'
-            })
-        });
-    </script>
-    <script>
-        $('#test').datetimepicker({
-            format: "L",
-            buttons: {
-                showToday: false,
-                showClear: false,
-                showClose: false
-            },
-            useCurrent: false,
-        });
-
-        $('#test').on('change.datetimepicker', () => {
-            $('input[name="test"]').val('');
-            if ($('input[name="test_local"]').val() !== '') {
-                let date = $('#test').datetimepicker('viewDate').format('YYYY-MM-DD');
-                $('input[name="test"]').val(date);
-            }
-        })
-    </script>
+    <script>$.fn.datetimepicker.Constructor.Default=$.extend({},$.fn.datetimepicker.Constructor.Default,{locale:"en",icons:$.extend({},$.fn.datetimepicker.Constructor.Default.icons,{time:'far fa-clock',date:'far fa-calendar',up:'fas fa-arrow-up',down:'fas fa-arrow-down',previous:'fas fa-chevron-left',next:'fas fa-chevron-right',today:'far fa-calendar-check',clear:'fas fa-trash',close:'fas fa-times'})});</script><script>$('#test').datetimepicker({format:"L",buttons:{showToday:!1,showClear:!1,showClose:!1},useCurrent:!1,});$('#test').on('change.datetimepicker',()=>{$('input[name="test"]').val('');if($('input[name="test_local"]').val()!==''){let date=$('#test').datetimepicker('viewDate').format('YYYY-MM-DD');$('input[name="test"]').val(date).trigger('change')}})</script>
 HTML;
         if ($this->isLaravelEqualOrGreaterThan7) {
             $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" />@stack("js")');

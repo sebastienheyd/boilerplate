@@ -3,13 +3,16 @@
 namespace Sebastienheyd\Boilerplate\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 
 class DashboardController extends Controller
 {
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return Application|Factory|View
      */
     public function index()
     {

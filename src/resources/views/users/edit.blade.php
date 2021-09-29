@@ -50,14 +50,14 @@
                 @endcomponent
                 @component('boilerplate::card', ['title' => __('boilerplate::users.informations')])
                     <div class="row">
-                        <div class="col-md-6">
                         @if(Auth::user()->id !== $user->id)
+                        <div class="col-md-6">
                             @component('boilerplate::select2', ['name' => 'active', 'label' => 'boilerplate::users.status', 'minimum-results-for-search' => '-1'])
                                 <option value="1" @if (old('active', $user->active) == '1') selected="selected" @endif>@lang('boilerplate::users.active')</option>
                                 <option value="0" @if (old('active', $user->active) == '0') selected="selected" @endif>@lang('boilerplate::users.inactive')</option>
                             @endcomponent
-                        @endif
                         </div>
+                        @endif
                         <div class="col-md-6">
                             @component('boilerplate::input', ['name' => 'email', 'label' => 'boilerplate::users.email', 'value' => $user->email])@endcomponent
                         </div>

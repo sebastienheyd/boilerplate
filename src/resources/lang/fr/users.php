@@ -34,6 +34,7 @@ return [
         'lastconnect'   => 'Dernière connexion',
         'confirmdelete' => "Confirmez vous la suppression de l'utilisateur ?",
         'deletesuccess' => "L'utilisateur à été correctement supprimé",
+        'deleteerror'   => "Une erreur est survenue lors de la suppression de l'utilisateur",
     ],
     'profile' => [
         'title'            => 'Mon profil',
