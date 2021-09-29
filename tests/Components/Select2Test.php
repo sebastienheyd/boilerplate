@@ -30,20 +30,8 @@ HTML;
 </div>
     <script src=""></script>
     <script src=""></script>
-    <script>$.extend(true,$.fn.select2.defaults,{language:'en',direction:'ltr'});</script>
-    <script>
-        $(function () {
-            $('#test').select2({
-                placeholder: '—',
-                allowClear: false,
-                language: "en",
-                direction: "ltr",
-                minimumInputLength: 0,
-                minimumResultsForSearch: 10,
-                width: '100%',
-            });
-        });
-    </script>
+    <script>$.extend(true,$.fn.select2.defaults,{language:'en',direction:'ltr'});$(document).on('select2:open',(e)=>{let t = $(e.target);if(t && t.length){let id=t[0].id||t[0].name;document.querySelector(`input[aria-controls*='${id}']`).focus();}});</script>
+<script>$(function(){$('#test').select2({placeholder:'—',allowClear:!1,language:"en",direction:"ltr",minimumInputLength:0,minimumResultsForSearch:10,width:'100%',})})</script>
 HTML;
 
         $view = $this->blade("@component('boilerplate::select2', ['name' => 'test', 'id' => 'test', 'data-test' => 'test'])<option value=\"1\">Value 1</option>@endcomponent()@stack('js')");
@@ -71,20 +59,8 @@ HTML;
 </div>
     <script src=""></script>
     <script src=""></script>
-    <script>$.extend(true,$.fn.select2.defaults,{language:'en',direction:'ltr'});</script>
-    <script>
-        $(function () {
-            $('#test').select2({
-                placeholder: '—',
-                allowClear: false,
-                language: "en",
-                direction: "ltr",
-                minimumInputLength: 0,
-                minimumResultsForSearch: 10,
-                width: '100%',
-            });
-        });
-    </script>
+    <script>$.extend(true,$.fn.select2.defaults,{language:'en',direction:'ltr'});$(document).on('select2:open',(e)=>{let t = $(e.target);if(t && t.length){let id=t[0].id||t[0].name;document.querySelector(`input[aria-controls*='${id}']`).focus();}});</script>
+<script>$(function(){$('#test').select2({placeholder:'—',allowClear:!1,language:"en",direction:"ltr",minimumInputLength:0,minimumResultsForSearch:10,width:'100%',})})</script>
 HTML;
 
         $view = $this->blade("@component('boilerplate::select2', ['name' => 'test', 'id' => 'test', 'data-test' => 'test', 'options' => [1 => 'Value 1']])@endcomponent()@stack('js')");
