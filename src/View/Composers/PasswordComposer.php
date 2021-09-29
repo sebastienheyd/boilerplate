@@ -9,7 +9,6 @@ class PasswordComposer extends ComponentComposer
     protected $props = [
         'check',
         'class',
-        'errors',
         'groupClass',
         'group-class',
         'groupId',
@@ -17,7 +16,6 @@ class PasswordComposer extends ComponentComposer
         'label',
         'length',
         'name',
-        'options',
         'value',
     ];
 
