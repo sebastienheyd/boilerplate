@@ -14,12 +14,14 @@
             <button class="btn btn-outline-secondary" data-toggle="password"><i class="fa fa-fw fa-eye"></i></button>
         </div>
     </div>
+@if($help ?? false)
+    <small class="form-text text-muted">@lang($help)</small>
+@endif
 @error($name)
     <div class="error-bubble"><div>{{ $message }}</div></div>
 @enderror
 </div>
 @endif
-
 @if($check)
 @push('js')
 @component('boilerplate::minify')
