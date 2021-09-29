@@ -13,5 +13,5 @@ return [
         'capital' => 'Il :attribute deve contenere almeno una lettera maiuscola.',
         'number'  => 'Il :attribute deve contenere almeno un numero.',
         'special' => 'Il :attribute deve contenere almeno un carattere speciale.',
-    ]
+    ],
 ];

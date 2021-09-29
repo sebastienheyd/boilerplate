@@ -39,6 +39,7 @@ class Password implements Rule
         foreach ($rules as $rule => $msg) {
             if (! preg_match($rule, $value)) {
                 $this->message = __($msg, ['min' => $this->length]);
+
                 return false;
             }
         }

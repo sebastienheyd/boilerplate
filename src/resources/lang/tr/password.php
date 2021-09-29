@@ -13,5 +13,5 @@ return [
         'capital' => ':attribute en az bir büyük harf içermelidir.',
         'number'  => ':attribute en az bir sayı içermelidir.',
         'special'  => ':attribute en az bir özel karakter içermelidir.',
-    ]
+    ],
 ];

@@ -13,5 +13,5 @@ return [
         'capital' => 'The :attribute must contain at least one capital letter.',
         'number'  => 'The :attribute must contain at least one number.',
         'special'  => 'The :attribute must contain at least one special character.',
-    ]
+    ],
 ];

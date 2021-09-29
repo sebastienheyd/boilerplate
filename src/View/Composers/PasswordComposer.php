@@ -2,7 +2,6 @@
 
 namespace Sebastienheyd\Boilerplate\View\Composers;
 
-use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class PasswordComposer extends ComponentComposer

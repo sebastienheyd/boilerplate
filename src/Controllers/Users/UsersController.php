@@ -134,7 +134,7 @@ class UsersController extends Controller
     public function create()
     {
         return view('boilerplate::users.create', [
-            'roles' => Auth::user()->hasRole('admin') ? Role::all() : Role::whereNotIn('name', ['admin'])->get()
+            'roles' => Auth::user()->hasRole('admin') ? Role::all() : Role::whereNotIn('name', ['admin'])->get(),
         ]);
     }
 
@@ -172,8 +172,7 @@ class UsersController extends Controller
     /**
      * Show the form for editing the specified user.
      *
-     * @param User $user
-     *
+     * @param  User  $user
      * @return Application|Factory|View
      */
     public function edit(User $user)
@@ -187,9 +186,8 @@ class UsersController extends Controller
     /**
      * Update the specified user in storage.
      *
-     * @param User    $user
-     * @param Request $request
-     *
+     * @param  User  $user
+     * @param  Request  $request
      * @return RedirectResponse
      *
      * @throws ValidationException
@@ -213,8 +211,7 @@ class UsersController extends Controller
     /**
      * Remove the specified user from storage.
      *
-     * @param User $user
-     *
+     * @param  User  $user
      * @return JsonResponse
      */
     public function destroy(User $user): JsonResponse
@@ -226,7 +223,6 @@ class UsersController extends Controller
      * Show the form to set a new password on the first login.
      *
      * @param $token
-     *
      * @return Application|Factory|View
      */
     public function firstLogin($token)
@@ -278,8 +274,7 @@ class UsersController extends Controller
     /**
      * Post user profile.
      *
-     * @param Request $request
-     *
+     * @param  Request  $request
      * @return RedirectResponse
      */
     public function profilePost(Request $request)
@@ -332,8 +327,7 @@ class UsersController extends Controller
     /**
      * Avatar upload post.
      *
-     * @param Request $request
-     *
+     * @param  Request  $request
      * @return JsonResponse
      */
     public function avatarUpload(Request $request)
@@ -390,8 +384,7 @@ class UsersController extends Controller
     /**
      * Store setting for the current user.
      *
-     * @param Request $request
-     *
+     * @param  Request  $request
      * @return JsonResponse
      */
     public function storeSetting(Request $request)
