@@ -1,6 +1,6 @@
-<div class="card{{ isset($tabs) ? ($outline ? ' card-outline card-outline-tabs' : ' card-tabs') : ($outline ? ' card-outline' : '') }} card-{{ $color ?? config('boilerplate.theme.card.default_color', 'info') }}{{ ($bgColor ?? null) ? ' bg-'.$bgColor : '' }}{{ $collapsed ? ' collapsed-card' : '' }}{{ !empty($class) ? ' '.$class : '' }}"{!! empty($attributes) ? '' : ' '.$attributes !!}>
+<div class="card{{ $tabs ? ($outline ? ' card-outline card-outline-tabs' : ' card-tabs') : ($outline ? ' card-outline' : '') }} card-{{ $color ?? config('boilerplate.theme.card.default_color', 'info') }}{{ ($bgColor ?? null) ? ' bg-'.$bgColor : '' }}{{ $collapsed ? ' collapsed-card' : '' }}{{ !empty($class) ? ' '.$class : '' }}"{!! empty($attributes) ? '' : ' '.$attributes !!}>
 @if($title ?? false || $header ?? false || $tools ?? false || $maximize || $reduce || $close)
-    <div class="card-header{{ isset($tabs) ? ($outline ? ' p-0' : ' p-0 pt-1') : '' }} border-bottom-0">
+    <div class="card-header{{ $tabs ? ($outline ? ' p-0' : ' p-0 pt-1') : '' }} border-bottom-0">
 @if($header ?? false)
         {!! $header !!}
 @else

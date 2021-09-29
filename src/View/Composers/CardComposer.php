@@ -42,5 +42,6 @@ class CardComposer extends ComponentComposer
 
         $view->with('header', $data['header'] ?? false);
         $view->with('class', $data['class'] ?? '');
+        $view->with('tabs', $data['tabs'] ?? false);
     }
 }
