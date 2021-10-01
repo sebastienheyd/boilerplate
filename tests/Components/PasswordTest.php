@@ -26,10 +26,10 @@ HTML;
     {
         $expected = <<<'HTML'
 <div class="form-group">
-    <div class="input-group">
+    <div class="input-group password">
         <input class="form-control" name="password" type="password" value="">
         <div class="input-group-append">
-            <button class="btn btn-outline-secondary" data-toggle="password"><i class="fa fa-fw fa-eye"></i></button>
+            <button type="button" class="btn" data-toggle="password"><i class="far fa-fw fa-eye"></i></button>
         </div>
     </div>
 </div>
@@ -48,10 +48,10 @@ HTML;
     {
         $expected = <<<'HTML'
 <div class="form-group">
-    <div class="input-group">
+    <div class="input-group password">
         <input class="form-control" name="password" type="password" value="">
         <div class="input-group-append">
-            <button class="btn btn-outline-secondary" data-toggle="password"><i class="fa fa-fw fa-eye"></i></button>
+            <button type="button" class="btn" data-toggle="password"><i class="far fa-fw fa-eye"></i></button>
         </div>
     </div>
 </div>

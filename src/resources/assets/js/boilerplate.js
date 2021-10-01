@@ -45,17 +45,19 @@ $(() => {
         trigger: 'hover',
     })
 
-    setInterval(function () {
-        var timestamp = Math.round(+new Date() / 1000);
-        if (Math.round(+new Date() / 1000) === (session.expire - 10)) {
-            session.expire = timestamp + session.lifetime;
-            $.ajax({
-                url: session.keepalive,
-                type: 'post',
-                data: {id: session.id}
-            })
-        }
-    }, 1000);
+    if(typeof session !== 'undefined') {
+        setInterval(function () {
+            var timestamp = Math.round(+new Date() / 1000);
+            if (Math.round(+new Date() / 1000) === (session.expire - 10)) {
+                session.expire = timestamp + session.lifetime;
+                $.ajax({
+                    url: session.keepalive,
+                    type: 'post',
+                    data: {id: session.id}
+                })
+            }
+        }, 1000);
+    }
 
     $('[data-widget="darkmode"]').on('click', function(e) {
         e.preventDefault();

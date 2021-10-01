@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Validator;
+use Sebastienheyd\Boilerplate\Rules\Password;
 
 class RegisterController extends Controller
 {
@@ -58,7 +59,7 @@ class RegisterController extends Controller
             'last_name'  => 'required|max:255',
             'first_name' => 'required|max:255',
             'email'      => 'required|email|max:255|unique:users,email,NULL,id,deleted_at,NULL',
-            'password'   => 'required|min:6|confirmed',
+            'password'   => ['required', 'confirmed', new Password()],
         ]);
     }
 

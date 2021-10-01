@@ -7,8 +7,8 @@
     @component('boilerplate::auth.loginbox')
         <p class="login-box-msg text-sm">@lang('boilerplate::auth.login.intro')</p>
         {!! Form::open(['route' => 'boilerplate.login', 'method' => 'post', 'autocomplete'=> 'off']) !!}
-        @component('boilerplate::input', ['name' => 'email', 'placeholder' => 'boilerplate::auth.fields.email', 'append-text' => 'fas fa-envelope', 'type' => 'email'])@endcomponent
-        @component('boilerplate::input', ['name' => 'password', 'placeholder' => 'boilerplate::auth.fields.password', 'append-text' => 'fas fa-lock', 'type' => 'password'])@endcomponent
+        @component('boilerplate::input', ['name' => 'email', 'placeholder' => 'boilerplate::auth.fields.email', 'append-text' => 'fas fa-fw fa-envelope', 'type' => 'email'])@endcomponent
+        @component('boilerplate::password', ['name' => 'password', 'placeholder' => 'boilerplate::auth.fields.password', 'check' => false])@endcomponent
         <div class="d-flex flex-wrap align-items-center justify-content-between">
             @component('boilerplate::icheck', ['name' => 'remember', 'checked' => old('remember') == 'on', 'label' => 'boilerplate::auth.login.rememberme', 'class' => 'text-sm'])@endcomponent
             <button type="submit" class="btn btn-primary mb-3">@lang('boilerplate::auth.login.signin')</button>

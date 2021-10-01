@@ -8,10 +8,10 @@
 @isset($label)
     {!! Form::label($name, $label) !!}
 @endisset
-    <div class="input-group">
+    <div class="input-group password">
         {!! Form::password($name, array_merge(['class' => 'form-control'.$errors->first($name,' is-invalid').(isset($class) ? ' '.$class : '')], $attributes)) !!}
         <div class="input-group-append">
-            <button class="btn btn-outline-secondary" data-toggle="password"><i class="fa fa-fw fa-eye"></i></button>
+            <button type="button" class="btn" data-toggle="password"><i class="far fa-fw fa-eye"></i></button>
         </div>
     </div>
 @if($help ?? false)

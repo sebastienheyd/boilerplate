@@ -4,11 +4,11 @@
     @component('boilerplate::auth.loginbox')
         <p class="login-box-msg text-sm">@lang('boilerplate::auth.register.intro')</p>
         {!! Form::open(['route' => 'boilerplate.register', 'method' => 'post', 'autocomplete'=> 'off']) !!}
-            @component('boilerplate::input', ['name' => 'first_name', 'placeholder' => 'boilerplate::auth.fields.first_name', 'append-text' => 'fas fa-user', 'autofocus' => true])@endcomponent
-            @component('boilerplate::input', ['name' => 'last_name', 'placeholder' => 'boilerplate::auth.fields.last_name', 'append-text' => 'fas fa-user'])@endcomponent
-            @component('boilerplate::input', ['name' => 'email', 'placeholder' => 'boilerplate::auth.fields.email', 'append-text' => 'fas fa-envelope', 'type' => 'email'])@endcomponent
-            @component('boilerplate::input', ['name' => 'password', 'placeholder' => 'boilerplate::auth.fields.password', 'append-text' => 'fas fa-lock', 'type' => 'password'])@endcomponent
-            @component('boilerplate::input', ['name' => 'password_confirmation', 'placeholder' => 'boilerplate::auth.fields.password_confirm', 'append-text' => 'fas fa-lock', 'type' => 'password'])@endcomponent
+            @component('boilerplate::input', ['name' => 'first_name', 'placeholder' => 'boilerplate::auth.fields.first_name', 'append-text' => 'fas fa-fw fa-user', 'autofocus' => true])@endcomponent
+            @component('boilerplate::input', ['name' => 'last_name', 'placeholder' => 'boilerplate::auth.fields.last_name', 'append-text' => 'far fa-fw fa-user'])@endcomponent
+            @component('boilerplate::input', ['name' => 'email', 'placeholder' => 'boilerplate::auth.fields.email', 'append-text' => 'fas fa-fw fa-envelope', 'type' => 'email'])@endcomponent
+            @component('boilerplate::password', ['name' => 'password', 'placeholder' => 'boilerplate::auth.fields.password'])@endcomponent
+            @component('boilerplate::password', ['name' => 'password_confirmation', 'placeholder' => 'boilerplate::auth.fields.password_confirm', 'check' => false])@endcomponent
             <div class="mb-3">
                 <div class="col-12 text-right">
                     <button type="submit" class="btn btn-primary">

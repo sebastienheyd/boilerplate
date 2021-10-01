@@ -5,6 +5,7 @@ namespace Sebastienheyd\Boilerplate\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
+use Sebastienheyd\Boilerplate\Rules\Password;
 
 class ResetPasswordController extends Controller
 {
@@ -52,5 +53,14 @@ class ResetPasswordController extends Controller
             'token' => $token,
             'email' => $request->email ?? '',
         ]);
+    }
+
+    protected function rules()
+    {
+        return [
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => ['required', 'confirmed', new Password()],
+        ];
     }
 }

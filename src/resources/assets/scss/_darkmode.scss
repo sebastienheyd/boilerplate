@@ -142,4 +142,26 @@ body.dark-mode {
       color: #FFF;
     }
   }
+
+  .input-group.password {
+    .input-group-append {
+      .btn {
+        border-color: #6c757d;
+
+        &:hover {
+          color: #CCC !important;
+        }
+      }
+    }
+
+    input {
+      &:focus ~ .input-group-append .btn {
+        border-color: #fff;
+      }
+
+      &.is-invalid ~ .input-group-append .btn {
+        border-color: #dc3545 !important;
+      }
+    }
+  }
 }

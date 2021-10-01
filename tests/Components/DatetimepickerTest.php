@@ -2,7 +2,7 @@
 
 namespace Sebastienheyd\Boilerplate\Tests\Components;
 
-class DatepickerTest extends TestComponent
+class DatetimepickerTest extends TestComponent
 {
     public function testDatepickerNoArgs()
     {

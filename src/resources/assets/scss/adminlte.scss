@@ -252,4 +252,30 @@ aside.control-sidebar {
   border-color: #ced4da;
 }
 
+.input-group.password {
+  .input-group-append {
+    .btn {
+      border: 1px solid #ced4da;
+      border-left: 0;
+      color: #777;
+
+      &:hover {
+        color: #333 !important;
+      }
+    }
+  }
+
+  input {
+    border-right: 0;
+
+    &:focus ~ .input-group-append .btn {
+      border: 1px solid #80bdff;
+    }
+
+    &.is-invalid ~ .input-group-append .btn {
+      border-color: #dc3545 !important;
+    }
+  }
+}
+
 @import "darkmode";
