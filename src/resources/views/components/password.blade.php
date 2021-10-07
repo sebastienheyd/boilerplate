@@ -11,7 +11,7 @@
     <div class="input-group password">
         {!! Form::password($name, array_merge(['class' => 'form-control'.$errors->first($name,' is-invalid').(isset($class) ? ' '.$class : '')], $attributes)) !!}
         <div class="input-group-append">
-            <button type="button" class="btn" data-toggle="password"><i class="far fa-fw fa-eye"></i></button>
+            <button type="button" class="btn" data-toggle="password" tabindex="-1"><i class="far fa-fw fa-eye"></i></button>
         </div>
     </div>
 @if($help ?? false)

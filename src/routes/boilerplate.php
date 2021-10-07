@@ -17,29 +17,33 @@ Route::group($default, function () {
         Route::post('keep-alive', ['as' => 'keepalive', 'uses' => 'Users\UsersController@keepAlive']);
         Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'LanguageController@switch']);
 
-        // Login
-        Route::get('login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);
-        Route::post('login', ['as' => 'login.post', 'uses' => 'Auth\LoginController@login']);
+        // Logout
         Route::post('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']);
 
-        // Registration
-        Route::get('register', ['as' => 'register', 'uses' => 'Auth\RegisterController@showRegistrationForm']);
-        Route::post('register', ['as' => 'register.post', 'uses' => 'Auth\RegisterController@register']);
+        Route::group(['middleware' => ['boilerplateguest']], function () {
+            // Login
+            Route::get('login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);
+            Route::post('login', ['as' => 'login.post', 'uses' => 'Auth\LoginController@login']);
 
-        // Password reset
-        Route::get('password/request', [
-            'as'   => 'password.request',
-            'uses' => 'Auth\ForgotPasswordController@showLinkRequestForm',
-        ]);
-        Route::post('password/email', [
-            'as'   => 'password.email',
-            'uses' => 'Auth\ForgotPasswordController@sendResetLinkEmail',
-        ]);
-        Route::get('password/reset/{token}', [
-            'as'   => 'password.reset',
-            'uses' => 'Auth\ResetPasswordController@showResetForm',
-        ]);
-        Route::post('password/reset', ['as' => 'password.reset.post', 'uses' => 'Auth\ResetPasswordController@reset']);
+            // Registration
+            Route::get('register', ['as' => 'register', 'uses' => 'Auth\RegisterController@showRegistrationForm']);
+            Route::post('register', ['as' => 'register.post', 'uses' => 'Auth\RegisterController@register']);
+
+            // Password reset
+            Route::get('password/request', [
+                'as'   => 'password.request',
+                'uses' => 'Auth\ForgotPasswordController@showLinkRequestForm',
+            ]);
+            Route::post('password/email', [
+                'as'   => 'password.email',
+                'uses' => 'Auth\ForgotPasswordController@sendResetLinkEmail',
+            ]);
+            Route::get('password/reset/{token}', [
+                'as'   => 'password.reset',
+                'uses' => 'Auth\ResetPasswordController@showResetForm',
+            ]);
+            Route::post('password/reset', ['as' => 'password.reset.post', 'uses' => 'Auth\ResetPasswordController@reset']);
+        });
 
         // First login
         Route::get('connect/{token?}', [
@@ -54,9 +58,14 @@ Route::group($default, function () {
         // Backend
         Route::group(['middleware' => ['boilerplateauth', 'ability:admin,backend_access']], function () {
             // Roles and users
-            Route::resource('roles', 'Users\RolesController', ['except' => 'show']);
-            Route::resource('users', 'Users\UsersController', ['except' => 'show']);
-            Route::any('users/dt', ['as' => 'users.datatable', 'uses' => 'Users\UsersController@datatable']);
+            Route::resource('roles', 'Users\RolesController', [
+                'except' => 'show',
+                'middleware' => ['ability:admin,roles_crud']
+            ]);
+            Route::group(['middleware' => ['boilerplateauth', 'ability:admin,users_crud']], function () {
+                Route::resource('users', 'Users\UsersController', ['except' => 'show']);
+                Route::any('users/dt', ['as' => 'users.datatable', 'uses' => 'Users\UsersController@datatable']);
+            });
             Route::get('userprofile', ['as' => 'user.profile', 'uses' => 'Users\UsersController@profile']);
             Route::post('userprofile', ['as' => 'user.profile.post', 'uses' => 'Users\UsersController@profilePost']);
             Route::post('userprofile/settings', ['as' => 'settings', 'uses' => 'Users\UsersController@storeSetting']);

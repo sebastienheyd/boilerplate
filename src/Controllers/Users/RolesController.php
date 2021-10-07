@@ -2,53 +2,44 @@
 
 namespace Sebastienheyd\Boilerplate\Controllers\Users;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Str;
-use Sebastienheyd\Boilerplate\Models\Permission;
-use Sebastienheyd\Boilerplate\Models\Role;
+use Illuminate\Validation\ValidationException;
 
-class RolesController extends Controller
+class RolesController
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Roles Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the roles and permission management.
-    |
-    */
-
-    /**
-     * Create a new controller instance.
-     */
-    public function __construct()
-    {
-        $this->middleware('ability:admin,roles_crud');
-    }
+    use ValidatesRequests;
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function index()
     {
-        return view('boilerplate::roles.list', ['roles' => Role::all()]);
+        $roleModel = config('boilerplate.laratrust.role');
+        return view('boilerplate::roles.list', ['roles' => $roleModel::all()]);
     }
 
     /**
      * Show the form for creating a new role.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function create()
     {
-        $permissions = Permission::with('category')->orderBy('category_id')->get();
+        $permModel = config('boilerplate.laratrust.permission');
+        $permissions = $permModel::with('category')->orderBy('category_id')->get();
         $permissions = $permissions->groupBy('category_id');
 
         $permissions_categories = [];
-        foreach ($permissions as $category_id => $perms) {
+        foreach ($permissions as $perms) {
             $perms = $perms->filter(function ($perm) {
                 return config('boilerplate.app.logs', true) || $perm->name !== 'logs';
             });
@@ -67,9 +58,9 @@ class RolesController extends Controller
      * Store a newly created role in storage.
      *
      * @param  Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function store(Request $request)
     {
@@ -86,7 +77,8 @@ class RolesController extends Controller
             'description'  => mb_strtolower(__('boilerplate::role.description')),
         ]);
 
-        $role = Role::create($input);
+        $roleModel = config('boilerplate.laratrust.role');
+        $role = $roleModel::create($input);
         $role->permissions()->sync(array_keys($request->input('permission', [])));
 
         return redirect()->route('boilerplate.roles.edit', $role)
@@ -97,16 +89,19 @@ class RolesController extends Controller
      * Show the form for editing the specified role.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     *
+     * @return Application|Factory|View
      */
     public function edit($id)
     {
-        $role = Role::find($id);
-        $permissions = Permission::with('category')->orderBy('category_id')->get();
+        $roleModel = config('boilerplate.laratrust.role');
+        $role = $roleModel::findOrFail($id);
+        $permModel = config('boilerplate.laratrust.permission');
+        $permissions = $permModel::with('category')->orderBy('category_id')->get();
         $permissions = $permissions->groupBy('category_id');
 
         $permissions_categories = [];
-        foreach ($permissions as $category_id => $perms) {
+        foreach ($permissions as $perms) {
             $name = $perms->first()->category->display_name ?? __('boilerplate::permissions.categories.default');
             $permissions_categories[] = (object) [
                 'name'        => $name,
@@ -120,11 +115,12 @@ class RolesController extends Controller
     /**
      * Update the specified role in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Request $request
+     * @param  int    $id
+     *
+     * @return RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update($id, Request $request)
     {
         $this->validate($request, [
             'display_name' => 'required',
@@ -134,7 +130,8 @@ class RolesController extends Controller
             'description'  => mb_strtolower(__('boilerplate::role.description')),
         ]);
 
-        $role = Role::find($id);
+        $roleModel = config('boilerplate.laratrust.role');
+        $role = $roleModel::find($id);
         $role->update($request->all());
         $role->permissions()->sync(array_keys($request->input('permission')));
 
@@ -146,10 +143,12 @@ class RolesController extends Controller
      * Remove the specified role from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy($id)
     {
-        Role::destroy($id);
+        $roleModel = config('boilerplate.laratrust.role');
+        $role = $roleModel::findOrFail($id);
+        $role->delete();
     }
 }

@@ -2,25 +2,16 @@
 
 namespace Sebastienheyd\Boilerplate\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use Carbon\Carbon;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Validator;
 use Sebastienheyd\Boilerplate\Rules\Password;
 
-class RegisterController extends Controller
+class RegisterController
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
-
     use RegistersUsers;
 
     /**
@@ -29,6 +20,13 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo;
+
+    /**
+     * Is registering the first user ?
+     *
+     * @var bool
+     */
+    protected $firstUser;
 
     /**
      * Create a new controller instance.
@@ -66,7 +64,7 @@ class RegisterController extends Controller
     /**
      * Show the application registration form.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function showRegistrationForm()
     {
@@ -81,7 +79,7 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return User
+     * @return mixed
      */
     protected function create(array $data)
     {

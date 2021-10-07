@@ -2,7 +2,6 @@
 
 namespace Sebastienheyd\Boilerplate\Middleware;
 
-use App\Http\Middleware\RedirectIfAuthenticated as Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

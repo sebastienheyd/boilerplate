@@ -2,24 +2,15 @@
 
 namespace Sebastienheyd\Boilerplate\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
 use Sebastienheyd\Boilerplate\Rules\Password;
 
-class ResetPasswordController extends Controller
+class ResetPasswordController
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Password Reset Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller is responsible for handling password reset requests
-    | and uses a simple trait to include this behavior. You're free to
-    | explore this trait and override any methods you wish to tweak.
-    |
-    */
-
     use ResetsPasswords;
 
     /**
@@ -35,7 +26,6 @@ class ResetPasswordController extends Controller
     public function __construct()
     {
         $this->redirectTo = route(config('boilerplate.app.redirectTo', 'boilerplate.dashboard'));
-        $this->middleware('boilerplateguest');
     }
 
     /**
@@ -43,9 +33,10 @@ class ResetPasswordController extends Controller
      *
      * If no token is present, display the link request form.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  string|null  $token
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @param Request      $request
+     * @param string|null  $token
+     *
+     * @return Application|Factory|View
      */
     public function showResetForm(Request $request, $token = null)
     {

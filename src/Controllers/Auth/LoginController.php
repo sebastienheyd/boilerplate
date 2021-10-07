@@ -2,27 +2,21 @@
 
 namespace Sebastienheyd\Boilerplate\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use Carbon\Carbon;
+use Illuminate\Config\Repository;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Validation\ValidationException;
 
-class LoginController extends Controller
+class LoginController
 {
-    use AuthenticatesUsers;
-
-    /**
-     * Create a new controller instance.
-     */
-    public function __construct()
-    {
-        $this->middleware('boilerplateguest', ['except' => 'logout']);
-    }
+    use AuthenticatesUsers, ValidatesRequests;
 
     /**
      * Where to redirect after login / register.
@@ -68,7 +62,7 @@ class LoginController extends Controller
      * Send the response after the user was authenticated.
      *
      * @param  Request  $request
-     * @return RedirectResponse|JsonResponse
+     * @return RedirectResponse|JsonResponse|bool
      */
     protected function sendLoginResponse(Request $request)
     {
@@ -76,29 +70,29 @@ class LoginController extends Controller
 
         $this->clearLoginAttempts($request);
 
-        if ($response = $this->authenticated($request, $this->guard()->user())) {
-            return $response;
+        if ($this->authenticated($request, $this->guard()->user())) {
+            $this->guard()->user()->update(['last_login' => Carbon::now()->toDateTimeString()]);
+
+            return $request->wantsJson()
+                ? new JsonResponse([], 204)
+                : redirect()->intended($this->redirectPath());
         }
-
-        $this->guard()->user()->update(['last_login' => Carbon::now()->toDateTimeString()]);
-
-        return $request->wantsJson()
-            ? new JsonResponse([], 204)
-            : redirect()->intended($this->redirectPath());
     }
 
     /**
-     * The user has been authenticated.
+     * @param Request $request
+     * @param         $user
      *
-     * @param  Request  $request
-     * @param  mixed  $user
-     * @return mixed
+     * @return bool
      */
     protected function authenticated(Request $request, $user)
     {
         if (! empty($user->name)) {
             \Log::info('User logged in : '.$user->name);
+            return true;
         }
+
+        return false;
     }
 
     /**
@@ -130,7 +124,7 @@ class LoginController extends Controller
     /**
      * Get the maximum number of attempts to allow.
      *
-     * @return \Illuminate\Config\Repository|\Illuminate\Contracts\Foundation\Application|mixed
+     * @return Repository|Application|mixed
      */
     public function maxAttempts()
     {
@@ -140,7 +134,7 @@ class LoginController extends Controller
     /**
      * Get the number of minutes to throttle for.
      *
-     * @return \Illuminate\Config\Repository|\Illuminate\Contracts\Foundation\Application|mixed
+     * @return Repository|Application|mixed
      */
     public function decayMinutes()
     {

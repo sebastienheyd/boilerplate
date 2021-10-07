@@ -2,46 +2,26 @@
 
 namespace Sebastienheyd\Boilerplate\Controllers\Users;
 
-use App\Http\Controllers\Controller;
 use Auth;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Intervention\Image\Facades\Image;
-use Sebastienheyd\Boilerplate\Models\Role;
-use Sebastienheyd\Boilerplate\Models\User;
-use Sebastienheyd\Boilerplate\Contracts\Models\UserContract;
+use Ramsey\Uuid\Type\Integer;
 use Sebastienheyd\Boilerplate\Rules\Password;
 use Yajra\DataTables\Facades\DataTables;
 
-class UsersController extends Controller
+class UsersController
 {
-    /**
-     * Create a new controller instance.
-     */
-    public function __construct()
-    {
-        $this->middleware('ability:admin,users_crud', [
-            'except' => [
-                'firstLogin',
-                'firstLoginPost',
-                'profile',
-                'profilePost',
-                'getAvatarUrl',
-                'getAvatarFromGravatar',
-                'avatarDelete',
-                'avatarUpload',
-                'keepAlive',
-            ],
-        ]);
-    }
+    use ValidatesRequests;
 
     /**
      * Display a listing of users.
@@ -50,7 +30,8 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return view('boilerplate::users.list', ['roles' => Role::all()]);
+        $roleModel = config('boilerplate.laratrust.role');
+        return view('boilerplate::users.list', ['roles' => $roleModel::all()]);
     }
 
     /**
@@ -63,7 +44,8 @@ class UsersController extends Controller
      */
     public function datatable(Request $request)
     {
-        $users = User::with('roles');
+        $userModel = config('boilerplate.auth.providers.users.model');
+        $users = $userModel::with('roles');
 
         if ($request->input('columns.6.search.value') !== null) {
             $users->whereRoleIs($request->input('columns.6.search.value'));
@@ -134,8 +116,10 @@ class UsersController extends Controller
      */
     public function create()
     {
+        $role = config('boilerplate.laratrust.role');
+
         return view('boilerplate::users.create', [
-            'roles' => Auth::user()->hasRole('admin') ? Role::all() : Role::whereNotIn('name', ['admin'])->get(),
+            'roles' => Auth::user()->hasRole('admin') ? $role::all() : $role::whereNotIn('name', ['admin'])->get(),
         ]);
     }
 
@@ -160,7 +144,8 @@ class UsersController extends Controller
         $input['remember_token'] = Str::random(32);
         $input['deleted_at'] = null;
 
-        $user = User::withTrashed()->updateOrCreate(['email' => $input['email']], $input);
+        $userModel = config('boilerplate.auth.providers.users.model');
+        $user = $userModel::withTrashed()->updateOrCreate(['email' => $input['email']], $input);
         $user->restore();
         $user->roles()->sync(array_keys($request->input('roles', [])));
 
@@ -173,32 +158,39 @@ class UsersController extends Controller
     /**
      * Show the form for editing the specified user.
      *
-     * @param  User  $user
+     * @param  Integer  $id
      * @return Application|Factory|View
      */
-    public function edit(UserContract $user)
+    public function edit($id)
     {
+        $role = config('boilerplate.laratrust.role');
+        $userModel = config('boilerplate.auth.providers.users.model');
+        $user = $userModel::findOrFail($id);
+
         return view('boilerplate::users.edit', [
             'user' => $user,
-            'roles' => Auth::user()->hasRole('admin') ? Role::all() : Role::whereNotIn('name', ['admin'])->get(),
+            'roles' => Auth::user()->hasRole('admin') ? $role::all() : $role::whereNotIn('name', ['admin'])->get(),
         ]);
     }
 
     /**
      * Update the specified user in storage.
      *
-     * @param  User  $user
+     * @param  Integer  $id
      * @param  Request  $request
      * @return RedirectResponse
      *
      * @throws ValidationException
      */
-    public function update(UserContract $user, Request $request): RedirectResponse
+    public function update($id, Request $request): RedirectResponse
     {
+        $userModel = config('boilerplate.auth.providers.users.model');
+        $user = $userModel::findOrFail($id);
+
         $this->validate($request, [
             'last_name'  => 'required',
             'first_name' => 'required',
-            'email'      => 'required|email|unique:users,email,'.$user->id,
+            'email'      => 'required|email|unique:users,email,'.$id,
         ]);
 
         $user->update($request->all());
@@ -212,11 +204,14 @@ class UsersController extends Controller
     /**
      * Remove the specified user from storage.
      *
-     * @param  User  $user
+     * @param Integer $id
+     *
      * @return JsonResponse
      */
-    public function destroy(User $user): JsonResponse
+    public function destroy(Integer $id): JsonResponse
     {
+        $userModel = config('boilerplate.auth.providers.users.model');
+        $user = $userModel::findOrFail($id);
         return response()->json(['success' => $user->delete() ?? false]);
     }
 
@@ -228,7 +223,8 @@ class UsersController extends Controller
      */
     public function firstLogin($token)
     {
-        $user = User::where(['remember_token' => $token])->firstOrFail();
+        $userModel = config('boilerplate.auth.providers.users.model');
+        $user = $userModel::where(['remember_token' => $token])->firstOrFail();
 
         return view('boilerplate::auth.firstlogin', compact('user', 'token'));
     }
@@ -249,7 +245,8 @@ class UsersController extends Controller
             'password_confirmation' => 'required|same:password',
         ]);
 
-        $user = User::where(['remember_token' => $request->input('token')])->first();
+        $userModel = config('boilerplate.auth.providers.users.model');
+        $user = $userModel::where(['remember_token' => $request->input('token')])->first();
 
         $user->password = bcrypt($request->input('password'));
         $user->remember_token = Str::random(32);

@@ -12,9 +12,8 @@ use Sebastienheyd\Boilerplate\Events\UserDeleted;
 use Sebastienheyd\Boilerplate\Notifications\NewUser;
 use Sebastienheyd\Boilerplate\Notifications\ResetPassword;
 use Thomaswelton\LaravelGravatar\Facades\Gravatar;
-use Sebastienheyd\Boilerplate\Contracts\Models\UserContract;
 
-class User extends Authenticatable implements UserContract
+class User extends Authenticatable
 {
     use Notifiable;
     use LaratrustUserTrait;

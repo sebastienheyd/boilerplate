@@ -2,12 +2,11 @@
 
 namespace Sebastienheyd\Boilerplate\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 
-class DashboardController extends Controller
+class DashboardController
 {
     /**
      * Show the application dashboard.
