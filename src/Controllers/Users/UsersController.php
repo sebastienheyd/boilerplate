@@ -17,6 +17,7 @@ use Illuminate\Validation\ValidationException;
 use Intervention\Image\Facades\Image;
 use Sebastienheyd\Boilerplate\Models\Role;
 use Sebastienheyd\Boilerplate\Models\User;
+use Sebastienheyd\Boilerplate\Contracts\Models\UserContract;
 use Sebastienheyd\Boilerplate\Rules\Password;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -175,7 +176,7 @@ class UsersController extends Controller
      * @param  User  $user
      * @return Application|Factory|View
      */
-    public function edit(User $user)
+    public function edit(UserContract $user)
     {
         return view('boilerplate::users.edit', [
             'user' => $user,
@@ -192,7 +193,7 @@ class UsersController extends Controller
      *
      * @throws ValidationException
      */
-    public function update(User $user, Request $request): RedirectResponse
+    public function update(UserContract $user, Request $request): RedirectResponse
     {
         $this->validate($request, [
             'last_name'  => 'required',
