@@ -2,6 +2,7 @@
 
 namespace Sebastienheyd\Boilerplate\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -10,7 +11,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Validator;
 use Sebastienheyd\Boilerplate\Rules\Password;
 
-class RegisterController
+class RegisterController extends Controller
 {
     use RegistersUsers;
 

@@ -60,7 +60,7 @@ Route::group($default, function () {
             // Roles and users
             Route::resource('roles', 'Users\RolesController', [
                 'except' => 'show',
-                'middleware' => ['ability:admin,roles_crud']
+                'middleware' => ['ability:admin,roles_crud'],
             ]);
             Route::group(['middleware' => ['boilerplateauth', 'ability:admin,users_crud']], function () {
                 Route::resource('users', 'Users\UsersController', ['except' => 'show']);

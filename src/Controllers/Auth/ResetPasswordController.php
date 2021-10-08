@@ -2,6 +2,7 @@
 
 namespace Sebastienheyd\Boilerplate\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -9,7 +10,7 @@ use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
 use Sebastienheyd\Boilerplate\Rules\Password;
 
-class ResetPasswordController
+class ResetPasswordController extends Controller
 {
     use ResetsPasswords;
 
@@ -33,9 +34,8 @@ class ResetPasswordController
      *
      * If no token is present, display the link request form.
      *
-     * @param Request      $request
-     * @param string|null  $token
-     *
+     * @param  Request  $request
+     * @param  string|null  $token
      * @return Application|Factory|View
      */
     public function showResetForm(Request $request, $token = null)

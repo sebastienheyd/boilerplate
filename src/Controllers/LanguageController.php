@@ -2,10 +2,11 @@
 
 namespace Sebastienheyd\Boilerplate\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 
-class LanguageController
+class LanguageController extends Controller
 {
     /**
      * Switch language.

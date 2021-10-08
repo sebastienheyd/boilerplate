@@ -96,23 +96,23 @@ class BoilerplateServiceProvider extends ServiceProvider
         $this->viewComposers();
 
         // Load directives
-        $this->bladeDirectives();
+        if (version_compare($this->app->version(), '7.0', '<')) {
+            $this->bladeDirectives();
+        }
     }
 
     private function bladeDirectives()
     {
         // Once directive for Laravel 6
-        if (version_compare($this->app->version(), '7.0', '<')) {
-            Blade::directive('once', function () {
-                $id = Str::uuid();
+        Blade::directive('once', function () {
+            $id = Str::uuid();
 
-                return '<?php if(!defined("'.$id.'")): define("'.$id.'", true); ?>';
-            });
+            return '<?php if(!defined("'.$id.'")): define("'.$id.'", true); ?>';
+        });
 
-            Blade::directive('endonce', function () {
-                return '<?php endif; ?>';
-            });
-        }
+        Blade::directive('endonce', function () {
+            return '<?php endif; ?>';
+        });
     }
 
     /**
@@ -229,9 +229,9 @@ class BoilerplateServiceProvider extends ServiceProvider
 
         // Overriding config
         config([
-            'laratrust.user_models.users' => config('boilerplate.laratrust.user', 'App\User'),
-            'laratrust.models.role' => config('boilerplate.laratrust.role', 'App\Role'),
-            'laratrust.models.permission' => config('boilerplate.laratrust.permission', 'App\Permission'),
+            'laratrust.user_models.users' => config('boilerplate.laratrust.user'),
+            'laratrust.models.role' => config('boilerplate.laratrust.role'),
+            'laratrust.models.permission' => config('boilerplate.laratrust.permission'),
         ]);
 
         // Registering middlewares

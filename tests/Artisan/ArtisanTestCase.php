@@ -2,7 +2,17 @@
 
 namespace Sebastienheyd\Boilerplate\Tests\Artisan;
 
+use Collective\Html\FormFacade;
 use Collective\Html\HtmlServiceProvider;
+use Illuminate\Cache\CacheServiceProvider;
+use Illuminate\Database\DatabaseServiceProvider;
+use Illuminate\Filesystem\FilesystemServiceProvider;
+use Illuminate\Foundation\Providers\ConsoleSupportServiceProvider;
+use Illuminate\Queue\QueueServiceProvider;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\View;
+use Illuminate\View\ViewServiceProvider;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 use Sebastienheyd\Boilerplate\BoilerplateServiceProvider;
 
@@ -26,12 +36,12 @@ abstract class ArtisanTestCase extends OrchestraTestCase
     protected function getPackageProviders($app)
     {
         return [
-            \Illuminate\Cache\CacheServiceProvider::class,
-            \Illuminate\Database\DatabaseServiceProvider::class,
-            \Illuminate\Foundation\Providers\ConsoleSupportServiceProvider::class,
-            \Illuminate\Filesystem\FilesystemServiceProvider::class,
-            \Illuminate\Queue\QueueServiceProvider::class,
-            \Illuminate\View\ViewServiceProvider::class,
+            CacheServiceProvider::class,
+            DatabaseServiceProvider::class,
+            ConsoleSupportServiceProvider::class,
+            FilesystemServiceProvider::class,
+            QueueServiceProvider::class,
+            ViewServiceProvider::class,
             HtmlServiceProvider::class,
             BoilerplateServiceProvider::class,
         ];
@@ -40,10 +50,10 @@ abstract class ArtisanTestCase extends OrchestraTestCase
     protected function getPackageAliases($app)
     {
         return [
-            'Form' => \Collective\Html\FormFacade::class,
-            'Blade' => \Illuminate\Support\Facades\Blade::class,
-            'View' => \Illuminate\Support\Facades\View::class,
-            'File' => \Illuminate\Support\Facades\File::class,
+            'Form' => FormFacade::class,
+            'Blade' => Blade::class,
+            'View' => View::class,
+            'File' => File::class,
         ];
     }
 }

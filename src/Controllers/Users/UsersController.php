@@ -2,16 +2,16 @@
 
 namespace Sebastienheyd\Boilerplate\Controllers\Users;
 
-use Auth;
+use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Intervention\Image\Facades\Image;
@@ -19,10 +19,8 @@ use Ramsey\Uuid\Type\Integer;
 use Sebastienheyd\Boilerplate\Rules\Password;
 use Yajra\DataTables\Facades\DataTables;
 
-class UsersController
+class UsersController extends Controller
 {
-    use ValidatesRequests;
-
     /**
      * Display a listing of users.
      *
@@ -31,6 +29,7 @@ class UsersController
     public function index()
     {
         $roleModel = config('boilerplate.laratrust.role');
+
         return view('boilerplate::users.list', ['roles' => $roleModel::all()]);
     }
 
@@ -158,7 +157,7 @@ class UsersController
     /**
      * Show the form for editing the specified user.
      *
-     * @param  Integer  $id
+     * @param  int  $id
      * @return Application|Factory|View
      */
     public function edit($id)
@@ -176,7 +175,7 @@ class UsersController
     /**
      * Update the specified user in storage.
      *
-     * @param  Integer  $id
+     * @param  int  $id
      * @param  Request  $request
      * @return RedirectResponse
      *
@@ -204,14 +203,14 @@ class UsersController
     /**
      * Remove the specified user from storage.
      *
-     * @param Integer $id
-     *
+     * @param  int  $id
      * @return JsonResponse
      */
     public function destroy(Integer $id): JsonResponse
     {
         $userModel = config('boilerplate.auth.providers.users.model');
         $user = $userModel::findOrFail($id);
+
         return response()->json(['success' => $user->delete() ?? false]);
     }
 

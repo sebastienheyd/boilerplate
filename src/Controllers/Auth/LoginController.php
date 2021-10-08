@@ -2,21 +2,21 @@
 
 namespace Sebastienheyd\Boilerplate\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Config\Repository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Validation\ValidationException;
 
-class LoginController
+class LoginController extends Controller
 {
-    use AuthenticatesUsers, ValidatesRequests;
+    use AuthenticatesUsers;
 
     /**
      * Where to redirect after login / register.
@@ -80,15 +80,15 @@ class LoginController
     }
 
     /**
-     * @param Request $request
-     * @param         $user
-     *
+     * @param  Request  $request
+     * @param  $user
      * @return bool
      */
     protected function authenticated(Request $request, $user)
     {
         if (! empty($user->name)) {
             \Log::info('User logged in : '.$user->name);
+
             return true;
         }
 

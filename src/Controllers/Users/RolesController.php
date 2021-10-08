@@ -2,20 +2,18 @@
 
 namespace Sebastienheyd\Boilerplate\Controllers\Users;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
-class RolesController
+class RolesController extends Controller
 {
-    use ValidatesRequests;
-
     /**
      * Display a listing of the resource.
      *
@@ -24,6 +22,7 @@ class RolesController
     public function index()
     {
         $roleModel = config('boilerplate.laratrust.role');
+
         return view('boilerplate::roles.list', ['roles' => $roleModel::all()]);
     }
 
@@ -89,7 +88,6 @@ class RolesController
      * Show the form for editing the specified role.
      *
      * @param  int  $id
-     *
      * @return Application|Factory|View
      */
     public function edit($id)
@@ -115,9 +113,8 @@ class RolesController
     /**
      * Update the specified role in storage.
      *
-     * @param Request $request
-     * @param  int    $id
-     *
+     * @param  Request  $request
+     * @param  int  $id
      * @return RedirectResponse
      */
     public function update($id, Request $request)

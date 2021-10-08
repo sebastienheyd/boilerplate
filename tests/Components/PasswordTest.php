@@ -29,7 +29,7 @@ HTML;
     <div class="input-group password">
         <input class="form-control" name="password" type="password" value="">
         <div class="input-group-append">
-            <button type="button" class="btn" data-toggle="password"><i class="far fa-fw fa-eye"></i></button>
+            <button type="button" class="btn" data-toggle="password" tabindex="-1"><i class="far fa-fw fa-eye"></i></button>
         </div>
     </div>
 </div>
@@ -51,7 +51,7 @@ HTML;
     <div class="input-group password">
         <input class="form-control" name="password" type="password" value="">
         <div class="input-group-append">
-            <button type="button" class="btn" data-toggle="password"><i class="far fa-fw fa-eye"></i></button>
+            <button type="button" class="btn" data-toggle="password" tabindex="-1"><i class="far fa-fw fa-eye"></i></button>
         </div>
     </div>
 </div>
