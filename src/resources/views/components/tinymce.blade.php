@@ -5,7 +5,7 @@
 @isset($label)
     {!! Form::label($name, __($label)) !!}
 @endisset
-    <textarea id="{{ $id }}" name="{{ $name }}"{!! !empty($attributes) ? ' '.$attributes : '' !!} style="visibility:hidden">{!! old($name, $value) ?? $slot ?? '' !!}</textarea>
+    <textarea id="{{ $id }}" name="{{ $name }}"{!! !empty($attributes) ? ' '.$attributes : '' !!} style="visibility:hidden">{!! old($name, $value ?? $slot ?? '') !!}</textarea>
 @if($help ?? false)
     <small class="form-text text-muted">@lang($help)</small>
 @endif
