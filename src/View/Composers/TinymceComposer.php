@@ -7,7 +7,16 @@ use Illuminate\View\View;
 class TinymceComposer extends ComponentComposer
 {
     protected $props = [
+        'errors',
+        'group-class',
+        'group-id',
+        'groupClass',
+        'groupId',
+        'help',
         'id',
+        'label',
+        'name',
+        'value',
     ];
 
     public function compose(View $view)

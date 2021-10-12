@@ -7,7 +7,15 @@ use Illuminate\View\View;
 class CodemirrorComposer extends ComponentComposer
 {
     protected $props = [
+        'errors',
+        'group-class',
+        'group-id',
+        'groupClass',
+        'groupId',
+        'help',
         'id',
+        'label',
+        'name',
         'theme',
         'value',
     ];

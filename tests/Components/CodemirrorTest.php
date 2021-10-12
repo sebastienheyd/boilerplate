@@ -22,7 +22,10 @@ HTML;
     public function testCodeMirrorName()
     {
         $expected = <<<'HTML'
-<textarea id="test" name="test" style="visibility:hidden"></textarea>
+<div class="form-group test" id="test">
+    <label for="test">test</label>
+    <textarea id="test" name="test" style="visibility:hidden"></textarea>
+</div>
     <script src=""></script>
     <script src="/assets/vendor/boilerplate/plugins/codemirror/mode/xml/xml.js"></script>
     <script src="/assets/vendor/boilerplate/plugins/codemirror/mode/css/css.js"></script>
@@ -38,11 +41,11 @@ HTML;
 HTML;
 
         if ($this->isLaravelEqualOrGreaterThan7) {
-            $view = $this->blade('<x-boilerplate::codemirror name="test" id="test" />@stack("js")');
+            $view = $this->blade('<x-boilerplate::codemirror name="test" id="test" group-id="test" group-class="test" label="test" />@stack("js")');
             $this->assertEquals($expected, $view);
         }
 
-        $view = $this->blade("@component('boilerplate::codemirror', ['name' => 'test', 'id' => 'test'])@endcomponent()@stack('js')");
+        $view = $this->blade("@component('boilerplate::codemirror', ['name' => 'test', 'id' => 'test', 'group-id' => 'test', 'group-class' => 'test', 'label' => 'test'])@endcomponent()@stack('js')");
         $this->assertEquals($expected, $view);
     }
 }
