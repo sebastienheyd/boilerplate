@@ -7,10 +7,6 @@ use MatthiasMullie\Minify;
 
 class MinifyComposer extends ComponentComposer
 {
-    protected $props = [
-        'type' => 'js',
-    ];
-
     public function compose(View $view)
     {
         parent::compose($view);
@@ -19,7 +15,7 @@ class MinifyComposer extends ComponentComposer
             return;
         }
 
-        $minifier = $this->props['type'] === 'js' ? new Minify\JS($view->slot) : new Minify\CSS($view->slot);
-        $view->slot = $minifier->minify();
+        $isJs = ($this->attributes['type'] ?? 'js') === 'js';
+        $view->slot = ($isJs ? new Minify\JS($view->slot) : new Minify\CSS($view->slot))->minify();
     }
 }
