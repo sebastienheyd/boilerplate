@@ -6,17 +6,17 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class BoilerplateGuestL6 extends Middleware
+class BoilerplateGuestL6
 {
     /**
      * Handle an incoming request.
      *
      * @param  Request  $request
      * @param  Closure  $next
-     * @param  string|null  ...$guards
+     *
      * @return mixed
      */
-    public function handle($request, Closure $next, $guard = null)
+    public function handle($request, Closure $next)
     {
         $guards = empty($guards) ? [null] : $guards;
 
