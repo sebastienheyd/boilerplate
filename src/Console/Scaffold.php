@@ -153,7 +153,7 @@ class Scaffold extends BoilerplateCommand
     {
         $to = base_path('routes/boilerplate.php');
         $this->copy(__DIR__.'/../routes/boilerplate.php', $to);
-        $this->replaceInFile(['\Sebastienheyd\Boilerplate\Controllers' => '\App\Http\Controllers\Boilerplate'], $to);
+        $this->replaceInFile(['Sebastienheyd\Boilerplate\Controllers' => 'App\Http\Controllers\Boilerplate'], $to);
     }
 
     private function publishControllers()
@@ -171,7 +171,7 @@ class Scaffold extends BoilerplateCommand
         }
 
         $this->replaceInFile([
-            '\Sebastienheyd\Boilerplate\Controllers' => '\App\Http\Controllers\Boilerplate',
+            'Sebastienheyd\Boilerplate\Controllers' => 'App\Http\Controllers\Boilerplate',
         ], config_path('boilerplate/menu.php'));
     }
 
