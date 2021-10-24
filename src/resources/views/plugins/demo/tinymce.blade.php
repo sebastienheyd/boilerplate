@@ -3,7 +3,7 @@
     <pre>&lt;x-boilerplate::tinymce name="tinymce">
     &lt;h2>TinyMCE demo&lt;/h2>&lt;p>Lorem ipsum dolor sit amet.&lt;/p>
 &lt;/x-boilerplate::tinymce></pre>
-    @component('boilerplate::tinymce', ['name' => 'tinymce'])
+    @component('boilerplate::tinymce', ['name' => 'tinymce', 'sticky' => true])
         <h2>TinyMCE demo</h2><p>Lorem ipsum dolor sit amet.</p>
     @endcomponent()
     @slot('footer')

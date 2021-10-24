@@ -13,10 +13,19 @@
     <div class="error-bubble"><div>{{ $message }}</div></div>
 @enderror
 </div>
-@if($hasMediaManager)
-@include('boilerplate-media-manager::load.tinymce')
-@else
-@include('boilerplate::load.tinymce')
-@endif
-@push('js')<script>$(function(){$('#{{ $id }}').tinymce({})});</script>@endpush()
+@includeWhen($hasMediaManager, 'boilerplate-media-manager::load.tinymce')
+@includeUnless($hasMediaManager, 'boilerplate::load.tinymce')
+@component('boilerplate::minify')
+<script id="interval_{{$id}}">
+    var interval_{{$id}} = setInterval(function() {
+        if(typeof tinymce !== 'undefined') {
+            $('#{{ $id }}').tinymce({
+                toolbar_sticky: {{ ($sticky ?? false) ? 'true' : 'false' }},
+            });
+            clearInterval(interval_{{$id}});
+            document.getElementById('interval_{{$id}}').remove();
+        }
+    }, 1);
+</script>
+@endcomponent
 @endif

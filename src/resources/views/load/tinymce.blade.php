@@ -8,7 +8,6 @@
             toolbar: "undo redo | styleselect | bold italic underline | customalignleft aligncenter customalignright | link media image | bullist numlist | table | code fullscreen",
             contextmenu: "link image imagetools table spellchecker bold italic underline",
             toolbar_drawer: "sliding",
-            toolbar_sticky: true,
             toolbar_sticky_offset: $('nav.main-header').outerHeight(),
             codemirror: { config: { theme: 'storm' } },
             menubar: false,

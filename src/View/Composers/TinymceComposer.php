@@ -16,6 +16,7 @@ class TinymceComposer extends ComponentComposer
         'id',
         'label',
         'name',
+        'sticky',
         'value',
     ];
 
