@@ -34,10 +34,10 @@
 @enderror
     {!! Form::hidden($name, $rawValue) !!}
 </div>
-@include('boilerplate::load.datepicker')
-@push('js')
+@include('boilerplate::load.async.datepicker')
 @component('boilerplate::minify')
-    <script>
+<script>
+    whenAssetIsLoaded('{!! mix('/plugins/datepicker/datetimepicker.min.js', '/assets/vendor/boilerplate') !!}', () => {
         $('#{{ $id }}').datetimepicker({
             format: "{{ $format }}",
             buttons: {
@@ -45,7 +45,8 @@
                 showClear: {{ $showClear ?? 'false' }},
                 showClose: {{ $showClose ?? 'false' }}
             },
-            useCurrent: {{ $useCurrent ?? 'false' }},{!! $options ?? '' !!}
+            useCurrent: {{ $useCurrent ?? 'false' }},
+            {!! $options ?? '' !!}
         });
 
         $('#{{ $id }}').on('change.datetimepicker', () => {
@@ -54,8 +55,8 @@
                 let date = $('#{{ $id }}').datetimepicker('viewDate').format('{{ $format === 'L' ? 'YYYY-MM-DD' : 'YYYY-MM-DD HH:mm:ss' }}');
                 $('input[name="{{ $name }}"]').val(date).trigger('change');
             }
-        })
-    </script>
+        });
+    });
+</script>
 @endcomponent
-@endpush
 @endif

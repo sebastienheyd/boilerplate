@@ -9,6 +9,80 @@ window.growl = (message, type) => {
     window.toastr[type](message);
 }
 
+window.intervals = [];
+window.loadedAssets = [];
+
+window.loadScript = function(src, callback) {
+    if(loadedAssets.includes(src)) {
+        return;
+    }
+
+    if (document.querySelector('script[src="' + src + '"]')) {
+        loadedAssets.push(src);
+        if (typeof callback === 'function') {
+            callback()
+        }
+        return;
+    }
+
+    if(! loadedAssets.includes(src)) {
+        let script = document.createElement('script');
+        script.onload = () => {
+            loadedAssets.push(src);
+            if (typeof callback === 'function') {
+                callback()
+            }
+        };
+        script.src = src;
+        document.body.appendChild(script);
+    }
+}
+
+window.loadStylesheet = function(src, callback) {
+    if(loadedAssets.includes(src)) {
+        return;
+    }
+
+    if(document.querySelector('link[rel="stylesheet"][href="'+src+'"]')) {
+        loadedAssets.push(src);
+        if (typeof callback === 'function') {
+            callback()
+        }
+        return;
+    }
+
+    let link = document.createElement('link');
+    link.onload = () => {
+        loadedAssets.push(src);
+        if(typeof callback === 'function') {
+            callback()
+        }
+    };
+    link.href = src;
+    link.rel = 'stylesheet';
+    document.querySelector('title').appendChild(link);
+}
+
+window.whenAssetIsLoaded = function(src, callback) {
+    let uid = getIntervalUid();
+    intervals[uid] = setInterval(function() {
+        if(loadedAssets.includes(src)){
+            clearInterval(intervals[uid]);
+            callback();
+        }
+    });
+}
+
+window.getIntervalUid = function() {
+    return String.fromCharCode(Math.floor(Math.random() * 11)) + Math.floor(Math.random() * 1000000);
+}
+
+$(document).on('focusin', function(e) {
+    if ($(e.target).closest(".tox-tinymce, .tox-tinymce-aux, .moxman-window, .tam-assetmanager-root").length) {
+        e.stopImmediatePropagation();
+    }
+});
+
 function storeSetting(settingName, settingValue) {
     $.ajax({
         url: bpRoutes.settings,
@@ -23,12 +97,19 @@ function toggleTinyMceSkin(skin, css)
         return false;
     }
 
-    tinymce.get().forEach(e => {
-        e.settings.skin = skin;
-        e.settings.content_css = css;
-        $('#'+e.settings.id).tinymce().destroy(false);
-        $('#'+e.settings.id).tinymce(e.settings);
-    })
+    let editors = [];
+    tinymce.editors.forEach((e, i) => {
+        if($('#'+e.settings.id).length === 1) {
+            e.settings.skin = skin;
+            e.settings.content_css = css;
+            editors.push(e.settings);
+        }
+    });
+
+    tinymce.remove();
+    editors.forEach((e) => {
+        $('#'+e.id).tinymce(e);
+    });
 }
 
 $('.sidebar-toggle').on('click', e => {

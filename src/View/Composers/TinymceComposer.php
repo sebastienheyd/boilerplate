@@ -27,9 +27,5 @@ class TinymceComposer extends ComponentComposer
         $data = $view->getData();
 
         $view->with('id', $data['id'] ?? uniqid('tinymce_'));
-
-        // Check if sebastienheyd/boilerplate-media-manager is installed
-        $providers = app()->getProviders('Sebastienheyd\BoilerplateMediaManager\ServiceProvider');
-        $view->with('hasMediaManager', count($providers) === 1);
     }
 }

@@ -2,7 +2,7 @@
 @push('plugin-css')
     <link rel="stylesheet" href="{!! mix('/plugins/datepicker/datetimepicker.min.css', '/assets/vendor/boilerplate') !!}">
 @endpush
-@push('js')
+@push('plugin-js')
     @include('boilerplate::load.moment')
     <script src="{!! mix('/plugins/datepicker/datetimepicker.min.js', '/assets/vendor/boilerplate') !!}"></script>
     @component('boilerplate::minify')

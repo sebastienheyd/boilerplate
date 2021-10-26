@@ -13,19 +13,25 @@
     <div class="error-bubble"><div>{{ $message }}</div></div>
 @enderror
 </div>
-@includeWhen($hasMediaManager, 'boilerplate-media-manager::load.tinymce')
-@includeUnless($hasMediaManager, 'boilerplate::load.tinymce')
+@include('boilerplate::load.async.tinymce')
 @component('boilerplate::minify')
-<script id="interval_{{$id}}">
-    var interval_{{$id}} = setInterval(function() {
-        if(typeof tinymce !== 'undefined') {
-            $('#{{ $id }}').tinymce({
-                toolbar_sticky: {{ ($sticky ?? false) ? 'true' : 'false' }},
-            });
-            clearInterval(interval_{{$id}});
-            document.getElementById('interval_{{$id}}').remove();
-        }
-    }, 1);
+<script>
+    whenAssetIsLoaded('{!! mix('/plugins/tinymce/tinymce.min.js', '/assets/vendor/boilerplate') !!}', () => {
+        tinymce.init({
+            selector: '#{{ $id }}',
+            toolbar_sticky: {{ ($sticky ?? false) ? 'true' : 'false' }},
+            @if(setting('darkmode', false) && config('boilerplate.theme.darkmode'))
+            skin : "boilerplate-dark",
+            content_css: 'boilerplate-dark',
+            @else
+            skin : "oxide",
+            content_css: null,
+            @endif
+                    @if(App::getLocale() !== 'en')
+            language: '{{ App::getLocale() }}'
+            @endif
+        });
+    });
 </script>
 @endcomponent
 @endif

@@ -29,6 +29,6 @@
     <script src="/assets/vendor/boilerplate/plugins/codemirror/{{ $script }}"></script>
 @endforeach
 @endif
-    <script>$.fn.codemirror.defaults.theme='{{ $theme ?? 'storm' }}';</script>
+    <script>$.fn.codemirror.defaults.theme='{{ $theme ?? 'storm' }}';window.loadedAssets.push('CodeMirror');</script>
 @endpush
 @endonce

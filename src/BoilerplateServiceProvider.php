@@ -17,6 +17,7 @@ use Lavary\Menu\Facade;
 use Lavary\Menu\ServiceProvider as MenuServiceProvider;
 use Sebastienheyd\Boilerplate\View\Composers\DatatablesComposer;
 use Sebastienheyd\Boilerplate\View\Composers\MenuComposer;
+use Sebastienheyd\Boilerplate\View\Composers\TinymceLoadComposer;
 
 class BoilerplateServiceProvider extends ServiceProvider
 {
@@ -125,6 +126,9 @@ class BoilerplateServiceProvider extends ServiceProvider
 
         // For datatables locales
         View::composer('boilerplate::load.datatables', DatatablesComposer::class);
+
+        // Check if Media Manager is installed
+        View::composer(['boilerplate::load.tinymce', 'boilerplate::load.async.tinymce'], TinymceLoadComposer::class);
 
         // Components
         $components = [

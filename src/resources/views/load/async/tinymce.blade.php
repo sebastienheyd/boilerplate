@@ -1,8 +1,7 @@
 @once
-@push('plugin-js')
 @component('boilerplate::minify')
-    <script src="{!! mix('/plugins/tinymce/tinymce.min.js', '/assets/vendor/boilerplate') !!}"></script>
-    <script>
+<script>
+    loadScript("{!! mix('/plugins/tinymce/tinymce.min.js', '/assets/vendor/boilerplate') !!}", () => {
         tinymce.defaultSettings = {
             plugins: "autoresize fullscreen codemirror link lists table media image imagetools paste customalign",
             toolbar: "undo redo | styleselect | bold italic underline | customalignleft aligncenter customalignright | link media image | bullist numlist | table | code fullscreen",
@@ -39,7 +38,17 @@
             @endif
             @includeWhen($hasMediaManager, 'boilerplate-media-manager::load.mceextend')
         };
-    </script>
+
+        setInterval(() => {
+            if (tinymce.editors.length > 0) {
+                $(tinymce.editors).each((i,e) => {
+                    if($('#'+e.id).length === 0) {
+                        tinymce.get(e.id).remove();
+                    }
+                });
+            }
+        });
+    });
+</script>
 @endcomponent
-@endpush
 @endonce

@@ -24,11 +24,10 @@
     <div class="error-bubble"><div>{{ $message }}</div></div>
 @enderror
 </div>
-@include('boilerplate::load.select2')
-@push('js')
+@include('boilerplate::load.async.select2')
 @component('boilerplate::minify')
     <script>
-        $(function () {
+        whenAssetIsLoaded('{!! mix('/plugins/select2/select2.full.min.js', '/assets/vendor/boilerplate') !!}', () => {
             $('#{{ $id }}').select2({
                 placeholder: '{{ $placeholder ?? '—' }}',
                 allowClear: {{ $allowClear }},
@@ -37,16 +36,15 @@
                 minimumInputLength: {{ $minimumInputLength ?? 0 }},
                 minimumResultsForSearch: {{ $minimumResultsForSearch ?? 10 }},
                 width: '100%',
-@isset($ajax)
+                @isset($ajax)
                 ajax: {
                     delay: 200,
                     url: '{{ $ajax }}',
                     method: 'post'
                 }
-@endisset
+                @endisset
             })
         })
     </script>
 @endcomponent
-@endpush
 @endif

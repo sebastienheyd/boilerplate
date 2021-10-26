@@ -5,7 +5,7 @@
 @isset($label)
     {!! Form::label($name, __($label)) !!}
 @endisset
-    <textarea id="{{ $id }}" name="{{ $name }}" style="visibility:hidden">{!! old($name, $value ?? $slot ?? '') !!}</textarea>
+    <textarea id="{{ $id }}" name="{{ $name }}" style="visibility:hidden" rows="0">{!! old($name, $value ?? $slot ?? '') !!}</textarea>
 @if($help ?? false)
     <small class="form-text text-muted">@lang($help)</small>
 @endif
@@ -13,8 +13,18 @@
     <div class="error-bubble"><div>{{ $message }}</div></div>
 @enderror
 </div>
-@include('boilerplate::load.codemirror', ['theme' => $theme])
-@push('js')
-    <script>$(function(){$('#{{ $id }}').codemirror({ {!! $options ?? '' !!} })});</script>
-@endpush
+@include('boilerplate::load.async.codemirror', ['theme' => $theme])
+@component('boilerplate::minify')
+<script>
+    whenAssetIsLoaded('CodeMirror', () => {
+        let uid = getIntervalUid();
+        intervals[uid] = setInterval(function() {
+            if($('#{{ $id }}').is(':visible')){
+                clearInterval(intervals[uid]);
+                $('#{{ $id }}').codemirror({ {!! $options ?? '' !!} });
+            }
+        });
+    })
+</script>
+@endcomponent
 @endif

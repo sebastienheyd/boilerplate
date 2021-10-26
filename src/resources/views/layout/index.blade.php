@@ -14,6 +14,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
 @stack('css')
+    <script src="{{ mix('/bootstrap.min.js', '/assets/vendor/boilerplate') }}"></script>
+    <script src="{{ mix('/admin-lte.min.js', '/assets/vendor/boilerplate') }}"></script>
+    <script src="{{ mix('/boilerplate.min.js', '/assets/vendor/boilerplate') }}"></script>
+@stack('plugin-js')
 </head>
 <body class="layout-fixed layout-navbar-fixed sidebar-mini{{ setting('darkmode', false) && config('boilerplate.theme.darkmode') ? ' dark-mode accent-light' : '' }}{{ setting('sidebar-collapsed', false) ? ' sidebar-collapse' : '' }}">
     <div class="wrapper">
@@ -38,19 +42,28 @@
         </aside>
         <div class="control-sidebar-bg"></div>
     </div>
-    <script src="{{ mix('/bootstrap.min.js', '/assets/vendor/boilerplate') }}"></script>
-    <script src="{{ mix('/admin-lte.min.js', '/assets/vendor/boilerplate') }}"></script>
-    <script src="{{ mix('/boilerplate.min.js', '/assets/vendor/boilerplate') }}"></script>
-    <script>$.ajaxSetup({headers:{'X-CSRF-TOKEN':'{{ csrf_token() }}'}});bootbox.setLocale('{{ App::getLocale() }}');var bpRoutes={settings:"{{ route('boilerplate.settings',null,false) }}"};var session={keepalive:"{{ route('boilerplate.keepalive', null, false) }}",expire:{{ time() +  config('session.lifetime') * 60 }},lifetime:{{ config('session.lifetime') * 60 }},id:"{{ session()->getId() }}"}</script>
-@if(Session::has('growl'))
+    @component('boilerplate::minify')
     <script>
-@if(is_array(Session::get('growl')))
-        growl("{!! Session::get('growl')[0] !!}", "{{ Session::get('growl')[1] }}");
-@else
-        growl("{{Session::get('growl')}}");
-@endif
+        $.ajaxSetup({headers:{'X-CSRF-TOKEN':'{{ csrf_token() }}'}});
+        bootbox.setLocale('{{ App::getLocale() }}');
+        var bpRoutes={
+            settings:"{{ route('boilerplate.settings',null,false) }}"
+        };
+        var session={
+            keepalive:"{{ route('boilerplate.keepalive', null, false) }}",
+            expire:{{ time() +  config('session.lifetime') * 60 }},
+            lifetime:{{ config('session.lifetime') * 60 }},
+            id:"{{ session()->getId() }}"
+        };
+        @if(Session::has('growl'))
+        @if(is_array(Session::get('growl')))
+            growl("{!! Session::get('growl')[0] !!}", "{{ Session::get('growl')[1] }}");
+        @else
+            growl("{{Session::get('growl')}}");
+        @endif
+        @endif
     </script>
-@endif
+    @endcomponent
 @stack('js')
 </body>
 </html>
