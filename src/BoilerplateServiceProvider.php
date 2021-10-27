@@ -127,7 +127,7 @@ class BoilerplateServiceProvider extends ServiceProvider
         // For datatables locales
         View::composer([
             'boilerplate::load.datatables',
-            'boilerplate::load.async.datatables'
+            'boilerplate::load.async.datatables',
         ], DatatablesComposer::class);
 
         // Check if Media Manager is installed
