@@ -2,11 +2,12 @@
 @push('plugin-css')
     <link rel="stylesheet" href="{!! mix('/plugins/datepicker/daterangepicker.min.css', '/assets/vendor/boilerplate') !!}">
 @endpush
-@push('js')
+@push('plugin-js')
     @include('boilerplate::load.moment')
     <script src="{!! mix('/plugins/datepicker/daterangepicker.min.js', '/assets/vendor/boilerplate') !!}"></script>
     @component('boilerplate::minify')
     <script>
+        registerAsset('daterangepicker');
         $.fn.daterangepicker.defaultOptions = {
             locale: {
                 "applyLabel": "@lang('boilerplate::daterangepicker.applyLabel')",

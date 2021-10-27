@@ -18,26 +18,27 @@
 
     $js = array_unique($default);
 @endphp
+@component('boilerplate::minify')
     <script>
         loadStylesheet('{{ mix('/plugins/codemirror/codemirror.min.css', '/assets/vendor/boilerplate') }}', () => {
             loadStylesheet('/assets/vendor/boilerplate/plugins/codemirror/theme/{{ $theme ?? 'storm' }}.css', () => {
                 loadScript('{{ mix('/plugins/codemirror/jquery.codemirror.min.js', '/assets/vendor/boilerplate') }}', () => {
                     @if(!empty($js))
                         @foreach($js as $script)
-                        loadScript("/assets/vendor/boilerplate/plugins/codemirror/{{ $script }}", () => {
-                        @if ($loop->last)
-                            if(! loadedAssets.includes('CodeMirror')) {
-                                window.loadedAssets.push('CodeMirror');
-                                $.fn.codemirror.defaults.theme = '{{ $theme ?? 'storm' }}';
-                            }
-                        @endif
+                            loadScript("/assets/vendor/boilerplate/plugins/codemirror/{{ $script }}", () => {
+                            @if ($loop->last)
+                                registerAsset('CodeMirror', () => {
+                                    $.fn.codemirror.defaults.theme = '{{ $theme ?? 'storm' }}';
+                                });
+                            @endif
                         @endforeach
                         @foreach($js as $script)
-                        });
+                            });
                         @endforeach
                     @endif
                 });
             });
         });
     </script>
+@endcomponent
 @endonce

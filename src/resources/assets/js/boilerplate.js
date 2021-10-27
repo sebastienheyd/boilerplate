@@ -12,26 +12,29 @@ window.growl = (message, type) => {
 window.intervals = [];
 window.loadedAssets = [];
 
+window.registerAsset = function(name, callback) {
+    if(! loadedAssets.includes(name)) {
+        loadedAssets.push(name);
+        if (typeof callback === 'function') {
+            callback()
+        }
+    }
+}
+
 window.loadScript = function(src, callback) {
     if(loadedAssets.includes(src)) {
         return;
     }
 
     if (document.querySelector('script[src="' + src + '"]')) {
-        loadedAssets.push(src);
-        if (typeof callback === 'function') {
-            callback()
-        }
+        registerAsset(src, callback);
         return;
     }
 
     if(! loadedAssets.includes(src)) {
         let script = document.createElement('script');
         script.onload = () => {
-            loadedAssets.push(src);
-            if (typeof callback === 'function') {
-                callback()
-            }
+            registerAsset(src, callback);
         };
         script.src = src;
         document.body.appendChild(script);
@@ -44,19 +47,13 @@ window.loadStylesheet = function(src, callback) {
     }
 
     if(document.querySelector('link[rel="stylesheet"][href="'+src+'"]')) {
-        loadedAssets.push(src);
-        if (typeof callback === 'function') {
-            callback()
-        }
+        registerAsset(src, callback);
         return;
     }
 
     let link = document.createElement('link');
     link.onload = () => {
-        loadedAssets.push(src);
-        if(typeof callback === 'function') {
-            callback()
-        }
+        registerAsset(src, callback);
     };
     link.href = src;
     link.rel = 'stylesheet';

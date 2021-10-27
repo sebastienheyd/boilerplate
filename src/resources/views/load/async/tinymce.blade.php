@@ -39,6 +39,7 @@
             @includeWhen($hasMediaManager, 'boilerplate-media-manager::load.mceextend')
         };
 
+        /** Fix for editors removed from the DOM (modal, ajax, ...) **/
         setInterval(() => {
             if (tinymce.editors.length > 0) {
                 $(tinymce.editors).each((i,e) => {

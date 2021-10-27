@@ -37,7 +37,7 @@
 @include('boilerplate::load.async.datepicker')
 @component('boilerplate::minify')
 <script>
-    whenAssetIsLoaded('{!! mix('/plugins/datepicker/datetimepicker.min.js', '/assets/vendor/boilerplate') !!}', () => {
+    whenAssetIsLoaded('datetimepicker', () => {
         $('#{{ $id }}').datetimepicker({
             format: "{{ $format }}",
             buttons: {

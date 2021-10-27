@@ -7,6 +7,10 @@
     <script src="{!! mix('/plugins/datepicker/datetimepicker.min.js', '/assets/vendor/boilerplate') !!}"></script>
     @component('boilerplate::minify')
     <script>
+        if(! loadedAssets.includes('datetimepicker')) {
+            window.loadedAssets.push('datetimepicker');
+        }
+
         $.fn.datetimepicker.Constructor.Default = $.extend({}, $.fn.datetimepicker.Constructor.Default, {
             locale: "{{ App::getLocale() }}",
             icons: $.extend({}, $.fn.datetimepicker.Constructor.Default.icons, {

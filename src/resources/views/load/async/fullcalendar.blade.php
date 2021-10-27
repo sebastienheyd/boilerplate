@@ -4,16 +4,13 @@
         loadStylesheet("{!! mix('/plugins/fullcalendar/main.min.css', '/assets/vendor/boilerplate') !!}");
         loadScript("{!! mix('/plugins/fullcalendar/fullcalendar.min.js', '/assets/vendor/boilerplate') !!}", () => {
             @if(App::getLocale() !== 'en')
-                loadScript("{!! mix('/plugins/fullcalendar/locales/'.App::getLocale().'.js', '/assets/vendor/boilerplate') !!}", function() {
-                    $.fn.fullCalendar.options = {locale:"{{ App::getLocale() }}"}
-                    if(! loadedAssets.includes('fullCalendar')) {
-                        window.loadedAssets.push('fullCalendar');
-                    };
+                loadScript("{!! mix('/plugins/fullcalendar/locales/'.App::getLocale().'.js', '/assets/vendor/boilerplate') !!}", () => {
+                    registerAsset('fullCalendar', () => {
+                        $.fn.fullCalendar.options = {locale:"{{ App::getLocale() }}"}
+                    });
                 })
             @else
-                if(! loadedAssets.includes('fullCalendar')) {
-                    window.loadedAssets.push('fullCalendar');
-                };
+                registerAsset('fullCalendar');
             @endif
         });
     </script>

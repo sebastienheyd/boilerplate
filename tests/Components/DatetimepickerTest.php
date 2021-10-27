@@ -28,6 +28,7 @@ HTML;
     </div>
     <input name="test" type="hidden">
 </div>
+<script>loadStylesheet('');loadScript('',()=>{moment.locale('en');loadScript('',()=>{registerAsset('datetimepicker',()=>{$.fn.datetimepicker.Constructor.Default=$.extend({},$.fn.datetimepicker.Constructor.Default,{locale:"en",icons:$.extend({},$.fn.datetimepicker.Constructor.Default.icons,{time:'far fa-clock',date:'far fa-calendar',up:'fas fa-arrow-up',down:'fas fa-arrow-down',previous:'fas fa-chevron-left',next:'fas fa-chevron-right',today:'far fa-calendar-check',clear:'fas fa-trash',close:'fas fa-times'})})})})});</script><script>whenAssetIsLoaded('datetimepicker',()=>{$('#test').datetimepicker({format:"L",buttons:{showToday:!1,showClear:!1,showClose:!1},useCurrent:!1,});$('#test').on('change.datetimepicker',()=>{$('input[name="test"]').val('');if($('input[name="test_local"]').val()!==''){let date=$('#test').datetimepicker('viewDate').format('YYYY-MM-DD');$('input[name="test"]').val(date).trigger('change')}})});</script>
 HTML;
         if ($this->isLaravelEqualOrGreaterThan7) {
             $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" />');
@@ -48,6 +49,7 @@ HTML;
     </div>
     <input name="test" type="hidden">
 </div>
+<script>loadStylesheet('');loadScript('',()=>{moment.locale('en');loadScript('',()=>{registerAsset('datetimepicker',()=>{$.fn.datetimepicker.Constructor.Default=$.extend({},$.fn.datetimepicker.Constructor.Default,{locale:"en",icons:$.extend({},$.fn.datetimepicker.Constructor.Default.icons,{time:'far fa-clock',date:'far fa-calendar',up:'fas fa-arrow-up',down:'fas fa-arrow-down',previous:'fas fa-chevron-left',next:'fas fa-chevron-right',today:'far fa-calendar-check',clear:'fas fa-trash',close:'fas fa-times'})})})})});</script><script>whenAssetIsLoaded('datetimepicker',()=>{$('#test').datetimepicker({format:"L",buttons:{showToday:!1,showClear:!1,showClose:!1},useCurrent:!1,});$('#test').on('change.datetimepicker',()=>{$('input[name="test"]').val('');if($('input[name="test_local"]').val()!==''){let date=$('#test').datetimepicker('viewDate').format('YYYY-MM-DD');$('input[name="test"]').val(date).trigger('change')}})});</script>
 HTML;
         if ($this->isLaravelEqualOrGreaterThan7) {
             $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" label="Test" />');
@@ -67,6 +69,7 @@ HTML;
     </div>
     <input name="test" type="hidden">
 </div>
+<script>loadStylesheet('');loadScript('',()=>{moment.locale('en');loadScript('',()=>{registerAsset('datetimepicker',()=>{$.fn.datetimepicker.Constructor.Default=$.extend({},$.fn.datetimepicker.Constructor.Default,{locale:"en",icons:$.extend({},$.fn.datetimepicker.Constructor.Default.icons,{time:'far fa-clock',date:'far fa-calendar',up:'fas fa-arrow-up',down:'fas fa-arrow-down',previous:'fas fa-chevron-left',next:'fas fa-chevron-right',today:'far fa-calendar-check',clear:'fas fa-trash',close:'fas fa-times'})})})})});</script><script>whenAssetIsLoaded('datetimepicker',()=>{$('#test').datetimepicker({format:"L",buttons:{showToday:!1,showClear:!1,showClose:!1},useCurrent:!1,});$('#test').on('change.datetimepicker',()=>{$('input[name="test"]').val('');if($('input[name="test_local"]').val()!==''){let date=$('#test').datetimepicker('viewDate').format('YYYY-MM-DD');$('input[name="test"]').val(date).trigger('change')}})});</script>
 HTML;
         if ($this->isLaravelEqualOrGreaterThan7) {
             $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" class="test-class" />');
@@ -87,6 +90,7 @@ HTML;
     <small class="form-text text-muted">The user will receive an invitation by e-mail to login in which it will allow him to enter his new password</small>
     <input name="test" type="hidden">
 </div>
+<script>loadStylesheet('');loadScript('',()=>{moment.locale('en');loadScript('',()=>{registerAsset('datetimepicker',()=>{$.fn.datetimepicker.Constructor.Default=$.extend({},$.fn.datetimepicker.Constructor.Default,{locale:"en",icons:$.extend({},$.fn.datetimepicker.Constructor.Default.icons,{time:'far fa-clock',date:'far fa-calendar',up:'fas fa-arrow-up',down:'fas fa-arrow-down',previous:'fas fa-chevron-left',next:'fas fa-chevron-right',today:'far fa-calendar-check',clear:'fas fa-trash',close:'fas fa-times'})})})})});</script><script>whenAssetIsLoaded('datetimepicker',()=>{$('#test').datetimepicker({format:"L",buttons:{showToday:!1,showClear:!1,showClose:!1},useCurrent:!1,});$('#test').on('change.datetimepicker',()=>{$('input[name="test"]').val('');if($('input[name="test_local"]').val()!==''){let date=$('#test').datetimepicker('viewDate').format('YYYY-MM-DD');$('input[name="test"]').val(date).trigger('change')}})});</script>
 HTML;
         if ($this->isLaravelEqualOrGreaterThan7) {
             $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" help="boilerplate::users.create.help" />');
@@ -107,6 +111,7 @@ HTML;
     <div class="error-bubble"><div>Error message</div></div>
     <input name="fielderror" type="hidden">
 </div>
+<script>loadStylesheet('');loadScript('',()=>{moment.locale('en');loadScript('',()=>{registerAsset('datetimepicker',()=>{$.fn.datetimepicker.Constructor.Default=$.extend({},$.fn.datetimepicker.Constructor.Default,{locale:"en",icons:$.extend({},$.fn.datetimepicker.Constructor.Default.icons,{time:'far fa-clock',date:'far fa-calendar',up:'fas fa-arrow-up',down:'fas fa-arrow-down',previous:'fas fa-chevron-left',next:'fas fa-chevron-right',today:'far fa-calendar-check',clear:'fas fa-trash',close:'fas fa-times'})})})})});</script><script>whenAssetIsLoaded('datetimepicker',()=>{$('#test').datetimepicker({format:"L",buttons:{showToday:!1,showClear:!1,showClose:!1},useCurrent:!1,});$('#test').on('change.datetimepicker',()=>{$('input[name="fielderror"]').val('');if($('input[name="fielderror_local"]').val()!==''){let date=$('#test').datetimepicker('viewDate').format('YYYY-MM-DD');$('input[name="fielderror"]').val(date).trigger('change')}})});</script>
 HTML;
         if ($this->isLaravelEqualOrGreaterThan7) {
             $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="fielderror" />');
@@ -132,6 +137,7 @@ HTML;
     </div>
     <input name="test" type="hidden">
 </div>
+<script>loadStylesheet('');loadScript('',()=>{moment.locale('en');loadScript('',()=>{registerAsset('datetimepicker',()=>{$.fn.datetimepicker.Constructor.Default=$.extend({},$.fn.datetimepicker.Constructor.Default,{locale:"en",icons:$.extend({},$.fn.datetimepicker.Constructor.Default.icons,{time:'far fa-clock',date:'far fa-calendar',up:'fas fa-arrow-up',down:'fas fa-arrow-down',previous:'fas fa-chevron-left',next:'fas fa-chevron-right',today:'far fa-calendar-check',clear:'fas fa-trash',close:'fas fa-times'})})})})});</script><script>whenAssetIsLoaded('datetimepicker',()=>{$('#test').datetimepicker({format:"L",buttons:{showToday:!1,showClear:!1,showClose:!1},useCurrent:!1,});$('#test').on('change.datetimepicker',()=>{$('input[name="test"]').val('');if($('input[name="test_local"]').val()!==''){let date=$('#test').datetimepicker('viewDate').format('YYYY-MM-DD');$('input[name="test"]').val(date).trigger('change')}})});</script>
 HTML;
         if ($this->isLaravelEqualOrGreaterThan7) {
             $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" prepend-text="test" append-text="test" />');
@@ -157,6 +163,7 @@ HTML;
     </div>
     <input name="test" type="hidden">
 </div>
+<script>loadStylesheet('');loadScript('',()=>{moment.locale('en');loadScript('',()=>{registerAsset('datetimepicker',()=>{$.fn.datetimepicker.Constructor.Default=$.extend({},$.fn.datetimepicker.Constructor.Default,{locale:"en",icons:$.extend({},$.fn.datetimepicker.Constructor.Default.icons,{time:'far fa-clock',date:'far fa-calendar',up:'fas fa-arrow-up',down:'fas fa-arrow-down',previous:'fas fa-chevron-left',next:'fas fa-chevron-right',today:'far fa-calendar-check',clear:'fas fa-trash',close:'fas fa-times'})})})})});</script><script>whenAssetIsLoaded('datetimepicker',()=>{$('#test').datetimepicker({format:"L",buttons:{showToday:!1,showClear:!1,showClose:!1},useCurrent:!1,});$('#test').on('change.datetimepicker',()=>{$('input[name="test"]').val('');if($('input[name="test_local"]').val()!==''){let date=$('#test').datetimepicker('viewDate').format('YYYY-MM-DD');$('input[name="test"]').val(date).trigger('change')}})});</script>
 HTML;
         if ($this->isLaravelEqualOrGreaterThan7) {
             $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" prepend-text="fas fa-calendar" append-text="fas fa-calendar" />');
@@ -182,6 +189,7 @@ HTML;
     </div>
     <input name="test" type="hidden">
 </div>
+<script>loadStylesheet('');loadScript('',()=>{moment.locale('en');loadScript('',()=>{registerAsset('datetimepicker',()=>{$.fn.datetimepicker.Constructor.Default=$.extend({},$.fn.datetimepicker.Constructor.Default,{locale:"en",icons:$.extend({},$.fn.datetimepicker.Constructor.Default.icons,{time:'far fa-clock',date:'far fa-calendar',up:'fas fa-arrow-up',down:'fas fa-arrow-down',previous:'fas fa-chevron-left',next:'fas fa-chevron-right',today:'far fa-calendar-check',clear:'fas fa-trash',close:'fas fa-times'})})})})});</script><script>whenAssetIsLoaded('datetimepicker',()=>{$('#test').datetimepicker({format:"L",buttons:{showToday:!1,showClear:!1,showClose:!1},useCurrent:!1,});$('#test').on('change.datetimepicker',()=>{$('input[name="test"]').val('');if($('input[name="test_local"]').val()!==''){let date=$('#test').datetimepicker('viewDate').format('YYYY-MM-DD');$('input[name="test"]').val(date).trigger('change')}})});</script>
 HTML;
         if ($this->isLaravelEqualOrGreaterThan7) {
             $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test"><x-slot name="prepend">test</x-slot><x-slot name="append">test</x-slot></x-boilerplate::datetimepicker>');
@@ -201,10 +209,7 @@ HTML;
     </div>
     <input name="test" type="hidden">
 </div>
-    <script src=""></script>
-<script>moment.locale('en')</script>
-    <script src=""></script>
-    <script>$.fn.datetimepicker.Constructor.Default=$.extend({},$.fn.datetimepicker.Constructor.Default,{locale:"en",icons:$.extend({},$.fn.datetimepicker.Constructor.Default.icons,{time:'far fa-clock',date:'far fa-calendar',up:'fas fa-arrow-up',down:'fas fa-arrow-down',previous:'fas fa-chevron-left',next:'fas fa-chevron-right',today:'far fa-calendar-check',clear:'fas fa-trash',close:'fas fa-times'})});</script><script>$('#test').datetimepicker({format:"L",buttons:{showToday:!1,showClear:!1,showClose:!1},useCurrent:!1,});$('#test').on('change.datetimepicker',()=>{$('input[name="test"]').val('');if($('input[name="test_local"]').val()!==''){let date=$('#test').datetimepicker('viewDate').format('YYYY-MM-DD');$('input[name="test"]').val(date).trigger('change')}})</script>
+<script>loadStylesheet('');loadScript('',()=>{moment.locale('en');loadScript('',()=>{registerAsset('datetimepicker',()=>{$.fn.datetimepicker.Constructor.Default=$.extend({},$.fn.datetimepicker.Constructor.Default,{locale:"en",icons:$.extend({},$.fn.datetimepicker.Constructor.Default.icons,{time:'far fa-clock',date:'far fa-calendar',up:'fas fa-arrow-up',down:'fas fa-arrow-down',previous:'fas fa-chevron-left',next:'fas fa-chevron-right',today:'far fa-calendar-check',clear:'fas fa-trash',close:'fas fa-times'})})})})});</script><script>whenAssetIsLoaded('datetimepicker',()=>{$('#test').datetimepicker({format:"L",buttons:{showToday:!1,showClear:!1,showClose:!1},useCurrent:!1,});$('#test').on('change.datetimepicker',()=>{$('input[name="test"]').val('');if($('input[name="test_local"]').val()!==''){let date=$('#test').datetimepicker('viewDate').format('YYYY-MM-DD');$('input[name="test"]').val(date).trigger('change')}})});</script>
 HTML;
         if ($this->isLaravelEqualOrGreaterThan7) {
             $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" />@stack("js")');

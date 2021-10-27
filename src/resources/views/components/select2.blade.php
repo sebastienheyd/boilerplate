@@ -27,7 +27,7 @@
 @include('boilerplate::load.async.select2')
 @component('boilerplate::minify')
     <script>
-        whenAssetIsLoaded('{!! mix('/plugins/select2/select2.full.min.js', '/assets/vendor/boilerplate') !!}', () => {
+        whenAssetIsLoaded('select2', () => {
             $('#{{ $id }}').select2({
                 placeholder: '{{ $placeholder ?? '—' }}',
                 allowClear: {{ $allowClear }},

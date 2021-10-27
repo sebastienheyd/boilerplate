@@ -125,7 +125,10 @@ class BoilerplateServiceProvider extends ServiceProvider
         View::composer('boilerplate::layout.mainsidebar', MenuComposer::class);
 
         // For datatables locales
-        View::composer('boilerplate::load.datatables', DatatablesComposer::class);
+        View::composer([
+            'boilerplate::load.datatables',
+            'boilerplate::load.async.datatables'
+        ], DatatablesComposer::class);
 
         // Check if Media Manager is installed
         View::composer(['boilerplate::load.tinymce', 'boilerplate::load.async.tinymce'], TinymceLoadComposer::class);
