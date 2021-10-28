@@ -32,10 +32,10 @@ The documentation is readable on [Github pages](https://sebastienheyd.github.io/
 
 ## Features
 
-* Configurable backend theme and [components](https://sebastienheyd.github.io/boilerplate/components/) for [AdminLTE 3](https://adminlte.io/docs/3.0/)
+* Configurable [backend theme](https://sebastienheyd.github.io/boilerplate/howto/change-theme) and [components](https://sebastienheyd.github.io/boilerplate/components/) for [AdminLTE 3](https://adminlte.io/docs/3.0/)
 * Css framework [Bootstrap 4](https://getbootstrap.com/)
 * Icons by [Font Awesome 5](https://fontawesome.com/)
-* Role-based permissions provided by [santigarcor/laratrust](https://github.com/santigarcor/laratrust)
+* Role-based permissions support by [santigarcor/laratrust](https://github.com/santigarcor/laratrust)
 * Forms & Html helpers by [laravelcollective/html](https://github.com/laravelcollective/html)
 * Menu dynamically builded by [lavary/laravel-menu](https://github.com/lavary/laravel-menu)
 * Menu items activated by [hieu-le/active](https://github.com/letrunghieu/active)

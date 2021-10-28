@@ -25,7 +25,6 @@ class ArtisanTest extends ArtisanTestCase
 
         $this->assertTrue(is_dir(self::TEST_APP.'/public/assets/vendor/boilerplate'));
         $this->assertTrue(is_dir(self::TEST_APP.'/config/boilerplate'));
-        $this->assertTrue(is_dir(self::TEST_APP.'/resources/lang/fr'));
     }
 
     public function testMenuItem()
