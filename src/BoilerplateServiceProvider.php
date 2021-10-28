@@ -111,7 +111,7 @@ class BoilerplateServiceProvider extends ServiceProvider
     }
 
     /**
-     * Once directive for Laravel 6
+     * Once directive for Laravel 6.
      */
     private function bladeDirectives()
     {
