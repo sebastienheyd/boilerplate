@@ -53,32 +53,7 @@ class BoilerplateServiceProvider extends ServiceProvider
     public function boot()
     {
         if ($this->app->runningInConsole()) {
-            // Publish files when calling php artisan vendor:publish
-            $this->publishes([
-                __DIR__.'/config' => config_path('boilerplate'),
-            ], ['boilerplate', 'boilerplate-config']);
-
-            $this->publishes([
-                __DIR__.'/public' => public_path('assets/vendor/boilerplate'),
-            ], ['boilerplate', 'boilerplate-public']);
-
-            $this->publishes([
-                __DIR__.'/resources/views' => resource_path('views/vendor/boilerplate'),
-            ], 'boilerplate-views');
-
-            $this->publishes([
-                __DIR__.'/resources/views/dashboard.blade.php' => resource_path('views/vendor/boilerplate/dashboard.blade.php'),
-            ], 'boilerplate-dashboard');
-
-            $this->publishLang();
-
-            // Add console commands
-            $this->commands([
-                Console\Dashboard::class,
-                Console\MenuItem::class,
-                Console\Permission::class,
-                Console\Scaffold::class,
-            ]);
+            $this->bootInConsole();
         }
 
         // Load routes
@@ -102,9 +77,44 @@ class BoilerplateServiceProvider extends ServiceProvider
         }
     }
 
+    /**
+     * Publish files when calling php artisan vendor:publish and add console commands.
+     */
+    private function bootInConsole()
+    {
+        $this->publishes([
+            __DIR__.'/config' => config_path('boilerplate'),
+        ], ['boilerplate', 'boilerplate-config']);
+
+        $this->publishes([
+            __DIR__.'/public' => public_path('assets/vendor/boilerplate'),
+        ], ['boilerplate', 'boilerplate-public']);
+
+        $this->publishes([
+            __DIR__.'/resources/views' => resource_path('views/vendor/boilerplate'),
+        ], 'boilerplate-views');
+
+        $this->publishes([
+            __DIR__.'/resources/views/dashboard.blade.php' => resource_path('views/vendor/boilerplate/dashboard.blade.php'),
+        ], 'boilerplate-dashboard');
+
+        $this->publishes([
+            __DIR__.'/resources/lang' => resource_path('lang/vendor/boilerplate'),
+        ], 'boilerplate-lang');
+
+        $this->commands([
+            Console\Dashboard::class,
+            Console\MenuItem::class,
+            Console\Permission::class,
+            Console\Scaffold::class,
+        ]);
+    }
+
+    /**
+     * Once directive for Laravel 6
+     */
     private function bladeDirectives()
     {
-        // Once directive for Laravel 6
         Blade::directive('once', function () {
             $id = Str::uuid();
 
@@ -159,26 +169,6 @@ class BoilerplateServiceProvider extends ServiceProvider
     }
 
     /**
-     * Publish Laravel lang files.
-     */
-    private function publishLang()
-    {
-        $toPublish = [];
-        foreach (array_diff(scandir(__DIR__.'/resources/lang'), ['..', '.']) as $lang) {
-            if ($lang === 'en') {
-                continue;
-            }
-            $toPublish[base_path('vendor/laravel-lang/lang/locales/'.$lang)] = resource_path('lang/'.$lang);
-        }
-
-        $this->publishes($toPublish, 'boilerplate');
-
-        $this->publishes([
-            __DIR__.'/resources/lang' => resource_path('lang/vendor/boilerplate'),
-        ], 'boilerplate-lang');
-    }
-
-    /**
      * Register the application services.
      *
      * @return void
@@ -186,12 +176,9 @@ class BoilerplateServiceProvider extends ServiceProvider
     public function register()
     {
         // Get config
-        $this->mergeConfigFrom(__DIR__.'/config/app.php', 'boilerplate.app');
-        $this->mergeConfigFrom(__DIR__.'/config/laratrust.php', 'boilerplate.laratrust');
-        $this->mergeConfigFrom(__DIR__.'/config/auth.php', 'boilerplate.auth');
-        $this->mergeConfigFrom(__DIR__.'/config/menu.php', 'boilerplate.menu');
-        $this->mergeConfigFrom(__DIR__.'/config/theme.php', 'boilerplate.theme');
-        $this->mergeConfigFrom(__DIR__.'/config/locale.php', 'boilerplate.locale');
+        foreach (['app', 'laratrust', 'auth', 'menu', 'theme', 'locale'] as $config) {
+            $this->mergeConfigFrom(__DIR__."/config/$config.php", "boilerplate.$config");
+        }
 
         // Overriding Laravel config
         config([
@@ -227,7 +214,7 @@ class BoilerplateServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register package lavary/laravel-menu.
+     * Register package santigarcor/laratrust.
      */
     private function registerLaratrust()
     {

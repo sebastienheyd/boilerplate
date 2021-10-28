@@ -19,13 +19,20 @@ Other packages to extend the features :
 * [sebastienheyd/boilerplate-media-manager](https://github.com/sebastienheyd/boilerplate-media-manager)
 * [sebastienheyd/boilerplate-email-editor](https://github.com/sebastienheyd/boilerplate-email-editor)
 
-## Full documentation
+---
 
-The full documentation is readable on [Github pages](https://sebastienheyd.github.io/boilerplate/)
+<a href="https://sebastienheyd.github.io/boilerplate/assets/img/login.png" class="img-link"><img src="https://sebastienheyd.github.io/boilerplate/assets/img/login.png" style="max-width:100%;height:100px;margin-right:.5rem"/></a>
+<a href="https://sebastienheyd.github.io/boilerplate/assets/img/add_user.png" class="img-link"><img src="https://sebastienheyd.github.io/boilerplate/assets/img/add_user.png" style="max-width:100%;height:100px;margin-right:.5rem" /></a>
+<a href="https://sebastienheyd.github.io/boilerplate/assets/img/role.png" class="img-link"><img src="https://sebastienheyd.github.io/boilerplate/assets/img/role.png" style="max-width:100%;height:100px;margin-right:.5rem" /></a>
+<a href="https://sebastienheyd.github.io/boilerplate/assets/img/logs.png" class="img-link"><img src="https://sebastienheyd.github.io/boilerplate/assets/img/logs.png" style="max-width:100%;height:100px;margin-right:.5rem" /></a>
+
+## Documentation
+
+The documentation is readable on [Github pages](https://sebastienheyd.github.io/boilerplate/)
 
 ## Features
 
-* Configurable backend theme [AdminLTE 3](https://adminlte.io/docs/3.0/)
+* Configurable backend theme and [components](https://sebastienheyd.github.io/boilerplate/components/) for [AdminLTE 3](https://adminlte.io/docs/3.0/)
 * Css framework [Bootstrap 4](https://getbootstrap.com/)
 * Icons by [Font Awesome 5](https://fontawesome.com/)
 * Role-based permissions provided by [santigarcor/laratrust](https://github.com/santigarcor/laratrust)
@@ -36,7 +43,7 @@ The full documentation is readable on [Github pages](https://sebastienheyd.githu
 * Image manipulation by [intervention/image](https://github.com/intervention/image)
 * Logs visualization by [arcanedev/log-viewer](https://github.com/ARCANEDEV/LogViewer)
 * Gravatar import by [thomaswelton/laravel-gravatar](https://github.com/thomaswelton/laravel-gravatar)
-* Laravel Blade components for AdminLTE 3
+* Default languages support by [overtrue/laravel-lang](https://github.com/overtrue/laravel-lang) and [Laravel-Lang/lang](https://github.com/Laravel-Lang/lang)
 * Javascript session keep-alive
 * [Localized](https://github.com/sebastienheyd/boilerplate/tree/master/src/resources/lang)
 
@@ -54,7 +61,7 @@ composer require sebastienheyd/boilerplate
 php artisan vendor:publish --tag=boilerplate
 ```
 
-3. After you set your database parameters file run :
+3. After you set your database parameters run :
 
 ```
 php artisan migrate
@@ -69,150 +76,6 @@ php artisan serve
 ```
 
 Now you can point your browser to [http://localhost:8000/admin](http://localhost:8000/admin)
-
-## Configuration
-
-Configuration files can be found in `config/boilerplate` folder.
-
-* [`app.php`](src/config/app.php) : url admin prefix, backend locale, redirection after login (see comments in file), ...
-* [`auth.php`](src/config/auth.php) : overriding of `config/auth.php` to use boilerplate models instead
-of default Laravel models. Allow you to define if users can register from login page and which role will be assigned
-to a new user.
-* [`laratrust.php`](src/config/laratrust.php) : overriding of Laratrust (package santigarcor/laratrust)
-default config.
-* [`menu.php`](src/config/menu.php) : dashboard to use and menu classes
-* [`theme.php`](src/config/theme.php) : backend theme configuration
-
-### Dashboard
-
-You can override the dashboard view by publishing it :
-
-```bash
-php artisan vendor:publish --tag=boilerplate-dashboard
-```
-
-After that, you will find the view `dashboard.blade.php` in `resources/views/vendor/boilerplate`
-
-If you need to have a controller for more flexibility, you can run the following artisan command :
-
-```bash
-php artisan boilerplate:dashboard
-```
-
-This will publish for you the view, the `DashboardController.php` file in the `app/Http/Controllers/Boilerplate` folder and 
-modify the configuration file `config/boilerplate/menu.php`.
-
-You can also use your own dashboard controller by changing the `dashboard` value in `config/boilerplate/menu.php`.
-
-### Adding items to the menu
-
-To add an item to the menu, nothing simpler, use the `artisan boilerplate:menuitem` command provided with boilerplate.
-
-This command will generate the classes needed to generate the menu item in the `app/Menu` folder.
-
-```bash
-php artisan boilerplate:menuitem {name} {-s} {-o=100}
-```
-
-| option / argument | description |
-|---|---|
-| name | Class name to generate |
-| -s --submenu | Menu item must have sub item(s) |
-| -o --order | Menu item order in the backend menu |
-
-Once generated, the files can be edited to customize the item.
-
-You can also add your own providers by adding their classnames to the array of providers in the configuration file
-`config/boilerplate/menu.php`. This can be useful if you don't want to use the default directory `app/Menu` in your 
-application.
-
-For package developers, menu items providers can be added by using the `boilerplate.menu.items` singleton in your 
-package service provider. Example : 
-
-```php
-public function boot()
-{
-    app('boilerplate.menu.items')->registerMenuItem([
-        Users::class,
-        Logs::class,
-    ]);
-}
-```
-
-For more information, see the documentation of the following packages:
-
-- [lavary/laravel-menu](https://github.com/lavary/laravel-menu)
-- [hieu-le/active](https://github.com/letrunghieu/active)
-
-### Loading plugins assets
-
-By default, only jQuery, Bootstrap, Font Awesome and AdminLTE scripts and styles are loaded.
-
-To load and use plugins like Datatables, Date Picker, TinyMCE, ... you can use "loaders". These are blade templates
-prepared to add the loading of scripts and styles for a plugin.
-
-For example, you want to use a datepicker on a text field :
-
-```blade
-@include('boilerplate::load.datepicker')
-
-@push('js')
-    <script>
-        $('.datepicker').datepicker();
-    </script>
-@endpush
-```
-
-Here `@include('boilerplate::load.datepicker')` will load scripts and styles to allow usage of datepicker. After that
-you can push your scripts on the `js` stack (or styles on the `css` stack).
-
-Available loaders are :
-
-| Loader  | Documentation  |  |
-|---|---|---|
-| [`boilerplate::load.tinymce`](src/resources/views/load/tinymce.blade.php) | [TinyMCE](https://www.tiny.cloud)  | [Example](src/resources/views/plugins/demo/tinymce.blade.php) |
-| [`boilerplate::load.codemirror`](src/resources/views/load/codemirror.blade.php) | [CodeMirror](https://codemirror.net/) | [Example](src/resources/views/plugins/demo/codemirror.blade.php) |
-| [`boilerplate::load.datatables`](src/resources/views/load/datatables.blade.php) | [Datatables](https://www.datatables.net/) | [Example](src/resources/views/plugins/demo/datatables.blade.php) |
-| [`boilerplate::load.datepicker`](src/resources/views/load/datepicker.blade.php) | [Tempus Dominus](https://tempusdominus.github.io/bootstrap-4/) / [Date Range Picker](https://www.daterangepicker.com) | [Example](src/resources/views/plugins/demo/datepicker.blade.php) |
-| [`boilerplate::load.select2`](src/resources/views/load/select2.blade.php) | [Select2](https://select2.github.io/) | [Example](src/resources/views/plugins/demo/select2.blade.php) |
-| [`boilerplate::load.fileinput`](src/resources/views/load/fileinput.blade.php) | [Bootstrap FileInput](http://plugins.krajee.com/file-input) | [Example](src/resources/views/plugins/demo/fileinput.blade.php) | 
-| [`boilerplate::load.fullcalendar`](src/resources/views/load/fullcalendar.blade.php) | [FullCalendar](https://fullcalendar.io/) | [Example](src/resources/views/plugins/demo/fullcalendar.blade.php) |  
-| [`boilerplate::load.moment`](src/resources/views/load/moment.blade.php) | [MomentJs](http://momentjs.com/) | |
-
-Some plugins are loaded by default :
-
-* [Bootbox](https://github.com/makeusabrew/bootbox) -
-[Example](src/resources/views/plugins/demo/bootbox.blade.php)
-* [Toastr](https://codeseven.github.io/toastr/) -
-[Example](src/resources/views/plugins/demo/notify.blade.php)
-* [iCheck](https://github.com/bantikyan/icheck-bootstrap) - [Example](src/resources/views/plugins/demo/icheck.blade.php)
-
-You can see examples on the default dashboard.
-
-### Language
-
-The default language used by boilerplate is the global application language set as `locale` in `config/app.php`. 
-
-You can define another default language for the admin panel by setting the `default` parameter in `config/boilerplate/locale.php`.
-
-You can activate a language switch by setting to true the `switch` parameter in `config/boilerplate/locale.php`. A language 
-selector will so be shown on the login page and in the top bar. Select allowed switchable languages by setting the `allowed` parameter
-in `config/boilerplate/locale.php`
-
-[See the full documentation](https://sebastienheyd.github.io/boilerplate/language)
-
-### Routes
-
-Routes are loaded from the file [`boilerplate.php`](src/routes/boilerplate.php).
-
-A default prefix `admin` is set into the config file [`app.php`](src/config/app.php), this is why
-boilerplate is accessible by /admin url. You can set an empty prefix if you remove the default route / defined in
-`routes/web.php`
-
-### Views
-
-You can override views by running `php artisan vendor:publish --tag=boilerplate-views`. You will then find the views 
-in the `resources/views/vendor/boilerplate` folder.
 
 ## Package update
 
@@ -253,46 +116,6 @@ php artisan dusk vendor/sebastienheyd/boilerplate/tests/DuskTest.php
 ```
 
 **Important** : Never launch tests with Laravel Dusk if you have data in your database,  Dusk will wipeout all your datas
-
-## Troubleshooting
-
-### Dates localization
-
-Since Laravel 5.8, this package use [Carbon 2](https://carbon.nesbot.com/docs/#api-localization) instead of [Jenssegers/Date](https://github.com/jenssegers/date) to translate dates.
-
-Date format now use the format of momentjs. To translate your dates, you must now use the Carbon 2 class method `isoFormat`
-instead of `format`
-
-See [Carbon 2 documentation](https://carbon.nesbot.com/docs/#api-localization)
-
-### Migration error
-
-MySQL < v5.7.7 or MariaDB
-
-When you run `php artisan migrate` and you hit this error :
-
-```
-[PDOException]
-  SQLSTATE[42000]: Syntax error or access violation: 1071 Specified key was too long; max key length is 767 bytes
-```
-
-This is an error from a change since Laravel 5.4 : [see here](https://laravel-news.com/laravel-5-4-key-too-long-error)
-
-To correct this, two possibilities :
-
-- Define `utf8` instead of `utf8mb4` as default database charset and `utf8_unicode_ci` instead of
-`utf8mb4_unicode_ci` as default database collation.
-
-- Edit your `app/Providers/AppServiceProvider.php` file and define a default string inside the boot method :
-
-```php
-use Illuminate\Support\Facades\Schema;
-
-public function boot()
-{
-    Schema::defaultStringLength(191);
-}
-```
 
 ## Contributing
 

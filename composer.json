@@ -10,7 +10,7 @@
         "hieu-le/active": "^4.0|^7.0|^8.0",
         "illuminate/support": "^6.0|^7.0|^8.0",
         "intervention/image": "^2.5",
-        "laravel-lang/lang": "^9.0",
+        "overtrue/laravel-lang": "^4.0|^5.0",
         "laravel/ui": "^1.2|^2.0|^3.0",
         "laravelcollective/html": "^6.0|^7.0|^8.0",
         "lavary/laravel-menu": "^1.7",
