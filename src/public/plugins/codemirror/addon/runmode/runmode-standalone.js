@@ -251,7 +251,6 @@
 
   CodeMirror.registerHelper = CodeMirror.registerGlobalHelper = Math.min;
   CodeMirror.splitLines = function(string) { return string.split(/\r?\n|\r/) };
-  CodeMirror.countColumn = countColumn;
 
   CodeMirror.defaults = { indentUnit: 2 };
 
@@ -323,7 +322,7 @@
       if (!stream.string && mode.blankLine) { mode.blankLine(state); }
       while (!stream.eol()) {
         var style = mode.token(stream, state);
-        callback(stream.current(), style, i, stream.start, state, mode);
+        callback(stream.current(), style, i, stream.start, state);
         stream.start = stream.pos;
       }
     }

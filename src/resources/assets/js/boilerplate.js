@@ -109,11 +109,6 @@ function toggleTinyMceSkin(skin, css)
     });
 }
 
-$('.sidebar-toggle').on('click', e => {
-    e.preventDefault();
-    storeSetting('sidebar-collapsed', !$('body').hasClass('sidebar-collapse'));
-})
-
 $(() => {
     $(document).tooltip({
         container: 'body',
@@ -153,21 +148,27 @@ $(() => {
             toggleTinyMceSkin('boilerplate-dark', 'boilerplate-dark');
         }
     });
+
+    $('.sidebar-toggle').on('click', function(e) {
+        e.preventDefault();
+        storeSetting('sidebar-collapsed', !$('body').hasClass('sidebar-collapse'));
+    })
+
+    $('.logout').click(function(e) {
+        e.preventDefault();
+        bootbox.confirm($(this).attr('data-question'), res => {
+            if (res === false) {
+                return;
+            }
+            $('#logout-form').submit();
+        });
+    });
+
+    $('[data-toggle=password]').on('click', function(e) {
+        e.preventDefault();
+        $(this).children().toggleClass('fa-eye fa-eye-slash');
+        let p = $(this).closest('.input-group').find('input');
+        p.attr('type', p.attr('type') === 'text' ? 'password' : 'text');
+    });
 })
 
-$('.logout').click(function(e) {
-    e.preventDefault();
-    bootbox.confirm($(this).attr('data-question'), res => {
-        if (res === false) {
-            return;
-        }
-        $('#logout-form').submit();
-    });
-});
-
-$('[data-toggle=password]').on('click', function(e) {
-    e.preventDefault();
-    $(this).children().toggleClass('fa-eye fa-eye-slash');
-    let p = $(this).closest('.input-group').find('input');
-    p.attr('type', p.attr('type') === 'text' ? 'password' : 'text');
-});

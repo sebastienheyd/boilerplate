@@ -195,7 +195,7 @@ CodeMirror.defineMode("cobol", function () {
       case "string": // multi-line string parsing mode
         var next = false;
         while ((next = stream.next()) != null) {
-          if ((next == "\"" || next == "\'") && !stream.match(/['"]/, false)) {
+          if (next == "\"" || next == "\'") {
             state.mode = false;
             break;
           }

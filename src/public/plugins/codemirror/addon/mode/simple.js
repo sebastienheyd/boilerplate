@@ -68,7 +68,6 @@
     var flags = "";
     if (val instanceof RegExp) {
       if (val.ignoreCase) flags = "i";
-      if (val.unicode) flags += "u"
       val = val.source;
     } else {
       val = String(val);

@@ -24,11 +24,9 @@
     function getRange(allowFolded) {
       var range = finder(cm, pos);
       if (!range || range.to.line - range.from.line < minSize) return null;
-      if (force === "fold") return range;
-
       var marks = cm.findMarksAt(range.from);
       for (var i = 0; i < marks.length; ++i) {
-        if (marks[i].__isFold) {
+        if (marks[i].__isFold && force !== "fold") {
           if (!allowFolded) return null;
           range.cleared = true;
           marks[i].clear();
@@ -101,18 +99,18 @@
     cm.foldCode(cm.getCursor(), null, "fold");
   };
   CodeMirror.commands.unfold = function(cm) {
-    cm.foldCode(cm.getCursor(), { scanUp: false }, "unfold");
+    cm.foldCode(cm.getCursor(), null, "unfold");
   };
   CodeMirror.commands.foldAll = function(cm) {
     cm.operation(function() {
       for (var i = cm.firstLine(), e = cm.lastLine(); i <= e; i++)
-        cm.foldCode(CodeMirror.Pos(i, 0), { scanUp: false }, "fold");
+        cm.foldCode(CodeMirror.Pos(i, 0), null, "fold");
     });
   };
   CodeMirror.commands.unfoldAll = function(cm) {
     cm.operation(function() {
       for (var i = cm.firstLine(), e = cm.lastLine(); i <= e; i++)
-        cm.foldCode(CodeMirror.Pos(i, 0), { scanUp: false }, "unfold");
+        cm.foldCode(CodeMirror.Pos(i, 0), null, "unfold");
     });
   };
 
