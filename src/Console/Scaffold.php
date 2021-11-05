@@ -24,6 +24,8 @@ class Scaffold extends BoilerplateCommand
     protected $description = 'Scaffold all files to Laravel application';
 
     /**
+     * Instance of current Filesystem.
+     *
      * @var Filesystem
      */
     private $fileSystem;
@@ -78,7 +80,7 @@ class Scaffold extends BoilerplateCommand
                     ->update(['user_type' => 'App\Models\Boilerplate\User']);
             }
         } catch (\Exception $e) {
-            // Nothing to do
+            $this->error($e->getMessage());
         }
     }
 
@@ -145,7 +147,7 @@ class Scaffold extends BoilerplateCommand
                     ->update(['user_type' => 'Sebastienheyd\Boilerplate\Models\User']);
             }
         } catch (\Exception $e) {
-            // Nothing to do
+            $this->error($e->getMessage());
         }
     }
 

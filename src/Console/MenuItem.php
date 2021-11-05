@@ -23,14 +23,6 @@ class MenuItem extends BoilerplateCommand
     protected $description = 'Add a menu item to the backend menu';
 
     /**
-     * Create a new command instance.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Execute the console command.
      *
      * @return mixed

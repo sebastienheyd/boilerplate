@@ -2,8 +2,10 @@
 
 namespace Sebastienheyd\Boilerplate;
 
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -24,19 +26,23 @@ class BoilerplateServiceProvider extends ServiceProvider
     protected $defer = false;
 
     /**
-     * @var \Illuminate\Foundation\AliasLoader
+     * Instance of AliasLoader.
+     *
+     * @var AliasLoader
      */
     protected $loader;
 
     /**
-     * @var \Illuminate\Routing\Router
+     * Instance of Router.
+     *
+     * @var Router
      */
     protected $router;
 
     /**
      * Create a new boilerplate service provider instance.
      *
-     * @param  \Illuminate\Contracts\Foundation\Application  $app
+     * @param Application $app
      */
     public function __construct($app)
     {

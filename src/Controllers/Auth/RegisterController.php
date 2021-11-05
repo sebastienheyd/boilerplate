@@ -39,6 +39,8 @@ class RegisterController extends Controller
     }
 
     /**
+     * Return route where to redirect after login success.
+     *
      * @return string
      */
     protected function redirectTo()

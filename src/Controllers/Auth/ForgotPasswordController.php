@@ -13,6 +13,8 @@ class ForgotPasswordController extends Controller
     use SendsPasswordResetEmails;
 
     /**
+     * Get password request form view.
+     *
      * @return Application|Factory|View
      */
     public function showLinkRequestForm()

@@ -45,6 +45,8 @@ class LoginController extends Controller
     }
 
     /**
+     * Validate the user login request.
+     *
      * @param  Request  $request
      *
      * @throws ValidationException
@@ -52,7 +54,8 @@ class LoginController extends Controller
     protected function validateLogin(Request $request)
     {
         $this->validate($request, [
-            $this->username() => 'required|exists:users,'.$this->username().',active,1', 'password' => 'required',
+            $this->username() => 'required|exists:users,'.$this->username().',active,1',
+            'password' => 'required',
         ], [
             $this->username().'.exists' => __('auth.failed'),
         ]);
@@ -80,19 +83,17 @@ class LoginController extends Controller
     }
 
     /**
+     * The user has been authenticated.
+     *
      * @param  Request  $request
      * @param  $user
-     * @return bool
+     * @return void
      */
     protected function authenticated(Request $request, $user)
     {
         if (! empty($user->name)) {
             \Log::info('User logged in : '.$user->name);
-
-            return true;
         }
-
-        return false;
     }
 
     /**

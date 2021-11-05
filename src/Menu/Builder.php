@@ -24,8 +24,9 @@ class Builder extends LavaryMenuBuilder
      */
     public function add($title, $options = [])
     {
-        $title = sprintf('<p>%s</p>', /** @scrutinizer ignore-type */ __($title));
-        $id = isset($options['id']) ? $options['id'] : $this->id();
+        $title = __($title);
+        $title = sprintf('<p>%s</p>', $title);
+        $id = $options['id'] ?? $this->id();
 
         $item = new Item($this, $id, $title, $options);
         $item->addLinkClass('nav-link');
