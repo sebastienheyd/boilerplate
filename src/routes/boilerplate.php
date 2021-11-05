@@ -8,6 +8,7 @@ use Sebastienheyd\Boilerplate\Controllers\LanguageController;
 use Sebastienheyd\Boilerplate\Controllers\Logs\LogViewerController;
 use Sebastienheyd\Boilerplate\Controllers\Users\RolesController;
 use Sebastienheyd\Boilerplate\Controllers\Users\UsersController;
+use Sebastienheyd\Boilerplate\Controllers\DatatablesController;
 
 Route::group([
     'prefix'     => config('boilerplate.app.prefix', ''),
@@ -48,6 +49,9 @@ Route::group([
 
     // Backend
     Route::group(['middleware' => ['boilerplateauth', 'ability:admin,backend_access']], function () {
+        // Datatables
+        Route::any('datatables', DatatablesController::class);
+
         // Roles and users
         Route::resource('roles', RolesController::class)->except('show')->middleware(['ability:admin,roles_crud']);
         Route::group(['middleware' => ['ability:admin,users_crud']], function () {
