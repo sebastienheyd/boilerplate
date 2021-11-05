@@ -10,6 +10,8 @@ use Illuminate\Contracts\View\View;
 
 class LogViewerController extends ArcanedevController
 {
+    protected $showRoute = 'boilerplate.logs.show';
+
     /**
      * LogViewerController constructor.
      *
@@ -19,21 +21,19 @@ class LogViewerController extends ArcanedevController
     {
         $this->middleware('ability:admin,logs');
 
-        if (! config('boilerplate.app.logs')) {
+        if (!config('boilerplate.app.logs')) {
             abort('404');
         }
 
         parent::__construct($logViewer);
     }
 
-    protected $showRoute = 'boilerplate.logs.show';
-
     /**
      * Get overloaded view.
      *
-     * @param string $view
-     * @param array  $data
-     * @param array  $mergeData
+     * @param  string  $view
+     * @param  array   $data
+     * @param  array   $mergeData
      * @return Application|Factory|View
      */
     protected function view($view, $data = [], $mergeData = [])
