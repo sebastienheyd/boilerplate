@@ -21,7 +21,7 @@ class LogViewerController extends ArcanedevController
     {
         $this->middleware('ability:admin,logs');
 
-        if (!config('boilerplate.app.logs')) {
+        if (! config('boilerplate.app.logs')) {
             abort('404');
         }
 
@@ -32,8 +32,8 @@ class LogViewerController extends ArcanedevController
      * Get overloaded view.
      *
      * @param  string  $view
-     * @param  array   $data
-     * @param  array   $mergeData
+     * @param  array  $data
+     * @param  array  $mergeData
      * @return Application|Factory|View
      */
     protected function view($view, $data = [], $mergeData = [])
