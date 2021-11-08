@@ -16,3 +16,7 @@ before_script:
 script:
   - vendor/bin/phpcs
   - vendor/bin/phpunit
+
+branches:
+  only:
+    - master
