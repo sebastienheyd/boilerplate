@@ -93,6 +93,7 @@ class LoginController extends Controller
     {
         if (! empty($user->name)) {
             \Log::info('User logged in : '.$user->name);
+
             return true;
         }
 
