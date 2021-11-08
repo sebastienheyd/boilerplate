@@ -22,13 +22,13 @@ class DatatablesRepository
         foreach ($class as $c) {
             if (is_subclass_of($c, Datatable::class) && ! (new ReflectionClass($c))->isAbstract()) {
                 $dt = (new $c());
-                $signature = $dt->signature();
+                $slug = $dt->slug;
 
-                if (empty($signature)) {
+                if (empty($slug)) {
                     continue;
                 }
 
-                $this->datatables[$signature] = $dt;
+                $this->datatables[$slug] = $dt;
             }
         }
 

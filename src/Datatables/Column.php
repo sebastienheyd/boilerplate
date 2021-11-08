@@ -4,13 +4,12 @@ namespace Sebastienheyd\Boilerplate\Datatables;
 
 class Column
 {
-    protected $title = '';
+    public $title = '';
+    public $raw = null;
 
-    protected $attributes = [
-        'data' => '',
-    ];
+    protected $attributes = [];
 
-    public static function add(string $title): Column
+    public static function add(string $title = ''): Column
     {
         return new static($title);
     }
@@ -20,11 +19,9 @@ class Column
         $this->title = $title;
     }
 
-    public function title(string $title): Column
+    public function get()
     {
-        $this->title = __($title);
-
-        return $this;
+        return json_encode($this->attributes);
     }
 
     public function field(string $field): Column
@@ -60,24 +57,32 @@ class Column
         return $this;
     }
 
-    public function visible(bool $visible = true): Column
+    public function hidden(): Column
     {
-        return $this->booleanAttribute('visible', $visible);
+        return $this->booleanAttribute('visible', false);
     }
 
-    public function searchable(bool $searchable = true): Column
+    public function notSearchable(): Column
     {
-        return $this->booleanAttribute('searchable', $searchable);
+        return $this->booleanAttribute('searchable', false);
     }
 
-    public function sortable(bool $sortable = true): Column
+    public function notSortable(): Column
     {
-        return $this->booleanAttribute('sortable', $sortable);
+        return $this->booleanAttribute('sortable', false);
     }
 
-    public function orderable(bool $orderable = true): Column
+    public function notOrderable(): Column
     {
-        return $this->booleanAttribute('orderable', $orderable);
+        return $this->booleanAttribute('orderable', false);
+    }
+
+    public function raw($name, $function)
+    {
+        $this->data($name);
+        $this->raw = $function;
+
+        return $this;
     }
 
     private function booleanAttribute($name, $value): Column
@@ -89,5 +94,18 @@ class Column
         }
 
         return $this;
+    }
+
+    public function __get($name)
+    {
+        if(property_exists($this, $name)) {
+            return $this->$name;
+        }
+
+        if(isset($this->attributes[$name])) {
+            return $this->attributes[$name];
+        }
+
+        return null;
     }
 }
