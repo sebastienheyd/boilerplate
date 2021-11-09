@@ -19,13 +19,14 @@ class UsersDatatable extends Datatable
 
     }
 
-    public function columns()
+    public function columns(): array
     {
         return [
             Column::add('Id')
                 ->field('id')
                 ->hidden()
                 ->notSearchable(),
+
             Column::add()
                 ->width('40px')
                 ->notSearchable()
@@ -33,25 +34,29 @@ class UsersDatatable extends Datatable
                 ->raw('avatar', function ($user) {
                     return '<img src="'.$user->avatar_url.'" class="img-circle" width="32" height="32" />';
                 }),
+
             Column::add('Statut')
                 ->width('100px')
-                ->raw('status', function ($user) {
+                ->raw('active', function ($user) {
                     if ($user->active == 1) {
                         return '<span class="badge badge-pill badge-success">'.__('boilerplate::users.active').'</span>';
                     }
 
                     return '<span class="badge badge-pill badge-danger">'.__('boilerplate::users.inactive').'</span>';
                 }),
+
             Column::add(__('boilerplate::users.list.lastname'))
                 ->field('last_name'),
+
             Column::add(__('boilerplate::users.list.firstname'))
                 ->field('first_name'),
+
             Column::add('Roles')
-                ->notSearchable()
                 ->notOrderable()
-                ->raw('roles', function ($user) {
+                ->raw('roles.name', function ($user) {
                     return $user->getRolesList();
                 }),
+
             Column::add()
                 ->class('visible-on-hover text-nowrap')
                 ->notSearchable()

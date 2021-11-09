@@ -28,9 +28,12 @@
                 paging: {{ (int) $datatable->paging }},
                 pageLength: {{ $datatable->pageLength }},
                 lengthChange: {{ (int) $datatable->lengthChange }},
+                lengthMenu: {!! $datatable->lengthMenu !!},
                 ordering: {{ (int) $datatable->ordering }},
+                order: {!! $datatable->order !!},
                 searching: {{ (int) $datatable->searching }},
                 info: {{ (int) $datatable->info }},
+                pagingType: '{{ $datatable->pagingType }}',
                 ajax: {
                     url: '{!! route('boilerplate.datatables', $datatable->slug) !!}',
                     type: 'post'

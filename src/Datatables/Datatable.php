@@ -2,32 +2,25 @@
 
 namespace Sebastienheyd\Boilerplate\Datatables;
 
+use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Facades\DataTables;
 
 abstract class Datatable
 {
     public    $slug          = '';
     public    $datasource;
-    public    $perPageValues = [10, 25, 50, 100, 0];
-    protected $attributes    = [
-        'ordering'     => true,
-        'paging'       => true,
-        'pageLength'   => 10,
+    protected $attributes = [
+        'info'         => true,
         'lengthChange' => true,
+        'order'        => [],
+        'ordering'     => true,
+        'pageLength'   => 10,
+        'paging'       => true,
+        'pagingType'   => 'simple_numbers',
         'searching'    => true,
         'stateSave'    => false,
-        'info'         => true,
+        'lengthMenu'   => [10, 25, 50, 100],
     ];
-
-    public function datasource()
-    {
-        return null;
-    }
-
-    public function columns()
-    {
-        return [];
-    }
 
     public function setUp()
     {
@@ -36,6 +29,7 @@ abstract class Datatable
 
     public function make()
     {
+        /** @var EloquentDataTable $datatable */
         $datatable = DataTables::of($this->datasource());
 
         $raw = [];
@@ -51,6 +45,54 @@ abstract class Datatable
         }
 
         return $datatable->make(true);
+    }
+
+    abstract public function datasource();
+
+    abstract public function columns(): array;
+
+    public function order($column, $order = 'asc')
+    {
+        if (! is_array($column)) {
+            $column = [$column => $order];
+        }
+
+        foreach ($column as $c => $o) {
+            $this->attributes['order'][] = [$this->getColumnIndex($c), $o];
+        }
+
+        return $this;
+    }
+
+    private function getColumnIndex($column)
+    {
+        if(is_int($column)) {
+            return $column;
+        }
+
+        foreach ($this->columns() as $k => $c) {
+            if($c->data === $column) {
+                return $k;
+            }
+        }
+
+        return 0;
+    }
+
+    public function lengthMenu(array $value)
+    {
+        $this->attributes['lengthMenu'] = $value;
+
+        return $this;
+    }
+
+    public function pagingType($type)
+    {
+        if (in_array($type, ['numbers', 'simple', 'simple_numbers', 'full', 'full_numbers', 'first_last_numbers'])) {
+            $this->attributes['pagingType'] = $type;
+        }
+
+        return $this;
     }
 
     public function pageLength(int $length = 10): Datatable
@@ -106,6 +148,10 @@ abstract class Datatable
     {
         if (property_exists($this, $name)) {
             return $this->$name;
+        }
+
+        if (in_array($name, ['order', 'lengthMenu'])) {
+            return json_encode($this->attributes[$name]);
         }
 
         if (isset($this->attributes[$name])) {
