@@ -11,33 +11,36 @@ class UsersDatatable extends Datatable
     public function datasource()
     {
         $userModel = config('boilerplate.auth.providers.users.model');
-        return $userModel::with('roles')->select(['id', 'last_name', 'first_name', 'active']);
+        return $userModel::with('roles')->select([
+            'id',
+            'email',
+            'last_name',
+            'first_name',
+            'active',
+            'created_at',
+            'last_login'
+        ]);
     }
 
     public function setUp()
     {
-
+        $this->order('created_at', 'desc');
     }
 
     public function columns(): array
     {
         return [
-            Column::add('Id')
-                ->field('id')
-                ->hidden()
-                ->notSearchable(),
-
             Column::add()
                 ->width('40px')
                 ->notSearchable()
                 ->notOrderable()
-                ->raw('avatar', function ($user) {
+                ->data('avatar', function ($user) {
                     return '<img src="'.$user->avatar_url.'" class="img-circle" width="32" height="32" />';
                 }),
 
             Column::add('Statut')
                 ->width('100px')
-                ->raw('active', function ($user) {
+                ->data('active', function ($user) {
                     if ($user->active == 1) {
                         return '<span class="badge badge-pill badge-success">'.__('boilerplate::users.active').'</span>';
                     }
@@ -46,22 +49,33 @@ class UsersDatatable extends Datatable
                 }),
 
             Column::add(__('boilerplate::users.list.lastname'))
-                ->field('last_name'),
+                ->data('last_name'),
 
             Column::add(__('boilerplate::users.list.firstname'))
-                ->field('first_name'),
+                ->data('first_name'),
+
+            Column::add(__('boilerplate::users.list.email'))
+                ->data('email'),
 
             Column::add('Roles')
                 ->notOrderable()
-                ->raw('roles.name', function ($user) {
+                ->data('roles.name', function ($user) {
                     return $user->getRolesList();
                 }),
+
+            Column::add('Créé le')
+                ->data('created_at')
+                ->dateFormat(),
+
+            Column::add('Dernière connexion')
+                ->data('last_login')
+                ->fromNow(),
 
             Column::add()
                 ->class('visible-on-hover text-nowrap')
                 ->notSearchable()
                 ->notOrderable()
-                ->raw('actions', function ($user) {
+                ->data('actions', function ($user) {
                     $currentUser = Auth::user();
 
                     // Admin can edit and delete anyone...

@@ -2,10 +2,12 @@
 
 namespace Sebastienheyd\Boilerplate\Datatables;
 
+use Closure;
+
 class Column
 {
     public $title = '';
-    public $raw = null;
+    public $raw   = null;
 
     protected $attributes = [];
 
@@ -21,19 +23,54 @@ class Column
 
     public function get()
     {
-        return json_encode($this->attributes);
+        $attributes = [];
+        foreach ($this->attributes as $k => $v) {
+            if (is_string($v)) {
+                $attributes[] = "$k:\"$v\"";
+            } elseif ($v instanceof Closure) {
+                $attributes[] = "$k:".$v();
+            } else {
+                $attributes[] = "$k:".intval($v);
+            }
+        }
+        return '{'.implode(',', $attributes).'}';
     }
 
-    public function field(string $field): Column
+    public function data(string $name, Closure $format = null): Column
     {
-        return $this->data($field);
-    }
+        $this->attributes['data'] = $name;
 
-    public function data(string $data): Column
-    {
-        $this->attributes['data'] = $data;
+        if ($format !== null) {
+            $this->raw = $format;
+        }
 
         return $this;
+    }
+
+    public function dateFormat($format = null)
+    {
+        if ($format === null) {
+            $format = __('boilerplate::date.YmdHis');
+        }
+
+        if (is_string($format)) {
+            $format = function () use ($format) {
+                return "(d) => { return d === null ? '-' : moment(d).format('$format') }";
+            };
+        }
+
+        if ($format instanceof Closure) {
+            $this->attributes['render'] = $format;
+        }
+
+        return $this;
+    }
+
+    public function fromNow()
+    {
+        return $this->dateFormat(function () {
+            return "(d) => { return d === null ? '-' : moment(d).fromNow(d) }";
+        });
     }
 
     public function class(string $class): Column
@@ -77,14 +114,6 @@ class Column
         return $this->booleanAttribute('orderable', false);
     }
 
-    public function raw($name, $function)
-    {
-        $this->data($name);
-        $this->raw = $function;
-
-        return $this;
-    }
-
     private function booleanAttribute($name, $value): Column
     {
         $this->attributes[$name] = false;
@@ -98,11 +127,11 @@ class Column
 
     public function __get($name)
     {
-        if(property_exists($this, $name)) {
+        if (property_exists($this, $name)) {
             return $this->$name;
         }
 
-        if(isset($this->attributes[$name])) {
+        if (isset($this->attributes[$name])) {
             return $this->attributes[$name];
         }
 
