@@ -3,6 +3,7 @@
 namespace Sebastienheyd\Boilerplate\View\Composers;
 
 use Illuminate\View\View;
+use Str;
 
 class DatatableComposer extends ComponentComposer
 {
@@ -22,12 +23,12 @@ class DatatableComposer extends ComponentComposer
             return;
         }
 
-        if (empty($data['id'])) {
-            $view->with('id', uniqid('datatable_'));
-        }
-
         $datatable = $datatables[$data['name']];
         $datatable->setUp();
+
+        if (empty($data['id'])) {
+            $view->with('id', 'dt_'.Str::snake(Str::camel($datatable->slug)), '_');
+        }
 
         $view->with('datatable', $datatable);
     }

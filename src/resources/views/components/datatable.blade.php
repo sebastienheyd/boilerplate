@@ -5,7 +5,7 @@
     </code>
 @else
     <div class="table-responsive">
-        <table class="table table-striped table-hover va-middle w-100" id="{{ $id }}">
+        <table class="table table-striped table-hover va-middle w-100" id="{{ $id }}" data-options="{{ route('boilerplate.datatables.options', $datatable->slug, false) }}">
             <thead>
             <tr>
                 @foreach($datatable->columns() as $column)
@@ -24,25 +24,28 @@
                 processing: 1,
                 serverSide: 1,
                 autoWidth: 0,
-                stateSave: {{ (int) $datatable->stateSave }},
-                paging: {{ (int) $datatable->paging }},
-                pageLength: {{ $datatable->pageLength }},
+                searching: 0,
+                info: {{ (int) $datatable->info }},
                 lengthChange: {{ (int) $datatable->lengthChange }},
                 lengthMenu: {!! $datatable->lengthMenu !!},
-                ordering: {{ (int) $datatable->ordering }},
                 order: {!! $datatable->order !!},
-                searching: {{ (int) $datatable->searching }},
-                info: {{ (int) $datatable->info }},
+                ordering: {{ (int) $datatable->ordering }},
+                pageLength: {{ $datatable->pageLength }},
+                paging: {{ (int) $datatable->paging }},
                 pagingType: '{{ $datatable->pagingType }}',
+                stateSave: {{ (int) $datatable->stateSave }},
                 ajax: {
-                    url: '{!! route('boilerplate.datatables', $datatable->slug) !!}',
+                    url: '{!! route('boilerplate.datatables', $datatable->slug, false) !!}',
                     type: 'post'
                 },
                 columns: [
                     @foreach($datatable->columns() as $column)
                         {!! $column->get() !!},
                     @endforeach
-                ]
+                ],
+                fnInitComplete: function() {
+                    $.fn.dataTable.initSearch('{{ $id }}')
+                }
             });
         });
     </script>

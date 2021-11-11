@@ -4,7 +4,7 @@
  * For LGPL see License.txt in the project root for license information.
  * For commercial licenses see https://www.tiny.cloud/
  *
- * Version: 5.10.1 (2021-11-03)
+ * Version: 5.9.2 (2021-09-08)
  */
 (function () {
     'use strict';
@@ -117,11 +117,7 @@
           }
         } else {
           for (var ii = h.level; ii > nextLevel; ii--) {
-            if (ii === nextLevel + 1) {
-              html += '</li></ul><li>';
-            } else {
-              html += '</li></ul>';
-            }
+            html += '</li></ul><li>';
           }
         }
         prevLevel = h.level;

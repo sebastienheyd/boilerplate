@@ -42,7 +42,18 @@ class DatatablesRepository
      */
     public function getDatatables()
     {
-        return array_unique($this->datatables);
+        return $this->datatables;
+    }
+
+    /**
+     * Get datatable by slug.
+     *
+     * @param $slug
+     * @return false|mixed
+     */
+    public function getDatatable($slug)
+    {
+        return $this->datatables[$slug] ?? false;
     }
 
     /**

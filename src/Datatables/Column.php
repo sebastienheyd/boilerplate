@@ -55,7 +55,7 @@ class Column
 
         if (is_string($format)) {
             $format = function () use ($format) {
-                return "(d) => { return d === null ? '-' : moment(d).format('$format') }";
+                return "$.fn.dataTable.render.moment('$format')";
             };
         }
 
@@ -69,7 +69,7 @@ class Column
     public function fromNow()
     {
         return $this->dateFormat(function () {
-            return "(d) => { return d === null ? '-' : moment(d).fromNow(d) }";
+            return "$.fn.dataTable.render.fromNow()";
         });
     }
 

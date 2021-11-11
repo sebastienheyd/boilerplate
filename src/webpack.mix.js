@@ -31,10 +31,7 @@ mix.scripts([
     'resources/assets/js/datatables.js',
 ], 'public/plugins/datatables/datatables.min.js');
 mix.copy('node_modules/drmonty-datatables-plugins/i18n/*', 'public/plugins/datatables/i18n/');
-mix.styles(
-    'node_modules/admin-lte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css',
-    'public/plugins/datatables/datatables.min.css'
-);
+mix.sass('resources/assets/scss/datatables.scss', 'public/plugins/datatables/datatables.min.css');
 mix.copy([
     'node_modules/admin-lte/plugins/datatables-autofill/css/*.min.css',
     'node_modules/admin-lte/plugins/datatables-autofill/js/*.min.js',

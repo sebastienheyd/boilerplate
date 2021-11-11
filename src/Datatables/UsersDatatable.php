@@ -69,6 +69,7 @@ class UsersDatatable extends Datatable
 
             Column::add('Dernière connexion')
                 ->data('last_login')
+                ->notSearchable()
                 ->fromNow(),
 
             Column::add()
