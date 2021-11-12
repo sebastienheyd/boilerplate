@@ -3,12 +3,24 @@
 namespace Sebastienheyd\Boilerplate\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use ReflectionException;
 use Sebastienheyd\Boilerplate\Datatables\Datatable;
 
 class DatatablesController extends Controller
 {
-    public function __invoke(Request $request, $slug)
+    /**
+     * Rendering DataTable.
+     *
+     * @param  Request  $request
+     * @param  string  $slug
+     * @throws ReflectionException
+     * @return mixed
+     */
+    public function __invoke(Request $request, string $slug)
     {
         if (! $request->ajax()) {
             abort(404);
@@ -19,7 +31,14 @@ class DatatablesController extends Controller
         return ($datatable)->make();
     }
 
-    private function getDatatable($slug)
+    /**
+     * Get DataTable class for the given slug.
+     *
+     * @param  string  $slug
+     * @throws ReflectionException
+     * @return false|mixed
+     */
+    private function getDatatable(string $slug)
     {
         $datatable = app('boilerplate.datatables')->load(app_path('Datatables'))->getDatatable($slug);
 
@@ -30,22 +49,36 @@ class DatatablesController extends Controller
         return $datatable;
     }
 
+    /**
+     * Get array of searchable fields.
+     *
+     * @param  Datatable  $datatable
+     * @return array
+     */
     private function getSearchable(Datatable $datatable)
     {
         $searchable = [];
 
-        foreach ($datatable->columns() as $column) {
+        foreach ($datatable->columns() as $k => $column) {
             if ($column->searchable === false) {
                 continue;
             }
 
-            $searchable[$column->data] = $column->title;
+            $searchable[$k] = $column->title;
         }
 
         return $searchable;
     }
 
-    public function options(Request $request, $slug)
+    /**
+     * Rendering available filter options for autocomplete.
+     *
+     * @param  Request  $request
+     * @param  string  $slug
+     * @throws ReflectionException
+     * @return Application|Factory|View
+     */
+    public function options(Request $request, string $slug)
     {
         if (! $request->ajax()) {
             abort(404);
@@ -67,7 +100,15 @@ class DatatablesController extends Controller
         return view('boilerplate::datatables.options', compact('q', 'searchable', 'slug', 'id'));
     }
 
-    public function facet(Request $request, $slug)
+    /**
+     * Rendering a facet.
+     *
+     * @param  Request  $request
+     * @param  string  $slug
+     * @throws ReflectionException
+     * @return Application|Factory|View
+     */
+    public function facet(Request $request, string $slug)
     {
         if (! $request->ajax()) {
             abort(404);
@@ -80,5 +121,16 @@ class DatatablesController extends Controller
         $label = $searchable[$field];
         $value = $request->post('value');
         return view('boilerplate::datatables.facet', compact('field', 'value', 'label'));
+    }
+
+    public function search(Request $request, string $slug)
+    {
+        if (! $request->ajax()) {
+            abort(404);
+        }
+
+        $datatable = $this->getDatatable($slug);
+
+        return view('boilerplate::datatables.search', compact('slug'));
     }
 }

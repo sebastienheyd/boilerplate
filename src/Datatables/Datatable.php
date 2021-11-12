@@ -2,12 +2,13 @@
 
 namespace Sebastienheyd\Boilerplate\Datatables;
 
+use Illuminate\Http\Request;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Facades\DataTables;
 
 abstract class Datatable
 {
-    public    $slug          = '';
+    public    $slug       = '';
     public    $datasource;
     protected $attributes = [
         'info'         => true,
@@ -34,6 +35,10 @@ abstract class Datatable
 
         $raw = [];
         foreach ($this->columns() as $column) {
+            if($column->filter) {
+                $datatable->filterColumn($column->name, $column->filter);
+            }
+
             if ($column->raw) {
                 $raw[] = $column->data;
                 $datatable->editColumn($column->data, $column->raw);
@@ -66,12 +71,12 @@ abstract class Datatable
 
     private function getColumnIndex($column)
     {
-        if(is_int($column)) {
+        if (is_int($column)) {
             return $column;
         }
 
         foreach ($this->columns() as $k => $c) {
-            if($c->data === $column) {
+            if ($c->data === $column) {
                 return $k;
             }
         }

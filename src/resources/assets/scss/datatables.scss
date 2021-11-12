@@ -1,16 +1,20 @@
 @import "~admin-lte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css";
 
 .dt-search {
-  height: calc(1.8125rem + 2px);
   border-radius: .25rem;
-  padding: 0;
   display: flex;
+  flex-wrap: wrap;
   border: 1px solid #ced4da;
-  padding: .25rem;
+  padding: 0;
+  padding: 0 0 .25rem .25rem;
 
   input {
     background: none;
     border: none;
+  }
+
+  &-facets {
+    flex-wrap: wrap;
   }
 
   &-facet {
@@ -19,15 +23,13 @@
     position: relative;
     background: #f0f0f0;
     color: #333;
-    margin-right: .25rem;
+    margin: .25rem .25rem 0 0;
 
     &-label {
       height: 100%;
       display: flex;
       max-width: 100%;
       white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
       padding: 0 .25rem;
       color: white;
       align-items: center;
@@ -35,6 +37,7 @@
     }
 
     &-value {
+      white-space: nowrap;
       padding: 0 .5rem;
     }
 

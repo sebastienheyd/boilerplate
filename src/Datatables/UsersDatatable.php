@@ -3,6 +3,7 @@
 namespace Sebastienheyd\Boilerplate\Datatables;
 
 use Illuminate\Support\Facades\Auth;
+use Sebastienheyd\Boilerplate\Models\User;
 
 class UsersDatatable extends Datatable
 {
@@ -12,12 +13,12 @@ class UsersDatatable extends Datatable
     {
         $userModel = config('boilerplate.auth.providers.users.model');
         return $userModel::with('roles')->select([
-            'id',
+            'users.id',
             'email',
             'last_name',
             'first_name',
             'active',
-            'created_at',
+            'users.created_at',
             'last_login'
         ]);
     }
@@ -34,18 +35,19 @@ class UsersDatatable extends Datatable
                 ->width('40px')
                 ->notSearchable()
                 ->notOrderable()
-                ->data('avatar', function ($user) {
+                ->data('avatar', function (User $user) {
                     return '<img src="'.$user->avatar_url.'" class="img-circle" width="32" height="32" />';
                 }),
 
-            Column::add('Statut')
+            Column::add(__('boilerplate::users.list.state'))
                 ->width('100px')
-                ->data('active', function ($user) {
-                    if ($user->active == 1) {
-                        return '<span class="badge badge-pill badge-success">'.__('boilerplate::users.active').'</span>';
+                ->data('active', function (User $user) {
+                    $badge = '<span class="badge badge-pill badge-%s">%s</span>';
+                    if($user->active == 1) {
+                        return sprintf($badge, 'success', __('boilerplate::users.active'));
                     }
 
-                    return '<span class="badge badge-pill badge-danger">'.__('boilerplate::users.inactive').'</span>';
+                    return sprintf($badge, 'danger', __('boilerplate::users.inactive'));
                 }),
 
             Column::add(__('boilerplate::users.list.lastname'))
@@ -57,17 +59,21 @@ class UsersDatatable extends Datatable
             Column::add(__('boilerplate::users.list.email'))
                 ->data('email'),
 
-            Column::add('Roles')
+            Column::add(__('boilerplate::users.list.roles'))
                 ->notOrderable()
-                ->data('roles.name', function ($user) {
+                ->name('roles.name')
+                ->data('roles', function (User $user) {
                     return $user->getRolesList();
+                })
+                ->filter(function($query, $q) {
+                    $query->whereRoleIs($q);
                 }),
 
-            Column::add('Créé le')
+            Column::add(__('boilerplate::users.list.creationdate'))
                 ->data('created_at')
                 ->dateFormat(),
 
-            Column::add('Dernière connexion')
+            Column::add(__('boilerplate::users.list.lastconnect'))
                 ->data('last_login')
                 ->notSearchable()
                 ->fromNow(),
@@ -76,7 +82,7 @@ class UsersDatatable extends Datatable
                 ->class('visible-on-hover text-nowrap')
                 ->notSearchable()
                 ->notOrderable()
-                ->data('actions', function ($user) {
+                ->data('actions', function (User $user) {
                     $currentUser = Auth::user();
 
                     // Admin can edit and delete anyone...

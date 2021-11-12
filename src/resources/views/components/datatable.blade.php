@@ -21,10 +21,10 @@
     <script>
         whenAssetIsLoaded('datatables', function() {
             window.{{ \Str::camel($id) }} = $('#{{ $id }}').DataTable({
-                processing: 1,
-                serverSide: 1,
-                autoWidth: 0,
-                searching: 0,
+                processing: true,
+                serverSide: true,
+                autoWidth: false,
+                searching: false,
                 info: {{ (int) $datatable->info }},
                 lengthChange: {{ (int) $datatable->lengthChange }},
                 lengthMenu: {!! $datatable->lengthMenu !!},
@@ -36,7 +36,12 @@
                 stateSave: {{ (int) $datatable->stateSave }},
                 ajax: {
                     url: '{!! route('boilerplate.datatables', $datatable->slug, false) !!}',
-                    type: 'post'
+                    type: 'post',
+                    data: function data(d) {
+                        $('#{{ $id }}_wrapper .dt-search-facet').each(function (i, e) {
+                            d.columns[$(e).data('field')].search.value = $(e).data('value');
+                        });
+                    }
                 },
                 columns: [
                     @foreach($datatable->columns() as $column)
@@ -44,7 +49,13 @@
                     @endforeach
                 ],
                 fnInitComplete: function() {
-                    $.fn.dataTable.initSearch('{{ $id }}')
+                    $.ajax({
+                        url: '{!! route('boilerplate.datatables.search', $datatable->slug, false) !!}',
+                        type: 'post',
+                        success: function(html){
+                            $('#{{ $id }}_wrapper .row:first div:last').html(html);
+                        }
+                    });
                 }
             });
         });

@@ -8,6 +8,7 @@ class Column
 {
     public $title = '';
     public $raw   = null;
+    public $filter = null;
 
     protected $attributes = [];
 
@@ -29,6 +30,8 @@ class Column
                 $attributes[] = "$k:\"$v\"";
             } elseif ($v instanceof Closure) {
                 $attributes[] = "$k:".$v();
+            } elseif (is_bool($v)) {
+                $attributes[] = "$k:".($v ? 'true' : 'false');
             } else {
                 $attributes[] = "$k:".intval($v);
             }
@@ -62,6 +65,13 @@ class Column
         if ($format instanceof Closure) {
             $this->attributes['render'] = $format;
         }
+
+        return $this;
+    }
+
+    public function filter(Closure $filter)
+    {
+        $this->filter = $filter;
 
         return $this;
     }

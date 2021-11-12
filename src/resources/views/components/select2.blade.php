@@ -1,7 +1,7 @@
 @if(empty($name))
 <code>&lt;x-boilerplate::select2> The name attribute has not been set</code>
 @else
-<div class="form-group{{ isset($groupClass) ? ' '.$groupClass : '' }}"{!! isset($groupId) ? ' id="'.$groupId.'"' : '' !!}>
+<div class="form-group position-relative{{ isset($groupClass) ? ' '.$groupClass : '' }}"{!! isset($groupId) ? ' id="'.$groupId.'"' : '' !!}>
 @isset($label)
     {{ Form::label($name, __($label)) }}
 @endisset
@@ -28,6 +28,7 @@
 @component('boilerplate::minify')
     <script>
         whenAssetIsLoaded('select2', () => {
+            let parent = $('#{{ $id }}').parent();
             $('#{{ $id }}').select2({
                 placeholder: '{{ $placeholder ?? '—' }}',
                 allowClear: {{ $allowClear }},
@@ -36,6 +37,8 @@
                 minimumInputLength: {{ $minimumInputLength ?? 0 }},
                 minimumResultsForSearch: {{ $minimumResultsForSearch ?? 10 }},
                 width: '100%',
+                dropdownAutoWidth: true,
+                dropdownParent: parent,
                 @isset($ajax)
                 ajax: {
                     delay: 200,

@@ -53,6 +53,7 @@ Route::group([
         Route::post('datatables/{slug}', DatatablesController::class)->name('datatables');
         Route::post('datatables/{slug}/options', [DatatablesController::class, 'options'])->name('datatables.options');
         Route::post('datatables/{slug}/facet', [DatatablesController::class, 'facet'])->name('datatables.facet');
+        Route::post('datatables/{slug}/search', [DatatablesController::class, 'search'])->name('datatables.search');
 
         // Roles and users
         Route::resource('roles', RolesController::class)->except('show')->middleware(['ability:admin,roles_crud']);
