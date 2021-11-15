@@ -82,6 +82,7 @@ class UsersDatatable extends Datatable
                 ->class('visible-on-hover text-nowrap')
                 ->notSearchable()
                 ->notOrderable()
+                ->width('70px')
                 ->data('actions', function (User $user) {
                     $currentUser = Auth::user();
 

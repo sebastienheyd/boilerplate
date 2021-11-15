@@ -12,6 +12,15 @@
                     <th>{{ $column->title }}</th>
                 @endforeach
             </tr>
+            <tr class="filters">
+                @foreach($datatable->columns() as $k => $column)
+                    <th>
+                        @if($column->searchable !== false)
+                            <x-boilerplate::input name="filter" groupClass="mb-0" class="form-control-sm" />
+                        @endif
+                    </th>
+                @endforeach
+            </tr>
             </thead>
             <tbody></tbody>
         </table>
@@ -21,10 +30,11 @@
     <script>
         whenAssetIsLoaded('datatables', function() {
             window.{{ \Str::camel($id) }} = $('#{{ $id }}').DataTable({
-                processing: true,
+                processing: false,
                 serverSide: true,
                 autoWidth: false,
-                searching: false,
+                searching: true,
+                orderCellsTop: true,
                 info: {{ (int) $datatable->info }},
                 lengthChange: {{ (int) $datatable->lengthChange }},
                 lengthMenu: {!! $datatable->lengthMenu !!},
@@ -48,14 +58,14 @@
                         {!! $column->get() !!},
                     @endforeach
                 ],
-                fnInitComplete: function() {
-                    $.ajax({
-                        url: '{!! route('boilerplate.datatables.search', $datatable->slug, false) !!}',
-                        type: 'post',
-                        success: function(html){
-                            $('#{{ $id }}_wrapper .row:first div:last').html(html);
-                        }
-                    });
+                initComplete: function() {
+                    {{--$.ajax({--}}
+                    {{--    url: '{!! route('boilerplate.datatables.search', $datatable->slug, false) !!}',--}}
+                    {{--    type: 'post',--}}
+                    {{--    success: function(html){--}}
+                    {{--        $('#{{ $id }}_wrapper .row:first div:last').html(html);--}}
+                    {{--    }--}}
+                    {{--});--}}
                 }
             });
         });
