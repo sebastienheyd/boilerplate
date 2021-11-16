@@ -11,6 +11,7 @@ abstract class Datatable
     public    $slug       = '';
     public    $datasource;
     protected $attributes = [
+        'filters'      => true,
         'info'         => true,
         'lengthChange' => true,
         'order'        => [],
@@ -23,10 +24,7 @@ abstract class Datatable
         'lengthMenu'   => [10, 25, 50, 100],
     ];
 
-    public function setUp()
-    {
-
-    }
+    public function setUp() { }
 
     public function make()
     {
@@ -110,6 +108,13 @@ abstract class Datatable
     public function stateSave(): Datatable
     {
         $this->attributes['stateSave'] = true;
+
+        return $this;
+    }
+
+    public function noFilters(): Datatable
+    {
+        $this->attributes['filters'] = false;
 
         return $this;
     }

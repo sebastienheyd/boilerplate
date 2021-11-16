@@ -5,7 +5,7 @@
 @isset($label)
     {{ Form::label($name, __($label)) }}
 @endisset
-    <select id="{{ $id }}" name="{{ $name }}" class="form-control{{ $errors->first($name,' is-invalid') }}{{ isset($class) ? ' '.$class : '' }}"{!! !empty($attributes) ? ' '.$attributes : '' !!} style="visibility:hidden;height:1rem">
+    <select id="{{ $id }}" name="{{ $name }}" class="form-control{{ $errors->first($name,' is-invalid') }}{{ isset($class) ? ' '.$class : '' }}"{!! !empty($attributes) ? ' '.$attributes : '' !!} style="visibility:hidden;height:1rem" autocomplete="off">
 @if(!isset($multiple))
         <option></option>
 @endif

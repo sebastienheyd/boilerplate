@@ -156,6 +156,7 @@ class BoilerplateServiceProvider extends ServiceProvider
             'codemirror',
             'datatable',
             'datetimepicker',
+            'daterangepicker',
             'form',
             'icheck',
             'infobox',

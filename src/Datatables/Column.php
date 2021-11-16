@@ -6,20 +6,20 @@ use Closure;
 
 class Column
 {
-    public $title = '';
-    public $raw   = null;
-    public $filter = null;
-
-    protected $attributes = [];
-
-    public static function add(string $title = ''): Column
-    {
-        return new static($title);
-    }
+    protected $title         = '';
+    protected $raw           = null;
+    protected $filter        = null;
+    protected $filterOptions = [];
+    protected $attributes    = [];
 
     public function __construct(string $title)
     {
         $this->title = $title;
+    }
+
+    public static function add(string $title = ''): Column
+    {
+        return new static($title);
     }
 
     public function get()
@@ -50,6 +50,33 @@ class Column
         return $this;
     }
 
+    public function filter(Closure $filter)
+    {
+        $this->filter = $filter;
+
+        return $this;
+    }
+
+    public function filterOptions($filterOptions)
+    {
+        if (is_array($filterOptions)) {
+            $this->filterOptions = $filterOptions;
+        }
+
+        if ($filterOptions instanceof Closure) {
+            $this->filterOptions = $filterOptions->call($this);
+        }
+
+        return $this;
+    }
+
+    public function fromNow()
+    {
+        return $this->dateFormat(function () {
+            return "$.fn.dataTable.render.fromNow()";
+        });
+    }
+
     public function dateFormat($format = null)
     {
         if ($format === null) {
@@ -67,20 +94,6 @@ class Column
         }
 
         return $this;
-    }
-
-    public function filter(Closure $filter)
-    {
-        $this->filter = $filter;
-
-        return $this;
-    }
-
-    public function fromNow()
-    {
-        return $this->dateFormat(function () {
-            return "$.fn.dataTable.render.fromNow()";
-        });
     }
 
     public function class(string $class): Column
@@ -109,6 +122,17 @@ class Column
         return $this->booleanAttribute('visible', false);
     }
 
+    private function booleanAttribute($name, $value): Column
+    {
+        $this->attributes[$name] = false;
+
+        if ($value === true) {
+            unset($this->attributes[$name]);
+        }
+
+        return $this;
+    }
+
     public function notSearchable(): Column
     {
         return $this->booleanAttribute('searchable', false);
@@ -124,17 +148,6 @@ class Column
         return $this->booleanAttribute('orderable', false);
     }
 
-    private function booleanAttribute($name, $value): Column
-    {
-        $this->attributes[$name] = false;
-
-        if ($value === true) {
-            unset($this->attributes[$name]);
-        }
-
-        return $this;
-    }
-
     public function __get($name)
     {
         if (property_exists($this, $name)) {
@@ -146,5 +159,14 @@ class Column
         }
 
         return null;
+    }
+
+    public function __isset($name)
+    {
+        if (property_exists($this, $name)) {
+            return !empty($this->$name);
+        }
+
+        return isset($this->attributes[$name]);
     }
 }

@@ -3,6 +3,7 @@
 namespace Sebastienheyd\Boilerplate\Datatables;
 
 use Illuminate\Support\Facades\Auth;
+use Sebastienheyd\Boilerplate\Models\Role;
 use Sebastienheyd\Boilerplate\Models\User;
 
 class UsersDatatable extends Datatable
@@ -48,7 +49,8 @@ class UsersDatatable extends Datatable
                     }
 
                     return sprintf($badge, 'danger', __('boilerplate::users.inactive'));
-                }),
+                })
+                ->filterOptions([__('boilerplate::users.inactive'), __('boilerplate::users.active')]),
 
             Column::add(__('boilerplate::users.list.lastname'))
                 ->data('last_name'),
@@ -67,6 +69,9 @@ class UsersDatatable extends Datatable
                 })
                 ->filter(function($query, $q) {
                     $query->whereRoleIs($q);
+                })
+                ->filterOptions(function() {
+                    return Role::all()->pluck('display_name', 'name')->toArray();
                 }),
 
             Column::add(__('boilerplate::users.list.creationdate'))

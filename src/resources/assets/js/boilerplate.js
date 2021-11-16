@@ -171,4 +171,3 @@ $(() => {
         p.attr('type', p.attr('type') === 'text' ? 'password' : 'text');
     });
 })
-

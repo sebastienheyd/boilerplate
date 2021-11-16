@@ -6,7 +6,10 @@
         // Date range picker
         $('#reservation').daterangepicker();
         // Date range picker with time picker
-        $('#reservationtime').daterangepicker({timePicker: true, timePickerIncrement: 15, timePicker24Hour: true, format: 'MM/DD/YYYY hh:mm A'});
+        $('#reservationtime').daterangepicker({timePicker: true, timePickerIncrement: 15, timePicker24Hour: true, format: 'MM/DD/YYYY hh:mm A'},
+            function(start, end, label) {
+                console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+            });
         // Date range as a button
         $('#daterange-btn').daterangepicker(
             {

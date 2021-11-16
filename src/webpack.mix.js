@@ -76,6 +76,7 @@ mix.scripts([
 mix.sass('resources/assets/scss/daterangepicker.scss', 'public/plugins/datepicker/daterangepicker.min.css');
 mix.scripts([
     'node_modules/admin-lte/plugins/daterangepicker/daterangepicker.js',
+    'resources/assets/js/daterangepicker.js',
 ], 'public/plugins/datepicker/daterangepicker.min.js');
 
 // ============== FileInput ==============

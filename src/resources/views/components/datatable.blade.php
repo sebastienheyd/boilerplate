@@ -5,22 +5,31 @@
     </code>
 @else
     <div class="table-responsive">
-        <table class="table table-striped table-hover va-middle w-100" id="{{ $id }}" data-options="{{ route('boilerplate.datatables.options', $datatable->slug, false) }}">
+        <table class="table table-striped table-hover va-middle w-100" id="{{ $id }}">
             <thead>
             <tr>
                 @foreach($datatable->columns() as $column)
                     <th>{{ $column->title }}</th>
                 @endforeach
             </tr>
-            <tr class="filters">
+            @if($datatable->filters)
+            <tr class="filters" style="display:none">
                 @foreach($datatable->columns() as $k => $column)
                     <th>
-                        @if($column->searchable !== false)
-                            <x-boilerplate::input name="filter" groupClass="mb-0" class="form-control-sm" />
+                        @if($column->searchable === false)
+                            @continue
+                        @endif
+                        @if(!empty($column->filterOptions))
+                            <x-boilerplate::select2 name="filter[{{ $k }}]" groupClass="mb-0" class="form-control-sm" :options="$column->filterOptions" data-field="{{ $k }}" :allowClear="true"/>
+                        @elseif(!empty($column->render))
+                            <x-boilerplate::daterangepicker name="filter[{{ $k }}]" groupClass="mb-0" class="dt-filter-daterange form-control-sm" data-field="{{ $k }}" />
+                        @else
+                            <x-boilerplate::input name="filter[{{ $k }}]" groupClass="mb-0" class="dt-filter-text form-control-sm" data-field="{{ $k }}" />
                         @endif
                     </th>
                 @endforeach
             </tr>
+            @endif
             </thead>
             <tbody></tbody>
         </table>
@@ -33,7 +42,6 @@
                 processing: false,
                 serverSide: true,
                 autoWidth: false,
-                searching: true,
                 orderCellsTop: true,
                 info: {{ (int) $datatable->info }},
                 lengthChange: {{ (int) $datatable->lengthChange }},
@@ -43,30 +51,25 @@
                 pageLength: {{ $datatable->pageLength }},
                 paging: {{ (int) $datatable->paging }},
                 pagingType: '{{ $datatable->pagingType }}',
+                searching: {{ (int) $datatable->searching }},
                 stateSave: {{ (int) $datatable->stateSave }},
                 ajax: {
                     url: '{!! route('boilerplate.datatables', $datatable->slug, false) !!}',
                     type: 'post',
-                    data: function data(d) {
-                        $('#{{ $id }}_wrapper .dt-search-facet').each(function (i, e) {
-                            d.columns[$(e).data('field')].search.value = $(e).data('value');
-                        });
-                    }
+                    data: $.fn.dataTable.parseDatatableFilters
                 },
                 columns: [
                     @foreach($datatable->columns() as $column)
                         {!! $column->get() !!},
                     @endforeach
                 ],
+                @if($datatable->filters)
                 initComplete: function() {
-                    {{--$.ajax({--}}
-                    {{--    url: '{!! route('boilerplate.datatables.search', $datatable->slug, false) !!}',--}}
-                    {{--    type: 'post',--}}
-                    {{--    success: function(html){--}}
-                    {{--        $('#{{ $id }}_wrapper .row:first div:last').html(html);--}}
-                    {{--    }--}}
-                    {{--});--}}
+                    $('#{{ $id }}_filter').append(
+                        '<button type="button" class="btn btn-sm btn-default mb-1 ml-1 show-filters"><span class="fa fa-fw fa-caret-down"></span></button>'
+                    );
                 }
+                @endif
             });
         });
     </script>

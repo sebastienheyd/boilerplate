@@ -1,9 +1,9 @@
 @once
 @component('boilerplate::minify')
+    @include('boilerplate::load.async.moment')
     <script>
         loadStylesheet('{!! mix('/plugins/datatables/datatables.min.css', '/assets/vendor/boilerplate') !!}');
-        loadScript('{!! mix('/plugins/moment/moment-with-locales.min.js', '/assets/vendor/boilerplate') !!}', () => {
-            moment.locale('{{ App::getLocale() }}');
+        whenAssetIsLoaded('momentjs', () => {
             loadScript('{!! mix('/plugins/datatables/datatables.min.js', '/assets/vendor/boilerplate') !!}', () => {
                 {{-- Plugins --}}
                 @foreach($plugins as $plugin)

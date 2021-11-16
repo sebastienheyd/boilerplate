@@ -1,0 +1,58 @@
+@if(empty($name))
+<code>&lt;x-boilerplate::daterangepicker> The name attribute has not been set</code>
+@else
+<div class="form-group{{ isset($groupClass) ? ' '.$groupClass : '' }}"{!! isset($groupId) ? ' id="'.$groupId.'"' : '' !!}>
+@isset($label)
+    {!! Form::label($name.'_localized', __($label)) !!}
+@endisset
+    <div class="input-group" id="{{ $id }}">
+@if($prepend || $prependText)
+        <div class="input-group-prepend">
+@if($prepend)
+            {!! $prepend !!}
+@else
+            <span class="input-group-text">{!! $prependText !!}</span>
+@endif
+        </div>
+@endif
+        <div class="d-flex align-items-center w-100 justify-content-end">
+            {!! Form::text($name.'[value]', old($name.'.value', $value), array_merge(['class' => 'form-control'.$errors->first($name,' is-invalid').(isset($class) ? ' '.$class : '')], $attributes)) !!}
+            <span class="fa fa-fw fa-times position-absolute mr-1 clear-daterangepicker" data-name="{{ $name }}" style="display:none"></span>
+        </div>
+@if($append || $appendText)
+        <div class="input-group-append">
+@if($append)
+            {!! $append !!}
+@else
+            <span class="input-group-text">{!! $appendText !!}</span>
+@endif
+        </div>
+@endif
+    </div>
+@if($help ?? false)
+    <small class="form-text text-muted">@lang($help)</small>
+@endif
+@error($name)
+    <div class="error-bubble"><div>{{ $message }}</div></div>
+@enderror
+    {!! Form::hidden($name.'[start]', old($name.'[start]', $start ?? ''), ['autocomplete' => 'off']) !!}
+    {!! Form::hidden($name.'[end]', old($name.'[end]', $end ?? ''), ['autocomplete' => 'off']) !!}
+</div>
+@include('boilerplate::load.async.daterangepicker')
+@component('boilerplate::minify')
+<script>
+    whenAssetIsLoaded('daterangepicker', () => {
+        $('input[name="{{ $name }}[value]"]').daterangepicker({
+            timePicker: {{ $timePicker ?? false ? 'true' : 'false' }},
+            timePickerIncrement: {{ $timePickerIncrement ?? '1' }},
+            timePicker24Hour: {{ $timePicker24Hour ?? true ? 'true' : 'false' }},
+            timePickerSeconds: {{ $timePickerSeconds ?? false ? 'true' : 'false' }},
+            autoUpdateInput: {{ (($start ?? null) || ($end ?? null)) ? 'true' : 'false' }},
+            startDate: {!! !empty(old($name.'.start', $start ?? '')) ? 'moment("'.old($name.'.start', $start ?? '').'")' : 'moment()' !!},
+            endDate: {!! !empty(old($name.'.end', $end ?? '')) ? 'moment("'.old($name.'.end', $end ?? '').'")' : 'moment()' !!},
+            locale: { format: '{{ $format }}' }
+        }).on('apply.daterangepicker', applyDateRangePicker);
+    });
+</script>
+@endcomponent
+@endif

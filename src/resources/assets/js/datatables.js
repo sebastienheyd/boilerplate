@@ -47,111 +47,38 @@ $.fn.dataTable.render.fromNow = function (format) {
     };
 };
 
+$.fn.dataTable.parseDatatableFilters = function (d, instance) {
+    let id = instance.sTableId;
+
+    $('#'+id+'_wrapper .filters .dt-filter-text').each(function (i, e) {
+        d.columns[$(e).data('field')].search.value = $(e).val();
+    });
+
+    $('#'+id+'_wrapper .filters select').each(function (i, e) {
+        d.columns[$(e).data('field')].search.value = $(e).find(':selected').val();
+    });
+
+    $('#'+id+'_wrapper .filters .dt-filter-daterange').each(function (i, e) {
+        let name = $(e).attr('name').replace('[value]', '');
+        d.columns[$(e).data('field')].search.date_start = $('#'+id+'_wrapper input[name="'+name+'[start]"]').val();
+        d.columns[$(e).data('field')].search.date_end = $('#'+id+'_wrapper input[name="'+name+'[end]"]').val();
+    });
+}
+
 /**
- * Showing autocomplete on typing in search input.
+ * Show filters button
  */
-$(document).on('keyup', '.dt-search-input', function (e) {
-    e.preventDefault();
-
-    let id = $(this).closest('.dt-search').data('target');
-    let wrapper = id + '_wrapper';
-
-    if ($(this).val() === '') {
-        $(wrapper + ' .dt-search-autocomplete').hide();
-        return;
-    }
-
-    if (e.keyCode === 13) { // Enter key
-        $(wrapper + ' .dt-search-autocomplete a.hover').trigger('click');
-    } else if (e.keyCode === 38) { // Arrow up
-        let current = $(wrapper + ' .dt-search-autocomplete a.hover')
-        let prev = current.parent().prev().find('a');
-        if (prev.length === 1) {
-            current.removeClass('hover');
-            prev.addClass('hover');
-        }
-    } else if (e.keyCode === 40) { // Arrow down
-        let current = $(wrapper + ' .dt-search-autocomplete a.hover')
-        let next = current.parent().next().find('a');
-        if (next.length === 1) {
-            current.removeClass('hover');
-            next.addClass('hover');
-        }
-    } else {
-        let fields = [];
-        $(wrapper + ' .dt-search-facet').each(function (i, e) {
-            fields.push($(e).data('field'));
-        });
-
-        $.ajax({
-            url: $(id).data('options'),
-            type: 'post',
-            data: {
-                id: id,
-                q: $(this).val(),
-                already: fields.toString()
-            },
-            success: function (options) {
-                $(wrapper + ' .dt-search-autocomplete').html(options).show();
-                $(wrapper + ' .dt-search-autocomplete a:first').addClass('hover');
-            }
-        });
-    }
-}).on('keydown', '.dt-search-input', function (e) {
-    let id = $(this).closest('.dt-search').data('target');
-    let wrapper = id + '_wrapper';
-
-    // Backspace
-    if (e.keyCode === 8 && $(wrapper + ' .dt-search-input').val() === '') {
-        $(wrapper + ' .dt-search .dt-search-facet:last .dt-search-facet-remove').trigger('click');
-    }
+$(document).on('click', '.dataTables_wrapper .show-filters', function () {
+    $(this).closest('.dataTables_wrapper').find('.filters').toggle();
+    $(this).children('span').toggleClass('fa-caret-down fa-caret-up');
 });
 
-/**
- * Click on autocomplete link.
- */
-$(document).on('click', '.dt-search-autocomplete a', function (e) {
-    e.preventDefault();
-
-    let ul = $(this).closest('ul');
-    let wrapper = $(ul.data('id')+'_wrapper');
-    let input = wrapper.find('.dt-search-input');
-    let field = $(this).data('option');
-
-    $.ajax({
-        url: ul.data('facet'),
-        type: 'post',
-        data: {
-            field: field,
-            value: input.val(),
-        },
-        success: function(facet) {
-            wrapper.find('.dt-search-facets').append(facet);
-            //localStorage.setItem('search-facets', $('.search-facets').html());
-
-            input.val('');
-            wrapper.find('.dt-search-autocomplete').hide();
-            $(ul.data('id')).DataTable().ajax.reload();
-        }
-    })
-});
-
-/**
- * Adding hover class when passing mouse over autocomplete link.
- */
-$(document).on('mouseover', '.dt-search-autocomplete a', function () {
-    $('.dt-search-autocomplete a').removeClass('hover');
-    $(this).addClass('hover')
-});
-
-/**
- * Removing search facet
- */
-$(document).on('click', '.dt-search-facet-remove', function () {
-    let id = $(this).closest('.dt-search').data('target');
-    let el = $(this).closest('.dt-search-facet');
-    el.remove();
-
-    // localStorage.setItem('search-facets', $('.search-facets').html());
+$(document).on('keyup change', '.dataTables_wrapper .filters input[type=text]', function () {
+    let id = '#' + $(this).closest('.dataTables_wrapper').find('table').attr('id');
     $(id).DataTable().ajax.reload();
-});
+})
+
+$(document).on('change', '.dataTables_wrapper .filters select', function () {
+    let id = '#' + $(this).closest('.dataTables_wrapper').find('table').attr('id');
+    $(id).DataTable().ajax.reload();
+})

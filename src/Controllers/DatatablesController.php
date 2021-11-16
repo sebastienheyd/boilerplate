@@ -3,12 +3,8 @@
 namespace Sebastienheyd\Boilerplate\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use ReflectionException;
-use Sebastienheyd\Boilerplate\Datatables\Datatable;
 
 class DatatablesController extends Controller
 {
@@ -47,90 +43,5 @@ class DatatablesController extends Controller
         }
 
         return $datatable;
-    }
-
-    /**
-     * Get array of searchable fields.
-     *
-     * @param  Datatable  $datatable
-     * @return array
-     */
-    private function getSearchable(Datatable $datatable)
-    {
-        $searchable = [];
-
-        foreach ($datatable->columns() as $k => $column) {
-            if ($column->searchable === false) {
-                continue;
-            }
-
-            $searchable[$k] = $column->title;
-        }
-
-        return $searchable;
-    }
-
-    /**
-     * Rendering available filter options for autocomplete.
-     *
-     * @param  Request  $request
-     * @param  string  $slug
-     * @throws ReflectionException
-     * @return Application|Factory|View
-     */
-    public function options(Request $request, string $slug)
-    {
-        if (! $request->ajax()) {
-            abort(404);
-        }
-
-        $q = $request->post('q');
-        $id = $request->post('id');
-
-        $datatable = $this->getDatatable($slug);
-        $searchable = $this->getSearchable($datatable);
-
-        $already = explode(',', $request->post('already'));
-        foreach ($already as $option) {
-            if (isset($searchable[$option])) {
-                unset($searchable[$option]);
-            }
-        }
-
-        return view('boilerplate::datatables.options', compact('q', 'searchable', 'slug', 'id'));
-    }
-
-    /**
-     * Rendering a facet.
-     *
-     * @param  Request  $request
-     * @param  string  $slug
-     * @throws ReflectionException
-     * @return Application|Factory|View
-     */
-    public function facet(Request $request, string $slug)
-    {
-        if (! $request->ajax()) {
-            abort(404);
-        }
-
-        $datatable = $this->getDatatable($slug);
-        $searchable = $this->getSearchable($datatable);
-
-        $field = $request->post('field');
-        $label = $searchable[$field];
-        $value = $request->post('value');
-        return view('boilerplate::datatables.facet', compact('field', 'value', 'label'));
-    }
-
-    public function search(Request $request, string $slug)
-    {
-        if (! $request->ajax()) {
-            abort(404);
-        }
-
-        $datatable = $this->getDatatable($slug);
-
-        return view('boilerplate::datatables.search', compact('slug'));
     }
 }
