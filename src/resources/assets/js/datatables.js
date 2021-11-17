@@ -60,8 +60,11 @@ $.fn.dataTable.parseDatatableFilters = function (d, instance) {
 
     $('#'+id+'_wrapper .filters .dt-filter-daterange').each(function (i, e) {
         let name = $(e).attr('name').replace('[value]', '');
-        d.columns[$(e).data('field')].search.date_start = $('#'+id+'_wrapper input[name="'+name+'[start]"]').val();
-        d.columns[$(e).data('field')].search.date_end = $('#'+id+'_wrapper input[name="'+name+'[end]"]').val();
+        let start = $('#'+id+'_wrapper input[name="'+name+'[start]"]').val();
+        let end = $('#'+id+'_wrapper input[name="'+name+'[end]"]').val();
+        if(start !== '' && end !== '') {
+            d.columns[$(e).data('field')].search.value = start+'|'+end;
+        }
     });
 }
 

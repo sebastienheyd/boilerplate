@@ -2,9 +2,8 @@
 
 namespace Sebastienheyd\Boilerplate\Datatables;
 
-use Illuminate\Http\Request;
 use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables\Facades\DataTables;
+use Yajra\DataTables\DataTables;
 
 abstract class Datatable
 {
@@ -34,7 +33,7 @@ abstract class Datatable
         $raw = [];
         foreach ($this->columns() as $column) {
             if($column->filter) {
-                $datatable->filterColumn($column->name, $column->filter);
+                $datatable->filterColumn($column->name ?? $column->data, $column->filter);
             }
 
             if ($column->raw) {

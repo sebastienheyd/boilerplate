@@ -80,26 +80,26 @@ class UsersDatatable extends Datatable
 
             Column::add(__('boilerplate::users.list.lastconnect'))
                 ->data('last_login')
-                ->notSearchable()
                 ->fromNow(),
 
             Column::add()
-                ->class('visible-on-hover text-nowrap')
-                ->notSearchable()
-                ->notOrderable()
                 ->width('70px')
-                ->data('actions', function (User $user) {
+                ->actions(function(User $user) {
                     $currentUser = Auth::user();
 
                     // Admin can edit and delete anyone...
                     if ($currentUser->hasRole('admin')) {
-                        $b = $this->button(route('boilerplate.users.edit', $user->id), 'primary mr-1', 'pencil-alt');
+                        $b = Button::add('pencil-alt')
+                            ->route('boilerplate.users.edit', $user->id)
+                            ->class('primary mr-1')
+                            ->make();
 
                         // ...except delete himself
                         if ($user->id !== $currentUser->id) {
-                            $b .= $this->button(route('boilerplate.users.destroy', $user->id),
-                                'danger destroy',
-                                'trash');
+                            $b .= Button::add('trash')
+                                ->route('boilerplate.users.destroy', $user->id)
+                                ->class('danger destroy')
+                                ->make();
                         }
 
                         return $b;

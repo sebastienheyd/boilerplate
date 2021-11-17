@@ -9,6 +9,7 @@ class Column
     protected $title         = '';
     protected $raw           = null;
     protected $filter        = null;
+    protected $actions       = [];
     protected $filterOptions = [];
     protected $attributes    = [];
 
@@ -50,13 +51,6 @@ class Column
         return $this;
     }
 
-    public function filter(Closure $filter)
-    {
-        $this->filter = $filter;
-
-        return $this;
-    }
-
     public function filterOptions($filterOptions)
     {
         if (is_array($filterOptions)) {
@@ -92,6 +86,26 @@ class Column
         if ($format instanceof Closure) {
             $this->attributes['render'] = $format;
         }
+
+        $this->filter(function ($query, $q) {
+            [$start, $end] = explode('|', $q);
+            $query->whereBetween($this->data, [$start, $end]);
+        });
+
+        return $this;
+    }
+
+    public function filter(Closure $filter)
+    {
+        $filter = Closure::bind($filter, $this);
+        $this->filter = $filter;
+
+        return $this;
+    }
+
+    public function actions(Closure $actions)
+    {
+        $this->data('dt-actions', $actions)->class('visible-on-hover text-nowrap')->notSearchable()->notOrderable();
 
         return $this;
     }
@@ -164,7 +178,7 @@ class Column
     public function __isset($name)
     {
         if (property_exists($this, $name)) {
-            return !empty($this->$name);
+            return ! empty($this->$name);
         }
 
         return isset($this->attributes[$name]);
