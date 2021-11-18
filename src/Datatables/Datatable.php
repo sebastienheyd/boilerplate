@@ -2,7 +2,8 @@
 
 namespace Sebastienheyd\Boilerplate\Datatables;
 
-use Yajra\DataTables\EloquentDataTable;
+use Exception;
+use Illuminate\Http\JsonResponse;
 use Yajra\DataTables\DataTables;
 
 abstract class Datatable
@@ -23,16 +24,23 @@ abstract class Datatable
         'lengthMenu'   => [10, 25, 50, 100],
     ];
 
+    abstract public function datasource();
+    abstract public function columns(): array;
     public function setUp() { }
 
-    public function make()
+    /**
+     * Renders the DataTable Json that will be used by the ajax call.
+     *
+     * @throws Exception
+     * @return JsonResponse
+     */
+    public function make(): JsonResponse
     {
-        /** @var EloquentDataTable $datatable */
         $datatable = DataTables::of($this->datasource());
 
         $raw = [];
         foreach ($this->columns() as $column) {
-            if($column->filter) {
+            if ($column->filter) {
                 $datatable->filterColumn($column->name ?? $column->data, $column->filter);
             }
 
@@ -49,11 +57,14 @@ abstract class Datatable
         return $datatable->make(true);
     }
 
-    abstract public function datasource();
-
-    abstract public function columns(): array;
-
-    public function order($column, $order = 'asc')
+    /**
+     * Sets the DataTable order by column name and direction.
+     *
+     * @param $column
+     * @param  string  $order
+     * @return $this
+     */
+    public function order($column, string $order = 'asc'): Datatable
     {
         if (! is_array($column)) {
             $column = [$column => $order];
@@ -66,6 +77,12 @@ abstract class Datatable
         return $this;
     }
 
+    /**
+     * Gets the column index number by column name.
+     *
+     * @param $column
+     * @return int|string
+     */
     private function getColumnIndex($column)
     {
         if (is_int($column)) {
@@ -81,14 +98,26 @@ abstract class Datatable
         return 0;
     }
 
-    public function lengthMenu(array $value)
+    /**
+     * Defines the array of values to use for the length selection menu.
+     *
+     * @param  array  $value
+     * @return $this
+     */
+    public function lengthMenu(array $value): Datatable
     {
         $this->attributes['lengthMenu'] = $value;
 
         return $this;
     }
 
-    public function pagingType($type)
+    /**
+     * Sets the paging type to use. Can be numbers, simple, simple_numbers, full, full_numbers, first_last_numbers.
+     *
+     * @param $type
+     * @return $this
+     */
+    public function pagingType($type): Datatable
     {
         if (in_array($type, ['numbers', 'simple', 'simple_numbers', 'full', 'full_numbers', 'first_last_numbers'])) {
             $this->attributes['pagingType'] = $type;
@@ -97,6 +126,12 @@ abstract class Datatable
         return $this;
     }
 
+    /**
+     * Sets the default page length.
+     *
+     * @param  int  $length
+     * @return $this
+     */
     public function pageLength(int $length = 10): Datatable
     {
         $this->attributes['pageLength'] = $length;
@@ -104,6 +139,11 @@ abstract class Datatable
         return $this;
     }
 
+    /**
+     * Enable state saving. Stores state information such as pagination position, display length, filtering and sorting.
+     *
+     * @return $this
+     */
     public function stateSave(): Datatable
     {
         $this->attributes['stateSave'] = true;
@@ -111,6 +151,11 @@ abstract class Datatable
         return $this;
     }
 
+    /**
+     * Disables filters bar.
+     *
+     * @return $this
+     */
     public function noFilters(): Datatable
     {
         $this->attributes['filters'] = false;
@@ -118,6 +163,11 @@ abstract class Datatable
         return $this;
     }
 
+    /**
+     * Disables the paging.
+     *
+     * @return $this
+     */
     public function noPaging(): Datatable
     {
         $this->attributes['paging'] = false;
@@ -125,6 +175,11 @@ abstract class Datatable
         return $this;
     }
 
+    /**
+     * Disables the user's ability to change the paging display length.
+     *
+     * @return $this
+     */
     public function noLengthChange(): Datatable
     {
         $this->attributes['lengthChange'] = false;
@@ -132,6 +187,11 @@ abstract class Datatable
         return $this;
     }
 
+    /**
+     * Disable the ordering (sorting).
+     *
+     * @return $this
+     */
     public function noOrdering(): Datatable
     {
         $this->attributes['ordering'] = false;
@@ -139,6 +199,21 @@ abstract class Datatable
         return $this;
     }
 
+    /**
+     * Alias of noOrdering.
+     *
+     * @return $this
+     */
+    public function noSorting(): DataTable
+    {
+        return $this->noOrdering();
+    }
+
+    /**
+     * Disables the searching.
+     *
+     * @return $this
+     */
     public function noSearching(): Datatable
     {
         $this->attributes['searching'] = false;
@@ -146,6 +221,11 @@ abstract class Datatable
         return $this;
     }
 
+    /**
+     * Disables the table information.
+     *
+     * @return $this
+     */
     public function noInfo(): Datatable
     {
         $this->attributes['info'] = false;
@@ -153,6 +233,12 @@ abstract class Datatable
         return $this;
     }
 
+    /**
+     * Magic method to get property or attribute.
+     *
+     * @param $name
+     * @return false|mixed|string|null
+     */
     public function __get($name)
     {
         if (property_exists($this, $name)) {
@@ -168,5 +254,24 @@ abstract class Datatable
         }
 
         return null;
+    }
+
+    /**
+     * Magic method to check if property or attribute is set or not.
+     *
+     * @param $name
+     * @return bool
+     */
+    public function __isset($name)
+    {
+        if (property_exists($this, $name)) {
+            return true;
+        }
+
+        if (isset($this->attributes[$name])) {
+            return true;
+        }
+
+        return false;
     }
 }

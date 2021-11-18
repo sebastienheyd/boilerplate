@@ -5,6 +5,7 @@ namespace Sebastienheyd\Boilerplate\Datatables;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use ReflectionClass;
+use ReflectionException;
 use Symfony\Component\Finder\Finder;
 
 class DatatablesRepository
@@ -15,6 +16,7 @@ class DatatablesRepository
      * Register a datatable class.
      *
      * @param ...$class
+     * @throws ReflectionException
      * @return $this
      */
     public function registerDatatable(...$class)
@@ -40,7 +42,7 @@ class DatatablesRepository
      *
      * @return array
      */
-    public function getDatatables()
+    public function getDatatables(): array
     {
         return $this->datatables;
     }
@@ -57,9 +59,11 @@ class DatatablesRepository
     }
 
     /**
-     * @throws \ReflectionException
+     * Load DataTable classes present in one or multiple paths.
+     *
+     * @throws ReflectionException
      */
-    public function load($paths)
+    public function load($paths): DatatablesRepository
     {
         $paths = array_unique(Arr::wrap($paths));
 

@@ -3,9 +3,12 @@ $(document).on('click', '.clear-daterangepicker', function(e) {
     let name = $(this).data('name');
     $('input[name="'+name+'[value]"]').data('daterangepicker').startDate = moment();
     $('input[name="'+name+'[value]"]').data('daterangepicker').endDate = moment();
-    $('input[name="'+name+'[end]"]').val('').trigger('change');
-    $('input[name="'+name+'[start]"]').val('').trigger('change');
-    $('input[name="'+name+'[value]"]').val('').trigger('change');
+    $('input[name="'+name+'[end]"]').val('');
+    $('input[name="'+name+'[start]"]').val('');
+    $('input[name="'+name+'[value]"]').val('');
+    $('input[name="'+name+'[end]"]').trigger('change');
+    $('input[name="'+name+'[start]"]').trigger('change');
+    $('input[name="'+name+'[value]"]').trigger('change');
 })
 
 window.applyDateRangePicker = function(e, picker) {

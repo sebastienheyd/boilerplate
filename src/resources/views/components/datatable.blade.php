@@ -20,7 +20,7 @@
                             @continue
                         @endif
                         @if(!empty($column->filterOptions))
-                            <x-boilerplate::select2 name="filter[{{ $k }}]" groupClass="mb-0" class="form-control-sm" :options="$column->filterOptions" data-field="{{ $k }}" :allowClear="true"/>
+                            <x-boilerplate::select2 name="filter[{{ $k }}]" groupClass="mb-0" class="form-control-sm dt-filter-select" :options="$column->filterOptions" data-field="{{ $k }}" :allowClear="true"/>
                         @elseif(!empty($column->render))
                             <x-boilerplate::daterangepicker name="filter[{{ $k }}]" groupClass="mb-0" class="dt-filter-daterange form-control-sm" data-field="{{ $k }}" />
                         @else
@@ -44,15 +44,23 @@
                 autoWidth: false,
                 orderCellsTop: true,
                 info: {{ (int) $datatable->info }},
-                lengthChange: {{ (int) $datatable->lengthChange }},
-                lengthMenu: {!! $datatable->lengthMenu !!},
-                order: {!! $datatable->order !!},
-                ordering: {{ (int) $datatable->ordering }},
-                pageLength: {{ $datatable->pageLength }},
-                paging: {{ (int) $datatable->paging }},
-                pagingType: '{{ $datatable->pagingType }}',
                 searching: {{ (int) $datatable->searching }},
-                stateSave: {{ (int) $datatable->stateSave }},
+                @if($datatable->ordering)
+                    ordering: true,
+                    order: {!! $datatable->order !!},
+                @endif
+                @if($datatable->paging)
+                    paging: true,
+                    pageLength: {{ $datatable->pageLength }},
+                    pagingType: '{{ $datatable->pagingType }}',
+                    lengthChange: {{ (int) $datatable->lengthChange }},
+                    lengthMenu: {!! $datatable->lengthMenu !!},
+                @endif
+                @if($datatable->stateSave)
+                    stateSave: true,
+                    stateSaveParams: $.fn.dataTable.saveFiltersState,
+                    stateLoadParams: $.fn.dataTable.loadFiltersState,
+                @endif
                 ajax: {
                     url: '{!! route('boilerplate.datatables', $datatable->slug, false) !!}',
                     type: 'post',
@@ -64,11 +72,12 @@
                     @endforeach
                 ],
                 @if($datatable->filters)
-                initComplete: function() {
-                    $('#{{ $id }}_filter').append(
-                        '<button type="button" class="btn btn-sm btn-default mb-1 ml-1 show-filters"><span class="fa fa-fw fa-caret-down"></span></button>'
-                    );
-                }
+                    initComplete: function() {
+                        $('#{{ $id }}_filter').append(
+                            '<button type="button" class="btn btn-sm btn-default mb-1 ml-1 show-filters"><span class="fa fa-fw fa-caret-down"></span></button>'
+                        );
+                        registerAsset('{{ $id }}');
+                    }
                 @endif
             });
         });

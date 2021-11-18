@@ -26,7 +26,7 @@ class UsersDatatable extends Datatable
 
     public function setUp()
     {
-        $this->order('created_at', 'desc');
+        $this->order('created_at', 'desc')->stateSave();
     }
 
     public function columns(): array
@@ -44,7 +44,7 @@ class UsersDatatable extends Datatable
                 ->width('100px')
                 ->data('active', function (User $user) {
                     $badge = '<span class="badge badge-pill badge-%s">%s</span>';
-                    if($user->active == 1) {
+                    if ($user->active == 1) {
                         return sprintf($badge, 'success', __('boilerplate::users.active'));
                     }
 
@@ -67,10 +67,10 @@ class UsersDatatable extends Datatable
                 ->data('roles', function (User $user) {
                     return $user->getRolesList();
                 })
-                ->filter(function($query, $q) {
+                ->filter(function ($query, $q) {
                     $query->whereRoleIs($q);
                 })
-                ->filterOptions(function() {
+                ->filterOptions(function () {
                     return Role::all()->pluck('display_name', 'name')->toArray();
                 }),
 
@@ -78,54 +78,32 @@ class UsersDatatable extends Datatable
                 ->data('created_at')
                 ->dateFormat(),
 
-            Column::add(__('boilerplate::users.list.lastconnect'))
-                ->data('last_login')
-                ->fromNow(),
+//            Column::add(__('boilerplate::users.list.lastconnect'))
+//                ->data('last_login')
+//                ->fromNow(),
 
             Column::add()
                 ->width('70px')
-                ->actions(function(User $user) {
+                ->actions(function (User $user) {
                     $currentUser = Auth::user();
 
-                    // Admin can edit and delete anyone...
-                    if ($currentUser->hasRole('admin')) {
-                        $b = Button::add('pencil-alt')
-                            ->route('boilerplate.users.edit', $user->id)
-                            ->class('primary mr-1')
+                    $buttons = Button::add()
+                        ->route('boilerplate.users.edit', $user->id)
+                        ->icon('pencil-alt')
+                        ->color('primary')
+                        ->make();
+
+                    if (($currentUser->hasRole('admin') || ! $user->hasRole('admin')) && $user->id !== $currentUser->id) {
+                        $buttons .= Button::add()
+                            ->route('boilerplate.users.destroy', $user->id)
+                            ->icon('trash')
+                            ->color('danger')
+                            ->class('destroy')
                             ->make();
-
-                        // ...except delete himself
-                        if ($user->id !== $currentUser->id) {
-                            $b .= Button::add('trash')
-                                ->route('boilerplate.users.destroy', $user->id)
-                                ->class('danger destroy')
-                                ->make();
-                        }
-
-                        return $b;
                     }
 
-                    // The user is the current user, you can't delete yourself
-                    if ($user->id === $currentUser->id) {
-                        return $this->button(route('boilerplate.users.edit', $user->id), 'primary mr-1', 'pencil');
-                    }
-
-                    $b = $this->button(route('boilerplate.users.edit', $user->id), 'primary mr1', 'pencil');
-
-                    // Current user is not admin, only admin can delete another admin
-                    if (! $user->hasRole('admin')) {
-                        $b .= $this->button(route('boilerplate.users.destroy', $user->id), 'danger destroy', 'trash');
-                    }
-
-                    return $b;
+                    return $buttons;
                 }),
         ];
-    }
-
-    protected function button(string $route, string $class, string $icon): string
-    {
-        $str = '<a href="%s" class="btn btn-sm btn-%s"><i class="fa fa-fw fa-%s"></i></a>';
-
-        return sprintf($str, $route, $class, $icon);
     }
 }
