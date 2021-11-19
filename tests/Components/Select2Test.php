@@ -23,12 +23,12 @@ HTML;
     {
         $expected = <<<'HTML'
 <div class="form-group">
-    <select id="test" name="test" class="form-control" data-test="test" style="visibility:hidden;height:1rem">
+    <select id="test" name="test" class="form-control" data-test="test" style="visibility:hidden;height:1rem" autocomplete="off">
         <option></option>
         <option value="1">Value 1</option>
     </select>
 </div>
-<script>loadStylesheet('');loadScript('',()=>{loadScript('',()=>{registerAsset('select2',()=>{$.extend(!0,$.fn.select2.defaults,{language:'en',direction:'ltr'});$(document).on('select2:open',(e)=>{let t=$(e.target);if(t&&t.length){let id=t[0].id||t[0].name;document.querySelector(`input[aria-controls*='${id}']`).focus()}})})})});</script><script>whenAssetIsLoaded('select2',()=>{$('#test').select2({placeholder:'—',allowClear:!1,language:"en",direction:"ltr",minimumInputLength:0,minimumResultsForSearch:10,width:'100%',})})</script>
+<script>loadStylesheet('');loadScript('',()=>{loadScript('',()=>{registerAsset('select2',()=>{$.extend(!0,$.fn.select2.defaults,{language:'en',direction:'ltr'});$(document).on('select2:open',(e)=>{let t=$(e.target);if(t&&t.length){let id=t[0].id||t[0].name;document.querySelector(`input[aria-controls*='${id}']`).focus()}})})})});</script><script>whenAssetIsLoaded('select2',()=>{let parent=$('#test').parent();$('#test').select2({placeholder:'—',allowClear:!1,language:"en",direction:"ltr",minimumInputLength:0,minimumResultsForSearch:10,width:'100%',dropdownAutoWidth:!0,dropdownParent:parent,})})</script>
 HTML;
 
         $view = $this->blade("@component('boilerplate::select2', ['name' => 'test', 'id' => 'test', 'data-test' => 'test'])<option value=\"1\">Value 1</option>@endcomponent()@stack('js')");
@@ -49,12 +49,12 @@ HTML;
     {
         $expected = <<<'HTML'
 <div class="form-group">
-    <select id="test" name="test" class="form-control" data-test="test" style="visibility:hidden;height:1rem">
+    <select id="test" name="test" class="form-control" data-test="test" style="visibility:hidden;height:1rem" autocomplete="off">
         <option></option>
         <option value="1">Value 1</option>
     </select>
 </div>
-<script>loadStylesheet('');loadScript('',()=>{loadScript('',()=>{registerAsset('select2',()=>{$.extend(!0,$.fn.select2.defaults,{language:'en',direction:'ltr'});$(document).on('select2:open',(e)=>{let t=$(e.target);if(t&&t.length){let id=t[0].id||t[0].name;document.querySelector(`input[aria-controls*='${id}']`).focus()}})})})});</script><script>whenAssetIsLoaded('select2',()=>{$('#test').select2({placeholder:'—',allowClear:!1,language:"en",direction:"ltr",minimumInputLength:0,minimumResultsForSearch:10,width:'100%',})})</script>
+<script>loadStylesheet('');loadScript('',()=>{loadScript('',()=>{registerAsset('select2',()=>{$.extend(!0,$.fn.select2.defaults,{language:'en',direction:'ltr'});$(document).on('select2:open',(e)=>{let t=$(e.target);if(t&&t.length){let id=t[0].id||t[0].name;document.querySelector(`input[aria-controls*='${id}']`).focus()}})})})});</script><script>whenAssetIsLoaded('select2',()=>{let parent=$('#test').parent();$('#test').select2({placeholder:'—',allowClear:!1,language:"en",direction:"ltr",minimumInputLength:0,minimumResultsForSearch:10,width:'100%',dropdownAutoWidth:!0,dropdownParent:parent,})})</script>
 HTML;
 
         $view = $this->blade("@component('boilerplate::select2', ['name' => 'test', 'id' => 'test', 'data-test' => 'test', 'options' => [1 => 'Value 1']])@endcomponent()@stack('js')");

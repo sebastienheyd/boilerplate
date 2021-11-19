@@ -79,10 +79,10 @@ class DatatablesRepository
 
         foreach ((new Finder())->in($paths)->files() as $datatable) {
             $datatable = $namespace.str_replace(
-                    ['/', '.php'],
-                    ['\\', ''],
-                    Str::after($datatable->getRealPath(), realpath(app_path()).DIRECTORY_SEPARATOR)
-                );
+                ['/', '.php'],
+                ['\\', ''],
+                Str::after($datatable->getRealPath(), realpath(app_path()).DIRECTORY_SEPARATOR)
+            );
 
             $this->registerDatatable($datatable);
         }

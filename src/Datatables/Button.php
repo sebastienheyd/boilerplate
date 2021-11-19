@@ -11,6 +11,8 @@ class Button
     protected $label = '';
 
     /**
+     * Instanciate a new button.
+     *
      * @param  string  $label
      */
     public function __construct(string $label)

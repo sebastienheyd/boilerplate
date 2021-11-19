@@ -110,6 +110,7 @@ class BoilerplateServiceProvider extends ServiceProvider
         ], 'boilerplate-lang');
 
         $this->commands([
+            Console\Datatable::class,
             Console\Dashboard::class,
             Console\MenuItem::class,
             Console\Permission::class,

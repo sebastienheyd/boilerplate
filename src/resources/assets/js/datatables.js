@@ -47,6 +47,18 @@ $.fn.dataTable.render.fromNow = function (format) {
     };
 };
 
+$.fn.dataTable.customProcessing = function (e, instance, processing) {
+    let id = instance.sTableId;
+
+    if (processing) {
+        if ($('#' + id + '_wrapper .dt-spinner').length === 0) {
+            $('#' + id + '_wrapper > .row:first-child > div:first-child').append('<span class="fa fa-sync fa-spin dt-spinner text-muted" />');
+        }
+    } else {
+        $('#' + id + '_wrapper .dt-spinner').remove();
+    }
+}
+
 /**
  * Parse all filters data
  *
@@ -157,6 +169,28 @@ $.fn.dataTable.loadFiltersState = function(instance, d) {
 }
 
 /**
+ * Check all checkboxes
+ */
+$(document).on('click', 'input[name="dt-check-all"]', function() {
+    $(this).closest('.dataTables_wrapper').find('input[name="dt-checkbox[]"]').prop('checked', $(this).is(':checked'));
+})
+
+/**
+ * Check / Uncheck the "check all" button
+ */
+$(document).on('click', 'input[name="dt-checkbox[]"]', function() {
+    let all = true;
+
+    $('input[name="dt-checkbox[]').each(function(i, e) {
+        if(! $(e).is(':checked')) {
+            all = false;
+        }
+    })
+
+    $('input[name="dt-check-all"]').prop('checked', all);
+})
+
+/**
  * Show filters button
  */
 $(document).on('click', '.dataTables_wrapper .show-filters', function () {
@@ -164,16 +198,25 @@ $(document).on('click', '.dataTables_wrapper .show-filters', function () {
     $(this).children('span').toggleClass('fa-caret-down fa-caret-up');
 });
 
+/**
+ * Typing in text filter
+ */
 $(document).on('keyup', '.dataTables_wrapper .dt-filter-text', function () {
     let id = '#' + $(this).closest('.dataTables_wrapper').find('table').attr('id');
     $(id).DataTable().ajax.reload();
 })
 
+/**
+ * Changing date range filter
+ */
 $(document).on('change', '.dataTables_wrapper .dt-filter-daterange', function () {
     let id = '#' + $(this).closest('.dataTables_wrapper').find('table').attr('id');
     $(id).DataTable().ajax.reload();
 })
 
+/**
+ * Select another filter option
+ */
 $(document).on('change', '.dataTables_wrapper .dt-filter-select', function () {
     let id = '#' + $(this).closest('.dataTables_wrapper').find('table').attr('id');
     $(id).DataTable().ajax.reload();

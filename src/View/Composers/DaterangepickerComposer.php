@@ -47,7 +47,7 @@ class DaterangepickerComposer extends ComponentComposer
         if (($data['timePicker'] ?? false) === true) {
             $format = __('boilerplate::date.YmdHi');
 
-            if(($data['timePickerSeconds'] ?? false) === true) {
+            if (($data['timePickerSeconds'] ?? false) === true) {
                 $format = __('boilerplate::date.YmdHis');
             }
 

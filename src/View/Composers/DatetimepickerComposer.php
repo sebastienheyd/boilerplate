@@ -54,7 +54,6 @@ class DatetimepickerComposer extends ComponentComposer
             $rawValue = $date->format('Y-m-d H:i:s');
             $data['value'] = $date->isoFormat($data['format']);
         }
-
         $view->with('value', $data['value'] ?? null);
         $view->with('rawValue', $rawValue ?? $data['value'] ?? null);
         $view->with('id', $data['id'] ?? uniqid('datetimepicker_'));

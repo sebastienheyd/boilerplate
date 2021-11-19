@@ -26,7 +26,7 @@ HTML;
     {
         $expected = <<<'HTML'
 <div class="form-group">
-    <input class="form-control" name="test" type="text" value="">
+    <input class="form-control" autocomplete="off" name="test" type="text" value="">
 </div>
 HTML;
 
@@ -44,7 +44,7 @@ HTML;
         $expected = <<<'HTML'
 <div class="form-group">
     <label for="test">Test</label>
-    <input class="form-control" name="test" type="text" value="" id="test">
+    <input class="form-control" autocomplete="off" name="test" type="text" value="" id="test">
 </div>
 HTML;
 
@@ -61,7 +61,7 @@ HTML;
     {
         $expected = <<<'HTML'
 <div class="form-group">
-    <input class="form-control test-field" name="test" type="text" value="">
+    <input class="form-control test-field" autocomplete="off" name="test" type="text" value="">
 </div>
 HTML;
 
@@ -78,7 +78,7 @@ HTML;
     {
         $expected = <<<'HTML'
 <div class="form-group">
-    <input class="form-control test-field" data-attr="test" name="test" type="text" value="">
+    <input class="form-control test-field" data-attr="test" autocomplete="off" name="test" type="text" value="">
 </div>
 HTML;
 
@@ -95,7 +95,7 @@ HTML;
     {
         $expected = <<<'HTML'
 <div class="form-group">
-    <input class="form-control" name="test" type="password" value="">
+    <input class="form-control" autocomplete="off" name="test" type="password" value="">
 </div>
 HTML;
 
@@ -112,7 +112,7 @@ HTML;
     {
         $expected = <<<'HTML'
 <div class="form-group">
-    <input class="form-control is-invalid" name="fielderror" type="text" value="">
+    <input class="form-control is-invalid" autocomplete="off" name="fielderror" type="text" value="">
     <div class="error-bubble"><div>Error message</div></div>
 </div>
 HTML;
@@ -130,7 +130,7 @@ HTML;
     {
         $expected = <<<'HTML'
 <div class="form-group">
-    <input class="form-control is-invalid" name="fielderror" type="text" value="">
+    <input class="form-control is-invalid" autocomplete="off" name="fielderror" type="text" value="">
     <small class="form-text text-muted">The user will receive an invitation by e-mail to login in which it will allow him to enter his new password</small>
     <div class="error-bubble"><div>Error message</div></div>
 </div>
@@ -153,7 +153,7 @@ HTML;
         <div class="input-group-prepend">
             <span class="input-group-text">test</span>
         </div>
-    <input class="form-control" name="test" type="text" value="">
+    <input class="form-control" autocomplete="off" name="test" type="text" value="">
         <div class="input-group-append">
             <span class="input-group-text">test</span>
         </div>
@@ -178,7 +178,7 @@ HTML;
         <div class="input-group-prepend">
             <span class="input-group-text"><span class="fas fa-envelope"></span></span>
         </div>
-    <input class="form-control" name="test" type="text" value="">
+    <input class="form-control" autocomplete="off" name="test" type="text" value="">
         <div class="input-group-append">
             <span class="input-group-text"><span class="fas fa-envelope"></span></span>
         </div>
@@ -203,7 +203,7 @@ HTML;
         <div class="input-group-prepend">
             test
         </div>
-    <input class="form-control" name="test" type="text" value="">
+    <input class="form-control" autocomplete="off" name="test" type="text" value="">
         <div class="input-group-append">
             test
         </div>

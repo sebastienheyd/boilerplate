@@ -14,6 +14,8 @@ abstract class ComponentComposer
 
     protected function appendPrependText(View $view)
     {
+        $data = $view->getData();
+
         foreach (['append', 'prepend', 'prependText', 'appendText', 'append-text', 'prepend-text'] as $p) {
             $p = Str::camel($p);
             if (! isset($data[$p])) {
@@ -71,7 +73,7 @@ abstract class ComponentComposer
         $this->attributes = $attributes;
 
         $attributes = implode(' ', array_map(function ($k, $v) {
-            if ($v === true || empty($v)) {
+            if ($v === true || ! isset($v)) {
                 return $k;
             }
 

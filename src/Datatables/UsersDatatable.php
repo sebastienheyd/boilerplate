@@ -20,13 +20,13 @@ class UsersDatatable extends Datatable
             'first_name',
             'active',
             'users.created_at',
-            'last_login'
+            'last_login',
         ]);
     }
 
     public function setUp()
     {
-        $this->order('created_at', 'desc')->stateSave();
+        $this->order('created_at', 'desc');
     }
 
     public function columns(): array
@@ -78,9 +78,9 @@ class UsersDatatable extends Datatable
                 ->data('created_at')
                 ->dateFormat(),
 
-//            Column::add(__('boilerplate::users.list.lastconnect'))
-//                ->data('last_login')
-//                ->fromNow(),
+            Column::add(__('boilerplate::users.list.lastconnect'))
+                ->data('last_login')
+                ->fromNow(),
 
             Column::add()
                 ->width('70px')

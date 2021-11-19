@@ -2,11 +2,10 @@
 
 namespace Sebastienheyd\Boilerplate\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use ReflectionException;
 
-class DatatablesController extends Controller
+class DatatablesController
 {
     /**
      * Rendering DataTable.
@@ -16,7 +15,7 @@ class DatatablesController extends Controller
      * @throws ReflectionException
      * @return mixed
      */
-    public function __invoke(Request $request, string $slug)
+    public function make(Request $request, string $slug)
     {
         if (! $request->ajax()) {
             abort(404);

@@ -50,7 +50,7 @@ Route::group([
     // Backend
     Route::group(['middleware' => ['boilerplateauth', 'ability:admin,backend_access']], function () {
         // Datatables
-        Route::post('datatables/{slug}', DatatablesController::class)->name('datatables');
+        Route::post('datatables/{slug}', [DatatablesController::class, 'make'])->name('datatables');
 
         // Roles and users
         Route::resource('roles', RolesController::class)->except('show')->middleware(['ability:admin,roles_crud']);

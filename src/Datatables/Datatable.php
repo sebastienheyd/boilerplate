@@ -2,14 +2,20 @@
 
 namespace Sebastienheyd\Boilerplate\Datatables;
 
+use Closure;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Yajra\DataTables\DataTables;
 
 abstract class Datatable
 {
-    public    $slug       = '';
-    public    $datasource;
+    protected $slug       = '';
+    protected $datasource;
+    protected $checkboxes = false;
+    protected $rowAttr;
+    protected $rowClass;
+    protected $rowData;
+    protected $rowId;
     protected $attributes = [
         'filters'      => true,
         'info'         => true,
@@ -24,10 +30,6 @@ abstract class Datatable
         'lengthMenu'   => [10, 25, 50, 100],
     ];
 
-    abstract public function datasource();
-    abstract public function columns(): array;
-    public function setUp() { }
-
     /**
      * Renders the DataTable Json that will be used by the ajax call.
      *
@@ -36,10 +38,19 @@ abstract class Datatable
      */
     public function make(): JsonResponse
     {
-        $datatable = DataTables::of($this->datasource());
+        $this->setUp();
+
+        $datatable = DataTables::of($this->datasource() ?? []);
 
         $raw = [];
-        foreach ($this->columns() as $column) {
+
+        foreach (['rowAttr', 'rowClass', 'rowData', 'rowId'] as $attr) {
+            if ($this->{$attr}) {
+                $datatable->{'set'.ucfirst($attr)}($this->{$attr});
+            }
+        }
+
+        foreach ($this->getColumns() as $column) {
             if ($column->filter) {
                 $datatable->filterColumn($column->name ?? $column->data, $column->filter);
             }
@@ -55,6 +66,39 @@ abstract class Datatable
         }
 
         return $datatable->make(true);
+    }
+
+    public function setUp()
+    {
+    }
+
+    abstract public function datasource();
+
+    abstract public function columns(): array;
+
+    /**
+     * Gets all columns, including checkboxes column.
+     *
+     * @return array
+     */
+    public function getColumns()
+    {
+        $columns = $this->columns();
+
+        if ($this->checkboxes) {
+            array_unshift($columns, Column::add()
+                ->notSearchable()
+                ->notOrderable()
+                ->data('checkbox', function () {
+                    $id = uniqid('checkbox_');
+                    return '<div class="icheck-primary mb-0">
+                                <input type="checkbox" name="dt-checkbox[]" id="'.$id.'" autocomplete="off">
+                                <label for="'.$id.'"></label>
+                            </div>';
+                }));
+        }
+
+        return $columns;
     }
 
     /**
@@ -83,19 +127,71 @@ abstract class Datatable
      * @param $column
      * @return int|string
      */
-    private function getColumnIndex($column)
+    protected function getColumnIndex($column)
     {
         if (is_int($column)) {
             return $column;
         }
 
-        foreach ($this->columns() as $k => $c) {
+        foreach ($this->getColumns() as $k => $c) {
             if ($c->data === $column) {
                 return $k;
             }
         }
 
         return 0;
+    }
+
+    /**
+     * Sets attributes on all rows.
+     *
+     * @param  string|Closure  $rowAttr
+     * @return $this
+     */
+    public function setRowAttr($rowAttr)
+    {
+        $this->rowAttr = $rowAttr;
+
+        return $this;
+    }
+
+    /**
+     * Sets class on all rows.
+     *
+     * @param  string|Closure  $rowClass
+     * @return $this
+     */
+    public function setRowClass($rowClass)
+    {
+        $this->rowClass = $rowClass;
+
+        return $this;
+    }
+
+    /**
+     * Sets data on all rows.
+     *
+     * @param  string|Closure  $rowData
+     * @return $this
+     */
+    public function setRowData($rowData)
+    {
+        $this->rowData = $rowData;
+
+        return $this;
+    }
+
+    /**
+     * Sets id on all rows.
+     *
+     * @param  string|Closure  $rowId
+     * @return $this
+     */
+    public function setRowId($rowId)
+    {
+        $this->rowId = $rowId;
+
+        return $this;
     }
 
     /**
@@ -152,6 +248,18 @@ abstract class Datatable
     }
 
     /**
+     * Shows checkboxes as first column.
+     *
+     * @return $this
+     */
+    public function showCheckboxes()
+    {
+        $this->checkboxes = true;
+
+        return $this;
+    }
+
+    /**
      * Disables filters bar.
      *
      * @return $this
@@ -188,6 +296,16 @@ abstract class Datatable
     }
 
     /**
+     * Alias of noOrdering.
+     *
+     * @return $this
+     */
+    public function noSorting(): DataTable
+    {
+        return $this->noOrdering();
+    }
+
+    /**
      * Disable the ordering (sorting).
      *
      * @return $this
@@ -197,16 +315,6 @@ abstract class Datatable
         $this->attributes['ordering'] = false;
 
         return $this;
-    }
-
-    /**
-     * Alias of noOrdering.
-     *
-     * @return $this
-     */
-    public function noSorting(): DataTable
-    {
-        return $this->noOrdering();
     }
 
     /**
@@ -231,6 +339,12 @@ abstract class Datatable
         $this->attributes['info'] = false;
 
         return $this;
+    }
+
+    protected function getRequestSearchValue($name)
+    {
+        $idx = $this->getColumnIndex($name);
+        return request()->input('columns')[$idx]['search']['value'];
     }
 
     /**

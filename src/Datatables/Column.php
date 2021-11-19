@@ -14,6 +14,8 @@ class Column
     protected $title         = '';
 
     /**
+     * Instanciate a new column.
+     *
      * @param  string  $title
      */
     public function __construct(string $title)
@@ -126,7 +128,7 @@ class Column
         }
 
         $this->filter(function ($query, $q) {
-            if(preg_match('#^[0-9]{4}-[0-9]{2}-[0-9]{2}\s[0-9]{2}:[0-9]{2}:[0-9]{2}|[0-9]{4}-[0-9]{2}-[0-9]{2}\s[0-9]{2}:[0-9]{2}:[0-9]{2}$#', $q)) {
+            if (preg_match('#^[0-9]{4}-[0-9]{2}-[0-9]{2}\s[0-9]{2}:[0-9]{2}:[0-9]{2}|[0-9]{4}-[0-9]{2}-[0-9]{2}\s[0-9]{2}:[0-9]{2}:[0-9]{2}$#', $q)) {
                 [$start, $end] = explode('|', $q);
                 $query->whereBetween($this->data, [$start, $end]);
             }
