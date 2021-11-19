@@ -6,12 +6,12 @@ use Closure;
 
 class Column
 {
-    protected $actions       = [];
-    protected $attributes    = [];
-    protected $filter        = null;
+    protected $actions = [];
+    protected $attributes = [];
+    protected $filter = null;
     protected $filterOptions = [];
-    protected $raw           = null;
-    protected $title         = '';
+    protected $raw = null;
+    protected $title = '';
 
     /**
      * Instanciate a new column.
@@ -53,6 +53,7 @@ class Column
                 $attributes[] = "$k:".intval($v);
             }
         }
+
         return '{'.implode(',', $attributes).'}';
     }
 
@@ -101,7 +102,7 @@ class Column
     public function fromNow(): Column
     {
         return $this->dateFormat(function () {
-            return "$.fn.dataTable.render.fromNow()";
+            return '$.fn.dataTable.render.fromNow()';
         });
     }
 
@@ -165,7 +166,7 @@ class Column
     }
 
     /**
-     * Column class
+     * Column class.
      *
      * @param  string  $class
      * @return $this

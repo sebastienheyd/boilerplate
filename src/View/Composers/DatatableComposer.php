@@ -8,7 +8,7 @@ use Str;
 class DatatableComposer extends ComponentComposer
 {
     protected $props = [
-        'name'
+        'name',
     ];
 
     public function compose(View $view)

@@ -2,8 +2,6 @@
 
 namespace Sebastienheyd\Boilerplate\View\Composers;
 
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class DatetimepickerComposer extends ComponentComposer

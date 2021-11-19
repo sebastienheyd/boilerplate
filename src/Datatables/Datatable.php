@@ -9,7 +9,7 @@ use Yajra\DataTables\DataTables;
 
 abstract class Datatable
 {
-    protected $slug       = '';
+    protected $slug = '';
     protected $datasource;
     protected $checkboxes = false;
     protected $rowAttr;
@@ -33,8 +33,9 @@ abstract class Datatable
     /**
      * Renders the DataTable Json that will be used by the ajax call.
      *
-     * @throws Exception
      * @return JsonResponse
+     *
+     * @throws Exception
      */
     public function make(): JsonResponse
     {
@@ -91,6 +92,7 @@ abstract class Datatable
                 ->notOrderable()
                 ->data('checkbox', function () {
                     $id = uniqid('checkbox_');
+
                     return '<div class="icheck-primary mb-0">
                                 <input type="checkbox" name="dt-checkbox[]" id="'.$id.'" autocomplete="off">
                                 <label for="'.$id.'"></label>
@@ -344,6 +346,7 @@ abstract class Datatable
     protected function getRequestSearchValue($name)
     {
         $idx = $this->getColumnIndex($name);
+
         return request()->input('columns')[$idx]['search']['value'];
     }
 

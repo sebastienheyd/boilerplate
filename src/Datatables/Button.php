@@ -6,8 +6,8 @@ class Button
 {
     protected $class = '';
     protected $color = 'default';
-    protected $href  = '#';
-    protected $icon  = '';
+    protected $href = '#';
+    protected $icon = '';
     protected $label = '';
 
     /**
@@ -35,6 +35,7 @@ class Button
      * Adds a FontAwesome icon.
      *
      * @link https://fontawesome.com/v5.15/icons
+     *
      * @param  string  $icon
      * @param  string  $style
      * @return $this
@@ -56,6 +57,7 @@ class Button
      * Sets a Bootstrap 4 color to the button.
      *
      * @link https://getbootstrap.com/docs/4.0/utilities/colors/
+     *
      * @param  string  $color
      * @return $this
      */

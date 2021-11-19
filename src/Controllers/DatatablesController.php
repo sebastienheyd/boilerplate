@@ -12,8 +12,9 @@ class DatatablesController
      *
      * @param  Request  $request
      * @param  string  $slug
-     * @throws ReflectionException
      * @return mixed
+     *
+     * @throws ReflectionException
      */
     public function make(Request $request, string $slug)
     {
@@ -30,8 +31,9 @@ class DatatablesController
      * Get DataTable class for the given slug.
      *
      * @param  string  $slug
-     * @throws ReflectionException
      * @return false|mixed
+     *
+     * @throws ReflectionException
      */
     private function getDatatable(string $slug)
     {

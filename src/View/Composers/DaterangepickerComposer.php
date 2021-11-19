@@ -2,7 +2,6 @@
 
 namespace Sebastienheyd\Boilerplate\View\Composers;
 
-use Illuminate\Support\Carbon;
 use Illuminate\View\View;
 
 class DaterangepickerComposer extends ComponentComposer
@@ -38,7 +37,7 @@ class DaterangepickerComposer extends ComponentComposer
 
         $this->appendPrependText($view);
 
-        if (!isset($this->attributes['autocomplete'])) {
+        if (! isset($this->attributes['autocomplete'])) {
             $this->attributes['autocomplete'] = 'off';
         }
 

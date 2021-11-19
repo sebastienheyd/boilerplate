@@ -16,8 +16,9 @@ class DatatablesRepository
      * Register a datatable class.
      *
      * @param ...$class
-     * @throws ReflectionException
      * @return $this
+     *
+     * @throws ReflectionException
      */
     public function registerDatatable(...$class)
     {

@@ -202,7 +202,7 @@ class UsersController extends Controller
     /**
      * Remove the specified user from storage.
      *
-     * @param  Integer  $id
+     * @param  int  $id
      * @return JsonResponse
      */
     public function destroy($id): JsonResponse

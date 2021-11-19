@@ -13,6 +13,7 @@ class UsersDatatable extends Datatable
     public function datasource()
     {
         $userModel = config('boilerplate.auth.providers.users.model');
+
         return $userModel::with('roles')->select([
             'users.id',
             'email',
