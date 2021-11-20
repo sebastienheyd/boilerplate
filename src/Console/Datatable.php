@@ -73,7 +73,7 @@ class Datatable extends BoilerplateCommand
             exit;
         }
 
-        if (!is_dir(app_path('Datatables'))) {
+        if (! is_dir(app_path('Datatables'))) {
             mkdir(app_path('Datatables'), 0775);
         }
 
