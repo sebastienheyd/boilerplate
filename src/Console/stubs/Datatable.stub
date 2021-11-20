@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Datatables;
+
+use Sebastienheyd\Boilerplate\Datatables\Datatable;
+
+class {{CLASSNAME}}Datatable extends Datatable
+{
+    public $slug = '{{SLUG}}';
+
+    public function datasource()
+    {
+
+    }
+
+    public function setUp()
+    {
+
+    }
+
+    public function columns(): array
+    {
+        return [
+
+        ];
+    }
+}

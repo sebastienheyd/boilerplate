@@ -1,0 +1,16 @@
+@import "~admin-lte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css";
+
+.dataTable {
+  thead {
+    tr {
+      th {
+        white-space: nowrap;
+      }
+    }
+  }
+}
+
+.dataTables_length {
+  display: inline-block;
+  margin-right: .5rem;
+}

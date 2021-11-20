@@ -5,7 +5,7 @@
 @isset($label)
     {{ Form::label($name, __($label)) }}
 @endisset
-    <select id="{{ $id }}" name="{{ $name }}" class="form-control{{ $errors->first($name,' is-invalid') }}{{ isset($class) ? ' '.$class : '' }}"{!! !empty($attributes) ? ' '.$attributes : '' !!} style="visibility:hidden;height:1rem">
+    <select id="{{ $id }}" name="{{ $name }}" class="form-control{{ $errors->first($name,' is-invalid') }}{{ isset($class) ? ' '.$class : '' }}"{!! !empty($attributes) ? ' '.$attributes : '' !!} style="visibility:hidden;height:1rem" autocomplete="off">
 @if(!isset($multiple))
         <option></option>
 @endif
@@ -28,6 +28,7 @@
 @component('boilerplate::minify')
     <script>
         whenAssetIsLoaded('select2', () => {
+            let parent = $('#{{ $id }}').parent();
             $('#{{ $id }}').select2({
                 placeholder: '{{ $placeholder ?? '—' }}',
                 allowClear: {{ $allowClear }},
@@ -36,6 +37,8 @@
                 minimumInputLength: {{ $minimumInputLength ?? 0 }},
                 minimumResultsForSearch: {{ $minimumResultsForSearch ?? 10 }},
                 width: '100%',
+                dropdownAutoWidth: true,
+                dropdownParent: parent,
                 @isset($ajax)
                 ajax: {
                     delay: 200,

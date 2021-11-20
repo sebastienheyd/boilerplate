@@ -4,6 +4,7 @@
  */
 return [
     'Ymd'    => 'DD/MM/YYYY',
+    'YmdHi' => 'DD/MM/YYYY HH:mm',
     'YmdHis' => 'DD/MM/YYYY HH:mm:ss',
     'lFdY'   => 'D MMMM YYYY dddd',
 ];

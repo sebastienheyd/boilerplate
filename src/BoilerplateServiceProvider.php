@@ -17,6 +17,7 @@ use Laratrust\Middleware\LaratrustPermission;
 use Laratrust\Middleware\LaratrustRole;
 use Lavary\Menu\Facade;
 use Lavary\Menu\ServiceProvider as MenuServiceProvider;
+use Sebastienheyd\Boilerplate\Datatables\UsersDatatable;
 use Sebastienheyd\Boilerplate\View\Composers\DatatablesComposer;
 use Sebastienheyd\Boilerplate\View\Composers\MenuComposer;
 use Sebastienheyd\Boilerplate\View\Composers\TinymceLoadComposer;
@@ -109,6 +110,7 @@ class BoilerplateServiceProvider extends ServiceProvider
         ], 'boilerplate-lang');
 
         $this->commands([
+            Console\Datatable::class,
             Console\Dashboard::class,
             Console\MenuItem::class,
             Console\Permission::class,
@@ -153,7 +155,9 @@ class BoilerplateServiceProvider extends ServiceProvider
         $components = [
             'card',
             'codemirror',
+            'datatable',
             'datetimepicker',
+            'daterangepicker',
             'form',
             'icheck',
             'infobox',
@@ -213,6 +217,7 @@ class BoilerplateServiceProvider extends ServiceProvider
         $this->registerLaratrust();
         $this->registerMenu();
         $this->registerNavbarItems();
+        $this->registerDatatables();
 
         if (version_compare($this->app->version(), '8.0', '>=')) {
             Paginator::useBootstrap();
@@ -268,5 +273,15 @@ class BoilerplateServiceProvider extends ServiceProvider
         $this->app->singleton('boilerplate.navbar.items', function () {
             return new Navbar\NavbarItemsRepository();
         });
+    }
+
+    private function registerDatatables()
+    {
+        // Datatables repository singleton
+        $this->app->singleton('boilerplate.datatables', function () {
+            return new Datatables\DatatablesRepository();
+        });
+
+        app('boilerplate.datatables')->registerDatatable(UsersDatatable::class);
     }
 }

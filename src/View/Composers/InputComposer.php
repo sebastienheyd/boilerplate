@@ -51,6 +51,10 @@ class InputComposer extends ComponentComposer
             $this->attributes['placeholder'] = __($data['placeholder']);
         }
 
+        if (! isset($data['autocomplete'])) {
+            $this->attributes['autocomplete'] = 'off';
+        }
+
         $view->with('attributes', $this->attributes);
     }
 }

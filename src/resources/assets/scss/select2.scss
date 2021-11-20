@@ -1,2 +1,13 @@
 @import "~admin-lte/plugins/select2/css/select2.min.css";
 @import "~admin-lte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css";
+
+.select2-right {
+  .select2-container {
+    left: auto !important;
+    right: 0 !important;
+  }
+}
+
+.select2-container--default .select2-results__option {
+  white-space: nowrap;
+}

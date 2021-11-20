@@ -15,7 +15,7 @@
 @endif
         </div>
 @endif
-        {!! Form::text($name.'_local', old($name.'_local', $value), array_merge(['data-toggle' => 'datetimepicker', 'data-target' => '#'.$id, 'class' => 'form-control datetimepicker-input'.$errors->first($name,' is-invalid').(isset($class) ? ' '.$class : '')], $attributes)) !!}
+        {!! Form::text($name.'_local', old($name.'_local', $value), array_merge(['data-toggle' => 'datetimepicker', 'data-target' => '#'.$id, 'class' => 'form-control datetimepicker-input'.$errors->first($name,' is-invalid').(isset($class) ? ' '.$class : ''), 'autocomplete' => 'off'], $attributes)) !!}
 @if($append || $appendText)
         <div class="input-group-append" data-toggle="datetimepicker" data-target="#{{ $id }}">
 @if($append)

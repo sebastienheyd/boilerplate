@@ -4,6 +4,7 @@ use Sebastienheyd\Boilerplate\Controllers\Auth\ForgotPasswordController;
 use Sebastienheyd\Boilerplate\Controllers\Auth\LoginController;
 use Sebastienheyd\Boilerplate\Controllers\Auth\RegisterController;
 use Sebastienheyd\Boilerplate\Controllers\Auth\ResetPasswordController;
+use Sebastienheyd\Boilerplate\Controllers\DatatablesController;
 use Sebastienheyd\Boilerplate\Controllers\LanguageController;
 use Sebastienheyd\Boilerplate\Controllers\Logs\LogViewerController;
 use Sebastienheyd\Boilerplate\Controllers\Users\RolesController;
@@ -48,6 +49,9 @@ Route::group([
 
     // Backend
     Route::group(['middleware' => ['boilerplateauth', 'ability:admin,backend_access']], function () {
+        // Datatables
+        Route::post('datatables/{slug}', [DatatablesController::class, 'make'])->name('datatables');
+
         // Roles and users
         Route::resource('roles', RolesController::class)->except('show')->middleware(['ability:admin,roles_crud']);
         Route::group(['middleware' => ['ability:admin,users_crud']], function () {

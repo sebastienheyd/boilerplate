@@ -2,8 +2,6 @@
 
 namespace Sebastienheyd\Boilerplate\View\Composers;
 
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class DatetimepickerComposer extends ComponentComposer
@@ -47,32 +45,13 @@ class DatetimepickerComposer extends ComponentComposer
             $view->with('format', 'L');
         }
 
-        foreach (['append', 'prepend', 'prependText', 'appendText', 'append-text', 'prepend-text'] as $p) {
-            $p = Str::camel($p);
-            if (! isset($data[$p])) {
-                $view->with($p, false);
-            } elseif (in_array($p, ['prependText', 'appendText']) && preg_match('#^fa[srb]? fa-.+$#', $data[$p])) {
-                $view->with($p, '<span class="'.$data[$p].'"></span>');
-            }
-        }
+        $this->appendPrependText($view);
 
         if (! empty($data['value'])) {
-            if (preg_match('#[0-9]{4}-[0-9]{2}-[0-9]{2}\s[0-9]{2}:[0-9]{2}:[0-9]{2}#', $data['value'])) {
-                $rawValue = $data['value'];
-                $data['value'] = Carbon::createFromFormat('Y-m-d H:i:s', $data['value'])->isoFormat($data['format']);
-            }
-
-            if (preg_match('#[0-9]{4}-[0-9]{2}-[0-9]{2}#', $data['value'])) {
-                $rawValue = $data['value'];
-                $data['value'] = Carbon::createFromFormat('Y-m-d', $data['value'])->isoFormat($data['format']);
-            }
-
-            if ($data['value'] instanceof Carbon) {
-                $rawValue = $data['value']->format('Y-m-d H:i:s');
-                $data['value'] = $data['value']->isoFormat($data['format']);
-            }
+            $date = $this->dateToCarbon($data['value']);
+            $rawValue = $date->format('Y-m-d H:i:s');
+            $data['value'] = $date->isoFormat($data['format']);
         }
-
         $view->with('value', $data['value'] ?? null);
         $view->with('rawValue', $rawValue ?? $data['value'] ?? null);
         $view->with('id', $data['id'] ?? uniqid('datetimepicker_'));

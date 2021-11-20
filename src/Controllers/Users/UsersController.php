@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Intervention\Image\Facades\Image;
-use Ramsey\Uuid\Type\Integer;
 use Sebastienheyd\Boilerplate\Rules\Password;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -206,7 +205,7 @@ class UsersController extends Controller
      * @param  int  $id
      * @return JsonResponse
      */
-    public function destroy(Integer $id): JsonResponse
+    public function destroy($id): JsonResponse
     {
         $userModel = config('boilerplate.auth.providers.users.model');
         $user = $userModel::findOrFail($id);

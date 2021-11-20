@@ -1,8 +1,9 @@
 @once
+@component('boilerplate::minify')
+    @include('boilerplate::load.async.moment')
     <script>
         loadStylesheet("{!! mix('/plugins/datepicker/daterangepicker.min.css', '/assets/vendor/boilerplate') !!}");
-        loadScript('{!! mix('/plugins/moment/moment-with-locales.min.js', '/assets/vendor/boilerplate') !!}', () => {
-            moment.locale('{{ App::getLocale() }}');
+        whenAssetIsLoaded('momentjs', () => {
             loadScript("{!! mix('/plugins/datepicker/daterangepicker.min.js', '/assets/vendor/boilerplate') !!}", () => {
                 registerAsset('daterangepicker');
                 $.fn.daterangepicker.defaultOptions = {
@@ -17,4 +18,5 @@
             });
         });
     </script>
+@endcomponent
 @endonce
