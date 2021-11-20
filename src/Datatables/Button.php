@@ -34,11 +34,11 @@ class Button
     /**
      * Adds a FontAwesome icon.
      *
-     * @link https://fontawesome.com/v5.15/icons
-     *
      * @param  string  $icon
      * @param  string  $style
      * @return $this
+     *
+     * @link https://fontawesome.com/v5.15/icons
      */
     public function icon(string $icon, string $style = 's'): Button
     {
@@ -56,10 +56,10 @@ class Button
     /**
      * Sets a Bootstrap 4 color to the button.
      *
-     * @link https://getbootstrap.com/docs/4.0/utilities/colors/
-     *
      * @param  string  $color
      * @return $this
+     *
+     * @link https://getbootstrap.com/docs/4.0/utilities/colors/
      */
     public function color(string $color): Button
     {

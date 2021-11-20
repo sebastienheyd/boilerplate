@@ -15,9 +15,9 @@
 @endif
         </div>
 @endif
-        <div class="d-flex align-items-center w-100 justify-content-end">
-            {!! Form::text($name.'[value]', old($name.'.value', $value), array_merge(['class' => 'form-control'.$errors->first($name,' is-invalid').(isset($class) ? ' '.$class : '')], $attributes)) !!}
-            <span class="fa fa-fw fa-times position-absolute mr-1 clear-daterangepicker" data-name="{{ $name }}" style="display:none"></span>
+        <div class="d-flex align-items-center form-control">
+            {!! Form::text($name.'[value]', old($name.'.value', $value), array_merge(['class' => 'daterangepicker-input'.$errors->first($name,' is-invalid').(isset($class) ? ' '.$class : '')], $attributes)) !!}
+            <span class="fa fa-fw fa-times fa-xs ml-1 clear-daterangepicker" data-name="{{ $name }}" />
         </div>
 @if($append || $appendText)
         <div class="input-group-append">
@@ -43,10 +43,10 @@
 <script>
     whenAssetIsLoaded('daterangepicker', () => {
         $('input[name="{{ $name }}[value]"]').daterangepicker({
-            timePicker: {{ $timePicker ?? false ? 'true' : 'false' }},
+            timePicker: {{ bool($timePicker ?? false) ? 'true' : 'false' }},
             timePickerIncrement: {{ $timePickerIncrement ?? '1' }},
-            timePicker24Hour: {{ $timePicker24Hour ?? true ? 'true' : 'false' }},
-            timePickerSeconds: {{ $timePickerSeconds ?? false ? 'true' : 'false' }},
+            timePicker24Hour: {{ bool($timePicker24Hour ?? true) ? 'true' : 'false' }},
+            timePickerSeconds: {{ bool($timePickerSeconds ?? false) ? 'true' : 'false' }},
             autoUpdateInput: {{ (($start ?? null) || ($end ?? null)) ? 'true' : 'false' }},
             startDate: {!! !empty(old($name.'.start', $start ?? '')) ? 'moment("'.old($name.'.start', $start ?? '').'")' : 'moment()' !!},
             endDate: {!! !empty(old($name.'.end', $end ?? '')) ? 'moment("'.old($name.'.end', $end ?? '').'")' : 'moment()' !!},

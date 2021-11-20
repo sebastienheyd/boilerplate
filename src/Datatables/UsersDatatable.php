@@ -27,7 +27,7 @@ class UsersDatatable extends Datatable
 
     public function setUp()
     {
-        $this->order('created_at', 'desc');
+        $this->stateSave()->order('created_at', 'desc');
     }
 
     public function columns(): array

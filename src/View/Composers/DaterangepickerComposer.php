@@ -8,23 +8,25 @@ class DaterangepickerComposer extends ComponentComposer
 {
     protected $props = [
         'append',
-        'appendText',
         'append-text',
+        'appendText',
         'class',
+        'end',
         'group-class',
-        'groupClass',
         'group-id',
+        'groupClass',
         'groupId',
         'help',
         'id',
         'label',
         'name',
         'prepend',
-        'prependText',
         'prepend-text',
+        'prependText',
+        'start',
         'timePicker',
-        'timePickerIncrement',
         'timePicker24Hour',
+        'timePickerIncrement',
         'timePickerSeconds',
         'value',
     ];
@@ -43,17 +45,17 @@ class DaterangepickerComposer extends ComponentComposer
 
         $format = __('boilerplate::date.Ymd');
 
-        if (($data['timePicker'] ?? false) === true) {
+        if (bool($data['timePicker'] ?? false)) {
             $format = __('boilerplate::date.YmdHi');
 
-            if (($data['timePickerSeconds'] ?? false) === true) {
+            if (bool($data['timePickerSeconds'] ?? false)) {
                 $format = __('boilerplate::date.YmdHis');
             }
 
-            if (($data['timePicker24Hour'] ?? true) === false) {
+            if (! bool($data['timePicker24Hour'] ?? true)) {
                 $format = __('boilerplate::date.YmdhiA');
 
-                if (($data['timePickerSeconds'] ?? false) === true) {
+                if (bool($data['timePickerSeconds'] ?? false)) {
                     $format = __('boilerplate::date.YmdhisA');
                 }
             }

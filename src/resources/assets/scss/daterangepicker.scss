@@ -1,15 +1,21 @@
 @import "~admin-lte/plugins/daterangepicker/daterangepicker.css";
 
 .daterangepicker {
-    font-family: Source Sans Pro,Helvetica Neue,Helvetica,Arial,sans-serif;
+  font-family: Source Sans Pro, Helvetica Neue, Helvetica, Arial, sans-serif;
 }
 
 .datepicker-days {
-    th, td {
-        border: 0;
-    }
+  th, td {
+    border: 0;
+  }
 }
 
 .clear-daterangepicker {
-    cursor: pointer;
+  cursor: pointer;
+  opacity: .5;
+  transition: opacity .15s ease-in-out;
+
+  &:hover {
+    opacity: 1;
+  }
 }
