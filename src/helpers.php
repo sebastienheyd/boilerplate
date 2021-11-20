@@ -4,6 +4,7 @@ if (! function_exists('bool')) {
     function bool($val)
     {
         $boolval = (is_string($val) ? filter_var($val, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE) : (bool) $val);
+
         return $boolval === null ? false : $boolval;
     }
 }
