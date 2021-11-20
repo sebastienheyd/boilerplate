@@ -2,6 +2,11 @@
         Usage
         <pre>&lt;x-boilerplate::daterangepicker name="range" /></pre>
         <div class="row">
+            <div class="col-12">
+                <x-boilerplate::daterangepicker name="test" label="test" :min-date="\Illuminate\Support\Carbon::now()->subDays(30)" :maxDate="\Illuminate\Support\Carbon::now()" />
+            </div>
+        </div>
+        <div class="row">
             <div class="col-6">
                 <!-- Date range -->
                 @component('boilerplate::daterangepicker', ['name' => 'range1', 'label' => 'Date range picker', 'appendText' => 'far fa-calendar', 'start' => \Illuminate\Support\Carbon::now()->subDays(10), 'end' => \Illuminate\Support\Carbon::now()])@endcomponent

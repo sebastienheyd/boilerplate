@@ -45,6 +45,12 @@
         $('input[name="{{ $name }}[value]"]').daterangepicker({
             showDropdowns: true,
             opens: "{{ $alignment ?? 'right' }}",
+            @if(!empty($minDate))
+            minDate: moment('{{ $minDate }}'),
+            @endif
+            @if(!empty($maxDate))
+            maxDate: moment('{{ $maxDate }}'),
+            @endif
             timePicker: {{ bool($timePicker ?? false) ? 'true' : 'false' }},
             timePickerIncrement: {{ $timePickerIncrement ?? '1' }},
             timePicker24Hour: {{ bool($timePicker24Hour ?? true) ? 'true' : 'false' }},

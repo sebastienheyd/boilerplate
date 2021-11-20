@@ -22,6 +22,10 @@ class DaterangepickerComposer extends ComponentComposer
         'help',
         'id',
         'label',
+        'max-date',
+        'maxDate',
+        'min-date',
+        'minDate',
         'name',
         'prepend',
         'prepend-text',
@@ -47,6 +51,16 @@ class DaterangepickerComposer extends ComponentComposer
         }
 
         $format = __('boilerplate::date.Ymd');
+
+        if (isset($data['minDate'])) {
+            $date = $this->dateToCarbon($data['minDate']);
+            $view->with('minDate', $date->format('Y-m-d H:i:s'));
+        }
+
+        if (isset($data['maxDate'])) {
+            $date = $this->dateToCarbon($data['maxDate']);
+            $view->with('maxDate', $date->format('Y-m-d H:i:s'));
+        }
 
         if (bool($data['timePicker'] ?? false)) {
             $format = __('boilerplate::date.YmdHi');
