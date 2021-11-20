@@ -8,7 +8,7 @@
             </div>
             <div class="col-6">
                 <!-- Date and time range -->
-                @component('boilerplate::daterangepicker', ['name' => 'range2', 'label' => 'Date and time range picker', 'appendText' => 'far fa-calendar', 'start' => \Illuminate\Support\Carbon::now()->subDays(10)->subHour(), 'end' => \Illuminate\Support\Carbon::now(), 'timePicker' => true])@endcomponent
+                @component('boilerplate::daterangepicker', ['name' => 'range2', 'label' => 'Date and time range picker', 'appendText' => 'far fa-clock', 'start' => \Illuminate\Support\Carbon::now()->subDays(10)->subHour(), 'end' => \Illuminate\Support\Carbon::now(), 'timePicker' => true])@endcomponent
             </div>
         </div>
     @slot('footer')

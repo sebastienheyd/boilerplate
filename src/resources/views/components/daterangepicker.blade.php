@@ -15,9 +15,9 @@
 @endif
         </div>
 @endif
-        <div class="d-flex align-items-center form-control">
+        <div class="d-flex align-items-center form-control{{ isset($controlClass) ? ' '.$controlClass : '' }}">
             {!! Form::text($name.'[value]', old($name.'.value', $value), array_merge(['class' => 'daterangepicker-input'.$errors->first($name,' is-invalid').(isset($class) ? ' '.$class : '')], $attributes)) !!}
-            <span class="fa fa-fw fa-times fa-xs ml-1 clear-daterangepicker" data-name="{{ $name }}" />
+            <span class="fa fa-fw fa-times fa-xs ml-1 clear-daterangepicker" data-name="{{ $name }}" style="display:none"/>
         </div>
 @if($append || $appendText)
         <div class="input-group-append">
@@ -43,6 +43,8 @@
 <script>
     whenAssetIsLoaded('daterangepicker', () => {
         $('input[name="{{ $name }}[value]"]').daterangepicker({
+            showDropdowns: true,
+            opens: "{{ $alignment ?? 'right' }}",
             timePicker: {{ bool($timePicker ?? false) ? 'true' : 'false' }},
             timePickerIncrement: {{ $timePickerIncrement ?? '1' }},
             timePicker24Hour: {{ bool($timePicker24Hour ?? true) ? 'true' : 'false' }},

@@ -31,7 +31,7 @@
                         @if(!empty($column->filterOptions))
                             @component('boilerplate::select2', ['name' => "filter[$k]", 'groupClass' => 'mb-0', 'class' => 'form-control-sm dt-filter-select', 'options' => $column->filterOptions, 'data-field' => "$k", 'allowClear' => true])@endcomponent
                         @elseif(!empty($column->render))
-                            @component('boilerplate::daterangepicker', ['name' => "filter[$k]", 'groupClass' => 'mb-0', 'class' => 'dt-filter-daterange form-control-sm', 'data-field' => "$k"])@endcomponent
+                            @component('boilerplate::daterangepicker', ['name' => "filter[$k]", 'groupClass' => 'mb-0', 'class' => 'dt-filter-daterange', 'controlClass' => 'form-control-sm', 'data-field' => "$k", 'alignment' => 'center'])@endcomponent
                         @else
                             @component('boilerplate::input', ['name' => "filter[$k]", 'groupClass' => 'mb-0', 'class' => 'dt-filter-text form-control-sm', 'data-field' => "$k"])@endcomponent
                         @endif

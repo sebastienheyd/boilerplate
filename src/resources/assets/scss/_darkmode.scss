@@ -98,10 +98,10 @@ body.dark-mode {
       background: #222;
     }
 
-    select.hourselect, select.minuteselect, select.secondselect, select.ampmselect {
+    select.hourselect, select.minuteselect, select.secondselect, select.ampmselect, select.monthselect, select.yearselect  {
+      border: 1px solid darken($border, 10%);
       background: #292d32;
       color: #FFF;
-      border-color: $border;
     }
 
     td.available:hover, th.available:hover {

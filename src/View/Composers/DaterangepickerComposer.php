@@ -7,10 +7,13 @@ use Illuminate\View\View;
 class DaterangepickerComposer extends ComponentComposer
 {
     protected $props = [
+        'alignment',
         'append',
         'append-text',
         'appendText',
         'class',
+        'control-class',
+        'controlClass',
         'end',
         'group-class',
         'group-id',
