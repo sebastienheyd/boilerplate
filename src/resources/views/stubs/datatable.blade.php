@@ -22,7 +22,9 @@ class {{ $className }}Datatable extends Datatable
 
     public function setUp()
     {
+@if($model)
         $this->order('id', 'desc');
+@endif
     }
 
     public function columns(): array

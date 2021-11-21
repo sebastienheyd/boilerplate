@@ -46,7 +46,7 @@ class Datatable extends BoilerplateCommand
         $name = $this->argument('name');
 
         if (empty($name)) {
-            $name = $this->forceAnswer('Name of the DataTable component to create');
+            $name = $this->forceAnswer('Name of the DataTable component to create (E.g., <comment>users</comment>)');
         }
 
         $className = ucfirst(Str::camel(Str::slug($name)));
@@ -55,8 +55,22 @@ class Datatable extends BoilerplateCommand
         $model = '';
         $shortName = '';
 
-        if ($this->hasOption('model')) {
+        if ($this->option('model') === null) {
+            if($this->confirm('Use a model as the data source?')) {
+                model:
+                $model = $this->forceAnswer('Enter the model path (E.g., <comment>App\Models\User</comment>)');
+                $this->input->setOption('model', $model);
+            }
+        }
+
+        if ($this->option('model')) {
             $model = ltrim($this->option('model'), '\\');
+
+            if(! class_exists($model)) {
+                $this->error("Class $model does not exists");
+                goto model;
+            }
+
             $shortName = (new \ReflectionClass($this->option('model')))->getShortName();
             $columns = $this->generateColumnsForModel($this->option('model'));
         }
@@ -69,8 +83,11 @@ class Datatable extends BoilerplateCommand
         $filePath = app_path('Datatables/'.$className.'Datatable.php');
 
         if (is_file($filePath)) {
-            $this->error('Datatable component '.$className.' already exists');
-            exit;
+            if(! $this->confirm("File <comment>$filePath</comment> already exists, overwrite?")) {
+                return;
+            }
+
+            unlink($filePath);
         }
 
         if (! is_dir(app_path('Datatables'))) {
@@ -78,7 +95,8 @@ class Datatable extends BoilerplateCommand
         }
 
         file_put_contents($filePath, $content);
-        $this->info('Datatable component generated with success : '.$filePath);
+        $this->line('<info>Datatable component generated with success :</info> <comment>'.$filePath.'</comment>');
+        $this->line('<info>Now you can use the component with the tag : </info> <comment><x-boilerplate::datatable name="'.$slug.'" /></comment>');
     }
 
     private function generateColumnsForModel($model)
