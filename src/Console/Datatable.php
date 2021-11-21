@@ -56,7 +56,7 @@ class Datatable extends BoilerplateCommand
         $shortName = '';
 
         if ($this->option('model') === null) {
-            if($this->confirm('Use a model as the data source?')) {
+            if ($this->confirm('Use a model as the data source?')) {
                 model:
                 $model = $this->forceAnswer('Enter the model path (E.g., <comment>App\Models\User</comment>)');
                 $this->input->setOption('model', $model);
@@ -66,7 +66,7 @@ class Datatable extends BoilerplateCommand
         if ($this->option('model')) {
             $model = ltrim($this->option('model'), '\\');
 
-            if(! class_exists($model)) {
+            if (! class_exists($model)) {
                 $this->error("Class $model does not exists");
                 goto model;
             }
@@ -83,7 +83,7 @@ class Datatable extends BoilerplateCommand
         $filePath = app_path('Datatables/'.$className.'Datatable.php');
 
         if (is_file($filePath)) {
-            if(! $this->confirm("File <comment>$filePath</comment> already exists, overwrite?")) {
+            if (! $this->confirm("File <comment>$filePath</comment> already exists, overwrite?")) {
                 return;
             }
 
