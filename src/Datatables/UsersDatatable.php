@@ -68,15 +68,13 @@ class UsersDatatable extends Datatable
                 ->data('roles', function (User $user) {
                     return $user->getRolesList();
                 })
-                ->filter(function ($query, $q) {
-                    $query->whereRoleIs($q);
-                })
                 ->filterOptions(function () {
                     return Role::all()->pluck('display_name', 'name')->toArray();
                 }),
 
             Column::add(__('boilerplate::users.list.creationdate'))
                 ->data('created_at')
+                ->name('users.created_at')
                 ->dateFormat(),
 
             Column::add(__('boilerplate::users.list.lastconnect'))
