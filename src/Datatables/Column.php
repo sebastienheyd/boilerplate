@@ -10,6 +10,7 @@ class Column
     protected $attributes = [];
     protected $filter = null;
     protected $filterOptions = [];
+    protected $filterType = 'input';
     protected $raw = null;
     protected $title = '';
 
@@ -79,9 +80,10 @@ class Column
      * Define an array of options to be used by the filter select.
      *
      * @param $filterOptions
+     * @param  string  $filterType
      * @return $this
      */
-    public function filterOptions($filterOptions): Column
+    public function filterOptions($filterOptions, $filterType = 'select'): Column
     {
         if (is_array($filterOptions)) {
             $this->filterOptions = $filterOptions;
@@ -90,6 +92,12 @@ class Column
         if ($filterOptions instanceof Closure) {
             $this->filterOptions = $filterOptions->call($this);
         }
+
+        if (! in_array($filterType, ['select', 'select-multiple'])) {
+            $filterType = 'select';
+        }
+
+        $this->filterType($filterType);
 
         return $this;
     }
@@ -134,6 +142,23 @@ class Column
                 $query->whereBetween($this->name ?? $this->data, [$start, $end]);
             }
         });
+
+        $this->filterType('daterangepicker');
+
+        return $this;
+    }
+
+    /**
+     * Define the filter type.
+     *
+     * @param  string  $type
+     * @return $this
+     */
+    public function filterType(string $type = 'input'): Column
+    {
+        if (in_array($type, ['input', 'daterangepicker', 'select', 'select-multiple'])) {
+            $this->filterType = $type;
+        }
 
         return $this;
     }

@@ -2,6 +2,7 @@
 
 namespace Sebastienheyd\Boilerplate\Datatables;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Sebastienheyd\Boilerplate\Models\Role;
 use Sebastienheyd\Boilerplate\Models\User;
@@ -64,7 +65,11 @@ class UsersDatatable extends Datatable
 
             Column::add(__('boilerplate::users.list.roles'))
                 ->notOrderable()
-                ->name('roles.name')
+                ->filter(function ($query, $q) {
+                    $query->whereHas('roles', function (Builder $query) use ($q) {
+                        $query->where('name', '=', $q);
+                    });
+                })
                 ->data('roles', function (User $user) {
                     return $user->getRolesList();
                 })

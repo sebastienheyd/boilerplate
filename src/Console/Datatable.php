@@ -112,7 +112,7 @@ class Datatable extends BoilerplateCommand
         $columns = [];
 
         foreach ($fields as $field) {
-            $column = Schema::getConnection()->getDoctrineColumn($model->getTable(), $field);
+            $column = $model->getConnection()->getDoctrineColumn($model->getTable(), $field);
 
             $title = Str::of($field)->replace('_', ' ')->title();
             $type = $column->getType()->getName();

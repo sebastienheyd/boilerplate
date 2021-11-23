@@ -28,13 +28,20 @@
                         @if($column->searchable === false)
                             @continue
                         @endif
-                        @if(!empty($column->filterOptions))
-                            @component('boilerplate::select2', ['name' => "filter[$k]", 'groupClass' => 'mb-0', 'class' => 'form-control-sm dt-filter-select', 'options' => $column->filterOptions, 'data-field' => "$k", 'allowClear' => true])@endcomponent
-                        @elseif(!empty($column->render))
-                            @component('boilerplate::daterangepicker', ['name' => "filter[$k]", 'groupClass' => 'mb-0', 'class' => 'dt-filter-daterange', 'controlClass' => 'form-control-sm', 'data-field' => "$k", 'alignment' => 'center'])@endcomponent
-                        @else
-                            @component('boilerplate::input', ['name' => "filter[$k]", 'groupClass' => 'mb-0', 'class' => 'dt-filter-text form-control-sm', 'data-field' => "$k"])@endcomponent
-                        @endif
+                        @switch($column->filterType)
+                            @case('select')
+                                @component('boilerplate::select2', ['name' => "filter[$k]", 'groupClass' => 'mb-0', 'class' => 'form-control-sm dt-filter-select', 'options' => $column->filterOptions, 'data-field' => "$k", 'allowClear' => true])@endcomponent
+                            @break
+                            @case('select-multiple')
+                                @component('boilerplate::select2', ['name' => "filter[$k]", 'groupClass' => 'mb-0', 'class' => 'form-control-sm dt-filter-select', 'options' => $column->filterOptions, 'data-field' => "$k", 'multiple' => true])@endcomponent
+                            @break
+                            @case('daterangepicker')
+                                @component('boilerplate::daterangepicker', ['name' => "filter[$k]", 'groupClass' => 'mb-0', 'class' => 'dt-filter-daterange', 'controlClass' => 'form-control-sm', 'data-field' => "$k", 'alignment' => 'center'])@endcomponent
+                            @break
+                            @default
+                                @component('boilerplate::input', ['name' => "filter[$k]", 'groupClass' => 'mb-0', 'class' => 'dt-filter-text form-control-sm', 'data-field' => "$k"])@endcomponent
+                            @break
+                        @endswitch
                     </th>
                 @endforeach
             </tr>
