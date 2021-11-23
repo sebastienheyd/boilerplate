@@ -3,7 +3,6 @@
 namespace Sebastienheyd\Boilerplate\Console;
 
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 class Datatable extends BoilerplateCommand
