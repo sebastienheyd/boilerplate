@@ -83,7 +83,7 @@ class Column
      * @param  string  $filterType
      * @return $this
      */
-    public function filterOptions($filterOptions, $filterType = 'select'): Column
+    public function filterOptions($filterOptions, bool $multiple = false): Column
     {
         if (is_array($filterOptions)) {
             $this->filterOptions = $filterOptions;
@@ -93,11 +93,9 @@ class Column
             $this->filterOptions = $filterOptions->call($this);
         }
 
-        if (! in_array($filterType, ['select', 'select-multiple'])) {
-            $filterType = 'select';
+        if ($multiple) {
+            $this->filterType('select-multiple');
         }
-
-        $this->filterType($filterType);
 
         return $this;
     }
@@ -154,9 +152,9 @@ class Column
      * @param  string  $type
      * @return $this
      */
-    public function filterType(string $type = 'input'): Column
+    public function filterType(string $type = 'text'): Column
     {
-        if (in_array($type, ['input', 'daterangepicker', 'select', 'select-multiple'])) {
+        if (in_array($type, ['text', 'daterangepicker', 'select', 'select-multiple'])) {
             $this->filterType = $type;
         }
 
