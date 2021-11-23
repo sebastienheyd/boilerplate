@@ -93,9 +93,7 @@ class Column
             $this->filterOptions = $filterOptions->call($this);
         }
 
-        if ($multiple) {
-            $this->filterType('select-multiple');
-        }
+        $this->filterType($multiple ? 'select-multiple' : 'select');
 
         return $this;
     }
