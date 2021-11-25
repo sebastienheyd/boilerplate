@@ -41,8 +41,9 @@ class Datatable extends BoilerplateCommand
     /**
      * Execute the console command.
      *
-     * @throws ReflectionException
      * @return mixed
+     *
+     * @throws ReflectionException
      */
     public function handle()
     {
