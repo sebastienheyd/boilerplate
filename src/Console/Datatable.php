@@ -5,6 +5,7 @@ namespace Sebastienheyd\Boilerplate\Console;
 use Exception;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
+use ReflectionException;
 
 class Datatable extends BoilerplateCommand
 {
@@ -40,6 +41,7 @@ class Datatable extends BoilerplateCommand
     /**
      * Execute the console command.
      *
+     * @throws ReflectionException
      * @return mixed
      */
     public function handle()
@@ -116,7 +118,7 @@ class Datatable extends BoilerplateCommand
         $connection = $model->getConnection();
 
         foreach ($fields as $field) {
-            if(! $this->option('nodb')) {
+            if (! $this->option('nodb')) {
                 try {
                     $type = $connection->getDoctrineColumn($model->getTable(), $field)->getType()->getName();
                 } catch (Exception $exception) {
