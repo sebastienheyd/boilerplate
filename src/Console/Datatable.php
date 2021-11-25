@@ -2,6 +2,7 @@
 
 namespace Sebastienheyd\Boilerplate\Console;
 
+use Exception;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 
@@ -12,7 +13,10 @@ class Datatable extends BoilerplateCommand
      *
      * @var string
      */
-    protected $signature = 'boilerplate:datatable {name? : Name of the datatable to create} {--model= : Generate Datatable for the given model}';
+    protected $signature = 'boilerplate:datatable 
+        {name? : Name of the datatable to create} 
+        {--model= : Generate Datatable for the given model}
+        {--nodb : Generate without using the database to get types}';
 
     /**
      * The console command description.
@@ -109,12 +113,21 @@ class Datatable extends BoilerplateCommand
         );
 
         $columns = [];
+        $connection = $model->getConnection();
 
         foreach ($fields as $field) {
-            $column = $model->getConnection()->getDoctrineColumn($model->getTable(), $field);
+            if(! $this->option('nodb')) {
+                try {
+                    $type = $connection->getDoctrineColumn($model->getTable(), $field)->getType()->getName();
+                } catch (Exception $exception) {
+                    $this->error($exception->getMessage());
+                    exit;
+                }
+            } else {
+                $type = preg_match('#_at$#', $field) ? 'datetime' : 'default';
+            }
 
             $title = Str::of($field)->replace('_', ' ')->title();
-            $type = $column->getType()->getName();
 
             switch ($type) {
                 case 'date':

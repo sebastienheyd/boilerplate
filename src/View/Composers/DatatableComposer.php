@@ -20,7 +20,7 @@ class DatatableComposer extends ComponentComposer
         $datatables = app('boilerplate.datatables')->load(app_path('Datatables'))->getDatatables();
 
         if (! empty($data['name']) && ! isset($datatables[$data['name']])) {
-            return;
+            throw new \Exception('DataTable class for "'.$data['name'].'" is not found');
         }
 
         $datatable = $datatables[$data['name']];
