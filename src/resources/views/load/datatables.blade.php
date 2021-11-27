@@ -15,6 +15,9 @@
 @push('plugin-js')
     <script src="{!! mix('/plugins/datatables/plugins/dataTables.'.$plugin.'.min.js', '/assets/vendor/boilerplate') !!}"></script>
     <script src="{!! mix('/plugins/datatables/plugins/'.$plugin.'.bootstrap4.min.js', '/assets/vendor/boilerplate') !!}"></script>
+    @if($plugin === 'buttons')
+        <script src="{!! mix('/plugins/datatables/buttons.min.js', '/assets/vendor/boilerplate') !!}"></script>
+    @endif
 @endpush
 @endif
 @endforeach

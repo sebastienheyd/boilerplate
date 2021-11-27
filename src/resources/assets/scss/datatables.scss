@@ -14,3 +14,12 @@
   display: inline-block;
   margin-right: .5rem;
 }
+
+.dark-mode {
+  #datatables_buttons_info {
+    h2 {
+      background: #343a40;
+    }
+    background: #454d55;
+  }
+}

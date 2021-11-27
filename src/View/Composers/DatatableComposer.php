@@ -2,6 +2,7 @@
 
 namespace Sebastienheyd\Boilerplate\View\Composers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Str;
 
@@ -25,6 +26,8 @@ class DatatableComposer extends ComponentComposer
 
         $datatable = $datatables[$data['name']];
         $datatable->setUp();
+
+        $view->with('permission', Auth::user()->ability(['admin'], $datatable->permissions));
 
         if (empty($data['id'])) {
             $view->with('id', 'dt_'.Str::snake(Str::camel($datatable->slug)), '_');

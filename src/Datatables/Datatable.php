@@ -16,6 +16,7 @@ abstract class Datatable
     protected $rowClass;
     protected $rowData;
     protected $rowId;
+    protected $permissions = ['backend_access'];
     protected $attributes = [
         'filters'      => true,
         'info'         => true,
@@ -27,7 +28,8 @@ abstract class Datatable
         'pagingType'   => 'simple_numbers',
         'searching'    => true,
         'stateSave'    => false,
-        'lengthMenu'   => [10, 25, 50, 100],
+        'lengthMenu'   => [[10, 25, 50, 100, -1],[10,25,50,100,'∞']],
+        'buttons'      => ['filters'],
     ];
 
     /**
@@ -145,6 +147,62 @@ abstract class Datatable
     }
 
     /**
+     * Set permissions.
+     *
+     * @param mixed ...$permissions
+     *
+     * @return $this
+     */
+    public function permissions(...$permissions)
+    {
+        $this->permissions = is_array($permissions[0]) ? $permissions[0] : $permissions;
+
+        return $this;
+    }
+
+    /**
+     * Set buttons to show.
+     *
+     * @param mixed ...$buttons
+     *
+     * @return $this
+     */
+    public function buttons(...$buttons)
+    {
+        if (is_array($buttons[0])) {
+            $buttons = $buttons[0];
+        }
+
+        $this->attributes['buttons'] = collect($buttons)->filter(function ($i) {
+            return in_array($i, ['filters', 'colvis', 'csv', 'excel', 'copy', 'print', 'refresh']);
+        })->toArray();
+
+        return $this;
+    }
+
+    /**
+     * Get buttons to show.
+     *
+     * @return string
+     */
+    public function getButtons()
+    {
+        $buttons = '';
+
+        $icons = [
+            'colvis' => 'eye',
+            'csv' => 'file-csv',
+            'excel' => 'file-excel',
+        ];
+
+        foreach ($this->attributes['buttons'] as $button) {
+            $buttons .= view('boilerplate::components.datatablebutton', compact('button', 'icons'))->render();
+        }
+
+        return $buttons;
+    }
+
+    /**
      * Sets attributes on all rows.
      *
      * @param  string|Closure  $rowAttr
@@ -257,18 +315,6 @@ abstract class Datatable
     public function showCheckboxes()
     {
         $this->checkboxes = true;
-
-        return $this;
-    }
-
-    /**
-     * Disables filters bar.
-     *
-     * @return $this
-     */
-    public function noFilters(): Datatable
-    {
-        $this->attributes['filters'] = false;
 
         return $this;
     }

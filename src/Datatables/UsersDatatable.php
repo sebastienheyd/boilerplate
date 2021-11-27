@@ -28,7 +28,7 @@ class UsersDatatable extends Datatable
 
     public function setUp()
     {
-        $this->stateSave()->order('created_at', 'desc');
+        $this->permissions('users_crud')->order('created_at', 'desc')->stateSave();
     }
 
     public function columns(): array

@@ -30,6 +30,12 @@ mix.scripts([
     'node_modules/drmonty-datatables-plugins/sorting/datetime-moment.js',
     'resources/assets/js/datatables.js',
 ], 'public/plugins/datatables/datatables.min.js');
+mix.scripts([
+    'node_modules/admin-lte/plugins/datatables-buttons/js/buttons.html5.js',
+    'node_modules/admin-lte/plugins/datatables-buttons/js/buttons.colVis.js',
+    'node_modules/admin-lte/plugins/datatables-buttons/js/buttons.print.js',
+    'node_modules/admin-lte/plugins/jszip/jszip.js',
+], 'public/plugins/datatables/buttons.min.js');
 mix.copy('node_modules/drmonty-datatables-plugins/i18n/*', 'public/plugins/datatables/i18n/');
 mix.sass('resources/assets/scss/datatables.scss', 'public/plugins/datatables/datatables.min.css');
 mix.copy([

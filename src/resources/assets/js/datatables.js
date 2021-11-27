@@ -47,12 +47,34 @@ $.fn.dataTable.render.fromNow = function (format) {
     };
 };
 
+/**
+ * After datatable init.
+ *
+ * @param dt
+ */
+$.fn.dataTable.init = function(dt) {
+    let id = '#'+dt.sInstance;
+    $(id).DataTable().buttons().container().appendTo(id+'_wrapper .col-md-6:eq(1)').addClass('ml-1');
+    $('.dt-buttons button').removeClass('btn-secondary').addClass('btn-default');
+    $(id+'_wrapper label').addClass('mb-0');
+    $(id+'_wrapper .col-md-6:eq(1)').addClass('d-flex align-items-center justify-content-end');
+    $(id+'_wrapper .col-md-6:eq(0),'+id+'_wrapper .col-md-6:eq(1)').addClass('mb-1');
+    registerAsset(dt.sInstance);
+}
+
+/**
+ * Show spinner instead of loading message.
+ *
+ * @param e
+ * @param instance
+ * @param processing
+ */
 $.fn.dataTable.customProcessing = function (e, instance, processing) {
     let id = instance.sTableId;
 
     if (processing) {
         if ($('#' + id + '_wrapper .dt-spinner').length === 0) {
-            $('#' + id + '_wrapper > .row:first-child > div:first-child').append('<span class="fa fa-sync fa-spin dt-spinner text-muted" />');
+            $('#' + id + '_wrapper > .row:eq(0) > div:eq(0)').append('<span class="fa fa-sync fa-spin dt-spinner text-muted" />');
         }
     } else {
         $('#' + id + '_wrapper .dt-spinner').remove();
@@ -195,7 +217,7 @@ $(document).on('click', 'input[name="dt-checkbox[]"]', function() {
  */
 $(document).on('click', '.dataTables_wrapper .show-filters', function () {
     $(this).closest('.dataTables_wrapper').find('.filters').toggle();
-    $(this).children('span').toggleClass('fa-caret-down fa-caret-up');
+    $(this).toggleClass('btn-default btn-secondary');
 });
 
 /**

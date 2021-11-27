@@ -3,6 +3,7 @@
 namespace Sebastienheyd\Boilerplate\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use ReflectionException;
 
 class DatatablesController
@@ -23,6 +24,10 @@ class DatatablesController
         }
 
         $datatable = $this->getDatatable($slug);
+
+        if (! Auth::user()->ability(['admin'], $datatable->permissions)) {
+            abort(503);
+        }
 
         return ($datatable)->make();
     }

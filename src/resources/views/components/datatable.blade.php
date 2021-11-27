@@ -3,6 +3,11 @@
         &lt;x-boilerplate::datatable>
         The name attribute has not been set
     </code>
+@elseif(! $permission)
+    <code>
+        &lt;x-boilerplate::datatable>
+        You don't have permission to access the table "{{ $name }}"
+    </code>
 @else
     <div class="table-responsive">
         <table class="table table-striped table-hover va-middle w-100" id="{{ $id }}">
@@ -21,7 +26,7 @@
                     <th>{{ $column->title }}</th>
                 @endforeach
             </tr>
-            @if($datatable->filters)
+            @if(in_array('filters', $datatable->buttons))
             <tr class="filters" style="display:none">
                 @foreach($datatable->getColumns() as $k => $column)
                     <th>
@@ -50,7 +55,7 @@
             <tbody></tbody>
         </table>
     </div>
-    @include('boilerplate::load.async.datatables')
+    @include('boilerplate::load.async.datatables', ['buttons' => true])
     @component('boilerplate::minify')
     <script>
         whenAssetIsLoaded('datatables', function() {
@@ -59,6 +64,7 @@
                 serverSide: true,
                 autoWidth: false,
                 orderCellsTop: true,
+                buttons: { buttons: [{!! $datatable->getButtons() !!}]},
                 info: {{ (int) $datatable->info }},
                 searching: {{ (int) $datatable->searching }},
                 ordering: {{ (int) $datatable->ordering }},
@@ -81,24 +87,17 @@
                     url: '{!! route('boilerplate.datatables', $datatable->slug, false) !!}',
                     type: 'post',
                     data: $.fn.dataTable.parseDatatableFilters,
-                    complete: () => {
-                        $('#{{ $id }} [name=dt-check-all]').prop('checked', false);
-                    }
+                    complete: () => { $('#{{ $id }} [name=dt-check-all]').prop('checked', false) }
                 },
                 columns: [
                     @foreach($datatable->getColumns() as $column)
                         {!! $column->get() !!},
                     @endforeach
                 ],
-                @if($datatable->filters)
-                    initComplete: () => {
-                        $('#{{ $id }}_filter').append(
-                            '<button type="button" class="btn btn-sm btn-default mb-1 ml-1 show-filters"><span class="fa fa-fw fa-caret-down"></span></button>'
-                        );
-                        registerAsset('{{ $id }}');
-                    }
-                @endif
+                initComplete: $.fn.dataTable.init
             });
+
+
         });
     </script>
     @endcomponent
