@@ -28,7 +28,7 @@ abstract class Datatable
         'pagingType'   => 'simple_numbers',
         'searching'    => true,
         'stateSave'    => false,
-        'lengthMenu'   => [[10, 25, 50, 100, -1],[10,25,50,100,'∞']],
+        'lengthMenu'   => [[10, 25, 50, 100, -1], [10, 25, 50, 100, '∞']],
         'buttons'      => ['filters'],
     ];
 
@@ -149,8 +149,7 @@ abstract class Datatable
     /**
      * Set permissions.
      *
-     * @param mixed ...$permissions
-     *
+     * @param  mixed  ...$permissions
      * @return $this
      */
     public function permissions(...$permissions)
@@ -163,8 +162,7 @@ abstract class Datatable
     /**
      * Set buttons to show.
      *
-     * @param mixed ...$buttons
-     *
+     * @param  mixed  ...$buttons
      * @return $this
      */
     public function buttons(...$buttons)
