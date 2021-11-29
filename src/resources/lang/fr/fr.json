@@ -1,0 +1,19 @@
+{
+  "Name": "Nom",
+  "Label": "Libellé",
+  "Display name": "Libellé",
+  "Title": "Titre",
+  "Description": "Description",
+  "Created at": "Créé le",
+  "Updated at": "Modifié le",
+  "Delete at": "Supprimé le",
+  "Active": "Actif",
+  "Status": "Statut",
+  "State": "État",
+  "First name": "Prénom",
+  "Firstname": "Prénom",
+  "Last name": "Nom",
+  "Lastname": "Nom",
+  "Email": "E-mail",
+  "Content": "Contenu"
+}

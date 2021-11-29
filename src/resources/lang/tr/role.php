@@ -12,7 +12,8 @@ return [
     'successmod'  => 'Rol başarıyla düzenlendi',
     'admin'       => [
         'display_name' => 'Yönetici',
-        'description'  => 'Yönetici (tüm izinler)',
+        'description'  => 'Yönetici',
+        'permissions'  => 'Tüm izinler',
     ],
     'backend_user' => [
         'display_name' => 'Yönetim Paneli Abonesi',

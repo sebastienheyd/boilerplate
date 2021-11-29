@@ -130,7 +130,7 @@ class Datatable extends BoilerplateCommand
                 $type = preg_match('#_at$#', $field) ? 'datetime' : 'default';
             }
 
-            $title = Str::of($field)->replace('_', ' ')->title();
+            $title = Str::of($field)->replace('_', ' ')->ucfirst();
 
             switch ($type) {
                 case 'date':

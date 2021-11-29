@@ -1,0 +1,19 @@
+{
+  "Name": "Име",
+  "Label": "Етикет",
+  "Display name": "Етикет",
+  "Title": "Заглавие",
+  "Description": "Описание",
+  "Created at": "Създаден в",
+  "Updated at": "Актуализиран в",
+  "Delete at": "Изтрит в",
+  "Active": "Активен",
+  "Status": "Статус",
+  "State": "Държава",
+  "First name": "Първо име",
+  "Firstname": "Първо име",
+  "Last name": "Фамилия",
+  "Lastname": "Фамилия",
+  "Email": "Имейл",
+  "Content": "Съдържание"
+}

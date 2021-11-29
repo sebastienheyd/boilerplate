@@ -21,9 +21,7 @@ class RolesController extends Controller
      */
     public function index()
     {
-        $roleModel = config('boilerplate.laratrust.role');
-
-        return view('boilerplate::roles.list', ['roles' => $roleModel::all()]);
+        return view('boilerplate::roles.list');
     }
 
     /**
@@ -130,7 +128,7 @@ class RolesController extends Controller
         $roleModel = config('boilerplate.laratrust.role');
         $role = $roleModel::find($id);
         $role->update($request->all());
-        $role->permissions()->sync(array_keys($request->input('permission')));
+        $role->permissions()->sync(array_keys($request->input('permission', [])));
 
         return redirect()->route('boilerplate.roles.edit', $role)
                          ->with('growl', [__('boilerplate::role.successmod'), 'success']);

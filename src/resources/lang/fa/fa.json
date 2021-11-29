@@ -1,0 +1,19 @@
+{
+  "Name": "نام",
+  "Label": "برچسب",
+  "Display name": "برچسب",
+  "Title": "عنوان",
+  "Description": "شرح",
+  "Created at": "ایجاد شده در",
+  "Updated at": "به روز شده در",
+  "Delete at": "حذف شد",
+  "Active": "فعال",
+  "Status": "وضعیت",
+  "State": "دولت",
+  "First name": "نام کوچک",
+  "Firstname": "نام کوچک",
+  "Last name": "نام خانوادگی",
+  "Lastname": "نام خانوادگی",
+  "Email": "پست الکترونیک",
+  "Content": "محتوا"
+}

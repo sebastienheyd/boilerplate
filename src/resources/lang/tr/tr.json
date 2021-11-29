@@ -1,0 +1,19 @@
+{
+  "Name": "İsim",
+  "Label": "Etiket",
+  "Display name": "Etiket",
+  "Title": "Başlık",
+  "Description": "Açıklama",
+  "Created at": "adresinde oluşturuldu",
+  "Updated at": "adresinde güncellendi",
+  "Delete at": "tarihinde silindi",
+  "Active": "Aktif",
+  "Status": "Durum",
+  "State": "Durum",
+  "First name": "Adı",
+  "Firstname": "Adı",
+  "Last name": "Soyadı",
+  "Lastname": "Soyadı",
+  "Email": "E-posta",
+  "Content": "İçerik"
+}

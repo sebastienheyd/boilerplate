@@ -54,13 +54,13 @@ class UsersDatatable extends Datatable
                 })
                 ->filterOptions([__('boilerplate::users.inactive'), __('boilerplate::users.active')]),
 
-            Column::add(__('boilerplate::users.list.lastname'))
+            Column::add(__('Last name'))
                 ->data('last_name'),
 
-            Column::add(__('boilerplate::users.list.firstname'))
+            Column::add(__('First name'))
                 ->data('first_name'),
 
-            Column::add(__('boilerplate::users.list.email'))
+            Column::add(__('Email'))
                 ->data('email'),
 
             Column::add(__('boilerplate::users.list.roles'))
@@ -71,13 +71,13 @@ class UsersDatatable extends Datatable
                     });
                 })
                 ->data('roles', function (User $user) {
-                    return $user->getRolesList();
+                    return $user->roles->implode('display_name', ', ') ?: '-';
                 })
                 ->filterOptions(function () {
                     return Role::all()->pluck('display_name', 'name')->toArray();
                 }),
 
-            Column::add(__('boilerplate::users.list.creationdate'))
+            Column::add(__('Created at'))
                 ->data('created_at')
                 ->name('users.created_at')
                 ->dateFormat(),

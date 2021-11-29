@@ -17,6 +17,7 @@ use Laratrust\Middleware\LaratrustPermission;
 use Laratrust\Middleware\LaratrustRole;
 use Lavary\Menu\Facade;
 use Lavary\Menu\ServiceProvider as MenuServiceProvider;
+use Sebastienheyd\Boilerplate\Datatables\RolesDatatable;
 use Sebastienheyd\Boilerplate\Datatables\UsersDatatable;
 use Sebastienheyd\Boilerplate\View\Composers\DatatablesComposer;
 use Sebastienheyd\Boilerplate\View\Composers\MenuComposer;
@@ -73,6 +74,7 @@ class BoilerplateServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__.'/migrations');
         $this->loadViewsFrom(__DIR__.'/resources/views/components', 'boilerplate');
         $this->loadViewsFrom(__DIR__.'/resources/views', 'boilerplate');
+        $this->loadJSONTranslationsFrom(__DIR__.'/resources/lang');
         $this->loadTranslationsFrom(__DIR__.'/resources/lang', 'boilerplate');
 
         // Load view composers
@@ -282,6 +284,6 @@ class BoilerplateServiceProvider extends ServiceProvider
             return new Datatables\DatatablesRepository();
         });
 
-        app('boilerplate.datatables')->registerDatatable(UsersDatatable::class);
+        app('boilerplate.datatables')->registerDatatable(UsersDatatable::class, RolesDatatable::class);
     }
 }

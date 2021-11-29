@@ -13,6 +13,7 @@ return [
     'admin'             => [
         'display_name'  => 'مدیریت',
         'description'   => 'دسترسی کامل',
+        'permissions'   => 'همه مجوزها',
     ],
     'backend_user' => [
         'display_name'  => 'کاربر',

@@ -17,9 +17,4 @@ class Role extends LaratrustRole
     {
         return __($value);
     }
-
-    public function getNbUsers()
-    {
-        return User::whereRoleIs($this->name)->count();
-    }
 }

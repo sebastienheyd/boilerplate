@@ -1,0 +1,19 @@
+{
+  "Name": "Nome",
+  "Label": "Etichetta",
+  "Display name": "Etichetta",
+  "Title": "Titolo",
+  "Description": "Descrizione",
+  "Created at": "Creato a",
+  "Updated at": "Aggiornato alle",
+  "Delete at": "Eliminato alle",
+  "Active": "Attivo",
+  "Status": "Stato",
+  "State": "Stato",
+  "First name": "Cognome",
+  "Firstname": "Cognome",
+  "Last name": "Nome",
+  "Lastname": "Nome",
+  "Email": "E-mail",
+  "Content": "Contenuto"
+}

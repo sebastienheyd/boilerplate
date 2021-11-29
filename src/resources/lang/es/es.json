@@ -1,0 +1,19 @@
+{
+  "Name": "Nombre",
+  "Label": "Etiqueta",
+  "Display name": "Etiqueta",
+  "Title": "Título",
+  "Description": "Descripción",
+  "Created at": "Creado en",
+  "Updated at": "Actualizado en",
+  "Delete at": "Eliminado en",
+  "Active": "Activo",
+  "Status": "Estado",
+  "State": "Estado",
+  "First name": "Nombre",
+  "Firstname": "Nombre",
+  "Last name": "Appelido",
+  "Lastname": "Appelido",
+  "Email": "E-mail",
+  "Content": "Contenido"
+}

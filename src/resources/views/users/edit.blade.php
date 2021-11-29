@@ -70,7 +70,6 @@
                             @component('boilerplate::input', ['name' => 'last_name', 'label' => 'boilerplate::users.lastname', 'value' => $user->last_name])@endcomponent
                         </div>
                     </div>
-
                 @endcomponent
             </div>
             <div class="col-md-6">
@@ -91,9 +90,9 @@
                                     </div>
                                 </td>
                                 <td>
-                                    {{ Form::label('role_'.$role->id, $role->display_name, ['class' => 'mbn']) }}<br />
-                                    <span class="small">{{ $role->description }}</span><br />
-                                    <span class="small text-muted">{{ $role->permissions->implode('display_name', ', ') }}</span>
+                                    <div>{{ Form::label('role_'.$role->id, $role->display_name, ['class' => 'mb-0']) }}</div>
+                                    <div class="small">{{ $role->description }}</div>
+                                    <div class="small text-muted pt-1">{!! $role->permissions->implode('display_name', '<br>') !!}</div>
                                 </td>
                             </tr>
                             @endif

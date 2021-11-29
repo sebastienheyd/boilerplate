@@ -14,19 +14,28 @@
                 <a href="{{ route("boilerplate.roles.index") }}" class="btn btn-default" title="@lang('boilerplate::role.list.title')">
                     <span class="far fa-arrow-alt-circle-left text-muted"></span>
                 </a>
+                @if($role->name !== 'admin')
                 <span class="btn-group float-right">
                     <button type="submit" class="btn btn-primary">
                         @lang('boilerplate::role.savebutton')
                     </button>
                 </span>
+                @endif
             </div>
         </div>
         <div class="row">
             <div class="col-md-5">
                 @component('boilerplate::card', ['title' => __('boilerplate::role.parameters')])
                     {!! $errors->first('name','<p class="text-danger"><strong>:message</strong></p>') !!}
-                    @component('boilerplate::input', ['name' => 'display_name', 'label' => 'boilerplate::role.label', 'value' => $role->display_name])@endcomponent
-                    @component('boilerplate::input', ['name' => 'description', 'label' => 'boilerplate::role.description', 'value' => $role->description])@endcomponent
+                    @if($role->name === 'admin' || $role->name === 'backend_user')
+                        <p><strong>@lang('boilerplate::role.label')</strong><br>{{ $role->display_name }}</p>
+                        <p><strong>@lang('boilerplate::role.description')</strong><br>{{ $role->description }}</p>
+                        @component('boilerplate::input', ['type' => 'hidden', 'name' => 'display_name', 'value' => $role->getAttributes()['display_name']])@endcomponent
+                        @component('boilerplate::input', ['type' => 'hidden', 'name' => 'description', 'value' => $role->getAttributes()['description'] ])@endcomponent
+                    @else
+                        @component('boilerplate::input', ['name' => 'display_name', 'label' => 'boilerplate::role.label', 'value' => $role->display_name])@endcomponent
+                        @component('boilerplate::input', ['name' => 'description', 'label' => 'boilerplate::role.description', 'value' => $role->description])@endcomponent
+                    @endif
                 @endcomponent
             </div>
             @if(count($permissions_categories) > 0)

@@ -12,7 +12,8 @@ return [
     'successmod'        => 'The role has been correctly modified',
     'admin'             => [
         'display_name'  => 'Admin',
-        'description'   => 'Admin (all permissions)',
+        'description'   => 'Total access',
+        'permissions'   => 'All permissions',
     ],
     'backend_user' => [
         'display_name'  => 'Backend user',

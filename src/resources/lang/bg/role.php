@@ -12,7 +12,8 @@ return [
     'successmod'        => 'Ролята беше редактирана успешно',
     'admin'             => [
         'display_name'  => 'Администратор',
-        'description'   => 'Администратор (всички права за достъп)',
+        'description'   => 'Администратор',
+        'permissions'   => 'Всички права за достъп',
     ],
     'backend_user' => [
         'display_name'  => 'Медия',
