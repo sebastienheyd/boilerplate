@@ -11,6 +11,7 @@ class RolesDatatable extends Datatable
     public function datasource()
     {
         $roleModel = config('boilerplate.laratrust.role');
+
         return $roleModel::with(['permissions', 'users'])->select([
             'roles.id',
             'roles.name',

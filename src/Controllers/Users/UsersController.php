@@ -4,7 +4,6 @@ namespace Sebastienheyd\Boilerplate\Controllers\Users;
 
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
-use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -16,7 +15,6 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Intervention\Image\Facades\Image;
 use Sebastienheyd\Boilerplate\Rules\Password;
-use Yajra\DataTables\Facades\DataTables;
 
 class UsersController extends Controller
 {
