@@ -1,6 +1,6 @@
 <?php
 
 return [
-    "deleteConfirm" => "Bu öğe silinsin mi?",
-    "deleteSuccess" => "Öğe başarıyla silindi",
+    'deleteConfirm' => 'Bu öğe silinsin mi?',
+    'deleteSuccess' => 'Öğe başarıyla silindi',
 ];

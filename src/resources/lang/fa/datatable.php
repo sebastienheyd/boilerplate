@@ -1,6 +1,6 @@
 <?php
 
 return [
-    "deleteConfirm" => "این مورد حذف شود؟",
-    "deleteSuccess" => "مورد با موفقیت حذف شد",
+    'deleteConfirm' => 'این مورد حذف شود؟',
+    'deleteSuccess' => 'مورد با موفقیت حذف شد',
 ];

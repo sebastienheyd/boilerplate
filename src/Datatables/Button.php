@@ -35,9 +35,8 @@ class Button
     /**
      * Returns an edit button.
      *
-     * @param string $route
-     * @param mixed  $args
-     *
+     * @param  string  $route
+     * @param  mixed  $args
      * @return string
      */
     public static function show(string $route, $args = []): string
@@ -48,9 +47,8 @@ class Button
     /**
      * Returns an edit button.
      *
-     * @param string $route
-     * @param mixed  $args
-     *
+     * @param  string  $route
+     * @param  mixed  $args
      * @return string
      */
     public static function edit(string $route, $args = []): string
@@ -61,9 +59,8 @@ class Button
     /**
      * Returns a delete button.
      *
-     * @param string $route
-     * @param mixed  $args
-     *
+     * @param  string  $route
+     * @param  mixed  $args
      * @return string
      */
     public static function delete(string $route, $args = []): string
@@ -79,8 +76,7 @@ class Button
     /**
      * Assign attributes to the button.
      *
-     * @param array $attributes
-     *
+     * @param  array  $attributes
      * @return $this
      */
     public function attributes(array $attributes): self
@@ -182,6 +178,7 @@ class Button
             if (is_bool($this->attributes[$k]) && $this->attributes[$k] === true) {
                 return $this->attributes[$k] ? $k : '';
             }
+
             return sprintf('%s="%s"', $k, $this->attributes[$k]);
         }, array_keys($this->attributes)));
 
