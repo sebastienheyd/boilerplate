@@ -28,7 +28,11 @@ class UsersDatatable extends Datatable
 
     public function setUp()
     {
-        $this->permissions('users_crud')->order('created_at', 'desc')->stateSave();
+        $this->permissions('users_crud')
+            ->locale([
+                'deleteConfirm' => __('boilerplate::users.list.confirmdelete'),
+                'deleteSuccess' => __('boilerplate::users.list.deletesuccess'),
+            ])->order('created_at', 'desc')->stateSave();
     }
 
     public function columns(): array
@@ -91,19 +95,10 @@ class UsersDatatable extends Datatable
                 ->actions(function (User $user) {
                     $currentUser = Auth::user();
 
-                    $buttons = Button::add()
-                        ->route('boilerplate.users.edit', $user->id)
-                        ->icon('pencil-alt')
-                        ->color('primary')
-                        ->make();
+                    $buttons = Button::edit('boilerplate.users.edit', $user->id);
 
                     if (($currentUser->hasRole('admin') || ! $user->hasRole('admin')) && $user->id !== $currentUser->id) {
-                        $buttons .= Button::add()
-                            ->route('boilerplate.users.destroy', $user->id)
-                            ->icon('trash')
-                            ->color('danger')
-                            ->class('destroy')
-                            ->make();
+                        $buttons .= Button::delete('boilerplate.users.destroy', $user->id);
                     }
 
                     return $buttons;

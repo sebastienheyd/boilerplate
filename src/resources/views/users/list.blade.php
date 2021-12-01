@@ -21,37 +21,6 @@
     @endcomponent
 @endsection
 
-@include('boilerplate::load.datatables')
-@include('boilerplate::load.select2')
-
-@push('js')
-@component('boilerplate::minify')
-    <script>
-        $(document).on('click', '#dt_users .destroy', function (e) {
-            e.preventDefault();
-
-            var href = $(this).attr('href');
-
-            bootbox.confirm("@lang('boilerplate::users.list.confirmdelete')", function (result) {
-                if (result === false) return;
-
-                $.ajax({
-                    url: href,
-                    method: 'delete',
-                    success: function (res) {
-                        if(res.success) {
-                            dtUsers.ajax.reload(null, false);
-                            growl("@lang('boilerplate::users.list.deletesuccess')", "success");
-                        } else {
-                            growl("@lang('boilerplate::users.list.deleteerror')", "error");
-                        }
-                    }
-                });
-            });
-        });
-    </script>
-@endcomponent
-@endpush
 @push('css')
     <style>.img-circle { border:1px solid #CCC }</style>
 @endpush

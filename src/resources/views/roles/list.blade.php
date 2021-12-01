@@ -16,30 +16,3 @@
         <x-boilerplate::datatable name="roles" />
     @endcomponent
 @endsection
-
-@push('js')
-@component('boilerplate::minify')
-    <script>
-        $(function () {
-            $(document).on('click', '.destroy', function (e) {
-                e.preventDefault();
-
-                var href = $(this).attr('href');
-
-                bootbox.confirm("{{ __('boilerplate::role.list.confirmdelete') }}", function (result) {
-                    if (result === false) return;
-
-                    $.ajax({
-                        url: href,
-                        method: 'delete',
-                        success: function(){
-                            dtRoles.ajax.reload();
-                            growl("{{ __('boilerplate::role.list.deletesuccess') }}", 'success');
-                        }
-                    });
-                });
-            });
-        });
-    </script>
-@endcomponent
-@endpush

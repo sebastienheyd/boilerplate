@@ -230,7 +230,7 @@ $(document).on('click', '.dataTables_wrapper [data-action="dt-delete-element"]',
             url: url,
             type: 'delete',
             success: function () {
-                inst.ajax.reload();
+                inst.ajax.reload(null, false);
                 growl(inst.locale.deleteSuccess, "success");
             }
         });

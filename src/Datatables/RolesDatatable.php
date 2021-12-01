@@ -23,6 +23,10 @@ class RolesDatatable extends Datatable
     public function setUp()
     {
         $this->permissions('users_crud')
+            ->locale([
+                'deleteConfirm' => __('boilerplate::role.list.confirmdelete'),
+                'deleteSuccess' => __('boilerplate::role.list.deletesuccess'),
+            ])
             ->buttons([])
             ->noSearching()
             ->noOrdering()
@@ -59,23 +63,14 @@ class RolesDatatable extends Datatable
             Column::add()
                 ->width('20px')
                 ->actions(function (Role $role) {
-                    $buttons = Button::add()
-                        ->route('boilerplate.roles.edit', $role)
-                        ->icon('pencil-alt')
-                        ->color('primary')
-                        ->make();
+                    $buttons = Button::edit('boilerplate.roles.edit', $role);
 
                     if ($role->name !== 'admin' &&
                         ! (config('boilerplate.auth.register') &&
                         $role->name === config('boilerplate.auth.register_role')) &&
                         $role->users->count() === 0
                     ) {
-                        $buttons .= Button::add()
-                            ->route('boilerplate.roles.destroy', $role)
-                            ->icon('trash')
-                            ->color('danger')
-                            ->class('destroy')
-                            ->make();
+                        $buttons .= Button::delete('boilerplate.roles.destroy', $role);
                     }
 
                     return $buttons;

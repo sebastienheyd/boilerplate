@@ -50,7 +50,7 @@
                                 <td>
                                     {{ Form::label('role_'.$role->id, $role->display_name, ['class' => 'mb-0 pb-0']) }}<br />
                                     <span class="small">{{ $role->description }}</span><br />
-                                    <span class="small text-muted">{{ $role->permissions->implode('display_name', ', ') }}</span>
+                                    <span class="small text-muted">{!! $role->permissions->implode('display_name', '<br>') !!}</span>
                                 </td>
                             </tr>
                         @endforeach

@@ -61,8 +61,11 @@
                                             </div>
                                         </td>
                                         <td>
-                                            {{ Form::label('permission_'.$permission->id, $permission->display_name, ['class' => 'mb-0', 'data-toggle' => 'tooltip', 'data-title' => $permission->name]) }}<br />
+                                            {{ Form::label('permission_'.$permission->id, $permission->display_name, ['class' => 'mb-0']) }}<br />
                                             <small class="text-muted">{{ $permission->description }}</small>
+                                        </td>
+                                        <td class="text-right visible-on-hover">
+                                            <span class="badge badge-secondary badge-pill">{{ $permission->name }}</span>
                                         </td>
                                     </tr>
                                 @endforeach
