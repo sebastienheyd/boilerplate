@@ -213,6 +213,31 @@ $(document).on('click', 'input[name="dt-checkbox[]"]', function() {
 })
 
 /**
+ * Generic delete button
+ */
+$(document).on('click', '.dataTables_wrapper [data-action="dt-delete-element"]', function(e) {
+    e.preventDefault();
+
+    let url = $(this).attr('href');
+    let inst = window[$(this).closest('.dataTables_wrapper').find('table').data('inst')];
+
+    bootbox.confirm(inst.locale.deleteConfirm, function(res) {
+        if(res === false) {
+            return
+        }
+
+        $.ajax({
+            url: url,
+            type: 'delete',
+            success: function () {
+                inst.ajax.reload();
+                growl(inst.locale.deleteSuccess, "success");
+            }
+        });
+    })
+})
+
+/**
  * Show filters button
  */
 $(document).on('click', '.dataTables_wrapper .show-filters', function () {

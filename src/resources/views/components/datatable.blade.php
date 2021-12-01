@@ -59,7 +59,9 @@
     @component('boilerplate::minify')
     <script>
         whenAssetIsLoaded('datatables', function() {
-            window.{{ \Str::camel($id) }} = $('#{{ $id }}').on('processing.dt', $.fn.dataTable.customProcessing).DataTable({
+            window.{{ \Str::camel($id) }} = $('#{{ $id }}')
+                .data('inst', '{{ \Str::camel($id) }}' )
+                .on('processing.dt', $.fn.dataTable.customProcessing).DataTable({
                 processing: false,
                 serverSide: true,
                 autoWidth: false,
@@ -94,10 +96,10 @@
                         {!! $column->get() !!},
                     @endforeach
                 ],
-                initComplete: $.fn.dataTable.init
+                initComplete: $.fn.dataTable.init,
             });
 
-
+            window.{{ \Str::camel($id) }}.locale = {!! $datatable->getLocale() !!}
         });
     </script>
     @endcomponent

@@ -16,6 +16,7 @@ abstract class Datatable
     protected $rowClass;
     protected $rowData;
     protected $rowId;
+    protected $locale = [];
     protected $permissions = ['backend_access'];
     protected $attributes = [
         'filters'      => true,
@@ -103,6 +104,18 @@ abstract class Datatable
         }
 
         return $columns;
+    }
+
+    public function locale(array $locale)
+    {
+        $this->locale = $locale;
+
+        return $this;
+    }
+
+    public function getLocale()
+    {
+        return collect(__('boilerplate::datatable'))->merge($this->locale)->toJson();
     }
 
     /**

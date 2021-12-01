@@ -37,18 +37,17 @@ class {{ $className }}Datatable extends Datatable
                 ->width('20px')
 @if($model)
                 ->actions(function ({{ $shortName }} ${{ strtolower($shortName) }}) {
-                    return Button::add()
-                        //->route('{{ strtolower($shortName) }}.edit', ${{ strtolower($shortName) }}->id)
-                        ->icon('pencil-alt')
-                        ->color('primary')
-                        ->make();
+                    return join([
+                        // Button::show('{{ strtolower($shortName) }}.show', ${{ strtolower($shortName) }}),
+                        // Button::edit('{{ strtolower($shortName) }}.edit', ${{ strtolower($shortName) }}),
+                        // Button::delete('{{ strtolower($shortName) }}.destroy', ${{ strtolower($shortName) }}),
+                    ]);
                 }),
 @else
                 ->actions(function () {
-                    return Button::add()
-                        ->icon('pencil-alt')
-                        ->color('primary')
-                        ->make();
+                    return join([
+                        Button::add()->icon('pencil-alt')->color('primary')->make(),
+                    ]);
                 }),
 @endif
         ];
