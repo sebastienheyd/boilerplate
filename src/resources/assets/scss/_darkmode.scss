@@ -8,6 +8,23 @@ $border: #6c757d;
 }
 
 body.dark-mode {
+
+  .nav-tabs {
+    .nav-item {
+      .nav-link {
+        color: #888;
+
+        &.active {
+          color: #FFF;
+        }
+
+        &:hover {
+          color: #CCC;
+        }
+      }
+    }
+  }
+
   pre {
     background: #222;
     color: #CCC;

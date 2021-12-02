@@ -286,6 +286,22 @@ aside.control-sidebar {
   margin: 0;
 }
 
+.nav-tabs {
+  .nav-item {
+    .nav-link {
+      color: #666;
+
+      &.active {
+        color: #000;
+      }
+
+      &:hover {
+        color: #333;
+      }
+    }
+  }
+}
+
 .dark-mode {
   .daterangepicker-input {
     color: #FFF;
