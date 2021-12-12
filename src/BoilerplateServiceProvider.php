@@ -97,7 +97,7 @@ class BoilerplateServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/public' => public_path('assets/vendor/boilerplate'),
-        ], ['boilerplate', 'boilerplate-public']);
+        ], ['boilerplate', 'boilerplate-public', 'laravel-assets']);
 
         $this->publishes([
             __DIR__.'/resources/views' => resource_path('views/vendor/boilerplate'),

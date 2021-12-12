@@ -77,7 +77,7 @@ php artisan serve
 
 Now you can point your browser to [http://localhost:8000/admin](http://localhost:8000/admin)
 
-## Package update
+## Package update (Laravel < 8.6.9)
 
 Boilerplate comes with assets such as Javascript, CSS, and images. Since you typically will need to overwrite the assets
 every time the package is updated, you may use the ```--force``` flag :
