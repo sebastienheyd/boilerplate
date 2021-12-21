@@ -3,7 +3,7 @@
 @else
 <div class="form-group{{ isset($groupClass) ? ' '.$groupClass : '' }}"{!! isset($groupId) ? ' id="'.$groupId.'"' : '' !!}>
 @isset($label)
-    {!! Form::label($name.'_localized', __($label)) !!}
+    <label>{!! __($label) !!}</label>
 @endisset
     <div class="input-group" id="{{ $id }}" data-target-input="nearest">
 @if($prepend || $prependText)

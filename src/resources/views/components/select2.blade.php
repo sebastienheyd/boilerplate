@@ -3,7 +3,7 @@
 @else
 <div class="form-group{{ isset($groupClass) ? ' '.$groupClass : '' }}"{!! isset($groupId) ? ' id="'.$groupId.'"' : '' !!}>
 @isset($label)
-    {{ Form::label($name, __($label)) }}
+    <label for="{{ $id }}">{!! __($label) !!}</label>
 @endisset
     <select id="{{ $id }}" name="{{ $name }}" class="form-control{{ $errors->first($name,' is-invalid') }}{{ isset($class) ? ' '.$class : '' }}"{!! !empty($attributes) ? ' '.$attributes : '' !!} style="visibility:hidden;height:1rem" autocomplete="off">
 @if(!isset($multiple))

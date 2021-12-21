@@ -3,7 +3,7 @@
 @else
 <div class="form-group{{ isset($groupClass) ? ' '.$groupClass : '' }}"{!! isset($groupId) ? ' id="'.$groupId.'"' : '' !!}>
 @isset($label)
-    {!! Form::label($name, __($label)) !!}
+    <label for="{{ $id }}">{!! __($label) !!}</label>
 @endisset
     <textarea id="{{ $id }}" name="{{ $name }}"{!! !empty($attributes) ? ' '.$attributes : '' !!} style="visibility:hidden">{!! old($name, $value ?? $slot ?? '') !!}</textarea>
 @if($help ?? false)
