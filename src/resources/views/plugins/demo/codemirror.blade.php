@@ -1,6 +1,6 @@
 @component('boilerplate::card', ['color' => 'warning', 'title' => 'CodeMirror'])
         Usage :
-        <pre>&lt;x-boilerplate::codemirror name="code">&lt;php echo "My code"; ?>&lt;/x-boilerplate::codemirror></pre>
+        <pre>&lt;x-boilerplate::codemirror name="code">.color { color: red; }&lt;/x-boilerplate::codemirror></pre>
 <x-boilerplate::codemirror name="code"><h1>CodeMirror demo</h1>
 <style>
     .color {

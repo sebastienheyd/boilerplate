@@ -3,7 +3,7 @@
 @else
 <div class="form-group{{ isset($groupClass) ? ' '.$groupClass : '' }}"{!! isset($groupId) ? ' id="'.$groupId.'"' : '' !!}>
 @isset($label)
-    {!! Form::label($name, __($label)) !!}
+    <label for="{{ $id }}">{!! __($label) !!}</label>
 @endisset
     <textarea id="{{ $id }}" name="{{ $name }}" style="visibility:hidden" rows="0">{!! old($name, $value ?? $slot ?? '') !!}</textarea>
 @if($help ?? false)
@@ -13,7 +13,7 @@
     <div class="error-bubble"><div>{{ $message }}</div></div>
 @enderror
 </div>
-@include('boilerplate::load.async.codemirror', ['theme' => $theme])
+@include('boilerplate::load.async.codemirror', ['js' => $js ?? []])
 @component('boilerplate::minify')
 <script>
     whenAssetIsLoaded('CodeMirror', () => {
