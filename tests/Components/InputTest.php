@@ -43,8 +43,8 @@ HTML;
     {
         $expected = <<<'HTML'
 <div class="form-group">
-    <label for="test">Test</label>
-    <input class="form-control" autocomplete="off" name="test" type="text" value="" id="test">
+    <label>Test</label>
+    <input class="form-control" autocomplete="off" name="test" type="text" value="">
 </div>
 HTML;
 

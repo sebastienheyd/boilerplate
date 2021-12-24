@@ -43,7 +43,7 @@ HTML;
     {
         $expected = <<<'HTML'
 <div class="form-group">
-    <label for="test_localized">Test</label>
+    <label>Test</label>
     <div class="input-group" id="test" data-target-input="nearest">
         <input data-toggle="datetimepicker" data-target="#test" class="form-control datetimepicker-input" autocomplete="off" name="test_local" type="text">
     </div>
