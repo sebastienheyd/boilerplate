@@ -4,6 +4,7 @@
         @include('boilerplate::plugins.demo.datetimepicker')
         @include('boilerplate::plugins.demo.icheck')
         @include('boilerplate::plugins.demo.daterangepicker')
+        @include('boilerplate::plugins.demo.colorpicker')
         @include('boilerplate::plugins.demo.codemirror')
         @include('boilerplate::plugins.demo.fileinput')
         @include('boilerplate::plugins.demo.tabs')
