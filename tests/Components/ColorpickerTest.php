@@ -56,7 +56,6 @@ HTML;
         $this->assertEquals($expected, $view);
     }
 
-
     public function testColorPickerClasses()
     {
         $expected = <<<'HTML'
