@@ -115,6 +115,8 @@ class Datatable extends BoilerplateCommand
             $model->timestamps ? ['created_at', 'updated_at'] : []
         );
 
+        $fields = array_unique($fields);
+
         $columns = [];
         $connection = $model->getConnection();
 
