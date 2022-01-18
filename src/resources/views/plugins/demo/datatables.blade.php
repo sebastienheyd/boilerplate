@@ -17,15 +17,8 @@
 @endpush
 
 @component('boilerplate::card', ['color' => 'orange', 'title' => 'Datatables'])
-        Usage :
-        <pre class="mb-3">
-&commat;include('boilerplate::load.datatables')
-&commat;push('js')
-    &lt;script>
-        $('#dt').dataTable();
-    &lt;/script>
-&commat;endpush</pre>
-
+    Usage :
+    <pre class="mb-3">&lt;x-boilerplate::datatable name="users" /></pre>
     <table class="table table-sm table-striped table-hover" id="dt">
         <thead>
         <tr>
@@ -60,6 +53,7 @@
 
     @slot('footer')
         <div class="small text-muted text-right">
+            <a href="https://sebastienheyd.github.io/boilerplate/components/datatable" target="_blank">component</a> /
             <a href="https://sebastienheyd.github.io/boilerplate/plugins/datatables" target="_blank">plugin</a> /
             <a href="https://datatables.net/manual/index">datatables</a>
         </div>

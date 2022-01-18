@@ -18,6 +18,7 @@
         </div>
     @slot('footer')
         <div class="text-right small text-muted">
+            <a href="https://sebastienheyd.github.io/boilerplate/components/daterangepicker" target="_blank">component</a> /
             <a href="https://www.daterangepicker.com" target="_blank">Date Range Picker</a>
         </div>
     @endslot
