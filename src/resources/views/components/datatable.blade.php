@@ -13,17 +13,8 @@
         <table class="table table-striped table-hover va-middle w-100" id="{{ $id }}">
             <thead>
             <tr>
-                @if($datatable->checkboxes)
-                    <th>
-                        @php($cbid = uniqid('checkbox_'))
-                        <div class="icheck-primary mb-0 mt-0">
-                            <input type="checkbox" name="dt-check-all" id="{{ $cbid }}" autocomplete="off">
-                            <label for="{{ $cbid }}"></label>
-                        </div>
-                    </th>
-                @endif
-                @foreach($datatable->columns() as $column)
-                    <th>{{ $column->title }}</th>
+                @foreach($datatable->getColumns() as $column)
+                    <th>{!! $column->title !!}</th>
                 @endforeach
             </tr>
             @if(in_array('filters', $datatable->buttons))

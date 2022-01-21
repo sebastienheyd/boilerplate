@@ -18,6 +18,7 @@ abstract class Datatable
     protected $rowId;
     protected $locale = [];
     protected $permissions = ['backend_access'];
+    protected $orderAttr = [];
     protected $attributes = [
         'filters'      => true,
         'info'         => true,
@@ -90,7 +91,12 @@ abstract class Datatable
         $columns = $this->columns();
 
         if ($this->checkboxes) {
-            array_unshift($columns, Column::add()
+            $cbid = uniqid('checkbox_');
+            array_unshift($columns, Column::add(
+                '<div class="icheck-primary mb-0 mt-0">
+                    <input type="checkbox" name="dt-check-all" id="'.$cbid.'" autocomplete="off">
+                    <label for="'.$cbid.'"></label>
+                </div>')
                 ->notSearchable()
                 ->notOrderable()
                 ->data('checkbox', function () {
@@ -131,9 +137,7 @@ abstract class Datatable
             $column = [$column => $order];
         }
 
-        foreach ($column as $c => $o) {
-            $this->attributes['order'][] = [$this->getColumnIndex($c), $o];
-        }
+        $this->orderAttr = $column;
 
         return $this;
     }
@@ -420,6 +424,12 @@ abstract class Datatable
         }
 
         if (in_array($name, ['order', 'lengthMenu'])) {
+            if ($name === 'order') {
+                foreach ($this->orderAttr as $c => $o) {
+                    $this->attributes['order'][] = [$this->getColumnIndex($c), $o];
+                }
+            }
+
             return json_encode($this->attributes[$name]);
         }
 
