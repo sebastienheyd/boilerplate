@@ -2,7 +2,9 @@
 
 namespace Sebastienheyd\Boilerplate\Datatables;
 
-use Sebastienheyd\Boilerplate\Models\Role;
+use Sebastienheyd\Boilerplate\Datatables\Datatable;
+use Sebastienheyd\Boilerplate\Datatables\Column;
+use Sebastienheyd\Boilerplate\Datatables\Button;
 
 class RolesDatatable extends Datatable
 {
@@ -38,7 +40,7 @@ class RolesDatatable extends Datatable
         return [
             Column::add(__('Name'))
                 ->class('text-nowrap')
-                ->data('display_name', function (Role $role) {
+                ->data('display_name', function ($role) {
                     return '<strong>'.$role->display_name.'</strong><br><small class="text-muted">'.$role->name.'</small>';
                 }),
 
@@ -47,7 +49,7 @@ class RolesDatatable extends Datatable
                 ->data('description'),
 
             Column::add(__('boilerplate::role.permissions'))
-                ->data('permissions', function (Role $role) {
+                ->data('permissions', function ($role) {
                     if ($role->name === 'admin') {
                         return __('boilerplate::role.admin.permissions');
                     }
@@ -56,13 +58,13 @@ class RolesDatatable extends Datatable
                 }),
 
             Column::add(__('boilerplate::role.list.nbusers'))
-                ->data('users', function (Role $role) {
+                ->data('users', function ($role) {
                     return $role->users->count();
                 }),
 
             Column::add()
                 ->width('20px')
-                ->actions(function (Role $role) {
+                ->actions(function ($role) {
                     $buttons = Button::edit('boilerplate.roles.edit', $role);
 
                     if ($role->name !== 'admin' &&

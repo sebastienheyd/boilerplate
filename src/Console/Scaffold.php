@@ -70,6 +70,7 @@ class Scaffold extends BoilerplateCommand
         $this->publishModels();
         $this->publishEvents();
         $this->publishNotifications();
+        $this->publishDatatables();
         $this->call('vendor:publish', ['--tag' => ['boilerplate', 'boilerplate-views', 'boilerplate-lang']]);
 
         try {
@@ -227,6 +228,25 @@ class Scaffold extends BoilerplateCommand
             $this->replaceInFile([
                 'Sebastienheyd\Boilerplate\Notifications' => 'App\Notifications\Boilerplate',
             ], $file->getRealPath());
+        }
+    }
+
+    private function publishDatatables()
+    {
+        $files = collect($this->fileSystem->allFiles(__DIR__.'/../Datatables'))->filter(function ($file) {
+            return preg_match('#^.+Datatable.php$#', $file->getFilename());
+        })->toArray();
+
+        if (! $this->fileSystem->isDirectory(app_path('Datatables'))) {
+            $this->fileSystem->makeDirectory(app_path('Datatables'));
+        }
+
+        foreach ($files as $file) {
+            $this->copy($file->getPathname(), app_path('Datatables/'.$file->getFilename()));
+
+            $this->replaceInFile([
+                'namespace Sebastienheyd\Boilerplate\Datatables' => 'namespace App\Datatables',
+            ], app_path('Datatables/'.$file->getFilename()));
         }
     }
 

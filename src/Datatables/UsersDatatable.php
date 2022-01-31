@@ -4,8 +4,9 @@ namespace Sebastienheyd\Boilerplate\Datatables;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
-use Sebastienheyd\Boilerplate\Models\Role;
-use Sebastienheyd\Boilerplate\Models\User;
+use Sebastienheyd\Boilerplate\Datatables\Datatable;
+use Sebastienheyd\Boilerplate\Datatables\Column;
+use Sebastienheyd\Boilerplate\Datatables\Button;
 
 class UsersDatatable extends Datatable
 {
@@ -42,13 +43,13 @@ class UsersDatatable extends Datatable
                 ->width('40px')
                 ->notSearchable()
                 ->notOrderable()
-                ->data('avatar', function (User $user) {
+                ->data('avatar', function ($user) {
                     return '<img src="'.$user->avatar_url.'" class="img-circle" width="32" height="32" />';
                 }),
 
             Column::add(__('boilerplate::users.list.state'))
                 ->width('100px')
-                ->data('active', function (User $user) {
+                ->data('active', function ($user) {
                     $badge = '<span class="badge badge-pill badge-%s">%s</span>';
                     if ($user->active == 1) {
                         return sprintf($badge, 'success', __('boilerplate::users.active'));
@@ -74,11 +75,13 @@ class UsersDatatable extends Datatable
                         $query->where('name', '=', $q);
                     });
                 })
-                ->data('roles', function (User $user) {
+                ->data('roles', function ($user) {
                     return $user->roles->implode('display_name', ', ') ?: '-';
                 })
                 ->filterOptions(function () {
-                    return Role::all()->pluck('display_name', 'name')->toArray();
+                    $roleModel = config('boilerplate.laratrust.role');
+
+                    return $roleModel::all()->pluck('display_name', 'name')->toArray();
                 }),
 
             Column::add(__('Created at'))
@@ -92,7 +95,7 @@ class UsersDatatable extends Datatable
 
             Column::add()
                 ->width('70px')
-                ->actions(function (User $user) {
+                ->actions(function ($user) {
                     $currentUser = Auth::user();
 
                     $buttons = Button::edit('boilerplate.users.edit', $user->id);

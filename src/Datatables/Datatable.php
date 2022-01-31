@@ -96,17 +96,18 @@ abstract class Datatable
                 '<div class="icheck-primary mb-0 mt-0">
                     <input type="checkbox" name="dt-check-all" id="'.$cbid.'" autocomplete="off">
                     <label for="'.$cbid.'"></label>
-                </div>')
-                ->notSearchable()
-                ->notOrderable()
-                ->data('checkbox', function () {
-                    $id = uniqid('checkbox_');
+                </div>'
+            )
+            ->notSearchable()
+            ->notOrderable()
+            ->data('checkbox', function () {
+                $id = uniqid('checkbox_');
 
-                    return '<div class="icheck-primary mb-0">
-                                <input type="checkbox" name="dt-checkbox[]" id="'.$id.'" autocomplete="off">
-                                <label for="'.$id.'"></label>
-                            </div>';
-                }));
+                return '<div class="icheck-primary mb-0">
+                            <input type="checkbox" name="dt-checkbox[]" id="'.$id.'" autocomplete="off">
+                            <label for="'.$id.'"></label>
+                        </div>';
+            }));
         }
 
         return $columns;
