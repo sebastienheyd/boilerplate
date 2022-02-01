@@ -2,9 +2,9 @@
 
 namespace Sebastienheyd\Boilerplate\Datatables\Admin;
 
-use Sebastienheyd\Boilerplate\Datatables\Datatable;
-use Sebastienheyd\Boilerplate\Datatables\Column;
 use Sebastienheyd\Boilerplate\Datatables\Button;
+use Sebastienheyd\Boilerplate\Datatables\Column;
+use Sebastienheyd\Boilerplate\Datatables\Datatable;
 
 class RolesDatatable extends Datatable
 {

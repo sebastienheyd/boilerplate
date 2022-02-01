@@ -4,9 +4,9 @@ namespace Sebastienheyd\Boilerplate\Datatables\Admin;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
-use Sebastienheyd\Boilerplate\Datatables\Datatable;
-use Sebastienheyd\Boilerplate\Datatables\Column;
 use Sebastienheyd\Boilerplate\Datatables\Button;
+use Sebastienheyd\Boilerplate\Datatables\Column;
+use Sebastienheyd\Boilerplate\Datatables\Datatable;
 
 class UsersDatatable extends Datatable
 {
