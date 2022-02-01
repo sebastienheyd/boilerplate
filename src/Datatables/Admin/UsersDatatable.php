@@ -1,6 +1,6 @@
 <?php
 
-namespace Sebastienheyd\Boilerplate\Datatables;
+namespace Sebastienheyd\Boilerplate\Datatables\Admin;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;

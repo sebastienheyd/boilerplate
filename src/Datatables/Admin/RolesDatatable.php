@@ -1,6 +1,6 @@
 <?php
 
-namespace Sebastienheyd\Boilerplate\Datatables;
+namespace Sebastienheyd\Boilerplate\Datatables\Admin;
 
 use Sebastienheyd\Boilerplate\Datatables\Datatable;
 use Sebastienheyd\Boilerplate\Datatables\Column;

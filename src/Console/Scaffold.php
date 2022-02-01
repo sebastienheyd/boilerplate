@@ -233,19 +233,14 @@ class Scaffold extends BoilerplateCommand
 
     private function publishDatatables()
     {
-        $files = collect($this->fileSystem->allFiles(__DIR__.'/../Datatables'))->filter(function ($file) {
-            return preg_match('#^.+Datatable.php$#', $file->getFilename());
-        })->toArray();
+        $to = app_path('Datatables');
+        $this->copy(__DIR__.'/../Datatables/Admin', $to);
 
-        if (! $this->fileSystem->isDirectory(app_path('Datatables'))) {
-            $this->fileSystem->makeDirectory(app_path('Datatables'));
-        }
+        $files = $this->fileSystem->allFiles($to);
 
         foreach ($files as $file) {
-            $this->copy($file->getPathname(), app_path('Datatables/'.$file->getFilename()));
-
             $this->replaceInFile([
-                'namespace Sebastienheyd\Boilerplate\Datatables' => 'namespace App\Datatables',
+                'Sebastienheyd\Boilerplate\Datatables\Admin' => 'App\Datatables',
             ], app_path('Datatables/'.$file->getFilename()));
         }
     }
