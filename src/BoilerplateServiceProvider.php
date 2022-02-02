@@ -216,6 +216,11 @@ class BoilerplateServiceProvider extends ServiceProvider
             $this->router->aliasMiddleware('boilerplateguest', Middleware\BoilerplateGuestL6::class);
         }
 
+        $this->router->aliasMiddleware('boilerplate.locale', Middleware\BoilerplateLocale::class);
+        $this->router->aliasMiddleware('boilerplate.auth', Middleware\BoilerplateAuthenticate::class);
+        $this->router->aliasMiddleware('boilerplate.guest', Middleware\BoilerplateGuest::class);
+        $this->router->aliasMiddleware('boilerplate.emailverified', Middleware\BoilerplateEmailVerified::class);
+
         // Loading packages
         $this->registerLaratrust();
         $this->registerMenu();

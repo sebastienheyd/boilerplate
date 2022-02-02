@@ -145,6 +145,11 @@ class UsersController extends Controller
         $userModel = config('boilerplate.auth.providers.users.model');
         $user = $userModel::where(['remember_token' => $token])->firstOrFail();
 
+        if ($user->email_verified_at === null) {
+            $user->email_verified_at = date('Y-m-d H:i:s');
+            $user->save();
+        }
+
         return view('boilerplate::auth.firstlogin', compact('user', 'token'));
     }
 

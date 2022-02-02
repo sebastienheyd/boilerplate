@@ -11,9 +11,12 @@ use Sebastienheyd\Boilerplate\Events\UserCreated;
 use Sebastienheyd\Boilerplate\Events\UserDeleted;
 use Sebastienheyd\Boilerplate\Notifications\NewUser;
 use Sebastienheyd\Boilerplate\Notifications\ResetPassword;
+use Sebastienheyd\Boilerplate\Notifications\VerifyEmail;
 use Thomaswelton\LaravelGravatar\Facades\Gravatar;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-class User extends Authenticatable
+
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
     use LaratrustUserTrait;
@@ -38,6 +41,18 @@ class User extends Authenticatable
         'forceDeleted' => UserDeleted::class,
         'created'      => UserCreated::class,
     ];
+
+    /**
+     * Send the email verification notification.
+     *
+     * @return void
+     */
+    public function sendEmailVerificationNotification()
+    {
+        if (config('boilerplate.auth.verify_email')) {
+            $this->notify(new VerifyEmail());
+        }
+    }
 
     /**
      * Send the password reset notification.
