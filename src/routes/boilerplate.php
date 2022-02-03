@@ -18,12 +18,6 @@ Route::group([
     'middleware' => ['web', 'boilerplate.locale'],
     'as'         => 'boilerplate.',
 ], function () {
-    // Dashboard
-    Route::get('/', [config('boilerplate.menu.dashboard'), 'index'])
-        ->middleware(['boilerplate.auth', 'ability:admin,backend_access', 'boilerplate.emailverified'])
-        ->name('dashboard');
-
-    Route::post('keep-alive', [UsersController::class, 'keepAlive'])->name('keepalive');
     Route::get('lang/{lang}', [LanguageController::class, 'switch'])->name('lang.switch');
 
     // Logout
@@ -43,28 +37,26 @@ Route::group([
         Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
         Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
         Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.reset.post');
+
+        // First login
+        Route::get('connect/{token?}', [UsersController::class, 'firstLogin'])->name('users.firstlogin');
+        Route::post('connect/{token?}', [UsersController::class, 'firstLoginPost'])->name('users.firstlogin.post');
     });
 
-    // First login
-    Route::get('connect/{token?}', [UsersController::class, 'firstLogin'])->name('users.firstlogin');
-    Route::post('connect/{token?}', [UsersController::class, 'firstLoginPost'])->name('users.firstlogin.post');
-
-    Route::get('/email/verify', function () {
-        return view('boilerplate::auth.verify-email');
-    })->middleware('auth')->name('verification.notice');
-
-    Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-        $request->fulfill();
-        return redirect(route(config('boilerplate.app.redirectTo', 'boilerplate.dashboard')));
-    })->middleware(['auth', 'signed'])->name('verification.verify');
-
-    Route::post('/email/verification-notification', function (Request $request) {
-        $request->user()->sendEmailVerificationNotification();
-        return back()->with('message', 'Verification link sent!');
-    })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+    // Email verification
+    Route::group(['middleware' => ['boilerplate.auth']], function() {
+        Route::get('/email/verify', [RegisterController::class, 'emailVerify'])->name('verification.notice');
+        Route::get('/email/verify/{id}/{hash}', [RegisterController::class, 'emailVerifyRequest'])->name('verification.verify');
+        Route::post('/email/verification-notification', [RegisterController::class, 'emailSendVerification'])->name('verification.send');
+    });
 
     // Backend
     Route::group(['middleware' => ['boilerplate.auth', 'ability:admin,backend_access', 'boilerplate.emailverified']], function () {
+        // Dashboard
+        Route::get('/', [config('boilerplate.menu.dashboard'), 'index'])->name('dashboard');
+
+        Route::post('keep-alive', [UsersController::class, 'keepAlive'])->name('keepalive');
+
         // Datatables
         Route::post('datatables/{slug}', [DatatablesController::class, 'make'])->name('datatables');
 
