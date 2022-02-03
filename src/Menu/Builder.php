@@ -49,19 +49,25 @@ class Builder extends LavaryMenuBuilder
             $item->order($options['order']);
         }
 
-        if (isset($options['role']) || isset($options['permission'])) {
+        if (! empty($options['role']) || ! empty($options['permission'])) {
             $ability = ['admin'];
-            if (isset($options['role'])) {
-                $ability = $ability + explode(',', $options['role']);
+            if (! empty($options['role'])) {
+                $ability = array_merge($ability, explode(',', $options['role']));
             }
 
             $permission = [];
-            if (isset($options['permission'])) {
+            if (! empty($options['permission'])) {
                 $permission = explode(',', $options['permission']);
             }
 
-            if (Auth::user()->ability($ability, $permission)) {
-                $this->items->push($item);
+            if (empty($permission)) {
+                if (Auth::user()->hasRole($ability)) {
+                    $this->items->push($item);
+                }
+            } else {
+                if (Auth::user()->ability($ability, $permission)) {
+                    $this->items->push($item);
+                }
             }
         } else {
             $this->items->push($item);
