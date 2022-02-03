@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Sebastienheyd\Boilerplate\Controllers\Auth\ForgotPasswordController;
 use Sebastienheyd\Boilerplate\Controllers\Auth\LoginController;
 use Sebastienheyd\Boilerplate\Controllers\Auth\RegisterController;
@@ -10,7 +9,6 @@ use Sebastienheyd\Boilerplate\Controllers\LanguageController;
 use Sebastienheyd\Boilerplate\Controllers\Logs\LogViewerController;
 use Sebastienheyd\Boilerplate\Controllers\Users\RolesController;
 use Sebastienheyd\Boilerplate\Controllers\Users\UsersController;
-use Illuminate\Http\Request;
 
 Route::group([
     'prefix'     => config('boilerplate.app.prefix', ''),
@@ -44,7 +42,7 @@ Route::group([
     });
 
     // Email verification
-    Route::group(['middleware' => ['boilerplate.auth']], function() {
+    Route::group(['middleware' => ['boilerplate.auth']], function () {
         Route::get('/email/verify', [RegisterController::class, 'emailVerify'])->name('verification.notice');
         Route::get('/email/verify/{id}/{hash}', [RegisterController::class, 'emailVerifyRequest'])->name('verification.verify');
         Route::post('/email/verification-notification', [RegisterController::class, 'emailSendVerification'])->name('verification.send');

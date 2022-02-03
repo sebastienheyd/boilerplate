@@ -142,6 +142,7 @@ class RegisterController extends Controller
     public function emailVerifyRequest(EmailVerificationRequest $request)
     {
         $request->fulfill();
+
         return redirect(route(config('boilerplate.app.redirectTo', 'boilerplate.dashboard')));
     }
 
@@ -154,6 +155,7 @@ class RegisterController extends Controller
     public function emailSendVerification(Request $request)
     {
         $request->user()->sendEmailVerificationNotification();
+
         return back()->with('message', 'Verification link sent!');
     }
 }

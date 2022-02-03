@@ -16,10 +16,9 @@ class BoilerplateEmailVerified extends Middleware
     /**
      * Handle an incoming request.
      *
-     * @param Request $request
-     * @param Closure                   $next
-     * @param string|null              $redirectToRoute
-     *
+     * @param  Request  $request
+     * @param  Closure  $next
+     * @param  string|null  $redirectToRoute
      * @return Response|RedirectResponse|null
      */
     public function handle($request, Closure $next, $redirectToRoute = null)
