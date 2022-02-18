@@ -2,8 +2,6 @@
 
 namespace Sebastienheyd\Boilerplate\Menu;
 
-use Sebastienheyd\Boilerplate\Menu\Builder as Builder;
-
 class Logs
 {
     public function make(Builder $menu)

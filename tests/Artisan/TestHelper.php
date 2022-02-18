@@ -28,7 +28,7 @@ trait TestHelper
             'laravel/framework' => '^6.0|^7.0|^8.0',
             'sebastienheyd/boilerplate' => '@dev',
         ];
-        $composer['require-dev'] = new \StdClass();
+        $composer['require-dev'] = new \stdClass();
         $composer['minimum-stability'] = 'stable';
         $composer['prefer-stable'] = true;
         $composer['repositories'] = [['type' => 'path', 'url' => 'packages/*/*', 'symlink' => true]];
