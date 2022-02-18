@@ -50,6 +50,7 @@
     @component('boilerplate::minify')
     <script>
         whenAssetIsLoaded('datatables', function() {
+            window.{{ \Str::camel($id) }}_ajax = {!! json_encode($ajax) !!}
             window.{{ \Str::camel($id) }} = $('#{{ $id }}')
                 .data('inst', '{{ \Str::camel($id) }}' )
                 .on('processing.dt', $.fn.dataTable.customProcessing).DataTable({

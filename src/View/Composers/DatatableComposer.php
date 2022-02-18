@@ -27,12 +27,12 @@ class DatatableComposer extends ComponentComposer
         $datatable = $datatables[$data['name']];
         $datatable->setUp();
 
-        $view->with('permission', Auth::user()->ability(['admin'], $datatable->permissions));
-
         if (empty($data['id'])) {
             $view->with('id', 'dt_'.Str::snake(Str::camel($datatable->slug)), '_');
         }
 
+        $view->with('permission', Auth::user()->ability(['admin'], $datatable->permissions));
+        $view->with('ajax', $data['ajax'] ?? []);
         $view->with('datatable', $datatable);
     }
 }

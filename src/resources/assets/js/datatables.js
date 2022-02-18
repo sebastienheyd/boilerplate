@@ -1,3 +1,14 @@
+let delay = function(callback, ms) {
+    var timer = 0;
+    return function() {
+        var context = this, args = arguments;
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+            callback.apply(context, args);
+        }, ms || 0);
+    };
+}
+
 /**
  * Rendering a date with the current locale format.
  *
@@ -107,6 +118,8 @@ $.fn.dataTable.parseDatatableFilters = function (d, instance) {
             d.columns[$(e).data('field')].search.value = start + '|' + end;
         }
     });
+
+    $.extend(true, d, window[id+'_ajax']);
 }
 
 /**
@@ -248,10 +261,10 @@ $(document).on('click', '.dataTables_wrapper .show-filters', function () {
 /**
  * Typing in text filter
  */
-$(document).on('keyup', '.dataTables_wrapper .dt-filter-text', function () {
+$(document).on('keyup', '.dataTables_wrapper .dt-filter-text', delay(function () {
     let id = '#' + $(this).closest('.dataTables_wrapper').find('table').attr('id');
     $(id).DataTable().ajax.reload();
-})
+}, 250))
 
 /**
  * Changing date range filter
