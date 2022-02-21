@@ -10,7 +10,7 @@
     </code>
 @else
     <div class="table-responsive">
-        <table class="table table-striped table-hover va-middle w-100" id="{{ $id }}">
+        <table class="table table-striped table-hover va-middle w-100{{ $datatable->condensed ? ' table-sm' : '' }}" id="{{ $id }}">
             <thead>
             <tr>
                 @foreach($datatable->getColumns() as $column)
@@ -50,7 +50,7 @@
     @component('boilerplate::minify')
     <script>
         whenAssetIsLoaded('datatables', function() {
-            window.{{ \Str::camel($id) }}_ajax = {!! json_encode($ajax) !!}
+            window.{{ $id }}_ajax = {!! json_encode($ajax) !!}
             window.{{ \Str::camel($id) }} = $('#{{ $id }}')
                 .data('inst', '{{ \Str::camel($id) }}' )
                 .on('processing.dt', $.fn.dataTable.customProcessing).DataTable({
@@ -66,8 +66,8 @@
                     order: {!! $datatable->order !!},
                 @endif
                 paging: {{ (int) $datatable->paging }},
+                pageLength: {{ $datatable->pageLength }},
                 @if($datatable->paging)
-                    pageLength: {{ $datatable->pageLength }},
                     pagingType: '{{ $datatable->pagingType }}',
                     lengthChange: {{ (int) $datatable->lengthChange }},
                     lengthMenu: {!! $datatable->lengthMenu !!},

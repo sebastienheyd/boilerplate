@@ -30,6 +30,7 @@ abstract class Datatable
         'pagingType'   => 'simple_numbers',
         'searching'    => true,
         'stateSave'    => false,
+        'condensed'    => false,
         'lengthMenu'   => [[10, 25, 50, 100, -1], [10, 25, 50, 100, '∞']],
         'buttons'      => ['filters'],
     ];
@@ -401,6 +402,18 @@ abstract class Datatable
     public function noInfo(): Datatable
     {
         $this->attributes['info'] = false;
+
+        return $this;
+    }
+
+    /**
+     * Table must be condensed.
+     *
+     * @return $this
+     */
+    public function condensed(): Datatable
+    {
+        $this->attributes['condensed'] = true;
 
         return $this;
     }
