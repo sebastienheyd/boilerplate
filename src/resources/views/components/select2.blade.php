@@ -28,7 +28,6 @@
 @component('boilerplate::minify')
     <script>
         whenAssetIsLoaded('select2', () => {
-            let parent = $('#{{ $id }}').parent();
             $('#{{ $id }}').select2({
                 placeholder: '{{ $placeholder ?? '—' }}',
                 allowClear: {{ $allowClear }},
@@ -38,7 +37,6 @@
                 minimumResultsForSearch: {{ $minimumResultsForSearch ?? 10 }},
                 width: '100%',
                 dropdownAutoWidth: true,
-                dropdownParent: parent,
                 @isset($ajax)
                 ajax: {
                     delay: 200,

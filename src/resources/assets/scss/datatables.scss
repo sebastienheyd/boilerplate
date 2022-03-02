@@ -1,11 +1,29 @@
 @import "~admin-lte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css";
 
-.dataTable {
+table.dataTable {
   thead {
     tr {
       th {
         white-space: nowrap;
-        padding: .75rem .25rem .75rem .75rem !important;
+        padding: .75rem .25rem .75rem .75rem;
+
+        &:not(.sorting_disabled) {
+          padding-right: 0;
+        }
+      }
+    }
+  }
+
+  &.table-sm {
+    thead {
+      tr {
+        th {
+          padding: .3rem;
+
+          &:not(.sorting_disabled) {
+            padding-right: 0;
+          }
+        }
       }
     }
   }
