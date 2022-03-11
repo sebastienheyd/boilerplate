@@ -262,6 +262,7 @@ class UsersController extends Controller
                 $destinationPath = dirname($user->avatar_path);
                 if (! is_dir($destinationPath)) {
                     mkdir($destinationPath, 0766, true);
+                    file_put_contents($destinationPath.'/.gitignore', "*\r\n!.gitignore");
                 }
                 $extension = $avatar->getClientOriginalExtension();
                 $fileName = md5($user->id.$user->email).'_tmp.'.$extension;

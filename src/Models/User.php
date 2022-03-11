@@ -13,7 +13,7 @@ use Sebastienheyd\Boilerplate\Events\UserDeleted;
 use Sebastienheyd\Boilerplate\Notifications\NewUser;
 use Sebastienheyd\Boilerplate\Notifications\ResetPassword;
 use Sebastienheyd\Boilerplate\Notifications\VerifyEmail;
-use Thomaswelton\LaravelGravatar\Facades\Gravatar;
+use Creativeorange\Gravatar\Facades\Gravatar;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -205,12 +205,13 @@ class User extends Authenticatable implements MustVerifyEmail
             unlink($this->getAvatarPathAttribute());
         }
 
-        $src = Gravatar::src($this->getAttribute('email'), 250);
+        $src = Gravatar::get($this->getAttribute('email'), ['size' => 250]);
         $img = file_get_contents($src);
         $destDir = public_path('images/avatars/');
 
         if (! is_dir($destDir)) {
             mkdir($destDir, 0766, true);
+            file_put_contents($destDir.'/.gitignore', "*\r\n!.gitignore");
         }
 
         file_put_contents($this->getAvatarPathAttribute(), $img);
