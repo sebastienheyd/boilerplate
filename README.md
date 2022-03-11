@@ -42,7 +42,7 @@ The documentation is readable on [Github pages](https://sebastienheyd.github.io/
 * Server-side datatables methods provided by [yajra/laravel-datatables](https://yajrabox.com/docs/laravel-datatables)
 * Image manipulation by [intervention/image](https://github.com/intervention/image)
 * Logs visualization by [arcanedev/log-viewer](https://github.com/ARCANEDEV/LogViewer)
-* Gravatar import by [thomaswelton/laravel-gravatar](https://github.com/thomaswelton/laravel-gravatar)
+* Gravatar import by [creativeorange/gravatar](https://github.com/creativeorange/gravatar)
 * Default languages support by [overtrue/laravel-lang](https://github.com/overtrue/laravel-lang) and [Laravel-Lang/lang](https://github.com/Laravel-Lang/lang)
 * Javascript session keep-alive
 * [Localized](https://github.com/sebastienheyd/boilerplate/tree/master/src/resources/lang)
