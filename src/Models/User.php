@@ -3,6 +3,7 @@
 namespace Sebastienheyd\Boilerplate\Models;
 
 use Carbon\Carbon;
+use Creativeorange\Gravatar\Facades\Gravatar;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -13,7 +14,6 @@ use Sebastienheyd\Boilerplate\Events\UserDeleted;
 use Sebastienheyd\Boilerplate\Notifications\NewUser;
 use Sebastienheyd\Boilerplate\Notifications\ResetPassword;
 use Sebastienheyd\Boilerplate\Notifications\VerifyEmail;
-use Creativeorange\Gravatar\Facades\Gravatar;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
