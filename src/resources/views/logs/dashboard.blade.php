@@ -12,6 +12,9 @@
     <div class="row">
         <div class="col-12">
             @component('boilerplate::card')
+                @empty($percents)
+                    {{ __('boilerplate::logs.list.empty-logs') }}
+                @else
                 <div class="row">
                     <div class="mb-3 ml-auto mr-auto col-md-6 col-lg-3">
                         <canvas id="stats-doughnut-chart" height="300"></canvas>
@@ -40,6 +43,7 @@
                         </div>
                     </div>
                 </div>
+                @endempty
                 @slot('footer')
                     <div class="text-right text-muted small">
                         {!! __('boilerplate::logs.vendor') !!}

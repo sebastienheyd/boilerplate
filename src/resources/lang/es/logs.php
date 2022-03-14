@@ -14,6 +14,7 @@ return [
         'title'             => 'Listado de Logs',
         'actions'           => 'Actiones',
         'deletequestion'    => '¿Estas seguro de que deseas eliminar este fichero de log?',
+        'empty-logs'        => 'La lista de logs está vacía',
     ],
     'show' => [
         'title'         => ':date informe',

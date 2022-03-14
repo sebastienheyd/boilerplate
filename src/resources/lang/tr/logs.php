@@ -14,6 +14,7 @@ return [
         'title'          => 'Günlük listesi',
         'actions'        => 'İşlemler',
         'deletequestion' => 'Günlük dosyasını silmek istediğinizden emin misiniz?',
+        'empty-logs'     => 'Günlük listesi boş',
     ],
     'show' => [
         'title'      => ':date raporu',

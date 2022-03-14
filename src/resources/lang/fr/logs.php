@@ -14,6 +14,7 @@ return [
         'title'             => 'Liste des fichiers',
         'actions'           => 'Actions',
         'deletequestion'    => 'Êtes vous sûr de vouloir supprimer ce fichier ?',
+        'empty-logs'        => 'La liste des journaux est vide',
     ],
     'show' => [
         'title'         => 'Rapport du :date',

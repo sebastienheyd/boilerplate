@@ -61,7 +61,7 @@
                         @else
                             <tr>
                                 <td colspan="11" class="text-center">
-                                    <span class="badge badge-pill badge-default">{{ trans('log-viewer::general.empty-logs') }}</span>
+                                    <span class="badge badge-pill badge-default">{{ __('boilerplate::logs.list.empty-logs') }}</span>
                                 </td>
                             </tr>
                         @endif

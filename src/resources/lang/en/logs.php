@@ -14,6 +14,7 @@ return [
         'title'             => 'Logs list',
         'actions'           => 'Actions',
         'deletequestion'    => 'Are you sure you want to delete this log file ?',
+        'empty-logs'        => 'The list of logs is empty',
     ],
     'show' => [
         'title'         => ':date report',

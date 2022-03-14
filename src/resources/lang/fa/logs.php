@@ -14,6 +14,7 @@ return [
         'title'             => 'لیست لاگ ها',
         'actions'           => 'اقدام ها',
         'deletequestion'    => 'آیا می خواهید حذف کنید؟',
+        'empty-logs'        => 'لیست گزارش ها خالی است',
     ],
     'show' => [
         'title'         => ':date گزارش',
