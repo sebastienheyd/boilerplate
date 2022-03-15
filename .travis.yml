@@ -6,13 +6,13 @@ php:
 
 cache:
   directories:
-    - $HOME/.composer/cache/files
-    - $HOME/.cache/composer/files
+    - $HOME/.composer/cache
+    - $HOME/.cache/composer
 
 before_script:
   - phpenv config-rm xdebug.ini
   - composer self-update
-  - COMPOSER_MEMORY_LIMIT=-1 composer install --prefer-source --no-interaction --no-suggest --no-progress
+  - COMPOSER_MEMORY_LIMIT=-1 composer install --prefer-source --no-interaction --no-progress
 
 script:
   - vendor/bin/phpcs
