@@ -26,6 +26,7 @@ class Item extends LavaryMenuItem
         if (preg_match('#^https?|\.(png|jpg|gif|svg)$#', $icon)) {
             $img = '<img src="%s" class="img-fluid" style="max-height: 17px" />';
             $this->prepend(sprintf('<div class="nav-icon d-inline-block text-sm">'.$img.'</div>', $icon));
+
             return $this;
         }
 
