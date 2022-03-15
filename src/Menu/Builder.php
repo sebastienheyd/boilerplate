@@ -37,10 +37,10 @@ class Builder extends LavaryMenuBuilder
             $item->activeIfRoute($options['route']);
         }
 
-        if ($item->hasParent()) {
-            $item->icon($item->isActive ? 'dot-circle ' : 'circle', 'far');
-        } elseif (! empty($options['icon'])) {
+        if (! empty($options['icon'])) {
             $item->icon($options['icon']);
+        } elseif ($item->hasParent()) {
+            $item->icon($item->isActive ? 'dot-circle ' : 'circle', 'far');
         } else {
             $item->icon('cube');
         }
