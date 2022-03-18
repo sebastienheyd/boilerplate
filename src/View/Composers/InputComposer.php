@@ -55,6 +55,7 @@ class InputComposer extends ComponentComposer
             $this->attributes['autocomplete'] = 'off';
         }
 
+        $view->with('nameDot', dotStr($data['name']));
         $view->with('attributes', $this->attributes);
     }
 }
