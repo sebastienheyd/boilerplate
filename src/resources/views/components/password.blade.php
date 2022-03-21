@@ -9,7 +9,7 @@
     <label>{!! __($label) !!}</label>
 @endisset
     <div class="input-group password">
-        {!! Form::password($name, array_merge(['class' => 'form-control'.$errors->first($name,' is-invalid').(isset($class) ? ' '.$class : '')], $attributes)) !!}
+        {!! Form::password($name, array_merge(['class' => 'form-control'.$errors->first($nameDot,' is-invalid').(isset($class) ? ' '.$class : '')], $attributes)) !!}
         <div class="input-group-append">
             <button type="button" class="btn" data-toggle="password" tabindex="-1"><i class="far fa-fw fa-eye"></i></button>
         </div>
@@ -17,7 +17,7 @@
 @if($help ?? false)
     <small class="form-text text-muted">@lang($help)</small>
 @endif
-@error($name)
+@error($nameDot)
     <div class="error-bubble"><div>{{ $message }}</div></div>
 @enderror
 </div>

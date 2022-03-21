@@ -30,5 +30,6 @@ class CodemirrorComposer extends ComponentComposer
         $view->with('id', $data['id'] ?? uniqid('codemirror_'));
         $view->with('theme', $data['theme'] ?? 'storm');
         $view->with('attributes', $this->attributes);
+        $view->with('nameDot', dot_str($data['name'] ?? ''));
     }
 }

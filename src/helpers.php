@@ -1,6 +1,6 @@
 <?php
-if (! function_exists('dotStr')) {
-    function dotStr($string)
+if (! function_exists('dot_str')) {
+    function dot_str($string)
     {
         return str_replace(['[', ']'], ['.', ''], $string);
     }

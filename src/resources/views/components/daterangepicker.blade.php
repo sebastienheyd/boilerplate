@@ -16,7 +16,7 @@
         </div>
 @endif
         <div class="d-flex align-items-center form-control{{ isset($controlClass) ? ' '.$controlClass : '' }}">
-            {!! Form::text($name.'[value]', old($name.'.value'), array_merge(['class' => 'daterangepicker-input'.$errors->first($name,' is-invalid').(isset($class) ? ' '.$class : '')], $attributes)) !!}
+            {!! Form::text($name.'[value]', old($name.'.value'), array_merge(['class' => 'daterangepicker-input'.$errors->first($nameDot,' is-invalid').$errors->first($nameDot.'.start',' is-invalid').$errors->first($nameDot.'.end',' is-invalid').(isset($class) ? ' '.$class : '')], $attributes)) !!}
             <span class="fa fa-fw fa-times fa-xs ml-1 clear-daterangepicker" data-name="{{ $name }}" style="display:none"/>
         </div>
 @if($append || $appendText)
@@ -32,8 +32,14 @@
 @if($help ?? false)
     <small class="form-text text-muted">@lang($help)</small>
 @endif
-@error($name)
+@error($nameDot)
     <div class="error-bubble"><div>{{ $message }}</div></div>
+@enderror
+@error($nameDot.'.start')
+<div class="error-bubble"><div>{{ $message }}</div></div>
+@enderror
+@error($nameDot.'.end')
+<div class="error-bubble"><div>{{ $message }}</div></div>
 @enderror
     {!! Form::hidden($name.'[start]', old($name.'[start]', $start ?? ''), ['autocomplete' => 'off']) !!}
     {!! Form::hidden($name.'[end]', old($name.'[end]', $end ?? ''), ['autocomplete' => 'off']) !!}

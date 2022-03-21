@@ -5,7 +5,7 @@
 @isset($label)
     <label for="{{ $id }}">{!! __($label) !!}</label>
 @endisset
-    <select id="{{ $id }}" name="{{ $name }}" class="form-control{{ $errors->first($name,' is-invalid') }}{{ isset($class) ? ' '.$class : '' }}"{!! !empty($attributes) ? ' '.$attributes : '' !!} style="visibility:hidden;height:1rem" autocomplete="off">
+    <select id="{{ $id }}" name="{{ $name }}" class="form-control{{ $errors->first($nameDot,' is-invalid') }}{{ isset($class) ? ' '.$class : '' }}"{!! !empty($attributes) ? ' '.$attributes : '' !!} style="visibility:hidden;height:1rem" autocomplete="off">
 @if(!isset($multiple))
         <option></option>
 @endif
@@ -20,7 +20,7 @@
 @if($help ?? false)
     <small class="form-text text-muted">@lang($help)</small>
 @endif
-@error($name)
+@error($nameDot)
     <div class="error-bubble"><div>{{ $message }}</div></div>
 @enderror
 </div>

@@ -9,7 +9,7 @@
 @if($help ?? false)
     <small class="form-text text-muted">@lang($help)</small>
 @endif
-@error($name)
+@error($nameDot)
     <div class="error-bubble"><div>{{ $message }}</div></div>
 @enderror
 </div>

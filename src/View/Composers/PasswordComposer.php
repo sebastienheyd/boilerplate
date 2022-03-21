@@ -34,5 +34,6 @@ class PasswordComposer extends ComponentComposer
         }
 
         $view->with('attributes', $this->attributes);
+        $view->with('nameDot', dot_str($data['name'] ?? ''));
     }
 }

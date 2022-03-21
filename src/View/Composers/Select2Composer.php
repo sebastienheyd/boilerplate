@@ -36,5 +36,6 @@ class Select2Composer extends ComponentComposer
         }
 
         $view->with('allowClear', isset($data['allowClear']) ? 'true' : 'false');
+        $view->with('nameDot', dot_str($data['name'] ?? ''));
     }
 }

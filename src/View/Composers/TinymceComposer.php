@@ -27,5 +27,6 @@ class TinymceComposer extends ComponentComposer
         $data = $view->getData();
 
         $view->with('id', $data['id'] ?? uniqid('tinymce_'));
+        $view->with('nameDot', dot_str($data['name'] ?? ''));
     }
 }

@@ -56,5 +56,6 @@ class DatetimepickerComposer extends ComponentComposer
         $view->with('rawValue', $rawValue ?? $data['value'] ?? null);
         $view->with('id', $data['id'] ?? uniqid('datetimepicker_'));
         $view->with('attributes', $this->attributes);
+        $view->with('nameDot', dot_str($data['name'] ?? ''));
     }
 }

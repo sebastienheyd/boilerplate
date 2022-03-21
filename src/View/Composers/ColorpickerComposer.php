@@ -30,5 +30,6 @@ class ColorpickerComposer extends ComponentComposer
         $data = $view->getData();
         $view->with('id', $data['id'] ?? uniqid('colorpicker_'));
         $view->with('attributes', $this->attributes);
+        $view->with('nameDot', dot_str($data['name'] ?? ''));
     }
 }
