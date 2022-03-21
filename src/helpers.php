@@ -1,4 +1,5 @@
 <?php
+
 if (! function_exists('dot_str')) {
     function dot_str($string)
     {
