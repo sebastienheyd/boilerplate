@@ -13,6 +13,6 @@
         </div>
     </div>
     @component('boilerplate::card')
-        <x-boilerplate::datatable name="roles" />
+        @component('boilerplate::datatable', ['name' => 'roles']) @endcomponent
     @endcomponent
 @endsection

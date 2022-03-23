@@ -1,7 +1,7 @@
 @component('boilerplate::card', ['color' => 'warning', 'title' => 'CodeMirror'])
         Usage :
         <pre>&lt;x-boilerplate::codemirror name="code">.color { color: red; }&lt;/x-boilerplate::codemirror></pre>
-<x-boilerplate::codemirror name="code"><h1>CodeMirror demo</h1>
+@component('boilerplate::codemirror', ['name' => 'code'])<h1>CodeMirror demo</h1>
 <style>
     .color {
         color: red;
@@ -12,7 +12,7 @@
         alert('demo');
     });
 </script>
-</x-boilerplate::codemirror>
+@endcomponent
     @slot('footer')
         <div class="small text-muted text-right">
             <a href="https://sebastienheyd.github.io/boilerplate/components/codemirror" target="_blank">component</a> /

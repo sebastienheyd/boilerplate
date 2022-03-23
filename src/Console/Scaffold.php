@@ -119,7 +119,7 @@ class Scaffold extends BoilerplateCommand
             app_path('Models/Boilerplate'),
             app_path('Events/Boilerplate'),
             app_path('Notifications/Boilerplate'),
-            resource_path('lang/vendor/boilerplate'),
+            app()->langPath().'/vendor/boilerplate',
             resource_path('views/vendor/boilerplate'),
         ]);
 

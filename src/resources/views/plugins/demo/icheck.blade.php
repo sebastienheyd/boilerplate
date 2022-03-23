@@ -7,38 +7,38 @@
         </div>
         <div class="row">
             <div class="col-sm-6 d-flex">
-                <x-boilerplate::icheck name="c1" label="" class="mb-0" checked />
-                <x-boilerplate::icheck name="c1" label="" class="mb-0" />
-                <x-boilerplate::icheck name="c1" label="Primary checkbox" class="mb-0" disabled />
+                @component('boilerplate::icheck', ['name' => 'c1', 'label' => '', 'class' => 'mb-0', 'checked' => true])@endcomponent
+                @component('boilerplate::icheck', ['name' => 'c1', 'label' => '', 'class' => 'mb-0'])@endcomponent
+                @component('boilerplate::icheck', ['name' => 'c1', 'label' => 'Primary checkbox', 'class' => 'mb-0', 'disabled' => true])@endcomponent
             </div>
             <div class="col-sm-6 d-flex">
-                <x-boilerplate::icheck name="r1" type="radio" label="" class="mb-0" checked />
-                <x-boilerplate::icheck name="r1" type="radio" label="" class="mb-0" />
-                <x-boilerplate::icheck name="r1" type="radio" label="Primary radio" class="mb-0" disabled />
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-6 d-flex">
-                <x-boilerplate::icheck color="danger" name="c2" label="" class="mb-0" checked />
-                <x-boilerplate::icheck color="danger" name="c2" label="" class="mb-0" />
-                <x-boilerplate::icheck color="danger" name="c2" label="Danger checkbox" class="mb-0" disabled />
-            </div>
-            <div class="col-sm-6 d-flex">
-                <x-boilerplate::icheck color="danger" name="r2" type="radio" label="" class="mb-0" checked />
-                <x-boilerplate::icheck color="danger" name="r2" type="radio" label="" class="mb-0" />
-                <x-boilerplate::icheck color="danger" name="r2" type="radio" label="Danger radio" class="mb-0" disabled />
+                @component('boilerplate::icheck', ['name' => 'r1', 'type' => 'radio', 'label' => '', 'class' => 'mb-0', 'checked' => true])@endcomponent
+                @component('boilerplate::icheck', ['name' => 'r1', 'type' => 'radio', 'label' => '', 'class' => 'mb-0'])@endcomponent
+                @component('boilerplate::icheck', ['name' => 'r1', 'type' => 'radio', 'label' => 'Primary checkbox', 'class' => 'mb-0', 'disabled' => true])@endcomponent
             </div>
         </div>
         <div class="row">
             <div class="col-sm-6 d-flex">
-                <x-boilerplate::icheck color="success" name="c3" label="" class="mb-0" checked />
-                <x-boilerplate::icheck color="success" name="c3" label="" class="mb-0" />
-                <x-boilerplate::icheck color="success" name="c3" label="Danger checkbox" class="mb-0" disabled />
+                @component('boilerplate::icheck', ['name' => 'c2', 'color' => 'danger', 'label' => '', 'class' => 'mb-0', 'checked' => true])@endcomponent
+                @component('boilerplate::icheck', ['name' => 'c2', 'color' => 'danger', 'label' => '', 'class' => 'mb-0'])@endcomponent
+                @component('boilerplate::icheck', ['name' => 'c2', 'color' => 'danger', 'label' => 'Primary checkbox', 'class' => 'mb-0', 'disabled' => true])@endcomponent
             </div>
             <div class="col-sm-6 d-flex">
-                <x-boilerplate::icheck color="success" name="r3" type="radio" label="" class="mb-0" checked />
-                <x-boilerplate::icheck color="success" name="r3" type="radio" label="" class="mb-0" />
-                <x-boilerplate::icheck color="success" name="r3" type="radio" label="Danger radio" class="mb-0" disabled />
+                @component('boilerplate::icheck', ['name' => 'r2', 'color' => 'danger', 'type' => 'radio', 'label' => '', 'class' => 'mb-0', 'checked' => true])@endcomponent
+                @component('boilerplate::icheck', ['name' => 'r2', 'color' => 'danger', 'type' => 'radio', 'label' => '', 'class' => 'mb-0'])@endcomponent
+                @component('boilerplate::icheck', ['name' => 'r2', 'color' => 'danger', 'type' => 'radio', 'label' => 'Primary checkbox', 'class' => 'mb-0', 'disabled' => true])@endcomponent
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 d-flex">
+                @component('boilerplate::icheck', ['name' => 'c3', 'color' => 'success', 'label' => '', 'class' => 'mb-0', 'checked' => true])@endcomponent
+                @component('boilerplate::icheck', ['name' => 'c3', 'color' => 'success', 'label' => '', 'class' => 'mb-0'])@endcomponent
+                @component('boilerplate::icheck', ['name' => 'c3', 'color' => 'success', 'label' => 'Primary checkbox', 'class' => 'mb-0', 'disabled' => true])@endcomponent
+            </div>
+            <div class="col-sm-6 d-flex">
+                @component('boilerplate::icheck', ['name' => 'r3', 'color' => 'success', 'type' => 'radio', 'label' => '', 'class' => 'mb-0', 'checked' => true])@endcomponent
+                @component('boilerplate::icheck', ['name' => 'r3', 'color' => 'success', 'type' => 'radio', 'label' => '', 'class' => 'mb-0'])@endcomponent
+                @component('boilerplate::icheck', ['name' => 'r3', 'color' => 'success', 'type' => 'radio', 'label' => 'Primary checkbox', 'class' => 'mb-0', 'disabled' => true])@endcomponent
             </div>
         </div>
 
