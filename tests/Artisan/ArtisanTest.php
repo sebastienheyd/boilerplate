@@ -86,7 +86,7 @@ class ArtisanTest extends ArtisanTestCase
         $this->assertTrue(is_dir(self::TEST_APP.'/app/Events/Boilerplate'));
         $this->assertTrue(is_dir(self::TEST_APP.'/app/Models/Boilerplate'));
         $this->assertTrue(is_dir(self::TEST_APP.'/app/Notifications/Boilerplate'));
-        $this->assertTrue(is_dir(self::TEST_APP.'/resources/lang/vendor/boilerplate'));
+        $this->assertTrue(is_dir(app()->langPath().'/vendor/boilerplate'));
         $this->assertTrue(is_dir(self::TEST_APP.'/resources/views/vendor/boilerplate'));
         $this->assertTrue(is_dir(self::TEST_APP.'/public/assets/vendor/boilerplate'));
     }
