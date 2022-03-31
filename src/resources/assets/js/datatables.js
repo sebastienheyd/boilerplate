@@ -207,16 +207,16 @@ $.fn.dataTable.loadFiltersState = function(instance, d) {
  * Check all checkboxes
  */
 $(document).on('click', 'input[name="dt-check-all"]', function() {
-    $(this).closest('.dataTables_wrapper').find('input[name="dt-checkbox[]"]').prop('checked', $(this).is(':checked'));
+    $(this).closest('.dataTables_wrapper').find('input[name^="dt-checkbox"]').prop('checked', $(this).is(':checked'));
 })
 
 /**
  * Check / Uncheck the "check all" button
  */
-$(document).on('click', 'input[name="dt-checkbox[]"]', function() {
+$(document).on('click', 'input[name^="dt-checkbox"]', function() {
     let all = true;
 
-    $('input[name="dt-checkbox[]').each(function(i, e) {
+    $('input[name^="dt-checkbox"]').each(function(i, e) {
         if(! $(e).is(':checked')) {
             all = false;
         }

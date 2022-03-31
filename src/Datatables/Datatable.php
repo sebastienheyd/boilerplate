@@ -12,10 +12,13 @@ abstract class Datatable
     protected $slug = '';
     protected $datasource;
     protected $checkboxes = false;
+    protected $checkboxesField = 'id';
+    protected $offset;
     protected $rowAttr;
     protected $rowClass;
     protected $rowData;
     protected $rowId;
+    protected $totalRecords;
     protected $locale = [];
     protected $permissions = ['backend_access'];
     protected $orderAttr = [];
@@ -101,12 +104,13 @@ abstract class Datatable
             )
             ->notSearchable()
             ->notOrderable()
-            ->data('checkbox', function () {
-                $id = uniqid('checkbox_');
+            ->data('checkbox', function ($data) {
+                $cbid = uniqid('checkbox_');
+                $id = $data[$this->checkboxesField] ?? '';
 
                 return '<div class="icheck-primary mb-0">
-                            <input type="checkbox" name="dt-checkbox[]" id="'.$id.'" autocomplete="off">
-                            <label for="'.$id.'"></label>
+                            <input type="checkbox" name="dt-checkbox['.$id.']" id="'.$cbid.'" autocomplete="off">
+                            <label for="'.$cbid.'"></label>
                         </div>';
             }));
         }
@@ -329,9 +333,10 @@ abstract class Datatable
      *
      * @return $this
      */
-    public function showCheckboxes()
+    public function showCheckboxes($field = 'id')
     {
         $this->checkboxes = true;
+        $this->checkboxesField = $field;
 
         return $this;
     }
