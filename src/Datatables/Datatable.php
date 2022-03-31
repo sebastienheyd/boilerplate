@@ -434,7 +434,7 @@ abstract class Datatable
     /**
      * When using API, set the current offset.
      *
-     * @param int $offset
+     * @param  int  $offset
      * @return $this
      */
     public function setOffset($offset)
@@ -447,7 +447,7 @@ abstract class Datatable
     /**
      * When using API, set the current total records.
      *
-     * @param int $total
+     * @param  int  $total
      * @return $this
      */
     public function setTotalRecords($total)
