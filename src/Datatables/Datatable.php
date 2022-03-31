@@ -51,6 +51,14 @@ abstract class Datatable
 
         $datatable = DataTables::of($this->datasource() ?? []);
 
+        if ($this->offset) {
+            $datatable->setOffset($this->offset);
+        }
+
+        if ($this->totalRecords) {
+            $datatable->setTotalRecords($this->totalRecords);
+        }
+
         $raw = [];
 
         foreach (['rowAttr', 'rowClass', 'rowData', 'rowId'] as $attr) {
@@ -419,6 +427,32 @@ abstract class Datatable
     public function condensed(): Datatable
     {
         $this->attributes['condensed'] = true;
+
+        return $this;
+    }
+
+    /**
+     * When using API, set the current offset.
+     *
+     * @param int $offset
+     * @return $this
+     */
+    public function setOffset($offset)
+    {
+        $this->offset = $offset;
+
+        return $this;
+    }
+
+    /**
+     * When using API, set the current total records.
+     *
+     * @param int $total
+     * @return $this
+     */
+    public function setTotalRecords($total)
+    {
+        $this->totalRecords = $total;
 
         return $this;
     }
