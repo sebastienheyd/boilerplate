@@ -13,6 +13,7 @@ abstract class Datatable
     protected $datasource;
     protected $checkboxes = false;
     protected $checkboxesField = 'id';
+    protected $filteredRecords;
     protected $offset;
     protected $rowAttr;
     protected $rowClass;
@@ -57,6 +58,10 @@ abstract class Datatable
 
         if ($this->totalRecords) {
             $datatable->setTotalRecords($this->totalRecords);
+        }
+
+        if ($this->filteredRecords) {
+            $datatable->setFilteredRecords($this->filteredRecords);
         }
 
         $raw = [];
@@ -453,6 +458,19 @@ abstract class Datatable
     public function setTotalRecords($total)
     {
         $this->totalRecords = $total;
+
+        return $this;
+    }
+
+    /**
+     * When using API, set the filter records.
+     *
+     * @param  int  $filteredRecords
+     * @return $this
+     */
+    public function setFilteredRecords($filteredRecords)
+    {
+        $this->filteredRecords = $filteredRecords;
 
         return $this;
     }
