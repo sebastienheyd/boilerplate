@@ -11,6 +11,7 @@ class Column
     protected $filter = null;
     protected $filterOptions = [];
     protected $filterType = 'input';
+    protected $order = null;
     protected $raw = null;
     protected $title = '';
 
@@ -169,6 +170,20 @@ class Column
     {
         $filter = Closure::bind($filter, $this);
         $this->filter = $filter;
+
+        return $this;
+    }
+
+    /**
+     * Order to use for custom searches.
+     *
+     * @param  Closure  $order
+     * @return $this
+     */
+    public function order(Closure $order): Column
+    {
+        $order = Closure::bind($order, $this);
+        $this->order = $order;
 
         return $this;
     }

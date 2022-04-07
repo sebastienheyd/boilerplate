@@ -77,6 +77,10 @@ abstract class Datatable
                 $datatable->filterColumn($column->name ?? $column->data, $column->filter);
             }
 
+            if ($column->order) {
+                $datatable->orderColumn($column->name ?? $column->data, $column->order);
+            }
+
             if ($column->raw) {
                 $raw[] = $column->data;
                 $datatable->editColumn($column->data, $column->raw);
