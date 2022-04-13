@@ -505,7 +505,6 @@ abstract class Datatable
      * Get a search value by the column name.
      *
      * @param $name
-     *
      * @return mixed
      */
     protected function getRequestSearchValue($name)
