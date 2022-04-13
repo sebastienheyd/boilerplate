@@ -5,6 +5,7 @@ namespace Sebastienheyd\Boilerplate\Datatables;
 use Closure;
 use Exception;
 use Illuminate\Http\JsonResponse;
+use Yajra\DataTables\DataTableAbstract;
 use Yajra\DataTables\DataTables;
 
 abstract class Datatable
@@ -19,6 +20,7 @@ abstract class Datatable
     protected $rowClass;
     protected $rowData;
     protected $rowId;
+    protected $skipPaging;
     protected $totalRecords;
     protected $locale = [];
     protected $permissions = ['backend_access'];
@@ -50,7 +52,11 @@ abstract class Datatable
     {
         $this->setUp();
 
-        $datatable = DataTables::of($this->datasource() ?? []);
+        if ($this->datasource() instanceof DataTableAbstract) {
+            $datatable = $this->datasource();
+        } else {
+            $datatable = DataTables::of($this->datasource() ?? []);
+        }
 
         if ($this->offset) {
             $datatable->setOffset($this->offset);
@@ -62,6 +68,10 @@ abstract class Datatable
 
         if ($this->filteredRecords) {
             $datatable->setFilteredRecords($this->filteredRecords);
+        }
+
+        if ($this->skipPaging) {
+            $datatable->skipPaging();
         }
 
         $raw = [];
@@ -479,6 +489,25 @@ abstract class Datatable
         return $this;
     }
 
+    /**
+     * Skip Datatables paging.
+     *
+     * @return $this
+     */
+    public function skipPaging()
+    {
+        $this->skipPaging = true;
+
+        return $this;
+    }
+
+    /**
+     * Get a search value by the column name.
+     *
+     * @param $name
+     *
+     * @return mixed
+     */
     protected function getRequestSearchValue($name)
     {
         $idx = $this->getColumnIndex($name);
