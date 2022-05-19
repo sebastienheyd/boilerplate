@@ -78,7 +78,7 @@ Route::group([
         Route::post('userprofile/avatar/delete', [UsersController::class, 'avatarDelete'])->name('user.avatar.delete');
 
         // Logs
-        if(config('boilerplate.app.logs')) {
+        if (config('boilerplate.app.logs')) {
             Route::group(['prefix' => 'logs', 'as' => 'logs.', 'middleware' => ['ability:admin,logs']], function () {
                 Route::get('/', [LogViewerController::class, 'index'])->name('dashboard');
                 Route::group(['prefix' => 'list'], function () {

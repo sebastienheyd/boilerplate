@@ -2,7 +2,6 @@
 
 namespace Sebastienheyd\Boilerplate\Controllers\Logs;
 
-use Arcanedev\LogViewer\Contracts\LogViewer as LogViewerContract;
 use Arcanedev\LogViewer\Http\Controllers\LogViewerController as ArcanedevController;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
