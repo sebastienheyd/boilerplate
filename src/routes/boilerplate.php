@@ -16,11 +16,13 @@ Route::group([
     'middleware' => ['web', 'boilerplate.locale'],
     'as'         => 'boilerplate.',
 ], function () {
+    // Language switch
     Route::get('lang/{lang}', [LanguageController::class, 'switch'])->name('lang.switch');
 
     // Logout
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
+    // Frontend
     Route::group(['middleware' => ['boilerplate.guest']], function () {
         // Login
         Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -53,6 +55,7 @@ Route::group([
         // Dashboard
         Route::get('/', [config('boilerplate.menu.dashboard'), 'index'])->name('dashboard');
 
+        // Session keep-alive
         Route::post('keep-alive', [UsersController::class, 'keepAlive'])->name('keepalive');
 
         // Datatables
@@ -64,29 +67,31 @@ Route::group([
             Route::resource('users', UsersController::class)->except('show');
             Route::any('users/dt', [UsersController::class, 'datatable'])->name('users.datatable');
         });
+
+        // Profile
         Route::get('userprofile', [UsersController::class, 'profile'])->name('user.profile');
         Route::post('userprofile', [UsersController::class, 'profilePost'])->name('user.profile.post');
         Route::post('userprofile/settings', [UsersController::class, 'storeSetting'])->name('settings');
-
-        // Avatar
         Route::get('userprofile/avatar/url', [UsersController::class, 'getAvatarUrl'])->name('user.avatar.url');
         Route::post('userprofile/avatar/upload', [UsersController::class, 'avatarUpload'])->name('user.avatar.upload');
         Route::post('userprofile/avatar/gravatar', [UsersController::class, 'getAvatarFromGravatar'])->name('user.avatar.gravatar');
         Route::post('userprofile/avatar/delete', [UsersController::class, 'avatarDelete'])->name('user.avatar.delete');
 
         // Logs
-        Route::group(['prefix' => 'logs', 'as' => 'logs.'], function () {
-            Route::get('/', [LogViewerController::class, 'index'])->name('dashboard');
-            Route::group(['prefix' => 'list'], function () {
-                Route::get('/', [LogViewerController::class, 'listLogs'])->name('list');
-                Route::delete('delete', [LogViewerController::class, 'delete'])->name('delete');
+        if(config('boilerplate.app.logs')) {
+            Route::group(['prefix' => 'logs', 'as' => 'logs.', 'middleware' => ['ability:admin,logs']], function () {
+                Route::get('/', [LogViewerController::class, 'index'])->name('dashboard');
+                Route::group(['prefix' => 'list'], function () {
+                    Route::get('/', [LogViewerController::class, 'listLogs'])->name('list');
+                    Route::delete('delete', [LogViewerController::class, 'delete'])->name('delete');
 
-                Route::group(['prefix' => '{date}'], function () {
-                    Route::get('/', [LogViewerController::class, 'show'])->name('show');
-                    Route::get('download', [LogViewerController::class, 'download'])->name('download');
-                    Route::get('{level}', [LogViewerController::class, 'showByLevel'])->name('filter');
+                    Route::group(['prefix' => '{date}'], function () {
+                        Route::get('/', [LogViewerController::class, 'show'])->name('show');
+                        Route::get('download', [LogViewerController::class, 'download'])->name('download');
+                        Route::get('{level}', [LogViewerController::class, 'showByLevel'])->name('filter');
+                    });
                 });
             });
-        });
+        }
     });
 });

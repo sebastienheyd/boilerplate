@@ -13,22 +13,6 @@ class LogViewerController extends ArcanedevController
     protected $showRoute = 'boilerplate.logs.show';
 
     /**
-     * LogViewerController constructor.
-     *
-     * @param  LogViewerContract  $logViewer
-     */
-    public function __construct(LogViewerContract $logViewer)
-    {
-        $this->middleware('ability:admin,logs');
-
-        if (! config('boilerplate.app.logs')) {
-            abort('404');
-        }
-
-        parent::__construct($logViewer);
-    }
-
-    /**
      * Get overloaded view.
      *
      * @param  string  $view
