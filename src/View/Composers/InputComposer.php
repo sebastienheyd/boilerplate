@@ -12,6 +12,7 @@ class InputComposer extends ComponentComposer
         'appendText',
         'append-text',
         'class',
+        'clearable',
         'errors',
         'groupClass',
         'group-class',

@@ -278,6 +278,29 @@ aside.control-sidebar {
   }
 }
 
+.input-clearable {
+  position: relative;
+
+  input {
+    position: relative;
+    padding-right: 1.5rem;
+  }
+
+  .fa {
+    position: absolute;
+    top: 50%;
+    right: .5rem;
+    z-index: 2;
+    opacity: .5;
+    cursor: pointer;
+    display: none;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
 .daterangepicker-input {
   width: 100%;
   background: none;

@@ -27,7 +27,14 @@
 @elseif($type === 'select')
     {!! Form::select($name, $options ?? [], old($name, $value ?? ''), array_merge(['class' => 'form-control'.$errors->first($nameDot,' is-invalid').(isset($class) ? ' '.$class : '')], $attributes)) !!}
 @else
-    {!! Form::{$type ?? 'text'}($name, old($name, $value ?? ''), array_merge(['class' => 'form-control'.$errors->first($nameDot,' is-invalid').(isset($class) ? ' '.$class : '')], $attributes)) !!}
+@if($clearable ?? false)
+    <div class="input-clearable">
+        <span class="fa fa-times fa-xs"{!! old($name, $value ?? '') !== '' ? ' style="display:block"' : '' !!}></span>
+@endif
+        {!! Form::{$type ?? 'text'}($name, old($name, $value ?? ''), array_merge(['class' => 'form-control'.$errors->first($nameDot,' is-invalid').(isset($class) ? ' '.$class : '')], $attributes)) !!}
+@if($clearable ?? false)
+    </div>
+@endif
 @endif
 @if($append || $appendText)
         <div class="input-group-append">

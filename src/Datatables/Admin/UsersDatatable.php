@@ -60,12 +60,15 @@ class UsersDatatable extends Datatable
                 ->filterOptions([__('boilerplate::users.inactive'), __('boilerplate::users.active')]),
 
             Column::add(__('Last name'))
+                ->width('12%')
                 ->data('last_name'),
 
             Column::add(__('First name'))
+                ->width('12%')
                 ->data('first_name'),
 
             Column::add(__('Email'))
+                ->width('12%')
                 ->data('email'),
 
             Column::add(__('boilerplate::users.list.roles'))
@@ -85,11 +88,13 @@ class UsersDatatable extends Datatable
                 }),
 
             Column::add(__('Created at'))
+                ->width('12%')
                 ->data('created_at')
                 ->name('users.created_at')
                 ->dateFormat(),
 
             Column::add(__('boilerplate::users.list.lastconnect'))
+                ->width('12%')
                 ->data('last_login')
                 ->fromNow(),
 

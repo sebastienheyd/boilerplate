@@ -190,7 +190,7 @@ $.fn.dataTable.loadFiltersState = function(instance, d) {
         }
 
         if(el.hasClass('dt-filter-text')) {
-            el.val(e.search.search);
+            el.val(e.search.search).trigger('keyup');
         }
 
         openFilters = true

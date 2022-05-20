@@ -171,3 +171,16 @@ $(() => {
         p.attr('type', p.attr('type') === 'text' ? 'password' : 'text');
     });
 })
+
+$(document).on('keyup', '.input-clearable input', function() {
+    $(this).parent().find('.fa').hide();
+
+    if ($(this).val() !== '') {
+        $(this).parent().find('.fa').show();
+    }
+});
+
+$(document).on('click', '.input-clearable .fa', function() {
+    let input = $(this).parent().find('input');
+    input.val('').trigger('keyup');
+});
