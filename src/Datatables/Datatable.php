@@ -59,7 +59,7 @@ abstract class Datatable
             $datatable = DataTables::of($this->datasource() ?? []);
         }
 
-        if($this->filter) {
+        if ($this->filter) {
             $datatable->filter($this->filter);
         }
 
