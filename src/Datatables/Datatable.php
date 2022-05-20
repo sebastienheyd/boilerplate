@@ -14,6 +14,7 @@ abstract class Datatable
     protected $datasource;
     protected $checkboxes = false;
     protected $checkboxesField = 'id';
+    protected $filter;
     protected $filteredRecords;
     protected $offset;
     protected $rowAttr;
@@ -56,6 +57,10 @@ abstract class Datatable
             $datatable = $this->datasource();
         } else {
             $datatable = DataTables::of($this->datasource() ?? []);
+        }
+
+        if($this->filter) {
+            $datatable->filter($this->filter);
         }
 
         if ($this->offset) {
@@ -202,7 +207,7 @@ abstract class Datatable
      * @param  mixed  ...$permissions
      * @return $this
      */
-    public function permissions(...$permissions)
+    public function permissions(...$permissions): Datatable
     {
         $this->permissions = is_array($permissions[0]) ? $permissions[0] : $permissions;
 
@@ -215,7 +220,7 @@ abstract class Datatable
      * @param  mixed  ...$buttons
      * @return $this
      */
-    public function buttons(...$buttons)
+    public function buttons(...$buttons): Datatable
     {
         if (is_array($buttons[0])) {
             $buttons = $buttons[0];
@@ -256,7 +261,7 @@ abstract class Datatable
      * @param  string|Closure  $rowAttr
      * @return $this
      */
-    public function setRowAttr($rowAttr)
+    public function setRowAttr($rowAttr): Datatable
     {
         $this->rowAttr = $rowAttr;
 
@@ -269,7 +274,7 @@ abstract class Datatable
      * @param  string|Closure  $rowClass
      * @return $this
      */
-    public function setRowClass($rowClass)
+    public function setRowClass($rowClass): Datatable
     {
         $this->rowClass = $rowClass;
 
@@ -282,7 +287,7 @@ abstract class Datatable
      * @param  string|Closure  $rowData
      * @return $this
      */
-    public function setRowData($rowData)
+    public function setRowData($rowData): Datatable
     {
         $this->rowData = $rowData;
 
@@ -295,9 +300,22 @@ abstract class Datatable
      * @param  string|Closure  $rowId
      * @return $this
      */
-    public function setRowId($rowId)
+    public function setRowId($rowId): Datatable
     {
         $this->rowId = $rowId;
+
+        return $this;
+    }
+
+    /**
+     * Manual filtering.
+     *
+     * @param  Closure  $query
+     * @return $this
+     */
+    public function filter(Closure $query): Datatable
+    {
+        $this->filter = $query;
 
         return $this;
     }
