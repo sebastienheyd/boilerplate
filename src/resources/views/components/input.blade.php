@@ -29,9 +29,9 @@
 @else
 @if($clearable ?? false)
     <div class="input-clearable">
-        <span class="fa fa-times fa-xs"{!! old($name, $value ?? '') !== '' ? ' style="display:block"' : '' !!}></span>
+    <span class="fa fa-times fa-xs"{!! old($name, $value ?? '') !== '' ? ' style="display:block"' : '' !!}></span>
 @endif
-        {!! Form::{$type ?? 'text'}($name, old($name, $value ?? ''), array_merge(['class' => 'form-control'.$errors->first($nameDot,' is-invalid').(isset($class) ? ' '.$class : '')], $attributes)) !!}
+    {!! Form::{$type ?? 'text'}($name, old($name, $value ?? ''), array_merge(['class' => 'form-control'.$errors->first($nameDot,' is-invalid').(isset($class) ? ' '.$class : '')], $attributes)) !!}
 @if($clearable ?? false)
     </div>
 @endif

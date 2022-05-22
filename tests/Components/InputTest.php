@@ -78,16 +78,19 @@ HTML;
     {
         $expected = <<<'HTML'
 <div class="form-group">
+    <div class="input-clearable">
+    <span class="fa fa-times fa-xs"></span>
     <input class="form-control test-field" data-attr="test" autocomplete="off" name="test" type="text" value="">
+    </div>
 </div>
 HTML;
 
         if ($this->isLaravelEqualOrGreaterThan7) {
-            $view = $this->blade('<x-boilerplate::input name="test" class="test-field" data-attr="test" />');
+            $view = $this->blade('<x-boilerplate::input name="test" class="test-field" data-attr="test" :clearable="true" />');
             $this->assertEquals($expected, $view);
         }
 
-        $view = $this->blade("@component('boilerplate::input', ['name' => 'test', 'class' => 'test-field', 'data-attr' => 'test']) @endcomponent");
+        $view = $this->blade("@component('boilerplate::input', ['name' => 'test', 'class' => 'test-field', 'data-attr' => 'test', 'clearable' => true]) @endcomponent");
         $this->assertEquals($expected, $view);
     }
 
