@@ -48,7 +48,7 @@
 @component('boilerplate::minify')
 <script>
     whenAssetIsLoaded('daterangepicker', () => {
-        $('input[name="{{ $name }}[value]"]').daterangepicker({
+        window.{{ 'DRP_'.\Str::camel($name) }} = $('input[name="{{ $name }}[value]"]').daterangepicker({
             showDropdowns: true,
             opens: "{{ $alignment ?? 'right' }}",
             @if(!empty($minDate))

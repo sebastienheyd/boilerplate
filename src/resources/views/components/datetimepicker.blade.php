@@ -38,7 +38,7 @@
 @component('boilerplate::minify')
 <script>
     whenAssetIsLoaded('datetimepicker', () => {
-        $('#{{ $id }}').datetimepicker({
+        window.{{ 'DTP_'.\Str::camel($name) }} = $('#{{ $id }}').datetimepicker({
             format: "{{ $format }}",
             buttons: {
                 showToday: {{ $showToday ?? 'false' }},

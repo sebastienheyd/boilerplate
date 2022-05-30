@@ -17,7 +17,7 @@
 @component('boilerplate::minify')
 <script>
     whenAssetIsLoaded('{!! mix('/plugins/tinymce/tinymce.min.js', '/assets/vendor/boilerplate') !!}', () => {
-        tinymce.init({
+        window.{{ 'MCE_'.\Str::camel($id) }} = tinymce.init({
             selector: '#{{ $id }}',
             toolbar_sticky: {{ ($sticky ?? false) ? 'true' : 'false' }},
             @if(setting('darkmode', false) && config('boilerplate.theme.darkmode'))

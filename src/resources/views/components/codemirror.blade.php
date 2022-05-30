@@ -21,7 +21,7 @@
         intervals[uid] = setInterval(function() {
             if($('#{{ $id }}').is(':visible')){
                 clearInterval(intervals[uid]);
-                $('#{{ $id }}').codemirror({ {!! $options ?? '' !!} });
+                window.{{ 'CM_'.\Str::camel($id) }} = $('#{{ $id }}').codemirror({ {!! $options ?? '' !!} });
             }
         });
     })

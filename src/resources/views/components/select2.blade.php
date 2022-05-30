@@ -28,7 +28,7 @@
 @component('boilerplate::minify')
     <script>
         whenAssetIsLoaded('select2', () => {
-            $('#{{ $id }}').select2({
+            window.{{ 'S2_'.\Str::camel($id) }} = $('#{{ $id }}').select2({
                 placeholder: '{{ $placeholder ?? '—' }}',
                 allowClear: {{ $allowClear }},
                 language: "{{ App::getLocale() }}",

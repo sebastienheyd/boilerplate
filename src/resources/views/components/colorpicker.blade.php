@@ -21,7 +21,7 @@
 @component('boilerplate::minify')
     <script>
         whenAssetIsLoaded('ColorPicker', () => {
-            $('#{{ $id }}').spectrum({
+            window.{{ 'CP_'.\Str::camel($id) }} = $('#{{ $id }}').spectrum({
                 allowEmpty:true,
                 showInput: true,
                 showInitial: true,
