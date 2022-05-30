@@ -32,7 +32,7 @@ HTML;
     <input autocomplete="off" name="range[start]" type="hidden" value="">
     <input autocomplete="off" name="range[end]" type="hidden" value="">
 </div>
-<script>loadScript('',()=>{moment.locale('en');registerAsset('momentjs')});</script><script>loadStylesheet("");whenAssetIsLoaded('momentjs',()=>{loadScript("",()=>{registerAsset('daterangepicker');$.fn.daterangepicker.defaultOptions={locale:{"applyLabel":"Apply","cancelLabel":"Cancel","fromLabel":"From","toLabel":"To","customRangeLabel":"Custom",}}})});</script><script>whenAssetIsLoaded('daterangepicker',()=>{$('input[name="range[value]"]').daterangepicker({showDropdowns:!0,opens:"right",timePicker:!1,timePickerIncrement:1,timePicker24Hour:!0,timePickerSeconds:!1,autoUpdateInput:!1,startDate:moment(),endDate:moment(),locale:{format:'YYYY-MM-DD'}}).on('apply.daterangepicker',applyDateRangePicker)});</script>
+<script>loadScript('',()=>{moment.locale('en');registerAsset('momentjs')});</script><script>loadStylesheet("");whenAssetIsLoaded('momentjs',()=>{loadScript("",()=>{registerAsset('daterangepicker');$.fn.daterangepicker.defaultOptions={locale:{"applyLabel":"Apply","cancelLabel":"Cancel","fromLabel":"From","toLabel":"To","customRangeLabel":"Custom",}}})});</script><script>whenAssetIsLoaded('daterangepicker',()=>{window.DRP_range=$('input[name="range[value]"]').daterangepicker({showDropdowns:!0,opens:"right",timePicker:!1,timePickerIncrement:1,timePicker24Hour:!0,timePickerSeconds:!1,autoUpdateInput:!1,startDate:moment(),endDate:moment(),locale:{format:'YYYY-MM-DD'}}).on('apply.daterangepicker',applyDateRangePicker)});</script>
 HTML;
 
         if ($this->isLaravelEqualOrGreaterThan7) {
@@ -64,7 +64,7 @@ HTML;
     <input autocomplete="off" name="range[start]" type="hidden" value="1970-01-01 00:00:00">
     <input autocomplete="off" name="range[end]" type="hidden" value="2021-11-20 09:27:57">
 </div>
-<script>loadScript('',()=>{moment.locale('en');registerAsset('momentjs')});</script><script>loadStylesheet("");whenAssetIsLoaded('momentjs',()=>{loadScript("",()=>{registerAsset('daterangepicker');$.fn.daterangepicker.defaultOptions={locale:{"applyLabel":"Apply","cancelLabel":"Cancel","fromLabel":"From","toLabel":"To","customRangeLabel":"Custom",}}})});</script><script>whenAssetIsLoaded('daterangepicker',()=>{$('input[name="range[value]"]').daterangepicker({showDropdowns:!0,opens:"right",timePicker:!1,timePickerIncrement:1,timePicker24Hour:!0,timePickerSeconds:!1,autoUpdateInput:!0,startDate:moment("1970-01-01 00:00:00"),endDate:moment("2021-11-20 09:27:57"),locale:{format:'YYYY-MM-DD'}}).on('apply.daterangepicker',applyDateRangePicker)});</script>
+<script>loadScript('',()=>{moment.locale('en');registerAsset('momentjs')});</script><script>loadStylesheet("");whenAssetIsLoaded('momentjs',()=>{loadScript("",()=>{registerAsset('daterangepicker');$.fn.daterangepicker.defaultOptions={locale:{"applyLabel":"Apply","cancelLabel":"Cancel","fromLabel":"From","toLabel":"To","customRangeLabel":"Custom",}}})});</script><script>whenAssetIsLoaded('daterangepicker',()=>{window.DRP_range=$('input[name="range[value]"]').daterangepicker({showDropdowns:!0,opens:"right",timePicker:!1,timePickerIncrement:1,timePicker24Hour:!0,timePickerSeconds:!1,autoUpdateInput:!0,startDate:moment("1970-01-01 00:00:00"),endDate:moment("2021-11-20 09:27:57"),locale:{format:'YYYY-MM-DD'}}).on('apply.daterangepicker',applyDateRangePicker)});</script>
 HTML;
 
         if ($this->isLaravelEqualOrGreaterThan7) {
