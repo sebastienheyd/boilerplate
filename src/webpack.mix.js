@@ -132,3 +132,7 @@ mix.copy('node_modules/admin-lte/plugins/fullcalendar/locales/*', 'public/plugin
 
 mix.sass('resources/assets/scss/colorpicker.scss', 'public/plugins/spectrum-colorpicker2/spectrum.min.css');
 mix.copy('node_modules/spectrum-colorpicker2/dist/spectrum.min.js', 'public/plugins/spectrum-colorpicker2');
+
+// ============== Pusher ==============
+
+mix.copy('node_modules/pusher-js/dist/web/pusher.min.js', 'public/plugins/pusher/pusher.min.js');
