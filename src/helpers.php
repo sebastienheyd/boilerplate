@@ -34,7 +34,7 @@ if (! function_exists('pusher')) {
     {
         $config = config('broadcasting.connections.pusher');
         foreach (['key', 'secret', 'app_id'] as $k) {
-            if(empty($config[$k])) {
+            if (empty($config[$k])) {
                 return false;
             }
         }
