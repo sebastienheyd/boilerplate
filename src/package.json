@@ -29,6 +29,7 @@
         "fix": "^0.0.6",
         "fullcalendar": "^5.10.1",
         "moment": "^2.29.1",
+        "pusher-js": "^7.0",
         "spectrum-colorpicker2": "^2.0.8",
         "tinymce": "^5.10.3"
     }

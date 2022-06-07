@@ -28,3 +28,32 @@ if (! function_exists('setting')) {
         return $default;
     }
 }
+
+if (! function_exists('pusher')) {
+    function pusher($event = null, $data = [])
+    {
+        $config = config('broadcasting.connections.pusher');
+        foreach (['key', 'secret', 'app_id'] as $k) {
+            if (empty($config[$k])) {
+                return false;
+            }
+        }
+
+        try {
+            $pusher = new \Pusher\Pusher(
+                config('broadcasting.connections.pusher.key'),
+                config('broadcasting.connections.pusher.secret'),
+                config('broadcasting.connections.pusher.app_id'),
+                ['cluster' => config('broadcasting.connections.pusher.options.cluster', 'eu'), 'encrypted' => true]
+            );
+        } catch (\Exception $e) {
+            return false;
+        }
+
+        if ($event === null) {
+            return $pusher;
+        }
+
+        return $pusher->trigger(md5(config('app.name').config('app.env')), $event, $data);
+    }
+}

@@ -109,6 +109,17 @@ function toggleTinyMceSkin(skin, css)
     });
 }
 
+window.pusher = function(event, callback, fallback) {
+    if (typeof window.pshr === 'undefined') {
+        if (typeof fallback === 'function') {
+            fallback();
+        }
+        return;
+    }
+
+    window.pshr.bind(event, callback);
+}
+
 $(() => {
     $(document).tooltip({
         container: 'body',
