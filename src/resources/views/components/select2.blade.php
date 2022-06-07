@@ -41,6 +41,14 @@
                 ajax: {
                     delay: 200,
                     url: '{{ $ajax }}',
+                    @isset($model)
+                    data: function (param) {
+                        return {
+                            q: param.term,
+                            model: "{!! str_replace('\\', '\\\\', $model) !!}",
+                        }
+                    },
+                    @endisset
                     method: 'post'
                 }
                 @endisset

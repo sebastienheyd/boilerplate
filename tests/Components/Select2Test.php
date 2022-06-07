@@ -70,4 +70,25 @@ HTML;
             $this->assertEquals($expected, $view);
         }
     }
+
+    public function testSelect2Model()
+    {
+        $expected = <<<'HTML'
+<div class="form-group">
+    <select id="test" name="user" class="form-control" style="visibility:hidden;height:1rem" autocomplete="off">
+        <option></option>
+        
+    </select>
+</div>
+<script>loadStylesheet('');loadScript('',()=>{loadScript('',()=>{registerAsset('select2',()=>{$.extend(!0,$.fn.select2.defaults,{language:'en',direction:'ltr'});$(document).on('select2:open',(e)=>{let t=$(e.target);if(t&&t.length){let id=t[0].id||t[0].name;document.querySelector(`input[aria-controls*='${id}']`).focus()}})})})});</script><script>whenAssetIsLoaded('select2',()=>{window.S2_test=$('#test').select2({placeholder:'—',allowClear:!1,language:"en",direction:"ltr",minimumInputLength:0,minimumResultsForSearch:10,width:'100%',dropdownAutoWidth:!0,ajax:{delay:200,url:'/admin/select2',data:function(param){return{q:param.term,model:"Sebastienheyd\\Boilerplate\\Models\\User,first_name",}},method:'post'}})})</script>
+HTML;
+
+        $view = $this->blade("@component('boilerplate::select2', ['id' => 'test', 'model' => 'Sebastienheyd\Boilerplate\Models\User,first_name'])@endcomponent()@stack('js')");
+        $this->assertEquals($expected, $view);
+
+        if ($this->isLaravelEqualOrGreaterThan7) {
+            $view = $this->blade('<x-boilerplate::select2 id="test" model="Sebastienheyd\Boilerplate\Models\User,first_name" />@stack("js")');
+            $this->assertEquals($expected, $view);
+        }
+    }
 }

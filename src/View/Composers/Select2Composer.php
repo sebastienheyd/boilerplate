@@ -19,6 +19,7 @@ class Select2Composer extends ComponentComposer
         'label',
         'minimum-input-length',
         'minimum-results-for-search',
+        'model',
         'name',
         'options',
         'placeholder',
@@ -30,6 +31,16 @@ class Select2Composer extends ComponentComposer
         parent::compose($view);
 
         $data = $view->getData();
+
+        if (! empty($data['model'])) {
+            if (! preg_match('#^([^,]+),([A-Za-z_\-]+)(,([A-Za-z\-]+))?$#', $data['model'], $m)) {
+                throw new \ErrorException('Select2 component model format is incorrect');
+            }
+
+            $view->with('name', $data['name'] ?? strtolower(class_basename($m[1])));
+            $view->with('model', $data['model']);
+            $view->with('ajax', route('boilerplate.select2', [], false));
+        }
 
         if (empty($data['id'])) {
             $view->with('id', uniqid('select2_'));

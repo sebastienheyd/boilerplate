@@ -7,6 +7,7 @@ use Sebastienheyd\Boilerplate\Controllers\Auth\ResetPasswordController;
 use Sebastienheyd\Boilerplate\Controllers\DatatablesController;
 use Sebastienheyd\Boilerplate\Controllers\LanguageController;
 use Sebastienheyd\Boilerplate\Controllers\Logs\LogViewerController;
+use Sebastienheyd\Boilerplate\Controllers\Select2Controller;
 use Sebastienheyd\Boilerplate\Controllers\Users\RolesController;
 use Sebastienheyd\Boilerplate\Controllers\Users\UsersController;
 
@@ -60,6 +61,9 @@ Route::group([
 
         // Datatables
         Route::post('datatables/{slug}', [DatatablesController::class, 'make'])->name('datatables');
+
+        // Select2
+        Route::post('select2', [Select2Controller::class, 'make'])->name('select2');
 
         // Roles and users
         Route::resource('roles', RolesController::class)->except('show')->middleware(['ability:admin,roles_crud']);
