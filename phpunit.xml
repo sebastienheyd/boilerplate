@@ -9,6 +9,9 @@
          convertWarningsToExceptions="true"
          processIsolation="false"
          stopOnFailure="false">
+    <php>
+        <env name="APP_KEY" value="base64:Wo2VgRys/LE/wWcQhIh3GrKb+3GbvE0TEq41WMm1UkQ="/>
+    </php>
     <testsuites>
         <testsuite name="Boilerplate Test Suite">
             <directory suffix="Test.php">tests</directory>
