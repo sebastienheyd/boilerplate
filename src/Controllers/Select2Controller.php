@@ -8,11 +8,18 @@ class Select2Controller
 {
     public function make(Request $request)
     {
+        // Only ajax calls
         if (! $request->isXmlHttpRequest()) {
             abort(404);
         }
 
-        if (! preg_match('#^([^,]+),([A-Za-z_\-]+)(,([A-Za-z\-]+))?$#', $request->post('model'), $m)) {
+        // Check model format
+        if (! preg_match('#^([^,]+),([A-Za-z_\-]+)(,([A-Za-z_\-]+))?$#', $request->post('model'), $m)) {
+            abort(500);
+        }
+
+        // Check signature to avoid using of forbidden fields
+        if (decrypt($request->post('s', '')) !== $request->post('model')) {
             abort(500);
         }
 
@@ -31,7 +38,8 @@ class Select2Controller
                 ->where($m[2], 'like', "%$q%")
                 ->orderBy('m1', 'desc')
                 ->orderBy('m2', 'desc')
-                ->limit(10)
+                ->orderBy('text', 'asc')
+                ->limit($request->post('length', 10))
                 ->get()
                 ->toArray(),
         ]);

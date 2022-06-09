@@ -33,7 +33,7 @@
                 allowClear: {{ $allowClear }},
                 language: "{{ App::getLocale() }}",
                 direction: "@lang('boilerplate::layout.direction')",
-                minimumInputLength: {{ $minimumInputLength ?? 0 }},
+                minimumInputLength: {{ $minimumInputLength ?? intval(isset($model)) }},
                 minimumResultsForSearch: {{ $minimumResultsForSearch ?? 10 }},
                 width: '100%',
                 dropdownAutoWidth: true,
@@ -46,6 +46,8 @@
                         return {
                             q: param.term,
                             model: "{!! str_replace('\\', '\\\\', $model) !!}",
+                            length: {{ $maxLength ?? 10 }},
+                            s: "{{ encrypt($model) }}"
                         }
                     },
                     @endisset
