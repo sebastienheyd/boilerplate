@@ -1,5 +1,6 @@
 <?php
 
+use Sebastienheyd\Boilerplate\Controllers\Auth\BroadcastController;
 use Sebastienheyd\Boilerplate\Controllers\Auth\ForgotPasswordController;
 use Sebastienheyd\Boilerplate\Controllers\Auth\LoginController;
 use Sebastienheyd\Boilerplate\Controllers\Auth\RegisterController;
@@ -55,6 +56,9 @@ Route::group([
     Route::group(['middleware' => ['boilerplate.auth', 'ability:admin,backend_access', 'boilerplate.emailverified']], function () {
         // Dashboard
         Route::get('/', [config('boilerplate.menu.dashboard'), 'index'])->name('dashboard');
+
+        // Pusher auth
+        Route::post('/pusher/auth', [BroadcastController::class, 'pusherAuth'])->name('pusher.auth');
 
         // Session keep-alive
         Route::post('keep-alive', [UsersController::class, 'keepAlive'])->name('keepalive');
