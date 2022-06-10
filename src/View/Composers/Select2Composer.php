@@ -45,7 +45,10 @@ class Select2Composer extends ComponentComposer
 
             if ($data['selected'] ?? false) {
                 $key = $m[4] ?? (new $m[1])->getKeyName();
-                $view->with('options', (new $m[1])->where($key, $data['selected'])->pluck($m[2], $key)->toArray());
+                $view->with('options', (new $m[1])
+                    ->whereIn($key, is_array($data['selected']) ? $data['selected'] : [$data['selected']])
+                    ->pluck($m[2], $key)
+                    ->toArray());
             }
         }
 
