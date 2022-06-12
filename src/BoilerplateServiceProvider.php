@@ -2,11 +2,13 @@
 
 namespace Sebastienheyd\Boilerplate;
 
+use App\Providers\BroadcastServiceProvider;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
@@ -80,6 +82,9 @@ class BoilerplateServiceProvider extends ServiceProvider
         // Load view composers
         $this->viewComposers();
 
+        // Load pusher
+        $this->loadPusher();
+
         // Load directives
         if (version_compare($this->app->version(), '7.0', '<')) {
             $this->bladeDirectives();
@@ -128,6 +133,17 @@ class BoilerplateServiceProvider extends ServiceProvider
             Console\Permission::class,
             Console\Scaffold::class,
         ]);
+    }
+
+    private function loadPusher()
+    {
+        if (config('broadcasting.default') !== 'pusher' ||
+            ! empty(app()->getProviders(BroadcastServiceProvider::class))) {
+            return;
+        }
+
+        Broadcast::routes();
+        require base_path('routes/channels.php');
     }
 
     /**
