@@ -10,6 +10,7 @@
 @if(config('broadcasting.connections.pusher.options.host', false))
             wsHost: '{{ config('broadcasting.connections.pusher.options.host') }}',
             forceTLS: false,
+            encrypted: true,
             enabledTransports: ['ws', 'wss'],
             disableStats: true,
 @endif
