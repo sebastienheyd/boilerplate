@@ -26,7 +26,6 @@ class RefreshDatatable implements ShouldBroadcast
 
     public function broadcastOn()
     {
-        $signature = md5($this->name.config('app.key'));
-        return new PrivateChannel("datatable.$this->name.$signature");
+        return new PrivateChannel(channel_hash('dt', $this->name));
     }
 }

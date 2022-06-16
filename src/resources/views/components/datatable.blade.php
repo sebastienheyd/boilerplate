@@ -96,7 +96,7 @@
         });
 
         whenAssetIsLoaded('echo', function() {
-            Echo.private('datatable.{{ $name }}.{{ md5($name.config('app.key')) }}')
+            Echo.private('{{ channel_hash('dt', $name) }}')
                 .listen('.RefreshDatatable', (res) => {
                     if (res.name === '{{ $name }}') {
                         window.{{ \Str::camel($id) }}.draw('full-hold');

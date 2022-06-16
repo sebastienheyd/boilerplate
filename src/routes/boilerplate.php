@@ -98,8 +98,8 @@ Route::group([
             });
         }
 
-        Broadcast::channel('datatable.{name}.{signature}', function ($user, $name, $signature) {
-            return $signature === md5($name.config('app.key'));
+        Broadcast::channel('dt.{name}.{signature}', function ($user, $name, $signature) {
+            return channel_hash_equals($signature, 'dt', $name);
         });
     });
 });
