@@ -7,7 +7,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Sebastienheyd\Boilerplate\Models\User;
 
-class UserDeleted
+class UserSaved
 {
     use Dispatchable;
     use InteractsWithSockets;
