@@ -14,7 +14,7 @@ class Select2Controller
         }
 
         // Check model format
-        if (! preg_match('#^([^,]+),([A-Za-z_\-]+)(,([A-Za-z_\-]+))?$#', $request->post('model'), $m)) {
+        if (! preg_match('#^([^,]+),([A-Za-z0-9_\-]+)(,([A-Za-z0-9_\-]+))?$#', $request->post('model'), $m)) {
             abort(500);
         }
 
