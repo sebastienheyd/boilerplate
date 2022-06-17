@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Intervention\Image\Facades\Image;
-use Sebastienheyd\Boilerplate\Events\RefreshDatatable;
 use Sebastienheyd\Boilerplate\Rules\Password;
 
 class UsersController extends Controller

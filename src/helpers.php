@@ -33,6 +33,7 @@ if (! function_exists('channel_hash')) {
     function channel_hash(...$values): string
     {
         $signature = md5(join('|', $values).config('app.key').config('app.url'));
+
         return join('.', array_merge($values, [$signature]));
     }
 }
