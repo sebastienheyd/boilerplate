@@ -37,6 +37,7 @@
                 minimumResultsForSearch: {{ $minimumResultsForSearch ?? 10 }},
                 width: '100%',
                 dropdownAutoWidth: true,
+                dropdownParent: $('#{{ $id }}').parent(),
                 @isset($ajax)
                 ajax: {
                     delay: 200,
