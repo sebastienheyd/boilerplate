@@ -8,6 +8,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Session;
 use Laratrust\Traits\LaratrustUserTrait;
 use Sebastienheyd\Boilerplate\Events\UserCreated;
 use Sebastienheyd\Boilerplate\Events\UserDeleted;
@@ -40,6 +41,37 @@ class User extends Authenticatable implements MustVerifyEmail
         'forceDeleted' => UserDeleted::class,
         'created'      => UserCreated::class,
     ];
+
+    /**
+     * Set the id of the user to be impersonated
+     *
+     * @param integer $id
+     * @return void
+     */
+    public function setImpersonating($id)
+    {
+        Session::put('impersonate', $id);
+    }
+
+    /**
+     * Delete the id of the user being impersonated
+     *
+     * @return void
+     */
+    public function stopImpersonating()
+    {
+        Session::forget('impersonate');
+    }
+
+    /**
+     * Check if the current user is a normal user or an admin impersonating a user
+     *
+     * @return boolean
+     */
+    public function isImpersonating(): bool
+    {
+        return Session::has('impersonate');
+    }
 
     /**
      * Send the email verification notification.

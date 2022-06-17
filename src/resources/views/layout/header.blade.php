@@ -15,6 +15,34 @@
         @foreach(app('boilerplate.navbar.items')->getItems('right') as $view)
         {!! $view !!}
         @endforeach
+        @if(config('boilerplate.app.allowImpersonate'))
+            @if(Auth::user()->hasRole('admin') || Auth::user()->isImpersonating())
+                @if(Auth::user()->isImpersonating())
+                    <div>
+                        @lang('boilerplate::impersonate.viewing_as', Auth::user()->name)<br>
+                        <a id="stop-impersonate" href="{{ route('boilerplate.impersonate.stop') }}">@lang('boilerplate::impersonate.stop_impersonate')</a>
+                    </div>
+                @else
+                    <x-boilerplate::select2 id="impersonate-user" name="impersonate-user" :ajax="route('boilerplate.impersonate.select')" placeholder="@lang('boilerplate::impersonate.user_placeholder')"></x-boilerplate::select2>
+                @endif
+            @endif
+            @component('boilerplate::minify')
+                <script>
+                    $(function() {
+                        $('#impersonate-user').on('select2:select', function(e) {
+                            var user = e.params.data;
+                            $.ajax({
+                                url: '{{ route('boilerplate.impersonate.user', ':id') }}'.replace(':id', user.id),
+                                method: 'POST',
+                                success: (res) => {
+                                    location.reload();
+                                }
+                            })
+                        });
+                    });
+                </script>
+            @endcomponent
+        @endif
         <ul class="nav navbar-nav">
             @if(config('boilerplate.locale.switch', false))
             <li class="nav-item dropdown">

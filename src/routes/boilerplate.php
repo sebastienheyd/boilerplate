@@ -20,6 +20,11 @@ Route::group([
     // Language switch
     Route::get('lang/{lang}', [LanguageController::class, 'switch'])->name('lang.switch');
 
+    // Impersonate another user
+    Route::post('/impersonate/{id}/impersonate', ['as' => 'impersonate.user', 'uses' => 'ImpersonateController@impersonate']);
+    Route::get('/impersonate/stop', ['as' => 'impersonate.stop', 'uses' => 'ImpersonateController@stopImpersonate']);
+    Route::post('/impersonate/select', ['as' => 'impersonate.select', 'uses' => 'ImpersonateController@selectImpersonate']);
+
     // Logout
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
