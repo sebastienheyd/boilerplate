@@ -38,6 +38,7 @@
                 width: '100%',
                 dropdownAutoWidth: true,
                 dropdownParent: $('#{{ $id }}').parent(),
+                escapeMarkup: function(markup) { return markup },
                 @isset($ajax)
                 ajax: {
                     delay: 200,
@@ -46,9 +47,8 @@
                     data: function (param) {
                         return {
                             q: param.term,
-                            model: "{!! str_replace('\\', '\\\\', $model) !!}",
+                            m: "{{ encrypt($model) }}",
                             length: {{ $maxLength ?? 10 }},
-                            s: "{{ encrypt($model) }}"
                         }
                     },
                     @endisset
