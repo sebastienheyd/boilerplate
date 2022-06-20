@@ -6,7 +6,7 @@ use Illuminate\View\View;
 
 class Select2Composer extends ComponentComposer
 {
-    static $regex = '#^([^,|]+)[,|]([A-Za-z0-9_\-]+)([,|]([A-Za-z0-9_\-]+))?$#';
+    public static $regex = '#^([^,|]+)[,|]([A-Za-z0-9_\-]+)([,|]([A-Za-z0-9_\-]+))?$#';
 
     protected $props = [
         'allow-clear',

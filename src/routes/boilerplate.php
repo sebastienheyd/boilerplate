@@ -1,5 +1,6 @@
 <?php
 
+use App\Providers\BroadcastServiceProvider;
 use Sebastienheyd\Boilerplate\Controllers\Auth\ForgotPasswordController;
 use Sebastienheyd\Boilerplate\Controllers\Auth\LoginController;
 use Sebastienheyd\Boilerplate\Controllers\Auth\RegisterController;
@@ -98,8 +99,10 @@ Route::group([
             });
         }
 
-        Broadcast::channel('dt.{name}.{signature}', function ($user, $name, $signature) {
-            return channel_hash_equals($signature, 'dt', $name);
-        });
+        if (! empty(app()->getProviders(BroadcastServiceProvider::class))) {
+            Broadcast::channel('dt.{name}.{signature}', function ($user, $name, $signature) {
+                return channel_hash_equals($signature, 'dt', $name);
+            });
+        }
     });
 });
