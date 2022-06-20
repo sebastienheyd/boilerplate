@@ -3,7 +3,7 @@
 namespace Sebastienheyd\Boilerplate\Middleware;
 
 use Closure;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class BoilerplateImpersonate
 {
@@ -12,8 +12,7 @@ class BoilerplateImpersonate
      */
     public function handle($request, Closure $next)
     {
-        if($request->session()->has('impersonate'))
-        {
+        if ($request->session()->has('impersonate')) {
             Auth::onceUsingId($request->session()->get('impersonate'));
         }
 

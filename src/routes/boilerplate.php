@@ -10,6 +10,7 @@ use Sebastienheyd\Boilerplate\Controllers\Logs\LogViewerController;
 use Sebastienheyd\Boilerplate\Controllers\Select2Controller;
 use Sebastienheyd\Boilerplate\Controllers\Users\RolesController;
 use Sebastienheyd\Boilerplate\Controllers\Users\UsersController;
+use Sebastienheyd\Boilerplate\Controllers\ImpersonateController;
 
 Route::group([
     'prefix'     => config('boilerplate.app.prefix', ''),
@@ -21,9 +22,9 @@ Route::group([
     Route::get('lang/{lang}', [LanguageController::class, 'switch'])->name('lang.switch');
 
     // Impersonate another user
-    Route::post('/impersonate/{id}/impersonate', ['as' => 'impersonate.user', 'uses' => 'ImpersonateController@impersonate']);
-    Route::get('/impersonate/stop', ['as' => 'impersonate.stop', 'uses' => 'ImpersonateController@stopImpersonate']);
-    Route::post('/impersonate/select', ['as' => 'impersonate.select', 'uses' => 'ImpersonateController@selectImpersonate']);
+    Route::post('/impersonate/{id}/impersonate', [ImpersonateController::class, 'impersonate'])->name('impersonate.user');
+    Route::get('/impersonate/stop', [ImpersonateController::class, 'stopImpersonate'])->name('impersonate.stop');
+    Route::post('/impersonate/select', [ImpersonateController::class, 'selectImpersonate'])->name('impersonate.select');
 
     // Logout
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');

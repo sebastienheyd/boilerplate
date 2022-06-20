@@ -19,11 +19,11 @@
             @if(Auth::user()->hasRole('admin') || Auth::user()->isImpersonating())
                 @if(Auth::user()->isImpersonating())
                     <div>
-                        @lang('boilerplate::impersonate.viewing_as', Auth::user()->name)<br>
-                        <a id="stop-impersonate" href="{{ route('boilerplate.impersonate.stop') }}">@lang('boilerplate::impersonate.stop_impersonate')</a>
+                        {{ __('boilerplate::impersonate.viewing_as', ['name' => Auth::user()->name]) }}<br>
+                        <a id="stop-impersonate" href="{{ route('boilerplate.impersonate.stop') }}">{{ __('boilerplate::impersonate.stop_impersonate') }}</a>
                     </div>
                 @else
-                    <x-boilerplate::select2 id="impersonate-user" name="impersonate-user" :ajax="route('boilerplate.impersonate.select')" placeholder="@lang('boilerplate::impersonate.user_placeholder')"></x-boilerplate::select2>
+                    <x-boilerplate::select2 id="impersonate-user" name="impersonate-user" :ajax="route('boilerplate.impersonate.select')" :placeholder="__('boilerplate::impersonate.user_placeholder')"></x-boilerplate::select2>
                 @endif
             @endif
             @component('boilerplate::minify')
@@ -31,11 +31,17 @@
                     $(function() {
                         $('#impersonate-user').on('select2:select', function(e) {
                             var user = e.params.data;
+                            console.log(user);
                             $.ajax({
                                 url: '{{ route('boilerplate.impersonate.user', ':id') }}'.replace(':id', user.id),
                                 method: 'POST',
                                 success: (res) => {
-                                    location.reload();
+                                    if(!res.success) {
+                                        growl(res.msg, 'error');
+                                        $('#impersonate-user').val(null).trigger('change');
+                                    } else {
+                                        location.reload();
+                                    }
                                 }
                             })
                         });
