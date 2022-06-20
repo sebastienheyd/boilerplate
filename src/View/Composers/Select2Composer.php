@@ -6,6 +6,8 @@ use Illuminate\View\View;
 
 class Select2Composer extends ComponentComposer
 {
+    static $regex = '#^([^,|]+)[,|]([A-Za-z0-9_\-]+)([,|]([A-Za-z0-9_\-]+))?$#';
+
     protected $props = [
         'allow-clear',
         'class',
@@ -35,7 +37,7 @@ class Select2Composer extends ComponentComposer
         $data = $view->getData();
 
         if (! empty($data['model'])) {
-            if (! preg_match('#^([^,]+),([A-Za-z_\-]+)(,([A-Za-z_\-]+))?$#', $data['model'], $m)) {
+            if (! preg_match(self::$regex, $data['model'], $m)) {
                 throw new \ErrorException('Select2 component model format is incorrect');
             }
 

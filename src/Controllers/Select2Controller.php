@@ -3,6 +3,7 @@
 namespace Sebastienheyd\Boilerplate\Controllers;
 
 use Illuminate\Http\Request;
+use Sebastienheyd\Boilerplate\View\Composers\Select2Composer;
 
 class Select2Controller
 {
@@ -14,34 +15,47 @@ class Select2Controller
         }
 
         // Check model format
-        if (! preg_match('#^([^,]+),([A-Za-z_\-]+)(,([A-Za-z_\-]+))?$#', $request->post('model'), $m)) {
-            abort(500);
-        }
-
-        // Check signature to avoid using of forbidden fields
-        if (decrypt($request->post('s', '')) !== $request->post('model')) {
+        if (! preg_match(Select2Composer::$regex, decrypt($request->post('m')), $m)) {
             abort(500);
         }
 
         $model = $m[1];
         $key = $m[4] ?? (new $model)->getKeyName();
-        $q = $request->post('q');
+        $q = str_replace(' ', '%', $request->post('q'));
+        $query = $model::query()->limit($request->post('length', 10));
+
+        // The model has a scope ?
+        if (method_exists($model, 'scope'.$m[2])) {
+            $query->{lcfirst($m[2])}($q);
+
+            $results = $query->get()->map(function($item) {
+                return [
+                    'id' => $item->select2_id,
+                    'text' => $item->select2_text,
+                ];
+            });
+        } else {
+            // Generic query
+            $query->selectRaw(
+                '`'.$key.'`,`'.$m[2].'`,
+                CASE WHEN '.$m[2].' LIKE "'.$q.'%" THEN 100 ELSE 0 END AS m1,
+                CASE WHEN '.$m[2].' LIKE "%'.$q.'%" THEN 50 ELSE 0 END AS m2'
+            )
+            ->where(\DB::raw($m[2]), 'like', "%$q%")
+            ->orderBy('m1', 'desc')
+            ->orderBy('m2', 'desc')
+            ->orderBy($m[2], 'asc');
+
+            $results = $query->get()->map(function($item) use ($m, $key) {
+                return [
+                    'id' => $item->{$key},
+                    'text' => $item->{$m[2]},
+                ];
+            });
+        }
 
         return response()->json([
-            'results' => $model::query()
-                ->selectRaw(
-                    $key.' as id,
-                    '.$m[2].' as text, 
-                    CASE WHEN '.$m[2].' LIKE "'.$q.'%" THEN 100 ELSE 0 END AS m1,
-                    CASE WHEN '.$m[2].' LIKE "%'.$q.'%" THEN 50 ELSE 0 END AS m2'
-                )
-                ->where($m[2], 'like', "%$q%")
-                ->orderBy('m1', 'desc')
-                ->orderBy('m2', 'desc')
-                ->orderBy('text', 'asc')
-                ->limit($request->post('length', 10))
-                ->get()
-                ->toArray(),
+            'results' => $results->toArray(),
         ]);
     }
 }
