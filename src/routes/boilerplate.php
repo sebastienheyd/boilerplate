@@ -6,12 +6,12 @@ use Sebastienheyd\Boilerplate\Controllers\Auth\LoginController;
 use Sebastienheyd\Boilerplate\Controllers\Auth\RegisterController;
 use Sebastienheyd\Boilerplate\Controllers\Auth\ResetPasswordController;
 use Sebastienheyd\Boilerplate\Controllers\DatatablesController;
+use Sebastienheyd\Boilerplate\Controllers\ImpersonateController;
 use Sebastienheyd\Boilerplate\Controllers\LanguageController;
 use Sebastienheyd\Boilerplate\Controllers\Logs\LogViewerController;
 use Sebastienheyd\Boilerplate\Controllers\Select2Controller;
 use Sebastienheyd\Boilerplate\Controllers\Users\RolesController;
 use Sebastienheyd\Boilerplate\Controllers\Users\UsersController;
-use Sebastienheyd\Boilerplate\Controllers\ImpersonateController;
 
 Route::group([
     'prefix'     => config('boilerplate.app.prefix', ''),

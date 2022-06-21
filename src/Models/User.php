@@ -45,9 +45,9 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
-     * Set the id of the user to be impersonated
+     * Set the id of the user to be impersonated.
      *
-     * @param integer $id
+     * @param  int $id
      * @return void
      */
     public function setImpersonating($id)
@@ -56,7 +56,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * Delete the id of the user being impersonated
+     * Delete the id of the user being impersonated.
      *
      * @return void
      */
@@ -66,9 +66,9 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * Check if the current user is a normal user or an admin impersonating a user
+     * Check if the current user is a normal user or an admin impersonating a user.
      *
-     * @return boolean
+     * @return bool
      */
     public function isImpersonating(): bool
     {
