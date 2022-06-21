@@ -28,7 +28,7 @@ class Select2Controller
         if (method_exists($model, 'scope'.$m[2])) {
             $query->{lcfirst($m[2])}($q);
 
-            $results = $query->get()->map(function($item) {
+            $results = $query->get()->map(function ($item) {
                 return [
                     'id' => $item->select2_id,
                     'text' => $item->select2_text,
@@ -46,7 +46,7 @@ class Select2Controller
             ->orderBy('m2', 'desc')
             ->orderBy($m[2], 'asc');
 
-            $results = $query->get()->map(function($item) use ($m, $key) {
+            $results = $query->get()->map(function ($item) use ($m, $key) {
                 return [
                     'id' => $item->{$key},
                     'text' => $item->{$m[2]},

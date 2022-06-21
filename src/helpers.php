@@ -28,3 +28,19 @@ if (! function_exists('setting')) {
         return $default;
     }
 }
+
+if (! function_exists('channel_hash')) {
+    function channel_hash(...$values): string
+    {
+        $signature = md5(join('|', $values).config('app.key').config('app.url'));
+
+        return join('.', array_merge($values, [$signature]));
+    }
+}
+
+if (! function_exists('channel_hash_equals')) {
+    function channel_hash_equals($signature, ...$values): string
+    {
+        return $signature === md5(join('|', $values).config('app.key').config('app.url'));
+    }
+}

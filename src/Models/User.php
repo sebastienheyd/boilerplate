@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Session;
 use Laratrust\Traits\LaratrustUserTrait;
 use Sebastienheyd\Boilerplate\Events\UserCreated;
 use Sebastienheyd\Boilerplate\Events\UserDeleted;
+use Sebastienheyd\Boilerplate\Events\UserSaved;
 use Sebastienheyd\Boilerplate\Notifications\NewUser;
 use Sebastienheyd\Boilerplate\Notifications\ResetPassword;
 use Sebastienheyd\Boilerplate\Notifications\VerifyEmail;
@@ -38,8 +39,9 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $hidden = ['password', 'remember_token'];
 
     protected $dispatchesEvents = [
-        'forceDeleted' => UserDeleted::class,
-        'created'      => UserCreated::class,
+        'created' => UserCreated::class,
+        'deleted' => UserDeleted::class,
+        'saved'   => UserSaved::class,
     ];
 
     /**
