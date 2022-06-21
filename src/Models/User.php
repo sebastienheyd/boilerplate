@@ -47,7 +47,7 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * Set the id of the user to be impersonated.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return void
      */
     public function setImpersonating($id)
