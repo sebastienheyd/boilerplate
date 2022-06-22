@@ -1,6 +1,5 @@
 <?php
 
-use App\Providers\BroadcastServiceProvider;
 use Sebastienheyd\Boilerplate\Controllers\Auth\ForgotPasswordController;
 use Sebastienheyd\Boilerplate\Controllers\Auth\LoginController;
 use Sebastienheyd\Boilerplate\Controllers\Auth\RegisterController;
