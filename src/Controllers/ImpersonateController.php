@@ -27,8 +27,8 @@ class ImpersonateController
      * backend access rights, then switch to that user's point of view.
      *
      * @param $id
-     *
      * @return JsonResponse
+     *
      * @author Christopher Walker
      */
     public function impersonate($id): JsonResponse
@@ -36,7 +36,7 @@ class ImpersonateController
         $user = User::find($id);
 
         // Guard against non-admins impersonating
-        if (!Auth::user()->hasRole('admin')) {
+        if (! Auth::user()->hasRole('admin')) {
             Log::error('Only admins can use the impersonate feature.');
             $msg = __('boilerplate::impersonate.errors.insufficient_permissions');
             $success = false;
@@ -44,7 +44,8 @@ class ImpersonateController
             Log::error('Cannot impersonate an admin.');
             $msg = __('boilerplate::impersonate.errors.no_impersonating_admins');
             $success = false;
-        } elseif (!$user->hasPermission('backend_access')) { // Guard against impersonating users without backend access
+        } elseif (! $user->hasPermission('backend_access')) { // Guard against impersonating users without backend
+            // access
             Log::error('Selected user does not have backend access.');
             $msg = __('boilerplate::impersonate.errors.no_backend_access');
             $success = false;
@@ -64,6 +65,7 @@ class ImpersonateController
      * Stop impersonating the user and return to admin point of view.
      *
      * @return RedirectResponse
+     *
      * @author Christopher Walker
      */
     public function stopImpersonate(): RedirectResponse
@@ -77,8 +79,8 @@ class ImpersonateController
      * Get the list of eligible users to impersonate. (Users must be active and have backend access).
      *
      * @param  Request  $request
-     *
      * @return JsonResponse
+     *
      * @author Christopher Walker
      */
     public function selectImpersonate(Request $request): JsonResponse

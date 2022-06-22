@@ -12,8 +12,8 @@ class BoilerplateImpersonate
      *
      * @param $request
      * @param  Closure  $next
-     *
      * @return mixed
+     *
      * @author Christopher Walker
      */
     public function handle($request, Closure $next)
