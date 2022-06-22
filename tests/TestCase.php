@@ -3,6 +3,7 @@
 namespace Sebastienheyd\Boilerplate\Tests;
 
 use Collective\Html\HtmlServiceProvider;
+use Illuminate\Broadcasting\BroadcastServiceProvider;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 use Sebastienheyd\Boilerplate\BoilerplateServiceProvider;
 
@@ -18,6 +19,7 @@ abstract class TestCase extends OrchestraTestCase
     {
         return [
             HtmlServiceProvider::class,
+            BroadcastServiceProvider::class,
             BoilerplateServiceProvider::class,
         ];
     }
@@ -26,6 +28,7 @@ abstract class TestCase extends OrchestraTestCase
     {
         return [
             'Form' => 'Collective\Html\FormFacade',
+            'Broadcast' => 'Illuminate\Support\Facades\Broadcast',
         ];
     }
 }

@@ -1,5 +1,5 @@
 @once
-@if(config('broadcasting.default', false) === 'pusher')
+@if(config('broadcasting.default') === 'pusher')
 @component('boilerplate::minify')
 <script>
     loadScript("{{ mix('/pusher.min.js', '/assets/vendor/boilerplate') }}", function() {

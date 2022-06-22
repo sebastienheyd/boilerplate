@@ -25,7 +25,7 @@ trait TestHelper
         $composer = json_decode($files->get(self::TEST_APP.'/composer.json'), true);
         unset($composer['autoload']['classmap'][1]);
         $composer['require'] = [
-            'laravel/framework' => '^6.0|^7.0|^8.0',
+            'laravel/framework' => '^6.0|^7.0|^8.0|^9.0',
             'sebastienheyd/boilerplate' => '@dev',
         ];
         $composer['require-dev'] = new \stdClass();

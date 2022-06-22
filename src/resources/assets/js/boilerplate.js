@@ -70,6 +70,10 @@ window.whenAssetIsLoaded = function(src, callback) {
     });
 }
 
+window.whenIsLoaded = function(src, callback) {
+    return window.whenAssetIsLoaded(src, callback);
+}
+
 window.getIntervalUid = function() {
     return String.fromCharCode(Math.floor(Math.random() * 11)) + Math.floor(Math.random() * 1000000);
 }

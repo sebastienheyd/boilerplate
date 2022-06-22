@@ -47,7 +47,7 @@
         </table>
     </div>
     @include('boilerplate::load.async.datatables', ['buttons' => true])
-    @include('boilerplate::load.async.pusher')
+    @include('boilerplate::load.pusher')
     @component('boilerplate::minify')
     <script>
         whenAssetIsLoaded('datatables', function() {
@@ -95,7 +95,7 @@
             window.{{ \Str::camel($id) }}.locale = {!! $datatable->getLocale() !!}
         });
 
-        whenAssetIsLoaded('echo', function() {
+        whenAssetIsLoaded('echo', () => {
             Echo.private('{{ channel_hash('dt', $name) }}')
                 .listen('.RefreshDatatable', (res) => {
                     if (res.name === '{{ $name }}') {

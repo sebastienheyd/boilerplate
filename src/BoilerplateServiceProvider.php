@@ -66,6 +66,9 @@ class BoilerplateServiceProvider extends ServiceProvider
             $this->bootInConsole();
         }
 
+        // Load pusher
+        $this->loadPusher();
+
         // Load routes
         $this->loadRoutesFrom(__DIR__.'/routes/boilerplate.php');
         if (file_exists(base_path('routes/boilerplate.php'))) {
@@ -81,9 +84,6 @@ class BoilerplateServiceProvider extends ServiceProvider
 
         // Load view composers
         $this->viewComposers();
-
-        // Load pusher
-        $this->loadPusher();
 
         // Load directives
         if (version_compare($this->app->version(), '7.0', '<')) {
@@ -137,13 +137,9 @@ class BoilerplateServiceProvider extends ServiceProvider
 
     private function loadPusher()
     {
-        if (config('broadcasting.default') !== 'pusher' ||
-            ! empty(app()->getProviders(BroadcastServiceProvider::class))) {
-            return;
+        if (config('broadcasting.default') === 'pusher') {
+            app()->register(BroadcastServiceProvider::class);
         }
-
-        Broadcast::routes();
-        require base_path('routes/channels.php');
     }
 
     /**

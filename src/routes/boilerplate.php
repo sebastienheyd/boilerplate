@@ -99,10 +99,8 @@ Route::group([
             });
         }
 
-        if (! empty(app()->getProviders(BroadcastServiceProvider::class))) {
-            Broadcast::channel('dt.{name}.{signature}', function ($user, $name, $signature) {
-                return channel_hash_equals($signature, 'dt', $name);
-            });
-        }
+        Broadcast::channel('dt.{name}.{signature}', function ($user, $name, $signature) {
+            return channel_hash_equals($signature, 'dt', $name);
+        });
     });
 });
