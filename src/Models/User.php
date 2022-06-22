@@ -41,16 +41,18 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $dispatchesEvents = [
         'created' => UserCreated::class,
         'deleted' => UserDeleted::class,
-        'saved'   => UserSaved::class,
+        'saved' => UserSaved::class,
     ];
 
     /**
      * Set the id of the user to be impersonated.
      *
      * @param  int  $id
+     *
      * @return void
+     * @author Christopher Walker
      */
-    public function setImpersonating($id)
+    public function setImpersonating(int $id)
     {
         Session::put('impersonate', $id);
     }
@@ -59,6 +61,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * Delete the id of the user being impersonated.
      *
      * @return void
+     * @author Christopher Walker
      */
     public function stopImpersonating()
     {
@@ -69,6 +72,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * Check if the current user is a normal user or an admin impersonating a user.
      *
      * @return bool
+     * @author Christopher Walker
      */
     public function isImpersonating(): bool
     {
@@ -91,6 +95,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * Send the password reset notification.
      *
      * @param  string  $token
+     *
      * @return void
      */
     public function sendPasswordResetNotification($token)
@@ -112,6 +117,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * Return last name in uppercase by default.
      *
      * @param $value
+     *
      * @return string
      */
     public function getLastNameAttribute($value)
@@ -123,6 +129,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * Return first name with first char of every word in uppercase.
      *
      * @param $value
+     *
      * @return string
      */
     public function getFirstNameAttribute($value)
@@ -145,6 +152,7 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @param  string  $format
      * @param  string  $default
+     *
      * @return mixed|string
      */
     public function getLastLogin($format = 'YYYY-MM-DD HH:mm:ss', $default = '')
@@ -217,11 +225,11 @@ class User extends Authenticatable implements MustVerifyEmail
         }
 
         return 'https://ui-avatars.com/api/?'.http_build_query([
-            'background' => 'F0F0F0',
-            'color' => '333',
-            'size' => 170,
-            'name' => $this->getNameAttribute(),
-        ]);
+                'background' => 'F0F0F0',
+                'color' => '333',
+                'size' => 170,
+                'name' => $this->getNameAttribute(),
+            ]);
     }
 
     /**
@@ -231,7 +239,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function getAvatarFromGravatar()
     {
-        if (! Gravatar::exists($this->getAttribute('email'))) {
+        if (!Gravatar::exists($this->getAttribute('email'))) {
             return false;
         }
 
@@ -243,7 +251,7 @@ class User extends Authenticatable implements MustVerifyEmail
         $img = file_get_contents($src);
         $destDir = public_path('images/avatars/');
 
-        if (! is_dir($destDir)) {
+        if (!is_dir($destDir)) {
             mkdir($destDir, 0766, true);
             file_put_contents($destDir.'/.gitignore', "*\r\n!.gitignore");
         }
@@ -258,6 +266,7 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @param  string|array  $name
      * @param  mixed  $default
+     *
      * @return mixed|null
      */
     public function setting($name, $default = null)
