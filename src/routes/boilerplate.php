@@ -61,6 +61,9 @@ Route::group([
 
         // Datatables
         Route::post('datatables/{slug}', [DatatablesController::class, 'make'])->name('datatables');
+        Broadcast::channel('dt.{name}.{signature}', function ($user, $name, $signature) {
+            return channel_hash_equals($signature, 'dt', $name);
+        });
 
         // Select2
         Route::post('select2', [Select2Controller::class, 'make'])->name('select2');
@@ -97,9 +100,5 @@ Route::group([
                 });
             });
         }
-
-        Broadcast::channel('dt.{name}.{signature}', function ($user, $name, $signature) {
-            return channel_hash_equals($signature, 'dt', $name);
-        });
     });
 });
