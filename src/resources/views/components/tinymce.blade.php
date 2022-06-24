@@ -5,7 +5,7 @@
 @isset($label)
     <label for="{{ $id }}">{!! __($label) !!}</label>
 @endisset
-    <textarea id="{{ $id }}" name="{{ $name }}"{!! !empty($attributes) ? ' '.$attributes : '' !!} style="visibility:hidden">{!! old($name, $value ?? $slot ?? '') !!}</textarea>
+    <textarea id="{{ $id }}" name="{{ $name }}"{!! !empty($attributes) ? ' '.$attributes : '' !!} style="visibility:hidden{{ $minHeight ?? false ? ';min-height:'.$minHeight.'px' : '' }}">{!! old($name, $value ?? $slot ?? '') !!}</textarea>
 @if($help ?? false)
     <small class="form-text text-muted">@lang($help)</small>
 @endif
@@ -20,6 +20,8 @@
         window.{{ 'MCE_'.\Str::camel($id) }} = tinymce.init({
             selector: '#{{ $id }}',
             toolbar_sticky: {{ ($sticky ?? false) ? 'true' : 'false' }},
+            {{ $minHeight ?? false ? 'min_height:'.$minHeight.',' : '' }}
+            {{ $maxHeight ?? false ? 'max_height:'.$maxHeight.',' : '' }}
             @if(setting('darkmode', false) && config('boilerplate.theme.darkmode'))
             skin : "boilerplate-dark",
             content_css: 'boilerplate-dark',
@@ -27,7 +29,7 @@
             skin : "oxide",
             content_css: null,
             @endif
-                    @if(App::getLocale() !== 'en')
+            @if(App::getLocale() !== 'en')
             language: '{{ App::getLocale() }}'
             @endif
         });

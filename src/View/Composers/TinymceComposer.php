@@ -18,6 +18,10 @@ class TinymceComposer extends ComponentComposer
         'name',
         'sticky',
         'value',
+        'minHeight',
+        'min-height',
+        'maxHeight',
+        'max-height',
     ];
 
     public function compose(View $view)
