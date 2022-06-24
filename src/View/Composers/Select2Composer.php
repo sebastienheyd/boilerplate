@@ -28,6 +28,7 @@ class Select2Composer extends ComponentComposer
         'options',
         'placeholder',
         'selected',
+        'tags',
     ];
 
     public function compose(View $view)
@@ -59,6 +60,7 @@ class Select2Composer extends ComponentComposer
         }
 
         $view->with('allowClear', isset($data['allowClear']) ? 'true' : 'false');
+        $view->with('tags', isset($data['tags']) ? 'true' : 'false');
         $view->with('nameDot', dot_str($data['name'] ?? ''));
     }
 }

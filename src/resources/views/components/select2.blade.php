@@ -38,6 +38,7 @@
                 width: '100%',
                 dropdownAutoWidth: true,
                 dropdownParent: $('#{{ $id }}').parent(),
+                tags: {{ $tags ?? 0 }},
                 escapeMarkup: function(markup) { return markup },
                 @isset($ajax)
                 ajax: {
