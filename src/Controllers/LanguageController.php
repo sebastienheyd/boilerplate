@@ -3,25 +3,26 @@
 namespace Sebastienheyd\Boilerplate\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class LanguageController extends Controller
 {
     /**
      * Switch language.
      *
-     * @param $lang
-     * @return RedirectResponse
+     * @param  Request  $request
+     * @return JsonResponse
      */
-    public function switch($lang): RedirectResponse
+    public function switch(Request $request): JsonResponse
     {
-        if (in_array($lang, config('boilerplate.locale.allowed'))) {
-            setting(['locale' => $lang]);
+        if (in_array($request->post('lang'), config('boilerplate.locale.allowed'))) {
+            setting(['locale' => $request->post('lang')]);
+            cookie()->forever('boilerplate_lang', $request->post('lang'));
 
-            return Redirect::back()->withCookie(cookie()->forever('boilerplate_lang', $lang));
+            return response()->json(['success' => true]);
         }
+        return response()->json(['success' => false]);
 
-        return Redirect::back();
     }
 }

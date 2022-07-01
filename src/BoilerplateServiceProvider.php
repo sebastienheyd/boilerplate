@@ -20,6 +20,7 @@ use Lavary\Menu\Facade;
 use Lavary\Menu\ServiceProvider as MenuServiceProvider;
 use Sebastienheyd\Boilerplate\Datatables\Admin\RolesDatatable;
 use Sebastienheyd\Boilerplate\Datatables\Admin\UsersDatatable;
+use Sebastienheyd\Boilerplate\Middleware\BoilerplateImpersonate;
 use Sebastienheyd\Boilerplate\View\Composers\DatatablesComposer;
 use Sebastienheyd\Boilerplate\View\Composers\MenuComposer;
 use Sebastienheyd\Boilerplate\View\Composers\TinymceLoadComposer;
@@ -80,6 +81,11 @@ class BoilerplateServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/resources/views', 'boilerplate');
         $this->loadJSONTranslationsFrom(__DIR__.'/resources/lang');
         $this->loadTranslationsFrom(__DIR__.'/resources/lang', 'boilerplate');
+
+        // Add the impersonate middleware into the default web middleware group
+        if (config('boilerplate.app.allowImpersonate', false)) {
+            $this->router->pushMiddlewareToGroup('web', BoilerplateImpersonate::class);
+        }
 
         // Load view composers
         $this->viewComposers();
@@ -241,6 +247,10 @@ class BoilerplateServiceProvider extends ServiceProvider
         $this->router->aliasMiddleware('boilerplate.auth', Middleware\BoilerplateAuthenticate::class);
         $this->router->aliasMiddleware('boilerplate.guest', Middleware\BoilerplateGuest::class);
         $this->router->aliasMiddleware('boilerplate.emailverified', Middleware\BoilerplateEmailVerified::class);
+
+        if (config('boilerplate.app.allowImpersonate', false)) {
+            $this->router->aliasMiddleware('boilerplate.impersonate', Middleware\BoilerplateImpersonate::class);
+        }
 
         // Loading packages
         $this->registerLaratrust();

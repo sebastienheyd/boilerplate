@@ -5,6 +5,7 @@ use Sebastienheyd\Boilerplate\Controllers\Auth\LoginController;
 use Sebastienheyd\Boilerplate\Controllers\Auth\RegisterController;
 use Sebastienheyd\Boilerplate\Controllers\Auth\ResetPasswordController;
 use Sebastienheyd\Boilerplate\Controllers\DatatablesController;
+use Sebastienheyd\Boilerplate\Controllers\ImpersonateController;
 use Sebastienheyd\Boilerplate\Controllers\LanguageController;
 use Sebastienheyd\Boilerplate\Controllers\Logs\LogViewerController;
 use Sebastienheyd\Boilerplate\Controllers\Select2Controller;
@@ -17,12 +18,6 @@ Route::group([
     'middleware' => ['web', 'boilerplate.locale'],
     'as'         => 'boilerplate.',
 ], function () {
-    // Language switch
-    Route::get('lang/{lang}', [LanguageController::class, 'switch'])->name('lang.switch');
-
-    // Logout
-    Route::post('logout', [LoginController::class, 'logout'])->name('logout');
-
     // Frontend
     Route::group(['middleware' => ['boilerplate.guest']], function () {
         // Login
@@ -34,10 +29,12 @@ Route::group([
         Route::post('register', [RegisterController::class, 'register'])->name('register.post');
 
         // Password reset
-        Route::get('password/request', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
-        Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
-        Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
-        Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.reset.post');
+        Route::prefix('password')->as('password.')->group(function() {
+            Route::get('request', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('request');
+            Route::post('email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('email');
+            Route::get('reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('reset');
+            Route::post('reset', [ResetPasswordController::class, 'reset'])->name('reset.post');
+        });
 
         // First login
         Route::get('connect/{token?}', [UsersController::class, 'firstLogin'])->name('users.firstlogin');
@@ -45,14 +42,31 @@ Route::group([
     });
 
     // Email verification
-    Route::group(['middleware' => ['boilerplate.auth']], function () {
-        Route::get('/email/verify', [RegisterController::class, 'emailVerify'])->name('verification.notice');
-        Route::get('/email/verify/{id}/{hash}', [RegisterController::class, 'emailVerifyRequest'])->name('verification.verify');
-        Route::post('/email/verification-notification', [RegisterController::class, 'emailSendVerification'])->name('verification.send');
+    Route::controller(RegisterController::class)->prefix('email')->middleware('boilerplate.auth')->as('verification.')->group(function () {
+        Route::get('verify', 'emailVerify')->name('notice');
+        Route::get('verify/{id}/{hash}', 'emailVerifyRequest')->name('verify');
+        Route::post('verification-notification', 'emailSendVerification')->name('send');
     });
 
     // Backend
     Route::group(['middleware' => ['boilerplate.auth', 'ability:admin,backend_access', 'boilerplate.emailverified']], function () {
+        // Language switch
+        if (config('boilerplate.locale.switch', false)) {
+            Route::post('lang-switch', [LanguageController::class, 'switch'])->name('lang.switch');
+        }
+
+        // Impersonate another user
+        if (config('boilerplate.app.allowImpersonate', false)) {
+            Route::controller(ImpersonateController::class)->prefix('impersonate')->as('impersonate.')->group(function() {
+                Route::post('/', 'impersonate')->name('user');
+                Route::get('stop', 'stopImpersonate')->name('stop');
+                Route::post('select', 'selectImpersonate')->name('select');
+            });
+        }
+
+        // Logout
+        Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+
         // Dashboard
         Route::get('/', [config('boilerplate.menu.dashboard'), 'index'])->name('dashboard');
 
@@ -70,32 +84,30 @@ Route::group([
 
         // Roles and users
         Route::resource('roles', RolesController::class)->except('show')->middleware(['ability:admin,roles_crud']);
-        Route::group(['middleware' => ['ability:admin,users_crud']], function () {
-            Route::resource('users', UsersController::class)->except('show');
-            Route::any('users/dt', [UsersController::class, 'datatable'])->name('users.datatable');
-        });
+        Route::resource('users', UsersController::class)->middleware('ability:admin,users_crud')->except('show');
 
         // Profile
-        Route::get('userprofile', [UsersController::class, 'profile'])->name('user.profile');
-        Route::post('userprofile', [UsersController::class, 'profilePost'])->name('user.profile.post');
-        Route::post('userprofile/settings', [UsersController::class, 'storeSetting'])->name('settings');
-        Route::get('userprofile/avatar/url', [UsersController::class, 'getAvatarUrl'])->name('user.avatar.url');
-        Route::post('userprofile/avatar/upload', [UsersController::class, 'avatarUpload'])->name('user.avatar.upload');
-        Route::post('userprofile/avatar/gravatar', [UsersController::class, 'getAvatarFromGravatar'])->name('user.avatar.gravatar');
-        Route::post('userprofile/avatar/delete', [UsersController::class, 'avatarDelete'])->name('user.avatar.delete');
+        Route::controller(UsersController::class)->prefix('userprofile')->as('user.')->group(function() {
+            Route::get('/', 'profile')->name('profile');
+            Route::post('/', 'profilePost')->name('profile.post');
+            Route::post('settings', 'storeSetting')->name('settings');
+            Route::get('avatar/url', 'getAvatarUrl')->name('avatar.url');
+            Route::post('avatar/upload', 'avatarUpload')->name('avatar.upload');
+            Route::post('avatar/gravatar', 'getAvatarFromGravatar')->name('avatar.gravatar');
+            Route::post('avatar/delete', 'avatarDelete')->name('avatar.delete');
+        });
 
         // Logs
-        if (config('boilerplate.app.logs')) {
-            Route::group(['prefix' => 'logs', 'as' => 'logs.', 'middleware' => ['ability:admin,logs']], function () {
-                Route::get('/', [LogViewerController::class, 'index'])->name('dashboard');
-                Route::group(['prefix' => 'list'], function () {
-                    Route::get('/', [LogViewerController::class, 'listLogs'])->name('list');
-                    Route::delete('delete', [LogViewerController::class, 'delete'])->name('delete');
-
-                    Route::group(['prefix' => '{date}'], function () {
-                        Route::get('/', [LogViewerController::class, 'show'])->name('show');
-                        Route::get('download', [LogViewerController::class, 'download'])->name('download');
-                        Route::get('{level}', [LogViewerController::class, 'showByLevel'])->name('filter');
+        if (config('boilerplate.app.logs', false)) {
+            Route::controller(LogViewerController::class)->prefix('logs')->as('logs.')->middleware('ability:admin,logs')->group(function () {
+                Route::get('/', 'index')->name('dashboard');
+                Route::prefix('list')->group(function () {
+                    Route::get('/', 'listLogs')->name('list');
+                    Route::delete('delete', 'delete')->name('delete');
+                    Route::prefix('{date}')->group(function () {
+                        Route::get('/', 'show')->name('show');
+                        Route::get('download', 'download')->name('download');
+                        Route::get('{level}', 'showByLevel')->name('filter');
                     });
                 });
             });

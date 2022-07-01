@@ -26,7 +26,7 @@
         "audit": "^0.0.6",
         "bootbox": "^5.3.4",
         "bootstrap": "^4.6.1",
-        "bootstrap-fileinput": "^5.2.7",
+        "bootstrap-fileinput": "5.2.7",
         "drmonty-datatables-plugins": "^1.10.12",
         "fix": "^0.0.6",
         "fullcalendar": "^5.10.1",
