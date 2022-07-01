@@ -83,7 +83,9 @@ class BoilerplateServiceProvider extends ServiceProvider
         $this->loadTranslationsFrom(__DIR__.'/resources/lang', 'boilerplate');
 
         // Add the impersonate middleware into the default web middleware group
-        $this->router->pushMiddlewareToGroup('web', BoilerplateImpersonate::class);
+        if (config('boilerplate.app.allowImpersonate', false)) {
+            $this->router->pushMiddlewareToGroup('web', BoilerplateImpersonate::class);
+        }
 
         // Load view composers
         $this->viewComposers();
@@ -246,7 +248,9 @@ class BoilerplateServiceProvider extends ServiceProvider
         $this->router->aliasMiddleware('boilerplate.guest', Middleware\BoilerplateGuest::class);
         $this->router->aliasMiddleware('boilerplate.emailverified', Middleware\BoilerplateEmailVerified::class);
 
-        $this->router->aliasMiddleware('boilerplate.impersonate', Middleware\BoilerplateImpersonate::class);
+        if (config('boilerplate.app.allowImpersonate', false)) {
+            $this->router->aliasMiddleware('boilerplate.impersonate', Middleware\BoilerplateImpersonate::class);
+        }
 
         // Loading packages
         $this->registerLaratrust();

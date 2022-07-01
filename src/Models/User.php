@@ -45,43 +45,6 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
-     * Set the id of the user to be impersonated.
-     *
-     * @param  int  $id
-     * @return void
-     *
-     * @author Christopher Walker
-     */
-    public function setImpersonating(int $id)
-    {
-        Session::put('impersonate', $id);
-    }
-
-    /**
-     * Delete the id of the user being impersonated.
-     *
-     * @return void
-     *
-     * @author Christopher Walker
-     */
-    public function stopImpersonating()
-    {
-        Session::forget('impersonate');
-    }
-
-    /**
-     * Check if the current user is a normal user or an admin impersonating a user.
-     *
-     * @return bool
-     *
-     * @author Christopher Walker
-     */
-    public function isImpersonating(): bool
-    {
-        return Session::has('impersonate');
-    }
-
-    /**
      * Send the email verification notification.
      *
      * @return void

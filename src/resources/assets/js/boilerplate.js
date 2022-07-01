@@ -168,6 +168,38 @@ $(() => {
         });
     });
 
+    $('#impersonate-user').on('select2:select', function() {
+        $.ajax({
+            url: $(this).data('route'),
+            type: 'post',
+            data: {id:$(this).val()},
+            success: function(){
+                window.location.reload();
+            }
+        });
+    }).on('select2:clear', function() {
+        $.ajax({
+            url: $(this).data('clear'),
+            type: 'get',
+            success: function(){
+                window.location.reload();
+            }
+        });
+    });
+
+    $('#boilerplate-language').on('select2:select', function() {
+        $.ajax({
+            url: $(this).data('route'),
+            type: 'post',
+            data: { lang: $(this).val() },
+            success: function(res){
+                if (res.success) {
+                    window.location.reload();
+                }
+            }
+        });
+    })
+
     $('[data-toggle=password]').on('click', function(e) {
         e.preventDefault();
         $(this).children().toggleClass('fa-eye fa-eye-slash');

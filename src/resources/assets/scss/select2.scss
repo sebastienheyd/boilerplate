@@ -11,3 +11,19 @@
 .select2-container--default .select2-results__option {
   white-space: nowrap;
 }
+
+.select2-container--default .select2-selection--single .select2-selection__clear {
+  padding-left: 5px;
+}
+
+.select2-container .select2-selection--single .select2-selection__rendered {
+  padding-right: 15px;
+}
+
+.navbar-left, .navbar-right {
+  .select2-container--default {
+    .select2-selection--single {
+      border: 1px solid transparent;
+    }
+  }
+}

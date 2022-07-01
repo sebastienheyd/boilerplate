@@ -23,7 +23,7 @@
         $.ajaxSetup({headers:{'X-CSRF-TOKEN':'{{ csrf_token() }}'}});
         bootbox.setLocale('{{ App::getLocale() }}');
         var bpRoutes={
-            settings:"{{ route('boilerplate.settings',null,false) }}"
+            settings:"{{ route('boilerplate.user.settings',null,false) }}"
         };
         var session={
             keepalive:"{{ route('boilerplate.keepalive', null, false) }}",

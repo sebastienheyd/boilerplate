@@ -18,8 +18,8 @@ class BoilerplateImpersonate
      */
     public function handle($request, Closure $next)
     {
-        if ($request->session()->has('impersonate')) {
-            Auth::onceUsingId($request->session()->get('impersonate'));
+        if (session()->has('impersonate')) {
+            Auth::onceUsingId(session()->get('impersonate'));
         }
 
         return $next($request);
