@@ -22,7 +22,7 @@ class LanguageController extends Controller
 
             return response()->json(['success' => true]);
         }
-        return response()->json(['success' => false]);
 
+        return response()->json(['success' => false]);
     }
 }

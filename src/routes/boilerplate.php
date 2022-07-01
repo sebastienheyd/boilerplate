@@ -29,7 +29,7 @@ Route::group([
         Route::post('register', [RegisterController::class, 'register'])->name('register.post');
 
         // Password reset
-        Route::prefix('password')->as('password.')->group(function() {
+        Route::prefix('password')->as('password.')->group(function () {
             Route::get('request', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('request');
             Route::post('email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('email');
             Route::get('reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('reset');
@@ -57,7 +57,7 @@ Route::group([
 
         // Impersonate another user
         if (config('boilerplate.app.allowImpersonate', false)) {
-            Route::controller(ImpersonateController::class)->prefix('impersonate')->as('impersonate.')->group(function() {
+            Route::controller(ImpersonateController::class)->prefix('impersonate')->as('impersonate.')->group(function () {
                 Route::post('/', 'impersonate')->name('user');
                 Route::get('stop', 'stopImpersonate')->name('stop');
                 Route::post('select', 'selectImpersonate')->name('select');
@@ -87,7 +87,7 @@ Route::group([
         Route::resource('users', UsersController::class)->middleware('ability:admin,users_crud')->except('show');
 
         // Profile
-        Route::controller(UsersController::class)->prefix('userprofile')->as('user.')->group(function() {
+        Route::controller(UsersController::class)->prefix('userprofile')->as('user.')->group(function () {
             Route::get('/', 'profile')->name('profile');
             Route::post('/', 'profilePost')->name('profile.post');
             Route::post('settings', 'storeSetting')->name('settings');

@@ -14,6 +14,6 @@ return [
     'rightsres'         => 'All rights reserved.',
     'darkmode'          => 'Dark mode',
     'fullscreen'        => 'Full screen',
-    'stop_impersonate'  => "Return to your profile",
+    'stop_impersonate'  => 'Return to your profile',
     'view_as'           => 'View as user',
 ];

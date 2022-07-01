@@ -14,6 +14,6 @@ return [
     'rightsres'         => 'Tous droits réservés.',
     'darkmode'          => 'Mode sombre',
     'fullscreen'        => 'Plein écran',
-    'stop_impersonate'  => "Revenir à votre profil",
+    'stop_impersonate'  => 'Revenir à votre profil',
     'view_as'           => 'Visualiser en tant que',
 ];

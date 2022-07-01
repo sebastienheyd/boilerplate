@@ -1,4 +1,5 @@
 <?php
+
 namespace Sebastienheyd\Boilerplate\Controllers;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -72,10 +73,10 @@ class ImpersonateController
                 ->where('active', 1)
                 ->where('id', '!=', Auth::id())
                 ->whereNotIn('id', $adminId)
-                ->whereHas('roles', function($query) {
+                ->whereHas('roles', function ($query) {
                     $query->where('name', '=', 'backend_user');
                 })
-                ->where(function($query) use ($request) {
+                ->where(function ($query) use ($request) {
                     $query->where('first_name', 'like', '%'.$request->input('q').'%')
                           ->orWhere('last_name', 'like', '%'.$request->input('q').'%');
                 })
