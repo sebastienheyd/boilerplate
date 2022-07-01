@@ -5,6 +5,7 @@ use Sebastienheyd\Boilerplate\Controllers\Auth\LoginController;
 use Sebastienheyd\Boilerplate\Controllers\Auth\RegisterController;
 use Sebastienheyd\Boilerplate\Controllers\Auth\ResetPasswordController;
 use Sebastienheyd\Boilerplate\Controllers\DatatablesController;
+use Sebastienheyd\Boilerplate\Controllers\ImpersonateController;
 use Sebastienheyd\Boilerplate\Controllers\LanguageController;
 use Sebastienheyd\Boilerplate\Controllers\Logs\LogViewerController;
 use Sebastienheyd\Boilerplate\Controllers\Select2Controller;
@@ -19,6 +20,11 @@ Route::group([
 ], function () {
     // Language switch
     Route::get('lang/{lang}', [LanguageController::class, 'switch'])->name('lang.switch');
+
+    // Impersonate another user
+    Route::post('/impersonate/{id}/impersonate', [ImpersonateController::class, 'impersonate'])->name('impersonate.user');
+    Route::get('/impersonate/stop', [ImpersonateController::class, 'stopImpersonate'])->name('impersonate.stop');
+    Route::post('/impersonate/select', [ImpersonateController::class, 'selectImpersonate'])->name('impersonate.select');
 
     // Logout
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
