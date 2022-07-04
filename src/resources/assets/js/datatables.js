@@ -65,11 +65,10 @@ $.fn.dataTable.render.fromNow = function (format) {
  */
 $.fn.dataTable.init = function(dt) {
     let id = '#'+dt.sInstance;
-    $(id).DataTable().buttons().container().appendTo(id+'_wrapper .col-md-6:eq(1)').addClass('ml-1');
+    $(id).DataTable().buttons().container().appendTo(id+'_wrapper .dt_top_right').addClass('ml-1');
+    $(id+'_wrapper .dataTables_filter').addClass('d-flex');
     $('.dt-buttons button').removeClass('btn-secondary').addClass('btn-default');
     $(id+'_wrapper label').addClass('mb-0');
-    $(id+'_wrapper .col-md-6:eq(1)').addClass('d-flex align-items-center justify-content-end');
-    $(id+'_wrapper .col-md-6:eq(0),'+id+'_wrapper .col-md-6:eq(1)').addClass('mb-1');
     registerAsset(dt.sInstance);
 }
 
@@ -85,7 +84,7 @@ $.fn.dataTable.customProcessing = function (e, instance, processing) {
 
     if (processing) {
         if ($('#' + id + '_wrapper .dt-spinner').length === 0) {
-            $('#' + id + '_wrapper > .row:eq(0) > div:eq(0)').append('<span class="fa fa-sync fa-spin dt-spinner text-muted" />');
+            $('#' + id + '_wrapper .dt_top_left').append('<span class="fa fa-sync ml-2 fa-spin dt-spinner text-muted" />');
         }
     } else {
         $('#' + id + '_wrapper .dt-spinner').remove();

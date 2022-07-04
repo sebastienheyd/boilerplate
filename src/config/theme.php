@@ -8,7 +8,7 @@ $theme += [
         'right' => [],
     ],
     'favicon'    => null,       // Favicon url
-    'fullscreen' => true,       // Fullscreen switch
+    'fullscreen' => false,      // Fullscreen switch
     'darkmode'   => true,       // Dark mode switch
     'minify'     => true,       // Minify inline JS / CSS when using boilerplate::minify component
 ];

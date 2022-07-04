@@ -28,15 +28,21 @@
                 </span>
             </span>
         </div>
-        <div class="col-3">
-            @component('boilerplate::card', ['title' => __('boilerplate::logs.show.levels'), 'color' => 'info'])
-                @include('boilerplate::logs._partials.levels')
-            @endcomponent
-            @component('boilerplate::card', ['title' => __('boilerplate::logs.show.loginfo'), 'color' => 'warning'])
-                @include('boilerplate::logs._partials.informations')
-            @endcomponent
+        <div class="col-12 col-xl-3">
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-6 col-xl-12">
+                    @component('boilerplate::card', ['title' => __('boilerplate::logs.show.levels'), 'color' => 'info'])
+                        @include('boilerplate::logs._partials.levels')
+                    @endcomponent
+                </div>
+                <div class="col-12 col-md-6 col-lg-6 col-xl-12">
+                    @component('boilerplate::card', ['title' => __('boilerplate::logs.show.loginfo'), 'color' => 'warning'])
+                        @include('boilerplate::logs._partials.informations')
+                    @endcomponent
+                </div>
+            </div>
         </div>
-        <div class="col-9">
+        <div class="col-12 col-xl-9">
             @component('boilerplate::card', ['title' => ucfirst(__('boilerplate::logs.show.file', ['date' => $date]))])
                 <div class="table-responsive">
                     <table id="entries" class="table table-sm">

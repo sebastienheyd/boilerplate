@@ -90,6 +90,10 @@
                     @endforeach
                 ],
                 initComplete: $.fn.dataTable.init,
+                dom:
+                    "<'d-flex flex-wrap justify-content-between'<'dt_top_left mb-2 mr-2'l><'dt_top_right d-flex mb-2'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'d-flex flex-wrap align-items-center justify-content-between'<'dt_bottom_left mt-2'i><'dt_bottom_right mt-2'p>>",
             });
 
             window.{{ \Str::camel($id) }}.locale = {!! $datatable->getLocale() !!}

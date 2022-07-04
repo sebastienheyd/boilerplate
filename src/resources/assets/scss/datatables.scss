@@ -29,6 +29,10 @@ table.dataTable {
   }
 }
 
+div.dataTables_wrapper div.dataTables_info {
+  padding-top: 0;
+}
+
 .dataTables_length {
   display: inline-block;
   margin-right: .5rem;
@@ -40,5 +44,12 @@ table.dataTable {
       background: #343a40;
     }
     background: #454d55;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  div.dt-buttons {
+    width: auto !important;
+    margin-bottom: 0 !important;
   }
 }
