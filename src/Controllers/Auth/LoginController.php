@@ -87,7 +87,7 @@ class LoginController extends Controller
      *
      * @param  Request  $request
      * @param  $user
-     * @return void
+     * @return bool
      */
     protected function authenticated(Request $request, $user)
     {
@@ -114,7 +114,6 @@ class LoginController extends Controller
         $this->guard()->logout();
 
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
 
         if ($response = $this->loggedOut($request)) {

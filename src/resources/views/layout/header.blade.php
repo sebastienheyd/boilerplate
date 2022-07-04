@@ -12,7 +12,7 @@
     <div class="navbar-right ml-auto d-flex">
         <ul class="nav navbar-nav">
             @foreach(app('boilerplate.navbar.items')->getItems('right') as $view){!! $view !!}@endforeach
-            @includeWhen(config('boilerplate.app.allowImpersonate') && Auth::user()->hasRole('admin') || session()->has('impersonate'), 'boilerplate::layout.header.impersonate')
+            @includeWhen((config('boilerplate.app.allowImpersonate') && Auth::user()->hasRole('admin')) || session()->has('impersonate'), 'boilerplate::layout.header.impersonate')
             @includeWhen(config('boilerplate.locale.switch', false), 'boilerplate::layout.header.language')
             @includeWhen(config('boilerplate.theme.navbar.user.visible'), 'boilerplate::layout.header.user')
             @includeWhen(config('boilerplate.theme.darkmode', false), 'boilerplate::layout.header.darkmode')

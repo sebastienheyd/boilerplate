@@ -18,6 +18,14 @@ Route::group([
     'middleware' => ['web', 'boilerplate.locale'],
     'as'         => 'boilerplate.',
 ], function () {
+    // Logout
+    Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+
+    // Language switch
+    if (config('boilerplate.locale.switch', false)) {
+        Route::post('language', [LanguageController::class, 'switch'])->name('lang.switch');
+    }
+
     // Frontend
     Route::group(['middleware' => ['boilerplate.guest']], function () {
         // Login
@@ -50,11 +58,6 @@ Route::group([
 
     // Backend
     Route::group(['middleware' => ['boilerplate.auth', 'ability:admin,backend_access', 'boilerplate.emailverified']], function () {
-        // Language switch
-        if (config('boilerplate.locale.switch', false)) {
-            Route::post('lang-switch', [LanguageController::class, 'switch'])->name('lang.switch');
-        }
-
         // Impersonate another user
         if (config('boilerplate.app.allowImpersonate', false)) {
             Route::controller(ImpersonateController::class)->prefix('impersonate')->as('impersonate.')->group(function () {
@@ -63,9 +66,6 @@ Route::group([
                 Route::post('select', 'selectImpersonate')->name('select');
             });
         }
-
-        // Logout
-        Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
         // Dashboard
         Route::get('/', [config('boilerplate.menu.dashboard'), 'index'])->name('dashboard');

@@ -28,11 +28,13 @@
             @if(config('boilerplate.locale.switch', false))
             <div class="dropdown-wrapper">
                 <div class="form-group">
-                    <select class="form-control form-control-sm" onchange="if (this.value) window.location.href=this.value">
+                    {!! Form::open(['route' => 'boilerplate.lang.switch', 'method' => 'post', 'autocomplete'=> 'off']) !!}
+                    <select class="form-control form-control-sm" name="lang" onchange="this.form.submit()">
                         @foreach(collect(config('boilerplate.locale.languages'))->map(function($e){return $e['label'];})->toArray() as $lang => $label)
-                            <option value="{{ route('boilerplate.lang.switch', $lang) }}" {{ $lang === App::getLocale() ? 'selected' : '' }}>{{ $label }}</option>
+                            <option value="{{ $lang }}" {{ $lang === App::getLocale() ? 'selected' : '' }}>{{ $label }}</option>
                         @endforeach
                     </select>
+                    {!! Form::close() !!}
                 </div>
             </div>
             @endif

@@ -2,7 +2,7 @@
     @if(session()->has('impersonate'))
         <div class="d-flex align-items-center h-100">
             <a href="{{ route('boilerplate.impersonate.stop', [], false) }}" class="nav-link px-1" data-toggle="tooltip" title="@lang('boilerplate::layout.stop_impersonate')">
-                <span class="text-white">{{ Auth::user()->name }}</span>
+                <span>{{ Auth::user()->name }}</span>
                 <span class="fa fa-undo fa-xs pl-1"></span>
             </a>
         </div>
