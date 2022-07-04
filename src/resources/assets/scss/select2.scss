@@ -20,11 +20,97 @@
   padding-right: 15px;
 }
 
-.navbar-left, .navbar-right {
-  .select2-container--default {
-    .select2-selection--single {
-      border: 1px solid transparent;
-      background: none;
+[data-type="light"] {
+  .navbar-left, .navbar-right {
+    .select2-container--default {
+      .select2-selection--single {
+        background: none;
+        border: 1px solid transparent;
+
+        .select2-selection__placeholder {
+          color: rgba(0,0,0,.7);
+        }
+      }
+
+      &.select2-container--open, &.select2-container--focus {
+        .select2-selection--single {
+          border: 1px solid rgba(0,0,0,.25) !important;
+        }
+      }
+    }
+  }
+}
+
+.dark-mode {
+  [data-type="light"] {
+    .navbar-left, .navbar-right {
+      .select2-container--default {
+        .select2-selection--single {
+          background: none;
+          border: 1px solid transparent;
+
+          .select2-selection__placeholder {
+            color: rgba(255,255,255,.7);
+          }
+        }
+
+        &.select2-container--open, &.select2-container--focus {
+          .select2-selection--single {
+            border: 1px solid rgba(255,255,255,.25) !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+[data-type="dark"] {
+  .navbar-left, .navbar-right {
+    .select2-container--default {
+      .select2-results__option {
+        color: #333;
+
+        &--highlighted[aria-selected] {
+          color: #FFF;
+        }
+      }
+
+      .select2-selection--single {
+        background: none;
+        border: 1px solid transparent;
+
+        .select2-selection__placeholder, .select2-selection__rendered {
+          color: rgba(255,255,255,.75);
+        }
+      }
+
+      &.select2-container--open, &.select2-container--focus {
+        .select2-selection--single {
+          border: 1px solid rgba(255,255,255,.25) !important;
+        }
+      }
+
+      .select2-selection__arrow b {
+        border-color: rgba(255,255,255,.75) transparent transparent transparent;
+      }
+
+      &.select2-container--open .select2-selection--single .select2-selection__arrow b {
+        border-color: transparent transparent rgba(255,255,255,.75) transparent;
+      }
+    }
+  }
+}
+
+.dark-mode {
+  .navbar-left, .navbar-right {
+    .select2-container--default {
+      .select2-results__option {
+        color: #FFF;
+
+        &--highlighted[aria-selected] {
+          color: #FFF;
+        }
+      }
     }
   }
 }
