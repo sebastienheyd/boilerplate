@@ -57,9 +57,13 @@ class Scaffold extends BoilerplateCommand
 
     private function install()
     {
-        $this->warn('-------------------------------------------------------------------------------------------------------------------------------');
-        $this->warn(' This command will install files in your project and configure your project to customize the use of sebastienheyd/boilerplate. ');
-        $this->warn('-------------------------------------------------------------------------------------------------------------------------------');
+        $warn = 'This command will install files in your project and configure your project to customize the use of sebastienheyd/boilerplate.';
+        $alert = "<fg=red>\u{26a0} BY DOING THIS, ALL UPDATES FROM FUTURE VERSIONS OF BOILERPLATE WILL BE IGNORED \u{26a0}</>";
+        $line = str_repeat('-', strlen($warn) + 6);
+        $this->warn($line);
+        $this->warn(str_repeat(' ', (strlen($line) - strlen($warn)) / 2).$warn);
+        $this->line(str_repeat(' ', (strlen($line) - strlen($alert)) / 2).$alert);
+        $this->warn($line);
 
         if (! $this->confirm('Continue?')) {
             return;
