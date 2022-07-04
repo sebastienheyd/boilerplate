@@ -13,4 +13,7 @@ return [
     'logoutconfirm'     => 'Sicuro di voler uscire ?',
     'rightsres'         => 'All rights reserved.',
     'darkmode'          => 'Modalità scura',
+    'fullscreen'        => 'A schermo intero',
+    'stop_impersonate'  => 'Torna al tuo profilo',
+    'view_as'           => 'Visualizza come utente',
 ];

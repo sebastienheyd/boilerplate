@@ -13,4 +13,7 @@ return [
     'logoutconfirm'     => '¿Estas seguro que deseas salir de la sesión?',
     'rightsres'         => 'Todos los derechos reservados.',
     'darkmode'          => 'Modo oscuro',
+    'fullscreen'        => 'Pantalla completa',
+    'stop_impersonate'  => 'Volver a tu perfil',
+    'view_as'           => 'Ver como usuario',
 ];

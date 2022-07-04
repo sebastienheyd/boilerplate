@@ -13,4 +13,7 @@ return [
     'logoutconfirm'     => 'آیا از خروج مطمئن هستید؟',
     'rightsres'         => 'کلیه حقوق محفوظ است',
     'darkmode'          => 'حالت تاریک',
+    'fullscreen'        => 'تمام صفحه',
+    'stop_impersonate'  => 'به نمایه خود بازگردید',
+    'view_as'           => 'مشاهده به عنوان کاربر',
 ];
