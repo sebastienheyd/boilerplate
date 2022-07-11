@@ -22,7 +22,8 @@ class ImpersonateController
      */
     public function impersonate(Request $request): JsonResponse
     {
-        $user = User::find($request->post('id'));
+        $userModel = config('auth.providers.users.model');
+        $user = $userModel::find($request->post('id'));
 
         if (! Auth::user()->hasRole('admin')) {
             Log::error('Only admins can use the impersonate feature.');
