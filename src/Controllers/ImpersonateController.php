@@ -22,7 +22,8 @@ class ImpersonateController
      */
     public function impersonate(Request $request): JsonResponse
     {
-        $user = User::find($request->post('id'));
+        $userModel = config('auth.providers.users.model');
+        $user = $userModel::find($request->post('id'));
 
         if (! Auth::user()->hasRole('admin')) {
             Log::error('Only admins can use the impersonate feature.');
@@ -63,13 +64,15 @@ class ImpersonateController
      */
     public function selectImpersonate(Request $request): JsonResponse
     {
+        $userModel = config('auth.providers.users.model');
+
         // Retrieve id of all admin
-        $adminId = User::with('roles')->select('id')->whereHas('roles', function (Builder $query) {
+        $adminId = $userModel::with('roles')->select('id')->whereHas('roles', function (Builder $query) {
             $query->where('name', '=', 'admin');
         })->pluck('id')->toArray();
 
         return response()->json([
-            'results' => User::with('roles')->selectRaw('id, CONCAT(first_name, \' \', last_name) as text')
+            'results' => $userModel::with('roles')->selectRaw('id, CONCAT(first_name, \' \', last_name) as text')
                 ->where('active', 1)
                 ->where('id', '!=', Auth::id())
                 ->whereNotIn('id', $adminId)
