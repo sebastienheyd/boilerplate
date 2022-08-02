@@ -44,15 +44,20 @@
                 ajax: {
                     delay: 200,
                     url: '{{ $ajax }}',
-                    @isset($model)
                     data: function (param) {
                         return {
                             q: param.term,
-                            m: "{{ encrypt($model) }}",
                             length: {{ $maxLength ?? 10 }},
+                            @isset($model)
+                            m: "{{ $model }}",
+                            @endisset
+                            @if(!empty($ajaxParams))
+                            @foreach ($ajaxParams as $k => $v)
+                            {{ $k }}: "{{ $v }}",
+                            @endforeach
+                            @endif
                         }
                     },
-                    @endisset
                     method: 'post'
                 }
                 @endisset

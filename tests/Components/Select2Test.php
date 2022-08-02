@@ -80,7 +80,7 @@ HTML;
         
     </select>
 </div>
-<script>loadStylesheet('');loadScript('',()=>{loadScript('',()=>{registerAsset('select2',()=>{$.extend(!0,$.fn.select2.defaults,{language:'en',direction:'ltr'});$(document).on('select2:open',(e)=>{let t=$(e.target);if(t&&t.length){let id=t[0].id||t[0].name;document.querySelector(`input[aria-controls*='${id}']`).focus()}})})})});</script><script>whenAssetIsLoaded('select2',()=>{window.S2_test=$('#test').select2({placeholder:'—',allowClear:!1,language:"en",direction:"ltr",minimumInputLength:1,minimumResultsForSearch:10,width:'100%',dropdownAutoWidth:!0,dropdownParent:$('#test').parent(),tags:!1,escapeMarkup:function(markup){return markup},ajax:{delay:200,url:'/admin/select2',data:function(param){return{q:param.term,m:"",length:10,}},method:'post'}})})</script>
+<script>loadStylesheet('');loadScript('',()=>{loadScript('',()=>{registerAsset('select2',()=>{$.extend(!0,$.fn.select2.defaults,{language:'en',direction:'ltr'});$(document).on('select2:open',(e)=>{let t=$(e.target);if(t&&t.length){let id=t[0].id||t[0].name;document.querySelector(`input[aria-controls*='${id}']`).focus()}})})})});</script><script>whenAssetIsLoaded('select2',()=>{window.S2_test=$('#test').select2({placeholder:'—',allowClear:!1,language:"en",direction:"ltr",minimumInputLength:1,minimumResultsForSearch:10,width:'100%',dropdownAutoWidth:!0,dropdownParent:$('#test').parent(),tags:!1,escapeMarkup:function(markup){return markup},ajax:{delay:200,url:'/admin/select2',data:function(param){return{q:param.term,length:10,m:"",}},method:'post'}})})</script>
 HTML;
 
         $view = $this->blade("@component('boilerplate::select2', ['id' => 'test', 'model' => 'Sebastienheyd\Boilerplate\Models\User,first_name'])@endcomponent()@stack('js')");

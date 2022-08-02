@@ -9,6 +9,7 @@ class Select2Composer extends ComponentComposer
     public static $regex = '#^([^,|]+)[,|]([A-Za-z0-9_\-]+)([,|]([A-Za-z0-9_\-]+))?$#';
 
     protected $props = [
+        'ajax-params',
         'allow-clear',
         'class',
         'errors',
@@ -43,7 +44,7 @@ class Select2Composer extends ComponentComposer
             }
 
             $view->with('name', $data['name'] ?? strtolower(class_basename($m[1])));
-            $view->with('model', $data['model']);
+            $view->with('model', encrypt($data['model']));
             $view->with('ajax', route('boilerplate.select2', [], false));
 
             if ($data['selected'] ?? false) {
@@ -62,5 +63,6 @@ class Select2Composer extends ComponentComposer
         $view->with('allowClear', isset($data['allowClear']) ? 'true' : 'false');
         $view->with('tags', isset($data['tags']) ? 'true' : 'false');
         $view->with('nameDot', dot_str($data['name'] ?? ''));
+        $view->with('ajaxParams', $data['ajaxParams'] ?? []);
     }
 }
