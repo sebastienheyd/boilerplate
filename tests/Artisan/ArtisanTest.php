@@ -20,7 +20,6 @@ class ArtisanTest extends ArtisanTestCase
     public function testBoilerplatePublish()
     {
         $this->artisan('vendor:publish', ['--tag' => 'boilerplate'])
-            ->expectsOutput('Publishing complete.')
             ->assertExitCode(0);
 
         $this->assertTrue(is_dir(self::TEST_APP.'/public/assets/vendor/boilerplate'));
