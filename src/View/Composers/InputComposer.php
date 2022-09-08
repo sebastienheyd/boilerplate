@@ -19,6 +19,8 @@ class InputComposer extends ComponentComposer
         'groupId',
         'group-id',
         'help',
+        'inputGroupClass',
+        'input-group-class',
         'label',
         'name',
         'options',

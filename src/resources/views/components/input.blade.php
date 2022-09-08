@@ -4,12 +4,14 @@
     The name attribute has not been set
 </code>
 @else
+@if($type !== 'hidden')
 <div class="form-group{{ isset($groupClass) ? ' '.$groupClass : '' }}"{!! isset($groupId) ? ' id="'.$groupId.'"' : '' !!}>
 @isset($label)
     <label>{!! __($label) !!}</label>
 @endisset
 @if($prepend || $prependText || $append || $appendText)
-    <div class="input-group">
+    <div class="input-group{{ isset($inputGroupClass) ? ' '.$inputGroupClass : '' }}">
+@endif
 @endif
 @if($prepend || $prependText)
         <div class="input-group-prepend">
@@ -54,5 +56,7 @@
 @error($nameDot)
     <div class="error-bubble"><div>{{ $message }}</div></div>
 @enderror
+@if($type !== 'hidden')
 </div>
+@endif
 @endif
