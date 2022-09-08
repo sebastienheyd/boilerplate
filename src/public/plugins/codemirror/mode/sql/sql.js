@@ -1,5 +1,5 @@
 // CodeMirror, copyright (c) by Marijn Haverbeke and others
-// Distributed under an MIT license: https://codemirror.net/LICENSE
+// Distributed under an MIT license: https://codemirror.net/5/LICENSE
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
@@ -122,9 +122,9 @@ CodeMirror.defineMode("sql", function(config, parserConfig) {
       if (dateSQL.hasOwnProperty(word) && (stream.match(/^( )+'[^']*'/) || stream.match(/^( )+"[^"]*"/)))
         return "number";
       if (atoms.hasOwnProperty(word)) return "atom";
-      if (builtin.hasOwnProperty(word)) return "builtin";
+      if (builtin.hasOwnProperty(word)) return "type";
       if (keywords.hasOwnProperty(word)) return "keyword";
-      if (client.hasOwnProperty(word)) return "string-2";
+      if (client.hasOwnProperty(word)) return "builtin";
       return null;
     }
   }
