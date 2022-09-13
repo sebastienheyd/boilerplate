@@ -40,7 +40,7 @@ class ImpersonateController
         }
 
         return response()->json([
-            'success' => $success,
+            'href' => route('boilerplate.dashboard'),
         ]);
     }
 

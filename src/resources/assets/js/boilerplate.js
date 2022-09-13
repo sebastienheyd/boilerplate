@@ -173,8 +173,8 @@ $(() => {
             url: $(this).data('route'),
             type: 'post',
             data: {id:$(this).val()},
-            success: function(){
-                window.location.reload();
+            success: function(res){
+                window.location.href = res.href;
             }
         });
     }).on('select2:clear', function() {
