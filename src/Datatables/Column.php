@@ -14,6 +14,7 @@ class Column
     protected $order = null;
     protected $raw = null;
     protected $title = '';
+    protected $tooltip = '';
 
     /**
      * Instanciate a new column.
@@ -236,6 +237,19 @@ class Column
     public function width(string $width): Column
     {
         $this->attributes['width'] = $width;
+
+        return $this;
+    }
+
+    /**
+     * Set a tooltip on the column title.
+     *
+     * @param  string  $tooltip
+     * @return $this
+     */
+    public function tooltip(string $tooltip): Column
+    {
+        $this->tooltip = $tooltip;
 
         return $this;
     }

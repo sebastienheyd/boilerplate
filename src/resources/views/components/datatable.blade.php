@@ -14,7 +14,7 @@
             <thead>
             <tr>
                 @foreach($datatable->getColumns() as $column)
-                    <th>{!! $column->title !!}</th>
+                    <th>@if(!empty($column->tooltip))<span data-toggle="tooltip" title="{{ $column->tooltip }}">@endif{!! $column->title !!}@if(!empty($column->tooltip))</span>@endif</th>
                 @endforeach
             </tr>
             @if(in_array('filters', $datatable->buttons))
