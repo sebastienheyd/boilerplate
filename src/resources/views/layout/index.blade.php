@@ -31,13 +31,6 @@
             lifetime:{{ config('session.lifetime') * 60 }},
             id:"{{ session()->getId() }}"
         };
-        @if(Session::has('growl'))
-        @if(is_array(Session::get('growl')))
-        growl("{!! Session::get('growl')[0] !!}", "{{ Session::get('growl')[1] }}");
-        @else
-        growl("{{Session::get('growl')}}");
-        @endif
-        @endif
     </script>
 @endcomponent
 @stack('plugin-js')
@@ -66,5 +59,8 @@
         <div class="control-sidebar-bg"></div>
     </div>
 @stack('js')
+@if(session('growl'))
+    <script>growl("{!! session('growl')[0] ?? session('growl') !!}", "{{ session('growl')[1] ?? 'info' }}")</script>
+@endif
 </body>
 </html>
