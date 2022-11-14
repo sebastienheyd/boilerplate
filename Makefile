@@ -20,5 +20,11 @@ csfix: vendor ## Check and fix for coding standards
 test: vendor phpunit.xml ## Unit testing
 	@php vendor/bin/phpunit --stop-on-failure
 
+testcoverage: composer.phar vendor phpunit.xml ## Unit testing with code coverage
+	@php vendor/bin/phpunit --coverage-text
+
+testcoveragehtml: composer.phar vendor phpunit.xml ## Unit testing with code coverage in HTML
+	@php vendor/bin/phpunit --coverage-html tests/coverage
+
 clean: ## Remove files needed for tests
 	@rm -rf composer.phar composer.lock vendor testbench

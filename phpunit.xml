@@ -18,4 +18,13 @@
             <exclude>./tests/DuskTest.php</exclude>
         </testsuite>
     </testsuites>
+    <coverage>
+        <include>
+            <directory suffix=".php">src/</directory>
+        </include>
+        <exclude>
+            <directory>src/migrations</directory>
+            <directory>src/resources</directory>
+        </exclude>
+    </coverage>
 </phpunit>
