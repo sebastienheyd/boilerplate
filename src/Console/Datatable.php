@@ -3,6 +3,7 @@
 namespace Sebastienheyd\Boilerplate\Console;
 
 use Exception;
+use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use ReflectionException;
@@ -64,7 +65,7 @@ class Datatable extends BoilerplateCommand
         if ($this->option('model') === null) {
             if ($this->confirm('Use a model as the data source?')) {
                 model:
-                $model = $this->forceAnswer('Enter the model path (E.g., <comment>App\Models\User</comment>)');
+                $model = $this->forceAnswer('Enter the model to use (E.g., <comment>App\Models\User</comment>)');
                 $this->input->setOption('model', $model);
             }
         }
@@ -78,7 +79,13 @@ class Datatable extends BoilerplateCommand
             }
 
             $shortName = (new \ReflectionClass($this->option('model')))->getShortName();
-            $columns = $this->generateColumnsForModel($this->option('model'));
+
+            try {
+                $columns = $this->generateColumnsForModel($this->option('model'));
+            } catch (Exception $exception) {
+                $this->error('Model structure is not accessible in the database');
+                return Command::FAILURE;
+            }
         }
 
         $content = (string) view(
@@ -122,12 +129,7 @@ class Datatable extends BoilerplateCommand
 
         foreach ($fields as $field) {
             if (! $this->option('nodb')) {
-                try {
-                    $type = $connection->getDoctrineColumn($model->getTable(), $field)->getType()->getName();
-                } catch (Exception $exception) {
-                    $this->error($exception->getMessage());
-                    exit;
-                }
+                $type = $connection->getDoctrineColumn($model->getTable(), $field)->getType()->getName();
             } else {
                 $type = preg_match('#_at$#', $field) ? 'datetime' : 'default';
             }

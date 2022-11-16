@@ -22,15 +22,10 @@ abstract class BoilerplateCommand extends Command
 
     protected function forceAnswer($question, $default = null)
     {
-        if (empty($default)) {
-            $default = null;
-        }
-
         $result = $this->ask($question, $default);
 
-        if (! $result) {
+        if (empty($result)) {
             $this->error('Answer cannot be empty');
-
             return $this->forceAnswer($question, $default);
         }
 

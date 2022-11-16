@@ -76,7 +76,7 @@ class BoilerplateServiceProvider extends ServiceProvider
         }
 
         // Load migrations, views and translations from current directory
-        $this->loadMigrationsFrom(__DIR__.'/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
         $this->loadViewsFrom(__DIR__.'/resources/views/components', 'boilerplate');
         $this->loadViewsFrom(__DIR__.'/resources/views', 'boilerplate');
         $this->loadJSONTranslationsFrom(__DIR__.'/resources/lang');

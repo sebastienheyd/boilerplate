@@ -12,10 +12,13 @@
     <php>
         <env name="APP_KEY" value="base64:Wo2VgRys/LE/wWcQhIh3GrKb+3GbvE0TEq41WMm1UkQ="/>
     </php>
+    <extensions>
+        <extension class="Sebastienheyd\Boilerplate\Tests\Boot"/>
+    </extensions>
     <testsuites>
         <testsuite name="Boilerplate Test Suite">
             <directory suffix="Test.php">tests</directory>
-            <exclude>./tests/DuskTest.php</exclude>
+<!--            <file>tests/Components/DatatableTest.php</file>-->
         </testsuite>
     </testsuites>
     <coverage>

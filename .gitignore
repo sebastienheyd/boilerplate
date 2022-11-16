@@ -1,9 +1,9 @@
 .idea/
 /vendor
+/coverage
 /testbench
 composer.phar
 composer.lock
 src/node_modules
 src/package-lock.json
 .phpunit.result.cache
-tests/coverage

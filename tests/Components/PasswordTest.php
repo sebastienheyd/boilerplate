@@ -27,7 +27,7 @@ HTML;
         $expected = <<<'HTML'
 <div class="form-group">
     <div class="input-group password">
-        <input class="form-control" name="password" type="password" value="">
+        <input class="form-control" placeholder="Password placeholder" name="password" type="password" value="">
         <div class="input-group-append">
             <button type="button" class="btn" data-toggle="password" tabindex="-1"><i class="far fa-fw fa-eye"></i></button>
         </div>
@@ -36,11 +36,11 @@ HTML;
 HTML;
 
         if ($this->isLaravelEqualOrGreaterThan7) {
-            $view = $this->blade('<x-boilerplate::password name="password" :check="false" />');
+            $view = $this->blade('<x-boilerplate::password name="password" :check="false" placeholder="Password placeholder" />');
             $this->assertEquals($expected, $view);
         }
 
-        $view = $this->blade("@component('boilerplate::password', ['name' => 'password', 'check' => false])@endcomponent()");
+        $view = $this->blade("@component('boilerplate::password', ['name' => 'password', 'check' => false, 'placeholder' => 'Password placeholder'])@endcomponent()");
         $this->assertEquals($expected, $view);
     }
 

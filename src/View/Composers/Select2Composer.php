@@ -2,6 +2,7 @@
 
 namespace Sebastienheyd\Boilerplate\View\Composers;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\View\View;
 
 class Select2Composer extends ComponentComposer
@@ -43,13 +44,23 @@ class Select2Composer extends ComponentComposer
                 throw new \ErrorException('Select2 component model format is incorrect');
             }
 
+            if (! class_exists($m[1])) {
+                throw new \ErrorException('Select2 component model does not exists');
+            }
+
+            $model = new $m[1];
+
+            if (! ($model instanceof Model)) {
+                throw new \ErrorException('Select2 component model is not an instance of Illuminate\Database\Eloquent\Model');
+            }
+
             $view->with('name', $data['name'] ?? strtolower(class_basename($m[1])));
             $view->with('model', encrypt($data['model']));
             $view->with('ajax', route('boilerplate.select2', [], false));
 
             if ($data['selected'] ?? false) {
-                $key = $m[4] ?? (new $m[1])->getKeyName();
-                $view->with('options', (new $m[1])
+                $key = $m[4] ?? $model->getKeyName();
+                $view->with('options', $model
                     ->whereIn($key, is_array($data['selected']) ? $data['selected'] : [$data['selected']])
                     ->pluck($m[2], $key)
                     ->toArray());

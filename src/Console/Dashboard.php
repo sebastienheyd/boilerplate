@@ -2,6 +2,8 @@
 
 namespace Sebastienheyd\Boilerplate\Console;
 
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use Symfony\Component\Console\Command\Command;
 use Illuminate\Filesystem\Filesystem;
 
 class Dashboard extends BoilerplateCommand
@@ -35,17 +37,13 @@ class Dashboard extends BoilerplateCommand
     /**
      * Execute the console command.
      *
+     * @throws FileNotFoundException
      * @return mixed
      */
     public function handle()
     {
         $this->title();
-
-        if ($this->option('remove')) {
-            $this->remove();
-        } else {
-            $this->install();
-        }
+        return $this->option('remove') ? $this->remove() : $this->install();
     }
 
     private function install()
@@ -53,8 +51,8 @@ class Dashboard extends BoilerplateCommand
         $controller = app_path('Http/Controllers/Boilerplate/DashboardController.php');
 
         if ($this->fileSystem->exists($controller)) {
-            $this->error('DashboardController.php already exists in '.app_path('Http/Controllers/Boilerplate'));
-            exit;
+            $this->error('DashboardController.php already exists in app/Http/Controllers/Boilerplate');
+            return Command::FAILURE;
         }
 
         // Create controller folder
@@ -82,10 +80,7 @@ class Dashboard extends BoilerplateCommand
             $this->fileSystem->get($configFile)
         );
 
-        if (! $this->fileSystem->put($configFile, $config)) {
-            $this->error('Error writing to configuration file '.$configFile);
-            exit;
-        }
+        $this->fileSystem->put($configFile, $config);
 
         $this->info('Dashboard controller and view has been successfully published!');
     }
@@ -95,8 +90,7 @@ class Dashboard extends BoilerplateCommand
         $path = app_path('Http/Controllers/Boilerplate');
         if (! $this->fileSystem->exists($path.'/DashboardController.php')) {
             $this->info('Custom dashboard is not present, nothing to remove');
-
-            return;
+            return Command::FAILURE;
         }
 
         $this->warn('------------------------------------------------------------------------');
@@ -104,7 +98,7 @@ class Dashboard extends BoilerplateCommand
         $this->warn('------------------------------------------------------------------------');
 
         if (! $this->confirm('Continue?')) {
-            return;
+            return Command::SUCCESS;
         }
 
         $this->delete($path.'/DashboardController.php');
@@ -125,10 +119,7 @@ class Dashboard extends BoilerplateCommand
             $this->fileSystem->get($configFile)
         );
 
-        if (! $this->fileSystem->put($configFile, $config)) {
-            $this->error('Error writing to configuration file '.$configFile);
-            exit;
-        }
+        $this->fileSystem->put($configFile, $config);
 
         $this->info('Custom dashboard has been removed!');
     }

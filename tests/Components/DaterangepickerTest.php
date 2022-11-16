@@ -2,6 +2,8 @@
 
 namespace Sebastienheyd\Boilerplate\Tests\Components;
 
+use PHP_CodeSniffer\Tokenizers\PHP;
+
 class DaterangepickerTest extends TestComponent
 {
     public function testDaterangepickerNoArgs()
@@ -73,6 +75,56 @@ HTML;
         }
 
         $view = $this->blade("@component('boilerplate::daterangepicker', ['name' => 'range', 'id' => 'range', 'prependText' => 'fas fa-calendar', 'append-text' => 'fas fa-clock', 'help' => 'Help text', 'start' => '1970-01-01 00:00:00', 'end' => date('Y-m-d H:i:s', 1637400477)]) @endcomponent");
+        $this->assertEquals($expected, $view);
+    }
+
+    public function testDateRangepickerMinMaxDate()
+    {
+        $expected = <<<'HTML'
+<div class="form-group">
+    <div class="input-group" id="range">
+        <div class="d-flex align-items-center form-control">
+            <input class="daterangepicker-input" autocomplete="off" name="range[value]" type="text">
+            <span class="fa fa-fw fa-times fa-xs ml-1 clear-daterangepicker" data-name="range" style="display:none"/>
+        </div>
+    </div>
+    <input autocomplete="off" name="range[start]" type="hidden" value="">
+    <input autocomplete="off" name="range[end]" type="hidden" value="">
+</div>
+<script>loadScript('',()=>{moment.locale('en');registerAsset('momentjs')});</script><script>loadStylesheet("");whenAssetIsLoaded('momentjs',()=>{loadScript("",()=>{registerAsset('daterangepicker');$.fn.daterangepicker.defaultOptions={locale:{"applyLabel":"Apply","cancelLabel":"Cancel","fromLabel":"From","toLabel":"To","customRangeLabel":"Custom",}}})});</script><script>whenAssetIsLoaded('daterangepicker',()=>{window.DRP_range=$('input[name="range[value]"]').daterangepicker({showDropdowns:!0,opens:"right",minDate:moment('1970-01-01 00:00:00'),maxDate:moment('2022-11-16 00:00:00'),timePicker:!1,timePickerIncrement:1,timePicker24Hour:!0,timePickerSeconds:!1,autoUpdateInput:!1,startDate:moment(),endDate:moment(),locale:{format:'YYYY-MM-DD'}}).on('apply.daterangepicker',applyDateRangePicker)});</script>
+HTML;
+
+        if ($this->isLaravelEqualOrGreaterThan7) {
+            $view = $this->blade('<x-boilerplate::daterangepicker name="range" id="range" min-date="1970-01-01 00:00:00" max-date="2022-11-16 00:00:00" />');
+            $this->assertEquals($expected, $view);
+        }
+
+        $view = $this->blade("@component('boilerplate::daterangepicker', ['name' => 'range', 'id' => 'range', 'min-date' => '1970-01-01 00:00:00', 'max-date' => '2022-11-16 00:00:00' ]) @endcomponent");
+        $this->assertEquals($expected, $view);
+    }
+
+    public function testDateRangepickerTimePicker()
+    {
+        $expected = <<<'HTML'
+<div class="form-group">
+    <div class="input-group" id="range">
+        <div class="d-flex align-items-center form-control">
+            <input class="daterangepicker-input" autocomplete="off" name="range[value]" type="text">
+            <span class="fa fa-fw fa-times fa-xs ml-1 clear-daterangepicker" data-name="range" style="display:none"/>
+        </div>
+    </div>
+    <input autocomplete="off" name="range[start]" type="hidden" value="">
+    <input autocomplete="off" name="range[end]" type="hidden" value="">
+</div>
+<script>loadScript('',()=>{moment.locale('en');registerAsset('momentjs')});</script><script>loadStylesheet("");whenAssetIsLoaded('momentjs',()=>{loadScript("",()=>{registerAsset('daterangepicker');$.fn.daterangepicker.defaultOptions={locale:{"applyLabel":"Apply","cancelLabel":"Cancel","fromLabel":"From","toLabel":"To","customRangeLabel":"Custom",}}})});</script><script>whenAssetIsLoaded('daterangepicker',()=>{window.DRP_range=$('input[name="range[value]"]').daterangepicker({showDropdowns:!0,opens:"right",timePicker:!0,timePickerIncrement:1,timePicker24Hour:!1,timePickerSeconds:!0,autoUpdateInput:!1,startDate:moment(),endDate:moment(),locale:{format:'YYYY-MM-DD hh:mm:ss A'}}).on('apply.daterangepicker',applyDateRangePicker)});</script>
+HTML;
+
+        if ($this->isLaravelEqualOrGreaterThan7) {
+            $view = $this->blade('<x-boilerplate::daterangepicker name="range" id="range" :timePicker="true" :timePickerSeconds="true" :timePicker24Hour="false" />');
+            $this->assertEquals($expected, $view);
+        }
+
+        $view = $this->blade("@component('boilerplate::daterangepicker', ['name' => 'range', 'id' => 'range', 'timePicker' => true, 'timePickerSeconds' => true, 'timePicker24Hour' => false]) @endcomponent");
         $this->assertEquals($expected, $view);
     }
 }

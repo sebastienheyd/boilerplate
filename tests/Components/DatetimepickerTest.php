@@ -219,4 +219,37 @@ HTML;
         $view = $this->blade("@component('boilerplate::datetimepicker', ['id' => 'test', 'name' => 'test']) @endcomponent()@stack('js')");
         $this->assertEquals($expected, $view);
     }
+
+    public function testDatepickerValue()
+    {
+        $expected = <<<'HTML'
+<div class="form-group">
+    <div class="input-group" id="test" data-target-input="nearest">
+        <input data-toggle="datetimepicker" data-target="#test" class="form-control datetimepicker-input" autocomplete="off" name="test_local" type="text" value="01/01/2022">
+    </div>
+    <input name="test" type="hidden" value="2022-01-01 00:00:00">
+</div>
+<script>loadScript('',()=>{moment.locale('en');registerAsset('momentjs')});</script><script>loadStylesheet('');whenAssetIsLoaded('momentjs',()=>{loadScript('',()=>{registerAsset('datetimepicker',()=>{$.fn.datetimepicker.Constructor.Default=$.extend({},$.fn.datetimepicker.Constructor.Default,{locale:"en",icons:$.extend({},$.fn.datetimepicker.Constructor.Default.icons,{time:'far fa-clock',date:'far fa-calendar',up:'fas fa-arrow-up',down:'fas fa-arrow-down',previous:'fas fa-chevron-left',next:'fas fa-chevron-right',today:'far fa-calendar-check',clear:'fas fa-trash',close:'fas fa-times'})})})})});</script><script>whenAssetIsLoaded('datetimepicker',()=>{window.DTP_test=$('#test').datetimepicker({format:"L",buttons:{showToday:!1,showClear:!1,showClose:!1},useCurrent:!1,});$('#test').on('change.datetimepicker',()=>{$('input[name="test"]').val('');if($('input[name="test_local"]').val()!==''){let date=$('#test').datetimepicker('viewDate').format('YYYY-MM-DD');$('input[name="test"]').val(date).trigger('change')}})});</script>
+HTML;
+
+        if ($this->isLaravelEqualOrGreaterThan7) {
+            $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" value="2022-01-01" />');
+            $this->assertEquals($expected, $view);
+
+            $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" value="2022-01-01 00:00:00" />');
+            $this->assertEquals($expected, $view);
+
+            $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" :value="Illuminate\Support\Carbon::createFromFormat(\'Y-m-d H:i:s\', \'2022-01-01 00:00:00\')" />');
+            $this->assertEquals($expected, $view);
+        }
+
+        $view = $this->blade("@component('boilerplate::datetimepicker', ['id' => 'test', 'name' => 'test', 'value' => '2022-01-01']) @endcomponent");
+        $this->assertEquals($expected, $view);
+
+        $view = $this->blade("@component('boilerplate::datetimepicker', ['id' => 'test', 'name' => 'test', 'value' => '2022-01-01 00:00:00']) @endcomponent");
+        $this->assertEquals($expected, $view);
+
+        $view = $this->blade("@component('boilerplate::datetimepicker', ['id' => 'test', 'name' => 'test', 'value' => Illuminate\Support\Carbon::createFromFormat('Y-m-d H:i:s', '2022-01-01 00:00:00')]) @endcomponent");
+        $this->assertEquals($expected, $view);
+    }
 }

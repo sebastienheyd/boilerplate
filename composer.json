@@ -25,7 +25,8 @@
         "phpunit/phpunit": "^8.0|^9.0",
         "squizlabs/php_codesniffer": "^3.0",
         "orchestra/testbench": "^4.0|^5.0|^6.0|^7.0",
-        "doctrine/dbal": "^2.9"
+        "doctrine/dbal": "^2.9",
+        "fakerphp/faker": "^1.20"
     },
     "suggest": {
         "sebastienheyd/boilerplate-packager": "Package manager for sebastienheyd/boilerplate",
@@ -42,7 +43,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Sebastienheyd\\Boilerplate\\Tests\\": "tests/"
+            "Sebastienheyd\\Boilerplate\\Tests\\": "tests",
+            "Sebastienheyd\\Boilerplate\\Database\\Factories\\": "database/factories/"
         }
     },
     "authors": [

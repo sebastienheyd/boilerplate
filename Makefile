@@ -24,7 +24,7 @@ testcoverage: composer.phar vendor phpunit.xml ## Unit testing with code coverag
 	@php vendor/bin/phpunit --coverage-text
 
 testcoveragehtml: composer.phar vendor phpunit.xml ## Unit testing with code coverage in HTML
-	@php vendor/bin/phpunit --coverage-html tests/coverage
+	@php vendor/bin/phpunit --coverage-html coverage
 
 clean: ## Remove files needed for tests
-	@rm -rf composer.phar composer.lock vendor testbench
+	@rm -rf composer.phar composer.lock vendor testbench coverage

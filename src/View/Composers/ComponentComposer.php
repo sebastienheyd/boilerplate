@@ -28,16 +28,16 @@ abstract class ComponentComposer
 
     protected function dateToCarbon($date)
     {
-        if (preg_match('#[0-9]{4}-[0-9]{2}-[0-9]{2}\s[0-9]{2}:[0-9]{2}:[0-9]{2}#', $date)) {
-            return Carbon::createFromFormat('Y-m-d H:i:s', $date);
-        }
-
-        if (preg_match('#[0-9]{4}-[0-9]{2}-[0-9]{2}#', $date)) {
-            return Carbon::createFromFormat('Y-m-d', $date);
-        }
-
         if ($date instanceof Carbon) {
             return $date;
+        }
+
+        if (preg_match('#^[0-9]{4}-[0-9]{2}-[0-9]{2}$#', $date)) {
+            return Carbon::createFromFormat('Y-m-d', $date)->startOfDay();
+        }
+
+        if (preg_match('#^[0-9]{4}-[0-9]{2}-[0-9]{2}\s[0-9]{2}:[0-9]{2}:[0-9]{2}$#', $date)) {
+            return Carbon::createFromFormat('Y-m-d H:i:s', $date);
         }
     }
 

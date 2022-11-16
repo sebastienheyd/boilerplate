@@ -3,6 +3,7 @@
 namespace Sebastienheyd\Boilerplate\Console;
 
 use FilesystemIterator;
+use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -47,12 +48,7 @@ class Scaffold extends BoilerplateCommand
     public function handle()
     {
         $this->title();
-
-        if ($this->option('remove')) {
-            $this->remove();
-        } else {
-            $this->install();
-        }
+        return $this->option('remove') ? $this->remove() : $this->install();
     }
 
     private function install()
@@ -66,7 +62,7 @@ class Scaffold extends BoilerplateCommand
         $this->warn($line);
 
         if (! $this->confirm('Continue?')) {
-            return;
+            return Command::SUCCESS;
         }
 
         $this->publishRoutes();
@@ -85,7 +81,7 @@ class Scaffold extends BoilerplateCommand
                     ->update(['user_type' => 'App\Models\Boilerplate\User']);
             }
         } catch (\Exception $e) {
-            $this->error($e->getMessage());
+            $this->error('Database is not available');
         }
     }
 
@@ -96,7 +92,7 @@ class Scaffold extends BoilerplateCommand
         $this->warn('---------------------------------------------------------------------------------------');
 
         if (! $this->confirm('Continue?')) {
-            return;
+            return Command::SUCCESS;
         }
 
         $backupDashboard = [];
@@ -152,7 +148,7 @@ class Scaffold extends BoilerplateCommand
                     ->update(['user_type' => 'Sebastienheyd\Boilerplate\Models\User']);
             }
         } catch (\Exception $e) {
-            $this->error($e->getMessage());
+            $this->error('Database is not available');
         }
     }
 
@@ -269,14 +265,10 @@ class Scaffold extends BoilerplateCommand
     /**
      * Delete files or directories.
      *
-     * @param  mixed  $fileOrDirectory  String or array of files or directories to delete
+     * @param  array  $fileOrDirectory  Array of files or directories to delete
      */
-    private function delete($fileOrDirectory)
+    private function delete(array $fileOrDirectory)
     {
-        if (is_string($fileOrDirectory)) {
-            $fileOrDirectory = [$fileOrDirectory];
-        }
-
         foreach ($fileOrDirectory as $path) {
             if ($this->fileSystem->isFile($path)) {
                 $type = 'File';
@@ -324,10 +316,6 @@ class Scaffold extends BoilerplateCommand
      */
     private function copyDirectory($directory, $destination)
     {
-        if (! $this->fileSystem->isDirectory($directory)) {
-            return false;
-        }
-
         $this->fileSystem->ensureDirectoryExists($destination, 0777);
 
         $items = new FilesystemIterator($directory, FilesystemIterator::SKIP_DOTS);
@@ -343,9 +331,7 @@ class Scaffold extends BoilerplateCommand
                 }
             } else {
                 if (! $this->fileSystem->exists($target)) {
-                    if (! $this->fileSystem->copy($item->getPathname(), $target)) {
-                        return false;
-                    }
+                    $this->fileSystem->copy($item->getPathname(), $target);
                 }
             }
         }

@@ -2,6 +2,7 @@
 
 namespace Sebastienheyd\Boilerplate\Console;
 
+use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 
 class MenuItem extends BoilerplateCommand
@@ -54,7 +55,7 @@ class MenuItem extends BoilerplateCommand
 
         if (is_file($filePath)) {
             $this->error('Menu item '.$camelName.' already exists');
-            exit;
+            return Command::FAILURE;
         }
 
         if (! is_dir(app_path('Menu'))) {

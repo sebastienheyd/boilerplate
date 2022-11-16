@@ -222,4 +222,21 @@ HTML;
         $view = $this->blade("@component('boilerplate::input', ['name' => 'test']) @slot('prepend') test @endslot @slot('append') test @endslot @endcomponent");
         $this->assertEquals($expected, $view);
     }
+
+    public function testInputPlaceholder()
+    {
+        $expected = <<<'HTML'
+<div class="form-group">
+    <input class="form-control" placeholder="Test" autocomplete="off" name="test" type="text" value="">
+</div>
+HTML;
+
+        if ($this->isLaravelEqualOrGreaterThan7) {
+            $view = $this->blade('<x-boilerplate::input name="test" placeholder="Test" />');
+            $this->assertEquals($expected, $view);
+        }
+
+        $view = $this->blade("@component('boilerplate::input', ['name' => 'test', 'placeholder' => 'Test']) @endcomponent");
+        $this->assertEquals($expected, $view);
+    }
 }
