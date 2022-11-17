@@ -8,6 +8,8 @@ class DashboardTest extends TestCase
 {
     public function testDashboard()
     {
+        unlink(config_path('boilerplate/menu.php'));
+
         $this->artisan('boilerplate:dashboard')
             ->expectsOutput('Dashboard controller and view has been successfully published!')
             ->assertSuccessful();
@@ -20,7 +22,7 @@ class DashboardTest extends TestCase
     {
         $this->artisan('boilerplate:dashboard')
             ->expectsOutput('DashboardController.php already exists in app/Http/Controllers/Boilerplate')
-            ->assertFailed();
+            ->assertSuccessful();
     }
 
     public function testDashboardRemoveNoContinue()
@@ -50,6 +52,6 @@ class DashboardTest extends TestCase
     {
         $this->artisan('boilerplate:dashboard', ['--remove' => true])
             ->expectsOutput('Custom dashboard is not present, nothing to remove')
-            ->assertFailed();
+            ->assertSuccessful();
     }
 }

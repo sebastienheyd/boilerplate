@@ -9,16 +9,9 @@
          convertWarningsToExceptions="true"
          processIsolation="false"
          stopOnFailure="false">
-    <php>
-        <env name="APP_KEY" value="base64:Wo2VgRys/LE/wWcQhIh3GrKb+3GbvE0TEq41WMm1UkQ="/>
-    </php>
-    <extensions>
-        <extension class="Sebastienheyd\Boilerplate\Tests\Boot"/>
-    </extensions>
     <testsuites>
         <testsuite name="Boilerplate Test Suite">
             <directory suffix="Test.php">tests</directory>
-<!--            <file>tests/Components/DatatableTest.php</file>-->
         </testsuite>
     </testsuites>
     <coverage>
@@ -26,7 +19,8 @@
             <directory suffix=".php">src/</directory>
         </include>
         <exclude>
-            <directory>src/migrations</directory>
+            <directory>src/config</directory>
+            <directory>src/database/migrations</directory>
             <directory>src/resources</directory>
         </exclude>
     </coverage>

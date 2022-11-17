@@ -2,6 +2,7 @@
 
 namespace Sebastienheyd\Boilerplate\Tests\Console;
 
+use Illuminate\Support\Facades\Schema;
 use Sebastienheyd\Boilerplate\Tests\TestCase;
 
 class DatatableTest extends TestCase
@@ -35,14 +36,7 @@ class DatatableTest extends TestCase
 
     public function testDatatableModel()
     {
-        $this->artisan('boilerplate:datatable', ['--nodb' => true])
-            ->expectsQuestion('Name of the DataTable component to create (E.g., <comment>users</comment>)', 'users')
-            ->expectsConfirmation('Use a model as the data source?', 'yes')
-            ->expectsQuestion('Enter the model to use (E.g., <comment>App\Models\User</comment>)', 'Sebastienheyd\\Boilerplate\\Models\\User')
-            ->expectsOutput('Datatable component generated with success : '.app_path('Datatables/UsersDatatable.php'))
-            ->assertSuccessful();
-
-        $this->assertFileExists('app/Datatables/UsersDatatable.php');
+        Schema::drop('users');
 
         $this->artisan('boilerplate:datatable')
             ->expectsQuestion('Name of the DataTable component to create (E.g., <comment>users</comment>)', 'users')
@@ -52,5 +46,14 @@ class DatatableTest extends TestCase
             ->expectsQuestion('Enter the model to use (E.g., <comment>App\Models\User</comment>)', 'Sebastienheyd\\Boilerplate\\Models\\User')
             ->expectsOutput('Model structure is not accessible in the database')
             ->assertFailed();
+
+        $this->artisan('boilerplate:datatable', ['--nodb' => true])
+            ->expectsQuestion('Name of the DataTable component to create (E.g., <comment>users</comment>)', 'users')
+            ->expectsConfirmation('Use a model as the data source?', 'yes')
+            ->expectsQuestion('Enter the model to use (E.g., <comment>App\Models\User</comment>)', 'Sebastienheyd\\Boilerplate\\Models\\User')
+            ->expectsOutput('Datatable component generated with success : '.app_path('Datatables/UsersDatatable.php'))
+            ->assertSuccessful();
+
+        $this->assertFileExists('app/Datatables/UsersDatatable.php');
     }
 }

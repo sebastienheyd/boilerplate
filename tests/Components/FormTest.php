@@ -12,13 +12,13 @@ class FormTest extends TestComponent
 </form>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7) {
+        if ($this->isLaravelEqualOrGreaterThan7()) {
             $view = $this->blade('<x-boilerplate::form />');
-            $this->assertEquals($expected, $view);
+            $view->assertSee($expected, false);
         }
 
         $view = $this->blade("@component('boilerplate::form') @endcomponent");
-        $this->assertEquals($expected, $view);
+        $view->assertSee($expected, false);
     }
 
     public function testFormComponentWithURL()
@@ -29,13 +29,13 @@ HTML;
 </form>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7) {
+        if ($this->isLaravelEqualOrGreaterThan7()) {
             $view = $this->blade('<x-boilerplate::form url="https://www.google.fr/search" />');
-            $this->assertEquals($expected, $view);
+            $view->assertSee($expected, false);
         }
 
         $view = $this->blade("@component('boilerplate::form', ['url' => 'https://www.google.fr/search']) @endcomponent");
-        $this->assertEquals($expected, $view);
+        $view->assertSee($expected, false);
     }
 
     public function testFormComponentWithRoute()
@@ -46,13 +46,13 @@ HTML;
 </form>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7) {
+        if ($this->isLaravelEqualOrGreaterThan7()) {
             $view = $this->blade('<x-boilerplate::form :route="[\'boilerplate.users.edit\', 1]" />');
-            $this->assertEquals($expected, $view);
+            $view->assertSee($expected, false);
         }
 
         $view = $this->blade("@component('boilerplate::form', ['route' => ['boilerplate.users.edit', 1]]) @endcomponent");
-        $this->assertEquals($expected, $view);
+        $view->assertSee($expected, false);
     }
 
     public function testFormComponentWithMethod()
@@ -63,13 +63,13 @@ HTML;
 </form>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7) {
+        if ($this->isLaravelEqualOrGreaterThan7()) {
             $view = $this->blade('<x-boilerplate::form method="get" />');
-            $this->assertEquals($expected, $view);
+            $view->assertSee($expected, false);
         }
 
         $view = $this->blade("@component('boilerplate::form', ['method' => 'get']) @endcomponent");
-        $this->assertEquals($expected, $view);
+        $view->assertSee($expected, false);
 
         $expected = <<<'HTML'
 <form method="POST" action="http://localhost" accept-charset="UTF-8"><input name="_method" type="hidden" value="PUT"><input name="_token" type="hidden">
@@ -77,13 +77,13 @@ HTML;
 </form>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7) {
+        if ($this->isLaravelEqualOrGreaterThan7()) {
             $view = $this->blade('<x-boilerplate::form method="put" />');
-            $this->assertEquals($expected, $view);
+            $view->assertSee($expected, false);
         }
 
         $view = $this->blade("@component('boilerplate::form', ['method' => 'put']) @endcomponent");
-        $this->assertEquals($expected, $view);
+        $view->assertSee($expected, false);
     }
 
     public function testFormComponentWithFiles()
@@ -94,12 +94,12 @@ HTML;
 </form>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7) {
+        if ($this->isLaravelEqualOrGreaterThan7()) {
             $view = $this->blade('<x-boilerplate::form files />');
-            $this->assertEquals($expected, $view);
+            $view->assertSee($expected, false);
         }
 
         $view = $this->blade("@component('boilerplate::form', ['files' => true]) @endcomponent");
-        $this->assertEquals($expected, $view);
+        $view->assertSee($expected, false);
     }
 }

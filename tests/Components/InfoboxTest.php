@@ -18,13 +18,13 @@ class InfoboxTest extends TestComponent
 </div>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7) {
+        if ($this->isLaravelEqualOrGreaterThan7()) {
             $view = $this->blade('<x-boilerplate::infobox />');
-            $this->assertEquals($expected, $view);
+            $view->assertSee($expected, false);
         }
 
         $view = $this->blade("@component('boilerplate::infobox') @endcomponent");
-        $this->assertEquals($expected, $view);
+        $view->assertSee($expected, false);
     }
 
     public function testInputFull()
@@ -43,12 +43,12 @@ HTML;
 </div>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7) {
+        if ($this->isLaravelEqualOrGreaterThan7()) {
             $view = $this->blade('<x-boilerplate::infobox icon="far fa-envelope" class="extra-class" color="red" bg-color="red" text="test" number="1234" progress="50" description="desc" id="test" />');
-            $this->assertEquals($expected, $view);
+            $view->assertSee($expected, false);
         }
 
         $view = $this->blade("@component('boilerplate::infobox', ['icon' => 'far fa-envelope', 'class' => 'extra-class', 'color' => 'red', 'bg-color' => 'red' , 'text' => 'test', 'number' => '1234', 'progress' => '50', 'description' => 'desc', 'id' => 'test']) @endcomponent");
-        $this->assertEquals($expected, $view);
+        $view->assertSee($expected, false);
     }
 }

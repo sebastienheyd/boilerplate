@@ -97,7 +97,7 @@ class Datatable extends BoilerplateCommand
 
         if (is_file($filePath)) {
             if (! $this->confirm("File <comment>$filePath</comment> already exists, overwrite?")) {
-                return;
+                return Command::SUCCESS;
             }
 
             unlink($filePath);

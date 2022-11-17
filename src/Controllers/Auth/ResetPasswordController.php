@@ -2,7 +2,6 @@
 
 namespace Sebastienheyd\Boilerplate\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -10,7 +9,7 @@ use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
 use Sebastienheyd\Boilerplate\Rules\Password;
 
-class ResetPasswordController extends Controller
+class ResetPasswordController
 {
     use ResetsPasswords;
 

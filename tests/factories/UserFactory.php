@@ -1,10 +1,11 @@
 <?php
 
-namespace Sebastienheyd\Boilerplate\database\factories;
+namespace Sebastienheyd\Boilerplate\Tests\factories;
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 use Faker\Factory;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Sebastienheyd\Boilerplate\Models\Permission;
 use Sebastienheyd\Boilerplate\Models\Role;
 use Sebastienheyd\Boilerplate\Models\User;
@@ -74,7 +75,7 @@ class UserFactory
 
     public function admin($authUser = false)
     {
-        $user = User::create([
+        $user = DB::table('users')->insertGetId([
             'active' => '1',
             'first_name' => $this->faker->firstName,
             'last_name' => $this->faker->lastName,
@@ -84,6 +85,7 @@ class UserFactory
             'remember_token' => Str::random(10),
         ]);
 
+        $user = User::find($user);
         $role = Role::find(1);
         $user->attachRole($role);
 

@@ -173,9 +173,15 @@ class Scaffold extends BoilerplateCommand
             ], $file->getRealPath());
         }
 
+        $configFile = config_path('boilerplate/menu.php');
+
+        if (! $this->fileSystem->exists($configFile)) {
+            $this->callSilent('vendor:publish', ['--tag' => 'boilerplate-config']);
+        }
+
         $this->replaceInFile([
             'Sebastienheyd\Boilerplate\Controllers' => 'App\Http\Controllers\Boilerplate',
-        ], config_path('boilerplate/menu.php'));
+        ], $configFile);
     }
 
     private function publishModels()

@@ -15,16 +15,16 @@ class IcheckTest extends TestComponent
 </div>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7) {
+        if ($this->isLaravelEqualOrGreaterThan7()) {
             $view = $this->blade('<x-boilerplate::icheck id="test" name="test" label="boilerplate::layout.dashboard" />');
-            $this->assertEquals($expected, $view);
+            $view->assertSee($expected, false);
 
             $view = $this->blade('<x-boilerplate::icheck id="test" name="test" label="boilerplate::layout.dashboard" :checked="false" />');
-            $this->assertEquals($expected, $view);
+            $view->assertSee($expected, false);
         }
 
         $view = $this->blade("@component('boilerplate::icheck', ['name' => 'test', 'id' => 'test', 'label' => 'boilerplate::layout.dashboard']) @endcomponent");
-        $this->assertEquals($expected, $view);
+        $view->assertSee($expected, false);
     }
 
     public function testIcheckComponentChecked()
@@ -38,16 +38,16 @@ HTML;
 </div>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7) {
+        if ($this->isLaravelEqualOrGreaterThan7()) {
             $view = $this->blade('<x-boilerplate::icheck id="test" checked />');
-            $this->assertEquals($expected, $view);
+            $view->assertSee($expected, false);
 
             $view = $this->blade('<x-boilerplate::icheck id="test" :checked="!isset($value)" />');
-            $this->assertEquals($expected, $view);
+            $view->assertSee($expected, false);
         }
 
         $view = $this->blade('@component("boilerplate::icheck", ["id" => "test", "checked" => !isset($value)]) @endcomponent');
-        $this->assertEquals($expected, $view);
+        $view->assertSee($expected, false);
     }
 
     public function testIcheckComponentExtraAttributes()
@@ -61,12 +61,12 @@ HTML;
 </div>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7) {
+        if ($this->isLaravelEqualOrGreaterThan7()) {
             $view = $this->blade('<x-boilerplate::icheck id="test" class="bg-red" data-toggle="tooltip" value="1"/>');
-            $this->assertEquals($expected, $view);
+            $view->assertSee($expected, false);
         }
 
         $view = $this->blade("@component('boilerplate::icheck', ['id' => 'test', 'class' => 'bg-red', 'data-toggle' => 'tooltip', 'value' => '1']) @endcomponent");
-        $this->assertEquals($expected, $view);
+        $view->assertSee($expected, false);
     }
 }

@@ -6,14 +6,10 @@ use Sebastienheyd\Boilerplate\Tests\TestCase;
 
 class ScaffoldTest extends TestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->migrate();
-    }
-
     public function testScaffold()
     {
+        unlink(config_path('boilerplate/menu.php'));
+
         $this->artisan('boilerplate:scaffold')
             ->expectsConfirmation('Continue?')
             ->assertSuccessful();
@@ -76,5 +72,10 @@ class ScaffoldTest extends TestCase
             ->assertSuccessful();
 
         app('config')->set('database.default', 'testbench');
+
+        $this->assertFileDoesNotExist('app/Http/Controllers/Boilerplate/DashboardController.php');
+        $this->assertFileDoesNotExist('resources/views/vendor/boilerplate/dashboard.blade.php');
+        $this->assertDirectoryDoesNotExist('app/Http/Controllers/Boilerplate');
+        $this->assertDirectoryDoesNotExist('resources/views/vendor/boilerplate');
     }
 }

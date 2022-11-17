@@ -2,21 +2,22 @@
 
 namespace Sebastienheyd\Boilerplate\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Config\Repository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 
-class LoginController extends Controller
+class LoginController
 {
-    use AuthenticatesUsers;
+    use AuthenticatesUsers, ValidatesRequests;
 
     /**
      * Where to redirect after login / register.
@@ -92,7 +93,7 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         if (! empty($user->name)) {
-            \Log::info('User logged in : '.$user->name);
+            Log::info('User logged in : '.$user->name);
 
             return true;
         }
@@ -109,7 +110,7 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         $user = $this->guard()->user();
-        \Log::info('User logged out : '.$user->name);
+        Log::info('User logged out : '.$user->name);
 
         $this->guard()->logout();
 

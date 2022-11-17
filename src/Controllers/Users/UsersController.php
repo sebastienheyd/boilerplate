@@ -2,11 +2,11 @@
 
 namespace Sebastienheyd\Boilerplate\Controllers\Users;
 
-use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -16,8 +16,10 @@ use Illuminate\Validation\ValidationException;
 use Intervention\Image\Facades\Image;
 use Sebastienheyd\Boilerplate\Rules\Password;
 
-class UsersController extends Controller
+class UsersController
 {
+    use ValidatesRequests;
+
     /**
      * Display a listing of users.
      *

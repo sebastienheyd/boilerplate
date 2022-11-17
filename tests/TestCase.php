@@ -5,60 +5,138 @@ namespace Sebastienheyd\Boilerplate\Tests;
 use Collective\Html\FormFacade;
 use Collective\Html\HtmlServiceProvider;
 use Creativeorange\Gravatar\GravatarServiceProvider;
+use HieuLe\Active\ActiveServiceProvider;
+use Illuminate\Auth\AuthServiceProvider;
 use Illuminate\Broadcasting\BroadcastServiceProvider;
+use Illuminate\Bus\BusServiceProvider;
 use Illuminate\Cache\CacheServiceProvider;
+use Illuminate\Cookie\CookieServiceProvider;
 use Illuminate\Database\DatabaseServiceProvider;
+use Illuminate\Encryption\EncryptionServiceProvider;
+use Illuminate\Events\EventServiceProvider;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Filesystem\FilesystemServiceProvider;
+use Illuminate\Foundation\Application as Laravel;
 use Illuminate\Foundation\Providers\ConsoleSupportServiceProvider;
+use Illuminate\Hashing\HashServiceProvider;
 use Illuminate\Queue\QueueServiceProvider;
+use Illuminate\Session\SessionServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\View;
+use Illuminate\Translation\TranslationServiceProvider;
+use Illuminate\Validation\ValidationServiceProvider;
 use Illuminate\View\ViewServiceProvider;
+use Laratrust\LaratrustServiceProvider;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 use Sebastienheyd\Boilerplate\BoilerplateServiceProvider;
 
 abstract class TestCase extends OrchestraTestCase
 {
+    public static $testbench_path = __DIR__.'/../testbench';
+    public static $vendor_path = __DIR__.'/../vendor';
+    public static $core_path = __DIR__.'/../vendor/orchestra/testbench-core/laravel';
+    public static $init = false;
+    public static $isLaravelEqualOrGreaterThan7;
+
     protected function getEnvironmentSetUp($app)
     {
-        $app['config']->set('database.default', 'testbench');
-        $app['config']->set('database.connections.testbench', [
-            'driver'   => 'sqlite',
-            'database' => ':memory:',
-            'prefix'   => '',
+        config([
+            'app.key' => 'base64:Wo2VgRys/LE/wWcQhIh3GrKb+3GbvE0TEq41WMm1UkQ=',
+            'app.cipher' => 'AES-256-CBC',
+            'app.locale' => 'en',
+            'session.driver' => 'array',
+            'queue.driver' => 'sync',
+            'database.default' => 'testbench',
+            'database.connections.testbench' => [
+                'driver'   => 'sqlite',
+                'database' => ':memory:',
+                'prefix'   => '',
+            ]
         ]);
     }
 
-    protected function migrate()
+    public static function setUpBeforeClass(): void
     {
-        $this->loadLaravelMigrationsWithoutRollback(['--database' => 'testbench']);
+        parent::setUpBeforeClass();
+
+        $fileSystem = new Filesystem();
+
+        if ($fileSystem->exists(self::$testbench_path)) {
+            $fileSystem->deleteDirectory(self::$testbench_path);
+        }
+
+        $fileSystem->makeDirectory(self::$testbench_path, 0755, true);
+        $fileSystem->delete(self::$core_path.'/vendor');
+        $fileSystem->copyDirectory(self::$core_path, self::$testbench_path);
+        $fileSystem->link(realpath(self::$vendor_path), self::$core_path.'/vendor');
+        $fileSystem->link(realpath(self::$vendor_path), self::$testbench_path.'/vendor');
+    }
+
+    public static function tearDownAfterClass(): void
+    {
+        parent::tearDownAfterClass();
+
+        $fileSystem = new Filesystem();
+
+        if ($fileSystem->exists(self::$testbench_path)) {
+            $fileSystem->deleteDirectory(self::$testbench_path);
+        }
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->artisan('view:clear');
+
+        if (self::$init === false) {
+            $this->artisan('vendor:publish', ['--tag' => 'boilerplate']);
+            $this->loadLaravelMigrations(['--database' => 'testbench']);
+            $this->artisan('migrate', ['--database' => 'testbench'])->run();
+            self::$init = true;
+        }
+    }
+
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+        self::$init = false;
+    }
+
+    protected function isLaravelEqualOrGreaterThan7()
+    {
+        if (self::$isLaravelEqualOrGreaterThan7 === null) {
+            self::$isLaravelEqualOrGreaterThan7 = version_compare(Laravel::VERSION, '7.0', '>=');
+        }
+
+        return self::$isLaravelEqualOrGreaterThan7;
     }
 
     protected function getBasePath()
     {
-        return Boot::$testbench_path;
+        return self::$testbench_path;
     }
 
     public static function assertFileExists(string $filename, string $message = ''): void
     {
-        parent::assertFileExists(Boot::$testbench_path.'/'.ltrim($filename, '/'), $message);
+        parent::assertFileExists(self::$testbench_path.'/'.ltrim($filename, '/'), $message);
     }
 
     public static function assertFileDoesNotExist(string $filename, string $message = ''): void
     {
-        parent::assertFileDoesNotExist(Boot::$testbench_path.'/'.ltrim($filename, '/'), $message);
+        parent::assertFileDoesNotExist(self::$testbench_path.'/'.ltrim($filename, '/'), $message);
     }
 
     public static function assertDirectoryExists(string $directory, string $message = ''): void
     {
-        parent::assertDirectoryExists(Boot::$testbench_path.'/'.ltrim($directory, '/'), $message);
+        parent::assertDirectoryExists(self::$testbench_path.'/'.ltrim($directory, '/'), $message);
     }
 
     public static function assertDirectoryDoesNotExist(string $directory, string $message = ''): void
     {
-        parent::assertDirectoryDoesNotExist(Boot::$testbench_path.'/'.ltrim($directory, '/'), $message);
+        parent::assertDirectoryDoesNotExist(self::$testbench_path.'/'.ltrim($directory, '/'), $message);
     }
 
     protected function getPackageProviders($app)
@@ -70,10 +148,22 @@ abstract class TestCase extends OrchestraTestCase
             ConsoleSupportServiceProvider::class,
             DatabaseServiceProvider::class,
             FilesystemServiceProvider::class,
-            GravatarServiceProvider::class,
             HtmlServiceProvider::class,
             QueueServiceProvider::class,
             ViewServiceProvider::class,
+            GravatarServiceProvider::class,
+            ActiveServiceProvider::class,
+            LaratrustServiceProvider::class,
+            TranslationServiceProvider::class,
+            SessionServiceProvider::class,
+            ValidationServiceProvider::class,
+            QueueServiceProvider::class,
+            EventServiceProvider::class,
+            BusServiceProvider::class,
+            AuthServiceProvider::class,
+            HashServiceProvider::class,
+            CookieServiceProvider::class,
+            EncryptionServiceProvider::class,
         ];
     }
 

@@ -2,18 +2,20 @@
 
 namespace Sebastienheyd\Boilerplate\Controllers\Users;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
-class RolesController extends Controller
+class RolesController
 {
+    use ValidatesRequests;
+
     /**
      * Display a listing of the resource.
      *

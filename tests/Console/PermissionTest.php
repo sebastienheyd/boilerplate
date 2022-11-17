@@ -6,12 +6,6 @@ use Sebastienheyd\Boilerplate\Tests\TestCase;
 
 class PermissionTest extends TestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->migrate();
-    }
-
     public function testPermission()
     {
         $this->artisan('boilerplate:permission')
@@ -28,7 +22,7 @@ class PermissionTest extends TestCase
     public function testGroupPermission()
     {
         $this->artisan('boilerplate:permission')
-            ->expectsQuestion('Name of the permission to create (snake_case)', 'test')
+            ->expectsQuestion('Name of the permission to create (snake_case)', 'test_alt')
             ->expectsQuestion('Full name of the permission (can be a locale string)', 'Test permission')
             ->expectsQuestion('Full description of the permission (can be a locale string)', 'This is a permission building test')
             ->expectsConfirmation('Create or assign to a permissions group?', 'yes')

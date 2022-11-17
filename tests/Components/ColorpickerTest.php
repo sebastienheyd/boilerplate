@@ -10,13 +10,13 @@ class ColorpickerTest extends TestComponent
 <code>&lt;x-boilerplate::colorpicker> The name attribute has not been set</code>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7) {
+        if ($this->isLaravelEqualOrGreaterThan7()) {
             $view = $this->blade('<x-boilerplate::colorpicker />');
-            $this->assertEquals($expected, $view);
+            $view->assertSee($expected, false);
         }
 
         $view = $this->blade("@component('boilerplate::colorpicker') @endcomponent");
-        $this->assertEquals($expected, $view);
+        $view->assertSee($expected, false);
     }
 
     public function testColorPickerName()
@@ -28,13 +28,13 @@ HTML;
 <script>loadScript('',()=>{loadStylesheet('',()=>{registerAsset('ColorPicker')})})</script><script>whenAssetIsLoaded('ColorPicker',()=>{window.CP_test=$('#test').spectrum({allowEmpty:!0,showInput:!0,showInitial:!0,clickoutFiresChange:!1,locale:'en',showSelectionPalette:!1,})});</script>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7) {
+        if ($this->isLaravelEqualOrGreaterThan7()) {
             $view = $this->blade('<x-boilerplate::colorpicker name="test" id="test" />');
-            $this->assertEquals($expected, $view);
+            $view->assertSee($expected, false);
         }
 
         $view = $this->blade("@component('boilerplate::colorpicker', ['name' => 'test', 'id' => 'test']) @endcomponent");
-        $this->assertEquals($expected, $view);
+        $view->assertSee($expected, false);
     }
 
     public function testColorPickerLabel()
@@ -47,13 +47,13 @@ HTML;
 <script>loadScript('',()=>{loadStylesheet('',()=>{registerAsset('ColorPicker')})})</script><script>whenAssetIsLoaded('ColorPicker',()=>{window.CP_test=$('#test').spectrum({allowEmpty:!0,showInput:!0,showInitial:!0,clickoutFiresChange:!1,locale:'en',showSelectionPalette:!1,})});</script>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7) {
+        if ($this->isLaravelEqualOrGreaterThan7()) {
             $view = $this->blade('<x-boilerplate::colorpicker name="test" id="test" label="Test" />');
-            $this->assertEquals($expected, $view);
+            $view->assertSee($expected, false);
         }
 
         $view = $this->blade("@component('boilerplate::colorpicker', ['name' => 'test', 'id' => 'test', 'label' => 'Test']) @endcomponent");
-        $this->assertEquals($expected, $view);
+        $view->assertSee($expected, false);
     }
 
     public function testColorPickerClasses()
@@ -66,13 +66,13 @@ HTML;
 <script>loadScript('',()=>{loadStylesheet('',()=>{registerAsset('ColorPicker')})})</script><script>whenAssetIsLoaded('ColorPicker',()=>{window.CP_test=$('#test').spectrum({allowEmpty:!0,showInput:!0,showInitial:!0,clickoutFiresChange:!1,locale:'en',showSelectionPalette:!1,})});</script>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7) {
+        if ($this->isLaravelEqualOrGreaterThan7()) {
             $view = $this->blade('<x-boilerplate::colorpicker name="test" id="test" label="Test" group-class="test" group-id="test" class="test" />');
-            $this->assertEquals($expected, $view);
+            $view->assertSee($expected, false);
         }
 
         $view = $this->blade("@component('boilerplate::colorpicker', ['name' => 'test', 'id' => 'test', 'label' => 'Test', 'group-class' => 'test', 'group-id' => 'test', 'class' => 'test']) @endcomponent");
-        $this->assertEquals($expected, $view);
+        $view->assertSee($expected, false);
     }
 
     public function testColorPickerPalettes()
@@ -84,15 +84,15 @@ HTML;
 <script>loadScript('',()=>{loadStylesheet('',()=>{registerAsset('ColorPicker')})})</script><script>whenAssetIsLoaded('ColorPicker',()=>{window.CP_test=$('#test').spectrum({allowEmpty:!0,showInput:!0,showInitial:!0,clickoutFiresChange:!1,locale:'en',showSelectionPalette:!1,palette:["green"],selectionPalette:["red"],})});</script>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7) {
+        if ($this->isLaravelEqualOrGreaterThan7()) {
             $view = $this->blade('<x-boilerplate::colorpicker name="test" id="test" :palette="[\'green\']" :selectionPalette="[\'red\']" />');
-            $this->assertEquals($expected, $view);
+            $view->assertSee($expected, false);
 
             $view = $this->blade('<x-boilerplate::colorpicker name="test" id="test" :palette="[\'green\']" :selection-palette="[\'red\']" />');
-            $this->assertEquals($expected, $view);
+            $view->assertSee($expected, false);
         }
 
         $view = $this->blade("@component('boilerplate::colorpicker', ['name' => 'test', 'id' => 'test', 'palette' => ['green'], 'selectionPalette' => ['red']]) @endcomponent");
-        $this->assertEquals($expected, $view);
+        $view->assertSee($expected, false);
     }
 }

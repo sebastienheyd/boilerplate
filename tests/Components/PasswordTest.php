@@ -13,13 +13,13 @@ class PasswordTest extends TestComponent
 </code>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7) {
+        if ($this->isLaravelEqualOrGreaterThan7()) {
             $view = $this->blade('<x-boilerplate::password />');
-            $this->assertEquals($expected, $view);
+            $view->assertSee($expected, false);
         }
 
         $view = $this->blade("@component('boilerplate::password')@endcomponent()");
-        $this->assertEquals($expected, $view);
+        $view->assertSee($expected, false);
     }
 
     public function testPasswordComponent()
@@ -35,13 +35,13 @@ HTML;
 </div>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7) {
+        if ($this->isLaravelEqualOrGreaterThan7()) {
             $view = $this->blade('<x-boilerplate::password name="password" :check="false" placeholder="Password placeholder" />');
-            $this->assertEquals($expected, $view);
+            $view->assertSee($expected, false);
         }
 
         $view = $this->blade("@component('boilerplate::password', ['name' => 'password', 'check' => false, 'placeholder' => 'Password placeholder'])@endcomponent()");
-        $this->assertEquals($expected, $view);
+        $view->assertSee($expected, false);
     }
 
     public function testPasswordComponentJS()
@@ -58,12 +58,12 @@ HTML;
 <script>$(()=>{var password_el=$('input[name="password"]');var password_ppv=password_el.popover({title:"Requirements",content:'',placement:'bottom',trigger:'manual',html:!0});password_el.on('keyup focus',function(){let er=[];$.map([[/.{8,}/,"8 characters"],[/[a-z]+/,"One letter"],[/[0-9]+/,"One number"],[/[A-Z]+/,"One capital letter"],[/[^A-Za-z0-9]+/,"One special character"]],function(rule){if(!password_el.val().match(rule[0])){er.push(rule[1])}});if(er.length>0){password_el.data('bs.popover').config.content=er.join('<br/>');password_ppv.popover('show')}else{password_ppv.popover('hide')}}).on('blur',()=>{password_ppv.popover('hide')})});</script>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7) {
+        if ($this->isLaravelEqualOrGreaterThan7()) {
             $view = $this->blade('<x-boilerplate::password name="password" />@stack("js")');
-            $this->assertEquals($expected, $view);
+            $view->assertSee($expected, false);
         }
 
         $view = $this->blade("@component('boilerplate::password', ['name' => 'password'])@endcomponent()@stack('js')");
-        $this->assertEquals($expected, $view);
+        $view->assertSee($expected, false);
     }
 }

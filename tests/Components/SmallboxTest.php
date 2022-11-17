@@ -16,13 +16,13 @@ class SmallboxTest extends TestComponent
 </div>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7) {
+        if ($this->isLaravelEqualOrGreaterThan7()) {
             $view = $this->blade('<x-boilerplate::smallbox />');
-            $this->assertEquals($expected, $view);
+            $view->assertSee($expected, false);
         }
 
         $view = $this->blade("@component('boilerplate::smallbox') @endcomponent");
-        $this->assertEquals($expected, $view);
+        $view->assertSee($expected, false);
     }
 
     public function testSmallboxComponentFull()
@@ -40,12 +40,12 @@ HTML;
 </div>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7) {
+        if ($this->isLaravelEqualOrGreaterThan7()) {
             $view = $this->blade('<x-boilerplate::smallbox id="test" color="primary" class="extra-class" nb="1234" text="boilerplate::layout.dashboard" icon="far fa-envelope" link="#" link-text="boilerplate::layout.dashboard" />');
-            $this->assertEquals($expected, $view);
+            $view->assertSee($expected, false);
         }
 
         $view = $this->blade("@component('boilerplate::smallbox', ['id' => 'test', 'color' => 'primary', 'class' => 'extra-class', 'nb' => '1234', 'text' => 'boilerplate::layout.dashboard', 'icon' => 'far fa-envelope', 'link' => '#', 'link-text' => 'boilerplate::layout.dashboard']) @endcomponent");
-        $this->assertEquals($expected, $view);
+        $view->assertSee($expected, false);
     }
 }

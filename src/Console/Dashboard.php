@@ -52,7 +52,7 @@ class Dashboard extends BoilerplateCommand
 
         if ($this->fileSystem->exists($controller)) {
             $this->error('DashboardController.php already exists in app/Http/Controllers/Boilerplate');
-            return Command::FAILURE;
+            return Command::SUCCESS;
         }
 
         // Create controller folder
@@ -90,7 +90,7 @@ class Dashboard extends BoilerplateCommand
         $path = app_path('Http/Controllers/Boilerplate');
         if (! $this->fileSystem->exists($path.'/DashboardController.php')) {
             $this->info('Custom dashboard is not present, nothing to remove');
-            return Command::FAILURE;
+            return Command::SUCCESS;
         }
 
         $this->warn('------------------------------------------------------------------------');
