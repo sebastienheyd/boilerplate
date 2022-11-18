@@ -2,6 +2,7 @@
 
 namespace Sebastienheyd\Boilerplate\Tests\Console;
 
+use Illuminate\Foundation\Application as Laravel;
 use Sebastienheyd\Boilerplate\Tests\TestCase;
 
 class ScaffoldTest extends TestCase
@@ -22,7 +23,7 @@ class ScaffoldTest extends TestCase
         $this->assertDirectoryExists('app/Events/Boilerplate');
         $this->assertDirectoryExists('app/Models/Boilerplate');
         $this->assertDirectoryExists('app/Notifications/Boilerplate');
-        $this->assertDirectoryExists('lang/vendor/boilerplate');
+        $this->assertDirectoryExists(version_compare(Laravel::VERSION, '6.0', '>') ? 'lang/vendor/boilerplate' : 'resources/lang/vendor/boilerplate');
         $this->assertDirectoryExists('resources/views/vendor/boilerplate');
         $this->assertDirectoryExists('public/assets/vendor/boilerplate');
     }
@@ -43,7 +44,7 @@ class ScaffoldTest extends TestCase
         $this->assertDirectoryDoesNotExist('app/Events/Boilerplate');
         $this->assertDirectoryDoesNotExist('app/Models/Boilerplate');
         $this->assertDirectoryDoesNotExist('app/Notifications/Boilerplate');
-        $this->assertDirectoryDoesNotExist('resources/lang/vendor/boilerplate');
+        $this->assertDirectoryDoesNotExist(version_compare(Laravel::VERSION, '6.0', '>') ? 'lang/vendor/boilerplate' : 'resources/lang/vendor/boilerplate');
 
         $this->artisan('boilerplate:scaffold', ['--remove' => true])
             ->expectsConfirmation('Continue?', 'yes')

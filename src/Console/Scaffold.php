@@ -62,9 +62,9 @@ class Scaffold extends BoilerplateCommand
         $this->warn($line);
 
         if (! $this->confirm('Continue?')) {
-            return Command::SUCCESS;
+            return 0;
         }
-
+        
         $this->publishRoutes();
         $this->publishControllers();
         $this->publishModels();
@@ -92,7 +92,7 @@ class Scaffold extends BoilerplateCommand
         $this->warn('---------------------------------------------------------------------------------------');
 
         if (! $this->confirm('Continue?')) {
-            return Command::SUCCESS;
+            return 0;
         }
 
         $backupDashboard = [];
@@ -302,6 +302,12 @@ class Scaffold extends BoilerplateCommand
         } else {
             $type = 'File';
             if (! $this->fileSystem->exists($to)) {
+
+                // For Laravel 6
+                if (! $this->fileSystem->isDirectory($this->fileSystem->dirname($to))) {
+                    $this->fileSystem->makeDirectory($this->fileSystem->dirname($to), 0755, true);
+                }
+
                 $this->fileSystem->copy($from, $to);
             }
         }

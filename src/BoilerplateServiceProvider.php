@@ -24,6 +24,7 @@ use Sebastienheyd\Boilerplate\Middleware\BoilerplateImpersonate;
 use Sebastienheyd\Boilerplate\View\Composers\DatatablesComposer;
 use Sebastienheyd\Boilerplate\View\Composers\MenuComposer;
 use Sebastienheyd\Boilerplate\View\Composers\TinymceLoadComposer;
+use Sebastienheyd\Boilerplate\View\ViewFactory;
 
 class BoilerplateServiceProvider extends ServiceProvider
 {
@@ -89,11 +90,6 @@ class BoilerplateServiceProvider extends ServiceProvider
 
         // Load view composers
         $this->viewComposers();
-
-        // Load directives
-        if (version_compare($this->app->version(), '7.0', '<')) {
-            $this->bladeDirectives();
-        }
     }
 
     /**
@@ -152,9 +148,16 @@ class BoilerplateServiceProvider extends ServiceProvider
      */
     private function bladeDirectives()
     {
-        Blade::directive('once', function () {
-            $id = Str::uuid();
+        $this->app->singleton('view', function ($app) {
+            $factory = new ViewFactory($app['view.engine.resolver'], $app['view.finder'], $app['events']);
+            $factory->setContainer($app);
+            $factory->share('app', $app);
+            return $factory;
+        });
 
+        Blade::directive('once', function () {
+            $id = (string) Str::uuid();
+            return '<?php if (! $__env->hasRenderedOnce("'.$id.'")): $__env->markAsRenderedOnce("'.$id.'"); ?>';
             return '<?php if(!defined("'.$id.'")): define("'.$id.'", true); ?>';
         });
 
@@ -260,6 +263,11 @@ class BoilerplateServiceProvider extends ServiceProvider
 
         if (version_compare($this->app->version(), '8.0', '>=')) {
             Paginator::useBootstrap();
+        }
+
+        // Load directives for Laravel 6
+        if (version_compare($this->app->version(), '7.0', '<')) {
+            $this->bladeDirectives();
         }
     }
 

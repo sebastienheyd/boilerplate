@@ -50,20 +50,20 @@ Route::group([
     });
 
     // Email verification
-    Route::controller(RegisterController::class)->prefix('email')->middleware('boilerplate.auth')->as('verification.')->group(function () {
-        Route::get('verify', 'emailVerify')->name('notice');
-        Route::get('verify/{id}/{hash}', 'emailVerifyRequest')->name('verify');
-        Route::post('verification-notification', 'emailSendVerification')->name('send');
+    Route::prefix('email')->middleware('boilerplate.auth')->as('verification.')->group(function () {
+        Route::get('verify', [RegisterController::class, 'emailVerify'])->name('notice');
+        Route::get('verify/{id}/{hash}', [RegisterController::class, 'emailVerifyRequest'])->name('verify');
+        Route::post('verification-notification', [RegisterController::class, 'emailSendVerification'])->name('send');
     });
 
     // Backend
     Route::group(['middleware' => ['boilerplate.auth', 'ability:admin,backend_access', 'boilerplate.emailverified']], function () {
         // Impersonate another user
         if (config('boilerplate.app.allowImpersonate', false)) {
-            Route::controller(ImpersonateController::class)->prefix('impersonate')->as('impersonate.')->group(function () {
-                Route::post('/', 'impersonate')->name('user');
-                Route::get('stop', 'stopImpersonate')->name('stop');
-                Route::post('select', 'selectImpersonate')->name('select');
+            Route::prefix('impersonate')->as('impersonate.')->group(function () {
+                Route::post('/', [ImpersonateController::class, 'impersonate'])->name('user');
+                Route::get('stop', [ImpersonateController::class, 'stopImpersonate'])->name('stop');
+                Route::post('select', [ImpersonateController::class, 'selectImpersonate'])->name('select');
             });
         }
 
@@ -87,27 +87,27 @@ Route::group([
         Route::resource('users', UsersController::class)->middleware('ability:admin,users_crud')->except('show');
 
         // Profile
-        Route::controller(UsersController::class)->prefix('userprofile')->as('user.')->group(function () {
-            Route::get('/', 'profile')->name('profile');
-            Route::post('/', 'profilePost')->name('profile.post');
-            Route::post('settings', 'storeSetting')->name('settings');
-            Route::get('avatar/url', 'getAvatarUrl')->name('avatar.url');
-            Route::post('avatar/upload', 'avatarUpload')->name('avatar.upload');
-            Route::post('avatar/gravatar', 'getAvatarFromGravatar')->name('avatar.gravatar');
-            Route::post('avatar/delete', 'avatarDelete')->name('avatar.delete');
+        Route::prefix('userprofile')->as('user.')->group(function () {
+            Route::get('/', [UsersController::class, 'profile'])->name('profile');
+            Route::post('/', [UsersController::class, 'profilePost'])->name('profile.post');
+            Route::post('settings', [UsersController::class, 'storeSetting'])->name('settings');
+            Route::get('avatar/url', [UsersController::class, 'getAvatarUrl'])->name('avatar.url');
+            Route::post('avatar/upload', [UsersController::class, 'avatarUpload'])->name('avatar.upload');
+            Route::post('avatar/gravatar', [UsersController::class, 'getAvatarFromGravatar'])->name('avatar.gravatar');
+            Route::post('avatar/delete', [UsersController::class, 'avatarDelete'])->name('avatar.delete');
         });
 
         // Logs
         if (config('boilerplate.app.logs', false)) {
-            Route::controller(LogViewerController::class)->prefix('logs')->as('logs.')->middleware('ability:admin,logs')->group(function () {
-                Route::get('/', 'index')->name('dashboard');
+            Route::prefix('logs')->as('logs.')->middleware('ability:admin,logs')->group(function () {
+                Route::get('/', [LogViewerController::class, 'index'])->name('dashboard');
                 Route::prefix('list')->group(function () {
-                    Route::get('/', 'listLogs')->name('list');
-                    Route::delete('delete', 'delete')->name('delete');
+                    Route::get('/', [LogViewerController::class, 'listLogs'])->name('list');
+                    Route::delete('delete', [LogViewerController::class, 'delete'])->name('delete');
                     Route::prefix('{date}')->group(function () {
-                        Route::get('/', 'show')->name('show');
-                        Route::get('download', 'download')->name('download');
-                        Route::get('{level}', 'showByLevel')->name('filter');
+                        Route::get('/', [LogViewerController::class, 'show'])->name('show');
+                        Route::get('download', [LogViewerController::class, 'download'])->name('download');
+                        Route::get('{level}', [LogViewerController::class, 'showByLevel'])->name('filter');
                     });
                 });
             });

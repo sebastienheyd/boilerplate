@@ -2,15 +2,15 @@
 
 namespace Sebastienheyd\Boilerplate\Tests\Components;
 
-use Illuminate\Foundation\Testing\Concerns\InteractsWithViews;
+use Illuminate\Foundation\Application as Laravel;
 use Illuminate\Support\Facades\View as ViewFacade;
-use Illuminate\Testing\TestView;
+use Illuminate\Support\MessageBag;
+use Illuminate\Support\ViewErrorBag;
 use Sebastienheyd\Boilerplate\Tests\TestCase;
+use Sebastienheyd\Boilerplate\View\ViewFactory;
 
 abstract class TestComponent extends TestCase
 {
-    use InteractsWithViews;
-
     protected function blade(string $template, $data = [])
     {
         $this->withoutMix()->withViewErrors([]);
@@ -26,13 +26,19 @@ abstract class TestComponent extends TestCase
         }
 
         $tempFileInfo = pathinfo(tempnam($tempDirectory, 'laravel-blade'));
-
         $tempFile = $tempFileInfo['dirname'].'/'.$tempFileInfo['filename'].'.blade.php';
-
         file_put_contents($tempFile, $template);
 
+        if (version_compare(Laravel::VERSION, '7.0', '>')) {
+            return new \Illuminate\Testing\TestView(view($tempFileInfo['filename'], $data));
+        } else {
+            return new \Sebastienheyd\Boilerplate\Tests\TestView(view($tempFileInfo['filename'], $data));
+        }
+    }
 
-
-        return new TestView(view($tempFileInfo['filename'], $data));
+    protected function withViewErrors(array $errors, $key = 'default')
+    {
+        ViewFacade::share('errors', (new ViewErrorBag)->put($key, new MessageBag($errors)));
+        return $this;
     }
 }

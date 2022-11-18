@@ -55,7 +55,7 @@ class MenuItem extends BoilerplateCommand
 
         if (is_file($filePath)) {
             $this->error('Menu item '.$camelName.' already exists');
-            return Command::FAILURE;
+            return 1;
         }
 
         if (! is_dir(app_path('Menu'))) {

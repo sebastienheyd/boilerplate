@@ -10,6 +10,7 @@ use Illuminate\Auth\AuthServiceProvider;
 use Illuminate\Broadcasting\BroadcastServiceProvider;
 use Illuminate\Bus\BusServiceProvider;
 use Illuminate\Cache\CacheServiceProvider;
+use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Cookie\CookieServiceProvider;
 use Illuminate\Database\DatabaseServiceProvider;
 use Illuminate\Encryption\EncryptionServiceProvider;
@@ -18,9 +19,12 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Filesystem\FilesystemServiceProvider;
 use Illuminate\Foundation\Application as Laravel;
 use Illuminate\Foundation\Providers\ConsoleSupportServiceProvider;
+use Illuminate\Foundation\Providers\FoundationServiceProvider;
+use Illuminate\Foundation\Testing\PendingCommand;
 use Illuminate\Hashing\HashServiceProvider;
 use Illuminate\Queue\QueueServiceProvider;
 use Illuminate\Session\SessionServiceProvider;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\File;
@@ -30,6 +34,9 @@ use Illuminate\Validation\ValidationServiceProvider;
 use Illuminate\View\ViewServiceProvider;
 use Laratrust\LaratrustServiceProvider;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
+use PHPUnit\Framework\Constraint\DirectoryExists;
+use PHPUnit\Framework\Constraint\FileExists;
+use PHPUnit\Framework\Constraint\LogicalNot;
 use Sebastienheyd\Boilerplate\BoilerplateServiceProvider;
 
 abstract class TestCase extends OrchestraTestCase
@@ -57,6 +64,29 @@ abstract class TestCase extends OrchestraTestCase
         ]);
     }
 
+    public function artisan($command, $parameters = [])
+    {
+        if (version_compare($this->app->version(), '7.0', '>=')) {
+            return parent::artisan($command, $parameters);
+        }
+
+        if (! $this->mockConsoleOutput) {
+            return $this->app[Kernel::class]->call($command, $parameters);
+        }
+
+        $this->beforeApplicationDestroyed(function () {
+            if (count($this->expectedQuestions)) {
+                $this->fail('Question "'.Arr::first($this->expectedQuestions)[0].'" was not asked.');
+            }
+
+            if (count($this->expectedOutput)) {
+                $this->fail('Output "'.Arr::first($this->expectedOutput).'" was not printed.');
+            }
+        });
+
+        return new \Sebastienheyd\Boilerplate\Tests\PendingCommand($this, $this->app, $command, $parameters);
+    }
+
     public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
@@ -81,7 +111,7 @@ abstract class TestCase extends OrchestraTestCase
         $fileSystem = new Filesystem();
 
         if ($fileSystem->exists(self::$testbench_path)) {
-            $fileSystem->deleteDirectory(self::$testbench_path);
+//            $fileSystem->deleteDirectory(self::$testbench_path);
         }
     }
 
@@ -126,7 +156,7 @@ abstract class TestCase extends OrchestraTestCase
 
     public static function assertFileDoesNotExist(string $filename, string $message = ''): void
     {
-        parent::assertFileDoesNotExist(self::$testbench_path.'/'.ltrim($filename, '/'), $message);
+        static::assertThat($filename, new LogicalNot(new FileExists), $message);
     }
 
     public static function assertDirectoryExists(string $directory, string $message = ''): void
@@ -136,7 +166,7 @@ abstract class TestCase extends OrchestraTestCase
 
     public static function assertDirectoryDoesNotExist(string $directory, string $message = ''): void
     {
-        parent::assertDirectoryDoesNotExist(self::$testbench_path.'/'.ltrim($directory, '/'), $message);
+        static::assertThat($directory, new LogicalNot(new DirectoryExists), $message);
     }
 
     protected function getPackageProviders($app)
@@ -164,6 +194,7 @@ abstract class TestCase extends OrchestraTestCase
             HashServiceProvider::class,
             CookieServiceProvider::class,
             EncryptionServiceProvider::class,
+            FoundationServiceProvider::class,
         ];
     }
 

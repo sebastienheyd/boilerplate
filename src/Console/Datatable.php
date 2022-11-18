@@ -84,7 +84,7 @@ class Datatable extends BoilerplateCommand
                 $columns = $this->generateColumnsForModel($this->option('model'));
             } catch (Exception $exception) {
                 $this->error('Model structure is not accessible in the database');
-                return Command::FAILURE;
+                return 1;
             }
         }
 
@@ -94,10 +94,10 @@ class Datatable extends BoilerplateCommand
         );
 
         $filePath = app_path('Datatables/'.$className.'Datatable.php');
-
+        
         if (is_file($filePath)) {
             if (! $this->confirm("File <comment>$filePath</comment> already exists, overwrite?")) {
-                return Command::SUCCESS;
+                return 0;
             }
 
             unlink($filePath);
@@ -134,7 +134,8 @@ class Datatable extends BoilerplateCommand
                 $type = preg_match('#_at$#', $field) ? 'datetime' : 'default';
             }
 
-            $title = Str::of($field)->replace('_', ' ')->ucfirst();
+
+            $title = Str::title(str_replace('_', ' ', $field));
 
             switch ($type) {
                 case 'date':
