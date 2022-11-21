@@ -53,6 +53,7 @@ abstract class TestCase extends OrchestraTestCase
             'app.key' => 'base64:Wo2VgRys/LE/wWcQhIh3GrKb+3GbvE0TEq41WMm1UkQ=',
             'app.cipher' => 'AES-256-CBC',
             'app.locale' => 'en',
+            'app.fallback_locale' => 'en',
             'session.driver' => 'array',
             'queue.driver' => 'sync',
             'database.default' => 'testbench',
@@ -172,40 +173,40 @@ abstract class TestCase extends OrchestraTestCase
     protected function getPackageProviders($app)
     {
         return [
+            ActiveServiceProvider::class,
+            AuthServiceProvider::class,
             BoilerplateServiceProvider::class,
             BroadcastServiceProvider::class,
+            BusServiceProvider::class,
             CacheServiceProvider::class,
             ConsoleSupportServiceProvider::class,
-            DatabaseServiceProvider::class,
-            FilesystemServiceProvider::class,
-            HtmlServiceProvider::class,
-            QueueServiceProvider::class,
-            ViewServiceProvider::class,
-            GravatarServiceProvider::class,
-            ActiveServiceProvider::class,
-            LaratrustServiceProvider::class,
-            TranslationServiceProvider::class,
-            SessionServiceProvider::class,
-            ValidationServiceProvider::class,
-            QueueServiceProvider::class,
-            EventServiceProvider::class,
-            BusServiceProvider::class,
-            AuthServiceProvider::class,
-            HashServiceProvider::class,
             CookieServiceProvider::class,
+            DatabaseServiceProvider::class,
             EncryptionServiceProvider::class,
+            EventServiceProvider::class,
+            FilesystemServiceProvider::class,
             FoundationServiceProvider::class,
+            GravatarServiceProvider::class,
+            HashServiceProvider::class,
+            HtmlServiceProvider::class,
+            LaratrustServiceProvider::class,
+            QueueServiceProvider::class,
+            QueueServiceProvider::class,
+            SessionServiceProvider::class,
+            TranslationServiceProvider::class,
+            ValidationServiceProvider::class,
+            ViewServiceProvider::class,
         ];
     }
 
     protected function getPackageAliases($app)
     {
         return [
-            'Blade' => Blade::class,
+            'Blade'     => Blade::class,
             'Broadcast' => Broadcast::class,
-            'File' => File::class,
-            'Form' => FormFacade::class,
-            'View' => View::class,
+            'File'      => File::class,
+            'Form'      => FormFacade::class,
+            'View'      => View::class,
         ];
     }
 }

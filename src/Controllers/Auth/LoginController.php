@@ -110,6 +110,11 @@ class LoginController
     public function logout(Request $request)
     {
         $user = $this->guard()->user();
+
+        if ($user === null) {
+            return $request->wantsJson() ? new JsonResponse([], 204) : redirect(route('boilerplate.login'));
+        }
+
         Log::info('User logged out : '.$user->name);
 
         $this->guard()->logout();
@@ -121,9 +126,7 @@ class LoginController
             return $response;
         }
 
-        return $request->wantsJson()
-            ? new JsonResponse([], 204)
-            : redirect(route('boilerplate.login'));
+        return $request->wantsJson() ? new JsonResponse([], 204) : redirect(route('boilerplate.login'));
     }
 
     /**
