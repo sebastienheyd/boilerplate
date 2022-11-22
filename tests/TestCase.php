@@ -45,6 +45,7 @@ abstract class TestCase extends OrchestraTestCase
     public static $vendor_path = __DIR__.'/../vendor';
     public static $core_path = __DIR__.'/../vendor/orchestra/testbench-core/laravel';
     public static $init = false;
+    public static $once = false;
     public static $isLaravelEqualOrGreaterThan7;
 
     protected function getEnvironmentSetUp($app)
@@ -67,7 +68,7 @@ abstract class TestCase extends OrchestraTestCase
 
     public function artisan($command, $parameters = [])
     {
-        if (version_compare($this->app->version(), '7.0', '>=')) {
+        if (version_compare($this->app->version(), '8.0', '>=')) {
             return parent::artisan($command, $parameters);
         }
 
@@ -92,6 +93,11 @@ abstract class TestCase extends OrchestraTestCase
     {
         parent::setUpBeforeClass();
 
+        if (self::$once === false) {
+            echo 'Tested version : Laravel '.Laravel::VERSION.' (PHP '.PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION .'.'.PHP_RELEASE_VERSION.')'.PHP_EOL;
+            self::$once = true;
+        }
+
         $fileSystem = new Filesystem();
 
         if ($fileSystem->exists(self::$testbench_path)) {
@@ -112,7 +118,7 @@ abstract class TestCase extends OrchestraTestCase
         $fileSystem = new Filesystem();
 
         if ($fileSystem->exists(self::$testbench_path)) {
-//            $fileSystem->deleteDirectory(self::$testbench_path);
+            $fileSystem->deleteDirectory(self::$testbench_path);
         }
     }
 

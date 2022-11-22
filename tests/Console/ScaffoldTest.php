@@ -23,7 +23,7 @@ class ScaffoldTest extends TestCase
         $this->assertDirectoryExists('app/Events/Boilerplate');
         $this->assertDirectoryExists('app/Models/Boilerplate');
         $this->assertDirectoryExists('app/Notifications/Boilerplate');
-        $this->assertDirectoryExists(version_compare(Laravel::VERSION, '6.0', '>') ? 'lang/vendor/boilerplate' : 'resources/lang/vendor/boilerplate');
+        $this->assertDirectoryExists(version_compare(Laravel::VERSION, '9.0', '>=') ? 'lang/vendor/boilerplate' : 'resources/lang/vendor/boilerplate');
         $this->assertDirectoryExists('resources/views/vendor/boilerplate');
         $this->assertDirectoryExists('public/assets/vendor/boilerplate');
     }
@@ -44,7 +44,7 @@ class ScaffoldTest extends TestCase
         $this->assertDirectoryDoesNotExist('app/Events/Boilerplate');
         $this->assertDirectoryDoesNotExist('app/Models/Boilerplate');
         $this->assertDirectoryDoesNotExist('app/Notifications/Boilerplate');
-        $this->assertDirectoryDoesNotExist(version_compare(Laravel::VERSION, '6.0', '>') ? 'lang/vendor/boilerplate' : 'resources/lang/vendor/boilerplate');
+        $this->assertDirectoryDoesNotExist(version_compare(Laravel::VERSION, '9.0', '>=') ? 'lang/vendor/boilerplate' : 'resources/lang/vendor/boilerplate');
 
         $this->artisan('boilerplate:scaffold', ['--remove' => true])
             ->expectsConfirmation('Continue?', 'yes')

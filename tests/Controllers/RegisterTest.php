@@ -3,8 +3,6 @@
 namespace Sebastienheyd\Boilerplate\Tests\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Sebastienheyd\Boilerplate\Models\User;
 use Sebastienheyd\Boilerplate\Tests\factories\UserFactory;
 use Sebastienheyd\Boilerplate\Tests\TestCase;
 use Faker\Factory;

@@ -75,12 +75,12 @@ HTML;
 
         if ($this->isLaravelEqualOrGreaterThan7()) {
             $view = $this->blade('<x-boilerplate::select2 id="test" model="Sebastienheyd\Boilerplate\Models\User,first_name" />@stack("js")');
-            $view = preg_replace('#m:"([^"]*)"#', 'm:""', $view);
+            $view = preg_replace('#m:"([^"]*)"#', 'm:""', trim($view));
             $this->assertEquals($expected, $view);
         }
 
         $view = $this->blade("@component('boilerplate::select2', ['id' => 'test', 'model' => 'Sebastienheyd\Boilerplate\Models\User,first_name'])@endcomponent()@stack('js')");
-        $view = preg_replace('#m:"([^"]*)"#', 'm:""', $view);
+        $view = preg_replace('#m:"([^"]*)"#', 'm:""', trim($view));
         $this->assertEquals($expected, $view);
     }
 
@@ -137,12 +137,12 @@ HTML;
 
         if ($this->isLaravelEqualOrGreaterThan7()) {
             $view = $this->blade('<x-boilerplate::select2 id="test" model="Sebastienheyd\Boilerplate\Models\Permission,name" :selected="[1]" />@stack("js")');
-            $view = preg_replace('#m:"([^"]*)"#', 'm:""', $view);
+            $view = preg_replace('#m:"([^"]*)"#', 'm:""', trim($view));
             $this->assertEquals($expected, $view);
         }
 
         $view = $this->blade("@component('boilerplate::select2', ['id' => 'test', 'model' => 'Sebastienheyd\Boilerplate\Models\Permission,name', 'selected' => [1]])@endcomponent()@stack('js')");
-        $view = preg_replace('#m:"([^"]*)"#', 'm:""', $view);
+        $view = preg_replace('#m:"([^"]*)"#', 'm:""', trim($view));
         $this->assertEquals($expected, $view);
     }
 }
