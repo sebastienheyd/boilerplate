@@ -2,6 +2,8 @@
 
 namespace Sebastienheyd\Boilerplate\Tests;
 
+use Arcanedev\LogViewer\LogViewerServiceProvider;
+use Arcanedev\LogViewer\Providers\DeferredServicesProvider;
 use Collective\Html\FormFacade;
 use Collective\Html\HtmlServiceProvider;
 use Creativeorange\Gravatar\GravatarServiceProvider;
@@ -50,20 +52,8 @@ abstract class TestCase extends OrchestraTestCase
 
     protected function getEnvironmentSetUp($app)
     {
-        config([
-            'app.key' => 'base64:Wo2VgRys/LE/wWcQhIh3GrKb+3GbvE0TEq41WMm1UkQ=',
-            'app.cipher' => 'AES-256-CBC',
-            'app.locale' => 'en',
-            'app.fallback_locale' => 'en',
-            'session.driver' => 'array',
-            'queue.driver' => 'sync',
-            'database.default' => 'testbench',
-            'database.connections.testbench' => [
-                'driver'   => 'sqlite',
-                'database' => ':memory:',
-                'prefix'   => '',
-            ]
-        ]);
+        $config = require 'config.php';
+        config($config);
     }
 
     public function artisan($command, $parameters = [])
@@ -151,6 +141,11 @@ abstract class TestCase extends OrchestraTestCase
         return self::$isLaravelEqualOrGreaterThan7;
     }
 
+    public static function applicationBasePath()
+    {
+        return self::$testbench_path;
+    }
+
     protected function getBasePath()
     {
         return self::$testbench_path;
@@ -188,6 +183,7 @@ abstract class TestCase extends OrchestraTestCase
             ConsoleSupportServiceProvider::class,
             CookieServiceProvider::class,
             DatabaseServiceProvider::class,
+            DeferredServicesProvider::class,
             EncryptionServiceProvider::class,
             EventServiceProvider::class,
             FilesystemServiceProvider::class,
@@ -196,6 +192,7 @@ abstract class TestCase extends OrchestraTestCase
             HashServiceProvider::class,
             HtmlServiceProvider::class,
             LaratrustServiceProvider::class,
+            LogViewerServiceProvider::class,
             QueueServiceProvider::class,
             QueueServiceProvider::class,
             SessionServiceProvider::class,
