@@ -11,7 +11,7 @@ class DatatableTest extends TestComponent
 {
     public function testDatatableNoName()
     {
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $this->expectException(ViewException::class);
             $this->blade('<x-boilerplate::datatable></x-boilerplate::datatable>');
         }
@@ -22,7 +22,7 @@ class DatatableTest extends TestComponent
 
     public function testDatatableBadName()
     {
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $this->expectException(Exception::class);
             $this->expectExceptionMessage('DataTable class for "BadName" is not found');
             $this->blade('<x-boilerplate::datatable name="BadName"></x-boilerplate::datatable>');
@@ -44,7 +44,7 @@ class DatatableTest extends TestComponent
 </code>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::datatable name="users"></x-boilerplate::datatable>');
             $view->assertSee($expected, false);
         }
@@ -57,7 +57,7 @@ HTML;
     {
         UserFactory::create()->admin(true);
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::datatable name="users"></x-boilerplate::datatable>');
             $this->assertTrue(preg_match('#<table class="table table-striped table-hover va-middle w-100" id="dt_users">#', $view) !== false);
         }

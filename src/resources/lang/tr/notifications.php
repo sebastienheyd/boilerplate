@@ -8,7 +8,7 @@ return [
     'copyright'  => ':date &copy; :name. Tüm hakları saklıdır.',
     'newuser'    => [
         'subject' => ':name adıyla kullanıcı oluşturdunuz',
-        'intro'   => ':name adıyla bir kullanıcı oluşturduğunuz için bu e-postayı alıyorsunuz.',
+        'intro'   => 'Bu e-postayı alıyorsunuz çünkü sizin için :name ile bir hesap oluşturuldu.',
         'button'  => 'Giriş yap',
         'outro'   => 'İlk girişinizde şifrenizi belirlemek için yönlendirileceksiniz',
     ],

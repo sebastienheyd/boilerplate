@@ -28,7 +28,7 @@ abstract class TestComponent extends TestCase
         $tempFile = $tempFileInfo['dirname'].'/'.$tempFileInfo['filename'].'.blade.php';
         file_put_contents($tempFile, $template);
 
-        if (version_compare(Laravel::VERSION, '8.0', '>=')) {
+        if ($this->minLaravelVersion('8.0')) {
             return new \Illuminate\Testing\TestView(view($tempFileInfo['filename'], $data));
         } else {
             return new \Sebastienheyd\Boilerplate\Tests\TestView(view($tempFileInfo['filename'], $data));

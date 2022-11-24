@@ -13,7 +13,7 @@ class InputTest extends TestComponent
 </code>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::input />');
             $view->assertSee($expected, false);
         }
@@ -30,7 +30,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::input name="test" />');
             $view->assertSee($expected, false);
         }
@@ -48,7 +48,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::input name="test" label="Test" />');
             $view->assertSee($expected, false);
         }
@@ -65,7 +65,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::input name="test" class="test-field" />');
             $view->assertSee($expected, false);
         }
@@ -85,7 +85,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::input name="test" class="test-field" data-attr="test" :clearable="true" />');
             $view->assertSee($expected, false);
         }
@@ -102,7 +102,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::input name="test" type="password" />');
             $view->assertSee($expected, false);
         }
@@ -120,7 +120,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->withoutMix()->withViewErrors(['fielderror' => 'Error message'])->rawBlade('<x-boilerplate::input name="fielderror" />');
             $view->assertSee($expected, false);
         }
@@ -139,7 +139,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view =  $this->withoutMix()->withViewErrors(['fielderror' => 'Error message'])->rawBlade('<x-boilerplate::input name="fielderror" help="boilerplate::users.create.help" />');
             $view->assertSee($expected, false);
         }
@@ -164,7 +164,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::input name="test" prepend-text="test" append-text="test" />');
             $view->assertSee($expected, false);
         }
@@ -189,7 +189,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::input name="test" prepend-text="fas fa-envelope" append-text="fas fa-envelope" />');
             $view->assertSee($expected, false);
         }
@@ -214,7 +214,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::input name="test"><x-slot name="prepend">test</x-slot><x-slot name="append">test</x-slot></x-boilerplate::input>');
             $view->assertSee($expected, false);
         }
@@ -231,7 +231,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::input name="test" placeholder="Test" />');
             $view->assertSee($expected, false);
         }

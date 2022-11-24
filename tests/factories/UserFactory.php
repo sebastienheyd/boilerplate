@@ -42,7 +42,7 @@ class UserFactory
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
-            'remember_token' => Str::random(10),
+            'remember_token' => Str::random(32),
         ]);
 
         if ($authUser) {
@@ -61,7 +61,7 @@ class UserFactory
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
-            'remember_token' => Str::random(10),
+            'remember_token' => Str::random(32),
         ]);
 
         $role = Permission::find(1);
@@ -83,7 +83,7 @@ class UserFactory
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
-            'remember_token' => Str::random(10),
+            'remember_token' => Str::random(32),
         ]);
 
         $user = User::find($user);

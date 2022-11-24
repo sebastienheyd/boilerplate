@@ -18,7 +18,7 @@ class InfoboxTest extends TestComponent
 </div>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::infobox />');
             $view->assertSee($expected, false);
         }
@@ -43,7 +43,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::infobox icon="far fa-envelope" class="extra-class" color="red" bg-color="red" text="test" number="1234" progress="50" description="desc" id="test" />');
             $view->assertSee($expected, false);
         }

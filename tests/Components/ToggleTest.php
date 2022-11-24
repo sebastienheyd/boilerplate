@@ -15,7 +15,7 @@ class ToggleTest extends TestComponent
 </div>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::toggle id="test" name="test" label="boilerplate::layout.dashboard" />');
             $view->assertSee($expected, false);
 
@@ -38,7 +38,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::toggle id="test" checked />');
             $view->assertSee($expected, false);
 
@@ -61,7 +61,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::toggle type="radio" id="test" value="1" class="bg-red" data-toggle="tooltip" />');
             $view->assertSee($expected, false);
         }

@@ -1,8 +1,7 @@
 <?php
 
-namespace Sebastienheyd\Boilerplate\Tests\Controllers;
+namespace Sebastienheyd\Boilerplate\Tests\Controllers\Users;
 
-use Illuminate\Support\Str;
 use Sebastienheyd\Boilerplate\Models\Role;
 use Sebastienheyd\Boilerplate\Tests\factories\UserFactory;
 use Sebastienheyd\Boilerplate\Tests\TestCase;

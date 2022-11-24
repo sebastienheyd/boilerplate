@@ -10,7 +10,7 @@ class ColorpickerTest extends TestComponent
 <code>&lt;x-boilerplate::colorpicker> The name attribute has not been set</code>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::colorpicker />');
             $view->assertSee($expected, false);
         }
@@ -28,7 +28,7 @@ HTML;
 <script>loadScript('',()=>{loadStylesheet('',()=>{registerAsset('ColorPicker')})})</script><script>whenAssetIsLoaded('ColorPicker',()=>{window.CP_test=$('#test').spectrum({allowEmpty:!0,showInput:!0,showInitial:!0,clickoutFiresChange:!1,locale:'en',showSelectionPalette:!1,})});</script>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::colorpicker name="test" id="test" />');
             $view->assertSee($expected, false);
         }
@@ -47,7 +47,7 @@ HTML;
 <script>loadScript('',()=>{loadStylesheet('',()=>{registerAsset('ColorPicker')})})</script><script>whenAssetIsLoaded('ColorPicker',()=>{window.CP_test=$('#test').spectrum({allowEmpty:!0,showInput:!0,showInitial:!0,clickoutFiresChange:!1,locale:'en',showSelectionPalette:!1,})});</script>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::colorpicker name="test" id="test" label="Test" />');
             $view->assertSee($expected, false);
         }
@@ -66,7 +66,7 @@ HTML;
 <script>loadScript('',()=>{loadStylesheet('',()=>{registerAsset('ColorPicker')})})</script><script>whenAssetIsLoaded('ColorPicker',()=>{window.CP_test=$('#test').spectrum({allowEmpty:!0,showInput:!0,showInitial:!0,clickoutFiresChange:!1,locale:'en',showSelectionPalette:!1,})});</script>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::colorpicker name="test" id="test" label="Test" group-class="test" group-id="test" class="test" />');
             $view->assertSee($expected, false);
         }
@@ -84,7 +84,7 @@ HTML;
 <script>loadScript('',()=>{loadStylesheet('',()=>{registerAsset('ColorPicker')})})</script><script>whenAssetIsLoaded('ColorPicker',()=>{window.CP_test=$('#test').spectrum({allowEmpty:!0,showInput:!0,showInitial:!0,clickoutFiresChange:!1,locale:'en',showSelectionPalette:!1,palette:["green"],selectionPalette:["red"],})});</script>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::colorpicker name="test" id="test" :palette="[\'green\']" :selectionPalette="[\'red\']" />');
             $view->assertSee($expected, false);
 

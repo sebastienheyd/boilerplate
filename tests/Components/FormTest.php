@@ -12,7 +12,7 @@ class FormTest extends TestComponent
 </form>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::form />');
             $view->assertSee($expected, false);
         }
@@ -29,7 +29,7 @@ HTML;
 </form>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::form url="https://www.google.fr/search" />');
             $view->assertSee($expected, false);
         }
@@ -46,7 +46,7 @@ HTML;
 </form>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::form :route="[\'boilerplate.users.edit\', 1]" />');
             $view->assertSee($expected, false);
         }
@@ -63,7 +63,7 @@ HTML;
 </form>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::form method="get" />');
             $view->assertSee($expected, false);
         }
@@ -77,7 +77,7 @@ HTML;
 </form>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::form method="put" />');
             $view->assertSee($expected, false);
         }
@@ -94,7 +94,7 @@ HTML;
 </form>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::form files />');
             $view->assertSee($expected, false);
         }

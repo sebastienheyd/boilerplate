@@ -1,10 +1,8 @@
 <?php
 
-namespace Sebastienheyd\Boilerplate\Tests\Controllers;
+namespace Sebastienheyd\Boilerplate\Tests\Controllers\Auth;
 
-use Illuminate\Support\Str;
 use Sebastienheyd\Boilerplate\Models\Permission;
-use Sebastienheyd\Boilerplate\Models\PermissionCategory;
 use Sebastienheyd\Boilerplate\Tests\factories\UserFactory;
 use Sebastienheyd\Boilerplate\Tests\TestCase;
 

@@ -167,8 +167,7 @@ class UsersController
     {
         $this->validate($request, [
             'token'                 => 'required',
-            'password'              => 'required|min:8',
-            'password_confirmation' => 'required|same:password',
+            'password'              => ['required', 'confirmed', new Password()],
         ]);
 
         $userModel = config('boilerplate.auth.providers.users.model');
@@ -207,19 +206,16 @@ class UsersController
             'avatar'                => 'mimes:jpeg,png|max:10000',
             'last_name'             => 'required',
             'first_name'            => 'required',
-            'password'              => ['nullable', new Password()],
-            'password_confirmation' => 'same:password',
+            'password'              => ['nullable', 'confirmed', new Password()],
         ]);
 
         $user = Auth::user();
 
         $input = $request->all();
 
-        if ($input['password'] !== null) {
+        if (! empty($input['password'])) {
             $input['password'] = bcrypt($input['password']);
             $input['remember_token'] = Str::random(32);
-        } else {
-            unset($input['password']);
         }
 
         $user->update($input);

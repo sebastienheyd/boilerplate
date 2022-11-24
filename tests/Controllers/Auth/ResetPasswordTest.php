@@ -1,6 +1,6 @@
 <?php
 
-namespace Sebastienheyd\Boilerplate\Tests\Controllers;
+namespace Sebastienheyd\Boilerplate\Tests\Controllers\Auth;
 
 use Illuminate\Support\Str;
 use Sebastienheyd\Boilerplate\Tests\factories\UserFactory;

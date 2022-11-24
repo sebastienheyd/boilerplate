@@ -12,7 +12,7 @@ class CardTest extends TestComponent
 </div>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::card>test</x-boilerplate::card>');
             $view->assertSee($expected, false);
         }
@@ -29,7 +29,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::card color="primary">test</x-boilerplate::card>');
             $view->assertSee($expected, false);
         }
@@ -46,7 +46,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::card color="primary" bg-color="primary">test</x-boilerplate::card>');
             $view->assertSee($expected, false);
         }
@@ -63,7 +63,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::card :outline=false>test</x-boilerplate::card>');
             $view->assertSee($expected, false);
         }
@@ -83,7 +83,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::card title="boilerplate::layout.dashboard">test</x-boilerplate::card>');
             $view->assertSee($expected, false);
         }
@@ -106,7 +106,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::card title="title"><x-slot name="tools"><a href="#">close</a></x-slot> test</x-boilerplate::card>');
             $view->assertSee($expected, false);
         }
@@ -131,7 +131,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::card title="title" maximize reduce close collapsed>test</x-boilerplate::card>');
             $view->assertSee($expected, false);
         }
@@ -151,7 +151,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::card><x-slot name="header"><a href="#">link</a></x-slot> test</x-boilerplate::card>');
             $view->assertSee($expected, false);
         }
@@ -169,7 +169,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::card><x-slot name="footer"><a href="#">link</a></x-slot> test</x-boilerplate::card>');
             $view->assertSee($expected, false);
         }
@@ -186,7 +186,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::card tabs="true">test</x-boilerplate::card>');
             $view->assertSee($expected, false);
         }
@@ -203,7 +203,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::card :outline=false id="test" class="extra-class" data-test="ok">test</x-boilerplate::card>');
             $view->assertSee($expected, false);
         }

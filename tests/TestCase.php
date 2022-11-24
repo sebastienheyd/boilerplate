@@ -24,12 +24,16 @@ use Illuminate\Foundation\Providers\ConsoleSupportServiceProvider;
 use Illuminate\Foundation\Providers\FoundationServiceProvider;
 use Illuminate\Foundation\Testing\PendingCommand;
 use Illuminate\Hashing\HashServiceProvider;
+use Illuminate\Mail\MailServiceProvider;
+use Illuminate\Notifications\NotificationServiceProvider;
 use Illuminate\Queue\QueueServiceProvider;
 use Illuminate\Session\SessionServiceProvider;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\View;
 use Illuminate\Translation\TranslationServiceProvider;
 use Illuminate\Validation\ValidationServiceProvider;
@@ -48,7 +52,6 @@ abstract class TestCase extends OrchestraTestCase
     public static $core_path = __DIR__.'/../vendor/orchestra/testbench-core/laravel';
     public static $init = false;
     public static $once = false;
-    public static $isLaravelEqualOrGreaterThan7;
 
     protected function getEnvironmentSetUp($app)
     {
@@ -58,7 +61,7 @@ abstract class TestCase extends OrchestraTestCase
 
     public function artisan($command, $parameters = [])
     {
-        if (version_compare($this->app->version(), '8.0', '>=')) {
+        if ($this->minLaravelVersion('8.0')) {
             return parent::artisan($command, $parameters);
         }
 
@@ -132,13 +135,20 @@ abstract class TestCase extends OrchestraTestCase
         self::$init = false;
     }
 
-    protected function isLaravelEqualOrGreaterThan7()
+    protected function minLaravelVersion($version)
     {
-        if (self::$isLaravelEqualOrGreaterThan7 === null) {
-            self::$isLaravelEqualOrGreaterThan7 = version_compare(Laravel::VERSION, '7.0', '>=');
+        return version_compare(Laravel::VERSION, $version, '>=');
+    }
+
+    protected function getLastMail()
+    {
+        if ($this->minLaravelVersion('9')) {
+            $mail = $this->app->make('mailer')->getSymfonyTransport()->messages()->last();
+        } else {
+            $mail = app()->make('mailer')->getSwiftMailer()->getTransport()->messages()->last();
         }
 
-        return self::$isLaravelEqualOrGreaterThan7;
+        return $mail === null ? null : $mail->getOriginalMessage();
     }
 
     public static function applicationBasePath()
@@ -193,7 +203,8 @@ abstract class TestCase extends OrchestraTestCase
             HtmlServiceProvider::class,
             LaratrustServiceProvider::class,
             LogViewerServiceProvider::class,
-            QueueServiceProvider::class,
+            MailServiceProvider::class,
+            NotificationServiceProvider::class,
             QueueServiceProvider::class,
             SessionServiceProvider::class,
             TranslationServiceProvider::class,
@@ -205,11 +216,13 @@ abstract class TestCase extends OrchestraTestCase
     protected function getPackageAliases($app)
     {
         return [
-            'Blade'     => Blade::class,
-            'Broadcast' => Broadcast::class,
-            'File'      => File::class,
-            'Form'      => FormFacade::class,
-            'View'      => View::class,
+            'Blade'        => Blade::class,
+            'Broadcast'    => Broadcast::class,
+            'File'         => File::class,
+            'Form'         => FormFacade::class,
+            'Mail'         => Mail::class,
+            'Notification' => Notification::class,
+            'View'         => View::class,
         ];
     }
 }

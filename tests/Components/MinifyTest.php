@@ -8,7 +8,7 @@ class MinifyTest extends TestComponent
     {
         $expected = 'function test(){var var=!0}';
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::minify>function test() { var var = true; }</x-boilerplate::minify>');
             $view->assertSee($expected, false);
         }
@@ -23,7 +23,7 @@ class MinifyTest extends TestComponent
 
         $expected = 'function test() { var var = true; }';
 
-        if ($this->isLaravelEqualOrGreaterThan7()) {
+        if ($this->minLaravelVersion('7.0')) {
             $view = $this->blade('<x-boilerplate::minify>function test() { var var = true; }</x-boilerplate::minify>');
             $view->assertSee($expected, false);
         }

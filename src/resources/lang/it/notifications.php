@@ -8,7 +8,7 @@ return [
     'copyright'  => '&copy; :date :name. All rights reserved.',
     'newuser'    => [
         'subject' => 'Il tuo account è stato creato :name',
-        'intro'   => 'Ricevi questa mail perchè è stato creato utente :name.',
+        'intro'   => 'State ricevendo questa e-mail perché è stato creato un account per voi da :name.',
         'button'  => 'Accedi',
         'outro'   => 'Al primo login dovrai impostare la tua password',
     ],

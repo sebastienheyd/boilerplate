@@ -1,11 +1,11 @@
 <?php
 
-namespace Sebastienheyd\Boilerplate\Tests\Controllers;
+namespace Sebastienheyd\Boilerplate\Tests\Controllers\Auth;
 
+use Faker\Factory;
 use Illuminate\Support\Facades\Auth;
 use Sebastienheyd\Boilerplate\Tests\factories\UserFactory;
 use Sebastienheyd\Boilerplate\Tests\TestCase;
-use Faker\Factory;
 
 class RegisterTest extends TestCase
 {
