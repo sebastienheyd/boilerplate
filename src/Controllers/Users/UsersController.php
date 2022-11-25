@@ -11,6 +11,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Intervention\Image\Facades\Image;
@@ -252,33 +253,40 @@ class UsersController
      */
     public function avatarUpload(Request $request)
     {
+        $validator = Validator::make($request->only('avatar'), [
+            'avatar' => 'required|mimes:jpeg,jpg,png|max:10000',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => $validator->errors()->first('avatar')
+            ]);
+        }
+
         $user = Auth::user();
         $avatar = $request->file('avatar');
 
         try {
-            if ($avatar && $avatar->isValid()) {
-                $destinationPath = dirname($user->avatar_path);
-                if (! is_dir($destinationPath)) {
-                    mkdir($destinationPath, 0766, true);
-                    file_put_contents($destinationPath.'/.gitignore', "*\r\n!.gitignore");
-                }
-                $extension = $avatar->getClientOriginalExtension();
-                $fileName = md5($user->id.$user->email).'_tmp.'.$extension;
-                $avatar->move($destinationPath, $fileName);
-
-                Image::make($destinationPath.DIRECTORY_SEPARATOR.$fileName)
-                    ->fit(170, 170)
-                    ->save($user->avatar_path);
-
-                unlink($destinationPath.DIRECTORY_SEPARATOR.$fileName);
-
-                return response()->json(['success' => true]);
+            $destinationPath = dirname($user->avatar_path);
+            if (! is_dir($destinationPath)) {
+                mkdir($destinationPath, 0766, true);
+                file_put_contents($destinationPath.'/.gitignore', "*\r\n!.gitignore");
             }
+            $extension = $avatar->getClientOriginalExtension();
+            $fileName = md5($user->id.$user->email).'_tmp.'.$extension;
+            $avatar->move($destinationPath, $fileName);
+
+            Image::make($destinationPath.DIRECTORY_SEPARATOR.$fileName)
+                ->fit(170, 170)
+                ->save($user->avatar_path);
+
+            unlink($destinationPath.DIRECTORY_SEPARATOR.$fileName);
+
+            return response()->json(['success' => true]);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }
-
-        return response()->json(['success' => false]);
     }
 
     /**
@@ -298,8 +306,10 @@ class UsersController
      */
     public function keepAlive(Request $request)
     {
-        session()->setId($request->post('id'));
-        session()->start();
+        if ($request->post('id') !== null) {
+            session()->setId($request->post('id'));
+            session()->start();
+        }
     }
 
     /**
@@ -310,8 +320,12 @@ class UsersController
      */
     public function storeSetting(Request $request)
     {
-        if (! $request->isXmlHttpRequest()) {
+        if (! $request->ajax()) {
             abort(404);
+        }
+
+        if (empty($request->post('name')) || empty($request->post('value'))) {
+            return response()->json(['success' => false]);
         }
 
         return response()->json(['success' => setting([$request->post('name') => $request->post('value')])]);

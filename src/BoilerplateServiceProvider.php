@@ -158,7 +158,6 @@ class BoilerplateServiceProvider extends ServiceProvider
         Blade::directive('once', function () {
             $id = (string) Str::uuid();
             return '<?php if (! $__env->hasRenderedOnce("'.$id.'")): $__env->markAsRenderedOnce("'.$id.'"); ?>';
-            return '<?php if(!defined("'.$id.'")): define("'.$id.'", true); ?>';
         });
 
         Blade::directive('endonce', function () {

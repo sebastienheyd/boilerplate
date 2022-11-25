@@ -7,6 +7,9 @@ return [
     'app.locale' => 'en',
     'app.url' => 'http://localhost',
     'app.fallback_locale' => 'en',
+    'boilerplate.app.locale' => 'en',
+    'boilerplate.locale.switch' => true,
+    'boilerplate.locale.allowed' => ['fr'],
     'auth.defaults' => [
         'guard' => 'web',
         'passwords' => 'users',

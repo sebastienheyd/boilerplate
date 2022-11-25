@@ -2,6 +2,7 @@
 
 namespace Sebastienheyd\Boilerplate\Tests\Controllers\Users;
 
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Hash;
 use Sebastienheyd\Boilerplate\Models\User;
 use Sebastienheyd\Boilerplate\Tests\factories\UserFactory;
@@ -123,9 +124,9 @@ class UsersTest extends TestCase
         $resource->assertRedirect('http://localhost/admin/users/2/edit');
 
         $user = User::find(2);
-        $this->assertTrue($user->email === 'john.doe@email.tld');
-        $this->assertTrue($user->last_name === 'DOE');
-        $this->assertTrue($user->first_name === 'John');
+        $this->assertEquals('john.doe@email.tld', $user->email);
+        $this->assertEquals('DOE', $user->last_name);
+        $this->assertEquals('John', $user->first_name);
     }
 
     public function testUserDestroy()
@@ -140,8 +141,8 @@ class UsersTest extends TestCase
         ]);
 
         $resource->assertStatus(200);
+        $resource->assertJson(['success' => true]);
         $this->assertTrue(User::find(2) === null);
-        $this->assertTrue($resource->content() === '{"success":true}');
     }
 
     public function testUserFirstLogin()
@@ -234,8 +235,116 @@ class UsersTest extends TestCase
         $resource->assertRedirect('http://localhost/admin/userprofile');
 
         $user = User::find(2);
-        $this->assertTrue($user->last_name === 'DOE');
-        $this->assertTrue($user->first_name === 'John');
+        $this->assertEquals('DOE', $user->last_name);
+        $this->assertEquals('John', $user->first_name);
         $this->assertTrue(Hash::check('#Azerty123', $user->password));
+    }
+
+    public function testAvatarUrl()
+    {
+        UserFactory::create()->admin();
+        $user = UserFactory::create()->backendUser();
+
+        $resource = $this->actingAs($user)->get('admin/userprofile/avatar/url');
+
+        $resource->assertStatus(200);
+        $name = http_build_query(['name' => $user->first_name.' '.$user->last_name]);
+        $this->assertEquals('https://ui-avatars.com/api/?background=F0F0F0&color=333&size=170&'.$name, $resource->content());
+    }
+
+    public function testAvatarDelete()
+    {
+        UserFactory::create()->admin();
+        $user = UserFactory::create()->backendUser();
+
+        $resource = $this->actingAs($user)->post('admin/userprofile/avatar/delete');
+
+        $resource->assertStatus(200);
+        $resource->assertJson(['success' => false]);
+    }
+
+    public function testAvatarUpload()
+    {
+        UserFactory::create()->admin();
+        $user = UserFactory::create()->backendUser();
+
+        $resource = $this->actingAs($user)->post('admin/userprofile/avatar/upload');
+        $resource->assertStatus(200);
+        $resource->assertJson([
+            'success' => false,
+            'message' => 'The avatar field is required.'
+        ]);
+
+        $resource = $this->actingAs($user)->post('admin/userprofile/avatar/upload', [
+            'avatar' => 'badValue',
+        ]);
+        $resource->assertStatus(200);
+        $resource->assertJson([
+            'success' => false,
+            'message' => 'The avatar must be a file of type: jpeg, jpg, png.',
+        ]);
+
+        $resource = $this->actingAs($user)->post('admin/userprofile/avatar/upload', [
+            'avatar' => UploadedFile::fake()->image('avatar.jpg', 500, 500),
+        ]);
+
+        $resource->assertStatus(200);
+        $resource->assertJson(['success' => true]);
+
+        $this->assertTrue($user->hasAvatar());
+    }
+
+    public function testAvatarFromGravatar()
+    {
+        UserFactory::create()->admin();
+        $user = UserFactory::create()->backendUser();
+
+        $resource = $this->actingAs($user)->post('admin/userprofile/avatar/gravatar');
+
+        $resource->assertStatus(200);
+        $resource->assertJson(['success' => false]);
+    }
+
+    public function testStoreSetting()
+    {
+        UserFactory::create()->admin();
+        $user = UserFactory::create()->backendUser();
+
+        $resource = $this->actingAs($user)->post('admin/userprofile/settings');
+        $resource->assertStatus(404);
+
+        $resource = $this->actingAs($user)->post('admin/userprofile/settings', [], ['X-Requested-With' => 'XMLHttpRequest']);
+        $resource->assertStatus(200);
+        $resource->assertJson(['success' => false]);
+
+        $resource = $this->actingAs($user)->post('admin/userprofile/settings', ['name' => 'test'], ['X-Requested-With' => 'XMLHttpRequest']);
+        $resource->assertStatus(200);
+        $resource->assertJson(['success' => false]);
+
+        $resource = $this->actingAs($user)->post('admin/userprofile/settings', ['value' => 'test'], ['X-Requested-With' => 'XMLHttpRequest']);
+        $resource->assertStatus(200);
+        $resource->assertJson(['success' => false]);
+
+        $resource = $this->actingAs($user)->post('admin/userprofile/settings', [
+            'name' => 'test',
+            'value' => 'test'
+        ], ['X-Requested-With' => 'XMLHttpRequest']);
+        $resource->assertStatus(200);
+        $resource->assertJson(['success' => true]);
+
+        $this->assertEquals('test', $user->setting('test'));
+    }
+
+    public function testKeepAlive()
+    {
+        UserFactory::create()->admin();
+        $user = UserFactory::create()->backendUser();
+
+        $sessionId = session()->getId();
+
+        $resource = $this->actingAs($user)->post('admin/keep-alive', ['id' => $sessionId]);
+        $resource->assertStatus(200);
+
+        $this->assertEquals($sessionId, session()->getId());
     }
 }

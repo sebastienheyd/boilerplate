@@ -113,6 +113,8 @@ class RegisterController
             $user->restore();
             $role = $roleModel::whereName(config('boilerplate.auth.register_role'))->first();
             $user->roles()->sync([$role->id]);
+
+            $user->sendEmailVerificationNotification();
         }
 
         return $user;

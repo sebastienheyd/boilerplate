@@ -34,16 +34,20 @@ use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 use Illuminate\Translation\TranslationServiceProvider;
 use Illuminate\Validation\ValidationServiceProvider;
 use Illuminate\View\ViewServiceProvider;
+use Intervention\Image\Facades\Image;
+use Intervention\Image\ImageServiceProvider;
 use Laratrust\LaratrustServiceProvider;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 use PHPUnit\Framework\Constraint\DirectoryExists;
 use PHPUnit\Framework\Constraint\FileExists;
 use PHPUnit\Framework\Constraint\LogicalNot;
 use Sebastienheyd\Boilerplate\BoilerplateServiceProvider;
+use Yajra\DataTables\DataTablesServiceProvider;
 
 abstract class TestCase extends OrchestraTestCase
 {
@@ -142,13 +146,17 @@ abstract class TestCase extends OrchestraTestCase
 
     protected function getLastMail()
     {
+        $mail = $this->getMails()->last();
+        return $mail === null ? null : $mail->getOriginalMessage();
+    }
+
+    protected function getMails()
+    {
         if ($this->minLaravelVersion('9')) {
-            $mail = $this->app->make('mailer')->getSymfonyTransport()->messages()->last();
-        } else {
-            $mail = app()->make('mailer')->getSwiftMailer()->getTransport()->messages()->last();
+            return $this->app->make('mailer')->getSymfonyTransport()->messages();
         }
 
-        return $mail === null ? null : $mail->getOriginalMessage();
+        return app()->make('mailer')->getSwiftMailer()->getTransport()->messages();
     }
 
     public static function applicationBasePath()
@@ -193,6 +201,7 @@ abstract class TestCase extends OrchestraTestCase
             ConsoleSupportServiceProvider::class,
             CookieServiceProvider::class,
             DatabaseServiceProvider::class,
+            DataTablesServiceProvider::class,
             DeferredServicesProvider::class,
             EncryptionServiceProvider::class,
             EventServiceProvider::class,
@@ -201,6 +210,7 @@ abstract class TestCase extends OrchestraTestCase
             GravatarServiceProvider::class,
             HashServiceProvider::class,
             HtmlServiceProvider::class,
+            ImageServiceProvider::class,
             LaratrustServiceProvider::class,
             LogViewerServiceProvider::class,
             MailServiceProvider::class,
@@ -223,6 +233,8 @@ abstract class TestCase extends OrchestraTestCase
             'Mail'         => Mail::class,
             'Notification' => Notification::class,
             'View'         => View::class,
+            'Image'        => Image::class,
+            'Validator'    => Validator::class,
         ];
     }
 }

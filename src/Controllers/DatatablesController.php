@@ -23,13 +23,7 @@ class DatatablesController
             abort(404);
         }
 
-        $datatable = $this->getDatatable($slug);
-
-        if (! Auth::user()->ability(['admin'], $datatable->permissions)) {
-            abort(503);
-        }
-
-        return ($datatable)->make();
+        return $this->getDatatable($slug)->make();
     }
 
     /**

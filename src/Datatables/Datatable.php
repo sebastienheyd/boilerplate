@@ -5,6 +5,7 @@ namespace Sebastienheyd\Boilerplate\Datatables;
 use Closure;
 use Exception;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTableAbstract;
 use Yajra\DataTables\DataTables;
 
@@ -52,6 +53,10 @@ abstract class Datatable
     public function make(): JsonResponse
     {
         $this->setUp();
+
+        if (! Auth::user()->ability(['admin'], $this->permissions)) {
+            abort(503);
+        }
 
         if ($this->datasource() instanceof DataTableAbstract) {
             $datatable = $this->datasource();
