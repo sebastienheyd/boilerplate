@@ -10,6 +10,7 @@ return [
     'boilerplate.app.locale' => 'en',
     'boilerplate.locale.switch' => true,
     'boilerplate.locale.allowed' => ['fr'],
+    'boilerplate.app.allowImpersonate' => true,
     'auth.defaults' => [
         'guard' => 'web',
         'passwords' => 'users',

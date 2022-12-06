@@ -24,22 +24,29 @@ class ImpersonateController
         $userModel = config('auth.providers.users.model');
         $user = $userModel::find($request->post('id'));
 
+        $error = false;
+
         if (! Auth::user()->hasRole('admin')) {
-            Log::error('Only admins can use the impersonate feature.');
-            $success = false;
+            $error = 'Only admins can use the impersonate feature.';
         } elseif ($user->hasRole('admin')) {
-            Log::error('Cannot impersonate an admin.');
-            $success = false;
+            $error = 'Cannot impersonate an admin.';
         } elseif (! $user->hasPermission('backend_access')) {
-            Log::error('Selected user does not have backend access.');
-            $success = false;
+            $error = 'Selected user does not have backend access.';
         } else {
             Session::put('impersonate', $user->id);
-            $success = true;
+        }
+
+        if ($error) {
+            Log::error($error);
+
+            return response()->json([
+                'success' => false,
+                'message' => $error,
+            ]);
         }
 
         return response()->json([
-            'success' => $success,
+            'success' => true,
         ]);
     }
 
@@ -65,25 +72,30 @@ class ImpersonateController
     {
         $userModel = config('auth.providers.users.model');
 
-        // Retrieve id of all admin
-        $adminId = $userModel::with('roles')->select('id')->whereHas('roles', function (Builder $query) {
-            $query->where('name', '=', 'admin');
-        })->pluck('id')->toArray();
-
         return response()->json([
-            'results' => $userModel::with('roles')->selectRaw('id, CONCAT(first_name, \' \', last_name) as text')
+            'results' => $userModel::with('roles', 'permissions')
+                ->select('id', 'first_name', 'last_name')
                 ->where('active', 1)
                 ->where('id', '!=', Auth::id())
-                ->whereNotIn('id', $adminId)
-                ->whereHas('roles', function ($query) {
-                    $query->where('name', '=', 'backend_user');
+                ->whereDoesntHave('roles', function ($query) {
+                    $query->where('name', '=', 'admin');
+                })
+                ->whereHas('permissions', function ($query) {
+                    $query->where('name', '=', 'backend_access');
                 })
                 ->where(function ($query) use ($request) {
                     $query->where('first_name', 'like', '%'.$request->input('q').'%')
                           ->orWhere('last_name', 'like', '%'.$request->input('q').'%');
                 })
                 ->limit(10)
-                ->get()->toArray(),
+                ->get()
+                ->mapWithKeys(function ($item, $key) {
+                    return [
+                        'id'   => $item['id'],
+                        'text' => $item['first_name'].' '.$item['last_name']
+                    ];
+                })
+                ->toArray(),
         ]);
     }
 }
