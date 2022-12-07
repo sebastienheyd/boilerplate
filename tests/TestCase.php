@@ -147,7 +147,19 @@ abstract class TestCase extends OrchestraTestCase
     protected function getLastMail()
     {
         $mail = $this->getMails()->last();
-        return $mail === null ? null : $mail->getOriginalMessage();
+
+        if ($mail === null) {
+            return null;
+        }
+
+        if (in_array('getOriginalMessage', get_class_methods($mail))) {
+            $mail = $mail->getOriginalMessage();
+        }
+
+        return [
+            'subject' => $mail->getSubject(),
+            'body' => $mail->getBody(),
+        ];
     }
 
     protected function getMails()

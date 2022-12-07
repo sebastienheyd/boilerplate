@@ -122,8 +122,8 @@ class RegisterTest extends TestCase
         $this->assertEquals($email, Auth::user()->email);
 
         $email = $this->getLastMail();
-        $regex = '#Verify Email Address: (http:\/\/localhost\/admin\/email\/verify\/2\/([^?]+)\?expires=([^&]+)&signature=([^\r\n]+))$#m';
-        $this->assertTrue(preg_match($regex, $email->getTextBody(), $m) == 1);
+        $regex = '#(http:\/\/localhost\/admin\/email\/verify\/2\/([^?]+)\?expires=([^&]+)&amp;signature=([^\r\n]+))$#m';
+        $this->assertTrue(preg_match($regex, $email['body'], $m) == 1);
 
         $resource = $this->get('admin');
         $resource->assertRedirect('http://localhost/admin/email/verify');
