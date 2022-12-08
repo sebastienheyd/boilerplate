@@ -153,7 +153,10 @@ abstract class TestCase extends OrchestraTestCase
         }
 
         if (in_array('getOriginalMessage', get_class_methods($mail))) {
-            $mail = $mail->getOriginalMessage();
+            return [
+                'subject' => $mail->getOriginalMessage()->getSubject(),
+                'body' => $mail->getOriginalMessage()->getHtmlBody(),
+            ];
         }
 
         return [
