@@ -10,13 +10,20 @@ class Select2Controller
     public function make(Request $request)
     {
         // Only ajax calls
-        if (! $request->isXmlHttpRequest()) {
+        if (! $request->isXmlHttpRequest() || $request->post('m') === null) {
+            abort(404);
+        }
+
+        // Decrypt model
+        try {
+            $m = decrypt($request->post('m'));
+        } catch (\Exception $e) {
             abort(404);
         }
 
         // Check model format
-        if (! preg_match(Select2Composer::$regex, decrypt($request->post('m')), $m)) {
-            abort(500);
+        if (! preg_match(Select2Composer::$regex, $m, $m)) {
+            abort(404);
         }
 
         $model = $m[1];

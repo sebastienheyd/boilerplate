@@ -79,7 +79,7 @@ class UserFactory
         $user = DB::table('users')->insertGetId([
             'active' => '1',
             'first_name' => $this->faker->firstName,
-            'last_name' => $this->faker->lastName,
+            'last_name' => mb_strtoupper($this->faker->lastName),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
