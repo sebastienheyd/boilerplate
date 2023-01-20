@@ -2,7 +2,7 @@
 
 namespace Sebastienheyd\Boilerplate\Menu;
 
-class Logs
+class Logs implements MenuItemInterface
 {
     public function make(Builder $menu)
     {

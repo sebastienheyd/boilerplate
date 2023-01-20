@@ -14,11 +14,11 @@ class MenuItemsRepository
     {
         $items = config('boilerplate.menu.providers', []);
 
-        if (is_array($menuitem)) {
-            $items = array_merge($items, $menuitem);
-        } elseif (is_string($menuitem)) {
-            $items[] = $menuitem;
+        if (is_string($menuitem)) {
+            $menuitem = [$menuitem];
         }
+
+        $items = array_merge($items, $menuitem);
 
         config(['boilerplate.menu.providers' => array_unique($items)]);
 

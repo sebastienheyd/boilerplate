@@ -3,8 +3,9 @@
 namespace App\Menu;
 
 use Sebastienheyd\Boilerplate\Menu\Builder;
+use Sebastienheyd\Boilerplate\Menu\MenuItemInterface;
 
-class {{ID}}
+class {{ID}} implements MenuItemInterface
 {
     public function make(Builder $menu)
     {

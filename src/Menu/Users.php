@@ -2,7 +2,7 @@
 
 namespace Sebastienheyd\Boilerplate\Menu;
 
-class Users
+class Users implements MenuItemInterface
 {
     public function make(Builder $menu)
     {

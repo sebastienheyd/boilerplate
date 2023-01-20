@@ -11,6 +11,7 @@
          stopOnFailure="false">
     <testsuites>
         <testsuite name="Boilerplate Test Suite">
+<!--            <file>tests/Menu/BuilderTest.php</file>-->
             <directory suffix="Test.php">tests</directory>
         </testsuite>
     </testsuites>
