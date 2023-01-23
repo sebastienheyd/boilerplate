@@ -3,8 +3,8 @@
 namespace Sebastienheyd\Boilerplate\Tests\Menu;
 
 use Sebastienheyd\Boilerplate\Menu\Builder;
-use Sebastienheyd\Boilerplate\Tests\TestCase;
 use Sebastienheyd\Boilerplate\Menu\Item;
+use Sebastienheyd\Boilerplate\Tests\TestCase;
 
 class ItemTest extends TestCase
 {

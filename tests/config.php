@@ -19,7 +19,7 @@ return [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
-        ]
+        ],
     ],
     'session.driver' => 'array',
     'mail.default' => 'array',
@@ -33,5 +33,5 @@ return [
         'driver'   => 'sqlite',
         'database' => ':memory:',
         'prefix'   => '',
-    ]
+    ],
 ];

@@ -260,7 +260,7 @@ class UsersController
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,
-                'message' => $validator->errors()->first('avatar')
+                'message' => $validator->errors()->first('avatar'),
             ]);
         }
 

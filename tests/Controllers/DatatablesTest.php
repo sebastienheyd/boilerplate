@@ -15,7 +15,7 @@ class DatatablesTest extends TestCase
         $resource->assertNotFound();
 
         $resource = $this->post('admin/datatables/bad', [], [
-            'X-Requested-With' => 'XMLHttpRequest'
+            'X-Requested-With' => 'XMLHttpRequest',
         ]);
         $resource->assertNotFound();
     }

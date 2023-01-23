@@ -3,7 +3,6 @@
 namespace Sebastienheyd\Boilerplate\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use ReflectionException;
 
 class DatatablesController

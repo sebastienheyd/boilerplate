@@ -2,7 +2,6 @@
 
 namespace Sebastienheyd\Boilerplate\Tests\Console;
 
-use Illuminate\Foundation\Application as Laravel;
 use Sebastienheyd\Boilerplate\Tests\TestCase;
 
 class ScaffoldTest extends TestCase

@@ -152,11 +152,13 @@ class BoilerplateServiceProvider extends ServiceProvider
             $factory = new ViewFactory($app['view.engine.resolver'], $app['view.finder'], $app['events']);
             $factory->setContainer($app);
             $factory->share('app', $app);
+
             return $factory;
         });
 
         Blade::directive('once', function () {
             $id = (string) Str::uuid();
+
             return '<?php if (! $__env->hasRenderedOnce("'.$id.'")): $__env->markAsRenderedOnce("'.$id.'"); ?>';
         });
 

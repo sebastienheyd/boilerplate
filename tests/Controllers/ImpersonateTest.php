@@ -48,6 +48,4 @@ class ImpersonateTest extends TestCase
         $resource->assertSessionMissing('impersonate');
         $resource->assertRedirect('http://localhost');
     }
-
-
 }

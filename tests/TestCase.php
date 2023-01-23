@@ -22,7 +22,6 @@ use Illuminate\Filesystem\FilesystemServiceProvider;
 use Illuminate\Foundation\Application as Laravel;
 use Illuminate\Foundation\Providers\ConsoleSupportServiceProvider;
 use Illuminate\Foundation\Providers\FoundationServiceProvider;
-use Illuminate\Foundation\Testing\PendingCommand;
 use Illuminate\Hashing\HashServiceProvider;
 use Illuminate\Mail\MailServiceProvider;
 use Illuminate\Notifications\NotificationServiceProvider;
@@ -91,7 +90,7 @@ abstract class TestCase extends OrchestraTestCase
         parent::setUpBeforeClass();
 
         if (self::$once === false) {
-            echo 'Tested version : Laravel '.Laravel::VERSION.' (PHP '.PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION .'.'.PHP_RELEASE_VERSION.')'.PHP_EOL;
+            echo 'Tested version : Laravel '.Laravel::VERSION.' (PHP '.PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION.'.'.PHP_RELEASE_VERSION.')'.PHP_EOL;
             self::$once = true;
         }
 

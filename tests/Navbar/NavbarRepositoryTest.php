@@ -2,8 +2,8 @@
 
 namespace Sebastienheyd\Boilerplate\Tests\Navbar;
 
-use Sebastienheyd\Boilerplate\Tests\TestCase;
 use Sebastienheyd\Boilerplate\Navbar\NavbarItemsRepository;
+use Sebastienheyd\Boilerplate\Tests\TestCase;
 
 class NavbarRepositoryTest extends TestCase
 {

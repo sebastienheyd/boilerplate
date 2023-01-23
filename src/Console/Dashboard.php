@@ -3,8 +3,8 @@
 namespace Sebastienheyd\Boilerplate\Console;
 
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
-use Symfony\Component\Console\Command\Command;
 use Illuminate\Filesystem\Filesystem;
+use Symfony\Component\Console\Command\Command;
 
 class Dashboard extends BoilerplateCommand
 {
@@ -37,12 +37,14 @@ class Dashboard extends BoilerplateCommand
     /**
      * Execute the console command.
      *
-     * @throws FileNotFoundException
      * @return mixed
+     *
+     * @throws FileNotFoundException
      */
     public function handle()
     {
         $this->title();
+
         return $this->option('remove') ? $this->remove() : $this->install();
     }
 
@@ -52,6 +54,7 @@ class Dashboard extends BoilerplateCommand
 
         if ($this->fileSystem->exists($controller)) {
             $this->error('DashboardController.php already exists in app/Http/Controllers/Boilerplate');
+
             return 0;
         }
 
@@ -90,6 +93,7 @@ class Dashboard extends BoilerplateCommand
         $path = app_path('Http/Controllers/Boilerplate');
         if (! $this->fileSystem->exists($path.'/DashboardController.php')) {
             $this->info('Custom dashboard is not present, nothing to remove');
+
             return 0;
         }
 

@@ -105,7 +105,7 @@ class RegisterTest extends TestCase
 
         config([
             'boilerplate.auth.verify_email' => true,
-            'boilerplate.auth.register' => true
+            'boilerplate.auth.register' => true,
         ]);
 
         $email = $factory->unique()->safeEmail();
@@ -132,11 +132,11 @@ class RegisterTest extends TestCase
         $resource->assertSeeInOrder([
             'Thanks for signing up!',
             'action="http://localhost/admin/email/verification-notification"',
-            'Resend Verification Email'
+            'Resend Verification Email',
         ], false);
 
         $resource = $this->post('admin/email/verification-notification', [
-            'token' => Auth::user()->getRememberToken()
+            'token' => Auth::user()->getRememberToken(),
         ]);
         $resource->assertRedirect('http://localhost/admin/email/verify');
         $resource->assertSessionHas(['message' => 'Verification link sent!']);

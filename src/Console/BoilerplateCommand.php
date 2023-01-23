@@ -26,6 +26,7 @@ abstract class BoilerplateCommand extends Command
 
         if (empty($result)) {
             $this->error('Answer cannot be empty');
+
             return $this->forceAnswer($question, $default);
         }
 

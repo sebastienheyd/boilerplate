@@ -13,5 +13,4 @@ class DashboardTest extends TestCase
         $resource = $this->get('admin');
         $resource->assertSee('Components &amp; plugins demo', false);
     }
-
 }

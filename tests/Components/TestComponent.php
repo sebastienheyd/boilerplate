@@ -2,7 +2,6 @@
 
 namespace Sebastienheyd\Boilerplate\Tests\Components;
 
-use Illuminate\Foundation\Application as Laravel;
 use Illuminate\Support\Facades\View as ViewFacade;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\ViewErrorBag;
@@ -13,6 +12,7 @@ abstract class TestComponent extends TestCase
     protected function blade(string $template, $data = [])
     {
         $this->withoutMix()->withViewErrors([]);
+
         return $this->rawBlade($template, $data);
     }
 
@@ -38,6 +38,7 @@ abstract class TestComponent extends TestCase
     protected function withViewErrors(array $errors, $key = 'default')
     {
         ViewFacade::share('errors', (new ViewErrorBag)->put($key, new MessageBag($errors)));
+
         return $this;
     }
 }

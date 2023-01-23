@@ -2,7 +2,6 @@
 
 namespace Sebastienheyd\Boilerplate\Controllers;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -92,7 +91,7 @@ class ImpersonateController
                 ->mapWithKeys(function ($item, $key) {
                     return [
                         'id'   => $item['id'],
-                        'text' => $item['first_name'].' '.$item['last_name']
+                        'text' => $item['first_name'].' '.$item['last_name'],
                     ];
                 })
                 ->toArray(),

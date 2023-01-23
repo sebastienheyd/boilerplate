@@ -43,7 +43,7 @@ class UsersTest extends TestCase
             'Users',
             'Add a user',
             '<h3 class="card-title">Informations</h3>',
-            'The user will receive an invitation by e-mail to login in which it will allow him to enter his new password'
+            'The user will receive an invitation by e-mail to login in which it will allow him to enter his new password',
         ], false);
     }
 
@@ -98,7 +98,7 @@ class UsersTest extends TestCase
         UserFactory::create()->backendUser();
 
         $resource = $this->actingAs($admin)->post('admin/users/2', [
-            '_method' => 'PUT'
+            '_method' => 'PUT',
         ]);
 
         $resource->assertSessionHasErrors([
@@ -272,7 +272,7 @@ class UsersTest extends TestCase
         $resource->assertStatus(200);
         $resource->assertJson([
             'success' => false,
-            'message' => 'The avatar field is required.'
+            'message' => 'The avatar field is required.',
         ]);
 
         $resource = $this->actingAs($user)->post('admin/userprofile/avatar/upload', [
@@ -327,7 +327,7 @@ class UsersTest extends TestCase
 
         $resource = $this->actingAs($user)->post('admin/userprofile/settings', [
             'name' => 'test',
-            'value' => 'test'
+            'value' => 'test',
         ], ['X-Requested-With' => 'XMLHttpRequest']);
         $resource->assertStatus(200);
         $resource->assertJson(['success' => true]);

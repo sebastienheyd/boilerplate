@@ -4,7 +4,6 @@ namespace Sebastienheyd\Boilerplate\Tests\Components;
 
 use Exception;
 use Illuminate\View\ViewException;
- 
 use Sebastienheyd\Boilerplate\Tests\factories\UserFactory;
 
 class DatatableTest extends TestComponent

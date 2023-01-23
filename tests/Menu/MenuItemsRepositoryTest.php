@@ -2,8 +2,8 @@
 
 namespace Sebastienheyd\Boilerplate\Tests\Menu;
 
-use Sebastienheyd\Boilerplate\Tests\TestCase;
 use Sebastienheyd\Boilerplate\Menu\MenuItemsRepository;
+use Sebastienheyd\Boilerplate\Tests\TestCase;
 
 class MenuItemsRepositoryTest extends TestCase
 {

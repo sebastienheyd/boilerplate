@@ -16,11 +16,11 @@ class NavbarItemsRepository
     public function registerItem($item, $side = 'left')
     {
         if (! in_array($side, ['left', 'right'])) {
-            throw new \InvalidArgumentException("Side is not allowed");
+            throw new \InvalidArgumentException('Side is not allowed');
         }
 
         if (! is_string($item) && ! is_array($item)) {
-            throw new \InvalidArgumentException("Item is not an array or a string");
+            throw new \InvalidArgumentException('Item is not an array or a string');
         }
 
         $items = config('boilerplate.theme.navbar.'.$side, []);
@@ -38,7 +38,7 @@ class NavbarItemsRepository
             }
 
             if (! ($view instanceof View)) {
-                throw new \InvalidArgumentException("Registered item is not an instance of View");
+                throw new \InvalidArgumentException('Registered item is not an instance of View');
             }
 
             $views[] = $view;

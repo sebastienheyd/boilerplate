@@ -5,9 +5,13 @@ namespace Sebastienheyd\Boilerplate\Tests;
 use Illuminate\Foundation\Application as Laravel;
 
 if (version_compare(Laravel::VERSION, '7.0', '>=')) {
-    class BasePendingCommand extends \Illuminate\Testing\PendingCommand {}
+    class BasePendingCommand extends \Illuminate\Testing\PendingCommand
+    {
+    }
 } else {
-    class BasePendingCommand extends \Illuminate\Foundation\Testing\PendingCommand {}
+    class BasePendingCommand extends \Illuminate\Foundation\Testing\PendingCommand
+    {
+    }
 }
 
 class PendingCommand extends BasePendingCommand

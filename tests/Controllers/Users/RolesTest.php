@@ -75,7 +75,7 @@ class RolesTest extends TestCase
         $resource->assertSeeInOrder([
             'action="http://localhost/admin/roles/3"',
             'value="Test"',
-            'value="Test role"'
+            'value="Test role"',
         ], false);
     }
 
@@ -88,7 +88,7 @@ class RolesTest extends TestCase
         ]);
 
         $resource = $this->actingAs($this->admin)->post('admin/roles/3', [
-            '_method' => 'PUT'
+            '_method' => 'PUT',
         ]);
 
         $resource->assertSessionHasErrors([

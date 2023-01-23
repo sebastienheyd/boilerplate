@@ -64,7 +64,7 @@ class LoginTest extends TestCase
 
     public function testLogoutPostAsNotConnected()
     {
-        $resource =  $this->post('admin/logout');
+        $resource = $this->post('admin/logout');
 
         $resource->assertRedirect('http://localhost/admin/login');
     }
@@ -72,7 +72,7 @@ class LoginTest extends TestCase
     public function testLogoutPost()
     {
         $user = UserFactory::create()->admin();
-        $resource =  $this->actingAs($user)->post('admin/logout');
+        $resource = $this->actingAs($user)->post('admin/logout');
 
         $resource->assertRedirect('http://localhost/admin/login');
         $this->assertTrue(Auth::user() === null);

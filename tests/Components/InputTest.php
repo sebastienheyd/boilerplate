@@ -125,7 +125,7 @@ HTML;
             $view->assertSee($expected, false);
         }
 
-        $view =  $this->withoutMix()->withViewErrors(['fielderror' => 'Error message'])->rawBlade("@component('boilerplate::input', ['name' => 'fielderror']) @endcomponent");
+        $view = $this->withoutMix()->withViewErrors(['fielderror' => 'Error message'])->rawBlade("@component('boilerplate::input', ['name' => 'fielderror']) @endcomponent");
         $view->assertSee($expected, false);
     }
 
@@ -140,7 +140,7 @@ HTML;
 HTML;
 
         if ($this->minLaravelVersion('7.0')) {
-            $view =  $this->withoutMix()->withViewErrors(['fielderror' => 'Error message'])->rawBlade('<x-boilerplate::input name="fielderror" help="boilerplate::users.create.help" />');
+            $view = $this->withoutMix()->withViewErrors(['fielderror' => 'Error message'])->rawBlade('<x-boilerplate::input name="fielderror" help="boilerplate::users.create.help" />');
             $view->assertSee($expected, false);
         }
 

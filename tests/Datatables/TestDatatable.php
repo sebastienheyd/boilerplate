@@ -15,13 +15,13 @@ class TestDatatable extends Datatable
     public function setUp()
     {
         $this->locale([
-                'deleteConfirm' => 'Delete the test?',
-            ])
+            'deleteConfirm' => 'Delete the test?',
+        ])
             ->permissions('users_crud')
             ->condensed()
             ->buttons('filters', 'csv', 'print')
             ->order('created_at', 'desc')
-            ->lengthMenu([[10, 25, 50, 100, -1],[10,25,50,100,'∞']])
+            ->lengthMenu([[10, 25, 50, 100, -1], [10, 25, 50, 100, '∞']])
             ->pageLength(50)
             ->setRowId(function ($item) {
                 return 'id-'.$item['id'];
@@ -30,8 +30,8 @@ class TestDatatable extends Datatable
                 return $item['id'] % 2 == 0 ? 'even' : 'odd';
             })
             ->setRowAttr([
-                'data-id' => function($item) {
-                    return 'row-' . $item['id'];
+                'data-id' => function ($item) {
+                    return 'row-'.$item['id'];
                 },
             ])
             ->pagingType('numbers')
@@ -103,7 +103,7 @@ class TestDatatable extends Datatable
                 ]),
 
             Column::add()
-                ->actions(function($user) {
+                ->actions(function ($user) {
                     return join([
                         Button::show('boilerplate.users.edit', $user->id),
                         Button::edit('boilerplate.users.edit', $user->id),
@@ -115,7 +115,7 @@ class TestDatatable extends Datatable
                             ->link('http://localhost/'.$user->id)
                             ->color('primary')
                             ->icon('pencil-alt')
-                            ->make()
+                            ->make(),
                     ]);
                 }),
         ];

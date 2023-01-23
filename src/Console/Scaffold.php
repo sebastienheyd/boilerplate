@@ -48,6 +48,7 @@ class Scaffold extends BoilerplateCommand
     public function handle()
     {
         $this->title();
+
         return $this->option('remove') ? $this->remove() : $this->install();
     }
 
@@ -64,7 +65,7 @@ class Scaffold extends BoilerplateCommand
         if (! $this->confirm('Continue?')) {
             return 0;
         }
-        
+
         $this->publishRoutes();
         $this->publishControllers();
         $this->publishModels();
