@@ -47,17 +47,4 @@ class NewUser extends Notification
             ]))
             ->line(__('boilerplate::notifications.newuser.outro'));
     }
-
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function toArray($notifiable)
-    {
-        return [
-            //
-        ];
-    }
 }
