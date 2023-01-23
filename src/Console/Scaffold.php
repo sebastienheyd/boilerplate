@@ -303,7 +303,6 @@ class Scaffold extends BoilerplateCommand
         } else {
             $type = 'File';
             if (! $this->fileSystem->exists($to)) {
-
                 // For Laravel 6
                 if (! $this->fileSystem->isDirectory($this->fileSystem->dirname($to))) {
                     $this->fileSystem->makeDirectory($this->fileSystem->dirname($to), 0755, true);
