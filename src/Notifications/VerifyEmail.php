@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\URL;
 
 class VerifyEmail extends BaseEmail
 {
+    public static $createUrlCallback;
+
     protected function verificationUrl($notifiable)
     {
         if (static::$createUrlCallback) {
@@ -40,5 +42,16 @@ class VerifyEmail extends BaseEmail
             ->line(__('Please click the button below to verify your email address.'))
             ->action(__('Verify Email Address'), $url)
             ->line(__('If you did not create an account, no further action is required.'));
+    }
+
+    /**
+     * Set a callback that should be used when creating the reset password button URL.
+     *
+     * @param  \Closure  $callback
+     * @return void
+     */
+    public static function createUrlUsing($callback)
+    {
+        static::$createUrlCallback = $callback;
     }
 }
