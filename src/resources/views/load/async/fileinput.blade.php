@@ -1,12 +1,12 @@
 @once
 @component('boilerplate::minify')
     <script>
-        loadStylesheet('{!! mix('/plugins/fileinput/bootstrap-fileinput.min.css', '/assets/vendor/boilerplate') !!}');
-        loadScript('{!! mix('/plugins/fileinput/bootstrap-fileinput.min.js', '/assets/vendor/boilerplate') !!}', () => {
-            loadScript('/assets/vendor/boilerplate/plugins/fileinput/themes/fas/theme.min.js', () => {
-                $.fn.fileinput.defaults = $.extend({}, $.fn.fileinput.defaults, $.fn.fileinputThemes.fas);
+        loadStylesheet('{!! mix('plugins/fileinput/bootstrap-fileinput.min.css', '/assets/vendor/boilerplate') !!}');
+        loadScript('{!! mix('plugins/fileinput/bootstrap-fileinput.min.js', '/assets/vendor/boilerplate') !!}', () => {
+            loadScript({!! mix('plugins/fileinput/themes/fa5/theme.min.js', '/assets/vendor/boilerplate') !!}, () => {
+                $.fn.fileinput.defaults = $.extend({}, $.fn.fileinput.defaults, $.fn.fileinputThemes.fa5);
                 @if(App::getLocale() !== 'en')
-                loadScript('/assets/vendor/boilerplate/plugins/fileinput/locales/{{ App::getLocale() }}.js', () => {
+                loadScript('{!! mix('plugins/fileinput/locales/'.App::getLocale().'.js', '/assets/vendor/boilerplate') !!}', () => {
                     $.fn.fileinput.defaults.language='{{ App::getLocale() }}';
                     registerAsset('fileinput');
                 });

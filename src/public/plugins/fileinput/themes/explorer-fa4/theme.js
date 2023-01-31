@@ -1,5 +1,5 @@
 /*!
- * bootstrap-fileinput v5.2.7
+ * bootstrap-fileinput v5.5.0
  * http://plugins.krajee.com/file-input
  *
  * Krajee Explorer Font Awesome theme configuration for bootstrap-fileinput. 
@@ -7,7 +7,7 @@
  * font awesome assets and CSS are loaded on the page as well.
  *
  * Author: Kartik Visweswaran
- * Copyright: 2014 - 2021, Kartik Visweswaran, Krajee.com
+ * Copyright: 2014 - 2022, Kartik Visweswaran, Krajee.com
  *
  * Licensed under the BSD-3-Clause
  * https://github.com/kartik-v/bootstrap-fileinput/blob/master/LICENSE.md
@@ -23,7 +23,7 @@
     }
 }(function ($) {
     'use strict';
-    $.fn.fileinputThemes['explorer-fa'] = {
+    $.fn.fileinputThemes['explorer-fa4'] = {
         layoutTemplates: {
             footer: '<div class="file-details-cell">' +
                 '<div class="explorer-caption" title="{caption}">{caption}</div> ' + '{size}{progress}' +
@@ -32,7 +32,7 @@
             actions: '{drag}\n' +
                 '<div class="file-actions">\n' +
                 '    <div class="file-footer-buttons">\n' +
-                '        {upload} {download} {delete} {zoom} {other} ' +
+                '        {rotate} {upload} {download} {delete} {zoom} {other} ' +
                 '    </div>\n' +
                 '</div>',
             fileIcon: '<i class="fa fa-file kv-caption-icon"></i> '
@@ -51,8 +51,9 @@
         fileActionSettings: {
             removeIcon: '<i class="fa fa-trash"></i>',
             uploadIcon: '<i class="fa fa-upload"></i>',
-            uploadRetryIcon: '<i class="fa fa-repeat"></i>',
+            uploadRetryIcon: '<i class="fa fa-cloud-upload"></i>',
             downloadIcon: '<i class="fa fa-download"></i>',
+            rotateIcon: '<i class="fa fa-rotate-right"></i>',
             zoomIcon: '<i class="fa fa-search-plus"></i>',
             dragIcon: '<i class="fa fa-arrows"></i>',
             indicatorNew: '<i class="fa fa-plus-circle text-warning"></i>',
@@ -64,6 +65,7 @@
         previewZoomButtonIcons: {
             prev: '<i class="fa fa-chevron-left"></i>',
             next: '<i class="fa fa-chevron-right"></i>',
+            rotate: '<i class="fa fa-rotate-right"></i>',
             toggleheader: '<i class="fa fa-fw fa-arrows-v"></i>',
             fullscreen: '<i class="fa fa-fw fa-arrows-alt"></i>',
             borderless: '<i class="fa fa-fw fa-external-link"></i>',

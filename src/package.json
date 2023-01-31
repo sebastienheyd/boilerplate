@@ -7,7 +7,8 @@
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
         "prod": "npm run production",
-        "production": "mix --production"
+        "production": "mix --production",
+        "postinstall": "patch-package"
     },
     "devDependencies": {
         "clean-webpack-plugin": "^3.0.0",
@@ -22,15 +23,16 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^6.1.1",
         "@ttskch/select2-bootstrap4-theme": "^1.5.2",
-        "admin-lte": "3.1.0",
+        "admin-lte": "^3.1.0",
         "audit": "^0.0.6",
         "bootbox": "^5.3.4",
         "bootstrap": "^4.6.1",
-        "bootstrap-fileinput": "5.2.7",
+        "bootstrap-fileinput": "^5.2.7",
         "drmonty-datatables-plugins": "^1.10.12",
         "fix": "^0.0.6",
         "fullcalendar": "^5.10.1",
         "moment": "^2.29.1",
+        "patch-package": "^6.5.1",
         "spectrum-colorpicker2": "^2.0.8",
         "tinymce": "^5.10.3"
     }

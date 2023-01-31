@@ -1,11 +1,11 @@
 /*!
- * bootstrap-fileinput v5.2.7
+ * bootstrap-fileinput v5.5.0
  * http://plugins.krajee.com/file-input
  *
  * Glyphicon (default) theme configuration for bootstrap-fileinput.
  *
  * Author: Kartik Visweswaran
- * Copyright: 2014 - 2021, Kartik Visweswaran, Krajee.com
+ * Copyright: 2014 - 2022, Kartik Visweswaran, Krajee.com
  *
  * Licensed under the BSD-3-Clause
  * https://github.com/kartik-v/bootstrap-fileinput/blob/master/LICENSE.md
@@ -26,7 +26,8 @@
         fileActionSettings: {
             removeIcon: '<i class="glyphicon glyphicon-trash"></i>',
             uploadIcon: '<i class="glyphicon glyphicon-upload"></i>',
-            uploadRetryIcon: '<i class="glyphicon glyphicon-repeat"></i>',
+            uploadRetryIcon: '<i class="glyphicon glyphicon-cloud-upload"></i>',
+            rotateIcon: '<i class="glyphicon glyphicon-repeat"></i>',
             downloadIcon: '<i class="glyphicon glyphicon-download"></i>',
             zoomIcon: '<i class="glyphicon glyphicon-zoom-in"></i>',
             dragIcon: '<i class="glyphicon glyphicon-move"></i>',
@@ -42,6 +43,7 @@
         previewZoomButtonIcons: {
             prev: '<i class="glyphicon glyphicon-menu-left"></i>',
             next: '<i class="glyphicon glyphicon-menu-right"></i>',
+            rotate: '<i class="glyphicon glyphicon-repeat"></i>',
             toggleheader: '<i class="glyphicon glyphicon-resize-vertical"></i>',
             fullscreen: '<i class="glyphicon glyphicon-fullscreen"></i>',
             borderless: '<i class="glyphicon glyphicon-resize-full"></i>',

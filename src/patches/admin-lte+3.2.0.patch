@@ -1,0 +1,13 @@
+diff --git a/node_modules/admin-lte/build/scss/mixins/_backgrounds.scss b/node_modules/admin-lte/build/scss/mixins/_backgrounds.scss
+index a4a031c..786e536 100644
+--- a/node_modules/admin-lte/build/scss/mixins/_backgrounds.scss
++++ b/node_modules/admin-lte/build/scss/mixins/_backgrounds.scss
+@@ -4,7 +4,7 @@
+ 
+ // Background Variant
+ @mixin background-variant($name, $color) {
+-  &.bg-#{$name} {
++  #{if(&, "&.bg-#{$name}",".bg-#{$name}")} {
+     background-color: #{$color} !important;
+ 
+     &,
