@@ -9,7 +9,7 @@ class NavbarItemsRepository
     /**
      * Register navbar items to display.
      *
-     * @param  string|array  $item
+     * @param  string|array|View  $item
      * @param  string  $side
      * @return $this
      */
@@ -19,32 +19,24 @@ class NavbarItemsRepository
             throw new \InvalidArgumentException('Side is not allowed');
         }
 
-        if (! is_string($item) && ! is_array($item)) {
-            throw new \InvalidArgumentException('Item is not an array or a string');
-        }
+        if (is_array($item)) {
+            foreach ($item as $view) {
+                $this->registerItem($view, $side);
+            }
 
-        $items = config('boilerplate.theme.navbar.'.$side, []);
+            return $this;
+        }
 
         if (is_string($item)) {
-            $item = [view($item)];
+            $item = view($item);
         }
 
-        $items = array_merge($items, $item);
-        $views = [];
-
-        foreach ($items as $view) {
-            if (is_string($view)) {
-                $view = view($view);
-            }
-
-            if (! ($view instanceof View)) {
-                throw new \InvalidArgumentException('Registered item is not an instance of View');
-            }
-
-            $views[] = $view;
+        if (! ($item instanceof View)) {
+            throw new \InvalidArgumentException('Item is not an instance of View');
         }
 
-        config(['boilerplate.theme.navbar.'.$side => array_unique($views)]);
+        $items = array_merge(config('boilerplate.theme.navbar.'.$side, []), [$item]);
+        config(['boilerplate.theme.navbar.'.$side => array_unique($items)]);
 
         return $this;
     }

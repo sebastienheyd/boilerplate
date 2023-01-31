@@ -2,6 +2,7 @@
 
 namespace Sebastienheyd\Boilerplate\Tests\Navbar;
 
+use Illuminate\View\View;
 use Sebastienheyd\Boilerplate\Navbar\NavbarItemsRepository;
 use Sebastienheyd\Boilerplate\Tests\TestCase;
 
@@ -32,7 +33,7 @@ class NavbarRepositoryTest extends TestCase
     {
         $repository = new NavbarItemsRepository();
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('Item is not an array or a string');
+        $this->expectExceptionMessage('Item is not an instance of View');
         $repository->registerItem($repository);
     }
 
@@ -40,7 +41,7 @@ class NavbarRepositoryTest extends TestCase
     {
         $repository = new NavbarItemsRepository();
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('Registered item is not an instance of View');
+        $this->expectExceptionMessage('Item is not an instance of View');
         $repository->registerItem([$repository]);
     }
 
@@ -48,9 +49,10 @@ class NavbarRepositoryTest extends TestCase
     {
         $repository = new NavbarItemsRepository();
         $repository->registerItem('boilerplate::layout.header.darkmode');
+        $repository->registerItem(view('boilerplate::layout.header.fullscreen'));
         $repository->registerItem([
             'boilerplate::layout.header.darkmode',
-            'boilerplate::layout.header.fullscreen',
+            view('boilerplate::layout.header.fullscreen'),
         ], 'right');
 
         $itemsLeft = $repository->getItems('left');
@@ -58,5 +60,9 @@ class NavbarRepositoryTest extends TestCase
 
         $this->assertNotEmpty($itemsLeft);
         $this->assertNotEmpty($itemsRight);
+        $this->assertTrue($itemsRight[0] instanceof View);
+        $this->assertTrue($itemsRight[1] instanceof View);
+        $this->assertTrue($itemsLeft[0] instanceof View);
+        $this->assertTrue($itemsLeft[1] instanceof View);
     }
 }
