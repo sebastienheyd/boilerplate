@@ -4,8 +4,8 @@
 @endpush
 @push('plugin-js')
     <script src="{!! mix('plugins/fileinput/bootstrap-fileinput.min.js', '/assets/vendor/boilerplate') !!}"></script>
-    <script src="{!! mix('plugins/fileinput/themes/fa5/theme.min.js', '/assets/vendor/boilerplate') !!}"></script>
-    <script>$.fn.fileinput.defaults = $.extend({}, $.fn.fileinput.defaults, $.fn.fileinputThemes.fa5);</script>
+    <script src="{!! mix('plugins/fileinput/themes/fa6/theme.min.js', '/assets/vendor/boilerplate') !!}"></script>
+    <script>$.fn.fileinput.defaults = $.extend({}, $.fn.fileinput.defaults, $.fn.fileinputThemes.fa6);</script>
 @if(App::getLocale() !== 'en')
     <script src="{!! mix('plugins/fileinput/locales/'.App::getLocale().'.js', '/assets/vendor/boilerplate') !!}"></script>
     <script>$.fn.fileinput.defaults.language='{{ App::getLocale() }}';</script>
