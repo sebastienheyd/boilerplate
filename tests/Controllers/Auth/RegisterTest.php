@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Auth;
 use Sebastienheyd\Boilerplate\Models\User;
 use Sebastienheyd\Boilerplate\Tests\factories\UserFactory;
 use Sebastienheyd\Boilerplate\Tests\TestCase;
-use Illuminate\Support\Facades\Notification;
 
 class RegisterTest extends TestCase
 {
