@@ -1,4 +1,4 @@
-@extends('boilerplate::auth.layout', ['title' => __('boilerplate::auth.register.title'), 'bodyClass' => 'hold-transition login-page'])
+@extends('boilerplate::auth.layout', ['title' => __('boilerplate::auth.register.title')])
 
 @section('content')
     @component('boilerplate::auth.loginbox')

@@ -22,16 +22,6 @@
             toolbar_sticky: {{ ($sticky ?? false) ? 'true' : 'false' }},
             {{ $minHeight ?? false ? 'min_height:'.$minHeight.',' : '' }}
             {{ $maxHeight ?? false ? 'max_height:'.$maxHeight.',' : '' }}
-            @if(setting('darkmode', false) && config('boilerplate.theme.darkmode'))
-            skin : "boilerplate-dark",
-            content_css: 'boilerplate-dark',
-            @else
-            skin : "oxide",
-            content_css: null,
-            @endif
-            @if(App::getLocale() !== 'en')
-            language: '{{ App::getLocale() }}'
-            @endif
         });
     });
 </script>

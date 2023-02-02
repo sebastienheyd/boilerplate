@@ -1,4 +1,4 @@
-@extends('boilerplate::auth.layout', ['title' => __('boilerplate::auth.register.title'), 'bodyClass' => 'hold-transition login-page'])
+@extends('boilerplate::auth.layout', ['title' => __('boilerplate::auth.register.title')])
 
 @section('content')
     @component('boilerplate::auth.loginbox')
@@ -13,7 +13,6 @@
 
         <form method="POST" action="{{ route('boilerplate.logout') }}">
             @csrf
-
             <button type="submit" class="btn btn-link text-sm">
                 {{ __('Log Out') }}
             </button>

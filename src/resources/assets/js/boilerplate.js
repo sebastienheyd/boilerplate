@@ -136,6 +136,19 @@ $(() => {
         }, 1000);
     }
 
+    let enableDarkMode = function() {
+        $('[data-widget="darkmode"]').html('<i class="fas fa-fw fa-sun"></i>');
+        $('body').addClass('dark-mode accent-light');
+        $('nav.main-header').addClass('navbar-dark');
+        storeSetting('darkmode', true);
+        toggleTinyMceSkin('boilerplate-dark', 'boilerplate-dark');
+    }
+
+    // Enable dark-mode automaticaly if not set and if system use dark-mode
+    if ($('body').data('darkmode') == '2' && window.matchMedia("(prefers-color-scheme: dark)")) {
+        enableDarkMode();
+    }
+
     $('[data-widget="darkmode"]').on('click', function(e) {
         e.preventDefault();
         if($('body').hasClass('dark-mode')) {
@@ -145,11 +158,7 @@ $(() => {
             storeSetting('darkmode', false);
             toggleTinyMceSkin('oxide', null);
         } else {
-            $(this).html('<i class="fas fa-fw fa-sun"></i>');
-            $('body').addClass('dark-mode accent-light');
-            $('nav.main-header').addClass('navbar-dark');
-            storeSetting('darkmode', true);
-            toggleTinyMceSkin('boilerplate-dark', 'boilerplate-dark');
+            enableDarkMode();
         }
     });
 
