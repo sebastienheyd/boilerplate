@@ -73,6 +73,8 @@ class UsersTest extends TestCase
         $resource->assertStatus(302);
         $resource->assertRedirect('http://localhost/admin/users/2/edit');
 
+        $this->assertTrue($this->getMails()->count() === 1);
+
         $mail = $this->getLastMail();
         $this->assertTrue($mail['subject'] === 'Your account has been created on Boilerplate Test');
     }
