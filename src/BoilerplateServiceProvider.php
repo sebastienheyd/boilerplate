@@ -117,15 +117,9 @@ class BoilerplateServiceProvider extends ServiceProvider
             __DIR__.'/resources/lang' => app()->langPath().'/vendor/boilerplate',
         ], 'boilerplate-lang');
 
-        if (is_dir(base_path('vendor/laravel-lang/lang/source'))) {
-            $this->publishes([
-                base_path('vendor/laravel-lang/lang/source') => app()->langPath().'/en',
-            ], ['boilerplate', 'boilerplate-lang']);
-        } else {
-            $this->publishes([
-                base_path('vendor/laravel-lang/lang/script/en') => app()->langPath().'/en',
-            ], ['boilerplate', 'boilerplate-lang']);
-        }
+        $this->publishes([
+            __DIR__.'/resources/laravel-lang' => app()->langPath(),
+        ], ['boilerplate', 'boilerplate-lang']);
 
         $this->commands([
             Console\Datatable::class,

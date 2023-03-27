@@ -7,7 +7,7 @@ use Arcanedev\LogViewer\Providers\DeferredServicesProvider;
 use Collective\Html\FormFacade;
 use Collective\Html\HtmlServiceProvider;
 use Creativeorange\Gravatar\GravatarServiceProvider;
-use HieuLe\Active\ActiveServiceProvider;
+use SebastienHeyd\Active\ActiveServiceProvider;
 use Illuminate\Auth\AuthServiceProvider;
 use Illuminate\Broadcasting\BroadcastServiceProvider;
 use Illuminate\Bus\BusServiceProvider;
