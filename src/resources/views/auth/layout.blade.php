@@ -22,7 +22,9 @@
     <script src="{{ mix('/admin-lte.min.js', '/assets/vendor/boilerplate') }}"></script>
     <script src="{{ mix('/boilerplate.min.js', '/assets/vendor/boilerplate') }}"></script>
     <script>$.ajaxSetup({headers:{'X-CSRF-TOKEN':'{{ csrf_token() }}'}});</script>
+@if(config('boilerplate.theme.darkmode'))
     <script>window.matchMedia("(prefers-color-scheme: dark)") ? $('body').addClass('dark-mode accent-light') : $('body').removeClass('dark-mode accent-light')</script>
+@endif
 @stack('js')
 </body>
 </html>
