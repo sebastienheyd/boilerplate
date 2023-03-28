@@ -7,7 +7,6 @@ use Arcanedev\LogViewer\Providers\DeferredServicesProvider;
 use Collective\Html\FormFacade;
 use Collective\Html\HtmlServiceProvider;
 use Creativeorange\Gravatar\GravatarServiceProvider;
-use SebastienHeyd\Active\ActiveServiceProvider;
 use Illuminate\Auth\AuthServiceProvider;
 use Illuminate\Broadcasting\BroadcastServiceProvider;
 use Illuminate\Bus\BusServiceProvider;
@@ -45,6 +44,7 @@ use Orchestra\Testbench\TestCase as OrchestraTestCase;
 use PHPUnit\Framework\Constraint\DirectoryExists;
 use PHPUnit\Framework\Constraint\FileExists;
 use PHPUnit\Framework\Constraint\LogicalNot;
+use SebastienHeyd\Active\ActiveServiceProvider;
 use Sebastienheyd\Boilerplate\BoilerplateServiceProvider;
 use Yajra\DataTables\DataTablesServiceProvider;
 
