@@ -9,11 +9,13 @@ cache:
   directories:
     - $HOME/.composer/cache
     - $HOME/.cache/composer
+    - $COMPOSER_CACHE_DIR
 
 before_script:
   - phpenv config-rm xdebug.ini
-  - composer self-update
-  - COMPOSER_MEMORY_LIMIT=-1 composer install --no-interaction --no-progress
+  - travis_retry composer self-update
+  - travis_retry COMPOSER_MEMORY_LIMIT=-1 composer install --no-interaction --no-progress
+  - php -r 'phpinfo();'
 
 script:
   - vendor/bin/phpcs

@@ -91,6 +91,7 @@ abstract class TestCase extends OrchestraTestCase
 
         if (self::$once === false) {
             echo 'Tested version : Laravel '.Laravel::VERSION.' (PHP '.PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION.'.'.PHP_RELEASE_VERSION.')'.PHP_EOL;
+            echo 'SQLite version : '.\SQLite3::version()['versionString'].PHP_EOL.PHP_EOL;
             self::$once = true;
         }
 
