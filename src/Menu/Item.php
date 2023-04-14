@@ -7,6 +7,9 @@ use Lavary\Menu\Item as LavaryMenuItem;
 
 class Item extends LavaryMenuItem
 {
+    protected $icon;
+    public $hasSubitems = false;
+
     public function __construct($builder, $id, $title, $options)
     {
         Arr::forget($options, ['role', 'permission', 'icon', 'active']);
@@ -25,7 +28,7 @@ class Item extends LavaryMenuItem
     {
         if (preg_match('#^https?|\.(png|jpg|gif|svg)$#', $icon)) {
             $img = '<img src="%s" class="img-fluid" style="max-height: 17px" />';
-            $this->prepend(sprintf('<div class="nav-icon d-inline-block text-sm">'.$img.'</div>', $icon));
+            $this->icon = sprintf('<div class="nav-icon d-inline-block text-sm">'.$img.'</div>', $icon);
 
             return $this;
         }
@@ -38,9 +41,19 @@ class Item extends LavaryMenuItem
             $icon = $m[1];
         }
 
-        $this->prepend(sprintf('<i class="nav-icon %s fa-%s"></i>', $type, $icon));
+        $this->icon = sprintf('<i class="nav-icon %s fa-%s"></i>', $type, $icon);
 
         return $this;
+    }
+
+    /**
+     * Get item icon.
+     *
+     * @return string|false
+     */
+    public function getIcon()
+    {
+        return $this->icon ?? false;
     }
 
     /**
@@ -114,7 +127,8 @@ class Item extends LavaryMenuItem
     public function add($title, $options = [])
     {
         $options['parent'] = $this->id;
-        $this->append('<i class="fa fa-angle-left right"></i>');
+
+        $this->hasSubItems = true;
 
         return $this->builder->add($title, $options);
     }

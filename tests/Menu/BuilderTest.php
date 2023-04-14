@@ -2,25 +2,74 @@
 
 namespace Sebastienheyd\Boilerplate\Tests\Menu;
 
+use ErrorException;
 use Sebastienheyd\Boilerplate\Menu\Builder;
 use Sebastienheyd\Boilerplate\Tests\factories\UserFactory;
 use Sebastienheyd\Boilerplate\Tests\TestCase;
 
 class BuilderTest extends TestCase
 {
-    public function testBuilder()
+    public function testBuilderWithPermission()
     {
         UserFactory::create()->admin(true);
 
         $builder = new Builder('test', []);
+        $builder->add('test', ['id' => 'test', 'role' => 'admin']);
+        $menu = '<ul><li id="test" class="nav-item"><a class="nav-link"><i class="nav-icon fas fa-stop"></i><p>test</p></a></li></ul>';
+        $this->assertEquals($menu, $builder->asUl());
+    }
 
-        $item = $builder->add('test', ['id' => 'test', 'role' => 'admin']);
-        $this->assertEquals('<i class="nav-icon fas fa-cube"></i><p>test</p>', $item->title);
+    public function testBuilderWithNoPermission()
+    {
+        UserFactory::create()->user(true);
 
-        $item = $builder->addTo('test', 'test 2');
-        $this->assertEquals('<i class="nav-icon far fa-circle"></i><p>test 2</p>', $item->title);
+        $builder = new Builder('test', []);
+        $builder->add('test', ['id' => 'test', 'role' => 'admin']);
+        $menu = '<ul></ul>';
+        $this->assertEquals($menu, $builder->asUl());
+    }
 
-        $item = $builder->addTo('noid', 'test 3');
-        $this->assertEquals('<i class="nav-icon fas fa-cube"></i><p>test 3</p>', $item->title);
+    public function testBuilderSubitem()
+    {
+        UserFactory::create()->user(true);
+
+        $builder = new Builder('test', []);
+        $builder->add('test', ['id' => 'test']);
+        $builder->addTo('test', 'test 2', ['icon' => 'home']);
+        $menu = '<ul><li id="test" class="nav-item has-treeview" url="#"><a class="nav-link"><i class="nav-icon fas fa-stop"></i><p>test</p><i class="fa fa-angle-left right"></i></a><ul><li class="nav-item"><a class="nav-link"><i class="nav-icon fas fa-home"></i><p>test 2</p></a></li></ul></li></ul>';
+        $this->assertEquals($menu, $builder->asUl());
+    }
+
+    public function testBuilderIcon()
+    {
+        UserFactory::create()->user(true);
+
+        $builder = new Builder('test', []);
+        $builder->add('test', ['id' => 'test']);
+        $builder->addTo('test', 'test 2', ['icon' => 'fab fa-times']);
+        $menu = '<ul><li id="test" class="nav-item has-treeview" url="#"><a class="nav-link"><i class="nav-icon fas fa-stop"></i><p>test</p><i class="fa fa-angle-left right"></i></a><ul><li class="nav-item"><a class="nav-link"><i class="nav-icon fab fa-times"></i><p>test 2</p></a></li></ul></li></ul>';
+        $this->assertEquals($menu, $builder->asUl());
+    }
+
+    public function testBuilderSubitemImgIcon()
+    {
+        UserFactory::create()->user(true);
+
+        $builder = new Builder('test', []);
+        $builder->add('test', ['id' => 'test']);
+        $builder->addTo('test', 'test 2')->icon('test.png');
+        $menu = '<ul><li id="test" class="nav-item has-treeview" url="#"><a class="nav-link"><i class="nav-icon fas fa-stop"></i><p>test</p><i class="fa fa-angle-left right"></i></a><ul><li class="nav-item"><a class="nav-link"><div class="nav-icon d-inline-block text-sm"><img src="test.png" class="img-fluid" style="max-height: 17px" /></div><p>test 2</p></a></li></ul></li></ul>';
+        $this->assertEquals($menu, $builder->asUl());
+    }
+
+    public function testBuilderSubitemBadParent()
+    {
+        UserFactory::create()->user(true);
+
+        $builder = new Builder('test', []);
+        $builder->add('test', ['id' => 'test']);
+        $this->expectException(ErrorException::class);
+        $this->expectExceptionMessage('Menu item parent "noid" does not exists');
+        $builder->addTo('noid', 'test 3')->icon('times');
     }
 }
