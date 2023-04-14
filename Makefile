@@ -21,10 +21,10 @@ test: vendor phpunit.xml ## Unit testing
 	@php vendor/bin/phpunit --stop-on-failure
 
 testcoverage: composer.phar vendor phpunit.xml ## Unit testing with code coverage
-	@php vendor/bin/phpunit --coverage-text
+	@XDEBUG_MODE=coverage php vendor/bin/phpunit --coverage-text
 
 testcoveragehtml: composer.phar vendor phpunit.xml ## Unit testing with code coverage in HTML
-	@php vendor/bin/phpunit --coverage-html coverage
+	@XDEBUG_MODE=coverage php vendor/bin/phpunit --coverage-html coverage
 
 clean: ## Remove files needed for tests
 	@rm -rf composer.phar composer.lock vendor testbench coverage .phpunit.result.cache .phpunit.cache
