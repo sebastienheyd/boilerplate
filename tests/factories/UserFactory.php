@@ -37,8 +37,8 @@ class UserFactory
     {
         $user = User::create([
             'active' => '1',
-            'first_name' => str_replace("'", "", $this->faker->firstName),
-            'last_name' => str_replace("'", "", $this->faker->lastName),
+            'first_name' => str_replace("'", '', $this->faker->firstName),
+            'last_name' => str_replace("'", '', $this->faker->lastName),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
@@ -56,8 +56,8 @@ class UserFactory
     {
         $user = User::create([
             'active' => '1',
-            'first_name' => str_replace("'", "", $this->faker->firstName),
-            'last_name' => str_replace("'", "", $this->faker->lastName),
+            'first_name' => str_replace("'", '', $this->faker->firstName),
+            'last_name' => str_replace("'", '', $this->faker->lastName),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
@@ -78,8 +78,8 @@ class UserFactory
     {
         $user = DB::table('users')->insertGetId([
             'active' => '1',
-            'first_name' => str_replace("'", "", $this->faker->firstName),
-            'last_name' => str_replace("'", "", mb_strtoupper($this->faker->lastName)),
+            'first_name' => str_replace("'", '', $this->faker->firstName),
+            'last_name' => str_replace("'", '', mb_strtoupper($this->faker->lastName)),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
