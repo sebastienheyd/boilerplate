@@ -470,10 +470,11 @@ pre[class*="language-"] {
   outline: none;
 }
 .mce-content-body *[data-mce-selected="inline-boundary"] {
-  background-color: #b4d7ff;
+  background-color: #bbb;
+  color: #333;
 }
 .mce-content-body .mce-edit-focus {
-  outline: 3px solid #b4d7ff;
+  outline: 3px solid #aaa;
 }
 .mce-content-body td[data-mce-selected],
 .mce-content-body th[data-mce-selected] {
