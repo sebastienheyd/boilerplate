@@ -25,34 +25,20 @@ class NavbarRepositoryTest extends TestCase
         $this->assertEmpty($itemsRight);
 
         $repository = new NavbarItemsRepository();
-        $this->expectException(\InvalidArgumentException::class);
         $repository->registerItem('badview');
-    }
 
-    public function testNavbarRepositoryBadModel()
-    {
-        $repository = new NavbarItemsRepository();
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('Item is not an instance of View');
-        $repository->registerItem($repository);
-    }
-
-    public function testNavbarRepositoryBadArray()
-    {
-        $repository = new NavbarItemsRepository();
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('Item is not an instance of View');
-        $repository->registerItem([$repository]);
+        $repository->getItems();
     }
 
     public function testNavbarRepository()
     {
         $repository = new NavbarItemsRepository();
         $repository->registerItem('boilerplate::layout.header.darkmode');
-        $repository->registerItem(view('boilerplate::layout.header.fullscreen'));
+        $repository->registerItem('boilerplate::layout.header.fullscreen');
         $repository->registerItem([
             'boilerplate::layout.header.darkmode',
-            view('boilerplate::layout.header.fullscreen'),
+            'boilerplate::layout.header.fullscreen',
         ], 'right');
 
         $itemsLeft = $repository->getItems('left');

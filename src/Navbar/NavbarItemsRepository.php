@@ -27,14 +27,6 @@ class NavbarItemsRepository
             return $this;
         }
 
-        if (is_string($item)) {
-            $item = view($item);
-        }
-
-        if (! ($item instanceof View)) {
-            throw new \InvalidArgumentException('Item is not an instance of View');
-        }
-
         $items = array_merge(config('boilerplate.theme.navbar.'.$side, []), [$item]);
         config(['boilerplate.theme.navbar.'.$side => array_unique($items)]);
 
@@ -49,6 +41,12 @@ class NavbarItemsRepository
      */
     public function getItems($side = 'left')
     {
-        return array_unique(config('boilerplate.theme.navbar.'.$side, []));
+        $items = array_unique(config('boilerplate.theme.navbar.'.$side, []));
+
+        foreach ($items as $k => $item) {
+            $items[$k] = view($item);
+        }
+
+        return $items;
     }
 }
