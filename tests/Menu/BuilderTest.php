@@ -81,5 +81,4 @@ class BuilderTest extends TestCase
         $menu = '<ul><li id="test" class="nav-item"><a class="nav-link"><i class="nav-icon fas fa-stop"></i><p>test</p></a></li></ul>';
         $this->assertEquals($menu, $builder->asUl());
     }
-    
 }
