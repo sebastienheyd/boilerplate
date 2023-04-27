@@ -2,7 +2,6 @@
 
 namespace Sebastienheyd\Boilerplate\Tests\Menu;
 
-use ErrorException;
 use Sebastienheyd\Boilerplate\Menu\Builder;
 use Sebastienheyd\Boilerplate\Tests\factories\UserFactory;
 use Sebastienheyd\Boilerplate\Tests\TestCase;
