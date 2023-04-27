@@ -41,12 +41,14 @@ class NavbarItemsRepository
      */
     public function getItems($side = 'left')
     {
-        $items = array_unique(config('boilerplate.theme.navbar.'.$side, []));
+        $items = array_map(function ($item) {
+            if ($item instanceof View) {
+                return $item;
+            }
 
-        foreach ($items as $k => $item) {
-            $items[$k] = view($item);
-        }
+            return view()->exists($item) ? view($item) : null;
+        }, array_unique(config('boilerplate.theme.navbar.'.$side, [])));
 
-        return $items;
+        return array_values(array_filter($items));
     }
 }

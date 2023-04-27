@@ -26,19 +26,20 @@ class NavbarRepositoryTest extends TestCase
 
         $repository = new NavbarItemsRepository();
         $repository->registerItem('badview');
+        $repository->registerItem('badview2', 'right');
 
-        $this->expectException(\InvalidArgumentException::class);
-        $repository->getItems();
+        $this->assertEmpty($repository->getItems('left'));
+        $this->assertEmpty($repository->getItems('right'));
     }
 
     public function testNavbarRepository()
     {
         $repository = new NavbarItemsRepository();
         $repository->registerItem('boilerplate::layout.header.darkmode');
-        $repository->registerItem('boilerplate::layout.header.fullscreen');
+        $repository->registerItem(view('boilerplate::layout.header.fullscreen'));
         $repository->registerItem([
             'boilerplate::layout.header.darkmode',
-            'boilerplate::layout.header.fullscreen',
+            view('boilerplate::layout.header.fullscreen'),
         ], 'right');
 
         $itemsLeft = $repository->getItems('left');
