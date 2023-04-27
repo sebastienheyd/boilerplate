@@ -15,7 +15,8 @@ class BuilderTest extends TestCase
 
         $builder = new Builder('test', []);
         $builder->add('test', ['id' => 'test', 'role' => 'admin']);
-        $menu = '<ul><li id="test" class="nav-item"><a class="nav-link"><i class="nav-icon fas fa-stop"></i><p>test</p></a></li></ul>';
+        $builder->addTo('test', 'test 2')->icon('times');
+        $menu = '<ul><li id="test" class="nav-item has-treeview" url="#"><a class="nav-link"><i class="nav-icon fas fa-stop"></i><p>test</p><i class="fa fa-angle-left right"></i></a><ul><li class="nav-item"><a class="nav-link"><i class="nav-icon fas fa-times"></i><p>test 2</p></a></li></ul></li></ul>';
         $this->assertEquals($menu, $builder->asUl());
     }
 
@@ -25,8 +26,8 @@ class BuilderTest extends TestCase
 
         $builder = new Builder('test', []);
         $builder->add('test', ['id' => 'test', 'role' => 'admin']);
-        $menu = '<ul></ul>';
-        $this->assertEquals($menu, $builder->asUl());
+        $builder->addTo('test', 'test 2')->icon('times');
+        $this->assertEquals('<ul></ul>', $builder->asUl());
     }
 
     public function testBuilderSubitem()
@@ -62,14 +63,24 @@ class BuilderTest extends TestCase
         $this->assertEquals($menu, $builder->asUl());
     }
 
+    public function testBuilderSubitemNoParent()
+    {
+        UserFactory::create()->user(true);
+
+        $builder = new Builder('test', []);
+        $builder->addTo('fake', 'test');
+        $this->assertEquals('<ul></ul>', $builder->asUl());
+    }
+
     public function testBuilderSubitemBadParent()
     {
         UserFactory::create()->user(true);
 
         $builder = new Builder('test', []);
         $builder->add('test', ['id' => 'test']);
-        $this->expectException(ErrorException::class);
-        $this->expectExceptionMessage('Menu item parent "noid" does not exists');
-        $builder->addTo('noid', 'test 3')->icon('times');
+        $builder->addTo('noid', 'test 2')->icon('times');
+        $menu = '<ul><li id="test" class="nav-item"><a class="nav-link"><i class="nav-icon fas fa-stop"></i><p>test</p></a></li></ul>';
+        $this->assertEquals($menu, $builder->asUl());
     }
+    
 }

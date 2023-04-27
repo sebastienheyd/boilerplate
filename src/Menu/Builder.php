@@ -97,7 +97,7 @@ class Builder extends LavaryMenuBuilder
 
             $item = $parent->add($title, $options);
         } else {
-            trigger_error('Menu item parent "'.$id.'" does not exists');
+            $item = new Item($this, $id, $title, $options);
         }
 
         return $item;
