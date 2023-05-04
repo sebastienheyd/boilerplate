@@ -16,9 +16,9 @@ class FileLoader extends LaravelTranslationFileLoader
     /**
      * Create a new file loader instance.
      *
-     * @param Filesystem $files
-     * @param string|array  $path
-     * @param array  $paths
+     * @param  Filesystem  $files
+     * @param  string|array  $path
+     * @param  array  $paths
      */
     public function __construct(Filesystem $files, $path, array $paths = [])
     {
@@ -32,9 +32,9 @@ class FileLoader extends LaravelTranslationFileLoader
     /**
      * Load the messages for the given locale.
      *
-     * @param string $locale
-     * @param string $group
-     * @param string $namespace
+     * @param  string  $locale
+     * @param  string  $group
+     * @param  string  $namespace
      * @return array
      *
      * @throws FileNotFoundException
@@ -55,9 +55,9 @@ class FileLoader extends LaravelTranslationFileLoader
     /**
      * Fall back to base locale (i.e. de) if a countries specific locale (i.e. de-CH) is not available.
      *
-     * @param string $path
-     * @param string $locale
-     * @param string $group
+     * @param  string  $path
+     * @param  string  $locale
+     * @param  string  $group
      * @return array
      */
     protected function loadPath($path, $locale, $group): array
