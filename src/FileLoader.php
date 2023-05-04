@@ -8,14 +8,7 @@ use RuntimeException;
 
 class FileLoader extends LaravelTranslationFileLoader
 {
-    /**
-     * @var array
-     */
     protected $paths;
-
-    /**
-     * @var string[]
-     */
     protected $customJsonPaths = [];
 
     /**
