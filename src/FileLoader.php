@@ -2,7 +2,6 @@
 
 namespace Sebastienheyd\Boilerplate;
 
-use Illuminate\Support\Str;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Translation\FileLoader as LaravelTranslationFileLoader;
 use RuntimeException;
@@ -22,9 +21,9 @@ class FileLoader extends LaravelTranslationFileLoader
     /**
      * Create a new file loader instance.
      *
-     * @param \Illuminate\Filesystem\Filesystem $files
-     * @param string $path
-     * @param array $paths
+     * @param  \Illuminate\Filesystem\Filesystem  $files
+     * @param  string  $path
+     * @param  array  $paths
      */
     public function __construct(Filesystem $files, string $path, array $paths = [])
     {
@@ -36,10 +35,9 @@ class FileLoader extends LaravelTranslationFileLoader
     /**
      * Load the messages for the given locale.
      *
-     * @param string $locale
-     * @param string $group
-     * @param string $namespace
-     *
+     * @param  string  $locale
+     * @param  string  $group
+     * @param  string  $namespace
      * @return array
      */
     public function load($locale, $group, $namespace = null)
@@ -58,10 +56,9 @@ class FileLoader extends LaravelTranslationFileLoader
     /**
      * Fall back to base locale (i.e. de) if a countries specific locale (i.e. de-CH) is not available.
      *
-     * @param string $path
-     * @param string $locale
-     * @param string $group
-     *
+     * @param  string  $path
+     * @param  string  $locale
+     * @param  string  $group
      * @return array
      */
     protected function loadPath($path, $locale, $group): array
@@ -100,7 +97,7 @@ class FileLoader extends LaravelTranslationFileLoader
         return collect(array_merge($this->jsonPaths, [$this->path]))
             ->reduce(function ($output, $path) use ($locale) {
                 if (preg_match('#^([a-z]{2})[-_][A-Z]{2}$#', $locale, $m)) {
-                    if(! $this->files->exists("{$path}/{$locale}.json")) {
+                    if (! $this->files->exists("{$path}/{$locale}.json")) {
                         $locale = $m[1];
                     }
                 }
