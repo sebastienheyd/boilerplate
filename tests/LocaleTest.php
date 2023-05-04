@@ -10,17 +10,19 @@ class LocaleTest extends TestCase
     {
         app()->setLocale('fr');
         $this->assertEquals('Inscription', __('Register'));
+        $this->assertEquals('prix', __('validation.attributes.price'));
     }
 
     public function testInexistantLocaleFile()
     {
         app()->setLocale('fr-US');
         $this->assertEquals('Inscription', __('Register'));
+        $this->assertEquals('prix', __('validation.attributes.price'));
     }
 
-    public function testBadLocaleFile()
+    public function testBadJsonLocaleFile()
     {
-        $this->artisan('vendor:publish', ['--tag' => 'boilerplate-lang']);
+        $this->artisan('vendor:publish', ['--tag' => 'boilerplate-lang', '--force' => true]);
         $path = App::langPath();
         $this->assertTrue(file_exists($path.'/fr.json'));
         file_put_contents($path.'/fr.json', 'bad');
@@ -30,5 +32,43 @@ class LocaleTest extends TestCase
         app()->setLocale('fr');
         $this->expectException(\RuntimeException::class);
         __('Register');
+    }
+
+    public function testBadPhpLocaleFile()
+    {
+        $this->artisan('vendor:publish', ['--tag' => 'boilerplate-lang', '--force' => true]);
+        $path = App::langPath();
+        $this->assertTrue(file_exists($path.'/fr/validation.php'));
+        file_put_contents($path.'/fr/validation.php', '');
+
+        app()->setLocale('fr');
+        $this->expectException(\RuntimeException::class);
+        __('validation.attributes.price');
+    }
+
+    public function testPublishedJsonLocaleFile()
+    {
+        $this->artisan('vendor:publish', ['--tag' => 'boilerplate-lang', '--force' => true]);
+        $path = App::langPath();
+
+        $str = file_get_contents($path.'/fr.json');
+        $str = str_replace('Inscription', 'Test value', $str);
+        file_put_contents($path.'/fr.json', $str);
+
+        app()->setLocale('fr');
+        $this->assertEquals('Test value', __('Register'));
+    }
+
+    public function testPublishedPhpLocaleFile()
+    {
+        $this->artisan('vendor:publish', ['--tag' => 'boilerplate-lang', '--force' => true]);
+        $path = App::langPath();
+
+        $str = file_get_contents($path.'/fr/validation.php');
+        $str = str_replace('prix', 'Test value', $str);
+        file_put_contents($path.'/fr/validation.php', $str);
+
+        app()->setLocale('fr');
+        $this->assertEquals('Test value', __('validation.attributes.price'));
     }
 }

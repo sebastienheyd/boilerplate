@@ -2,36 +2,42 @@
 
 namespace Sebastienheyd\Boilerplate;
 
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Translation\FileLoader as LaravelTranslationFileLoader;
 use RuntimeException;
 
 class FileLoader extends LaravelTranslationFileLoader
 {
-    protected $paths;
+    protected $path;
+    protected $paths = [];
     protected $customJsonPaths = [];
 
     /**
      * Create a new file loader instance.
      *
-     * @param  \Illuminate\Filesystem\Filesystem  $files
-     * @param  string  $path
-     * @param  array  $paths
+     * @param Filesystem $files
+     * @param string|array  $path
+     * @param array  $paths
      */
-    public function __construct(Filesystem $files, string $path, array $paths = [])
+    public function __construct(Filesystem $files, $path, array $paths = [])
     {
-        $this->paths = $paths;
+        $this->path = app()->langPath();
+        $this->files = $files;
 
-        parent::__construct($files, $path);
+        $path = is_string($path) ? [$path] : $path;
+        $this->paths = array_unique(array_merge($paths, $path));
     }
 
     /**
      * Load the messages for the given locale.
      *
-     * @param  string  $locale
-     * @param  string  $group
-     * @param  string  $namespace
+     * @param string $locale
+     * @param string $group
+     * @param string $namespace
      * @return array
+     *
+     * @throws FileNotFoundException
      */
     public function load($locale, $group, $namespace = null)
     {
@@ -49,20 +55,41 @@ class FileLoader extends LaravelTranslationFileLoader
     /**
      * Fall back to base locale (i.e. de) if a countries specific locale (i.e. de-CH) is not available.
      *
-     * @param  string  $path
-     * @param  string  $locale
-     * @param  string  $group
+     * @param string $path
+     * @param string $locale
+     * @param string $group
      * @return array
      */
     protected function loadPath($path, $locale, $group): array
     {
-        $result = parent::loadPath($path, $locale, $group);
+        $result = $this->loadLocalePath($path, $locale, $group);
 
         if (empty($result) && preg_match('#^([a-z]{2})[-_][A-Z]{2}$#', $locale, $m)) {
-            return parent::loadPath($path, $m[1], $group);
+            return $this->loadLocalePath($path, $m[1], $group);
         }
 
         return $result;
+    }
+
+    /**
+     * Load a locale path if exists.
+     *
+     * @param $path
+     * @param $locale
+     * @param $group
+     * @return array
+     */
+    protected function loadLocalePath($path, $locale, $group): array
+    {
+        if ($this->files->exists($full = "{$path}/{$locale}/{$group}.php")) {
+            try {
+                return $this->files->getRequire($full);
+            } catch (\Throwable $e) {
+                throw new RuntimeException("Translation file [{$full}] contains an invalid PHP array structure.");
+            }
+        }
+
+        return [];
     }
 
     /**
@@ -83,7 +110,7 @@ class FileLoader extends LaravelTranslationFileLoader
      * @param  string  $locale
      * @return array
      *
-     * @throws RuntimeException
+     * @throws RuntimeException|FileNotFoundException
      */
     protected function loadJsonPaths($locale)
     {
