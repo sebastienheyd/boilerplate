@@ -119,7 +119,7 @@ class BoilerplateServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/resources/laravel-lang' => app()->langPath(),
-        ], ['boilerplate', 'boilerplate-lang']);
+        ], ['boilerplate-lang']);
 
         $this->commands([
             Console\Datatable::class,
@@ -264,6 +264,8 @@ class BoilerplateServiceProvider extends ServiceProvider
         if (version_compare($this->app->version(), '7.0', '<')) {
             $this->bladeDirectives();
         }
+
+        $this->app->register(TranslationServiceProvider::class);
     }
 
     /**
