@@ -13,7 +13,20 @@ class LocaleTest extends TestCase
         $this->assertEquals('prix', __('validation.attributes.price'));
     }
 
-    public function testInexistantLocaleFile()
+    public function testDefaultLocale()
+    {
+        $this->assertEquals('Register', __('Register'));
+        $this->assertEquals('price', __('validation.attributes.price'));
+    }
+
+    public function testNonExistentLang()
+    {
+        app()->setLocale('zz');
+        $this->assertEquals('Register', __('Register'));
+        $this->assertEquals('price', __('validation.attributes.price'));
+    }
+
+    public function testNonInexistentLocaleFile()
     {
         app()->setLocale('fr-US');
         $this->assertEquals('Inscription', __('Register'));

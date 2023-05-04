@@ -281,9 +281,10 @@ class UsersTest extends TestCase
             'avatar' => 'badValue',
         ]);
         $resource->assertStatus(200);
+
         $resource->assertJson([
             'success' => false,
-            'message' => $this->minLaravelVersion('10.0') ? 'The avatar field must be a file of type: jpeg, jpg, png.' : 'The avatar must be a file of type: jpeg, jpg, png.',
+            'message' => 'The avatar must be a file of type: jpeg, jpg, png.',
         ]);
 
         $resource = $this->actingAs($user)->post('admin/userprofile/avatar/upload', [
