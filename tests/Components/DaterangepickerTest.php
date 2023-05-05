@@ -25,12 +25,12 @@ HTML;
 <div class="form-group">
     <div class="input-group" id="range">
         <div class="d-flex align-items-center form-control">
-            <input class="daterangepicker-input" autocomplete="off" name="range[value]" type="text">
+            <input class="daterangepicker-input" type="text" name="range[value]" value autocomplete="off">
             <span class="fa fa-fw fa-times fa-xs ml-1 clear-daterangepicker" data-name="range" style="display:none"/>
         </div>
     </div>
-    <input autocomplete="off" name="range[start]" type="hidden" value="">
-    <input autocomplete="off" name="range[end]" type="hidden" value="">
+    <input type="hidden" name="range[start]" value autocomplete="off">
+    <input type="hidden" name="range[end]" value autocomplete="off">
 </div>
 <script>loadScript('',()=>{moment.locale('en');registerAsset('momentjs')});</script><script>loadStylesheet("");whenAssetIsLoaded('momentjs',()=>{loadScript("",()=>{registerAsset('daterangepicker');$.fn.daterangepicker.defaultOptions={locale:{"applyLabel":"Apply","cancelLabel":"Cancel","fromLabel":"From","toLabel":"To","customRangeLabel":"Custom",}}})});</script><script>whenAssetIsLoaded('daterangepicker',()=>{window.DRP_range=$('input[name="range[value]"]').daterangepicker({showDropdowns:!0,opens:"right",timePicker:!1,timePickerIncrement:1,timePicker24Hour:!0,timePickerSeconds:!1,autoUpdateInput:!1,startDate:moment(),endDate:moment(),locale:{format:'YYYY-MM-DD'}}).on('apply.daterangepicker',applyDateRangePicker)});</script>
 HTML;
@@ -53,7 +53,7 @@ HTML;
             <span class="input-group-text"><span class="fas fa-calendar"></span></span>
         </div>
         <div class="d-flex align-items-center form-control">
-            <input class="daterangepicker-input" autocomplete="off" name="range[value]" type="text">
+            <input class="daterangepicker-input" type="text" name="range[value]" value autocomplete="off">
             <span class="fa fa-fw fa-times fa-xs ml-1 clear-daterangepicker" data-name="range" style="display:none"/>
         </div>
         <div class="input-group-append">
@@ -61,8 +61,8 @@ HTML;
         </div>
     </div>
     <small class="form-text text-muted">Help text</small>
-    <input autocomplete="off" name="range[start]" type="hidden" value="1970-01-01 00:00:00">
-    <input autocomplete="off" name="range[end]" type="hidden" value="2021-11-20 09:27:57">
+    <input type="hidden" name="range[start]" value="1970-01-01 00:00:00" autocomplete="off">
+    <input type="hidden" name="range[end]" value="1970-01-01 00:00:00" autocomplete="off">
 </div>
 <script>loadScript('',()=>{moment.locale('en');registerAsset('momentjs')});</script><script>loadStylesheet("");whenAssetIsLoaded('momentjs',()=>{loadScript("",()=>{registerAsset('daterangepicker');$.fn.daterangepicker.defaultOptions={locale:{"applyLabel":"Apply","cancelLabel":"Cancel","fromLabel":"From","toLabel":"To","customRangeLabel":"Custom",}}})});</script><script>whenAssetIsLoaded('daterangepicker',()=>{window.DRP_range=$('input[name="range[value]"]').daterangepicker({showDropdowns:!0,opens:"right",timePicker:!1,timePickerIncrement:1,timePicker24Hour:!0,timePickerSeconds:!1,autoUpdateInput:!0,startDate:moment("1970-01-01 00:00:00"),endDate:moment("2021-11-20 09:27:57"),locale:{format:'YYYY-MM-DD'}}).on('apply.daterangepicker',applyDateRangePicker)});</script>
 HTML;
@@ -82,12 +82,12 @@ HTML;
 <div class="form-group">
     <div class="input-group" id="range">
         <div class="d-flex align-items-center form-control">
-            <input class="daterangepicker-input" autocomplete="off" name="range[value]" type="text">
+            <input class="daterangepicker-input" type="text" name="range[value]" value autocomplete="off">
             <span class="fa fa-fw fa-times fa-xs ml-1 clear-daterangepicker" data-name="range" style="display:none"/>
         </div>
     </div>
-    <input autocomplete="off" name="range[start]" type="hidden" value="">
-    <input autocomplete="off" name="range[end]" type="hidden" value="">
+    <input type="hidden" name="range[start]" value autocomplete="off">
+    <input type="hidden" name="range[end]" value autocomplete="off">
 </div>
 <script>loadScript('',()=>{moment.locale('en');registerAsset('momentjs')});</script><script>loadStylesheet("");whenAssetIsLoaded('momentjs',()=>{loadScript("",()=>{registerAsset('daterangepicker');$.fn.daterangepicker.defaultOptions={locale:{"applyLabel":"Apply","cancelLabel":"Cancel","fromLabel":"From","toLabel":"To","customRangeLabel":"Custom",}}})});</script><script>whenAssetIsLoaded('daterangepicker',()=>{window.DRP_range=$('input[name="range[value]"]').daterangepicker({showDropdowns:!0,opens:"right",minDate:moment('1970-01-01 00:00:00'),maxDate:moment('2022-11-16 00:00:00'),timePicker:!1,timePickerIncrement:1,timePicker24Hour:!0,timePickerSeconds:!1,autoUpdateInput:!1,startDate:moment(),endDate:moment(),locale:{format:'YYYY-MM-DD'}}).on('apply.daterangepicker',applyDateRangePicker)});</script>
 HTML;
@@ -107,12 +107,12 @@ HTML;
 <div class="form-group">
     <div class="input-group" id="range">
         <div class="d-flex align-items-center form-control">
-            <input class="daterangepicker-input" autocomplete="off" name="range[value]" type="text">
+            <input class="daterangepicker-input" type="text" name="range[value]" value autocomplete="off">
             <span class="fa fa-fw fa-times fa-xs ml-1 clear-daterangepicker" data-name="range" style="display:none"/>
         </div>
     </div>
-    <input autocomplete="off" name="range[start]" type="hidden" value="">
-    <input autocomplete="off" name="range[end]" type="hidden" value="">
+    <input type="hidden" name="range[start]" value autocomplete="off">
+    <input type="hidden" name="range[end]" value autocomplete="off">
 </div>
 <script>loadScript('',()=>{moment.locale('en');registerAsset('momentjs')});</script><script>loadStylesheet("");whenAssetIsLoaded('momentjs',()=>{loadScript("",()=>{registerAsset('daterangepicker');$.fn.daterangepicker.defaultOptions={locale:{"applyLabel":"Apply","cancelLabel":"Cancel","fromLabel":"From","toLabel":"To","customRangeLabel":"Custom",}}})});</script><script>whenAssetIsLoaded('daterangepicker',()=>{window.DRP_range=$('input[name="range[value]"]').daterangepicker({showDropdowns:!0,opens:"right",timePicker:!0,timePickerIncrement:1,timePicker24Hour:!1,timePickerSeconds:!0,autoUpdateInput:!1,startDate:moment(),endDate:moment(),locale:{format:'YYYY-MM-DD hh:mm:ss A'}}).on('apply.daterangepicker',applyDateRangePicker)});</script>
 HTML;

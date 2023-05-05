@@ -11,13 +11,13 @@
         "illuminate/support": "^6.0|^7.0|^8.0|^9.0|^10.0",
         "intervention/image": "^2.5",
         "laravel/ui": "^1.2|^2.0|^3.0|^4.0",
-        "laravelcollective/html": "^6.0",
         "lavary/laravel-menu": "^1.7",
         "matthiasmullie/minify": "^1.3",
         "nesbot/carbon": "^2.0",
         "pusher/pusher-php-server": "^6.0|^7.0",
         "santigarcor/laratrust": "^6.0|^7.0",
         "sebastienheyd/active": "^1.0",
+        "spatie/laravel-html": "^2.0|^3.0",
         "yajra/laravel-datatables-oracle": "^9.0|^10.0"
     },
     "require-dev": {

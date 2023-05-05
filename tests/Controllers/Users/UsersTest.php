@@ -71,7 +71,7 @@ class UsersTest extends TestCase
         $user = User::whereEmail('john.doe@email.tld')->first();
         $this->assertTrue($user !== null);
         $resource->assertStatus(302);
-        $resource->assertRedirect('http://localhost/admin/users/2/edit');
+        $resource->assertRedirect('/admin/users/2/edit');
 
         $this->assertTrue($this->getMails()->count() === 1);
 
@@ -84,10 +84,10 @@ class UsersTest extends TestCase
         $admin = UserFactory::create()->admin();
         $user = UserFactory::create()->backendUser();
 
-        $resource = $this->actingAs($admin)->get('http://localhost/admin/users/2/edit');
+        $resource = $this->actingAs($admin)->get('/admin/users/2/edit');
         $resource->assertStatus(200);
         $resource->assertSeeInOrder([
-            'action="http://localhost/admin/users/2"',
+            'action="/admin/users/2"',
             'value="'.$user->email.'"',
             'value="'.$user->first_name.'"',
             'value="'.$user->last_name.'"',
@@ -123,7 +123,7 @@ class UsersTest extends TestCase
         ]);
 
         $resource->assertStatus(302);
-        $resource->assertRedirect('http://localhost/admin/users/2/edit');
+        $resource->assertRedirect('/admin/users/2/edit');
 
         $user = User::find(2);
         $this->assertEquals('john.doe@email.tld', $user->email);
@@ -155,7 +155,7 @@ class UsersTest extends TestCase
         $resource = $this->get('admin/connect/'.$user->remember_token);
         $resource->assertStatus(200);
         $resource->assertSeeInOrder([
-            'action="http://localhost/admin/connect"',
+            'action="/admin/connect"',
             'name="token" value="'.$user->remember_token.'"',
             'name="password"',
             'name="password_confirmation"',
@@ -187,7 +187,7 @@ class UsersTest extends TestCase
         ]);
 
         $resource->assertStatus(302);
-        $resource->assertRedirect('http://localhost/admin');
+        $resource->assertRedirect('/admin');
         $this->assertTrue(Hash::check('#Azerty123', User::find(2)->password));
     }
 
@@ -200,7 +200,7 @@ class UsersTest extends TestCase
 
         $resource->assertStatus(200);
         $resource->assertSeeInOrder([
-            'action="http://localhost/admin/userprofile"',
+            'action="/admin/userprofile"',
             '<h3 class="card-title">My profile</h3>',
             '<strong class="h3">'.$user->first_name.' '.$user->last_name.'</strong>',
             $user->email,
@@ -234,7 +234,7 @@ class UsersTest extends TestCase
         ]);
 
         $resource->assertStatus(302);
-        $resource->assertRedirect('http://localhost/admin/userprofile');
+        $resource->assertRedirect('/admin/userprofile');
 
         $user = User::find(2);
         $this->assertEquals('DOE', $user->last_name);

@@ -35,8 +35,10 @@ $(document).on('change', '#avatar-file', function (e) {
             $('.avatar-percent').text('0%');
             $('.avatar-progress').hide();
             $('.avatar-buttons').css('display', 'flex');
+            $('#avatar-file').val(null);
             if (res.success) {
                 refreshAvatar()
+                $('.avatar-delete').removeClass('d-none');
                 growl(avatar.locales.upload.success)
             } else {
                 console.log(res.message)

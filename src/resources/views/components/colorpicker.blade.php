@@ -5,11 +5,7 @@
 @isset($label)
     <label>{!! __($label) !!}</label>
 @endisset
-    {!! Form::text($name, old($name, $value ?? null), array_merge([
-        'id' => $id,
-        'class' => trim($errors->first($name,' is-invalid').(isset($class) ? ' form-control '.$class : 'form-control')),
-        'autocomplete' => 'off',
-    ], $attributes)) !!}
+    {{ html()->input('text')->name($name)->value(old($name, $value ?? null))->id($id)->class(trim($errors->first($name,' is-invalid').(isset($class) ? ' form-control '.$class : 'form-control')))->attributes(array_merge(['autocomplete' => 'off'], $attributes)) }}
 @if($help ?? false)
     <small class="form-text text-muted">@lang($help)</small>
 @endif

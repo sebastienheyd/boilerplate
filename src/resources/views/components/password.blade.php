@@ -9,7 +9,7 @@
     <label>{!! __($label) !!}</label>
 @endisset
     <div class="input-group password">
-        {!! Form::password($name, array_merge(['class' => 'form-control'.$errors->first($nameDot,' is-invalid').(isset($class) ? ' '.$class : '')], $attributes)) !!}
+        {{ html()->input('password')->name($name)->class('form-control'.$errors->first($nameDot,' is-invalid').(isset($class) ? ' '.$class : ''))->attributes($attributes) }}
         <div class="input-group-append">
             <button type="button" class="btn" data-toggle="password" tabindex="-1"><i class="far fa-fw fa-eye"></i></button>
         </div>
@@ -52,7 +52,7 @@
             });
 
             if(er.length > 0) {
-                {{ $name }}_el.data('bs.popover').config.content = er.join('<br/>');
+                {{ $name }}_el.data('bs.popover').config.content = er.join('<br>');
                 {{ $name }}_ppv.popover('show');
             } else {
                 {{ $name }}_ppv.popover('hide');

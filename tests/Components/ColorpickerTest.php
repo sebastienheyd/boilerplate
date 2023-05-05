@@ -23,7 +23,7 @@ HTML;
     {
         $expected = <<<'HTML'
 <div class="form-group">
-    <input id="test" class="form-control" autocomplete="off" name="test" type="text">
+    <input class="form-control" type="text" name="test" value id="test" autocomplete="off">
 </div>
 <script>loadScript('',()=>{loadStylesheet('',()=>{registerAsset('ColorPicker')})})</script><script>whenAssetIsLoaded('ColorPicker',()=>{window.CP_test=$('#test').spectrum({allowEmpty:!0,showInput:!0,showInitial:!0,clickoutFiresChange:!1,locale:'en',showSelectionPalette:!1,})});</script>
 HTML;
@@ -42,7 +42,7 @@ HTML;
         $expected = <<<'HTML'
 <div class="form-group">
     <label>Test</label>
-    <input id="test" class="form-control" autocomplete="off" name="test" type="text">
+    <input class="form-control" type="text" name="test" value id="test" autocomplete="off">
 </div>
 <script>loadScript('',()=>{loadStylesheet('',()=>{registerAsset('ColorPicker')})})</script><script>whenAssetIsLoaded('ColorPicker',()=>{window.CP_test=$('#test').spectrum({allowEmpty:!0,showInput:!0,showInitial:!0,clickoutFiresChange:!1,locale:'en',showSelectionPalette:!1,})});</script>
 HTML;
@@ -61,7 +61,7 @@ HTML;
         $expected = <<<'HTML'
 <div class="form-group test" id="test">
     <label>Test</label>
-    <input id="test" class="form-control test" autocomplete="off" name="test" type="text">
+    <input class="form-control test" type="text" name="test" value id="test" autocomplete="off">
 </div>
 <script>loadScript('',()=>{loadStylesheet('',()=>{registerAsset('ColorPicker')})})</script><script>whenAssetIsLoaded('ColorPicker',()=>{window.CP_test=$('#test').spectrum({allowEmpty:!0,showInput:!0,showInitial:!0,clickoutFiresChange:!1,locale:'en',showSelectionPalette:!1,})});</script>
 HTML;
@@ -79,7 +79,7 @@ HTML;
     {
         $expected = <<<'HTML'
 <div class="form-group">
-    <input id="test" class="form-control" autocomplete="off" name="test" type="text">
+    <input class="form-control" type="text" name="test" value id="test" autocomplete="off">
 </div>
 <script>loadScript('',()=>{loadStylesheet('',()=>{registerAsset('ColorPicker')})})</script><script>whenAssetIsLoaded('ColorPicker',()=>{window.CP_test=$('#test').spectrum({allowEmpty:!0,showInput:!0,showInitial:!0,clickoutFiresChange:!1,locale:'en',showSelectionPalette:!1,palette:["green"],selectionPalette:["red"],})});</script>
 HTML;

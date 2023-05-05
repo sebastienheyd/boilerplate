@@ -88,7 +88,7 @@
                                 <tr class="log-stack {{ $key %2 ? 'even' : 'odd' }}">
                                     <td colspan="5" class="stack">
                                         <div class="stack-content collapse" id="log-stack-{{ $key }}">
-                                            {!! preg_replace('`#([0-9]*)\s`', "<br /><strong>#$1</strong> ", $entry->stack()) !!}
+                                            {!! preg_replace('`#([0-9]*)\s`', "<br><strong>#$1</strong> ", $entry->stack()) !!}
                                         </div>
                                     </td>
                                 </tr>

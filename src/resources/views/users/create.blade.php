@@ -8,7 +8,7 @@
 ])
 
 @section('content')
-    {{ Form::open(['route' => 'boilerplate.users.store', 'autocomplete' => 'off']) }}
+    @component('boilerplate::form', ['route' => 'boilerplate.users.store'])
         <div class="row">
             <div class="col-12 pb-3">
                 <a href="{{ route("boilerplate.users.index") }}" class="btn btn-default" data-toggle="tooltip" title="@lang('boilerplate::users.returntolist')">
@@ -48,8 +48,8 @@
                                     @component('boilerplate::icheck', ['name' => 'roles['.$role->id.']', 'id' => 'role_'.$role->id, 'checked' => old('roles.'.$role->id) == 'on'])@endcomponent
                                 </td>
                                 <td>
-                                    {{ Form::label('role_'.$role->id, $role->display_name, ['class' => 'mb-0 pb-0']) }}<br />
-                                    <span class="small">{{ $role->description }}</span><br />
+                                    <label for="{{ 'role_'.$role->id }}" class="mb-0">{{ $role->display_name }}</label><br>
+                                    <span class="small">{{ $role->description }}</span><br>
                                     <span class="small text-muted">{!! $role->permissions->implode('display_name', '<br>') !!}</span>
                                 </td>
                             </tr>
@@ -58,5 +58,5 @@
                 @endcomponent
             </div>
         </div>
-    {{ Form::close() }}
+    @endcomponent
 @endsection

@@ -24,9 +24,9 @@ HTML;
         $expected = <<<'HTML'
 <div class="form-group">
     <div class="input-group" id="test" data-target-input="nearest">
-        <input data-toggle="datetimepicker" data-target="#test" class="form-control datetimepicker-input" autocomplete="off" name="test_local" type="text">
+        <input class="form-control datetimepicker-input" type="text" name="test_local" value data-toggle="datetimepicker" data-target="#test" autocomplete="off">
     </div>
-    <input name="test" type="hidden">
+    <input type="hidden" name="test" value>
 </div>
 <script>loadScript('',()=>{moment.locale('en');registerAsset('momentjs')});</script><script>loadStylesheet('');whenAssetIsLoaded('momentjs',()=>{loadScript('',()=>{registerAsset('datetimepicker',()=>{$.fn.datetimepicker.Constructor.Default=$.extend({},$.fn.datetimepicker.Constructor.Default,{locale:"en",icons:$.extend({},$.fn.datetimepicker.Constructor.Default.icons,{time:'far fa-clock',date:'far fa-calendar',up:'fas fa-arrow-up',down:'fas fa-arrow-down',previous:'fas fa-chevron-left',next:'fas fa-chevron-right',today:'far fa-calendar-check',clear:'fas fa-trash',close:'fas fa-times'})})})})});</script><script>whenAssetIsLoaded('datetimepicker',()=>{window.DTP_test=$('#test').datetimepicker({format:"L",buttons:{showToday:!1,showClear:!1,showClose:!1},useCurrent:!1,});$('#test').on('change.datetimepicker',()=>{$('input[name="test"]').val('');if($('input[name="test_local"]').val()!==''){let date=$('#test').datetimepicker('viewDate').format('YYYY-MM-DD');$('input[name="test"]').val(date).trigger('change')}})});</script>
 HTML;
@@ -45,9 +45,9 @@ HTML;
 <div class="form-group">
     <label>Test</label>
     <div class="input-group" id="test" data-target-input="nearest">
-        <input data-toggle="datetimepicker" data-target="#test" class="form-control datetimepicker-input" autocomplete="off" name="test_local" type="text">
+        <input class="form-control datetimepicker-input" type="text" name="test_local" value data-toggle="datetimepicker" data-target="#test" autocomplete="off">
     </div>
-    <input name="test" type="hidden">
+    <input type="hidden" name="test" value>
 </div>
 <script>loadScript('',()=>{moment.locale('en');registerAsset('momentjs')});</script><script>loadStylesheet('');whenAssetIsLoaded('momentjs',()=>{loadScript('',()=>{registerAsset('datetimepicker',()=>{$.fn.datetimepicker.Constructor.Default=$.extend({},$.fn.datetimepicker.Constructor.Default,{locale:"en",icons:$.extend({},$.fn.datetimepicker.Constructor.Default.icons,{time:'far fa-clock',date:'far fa-calendar',up:'fas fa-arrow-up',down:'fas fa-arrow-down',previous:'fas fa-chevron-left',next:'fas fa-chevron-right',today:'far fa-calendar-check',clear:'fas fa-trash',close:'fas fa-times'})})})})});</script><script>whenAssetIsLoaded('datetimepicker',()=>{window.DTP_test=$('#test').datetimepicker({format:"L",buttons:{showToday:!1,showClear:!1,showClose:!1},useCurrent:!1,});$('#test').on('change.datetimepicker',()=>{$('input[name="test"]').val('');if($('input[name="test_local"]').val()!==''){let date=$('#test').datetimepicker('viewDate').format('YYYY-MM-DD');$('input[name="test"]').val(date).trigger('change')}})});</script>
 HTML;
@@ -65,9 +65,9 @@ HTML;
         $expected = <<<'HTML'
 <div class="form-group">
     <div class="input-group" id="test" data-target-input="nearest">
-        <input data-toggle="datetimepicker" data-target="#test" class="form-control datetimepicker-input test-class" autocomplete="off" name="test_local" type="text">
+        <input class="form-control datetimepicker-input test-class" type="text" name="test_local" value data-toggle="datetimepicker" data-target="#test" autocomplete="off">
     </div>
-    <input name="test" type="hidden">
+    <input type="hidden" name="test" value>
 </div>
 <script>loadScript('',()=>{moment.locale('en');registerAsset('momentjs')});</script><script>loadStylesheet('');whenAssetIsLoaded('momentjs',()=>{loadScript('',()=>{registerAsset('datetimepicker',()=>{$.fn.datetimepicker.Constructor.Default=$.extend({},$.fn.datetimepicker.Constructor.Default,{locale:"en",icons:$.extend({},$.fn.datetimepicker.Constructor.Default.icons,{time:'far fa-clock',date:'far fa-calendar',up:'fas fa-arrow-up',down:'fas fa-arrow-down',previous:'fas fa-chevron-left',next:'fas fa-chevron-right',today:'far fa-calendar-check',clear:'fas fa-trash',close:'fas fa-times'})})})})});</script><script>whenAssetIsLoaded('datetimepicker',()=>{window.DTP_test=$('#test').datetimepicker({format:"L",buttons:{showToday:!1,showClear:!1,showClose:!1},useCurrent:!1,});$('#test').on('change.datetimepicker',()=>{$('input[name="test"]').val('');if($('input[name="test_local"]').val()!==''){let date=$('#test').datetimepicker('viewDate').format('YYYY-MM-DD');$('input[name="test"]').val(date).trigger('change')}})});</script>
 HTML;
@@ -85,10 +85,10 @@ HTML;
         $expected = <<<'HTML'
 <div class="form-group">
     <div class="input-group" id="test" data-target-input="nearest">
-        <input data-toggle="datetimepicker" data-target="#test" class="form-control datetimepicker-input" autocomplete="off" name="test_local" type="text">
+        <input class="form-control datetimepicker-input" type="text" name="test_local" value data-toggle="datetimepicker" data-target="#test" autocomplete="off">
     </div>
     <small class="form-text text-muted">The user will receive an invitation by e-mail to login in which it will allow him to enter his new password</small>
-    <input name="test" type="hidden">
+    <input type="hidden" name="test" value>
 </div>
 <script>loadScript('',()=>{moment.locale('en');registerAsset('momentjs')});</script><script>loadStylesheet('');whenAssetIsLoaded('momentjs',()=>{loadScript('',()=>{registerAsset('datetimepicker',()=>{$.fn.datetimepicker.Constructor.Default=$.extend({},$.fn.datetimepicker.Constructor.Default,{locale:"en",icons:$.extend({},$.fn.datetimepicker.Constructor.Default.icons,{time:'far fa-clock',date:'far fa-calendar',up:'fas fa-arrow-up',down:'fas fa-arrow-down',previous:'fas fa-chevron-left',next:'fas fa-chevron-right',today:'far fa-calendar-check',clear:'fas fa-trash',close:'fas fa-times'})})})})});</script><script>whenAssetIsLoaded('datetimepicker',()=>{window.DTP_test=$('#test').datetimepicker({format:"L",buttons:{showToday:!1,showClear:!1,showClose:!1},useCurrent:!1,});$('#test').on('change.datetimepicker',()=>{$('input[name="test"]').val('');if($('input[name="test_local"]').val()!==''){let date=$('#test').datetimepicker('viewDate').format('YYYY-MM-DD');$('input[name="test"]').val(date).trigger('change')}})});</script>
 HTML;
@@ -106,10 +106,10 @@ HTML;
         $expected = <<<'HTML'
 <div class="form-group">
     <div class="input-group" id="test" data-target-input="nearest">
-        <input data-toggle="datetimepicker" data-target="#test" class="form-control datetimepicker-input is-invalid" autocomplete="off" name="fielderror_local" type="text">
+        <input class="form-control datetimepicker-input is-invalid" type="text" name="fielderror_local" value data-toggle="datetimepicker" data-target="#test" autocomplete="off">
     </div>
     <div class="error-bubble"><div>Error message</div></div>
-    <input name="fielderror" type="hidden">
+    <input type="hidden" name="fielderror" value>
 </div>
 <script>loadScript('',()=>{moment.locale('en');registerAsset('momentjs')});</script><script>loadStylesheet('');whenAssetIsLoaded('momentjs',()=>{loadScript('',()=>{registerAsset('datetimepicker',()=>{$.fn.datetimepicker.Constructor.Default=$.extend({},$.fn.datetimepicker.Constructor.Default,{locale:"en",icons:$.extend({},$.fn.datetimepicker.Constructor.Default.icons,{time:'far fa-clock',date:'far fa-calendar',up:'fas fa-arrow-up',down:'fas fa-arrow-down',previous:'fas fa-chevron-left',next:'fas fa-chevron-right',today:'far fa-calendar-check',clear:'fas fa-trash',close:'fas fa-times'})})})})});</script><script>whenAssetIsLoaded('datetimepicker',()=>{window.DTP_test=$('#test').datetimepicker({format:"L",buttons:{showToday:!1,showClear:!1,showClose:!1},useCurrent:!1,});$('#test').on('change.datetimepicker',()=>{$('input[name="fielderror"]').val('');if($('input[name="fielderror_local"]').val()!==''){let date=$('#test').datetimepicker('viewDate').format('YYYY-MM-DD');$('input[name="fielderror"]').val(date).trigger('change')}})});</script>
 HTML;
@@ -130,12 +130,12 @@ HTML;
         <div class="input-group-prepend" data-toggle="datetimepicker" data-target="#test">
             <span class="input-group-text">test</span>
         </div>
-        <input data-toggle="datetimepicker" data-target="#test" class="form-control datetimepicker-input" autocomplete="off" name="test_local" type="text">
+        <input class="form-control datetimepicker-input" type="text" name="test_local" value data-toggle="datetimepicker" data-target="#test" autocomplete="off">
         <div class="input-group-append" data-toggle="datetimepicker" data-target="#test">
             <span class="input-group-text">test</span>
         </div>
     </div>
-    <input name="test" type="hidden">
+    <input type="hidden" name="test" value>
 </div>
 <script>loadScript('',()=>{moment.locale('en');registerAsset('momentjs')});</script><script>loadStylesheet('');whenAssetIsLoaded('momentjs',()=>{loadScript('',()=>{registerAsset('datetimepicker',()=>{$.fn.datetimepicker.Constructor.Default=$.extend({},$.fn.datetimepicker.Constructor.Default,{locale:"en",icons:$.extend({},$.fn.datetimepicker.Constructor.Default.icons,{time:'far fa-clock',date:'far fa-calendar',up:'fas fa-arrow-up',down:'fas fa-arrow-down',previous:'fas fa-chevron-left',next:'fas fa-chevron-right',today:'far fa-calendar-check',clear:'fas fa-trash',close:'fas fa-times'})})})})});</script><script>whenAssetIsLoaded('datetimepicker',()=>{window.DTP_test=$('#test').datetimepicker({format:"L",buttons:{showToday:!1,showClear:!1,showClose:!1},useCurrent:!1,});$('#test').on('change.datetimepicker',()=>{$('input[name="test"]').val('');if($('input[name="test_local"]').val()!==''){let date=$('#test').datetimepicker('viewDate').format('YYYY-MM-DD');$('input[name="test"]').val(date).trigger('change')}})});</script>
 HTML;
@@ -156,12 +156,12 @@ HTML;
         <div class="input-group-prepend" data-toggle="datetimepicker" data-target="#test">
             <span class="input-group-text"><span class="fas fa-calendar"></span></span>
         </div>
-        <input data-toggle="datetimepicker" data-target="#test" class="form-control datetimepicker-input" autocomplete="off" name="test_local" type="text">
+        <input class="form-control datetimepicker-input" type="text" name="test_local" value data-toggle="datetimepicker" data-target="#test" autocomplete="off">
         <div class="input-group-append" data-toggle="datetimepicker" data-target="#test">
             <span class="input-group-text"><span class="fas fa-calendar"></span></span>
         </div>
     </div>
-    <input name="test" type="hidden">
+    <input type="hidden" name="test" value>
 </div>
 <script>loadScript('',()=>{moment.locale('en');registerAsset('momentjs')});</script><script>loadStylesheet('');whenAssetIsLoaded('momentjs',()=>{loadScript('',()=>{registerAsset('datetimepicker',()=>{$.fn.datetimepicker.Constructor.Default=$.extend({},$.fn.datetimepicker.Constructor.Default,{locale:"en",icons:$.extend({},$.fn.datetimepicker.Constructor.Default.icons,{time:'far fa-clock',date:'far fa-calendar',up:'fas fa-arrow-up',down:'fas fa-arrow-down',previous:'fas fa-chevron-left',next:'fas fa-chevron-right',today:'far fa-calendar-check',clear:'fas fa-trash',close:'fas fa-times'})})})})});</script><script>whenAssetIsLoaded('datetimepicker',()=>{window.DTP_test=$('#test').datetimepicker({format:"L",buttons:{showToday:!1,showClear:!1,showClose:!1},useCurrent:!1,});$('#test').on('change.datetimepicker',()=>{$('input[name="test"]').val('');if($('input[name="test_local"]').val()!==''){let date=$('#test').datetimepicker('viewDate').format('YYYY-MM-DD');$('input[name="test"]').val(date).trigger('change')}})});</script>
 HTML;
@@ -182,12 +182,12 @@ HTML;
         <div class="input-group-prepend" data-toggle="datetimepicker" data-target="#test">
             test
         </div>
-        <input data-toggle="datetimepicker" data-target="#test" class="form-control datetimepicker-input" autocomplete="off" name="test_local" type="text">
+        <input class="form-control datetimepicker-input" type="text" name="test_local" value data-toggle="datetimepicker" data-target="#test" autocomplete="off">
         <div class="input-group-append" data-toggle="datetimepicker" data-target="#test">
             test
         </div>
     </div>
-    <input name="test" type="hidden">
+    <input type="hidden" name="test" value>
 </div>
 <script>loadScript('',()=>{moment.locale('en');registerAsset('momentjs')});</script><script>loadStylesheet('');whenAssetIsLoaded('momentjs',()=>{loadScript('',()=>{registerAsset('datetimepicker',()=>{$.fn.datetimepicker.Constructor.Default=$.extend({},$.fn.datetimepicker.Constructor.Default,{locale:"en",icons:$.extend({},$.fn.datetimepicker.Constructor.Default.icons,{time:'far fa-clock',date:'far fa-calendar',up:'fas fa-arrow-up',down:'fas fa-arrow-down',previous:'fas fa-chevron-left',next:'fas fa-chevron-right',today:'far fa-calendar-check',clear:'fas fa-trash',close:'fas fa-times'})})})})});</script><script>whenAssetIsLoaded('datetimepicker',()=>{window.DTP_test=$('#test').datetimepicker({format:"L",buttons:{showToday:!1,showClear:!1,showClose:!1},useCurrent:!1,});$('#test').on('change.datetimepicker',()=>{$('input[name="test"]').val('');if($('input[name="test_local"]').val()!==''){let date=$('#test').datetimepicker('viewDate').format('YYYY-MM-DD');$('input[name="test"]').val(date).trigger('change')}})});</script>
 HTML;
@@ -205,9 +205,9 @@ HTML;
         $expected = <<<'HTML'
 <div class="form-group">
     <div class="input-group" id="test" data-target-input="nearest">
-        <input data-toggle="datetimepicker" data-target="#test" class="form-control datetimepicker-input" autocomplete="off" name="test_local" type="text">
+        <input class="form-control datetimepicker-input" type="text" name="test_local" value data-toggle="datetimepicker" data-target="#test" autocomplete="off">
     </div>
-    <input name="test" type="hidden">
+    <input type="hidden" name="test" value>
 </div>
 <script>loadScript('',()=>{moment.locale('en');registerAsset('momentjs')});</script><script>loadStylesheet('');whenAssetIsLoaded('momentjs',()=>{loadScript('',()=>{registerAsset('datetimepicker',()=>{$.fn.datetimepicker.Constructor.Default=$.extend({},$.fn.datetimepicker.Constructor.Default,{locale:"en",icons:$.extend({},$.fn.datetimepicker.Constructor.Default.icons,{time:'far fa-clock',date:'far fa-calendar',up:'fas fa-arrow-up',down:'fas fa-arrow-down',previous:'fas fa-chevron-left',next:'fas fa-chevron-right',today:'far fa-calendar-check',clear:'fas fa-trash',close:'fas fa-times'})})})})});</script><script>whenAssetIsLoaded('datetimepicker',()=>{window.DTP_test=$('#test').datetimepicker({format:"L",buttons:{showToday:!1,showClear:!1,showClose:!1},useCurrent:!1,});$('#test').on('change.datetimepicker',()=>{$('input[name="test"]').val('');if($('input[name="test_local"]').val()!==''){let date=$('#test').datetimepicker('viewDate').format('YYYY-MM-DD');$('input[name="test"]').val(date).trigger('change')}})});</script>
 HTML;
@@ -225,9 +225,9 @@ HTML;
         $expected = <<<'HTML'
 <div class="form-group">
     <div class="input-group" id="test" data-target-input="nearest">
-        <input data-toggle="datetimepicker" data-target="#test" class="form-control datetimepicker-input" autocomplete="off" name="test_local" type="text" value="01/01/2022">
+        <input class="form-control datetimepicker-input" type="text" name="test_local" value="01/01/2022" data-toggle="datetimepicker" data-target="#test" autocomplete="off">
     </div>
-    <input name="test" type="hidden" value="2022-01-01 00:00:00">
+    <input type="hidden" name="test" value="2022-01-01 00:00:00">
 </div>
 <script>loadScript('',()=>{moment.locale('en');registerAsset('momentjs')});</script><script>loadStylesheet('');whenAssetIsLoaded('momentjs',()=>{loadScript('',()=>{registerAsset('datetimepicker',()=>{$.fn.datetimepicker.Constructor.Default=$.extend({},$.fn.datetimepicker.Constructor.Default,{locale:"en",icons:$.extend({},$.fn.datetimepicker.Constructor.Default.icons,{time:'far fa-clock',date:'far fa-calendar',up:'fas fa-arrow-up',down:'fas fa-arrow-down',previous:'fas fa-chevron-left',next:'fas fa-chevron-right',today:'far fa-calendar-check',clear:'fas fa-trash',close:'fas fa-times'})})})})});</script><script>whenAssetIsLoaded('datetimepicker',()=>{window.DTP_test=$('#test').datetimepicker({format:"L",buttons:{showToday:!1,showClear:!1,showClose:!1},useCurrent:!1,});$('#test').on('change.datetimepicker',()=>{$('input[name="test"]').val('');if($('input[name="test_local"]').val()!==''){let date=$('#test').datetimepicker('viewDate').format('YYYY-MM-DD');$('input[name="test"]').val(date).trigger('change')}})});</script>
 HTML;

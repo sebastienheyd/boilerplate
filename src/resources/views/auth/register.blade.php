@@ -3,7 +3,7 @@
 @section('content')
     @component('boilerplate::auth.loginbox')
         <p class="login-box-msg text-sm">@lang('boilerplate::auth.register.intro')</p>
-        {!! Form::open(['route' => 'boilerplate.register', 'method' => 'post', 'autocomplete'=> 'off']) !!}
+        @component('boilerplate::form', ['route' => 'boilerplate.register'])
             @component('boilerplate::input', ['name' => 'first_name', 'placeholder' => 'boilerplate::auth.fields.first_name', 'append-text' => 'fas fa-fw fa-user', 'autofocus' => true])@endcomponent
             @component('boilerplate::input', ['name' => 'last_name', 'placeholder' => 'boilerplate::auth.fields.last_name', 'append-text' => 'far fa-fw fa-user'])@endcomponent
             @component('boilerplate::input', ['name' => 'email', 'placeholder' => 'boilerplate::auth.fields.email', 'append-text' => 'fas fa-fw fa-envelope', 'type' => 'email'])@endcomponent
@@ -16,7 +16,7 @@
                     </button>
                 </div>
             </div>
-        {!! Form::close() !!}
+        @endcomponent
         @if(!$firstUser)
             <p class="mb-0 text-sm">
                 <a href="{{ route('boilerplate.login') }}">@lang('boilerplate::auth.register.login_link')</a><br>

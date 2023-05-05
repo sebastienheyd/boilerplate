@@ -26,7 +26,7 @@ HTML;
     {
         $expected = <<<'HTML'
 <div class="form-group">
-    <input class="form-control" autocomplete="off" name="test" type="text" value="">
+    <input class="form-control" type="text" name="test" value autocomplete="off">
 </div>
 HTML;
 
@@ -44,7 +44,7 @@ HTML;
         $expected = <<<'HTML'
 <div class="form-group">
     <label>Test</label>
-    <input class="form-control" autocomplete="off" name="test" type="text" value="">
+    <input class="form-control" type="text" name="test" value autocomplete="off">
 </div>
 HTML;
 
@@ -61,7 +61,7 @@ HTML;
     {
         $expected = <<<'HTML'
 <div class="form-group">
-    <input class="form-control test-field" autocomplete="off" name="test" type="text" value="">
+    <input class="form-control test-field" type="text" name="test" value autocomplete="off">
 </div>
 HTML;
 
@@ -80,7 +80,7 @@ HTML;
 <div class="form-group">
     <div class="input-clearable">
     <span class="fa fa-times fa-xs"></span>
-    <input class="form-control test-field" data-attr="test" autocomplete="off" name="test" type="text" value="">
+    <input class="form-control test-field" type="text" name="test" value data-attr="test" autocomplete="off">
     </div>
 </div>
 HTML;
@@ -98,7 +98,7 @@ HTML;
     {
         $expected = <<<'HTML'
 <div class="form-group">
-    <input class="form-control" autocomplete="off" name="test" type="password" value="">
+    <input class="form-control" type="password" name="test" autocomplete="off">
 </div>
 HTML;
 
@@ -115,7 +115,7 @@ HTML;
     {
         $expected = <<<'HTML'
 <div class="form-group">
-    <input class="form-control is-invalid" autocomplete="off" name="fielderror" type="text" value="">
+    <input class="form-control is-invalid" type="text" name="fielderror" value autocomplete="off">
     <div class="error-bubble"><div>Error message</div></div>
 </div>
 HTML;
@@ -133,7 +133,7 @@ HTML;
     {
         $expected = <<<'HTML'
 <div class="form-group">
-    <input class="form-control is-invalid" autocomplete="off" name="fielderror" type="text" value="">
+    <input class="form-control is-invalid" type="text" name="fielderror" value autocomplete="off">
     <small class="form-text text-muted">The user will receive an invitation by e-mail to login in which it will allow him to enter his new password</small>
     <div class="error-bubble"><div>Error message</div></div>
 </div>
@@ -156,7 +156,7 @@ HTML;
         <div class="input-group-prepend">
             <span class="input-group-text">test</span>
         </div>
-    <input class="form-control" autocomplete="off" name="test" type="text" value="">
+    <input class="form-control" type="text" name="test" value autocomplete="off">
         <div class="input-group-append">
             <span class="input-group-text">test</span>
         </div>
@@ -181,7 +181,7 @@ HTML;
         <div class="input-group-prepend">
             <span class="input-group-text"><span class="fas fa-envelope"></span></span>
         </div>
-    <input class="form-control" autocomplete="off" name="test" type="text" value="">
+    <input class="form-control" type="text" name="test" value autocomplete="off">
         <div class="input-group-append">
             <span class="input-group-text"><span class="fas fa-envelope"></span></span>
         </div>
@@ -206,7 +206,7 @@ HTML;
         <div class="input-group-prepend">
             test
         </div>
-    <input class="form-control" autocomplete="off" name="test" type="text" value="">
+    <input class="form-control" type="text" name="test" value autocomplete="off">
         <div class="input-group-append">
             test
         </div>
@@ -227,7 +227,7 @@ HTML;
     {
         $expected = <<<'HTML'
 <div class="form-group">
-    <input class="form-control" placeholder="Test" autocomplete="off" name="test" type="text" value="">
+    <input class="form-control" type="text" name="test" value placeholder="Test" autocomplete="off">
 </div>
 HTML;
 
@@ -237,6 +237,57 @@ HTML;
         }
 
         $view = $this->blade("@component('boilerplate::input', ['name' => 'test', 'placeholder' => 'Test']) @endcomponent");
+        $view->assertSee($expected, false);
+    }
+
+    public function testNumberType()
+    {
+        $expected = <<<'HTML'
+<div class="form-group">
+    <input class="form-control" type="number" name="test" value autocomplete="off">
+</div>
+HTML;
+
+        if ($this->minLaravelVersion('7.0')) {
+            $view = $this->blade('<x-boilerplate::input type="number" name="test" />');
+            $view->assertSee($expected, false);
+        }
+
+        $view = $this->blade("@component('boilerplate::input', ['type' => 'number', 'name' => 'test']) @endcomponent");
+        $view->assertSee($expected, false);
+    }
+
+    public function testFileType()
+    {
+        $expected = <<<'HTML'
+<div class="form-group">
+    <input class="form-control-file" type="file" name="test" autocomplete="off">
+</div>
+HTML;
+
+        if ($this->minLaravelVersion('7.0')) {
+            $view = $this->blade('<x-boilerplate::input type="file" name="test" />');
+            $view->assertSee($expected, false);
+        }
+
+        $view = $this->blade("@component('boilerplate::input', ['type' => 'file', 'name' => 'test']) @endcomponent");
+        $view->assertSee($expected, false);
+    }
+
+    public function testSelectType()
+    {
+        $expected = <<<'HTML'
+<div class="form-group">
+    <select class="form-control" name="test" autocomplete="off"><option value="value" selected="selected">test</option></select>
+</div>
+HTML;
+
+        if ($this->minLaravelVersion('7.0')) {
+            $view = $this->blade('<x-boilerplate::input type="select" name="test" :options="[\'value\' => \'test\']" value="value" />');
+            $view->assertSee($expected, false);
+        }
+
+        $view = $this->blade("@component('boilerplate::input', ['type' => 'select', 'name' => 'test', 'options' => ['value' => 'test'], 'value' => 'value']) @endcomponent");
         $view->assertSee($expected, false);
     }
 }

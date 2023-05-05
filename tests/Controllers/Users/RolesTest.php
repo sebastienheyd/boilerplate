@@ -73,7 +73,7 @@ class RolesTest extends TestCase
         $resource = $this->actingAs($this->admin)->get('admin/roles/3/edit');
         $resource->assertStatus(200);
         $resource->assertSeeInOrder([
-            'action="http://localhost/admin/roles/3"',
+            'action="/admin/roles/3"',
             'value="Test"',
             'value="Test role"',
         ], false);

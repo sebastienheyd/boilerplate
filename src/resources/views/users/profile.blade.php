@@ -7,7 +7,7 @@
 ])
 
 @section('content')
-    {{ Form::open(['route' => ['boilerplate.user.profile'], 'method' => 'post', 'autocomplete' => 'off', 'files' => true]) }}
+    @component('boilerplate::form', ['route' => 'boilerplate.user.profile'])
         <div class="row">
             <div class="col-12 mb-3">
                 <span class="btn-group float-right">
@@ -62,7 +62,7 @@
                 @endcomponent
             </div>
         </div>
-    {{ Form::close() }}
+    @endcomponent
 @endsection
 
 @push('js')

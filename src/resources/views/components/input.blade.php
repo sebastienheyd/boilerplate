@@ -23,17 +23,17 @@
         </div>
 @endif
 @if($type === 'password')
-    {!! Form::password($name, array_merge(['class' => 'form-control'.$errors->first($nameDot,' is-invalid').(isset($class) ? ' '.$class : '')], $attributes)) !!}
+    {!! html()->input('password')->name($name)->class('form-control'.$errors->first($nameDot,' is-invalid').(isset($class) ? ' '.$class : ''))->attributes($attributes) !!}
 @elseif($type === 'file')
-    {!! Form::file($name, array_merge(['class' => 'form-control-file'.$errors->first($nameDot,' is-invalid').(isset($class) ? ' '.$class : '')], $attributes)) !!}
+    {!! html()->input('file')->name($name)->class('form-control-file'.$errors->first($nameDot,' is-invalid').(isset($class) ? ' '.$class : ''))->attributes($attributes) !!}
 @elseif($type === 'select')
-    {!! Form::select($name, $options ?? [], old($name, $value ?? ''), array_merge(['class' => 'form-control'.$errors->first($nameDot,' is-invalid').(isset($class) ? ' '.$class : '')], $attributes)) !!}
+    {!! html()->select(null, $options ?? [], old($name, $value ?? ''))->name($name)->class('form-control'.$errors->first($nameDot,' is-invalid').(isset($class) ? ' '.$class : ''))->attributes($attributes) !!}
 @else
 @if($clearable ?? false)
     <div class="input-clearable">
     <span class="fa fa-times fa-xs"{!! old($name, $value ?? '') !== '' ? ' style="display:block"' : '' !!}></span>
 @endif
-    {!! Form::{$type ?? 'text'}($name, old($name, $value ?? ''), array_merge(['class' => 'form-control'.$errors->first($nameDot,' is-invalid').(isset($class) ? ' '.$class : '')], $attributes)) !!}
+    {!! html()->input($type)->name($name)->value(old($name, $value ?? ''))->class('form-control'.$errors->first($nameDot,' is-invalid').(isset($class) ? ' '.$class : ''))->attributes($attributes) !!}
 @if($clearable ?? false)
     </div>
 @endif

@@ -203,23 +203,20 @@ class UsersController
      */
     public function profilePost(Request $request)
     {
-        $this->validate($request, [
-            'avatar'                => 'mimes:jpeg,png|max:10000',
+        $input = $request->validate([
             'last_name'             => 'required',
             'first_name'            => 'required',
             'password'              => ['nullable', 'confirmed', new Password()],
         ]);
 
-        $user = Auth::user();
-
-        $input = $request->all();
-
-        if (! empty($input['password'])) {
+        if ($request->has('password')) {
             $input['password'] = bcrypt($input['password']);
             $input['remember_token'] = Str::random(32);
+        } else {
+            unset($input['password']);
         }
 
-        $user->update($input);
+        $request->user()->update($input);
 
         return redirect()->route('boilerplate.user.profile')
                          ->with('growl', [__('boilerplate::users.profile.successupdate'), 'success']);

@@ -36,7 +36,7 @@ The documentation is readable on [Github pages](https://sebastienheyd.github.io/
 * Css framework [Bootstrap 4](https://getbootstrap.com/)
 * Icons by [Font Awesome 5](https://fontawesome.com/)
 * Role-based permissions support by [santigarcor/laratrust](https://github.com/santigarcor/laratrust)
-* Forms & Html helpers by [laravelcollective/html](https://github.com/laravelcollective/html)
+* Forms & Html helpers by [spatie/laravel-html](https://github.com/spatie/laravel-html)
 * Menu dynamically builded by [lavary/laravel-menu](https://github.com/lavary/laravel-menu)
 * Menu items activated by [hieu-le/active](https://github.com/letrunghieu/active)
 * Server-side datatables methods provided by [yajra/laravel-datatables](https://yajrabox.com/docs/laravel-datatables)

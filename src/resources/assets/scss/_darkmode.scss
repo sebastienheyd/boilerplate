@@ -180,4 +180,8 @@ body.dark-mode {
       }
     }
   }
+
+  .login-card-body .input-group .form-control:focus~.input-group-append .input-group-text, .login-card-body .input-group .form-control:focus~.input-group-prepend .input-group-text, .register-card-body .input-group .form-control:focus~.input-group-append .input-group-text, .register-card-body .input-group .form-control:focus~.input-group-prepend .input-group-text {
+    border-color: #fff;
+  }
 }

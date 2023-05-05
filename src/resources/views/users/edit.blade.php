@@ -8,7 +8,7 @@
 ])
 
 @section('content')
-    {{ Form::open(['route' => ['boilerplate.users.update', $user->id], 'method' => 'put', 'autocomplete' => 'off']) }}
+    @component('boilerplate::form', ['method' => 'put', 'route' => ['boilerplate.users.update', $user->id]])
         <div class="row">
             <div class="col-12 pb-3">
                 <a href="{{ route("boilerplate.users.index") }}" class="btn btn-default" data-toggle="tooltip" title="@lang('boilerplate::users.returntolist')">
@@ -79,18 +79,15 @@
                             @if($role->name !== 'admin' || ($role->name === 'admin' && Auth::user()->hasRole('admin')))
                             <tr>
                                 <td style="width:25px">
-                                    <div class="icheck-primary">
                                     @if(Auth::user()->id === $user->id && $role->name === 'admin' && Auth::user()->hasRole('admin'))
-                                        {{ Form::checkbox('roles['.$role->id.']', 1, old('roles['.$role->id.']', $user->hasRole($role->name)), ['id' => 'role_'.$role->id, 'class' => 'icheck', 'checked', 'disabled']) }}
-                                        {!! Form::hidden('roles['.$role->id.']', '1', ['id' => 'role_'.$role->id]) !!}
+                                        @component('boilerplate::icheck', ['name' => 'roles['.$role->id.']', 'checked' => old('roles['.$role->id.']', $user->hasRole($role->name)), 'disabled' => true])@endcomponent
+                                        @component('boilerplate::input', ['type' => 'hidden', 'name' => 'roles['.$role->id.']', 'value' => 1])@endcomponent
                                     @else
-                                        {{ Form::checkbox('roles['.$role->id.']', 1, old('roles['.$role->id.']', $user->hasRole($role->name)), ['id' => 'role_'.$role->id, 'class' => 'icheck']) }}
+                                        @component('boilerplate::icheck', ['name' => 'roles['.$role->id.']', 'id' => 'role_'.$role->id, 'checked' => old('roles['.$role->id.']', $user->hasRole($role->name))])@endcomponent
                                     @endif
-                                        <label for="{{ 'role_'.$role->id }}"></label>
-                                    </div>
                                 </td>
                                 <td>
-                                    <div>{{ Form::label('role_'.$role->id, $role->display_name, ['class' => 'mb-0']) }}</div>
+                                    <div><label for="{{ 'role_'.$role->id }}" class="mb-0">{{ $role->display_name }}</label></div>
                                     <div class="small">{{ $role->description }}</div>
                                     <div class="small text-muted pt-1">{!! $role->permissions->implode('display_name', '<br>') !!}</div>
                                 </td>
@@ -101,5 +98,5 @@
                 @endcomponent
             </div>
         </div>
-    {{ Form::close() }}
+    @endcomponent
 @endsection

@@ -8,7 +8,7 @@
 ])
 
 @section('content')
-    {{ Form::open(['route' => 'boilerplate.roles.store', 'autocomplete' => 'off']) }}
+    @component('boilerplate::form', ['route' => 'boilerplate.roles.store'])
     <div class="row">
         <div class="col-12 mb-3">
             <a href="{{ route("boilerplate.roles.index") }}" class="btn btn-default" data-toggle="tooltip" title="@lang('boilerplate::role.list.title')">
@@ -39,14 +39,12 @@
                                 @foreach($category->permissions as $permission)
                                     <tr>
                                         <td style="width:25px;">
-                                            <div class="icheck-primary">
-                                                {{ Form::checkbox('permission['.$permission->id.']', 1, old('permission.'.$permission->id), ['id' => 'permission_'.$permission->id,]) }}
-                                                <label for="{{ 'permission_'.$permission->id }}"></label>
-                                            </div>
+                                            @component('boilerplate::icheck', ['name' => 'permission['.$permission->id.']', 'id' => 'permission_'.$permission->id, 'checked' => old('permission.'.$permission->id)])@endcomponent
                                         </td>
                                         <td>
-                                            {{ Form::label('permission_'.$permission->id, __($permission->display_name), ['class' => 'mb-0', 'data-toggle' => 'tooltip', 'data-title' => $permission->name]) }}
-                                            <br/>
+                                            <label for="{{ 'permission_'.$permission->id  }}" class="mb-0" data-toggle='tooltip' data-title="{{ $permission->name}}">
+                                                {{ __($permission->display_name) }}
+                                            </label><br>
                                             <small class="text-muted">{{ __($permission->description) }}</small>
                                         </td>
                                     </tr>
@@ -59,5 +57,5 @@
             </div>
         @endif
     </div>
-    {{ Form::close() }}
+    @endcomponent
 @endsection

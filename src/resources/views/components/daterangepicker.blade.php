@@ -16,7 +16,7 @@
         </div>
 @endif
         <div class="d-flex align-items-center form-control{{ isset($controlClass) ? ' '.$controlClass : '' }}">
-            {!! Form::text($name.'[value]', old($name.'.value'), array_merge(['class' => 'daterangepicker-input'.$errors->first($nameDot,' is-invalid').$errors->first($nameDot.'.start',' is-invalid').$errors->first($nameDot.'.end',' is-invalid').(isset($class) ? ' '.$class : '')], $attributes)) !!}
+            {{ html()->input('text')->name($name.'[value]')->value(old($name.'.value'))->attributes(array_merge(['autocomplete' => 'off', 'class' => 'daterangepicker-input'.$errors->first($nameDot,' is-invalid').$errors->first($nameDot.'.start',' is-invalid').$errors->first($nameDot.'.end',' is-invalid').(isset($class) ? ' '.$class : '')], $attributes)) }}
             <span class="fa fa-fw fa-times fa-xs ml-1 clear-daterangepicker" data-name="{{ $name }}" style="display:none"/>
         </div>
 @if($append || $appendText)
@@ -41,8 +41,8 @@
 @error($nameDot.'.end')
 <div class="error-bubble"><div>{{ $message }}</div></div>
 @enderror
-    {!! Form::hidden($name.'[start]', old($name.'[start]', $start ?? ''), ['autocomplete' => 'off']) !!}
-    {!! Form::hidden($name.'[end]', old($name.'[end]', $end ?? ''), ['autocomplete' => 'off']) !!}
+    {{ html()->input('hidden')->name($name.'[start]')->value(old($name.'[start]', $start ?? ''))->attributes(['autocomplete' => 'off']) }}
+    {{ html()->input('hidden')->name($name.'[end]')->value(old($name.'[end]', $start ?? ''))->attributes(['autocomplete' => 'off']) }}
 </div>
 @include('boilerplate::load.async.daterangepicker')
 @component('boilerplate::minify')

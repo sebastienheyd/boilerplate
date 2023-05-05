@@ -2,7 +2,7 @@
 
 @section('content')
     @component('boilerplate::auth.loginbox')
-        {{ Form::open(['route' => 'boilerplate.users.firstlogin', 'autocomplete' => 'off']) }}
+        @component('boilerplate::form', ['route' => 'boilerplate.users.firstlogin'])
         <input type="hidden" name="token" value="{{ $token }}">
         <div class="alert alert-info">
             @lang('boilerplate::auth.firstlogin.intro')
@@ -12,6 +12,6 @@
         <div class="form-group text-center">
             <button type="submit" class="btn btn-primary">@lang('boilerplate::auth.firstlogin.button')</button>
         </div>
-        </form>
+        @endcomponent
     @endcomponent
 @endsection

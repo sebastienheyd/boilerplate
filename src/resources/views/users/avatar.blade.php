@@ -18,6 +18,6 @@
     </div>
     <div class="d-flex align-items-center justify-content-center avatar-label mb-0">
         <img src="{{ $user->avatar_url }}" class="avatar-img" alt="avatar" />
-        {!! Form::file('avatar', ['id' => 'avatar-file', 'class' => 'd-none', 'accept' => 'image/*']) !!}
+        {{ html()->file('avatar')->id('avatar-file')->class('d-none')->attributes(['accept' => 'image/*']) }}
     </div>
 </div>

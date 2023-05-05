@@ -18,11 +18,11 @@
             @includeWhen(config('boilerplate.theme.darkmode', false), 'boilerplate::layout.header.darkmode')
             @includeWhen(config('boilerplate.theme.fullscreen', false), 'boilerplate::layout.header.fullscreen')
             <li class="nav-item">
-                {!! Form::open(['route' => 'boilerplate.logout', 'method' => 'post', 'id' => 'logout-form']) !!}
+                @component('boilerplate::form', ['route' => 'boilerplate.logout', 'id' => 'logout-form'])
                 <button type="submit" class="btn nav-link d-flex align-items-center logout px-2" data-question="{{ __('boilerplate::layout.logoutconfirm') }}" data-toggle="tooltip" title="@lang('boilerplate::layout.logout')">
                     <span class="fa fa-fw fa-power-off hidden-xs pr-1"></span>
                 </button>
-                {!! Form::close() !!}
+                @endcomponent
             </li>
         </ul>
     </div>

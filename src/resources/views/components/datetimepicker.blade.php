@@ -15,7 +15,7 @@
 @endif
         </div>
 @endif
-        {!! Form::text($name.'_local', old($name.'_local', $value), array_merge(['data-toggle' => 'datetimepicker', 'data-target' => '#'.$id, 'class' => 'form-control datetimepicker-input'.$errors->first($nameDot,' is-invalid').(isset($class) ? ' '.$class : ''), 'autocomplete' => 'off'], $attributes)) !!}
+        {{ html()->input('text')->name($name.'_local')->value(old($name.'_local', $value))->attributes(array_merge(['data-toggle' => 'datetimepicker', 'data-target' => '#'.$id, 'class' => 'form-control datetimepicker-input'.$errors->first($nameDot,' is-invalid').(isset($class) ? ' '.$class : ''), 'autocomplete' => 'off'], $attributes)) }}
 @if($append || $appendText)
         <div class="input-group-append" data-toggle="datetimepicker" data-target="#{{ $id }}">
 @if($append)
@@ -32,7 +32,7 @@
 @error($nameDot)
     <div class="error-bubble"><div>{{ $message }}</div></div>
 @enderror
-    {!! Form::hidden($name, $rawValue) !!}
+    {{ html()->input('hidden')->name($name)->value($rawValue) }}
 </div>
 @include('boilerplate::load.async.datepicker')
 @component('boilerplate::minify')

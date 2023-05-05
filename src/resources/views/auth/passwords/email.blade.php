@@ -9,7 +9,7 @@
                 {{ session('status') }}
             </div>
         @else
-            {!! Form::open(['route' => 'boilerplate.password.email', 'method' => 'post', 'autocomplete'=> 'off']) !!}
+            @component('boilerplate::form', ['route' => 'boilerplate.password.email'])
                 @component('boilerplate::input', ['name' => 'email', 'placeholder' => 'boilerplate::auth.fields.email', 'append-text' => 'fas fa-envelope', 'type' => 'email', 'autofocus' => true])@endcomponent
                 <div class="form-group">
                     <div class="row">
@@ -18,7 +18,7 @@
                         </div>
                     </div>
                 </div>
-            {!! Form::close() !!}
+            @endcomponent
         @endif
         <p class="mb-0 text-sm">
             <a href="{{ route('boilerplate.login') }}">@lang('boilerplate::auth.password.login_link')</a>

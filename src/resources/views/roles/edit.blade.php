@@ -8,7 +8,7 @@
 ])
 
 @section('content')
-    {{ Form::open(['route' => ['boilerplate.roles.update', $role->id], 'method' => 'put', 'autocomplete' => 'off']) }}
+    @component('boilerplate::form', ['route' => ['boilerplate.roles.update', $role->id], 'method' => 'put'])
         <div class="row">
             <div class="col-12 mb-3">
                 <a href="{{ route("boilerplate.roles.index") }}" class="btn btn-default" title="@lang('boilerplate::role.list.title')">
@@ -51,17 +51,14 @@
                                 @foreach($category->permissions as $permission)
                                     <tr>
                                         <td style="width:25px;">
-                                            <div class="icheck-primary">
-                                            @if($role->id == 1)
-                                                <input type="checkbox" checked disabled class="icheck"/>
+                                            @if($role->id === 1)
+                                                @component('boilerplate::icheck', ['checked' => true, 'disabled' => true])@endcomponent
                                             @else
-                                                {{ Form::checkbox('permission['.$permission->id.']', 1, old('permission.'.$permission->id, $role->permissions()->where(['id' => $permission->id])->count()), ['id' => 'permission_'.$permission->id, 'class' => 'icheck']) }}
+                                                @component('boilerplate::icheck', ['name' => 'permission['.$permission->id.']', 'id' => 'permission_'.$permission->id, 'checked' => old('permission.'.$permission->id, $role->permissions()->where(['id' => $permission->id])->count())])@endcomponent
                                             @endif
-                                                <label for="{{ 'permission_'.$permission->id }}"></label>
-                                            </div>
                                         </td>
                                         <td>
-                                            {{ Form::label('permission_'.$permission->id, $permission->display_name, ['class' => 'mb-0']) }}<br />
+                                            <label for="{{ 'permission_'.$permission->id }}" class="mb-0">{{ $permission->display_name }}</label><br>
                                             <small class="text-muted">{{ $permission->description }}</small>
                                         </td>
                                         <td class="text-right visible-on-hover">
@@ -76,5 +73,5 @@
                 @endcomponent
             </div>
             @endif
-    {{ Form::close() }}
+    @endcomponent
 @endsection
