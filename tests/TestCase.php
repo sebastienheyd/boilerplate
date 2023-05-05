@@ -5,7 +5,6 @@ namespace Sebastienheyd\Boilerplate\Tests;
 use Arcanedev\LogViewer\LogViewerServiceProvider;
 use Arcanedev\LogViewer\Providers\DeferredServicesProvider;
 use Collective\Html\FormFacade;
-use Spatie\Html\HtmlServiceProvider;
 use Creativeorange\Gravatar\GravatarServiceProvider;
 use Illuminate\Auth\AuthServiceProvider;
 use Illuminate\Broadcasting\BroadcastServiceProvider;
@@ -46,6 +45,7 @@ use PHPUnit\Framework\Constraint\FileExists;
 use PHPUnit\Framework\Constraint\LogicalNot;
 use SebastienHeyd\Active\ActiveServiceProvider;
 use Sebastienheyd\Boilerplate\BoilerplateServiceProvider;
+use Spatie\Html\HtmlServiceProvider;
 use Yajra\DataTables\DataTablesServiceProvider;
 
 abstract class TestCase extends OrchestraTestCase
