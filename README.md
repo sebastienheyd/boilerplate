@@ -38,7 +38,7 @@ The documentation is readable on [Github pages](https://sebastienheyd.github.io/
 * Role-based permissions support by [santigarcor/laratrust](https://github.com/santigarcor/laratrust)
 * Forms & Html helpers by [spatie/laravel-html](https://github.com/spatie/laravel-html)
 * Menu dynamically builded by [lavary/laravel-menu](https://github.com/lavary/laravel-menu)
-* Menu items activated by [hieu-le/active](https://github.com/letrunghieu/active)
+* Menu items activated by [sebastienheyd/active](https://github.com/sebastienheyd/active)
 * Server-side datatables methods provided by [yajra/laravel-datatables](https://yajrabox.com/docs/laravel-datatables)
 * Image manipulation by [intervention/image](https://github.com/intervention/image)
 * Logs visualization by [arcanedev/log-viewer](https://github.com/ARCANEDEV/LogViewer)
@@ -55,7 +55,7 @@ The documentation is readable on [Github pages](https://sebastienheyd.github.io/
 composer require sebastienheyd/boilerplate
 ```
 
-2. Run the command below to publish assets, lang and configuration files
+2. Run the command below to publish assets and configuration files
 
 ```
 php artisan vendor:publish --tag=boilerplate
@@ -105,18 +105,6 @@ This package is delivered with a `Makefile` used to launch checks for the respec
 
 Just call `make` to see the list of commands.
 
-### Laravel Dusk functionnal tests
-
-This package is also delivered with functional tests using [Laravel Dusk](https://laravel.com/docs/dusk)
-
-After installing Laravel, Laravel Dusk and configuring your database, you can start the tests with the following command :
-
-```
-php artisan dusk vendor/sebastienheyd/boilerplate/tests/DuskTest.php
-```
-
-**Important** : Never launch tests with Laravel Dusk if you have data in your database,  Dusk will wipeout all your datas
-
 ## Contributing
 
 Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details and a todolist.
@@ -125,7 +113,6 @@ Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details and a todolist.
 
 - [Sébastien HEYD](https://github.com/sebastienheyd)
 - [All Contributors](https://github.com/sebastienheyd/boilerplate/contributors)
-
 
 ## License
 
