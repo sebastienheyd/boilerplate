@@ -209,7 +209,7 @@ class UsersController
             'password'              => ['nullable', 'confirmed', new Password()],
         ]);
 
-        if ($request->has('password')) {
+        if (! empty(trim($input['password']))) {
             $input['password'] = bcrypt($input['password']);
             $input['remember_token'] = Str::random(32);
         } else {
