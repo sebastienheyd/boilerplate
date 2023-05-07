@@ -33,6 +33,6 @@ return [
             'introduction' => 'Giriş',
             'summary'      => 'Özet',
             'article'      => 'Makale',
-        ]
+        ],
     ],
 ];

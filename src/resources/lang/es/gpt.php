@@ -33,6 +33,6 @@ return [
             'introduction' => 'Introducción',
             'summary'      => 'Resumen',
             'article'      => 'Artículo',
-        ]
+        ],
     ],
 ];

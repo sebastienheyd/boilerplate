@@ -27,13 +27,14 @@ class GptController
             $request->flash();
             $view = view('boilerplate::gpt.form')->withErrors($validator->errors());
             View::share('errors', $view->errors);
+
             return response()->json([
                 'success' => false,
-                'html' => $view->render()
+                'html' => $view->render(),
             ]);
         }
 
-        $prompt  = 'Write '.$request->input('type').' with ';
+        $prompt = 'Write '.$request->input('type').' with ';
         $prompt .= 'topic: "'.$request->input('topic').'",';
         $prompt .= 'language: '.$request->input('language').',';
 
@@ -58,26 +59,27 @@ class GptController
                 ->retry(2, 60)
                 ->withHeaders([
                     'Content-Type'  => 'application/json',
-                    'Authorization' => 'Bearer ' . config('boilerplate.app.openai.key'),
+                    'Authorization' => 'Bearer '.config('boilerplate.app.openai.key'),
                 ])->post('https://api.openai.com/v1/chat/completions', [
-                    "messages" => [
+                    'messages' => [
                         [
-                            "role"        => 'user',
-                            "content"     => $prompt,
+                            'role'        => 'user',
+                            'content'     => $prompt,
                         ],
                     ],
-                    "model"       => 'gpt-3.5-turbo',
+                    'model'       => 'gpt-3.5-turbo',
                     'temperature' => 0.6,
-                    "max_tokens" => 500,
-                    "top_p" => 1.0,
-                    "frequency_penalty" => 0.52,
-                    "presence_penalty" => 0.5,
+                    'max_tokens' => 500,
+                    'top_p' => 1.0,
+                    'frequency_penalty' => 0.52,
+                    'presence_penalty' => 0.5,
                 ]);
         } catch (\Throwable $e) {
             $request->flash();
+
             return response()->json([
                 'success' => false,
-                'html' => (string) view('boilerplate::gpt.form')->with('gpterror', $e->getMessage())
+                'html' => (string) view('boilerplate::gpt.form')->with('gpterror', $e->getMessage()),
             ]);
         }
 
@@ -85,9 +87,10 @@ class GptController
 
         if (isset($json['error'])) {
             $request->flash();
+
             return response()->json([
                 'success' => false,
-                'html' => (string) view('boilerplate::gpt.form')->with('gpterror', $json['error']['message'])
+                'html' => (string) view('boilerplate::gpt.form')->with('gpterror', $json['error']['message']),
             ]);
         }
 
@@ -99,9 +102,10 @@ class GptController
         }
 
         $request->flash();
+
         return response()->json([
             'success' => false,
-            'html' => (string) view('boilerplate::gpt.form')->with('gpterror', 'No response from openai')
+            'html' => (string) view('boilerplate::gpt.form')->with('gpterror', 'No response from openai'),
         ]);
     }
 }
