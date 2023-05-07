@@ -11,6 +11,7 @@ use Sebastienheyd\Boilerplate\Controllers\Logs\LogViewerController;
 use Sebastienheyd\Boilerplate\Controllers\Select2Controller;
 use Sebastienheyd\Boilerplate\Controllers\Users\RolesController;
 use Sebastienheyd\Boilerplate\Controllers\Users\UsersController;
+use Sebastienheyd\Boilerplate\Controllers\GptController;
 
 Route::group([
     'prefix'     => config('boilerplate.app.prefix', ''),
@@ -96,6 +97,14 @@ Route::group([
             Route::post('avatar/gravatar', [UsersController::class, 'getAvatarFromGravatar'])->name('avatar.gravatar');
             Route::post('avatar/delete', [UsersController::class, 'avatarDelete'])->name('avatar.delete');
         });
+
+        // ChatGPT
+        if (config('boilerplate.app.openai.key')) {
+            Route::prefix('gpt')->as('gpt.')->group(function () {
+                Route::get('/', [GptController::class, 'index'])->name('index');
+                Route::post('/', [GptController::class, 'process'])->name('process');
+            });
+        }
 
         // Logs
         if (config('boilerplate.app.logs', false)) {
