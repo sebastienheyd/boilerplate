@@ -16,9 +16,10 @@ return [
     // When set to true, allows admins to view the site as a user of their choice
     'allowImpersonate'  => false,
 
-    // When filled, it allows to generate text with ChatGPT in TinyMCE
+    // Allows to generate text with ChatGPT in TinyMCE
     'openai'   => [
-        'organisation' => env('OPENAI_API_ORGANISATION'),
         'key' => env('OPENAI_API_KEY'),
+        'model' => 'gpt-3.5-turbo',
+        'organization' => env('OPENAI_API_ORGANIZATION'),
     ],
 ];

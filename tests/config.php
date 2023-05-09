@@ -11,6 +11,10 @@ return [
     'boilerplate.locale.switch' => true,
     'boilerplate.locale.allowed' => ['fr'],
     'boilerplate.app.allowImpersonate' => true,
+    'boilerplate.app.openai' => [
+        'key' => 'key1234',
+        'organization' => 'Boilerplate'
+    ],
     'auth.defaults' => [
         'guard' => 'web',
         'passwords' => 'users',

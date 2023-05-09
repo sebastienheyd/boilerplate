@@ -12,7 +12,6 @@
     <testsuites>
         <testsuite name="Boilerplate Test Suite">
             <directory suffix="Test.php">tests</directory>
-<!--            <file>tests/Components/FormTest.php</file>-->
         </testsuite>
     </testsuites>
     <coverage>
