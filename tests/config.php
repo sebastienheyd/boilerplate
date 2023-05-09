@@ -13,7 +13,7 @@ return [
     'boilerplate.app.allowImpersonate' => true,
     'boilerplate.app.openai' => [
         'key' => 'key1234',
-        'organization' => 'Boilerplate'
+        'organization' => 'Boilerplate',
     ],
     'auth.defaults' => [
         'guard' => 'web',

@@ -25,7 +25,7 @@ class GptController
     /**
      * Process OpenAI API request.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return JsonResponse
      */
     public function process(Request $request): JsonResponse
@@ -41,6 +41,7 @@ class GptController
             $request->flash();
             $view = view('boilerplate::gpt.form')->withErrors($validator->errors());
             View::share('errors', $view->errors);
+
             return response()->json(['success' => false, 'html' => $view->render()]);
         }
 
@@ -98,7 +99,7 @@ class GptController
     /**
      * Build prompt to send to the API.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return string
      */
     private function buildPrompt(Request $request): string
@@ -129,8 +130,8 @@ class GptController
     /**
      * Show error from the API.
      *
-     * @param string $error
-     * @param Request $request
+     * @param  string  $error
+     * @param  Request  $request
      * @return JsonResponse
      */
     private function gptError(string $error, Request $request): JsonResponse

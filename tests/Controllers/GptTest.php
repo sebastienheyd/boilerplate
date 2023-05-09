@@ -117,7 +117,7 @@ class GptTest extends TestCase
             'length'   => '5',
             'pov'      => 'first person singular',
             'tone'     => 'formal',
-            'keywords' => 'test'
+            'keywords' => 'test',
         ]);
 
         $response->assertJson(function (AssertableJson $json) {
