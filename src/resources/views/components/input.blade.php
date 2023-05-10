@@ -26,6 +26,8 @@
     {!! html()->input('password')->name($name)->class('form-control'.$errors->first($nameDot,' is-invalid').(isset($class) ? ' '.$class : ''))->attributes($attributes) !!}
 @elseif($type === 'file')
     {!! html()->input('file')->name($name)->class('form-control-file'.$errors->first($nameDot,' is-invalid').(isset($class) ? ' '.$class : ''))->attributes($attributes) !!}
+@elseif($type === 'textarea')
+    {!! html()->textarea()->name($name)->value(old($name, $value ?? ''))->class('form-control'.$errors->first($nameDot,' is-invalid').(isset($class) ? ' '.$class : ''))->attributes($attributes) !!}
 @elseif($type === 'select')
     {!! html()->select(null, $options ?? [], old($name, $value ?? ''))->name($name)->class('form-control'.$errors->first($nameDot,' is-invalid').(isset($class) ? ' '.$class : ''))->attributes($attributes) !!}
 @else

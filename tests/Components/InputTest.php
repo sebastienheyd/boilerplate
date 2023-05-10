@@ -290,4 +290,21 @@ HTML;
         $view = $this->blade("@component('boilerplate::input', ['type' => 'select', 'name' => 'test', 'options' => ['value' => 'test'], 'value' => 'value']) @endcomponent");
         $view->assertSee($expected, false);
     }
+
+    public function testTextarea()
+    {
+        $expected = <<<'HTML'
+<div class="form-group">
+    <textarea class="form-control" name="test" rows="12" autocomplete="off">value</textarea>
+</div>
+HTML;
+
+        if ($this->minLaravelVersion('7.0')) {
+            $view = $this->blade('<x-boilerplate::input type="textarea" name="test" value="value" rows="12" />');
+            $view->assertSee($expected, false);
+        }
+
+        $view = $this->blade("@component('boilerplate::input', ['type' => 'textarea', 'name' => 'test', 'value' => 'value', 'rows' => '12']) @endcomponent");
+        $view->assertSee($expected, false);
+    }
 }
