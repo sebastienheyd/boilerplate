@@ -38,4 +38,9 @@ return [
         'intro'  => 'Bu ilk girişiniz, hesabınızı etkinleştirmek için lütfen bir şifre giriniz.',
         'button' => 'Giriş',
     ],
+    'impersonate' => [
+        'back_to_impersonator' => ':user olarak sayfaya eriş',
+        'not_authorized'       => ':user, :page sayfasına erişim izni bulunmamaktadır.',
+        'back_to_dashboard'    => 'Kontrol paneline dön',
+    ]
 ];

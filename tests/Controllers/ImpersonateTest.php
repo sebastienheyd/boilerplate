@@ -13,13 +13,13 @@ class ImpersonateTest extends TestCase
         $user = UserFactory::create()->backendUser();
 
         $resource = $this->post('admin/impersonate/select');
-        $this->assertEquals('{"results":{"id":2,"text":"'.$user->first_name.' '.$user->last_name.'"}}', $resource->getContent());
+        $this->assertEquals('{"results":[{"id":2,"text":"'.$user->first_name.' '.$user->last_name.'"}]}', $resource->getContent());
 
         $resource = $this->post('admin/impersonate/select', ['q' => $user->first_name[0]]);
-        $this->assertEquals('{"results":{"id":2,"text":"'.$user->first_name.' '.$user->last_name.'"}}', $resource->getContent());
+        $this->assertEquals('{"results":[{"id":2,"text":"'.$user->first_name.' '.$user->last_name.'"}]}', $resource->getContent());
 
         $resource = $this->post('admin/impersonate/select', ['q' => $user->last_name[0]]);
-        $this->assertEquals('{"results":{"id":2,"text":"'.$user->first_name.' '.$user->last_name.'"}}', $resource->getContent());
+        $this->assertEquals('{"results":[{"id":2,"text":"'.$user->first_name.' '.$user->last_name.'"}]}', $resource->getContent());
 
         $resource = $this->post('admin/impersonate/select', ['q' => '1']);
         $this->assertEquals('{"results":[]}', $resource->getContent());

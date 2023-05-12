@@ -61,10 +61,13 @@ Route::group([
     Route::group(['middleware' => ['boilerplate.auth', 'ability:admin,backend_access', 'boilerplate.emailverified']], function () {
         // Impersonate another user
         if (config('boilerplate.app.allowImpersonate', false)) {
-            Route::prefix('impersonate')->as('impersonate.')->group(function () {
-                Route::post('/', [ImpersonateController::class, 'impersonate'])->name('user');
-                Route::get('stop', [ImpersonateController::class, 'stopImpersonate'])->name('stop');
-                Route::post('select', [ImpersonateController::class, 'selectImpersonate'])->name('select');
+            Route::as('impersonate.')->group(function () {
+                Route::get('unauthorized', [ImpersonateController::class, 'unauthorized'])->name('unauthorized');
+                Route::prefix('impersonate')->group(function() {
+                    Route::post('/', [ImpersonateController::class, 'impersonate'])->name('user');
+                    Route::get('stop', [ImpersonateController::class, 'stopImpersonate'])->name('stop');
+                    Route::post('select', [ImpersonateController::class, 'selectImpersonate'])->name('select');
+                });
             });
         }
 

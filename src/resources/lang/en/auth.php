@@ -38,4 +38,9 @@ return [
         'intro'             => 'This is your first login, please enter a password to activate your account.',
         'button'            => 'Login',
     ],
+    'impersonate' => [
+        'back_to_impersonator' => 'Access the page as :user',
+        'not_authorized' => ':user is not authorized to access page :page.',
+        'back_to_dashboard' => 'Return to the dashboard',
+    ]
 ];

@@ -64,8 +64,8 @@ class UserFactory
             'remember_token' => Str::random(32),
         ]);
 
-        $role = Permission::find(1);
-        $user->attachPermission($role);
+        $role = Role::find(2);
+        $user->attachRole($role);
 
         if ($authUser) {
             Auth::setUser($user);

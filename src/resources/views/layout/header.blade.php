@@ -12,8 +12,8 @@
     <div class="navbar-right ml-auto d-flex">
         <ul class="nav navbar-nav">
             @includeWhen(config('boilerplate.theme.navbar.user.visible'), 'boilerplate::layout.header.user')
-            @foreach(app('boilerplate.navbar.items')->getItems('right') as $view){!! $view !!}@endforeach
             @includeWhen((config('boilerplate.app.allowImpersonate') && Auth::user()->hasRole('admin')) || session()->has('impersonate'), 'boilerplate::layout.header.impersonate')
+            @foreach(app('boilerplate.navbar.items')->getItems('right') as $view){!! $view !!}@endforeach
             @includeWhen(config('boilerplate.locale.switch', false), 'boilerplate::layout.header.language')
             @includeWhen(config('boilerplate.theme.darkmode', false), 'boilerplate::layout.header.darkmode')
             @includeWhen(config('boilerplate.theme.fullscreen', false), 'boilerplate::layout.header.fullscreen')
