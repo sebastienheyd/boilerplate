@@ -6,10 +6,8 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\URL;
 
 class ImpersonateController
 {
@@ -17,7 +15,7 @@ class ImpersonateController
      * Check if the current user is allowed to impersonate others and if the user they are trying to impersonate has
      * backend access rights, then switch to that user's point of view.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return JsonResponse
      */
     public function impersonate(Request $request): JsonResponse
@@ -61,7 +59,7 @@ class ImpersonateController
             Session::forget('impersonator');
         }
 
-        if(Session::has('referer')) {
+        if (Session::has('referer')) {
             return redirect()->away(Session::get('referer'));
         }
 
@@ -71,7 +69,7 @@ class ImpersonateController
     /**
      * Get the list of eligible users to impersonate.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return JsonResponse
      */
     public function selectImpersonate(Request $request): JsonResponse
@@ -79,8 +77,7 @@ class ImpersonateController
         $userModel = config('auth.providers.users.model');
 
         return response()->json([
-            'results' =>
-                $userModel::with('roles', 'permissions')
+            'results' => $userModel::with('roles', 'permissions')
                     ->select('id', 'first_name', 'last_name')
                     ->where('active', '=', 1)
                     ->where('id', '<>', Auth::id())
@@ -94,8 +91,8 @@ class ImpersonateController
                         });
                     })->when($request->has('q'), function ($query) use ($request) {
                         $query->where(function ($query) use ($request) {
-                            $query->where('first_name', 'like', '%' . $request->input('q') . '%')
-                                ->orWhere('last_name', 'like', '%' . $request->input('q') . '%');
+                            $query->where('first_name', 'like', '%'.$request->input('q').'%')
+                                ->orWhere('last_name', 'like', '%'.$request->input('q').'%');
                         });
                     })
                     ->orderBy('first_name')
@@ -104,10 +101,10 @@ class ImpersonateController
                     ->map(function ($item, $key) {
                         return [
                             'id'   => $item['id'],
-                            'text' => $item['first_name'] . ' ' . $item['last_name'],
+                            'text' => $item['first_name'].' '.$item['last_name'],
                         ];
                     })
-                    ->toArray()
+                    ->toArray(),
         ]);
     }
 

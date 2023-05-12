@@ -63,7 +63,7 @@ Route::group([
         if (config('boilerplate.app.allowImpersonate', false)) {
             Route::as('impersonate.')->group(function () {
                 Route::get('unauthorized', [ImpersonateController::class, 'unauthorized'])->name('unauthorized');
-                Route::prefix('impersonate')->group(function() {
+                Route::prefix('impersonate')->group(function () {
                     Route::post('/', [ImpersonateController::class, 'impersonate'])->name('user');
                     Route::get('stop', [ImpersonateController::class, 'stopImpersonate'])->name('stop');
                     Route::post('select', [ImpersonateController::class, 'selectImpersonate'])->name('select');

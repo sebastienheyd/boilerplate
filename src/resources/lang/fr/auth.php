@@ -42,5 +42,5 @@ return [
         'back_to_impersonator' => 'Accéder à la page en tant que :user',
         'not_authorized'       => ':user n\'est pas autorisé(e) à accéder à la page :page.',
         'back_to_dashboard'    => 'Retourner au tableau de bord',
-    ]
+    ],
 ];

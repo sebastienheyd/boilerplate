@@ -42,5 +42,5 @@ return [
         'back_to_impersonator' => 'Достъп до страницата като :user',
         'not_authorized'       => ':user няма разрешение да достъпи страницата :page.',
         'back_to_dashboard'    => 'Връщане към контролния панел',
-    ]
+    ],
 ];
