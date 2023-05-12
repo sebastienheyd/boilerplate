@@ -56,7 +56,6 @@ class ImpersonateController
     {
         if (Session::has('impersonate')) {
             Session::forget('impersonate');
-            Session::forget('impersonator');
         }
 
         if (Session::has('referer')) {

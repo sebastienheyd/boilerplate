@@ -2,6 +2,8 @@
 
 namespace Sebastienheyd\Boilerplate\Tests\Controllers;
 
+use Illuminate\Http\Request;
+use Sebastienheyd\Boilerplate\Middleware\BoilerplateImpersonate;
 use Sebastienheyd\Boilerplate\Tests\factories\UserFactory;
 use Sebastienheyd\Boilerplate\Tests\TestCase;
 
@@ -25,7 +27,7 @@ class ImpersonateTest extends TestCase
         $this->assertEquals('{"results":[]}', $resource->getContent());
     }
 
-    public function testImpersonate()
+    public function testImpersonateSwitch()
     {
         $admin = UserFactory::create()->admin();
         UserFactory::create()->backendUser(true);
@@ -47,5 +49,38 @@ class ImpersonateTest extends TestCase
         $resource = $this->get('admin/impersonate/stop');
         $resource->assertSessionMissing('impersonate');
         $resource->assertRedirect('http://localhost');
+
+        $resource = $this->withSession(['referer' => 'http://localhost/admin/users'])->get('admin/impersonate/stop');
+        $resource->assertRedirect('http://localhost/admin/users');
+    }
+
+    public function testImpersonate()
+    {
+        $admin = UserFactory::create()->admin();
+        $user = UserFactory::create()->backendUser();
+
+        $resource = $this->actingAs($admin)->post('admin/impersonate', ['id' => 2]);
+        $resource->assertSessionHas('impersonate', 2);
+        $this->assertEquals('{"success":true}', $resource->getContent());
+
+        $this->actingAs($admin);
+        $request = Request::create('/admin/users');
+        $middleware = new BoilerplateImpersonate();
+        $response = $middleware->handle($request, function () {});
+        $this->assertEquals($response, null);
+
+        $resource = $this->get('/admin/users');
+        $resource->assertRedirect('http://localhost/admin/unauthorized');
+
+        $resource = $this->get('/admin/unauthorized');
+        $resource->assertSee($admin->name, false);
+        $resource->assertSee($user->name, false);
+
+        $resource = $this->get('/admin/unauthorized');
+        $resource->assertSessionHas('referer', 'http://localhost/admin/users');
+
+        $this->get('admin/impersonate/stop');
+        $resource = $this->get('/admin/unauthorized');
+        $resource->assertRedirect('http://localhost/admin');
     }
 }
