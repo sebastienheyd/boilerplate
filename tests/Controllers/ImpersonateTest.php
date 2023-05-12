@@ -66,7 +66,8 @@ class ImpersonateTest extends TestCase
         $this->actingAs($admin);
         $request = Request::create('/admin/users');
         $middleware = new BoilerplateImpersonate();
-        $response = $middleware->handle($request, function () {});
+        $response = $middleware->handle($request, function () {
+        });
         $this->assertEquals($response, null);
 
         $resource = $this->get('/admin/users');
