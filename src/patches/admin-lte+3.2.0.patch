@@ -7,7 +7,7 @@ index a4a031c..786e536 100644
  // Background Variant
  @mixin background-variant($name, $color) {
 -  &.bg-#{$name} {
-+  #{if(&, "&.bg-#{$name}",".bg-#{$name}")} {
++  #{if(&, "&.bg-#{$name}, & .bg-#{$name}",".bg-#{$name}")} {
      background-color: #{$color} !important;
  
      &,

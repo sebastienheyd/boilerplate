@@ -62,6 +62,11 @@
       }
     }
   }
+
+  .select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background: #3f6791;
+    border-color: #3f6791;
+  }
 }
 
 [data-type="dark"] {

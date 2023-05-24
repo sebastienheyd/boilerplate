@@ -99,7 +99,7 @@ label {
 // Brand logo with text
 .brand {
   &-logo {
-    background: #CCC;
+    background: transparent;
     border-radius: 50%;
     color: #333;
     width: 2.1rem;
@@ -359,12 +359,6 @@ aside.control-sidebar {
         color: #333;
       }
     }
-  }
-}
-
-.dark-mode {
-  .daterangepicker-input {
-    color: #FFF;
   }
 }
 

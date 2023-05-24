@@ -1,3 +1,4 @@
+@php($darkmode = (setting('darkmode', false) && config('boilerplate.theme.darkmode')))
 <!DOCTYPE html>
 <html lang="{{ App::getLocale() }}" dir="@lang('boilerplate::layout.direction')">
 <head>
@@ -35,11 +36,11 @@
 @endcomponent
 @stack('plugin-js')
 </head>
-<body class="layout-fixed layout-navbar-fixed sidebar-mini{{ setting('darkmode', false) && config('boilerplate.theme.darkmode') ? ' dark-mode accent-light' : '' }}{{ setting('sidebar-collapsed', false) ? ' sidebar-collapse' : '' }}" data-darkmode="{{ setting('darkmode', '2') }}">
+<body class="layout-fixed layout-navbar-fixed sidebar-mini{{ $darkmode ? ' dark-mode' : '' }}{{ setting('sidebar-collapsed', false) ? ' sidebar-collapse' : '' }}" data-darkmode="{{ setting('darkmode', '2') }}">
     <div class="wrapper">
         @include('boilerplate::layout.header')
         @include('boilerplate::layout.mainsidebar')
-        <div class="content-wrapper">
+        <div class="content-wrapper{{ $darkmode ? ' accent-light' : ' accent-dark' }}" id="content-wrapper">
             @include('boilerplate::layout.contentheader')
             <section class="content">
                 <div class="container-fluid">

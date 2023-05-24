@@ -138,7 +138,8 @@ $(() => {
 
     let enableDarkMode = function() {
         $('[data-widget="darkmode"]').html('<i class="fas fa-fw fa-sun"></i>');
-        $('body').addClass('dark-mode accent-light');
+        $('body').addClass('dark-mode');
+        $('#content-wrapper').addClass('accent-light').removeClass('accent-dark');
         $('nav.main-header').addClass('navbar-dark');
         storeSetting('darkmode', true);
         toggleTinyMceSkin('boilerplate-dark', 'boilerplate-dark');
@@ -153,7 +154,8 @@ $(() => {
         e.preventDefault();
         if($('body').hasClass('dark-mode')) {
             $(this).html('<i class="far fa-fw fa-moon"></i>');
-            $('body').removeClass('dark-mode accent-light');
+            $('body').removeClass('dark-mode');
+            $('#content-wrapper').removeClass('accent-light').addClass('accent-dark');
             $('nav.main-header').removeClass('navbar-dark').addClass('navbar-' + $('nav.main-header').data('type'));
             storeSetting('darkmode', false);
             toggleTinyMceSkin('oxide', null);

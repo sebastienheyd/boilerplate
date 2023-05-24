@@ -8,6 +8,10 @@ $border: #6c757d;
 }
 
 body.dark-mode {
+  .daterangepicker-input {
+    color: #FFF;
+  }
+
   .nav-tabs {
     .nav-item {
       .nav-link {
@@ -183,5 +187,13 @@ body.dark-mode {
 
   .login-card-body .input-group .form-control:focus~.input-group-append .input-group-text, .login-card-body .input-group .form-control:focus~.input-group-prepend .input-group-text, .register-card-body .input-group .form-control:focus~.input-group-append .input-group-text, .register-card-body .input-group .form-control:focus~.input-group-prepend .input-group-text {
     border-color: #fff;
+  }
+
+  div.phpdebugbar .phpdebugbar-header select {
+    background: #FFF;
+  }
+
+  .leaflet-touch a {
+    color: #000 !important;
   }
 }
