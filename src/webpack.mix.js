@@ -103,6 +103,7 @@ mix.sass('resources/assets/scss/codemirror.scss', 'public/plugins/codemirror/cod
 mix.copy('node_modules/tinymce/plugins', 'public/plugins/tinymce/plugins');
 mix.scripts('resources/assets/js/vendor/tinymce/plugins/codemirror/plugin.js', 'public/plugins/tinymce/plugins/codemirror/plugin.min.js');
 mix.scripts('resources/assets/js/vendor/tinymce/plugins/customalign/plugin.js', 'public/plugins/tinymce/plugins/customalign/plugin.min.js');
+mix.scripts('resources/assets/js/vendor/tinymce/plugins/gpt/plugin.js', 'public/plugins/tinymce/plugins/gpt/plugin.min.js');
 mix.copy('resources/assets/js/vendor/tinymce/plugins', 'public/plugins/tinymce/plugins');
 mix.copy('node_modules/tinymce/icons', 'public/plugins/tinymce/icons');
 mix.copy('node_modules/tinymce/skins', 'public/plugins/tinymce/skins');

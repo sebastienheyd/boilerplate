@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
+use Orhanerday\OpenAi\OpenAi;
 
 class GptController
 {
@@ -25,10 +26,10 @@ class GptController
     /**
      * Process OpenAI API request.
      *
-     * @param  Request  $request
+     * @param Request $request
      * @return JsonResponse
      */
-    public function process(Request $request): JsonResponse
+    public function process(Request $request)
     {
         $validator = Validator::make($request->input(), [
             'topic'  => 'required',
@@ -45,102 +46,57 @@ class GptController
             return response()->json(['success' => false, 'html' => $view->render()]);
         }
 
-        try {
-            $response = Http::withoutVerifying()
-                ->retry(2, 60)
-                ->withHeaders($this->buildHeaders())
-                ->post('https://api.openai.com/v1/chat/completions', [
-                    'model'       => config('boilerplate.app.openai.model', 'gpt-3.5-turbo'),
-                    'messages' => [['role' => 'user', 'content' => $this->buildPrompt($request)]],
-                    'temperature' => 0.6,
-                    'max_tokens' => 500,
-                    'frequency_penalty' => 0.52,
-                    'presence_penalty' => 0.5,
-                ]);
-        } catch (\Throwable $e) {
-            return $this->gptError($e->getMessage(), $request);
+        $openAi = new OpenAi(env('OPENAI_API_KEY'));
+
+        if ($organization = config('boilerplate.app.openai.organization')) {
+            $openAi->setORG($organization);
         }
 
-        $json = $response->json();
+        $result = $openAi->chat([
+            'model'             => config('boilerplate.app.openai.model', 'gpt-3.5-turbo'),
+            'messages'          => [['role' => 'user', 'content' => $this->buildPrompt($request),]],
+            'temperature'       => 0.6,
+            "frequency_penalty" => 0.52,
+            "presence_penalty"  => 0.5,
+            "max_tokens"        => 500,
+        ]);
 
-        if (isset($json['error'])) {
-            return $this->gptError($json['error']['message'], $request);
-        }
-
-        if (! isset($json['choices'][0]['message']['content'])) {
-            return $this->gptError('No response from OpenAI', $request);
-        }
+        $json = json_decode($result);
 
         return response()->json([
             'success' => true,
-            'content' => nl2br(trim($json['choices'][0]['message']['content'])),
+            'content' => nl2br(trim($json->choices[0]->message->content)),
         ]);
-    }
-
-    /**
-     * Build cURL headers for OpenAI API.
-     *
-     * @return string[]
-     */
-    private function buildHeaders(): array
-    {
-        $headers = [
-            'Content-Type'  => 'application/json',
-            'Authorization' => 'Bearer '.config('boilerplate.app.openai.key'),
-        ];
-
-        if ($organization = config('boilerplate.app.openai.organization')) {
-            $headers['OpenAI-Organization'] = $organization;
-        }
-
-        return $headers;
     }
 
     /**
      * Build prompt to send to the API.
      *
-     * @param  Request  $request
+     * @param Request $request
      * @return string
      */
     private function buildPrompt(Request $request): string
     {
-        $prompt = 'Write '.$request->input('type').' with ';
-        $prompt .= 'topic: "'.$request->input('topic').'",';
-        $prompt .= 'language: '.$request->input('language').',';
+        $prompt = 'Write ' . $request->input('type') . ' with ';
+        $prompt .= 'topic: "' . $request->input('topic') . '",';
+        $prompt .= 'language: ' . $request->input('language') . ',';
 
         if (! empty($request->input('pov'))) {
-            $prompt .= 'point of view: "'.$request->input('pov').'",';
+            $prompt .= 'point of view: "' . $request->input('pov') . '",';
         }
 
         if (! empty($request->input('tone'))) {
-            $prompt .= 'tone: "'.$request->input('tone').'",';
+            $prompt .= 'tone: "' . $request->input('tone') . '",';
         }
 
         if ($request->input('length') > 0) {
-            $prompt .= 'number of words: '.$request->input('length');
+            $prompt .= 'number of words: ' . $request->input('length');
         }
 
         if (! empty($request->input('keywords'))) {
-            $prompt .= 'keywords: "'.$request->input('length').'"';
+            $prompt .= 'keywords: "' . $request->input('length') . '"';
         }
 
         return $prompt;
-    }
-
-    /**
-     * Show error from the API.
-     *
-     * @param  string  $error
-     * @param  Request  $request
-     * @return JsonResponse
-     */
-    private function gptError(string $error, Request $request): JsonResponse
-    {
-        $request->flash();
-
-        return response()->json([
-            'success' => false,
-            'html' => (string) view('boilerplate::gpt.form')->with('gpterror', $error),
-        ]);
     }
 }

@@ -4,8 +4,8 @@
     <script src="{!! mix('/plugins/tinymce/tinymce.min.js', '/assets/vendor/boilerplate') !!}"></script>
     <script>
         tinymce.defaultSettings = {
-            plugins: "autoresize fullscreen codemirror link lists table media image imagetools paste customalign",
-            toolbar: "undo redo | styleselect | bold italic underline | customalignleft aligncenter customalignright | link media image | bullist numlist | table | code fullscreen",
+            plugins: "autoresize fullscreen codemirror link lists table media image imagetools paste customalign{{ config('boilerplate.app.openai.key') ? ' gpt' : '' }}",
+            toolbar: "undo redo | styleselect | bold italic underline | customalignleft aligncenter customalignright | gpt link media image | bullist numlist | table | code fullscreen",
             contextmenu: "link image imagetools table spellchecker bold italic underline",
             toolbar_drawer: "sliding",
             toolbar_sticky_offset: $('nav.main-header').outerHeight(),
@@ -23,6 +23,13 @@
             encoding: 'UTF-8',
             image_uploadtab: false,
             deprecation_warnings: false,
+            @if(config('boilerplate.app.openai.key'))
+            gpt: {
+                'tooltip': "@lang('boilerplate::gpt.tooltip')",
+                'title': "@lang('boilerplate::gpt.title')",
+                'route': "{{ route('boilerplate.gpt.index', [], false) }}",
+            },
+            @endif
             paste_preprocess: function(plugin, args) {
                 args.content = args.content.replace(/<(\/)*(\\?xml:|meta|link|span|font|del|ins|st1:|[ovwxp]:)((.|\s)*?)>/gi, ''); // Unwanted tags
                 args.content = args.content.replace(/\s(class|style|type|start)=("(.*?)"|(\w*))/gi, ''); // Unwanted attributes

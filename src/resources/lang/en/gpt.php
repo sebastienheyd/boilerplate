@@ -27,6 +27,9 @@ return [
         ],
         'language' => 'Language',
         'submit'   => 'Generate text',
+        'undo'     => 'Undo',
+        'modify'   => 'Modify',
+        'confirm'  => 'Confirm',
         'type'     => [
             'label'        => 'Type of text',
             'tagline'      => 'Tagline',

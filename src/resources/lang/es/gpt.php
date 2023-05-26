@@ -27,6 +27,9 @@ return [
         ],
         'language' => 'Idioma',
         'submit'   => 'Generar texto',
+        'undo'     => 'Deshacer',
+        'modify'   => 'Modificar',
+        'confirm'  => 'Confirmar',
         'type'     => [
             'label'        => 'Tipo de texto',
             'tagline'      => 'Lema',

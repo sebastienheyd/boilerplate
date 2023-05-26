@@ -18,7 +18,6 @@
     @component('boilerplate::minify')
         <script>
             $.ajaxSetup({headers:{'X-CSRF-TOKEN':'{{ csrf_token() }}'}});
-            bootbox.setLocale('{{ App::getLocale() }}');
             var session={
                 keepalive:"{{ route('boilerplate.keepalive', null, false) }}",
                 expire:{{ time() +  config('session.lifetime') * 60 }},
@@ -48,6 +47,27 @@
                 align-items: center;
                 justify-content: center;
             }
+
+            #content {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                padding: 1rem;
+                display: flex;
+                flex-direction: column;
+            }
+
+            #buttons {
+                padding-top: 1rem;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            #gpt-result {
+                overflow-y: auto;
+            }
         </style>
     @endcomponent
     @stack('plugin-js')
@@ -60,18 +80,30 @@
             <p>@lang('boilerplate::gpt.generation')</p>
         </div>
     </div>
-    @component('boilerplate::form', ['route' => 'boilerplate.gpt.process'])
-    <div class="container-fluid pt-2">
-        <div id="gpt-form">
-            @include('boilerplate::gpt.form')
-        </div>
-        <div class="row">
-            <div class="col-12 pt-2 text-center">
-                <button type="submit" class="btn btn-primary">@lang('boilerplate::gpt.form.submit')</button>
-            </div>
+    <div id="content" style="display: none">
+        <div id="gpt-result"></div>
+        <div id="buttons">
+            <button type="button" id="close" class="btn btn-secondary">@lang('boilerplate::gpt.form.undo')</button>
+            <span>
+                <button type="button" id="undo" class="btn btn-secondary">@lang('boilerplate::gpt.form.modify')</button>
+                <button type="button" id="confirm" class="btn btn-primary">@lang('boilerplate::gpt.form.confirm')</button>
+            </span>
         </div>
     </div>
-    @endcomponent
+    <div id="form">
+        @component('boilerplate::form', ['route' => 'boilerplate.gpt.process'])
+        <div class="container-fluid pt-2">
+            <div id="gpt-form">
+                @include('boilerplate::gpt.form')
+            </div>
+            <div class="row">
+                <div class="col-12 pt-2 text-center">
+                    <button type="submit" class="btn btn-primary">@lang('boilerplate::gpt.form.submit')</button>
+                </div>
+            </div>
+        </div>
+        @endcomponent
+    </div>
     @component('boilerplate::minify')
     <script>
         $(function() {
@@ -93,11 +125,9 @@
                             $('#gpt-form').html(json.html);
                             $('[name="topic"]').focus();
                         } else {
-                            $('#disable, #loading').hide();
-                            window.parent.postMessage({
-                                mceAction: 'confirmGPTContent',
-                                content: json.content
-                            }, '*');
+                            $('#disable, #loading, #form').hide();
+                            $('#gpt-result').html(json.content);
+                            $('#content').show();
                         }
                     },
                     error: function() {
@@ -105,6 +135,22 @@
                         $('#gpt-form').append('<div class="alert alert-danger" id="gpterror">@lang('boilerplate::gpt.error')</div>');
                     }
                 });
+            })
+
+            $(document).on('click', '#undo', function() {
+                $('#form').show();
+                $('#disable, #loading, #content').hide();
+            })
+
+            $(document).on('click', '#close', function() {
+                window.parent.tinyMCE.activeEditor.windowManager.close();
+            })
+
+            $(document).on('click', '#confirm', function() {
+                window.parent.postMessage({
+                    mceAction: 'confirmGPTContent',
+                    content: $('#gpt-result').html()
+                }, '*');
             })
         });
     </script>

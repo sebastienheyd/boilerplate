@@ -18,7 +18,8 @@
         "santigarcor/laratrust": "^6.0|^7.0",
         "sebastienheyd/active": "^1.0",
         "spatie/laravel-html": "^2.0|^3.0",
-        "yajra/laravel-datatables-oracle": "^9.0|^10.0"
+        "yajra/laravel-datatables-oracle": "^9.0|^10.0",
+        "orhanerday/open-ai": "^4.7"
     },
     "require-dev": {
         "doctrine/dbal": "^2.9|^3.0",

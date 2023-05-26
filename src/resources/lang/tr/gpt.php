@@ -27,6 +27,9 @@ return [
         ],
         'language' => 'Dil',
         'submit'   => 'Metin oluştur',
+        'undo'     => 'Geri al',
+        'modify'   => 'Düzenle',
+        'confirm'  => 'Onayla',
         'type'     => [
             'label'        => 'Metin türü',
             'tagline'      => 'Slogan',
