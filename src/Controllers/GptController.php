@@ -6,9 +6,10 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Str;
 use Orhanerday\OpenAi\OpenAi;
 
 class GptController
@@ -20,6 +21,10 @@ class GptController
      */
     public function index()
     {
+        if (class_exists(\Barryvdh\Debugbar\Facades\Debugbar::class)) {
+            \Barryvdh\Debugbar\Facades\Debugbar::disable();
+        }
+
         return view('boilerplate::gpt.layout');
     }
 
@@ -46,27 +51,53 @@ class GptController
             return response()->json(['success' => false, 'html' => $view->render()]);
         }
 
+        $key = 'gpt-' . Str::random();
+        Cache::put($key, $this->buildPrompt($request), 90);
+
+        return response()->json(['success' => true, 'id' => $key]);
+    }
+
+    public function stream(Request $request)
+    {
+        $prompt = Cache::pull($request->get('id'));
+
+        if ($prompt === null) {
+            abort(404);
+        }
+
         $openAi = new OpenAi(env('OPENAI_API_KEY'));
 
         if ($organization = config('boilerplate.app.openai.organization')) {
             $openAi->setORG($organization);
         }
 
-        $result = $openAi->chat([
+        $opts = [
             'model'             => config('boilerplate.app.openai.model', 'gpt-3.5-turbo'),
-            'messages'          => [['role' => 'user', 'content' => $this->buildPrompt($request),]],
+            'messages'          => [['role' => 'user', 'content' => $prompt]],
             'temperature'       => 0.6,
             "frequency_penalty" => 0.52,
             "presence_penalty"  => 0.5,
             "max_tokens"        => 500,
-        ]);
+            'stream'            => true,
+        ];
 
-        $json = json_decode($result);
+        header('Content-type: text/event-stream');
+        header('Cache-Control: no-cache');
 
-        return response()->json([
-            'success' => true,
-            'content' => nl2br(trim($json->choices[0]->message->content)),
-        ]);
+        $openAi->chat($opts, function ($curl, $data) {
+            $obj = json_decode($data);
+
+            if ($obj && ! empty($obj->error->message)) {
+                die('[ERROR] ' . $obj->error->message);
+            } else {
+                echo $data;
+            }
+
+            echo PHP_EOL;
+            ob_flush();
+            flush();
+            return strlen($data);
+        });
     }
 
     /**
@@ -75,11 +106,19 @@ class GptController
      * @param Request $request
      * @return string
      */
-    private function buildPrompt(Request $request): string
+    private function buildPrompt(Request $request)
     {
-        $prompt = 'Write ' . $request->input('type') . ' with ';
+        $prompt = 'write ' . $request->input('type') . ' with ';
         $prompt .= 'topic: "' . $request->input('topic') . '",';
         $prompt .= 'language: ' . $request->input('language') . ',';
+
+        if (! empty($request->input('author'))) {
+            $prompt .= 'author: "' . $request->input('pov') . '",';
+        }
+
+        if (! empty($request->input('actas'))) {
+            $prompt .= 'act as: "' . $request->input('actas') . '",';
+        }
 
         if (! empty($request->input('pov'))) {
             $prompt .= 'point of view: "' . $request->input('pov') . '",';

@@ -106,6 +106,7 @@ Route::group([
             Route::prefix('gpt')->as('gpt.')->group(function () {
                 Route::get('/', [GptController::class, 'index'])->name('index');
                 Route::post('/', [GptController::class, 'process'])->name('process');
+                Route::get('/stream', [GptController::class, 'stream'])->name('stream');
             });
         }
 

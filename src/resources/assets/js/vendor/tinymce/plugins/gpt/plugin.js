@@ -9,8 +9,8 @@ tinymce.PluginManager.add('gpt', function (editor, url) {
             editor.windowManager.openUrl({
                 url: editor.settings.gpt.route,
                 title: editor.settings.gpt.title,
-                width: Math.round(window.innerWidth * 0.5),
-                height: 520,
+                width: Math.max(640, Math.round(window.innerWidth * 0.5)),
+                height: Math.max(640, Math.round(window.innerHeight * 0.2)),
                 onMessage: function (instance, data) {
                     if(data.mceAction === 'confirmGPTContent') {
                         editor.insertContent(data.content);

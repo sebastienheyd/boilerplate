@@ -1,6 +1,7 @@
-<div class="row">
+@component('boilerplate::form', ['route' => 'boilerplate.gpt.process'])
+<div class="row mt-2">
     <div class="col-12">
-        @component('boilerplate::input', ['name' => 'topic', 'label' => 'boilerplate::gpt.form.topic'])@endcomponent
+        @component('boilerplate::input', ['name' => 'topic', 'label' => 'boilerplate::gpt.form.topic', 'groupClass' => 'input-group-lg'])@endcomponent
     </div>
 </div>
 <div class="row">
@@ -14,7 +15,7 @@
         ]])@endcomponent
     </div>
     <div class="col-6">
-        @component('boilerplate::input', ['name' => 'keywords', 'label' => 'boilerplate::gpt.form.keywords'])@endcomponent
+        @component('boilerplate::input', ['name' => 'author', 'label' => 'boilerplate::gpt.form.author'])@endcomponent
     </div>
 </div>
 <div class="row">
@@ -28,7 +29,7 @@
         ]])@endcomponent
     </div>
     <div class="col-6">
-        @component('boilerplate::input', ['type' => 'number', 'name' => 'length', 'label' => 'boilerplate::gpt.form.length', 'min' => 5, 'max' => 300, 'placeholder' => '∞'])@endcomponent
+        @component('boilerplate::input', ['name' => 'actas', 'label' => 'boilerplate::gpt.form.actas'])@endcomponent
     </div>
 </div>
 <div class="row">
@@ -43,6 +44,14 @@
         ]])@endcomponent
     </div>
     <div class="col-6">
+        @component('boilerplate::input', ['type' => 'number', 'name' => 'length', 'label' => 'boilerplate::gpt.form.length', 'min' => 5, 'max' => 300, 'placeholder' => '∞'])@endcomponent
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        @component('boilerplate::input', ['name' => 'keywords', 'label' => 'boilerplate::gpt.form.keywords'])@endcomponent
+    </div>
+    <div class="col-6">
         @component('boilerplate::input', ['type' => 'select', 'name' => 'language', 'label' => 'boilerplate::gpt.form.language', 'options' => collect(config('boilerplate.locale.languages'))->map(function($e){return $e['label'];})->toArray(), 'value' => App::getLocale()])@endcomponent
     </div>
 </div>
@@ -51,3 +60,9 @@
         {{ $gpterror }}
     </div>
 @endif
+<div class="row">
+    <div class="col-12 pt-2 text-center">
+        <button type="submit" class="btn btn-primary">@lang('boilerplate::gpt.form.submit')</button>
+    </div>
+</div>
+@endcomponent
