@@ -1,29 +1,36 @@
 <?php
 
 return [
-    'tooltip'      => 'GPT ile metin oluşturun',
-    'title'        => 'GPT ile oluşturun',
-    'confirmtitle' => 'Oluşturulan metin',
-    'generation'   => 'Oluşturma işlemi devam ediyor, lütfen bekleyin...',
-    'error'        => 'Bir şeyler yanlış gitti, lütfen tekrar deneyin',
-    'form'         => [
+    'tooltip'   => 'GPT ile metin oluştur',
+    'title'     => 'GPT ile oluştur',
+    'error'     => 'Bir hata oluştu, lütfen tekrar deneyin',
+    'copy'      => 'İçerik panoya kopyalandı',
+    'copyerror' => 'İçerik panoya kopyalanamadı',
+    'tabs'      => [
+        'wizard'  => 'Oluşturma Sihirbazı',
+        'prompt'  => 'Manuel giriş',
+        'rewrite' => 'Yeniden Yaz / Özetle',
+    ],
+    'form'      => [
+        'copy'     => 'Kopyala',
+        'actas'    => 'Olarak yaz',
         'topic'    => 'Konu',
         'keywords' => 'Anahtar kelimeler',
+        'prompt'   => 'İpucu',
         'pov'      => [
-            'label'         => 'Görüş noktası',
-            'firstsingular' => 'Tekil birinci kişi (Ben)',
-            'firstplural'   => 'Çoğul birinci kişi (Biz)',
-            'second'        => 'İkinci kişi (Sen/Siz)',
-            'third'         => 'Üçüncü kişi (O/Onlar)',
+            'label'         => 'Bakış açısı',
+            'firstsingular' => 'Birinci tekil şahıs (Ben, benim, benimki)',
+            'firstplural'   => 'Birinci çoğul şahıs (Biz, bizim, bizimki)',
+            'second'        => 'İkinci şahıs (Sen, senin, seninki)',
+            'third'         => 'Üçüncü şahıs (O, o, onun, onların)',
         ],
-        'length'   => 'Maksimum kelime sayısı',
         'tone'     => [
             'label'         => 'Ton',
             'professionnal' => 'Profesyonel',
             'formal'        => 'Resmi',
-            'casual'        => 'Sıradan',
+            'casual'        => 'Günlük',
             'friendly'      => 'Dostane',
-            'humorous'      => 'Komik',
+            'humorous'      => 'Esprili',
         ],
         'language' => 'Dil',
         'submit'   => 'Metin oluştur',
@@ -31,11 +38,21 @@ return [
         'modify'   => 'Düzenle',
         'confirm'  => 'Onayla',
         'type'     => [
-            'label'        => 'Metin türü',
-            'tagline'      => 'Slogan',
+            'label'        => 'Metin Türü',
+            'tagline'      => 'Başlık / Slogan',
             'introduction' => 'Giriş',
             'summary'      => 'Özet',
             'article'      => 'Makale',
         ],
+        'rewrite'  => [
+            'original' => 'Orijinal içerik',
+            'type'     => [
+                'label'     => 'Tür',
+                'rewrite'   => 'Yeniden Yaz',
+                'summary'   => 'Özet',
+                'title'     => 'Başlık',
+                'translate' => 'Çeviri',
+            ]
+        ]
     ],
 ];

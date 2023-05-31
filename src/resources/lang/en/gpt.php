@@ -1,14 +1,22 @@
 <?php
 
 return [
-    'tooltip'      => 'Generate text with GPT',
-    'title'        => 'Generate with GPT',
-    'confirmtitle' => 'Generated text',
-    'generation'   => 'Generation in progress, please wait...',
-    'error'        => 'Something went wrong, please retry',
-    'form'         => [
+    'tooltip'   => 'Generate text with GPT',
+    'title'     => 'Generate with GPT',
+    'error'     => 'Something went wrong, please retry',
+    'copy'      => 'Content copied to clipboard',
+    'copyerror' => 'Content could not be copied to clipboard',
+    'tabs'      => [
+        'wizard'  => 'Generation Wizard',
+        'prompt'  => 'Manual input',
+        'rewrite' => 'Rewrite / Summarize',
+    ],
+    'form'      => [
+        'copy'     => 'Copy',
+        'actas'    => 'Write as',
         'topic'    => 'Topic',
         'keywords' => 'Keywords',
+        'prompt'   => 'Prompt',
         'pov'      => [
             'label'         => 'Point of view',
             'firstsingular' => 'First person singular (I, me, my, mine)',
@@ -16,7 +24,6 @@ return [
             'second'        => 'Second person (you, your, yours)',
             'third'         => 'Third person (he, she, it, they)',
         ],
-        'length'   => 'Maximum number of words',
         'tone'     => [
             'label'         => 'Tone',
             'professionnal' => 'Professional',
@@ -32,10 +39,20 @@ return [
         'confirm'  => 'Confirm',
         'type'     => [
             'label'        => 'Type of text',
-            'tagline'      => 'Tagline',
+            'tagline'      => 'Title / Tagline',
             'introduction' => 'Introduction',
             'summary'      => 'Summary',
             'article'      => 'Article',
         ],
+        'rewrite'  => [
+            'original' => 'Original content',
+            'type'     => [
+                'label'     => 'Type',
+                'rewrite'   => 'Rewrite',
+                'summary'   => 'Summary',
+                'title'     => 'Title',
+                'translate' => 'Translation',
+            ]
+        ]
     ],
 ];

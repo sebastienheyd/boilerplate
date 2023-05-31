@@ -1,22 +1,29 @@
 <?php
 
 return [
-    'tooltip'      => 'Générer du texte avec GPT',
-    'title'        => 'Générer avec GPT',
-    'confirmtitle' => 'Texte généré',
-    'generation'   => 'Génération en cours, veuillez patienter...',
-    'error'        => 'Une erreur est survenue, veuillez réessayer',
-    'form'         => [
+    'tooltip'   => 'Générer du texte avec GPT',
+    'title'     => 'Générer avec GPT',
+    'error'     => 'Une erreur s\'est produite, veuillez réessayer',
+    'copy'      => 'Contenu copié dans le presse-papier',
+    'copyerror' => 'Impossible de copier le contenu dans le presse-papier',
+    'tabs'      => [
+        'wizard'  => 'Assistant de génération',
+        'prompt'  => 'Saisie manuelle',
+        'rewrite' => 'Réécrire / Résumer',
+    ],
+    'form'      => [
+        'copy'     => 'Copier',
+        'actas'    => 'Écrire en tant que',
         'topic'    => 'Sujet',
-        'keywords' => 'Mots clés',
+        'keywords' => 'Mots-clés',
+        'prompt'   => 'Indication',
         'pov'      => [
             'label'         => 'Point de vue',
-            'firstsingular' => 'Première personne singulière (je, me, mon, mien)',
-            'firstplural'   => 'Première personne plurielle (nous, notre, nos)',
-            'second'        => 'Deuxième personne (tu, toi, votre, vos)',
-            'third'         => 'Troisième personne (il, elle, eux, elles)',
+            'firstsingular' => 'Première personne du singulier (je, me, mon, le mien)',
+            'firstplural'   => 'Première personne du pluriel (nous, nous, notre, les nôtres)',
+            'second'        => 'Deuxième personne (tu, ton, le tien)',
+            'third'         => 'Troisième personne (il, elle, cela, ils)',
         ],
-        'length'   => 'Nombre maximum de mots',
         'tone'     => [
             'label'         => 'Tonalité',
             'professionnal' => 'Professionnel',
@@ -32,10 +39,20 @@ return [
         'confirm'  => 'Confirmer',
         'type'     => [
             'label'        => 'Type de texte',
-            'tagline'      => 'Slogan',
+            'tagline'      => 'Titre / Slogan',
             'introduction' => 'Introduction',
             'summary'      => 'Résumé',
             'article'      => 'Article',
         ],
+        'rewrite'  => [
+            'original' => 'Contenu original',
+            'type'     => [
+                'label'     => 'Type',
+                'rewrite'   => 'Réécrire',
+                'summary'   => 'Résumer',
+                'title'     => 'Titrer',
+                'translate' => 'Traduction',
+            ]
+        ]
     ],
 ];

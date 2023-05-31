@@ -29,34 +29,101 @@ class GptController
     }
 
     /**
-     * Process OpenAI API request.
+     * Generate the prompt to pass to the OpenAI API.
      *
      * @param Request $request
      * @return JsonResponse
      */
     public function process(Request $request)
     {
-        $validator = Validator::make($request->input(), [
+        if ($request->post('tab') === 'generator') {
+            return $this->processGenerator($request);
+        }
+
+        if ($request->post('tab') === 'prompt') {
+            return $this->processPrompt($request);
+        }
+
+        if ($request->post('tab') === 'rewrite') {
+            return $this->processRewrite($request);
+        }
+
+        abort(404);
+    }
+
+    private function processRewrite($request)
+    {
+        $validator = Validator::make($request->post(), [
+            'original-content'  => 'required',
+        ], [], [
+            'original-content' => __('boilerplate::gpt.form.pov.form.rewrite.original'),
+        ]);
+
+        if ($validator->fails()) {
+            $request->flash();
+            $view = view('boilerplate::gpt.rewrite')->withErrors($validator->errors());
+            View::share('errors', $view->errors);
+
+            return response()->json(['success' => false, 'tab' => 'gpt-rewrite', 'html' => $view->render()]);
+        }
+
+        $key = 'gpt-' . Str::random();
+        Cache::put($key, $this->buildRewritePrompt($request), 90);
+
+        return response()->json(['success' => true, 'prepend' => $request->post('type') === 'title', 'id' => $key]);
+    }
+
+    private function processGenerator($request)
+    {
+        $validator = Validator::make($request->post(), [
             'topic'  => 'required',
-            'length' => 'nullable|integer|between:5,300',
         ], [], [
             'topic' => __('boilerplate::gpt.form.topic'),
         ]);
 
         if ($validator->fails()) {
             $request->flash();
-            $view = view('boilerplate::gpt.form')->withErrors($validator->errors());
+            $view = view('boilerplate::gpt.generator')->withErrors($validator->errors());
             View::share('errors', $view->errors);
 
-            return response()->json(['success' => false, 'html' => $view->render()]);
+            return response()->json(['success' => false, 'tab' => 'gpt-generator', 'html' => $view->render()]);
         }
 
         $key = 'gpt-' . Str::random();
         Cache::put($key, $this->buildPrompt($request), 90);
 
-        return response()->json(['success' => true, 'id' => $key]);
+        return response()->json(['success' => true, 'prepend' => true,  'id' => $key]);
     }
 
+    private function processPrompt($request)
+    {
+        $validator = Validator::make($request->post(), [
+            'prompt'  => 'required',
+        ], [], [
+            'prompt' => __('boilerplate::gpt.form.prompt'),
+        ]);
+
+        if ($validator->fails()) {
+            $request->flash();
+            $view = view('boilerplate::gpt.prompt')->withErrors($validator->errors());
+            View::share('errors', $view->errors);
+
+            return response()->json(['success' => false, 'tab' => 'gpt-prompt', 'html' => $view->render()]);
+        }
+
+        $key = 'gpt-' . Str::random();
+        Cache::put($key, $request->post('prompt'), 90);
+
+        return response()->json(['success' => true, 'prepend' => true, 'id' => $key]);
+    }
+
+    /**
+     * Stream the result from OpenAI API.
+     *
+     * @param Request $request
+     * @return void
+     * @throws \Exception
+     */
     public function stream(Request $request)
     {
         $prompt = Cache::pull($request->get('id'));
@@ -77,7 +144,7 @@ class GptController
             'temperature'       => 0.6,
             "frequency_penalty" => 0.52,
             "presence_penalty"  => 0.5,
-            "max_tokens"        => 500,
+            "max_tokens"        => 1000,
             'stream'            => true,
         ];
 
@@ -108,33 +175,65 @@ class GptController
      */
     private function buildPrompt(Request $request)
     {
-        $prompt = 'write ' . $request->input('type') . ' with ';
-        $prompt .= 'topic: "' . $request->input('topic') . '",';
-        $prompt .= 'language: ' . $request->input('language') . ',';
+        $prompt = 'Language: "' . $request->post('language') . '".';
 
-        if (! empty($request->input('author'))) {
-            $prompt .= 'author: "' . $request->input('pov') . '",';
+        if (! empty($request->post('pov'))) {
+            $prompt .= 'Point of view: "' . $request->post('pov') . '".';
         }
 
-        if (! empty($request->input('actas'))) {
-            $prompt .= 'act as: "' . $request->input('actas') . '",';
+        if (! empty($request->post('tone'))) {
+            $prompt .= 'Tone: "' . $request->post('tone') . '".';
         }
 
-        if (! empty($request->input('pov'))) {
-            $prompt .= 'point of view: "' . $request->input('pov') . '",';
+        if (! empty($request->post('actas'))) {
+            $prompt .= 'Act as "' . $request->post('actas') . '".';
         }
 
-        if (! empty($request->input('tone'))) {
-            $prompt .= 'tone: "' . $request->input('tone') . '",';
+        $prompt .= 'Write ' . $request->post('type') . ' about "'.$request->post('topic').'"';
+
+        return $prompt;
+    }
+
+    /**
+     * Build prompt for text rewriting.
+     *
+     * @param Request $request
+     * @return string
+     */
+    private function buildRewritePrompt(Request $request)
+    {
+        if ($request->post('type') !== 'translate') {
+            $prompt = 'Act as '.(empty($request->post('actas')) ? 'the writer of the text.' : '"'.$request->post('actas').'"');
+
+            if (! empty($request->post('pov'))) {
+                $prompt .= 'Point of view: ' . $request->post('pov') . '.';
+            }
+
+            if (! empty($request->post('tone'))) {
+                $prompt .= 'Tone: ' . $request->post('tone') . '.';
+            }
+        } else {
+            $prompt = 'Act as a professionnal translator.';
         }
 
-        if ($request->input('length') > 0) {
-            $prompt .= 'number of words: ' . $request->input('length');
+        switch ($request->post('type')) {
+            case 'rewrite':
+                $prompt .= 'Rewrite the following text in "'.$request->post('language').'": "'.$request->post('original-content').'".';
+                break;
+
+            case 'summary':
+                $prompt .= 'Summarize the following text in "'.$request->post('language').'": "'.$request->post('original-content').'".';
+                break;
+
+            case 'title':
+                $prompt .= 'Write a title for the following text in "'.$request->post('language').'": "'.$request->post('original-content').'".';
+                break;
+
+            case 'translate':
+                $prompt .= 'Translate the following text in "'.$request->post('language').'": "'.$request->post('original-content').'".';
+                break;
         }
 
-        if (! empty($request->input('keywords'))) {
-            $prompt .= 'keywords: "' . $request->input('length') . '"';
-        }
 
         return $prompt;
     }

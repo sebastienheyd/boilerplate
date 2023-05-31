@@ -1,22 +1,29 @@
 <?php
 
 return [
-    'tooltip'      => 'Genera testo con GPT',
-    'title'        => 'Genera con GPT',
-    'confirmtitle' => 'Testo generato',
-    'generation'   => 'Generazione in corso, attendere...',
-    'error'        => 'Qualcosa è andato storto, riprova',
-    'form'         => [
+    'tooltip'   => 'Genera testo con GPT',
+    'title'     => 'Genera con GPT',
+    'error'     => 'Qualcosa è andato storto, riprova per favore',
+    'copy'      => 'Contenuto copiato negli appunti',
+    'copyerror' => 'Impossibile copiare il contenuto negli appunti',
+    'tabs'      => [
+        'wizard'  => 'Assistente di generazione',
+        'prompt'  => 'Input manuale',
+        'rewrite' => 'Riscrivi / Riassumi',
+    ],
+    'form'      => [
+        'copy'     => 'Copia',
+        'actas'    => 'Scrivi come',
         'topic'    => 'Argomento',
         'keywords' => 'Parole chiave',
+        'prompt'   => 'Prompt',
         'pov'      => [
             'label'         => 'Punto di vista',
-            'firstsingular' => 'Prima persona singolare (io, me, mio, mia)',
-            'firstplural'   => 'Prima persona plurale (noi, ci, nostro, nostra)',
-            'second'        => 'Seconda persona (tu, te, tuo, tua)',
-            'third'         => 'Terza persona (lui, lei, esso, essi)',
+            'firstsingular' => 'Prima persona singolare (Io, me, mio, il mio)',
+            'firstplural'   => 'Prima persona plurale (Noi, noi, nostro, i nostri)',
+            'second'        => 'Seconda persona (Tu, tuo, il tuo)',
+            'third'         => 'Terza persona (Egli, ella, esso, loro)',
         ],
-        'length'   => 'Numero massimo di parole',
         'tone'     => [
             'label'         => 'Tono',
             'professionnal' => 'Professionale',
@@ -32,10 +39,21 @@ return [
         'confirm'  => 'Conferma',
         'type'     => [
             'label'        => 'Tipo di testo',
-            'tagline'      => 'Slogan',
+            'tagline'      => 'Titolo / Slogan',
             'introduction' => 'Introduzione',
             'summary'      => 'Sommario',
             'article'      => 'Articolo',
         ],
+        'rewrite'  => [
+            'original' => 'Contenuto originale',
+            'type'     => [
+                'label'     => 'Tipo',
+                'rewrite'   => 'Riscrivi',
+                'summary'   => 'Sommario',
+                'title'     => 'Titolo',
+                'translate' => 'Traduzione',
+            ]
+        ]
     ],
 ];
+

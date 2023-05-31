@@ -1,4 +1,5 @@
 @component('boilerplate::form', ['route' => 'boilerplate.gpt.process'])
+<input type="hidden" name="tab" value="generator">
 <div class="row mt-2">
     <div class="col-12">
         @component('boilerplate::input', ['name' => 'topic', 'label' => 'boilerplate::gpt.form.topic', 'groupClass' => 'input-group-lg'])@endcomponent
@@ -11,11 +12,11 @@
             'a tagline' => __('boilerplate::gpt.form.type.tagline'),
             'an introduction' => __('boilerplate::gpt.form.type.introduction'),
             'a summary' => __('boilerplate::gpt.form.type.summary'),
-            'an article' => __('boilerplate::gpt.form.type.article'),
+            'a full article' => __('boilerplate::gpt.form.type.article'),
         ]])@endcomponent
     </div>
     <div class="col-6">
-        @component('boilerplate::input', ['name' => 'author', 'label' => 'boilerplate::gpt.form.author'])@endcomponent
+        @component('boilerplate::input', ['name' => 'actas', 'label' => 'boilerplate::gpt.form.actas'])@endcomponent
     </div>
 </div>
 <div class="row">
@@ -29,11 +30,6 @@
         ]])@endcomponent
     </div>
     <div class="col-6">
-        @component('boilerplate::input', ['name' => 'actas', 'label' => 'boilerplate::gpt.form.actas'])@endcomponent
-    </div>
-</div>
-<div class="row">
-    <div class="col-6">
         @component('boilerplate::input', ['name' => 'tone', 'label' => 'boilerplate::gpt.form.tone.label', 'type' => 'select', 'options' => [
             '' => '-',
             'professionnal' => __('boilerplate::gpt.form.tone.professionnal'),
@@ -43,14 +39,8 @@
             'humorous' => __('boilerplate::gpt.form.tone.humorous'),
         ]])@endcomponent
     </div>
-    <div class="col-6">
-        @component('boilerplate::input', ['type' => 'number', 'name' => 'length', 'label' => 'boilerplate::gpt.form.length', 'min' => 5, 'max' => 300, 'placeholder' => '∞'])@endcomponent
-    </div>
 </div>
 <div class="row">
-    <div class="col-6">
-        @component('boilerplate::input', ['name' => 'keywords', 'label' => 'boilerplate::gpt.form.keywords'])@endcomponent
-    </div>
     <div class="col-6">
         @component('boilerplate::input', ['type' => 'select', 'name' => 'language', 'label' => 'boilerplate::gpt.form.language', 'options' => collect(config('boilerplate.locale.languages'))->map(function($e){return $e['label'];})->toArray(), 'value' => App::getLocale()])@endcomponent
     </div>
@@ -62,7 +52,7 @@
 @endif
 <div class="row">
     <div class="col-12 pt-2 text-center">
-        <button type="submit" class="btn btn-primary">@lang('boilerplate::gpt.form.submit')</button>
+        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-gears mr-1"></i> @lang('boilerplate::gpt.form.submit')</button>
     </div>
 </div>
 @endcomponent

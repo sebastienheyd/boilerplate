@@ -1,7 +1,22 @@
 /** global: gpt */
 var eventSource;
+var content = parent.tinymce.activeEditor.selection.getContent({format : 'html'});
+var prepend;
 
 $(function() {
+    if (content !== '') {
+        $('#nav-gpt-rewrite').show();
+        $('.original-content').val($("<textarea/>").html(content).text());
+    }
+
+    $(document).on('change', '#rewrite-type', function() {
+        $('#rewrite-options').show();
+
+        if ($(this).val() === 'translate') {
+            $('#rewrite-options').hide();
+        }
+    });
+
     $('[name="topic"]').focus();
 
     $(document).on('click', 'button[type="submit"]', function(e) {
@@ -10,15 +25,19 @@ $(function() {
         $.ajax({
             url: gpt.route,
             type: 'post',
-            data: $('form').serialize(),
+            data: $(this).closest('form').serialize(),
             success: function(json){
+                $('.error-bubble').remove();
+                $('.is-invalid').removeClass('is-invalid');
                 if(json.success === false) {
-                    $('#gpt-compose').html(json.html);
-                    $('[name="topic"]').focus();
+                    $('#'+json.tab).html(json.html);
+                    $('#'+json.tab+' input:visible:first-child').focus();
                 } else {
                     $('#form, #buttons').hide();
                     $('#content, #stop').show();
                     $('#gpt-result').html('');
+                    prepend = json.prepend;
+
                     eventSource = new EventSource(gpt.stream + '?id=' + json.id);
                     eventSource.onmessage = function (e) {
                         if (e.data == "[DONE]") {
@@ -28,15 +47,16 @@ $(function() {
                         } else {
                             let txt = JSON.parse(e.data).choices[0].delta.content
                             if (txt !== undefined) {
-                                $('#gpt-result').append(txt.replace(/(?:\r\n|\r|\n)/g, '<br>'));
+                                txt = txt.replace(/(?:\r\n|\r|\n)/g, '<br>');
+                                txt = txt.replace(/"/g, '')
+                                $('#gpt-result').append(txt);
                             }
                         }
                     };
                 }
             },
             error: function() {
-                $('#disable, #loading').hide();
-                $('#gpt-form').append('<div class="alert alert-danger" id="gpterror">gpt.error</div>');
+                $(this).closest('form').append('<div class="alert alert-danger" id="gpterror">'+gpt.error+'</div>');
             }
         });
     })
@@ -47,9 +67,17 @@ $(function() {
         eventSource.close();
     })
 
+    $(document).on('click', '#copy', function() {
+        navigator.clipboard.writeText($('#gpt-result').html()).then(function() {
+            growl(gpt.copy);
+        }, function() {
+            growl(gpt.copyerror);
+        });
+    })
+
     $(document).on('click', '#undo', function() {
         $('#form').show();
-        $('#disable, #loading, #content').hide();
+        $('#content').hide();
     })
 
     $(document).on('click', '#close', function() {
@@ -59,7 +87,8 @@ $(function() {
     $(document).on('click', '#confirm', function() {
         window.parent.postMessage({
             mceAction: 'confirmGPTContent',
-            content: $('#gpt-result').html()
+            content: $('#gpt-result').html(),
+            prepend: prepend
         }, '*');
     })
 });

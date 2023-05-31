@@ -13,7 +13,12 @@ tinymce.PluginManager.add('gpt', function (editor, url) {
                 height: Math.max(640, Math.round(window.innerHeight * 0.2)),
                 onMessage: function (instance, data) {
                     if(data.mceAction === 'confirmGPTContent') {
-                        editor.insertContent(data.content);
+                        let content = data.content;
+                        if (data.prepend && editor.selection.getContent() !== '') {
+                            content = content+'<br>'+editor.selection.getContent();
+                        }
+
+                        editor.insertContent(content);
                         tinymce.activeEditor.windowManager.close();
                     }
                 }

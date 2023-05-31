@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name') }}</title>
     @stack('plugin-css')
+    <link rel="stylesheet" href="{{ mix('/plugins/fontawesome/fontawesome.min.css', '/assets/vendor/boilerplate') }}">
     <link rel="stylesheet" href="{{ mix('/adminlte.min.css', '/assets/vendor/boilerplate') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,6 +16,8 @@
     <link rel="stylesheet" href="{{ mix('/plugins/tinymce/plugins/gpt/gpt.min.css', '/assets/vendor/boilerplate') }}">
     @stack('css')
     <script src="{{ mix('/bootstrap.min.js', '/assets/vendor/boilerplate') }}"></script>
+    <script src="{{ mix('/admin-lte.min.js', '/assets/vendor/boilerplate') }}"></script>
+    <script src="{{ mix('/boilerplate.min.js', '/assets/vendor/boilerplate') }}"></script>
     @component('boilerplate::minify')
         <script>
             $.ajaxSetup({headers:{'X-CSRF-TOKEN':'{{ csrf_token() }}'}});
@@ -39,11 +42,14 @@
     <div id="content" style="display: none">
         <div id="gpt-result"></div>
         <div class="text-center mt-3">
-            <button type="button" id="stop" class="btn btn-secondary">Stop generation</button>
+            <button type="button" id="stop" class="btn btn-secondary"><i class="fa-solid fa-stop mr-1"></i> Stop generation</button>
         </div>
         <div id="buttons" style="display: none">
-            <button type="button" id="undo" class="btn btn-secondary">@lang('boilerplate::gpt.form.modify')</button>
-            <button type="button" id="confirm" class="btn btn-primary">@lang('boilerplate::gpt.form.confirm')</button>
+            <button type="button" id="undo" class="btn btn-secondary"><i class="fa-solid fa-pencil mr-1"></i> @lang('boilerplate::gpt.form.modify')</button>
+            <span>
+                <button type="button" id="copy" class="btn btn-secondary"><i class="fa-regular fa-copy mr-1"></i> @lang('boilerplate::gpt.form.copy')</button>
+                <button type="button" id="confirm" class="btn btn-primary"><i class="fa-solid fa-check mr-1"></i> @lang('boilerplate::gpt.form.confirm')</button>
+            </span>
         </div>
     </div>
     <div id="form">
@@ -58,7 +64,9 @@
         window.gpt = {
             route: '{{ route('boilerplate.gpt.process') }}',
             stream: '{{ route('boilerplate.gpt.stream') }}',
-            error: "@lang('boilerplate::gpt.error')"
+            error: "@lang('boilerplate::gpt.error')",
+            copy: "@lang('boilerplate::gpt.copy')",
+            copyerror: "@lang('boilerplate::gpt.copyerror')",
         };
     </script>
     <script src="{{ mix('/plugins/tinymce/plugins/gpt/generator.min.js', '/assets/vendor/boilerplate') }}"></script>
