@@ -52,8 +52,7 @@ return [
                 'summary'   => 'Resumen',
                 'title'     => 'Título',
                 'translate' => 'Traducción',
-            ]
-        ]
+            ],
+        ],
     ],
 ];
-

@@ -52,7 +52,7 @@ return [
                 'summary'   => 'Özet',
                 'title'     => 'Başlık',
                 'translate' => 'Çeviri',
-            ]
-        ]
+            ],
+        ],
     ],
 ];

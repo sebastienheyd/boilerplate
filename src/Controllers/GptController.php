@@ -31,7 +31,7 @@ class GptController
     /**
      * Generate the prompt to pass to the OpenAI API.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return JsonResponse
      */
     public function process(Request $request)
@@ -67,7 +67,7 @@ class GptController
             return response()->json(['success' => false, 'tab' => 'gpt-rewrite', 'html' => $view->render()]);
         }
 
-        $key = 'gpt-' . Str::random();
+        $key = 'gpt-'.Str::random();
         Cache::put($key, $this->buildRewritePrompt($request), 90);
 
         return response()->json(['success' => true, 'prepend' => $request->post('type') === 'title', 'id' => $key]);
@@ -89,7 +89,7 @@ class GptController
             return response()->json(['success' => false, 'tab' => 'gpt-generator', 'html' => $view->render()]);
         }
 
-        $key = 'gpt-' . Str::random();
+        $key = 'gpt-'.Str::random();
         Cache::put($key, $this->buildPrompt($request), 90);
 
         return response()->json(['success' => true, 'prepend' => true,  'id' => $key]);
@@ -111,7 +111,7 @@ class GptController
             return response()->json(['success' => false, 'tab' => 'gpt-prompt', 'html' => $view->render()]);
         }
 
-        $key = 'gpt-' . Str::random();
+        $key = 'gpt-'.Str::random();
         Cache::put($key, $request->post('prompt'), 90);
 
         return response()->json(['success' => true, 'prepend' => true, 'id' => $key]);
@@ -120,8 +120,9 @@ class GptController
     /**
      * Stream the result from OpenAI API.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return void
+     *
      * @throws \Exception
      */
     public function stream(Request $request)
@@ -142,9 +143,9 @@ class GptController
             'model'             => config('boilerplate.app.openai.model', 'gpt-3.5-turbo'),
             'messages'          => [['role' => 'user', 'content' => $prompt]],
             'temperature'       => 0.6,
-            "frequency_penalty" => 0.52,
-            "presence_penalty"  => 0.5,
-            "max_tokens"        => 1000,
+            'frequency_penalty' => 0.52,
+            'presence_penalty'  => 0.5,
+            'max_tokens'        => 1000,
             'stream'            => true,
         ];
 
@@ -155,7 +156,7 @@ class GptController
             $obj = json_decode($data);
 
             if ($obj && ! empty($obj->error->message)) {
-                die('[ERROR] ' . $obj->error->message);
+                exit('[ERROR] '.$obj->error->message);
             } else {
                 echo $data;
             }
@@ -163,6 +164,7 @@ class GptController
             echo PHP_EOL;
             ob_flush();
             flush();
+
             return strlen($data);
         });
     }
@@ -170,26 +172,26 @@ class GptController
     /**
      * Build prompt to send to the API.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return string
      */
     private function buildPrompt(Request $request)
     {
-        $prompt = 'Language: "' . $request->post('language') . '".';
+        $prompt = 'Language: "'.$request->post('language').'".';
 
         if (! empty($request->post('pov'))) {
-            $prompt .= 'Point of view: "' . $request->post('pov') . '".';
+            $prompt .= 'Point of view: "'.$request->post('pov').'".';
         }
 
         if (! empty($request->post('tone'))) {
-            $prompt .= 'Tone: "' . $request->post('tone') . '".';
+            $prompt .= 'Tone: "'.$request->post('tone').'".';
         }
 
         if (! empty($request->post('actas'))) {
-            $prompt .= 'Act as "' . $request->post('actas') . '".';
+            $prompt .= 'Act as "'.$request->post('actas').'".';
         }
 
-        $prompt .= 'Write ' . $request->post('type') . ' about "'.$request->post('topic').'"';
+        $prompt .= 'Write '.$request->post('type').' about "'.$request->post('topic').'"';
 
         return $prompt;
     }
@@ -197,7 +199,7 @@ class GptController
     /**
      * Build prompt for text rewriting.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return string
      */
     private function buildRewritePrompt(Request $request)
@@ -206,11 +208,11 @@ class GptController
             $prompt = 'Act as '.(empty($request->post('actas')) ? 'the writer of the text.' : '"'.$request->post('actas').'"');
 
             if (! empty($request->post('pov'))) {
-                $prompt .= 'Point of view: ' . $request->post('pov') . '.';
+                $prompt .= 'Point of view: '.$request->post('pov').'.';
             }
 
             if (! empty($request->post('tone'))) {
-                $prompt .= 'Tone: ' . $request->post('tone') . '.';
+                $prompt .= 'Tone: '.$request->post('tone').'.';
             }
         } else {
             $prompt = 'Act as a professionnal translator.';
@@ -233,7 +235,6 @@ class GptController
                 $prompt .= 'Translate the following text in "'.$request->post('language').'": "'.$request->post('original-content').'".';
                 break;
         }
-
 
         return $prompt;
     }
