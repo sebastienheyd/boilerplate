@@ -42,7 +42,7 @@ $(function() {
                     eventSource.onmessage = function (e) {
                         if (e.data == "[DONE]") {
                             $('#stop').hide();
-                            $('#buttons').show();
+                            $('#buttons, #copy, #confirm').show();
                             eventSource.close();
                         } else {
                             let txt = JSON.parse(e.data).choices[0].delta.content
@@ -52,6 +52,12 @@ $(function() {
                                 $('#gpt-result').append(txt);
                             }
                         }
+                    };
+                    eventSource.onerror = function (e) {
+                        eventSource.close();
+                        growl('Error', 'error');
+                        $('#stop, #copy, #confirm').hide();
+                        $('#buttons').show();
                     };
                 }
             },
@@ -63,7 +69,7 @@ $(function() {
 
     $(document).on('click', '#stop', function() {
         $('#stop').hide();
-        $('#buttons').show();
+        $('#buttons, #copy, #confirm').show();
         eventSource.close();
     })
 

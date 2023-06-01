@@ -2,6 +2,7 @@
 
 namespace Sebastienheyd\Boilerplate\Tests\Controllers;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Sebastienheyd\Boilerplate\Tests\factories\UserFactory;
@@ -22,110 +23,246 @@ class GptTest extends TestCase
         UserFactory::create()->admin(true);
 
         $response = $this->post(route('boilerplate.gpt.process', [], false), []);
+        $response->assertNotFound();
+    }
+
+    public function testProcessGeneratorNoInput()
+    {
+        UserFactory::create()->admin(true);
+
+        $response = $this->post(route('boilerplate.gpt.process', [], false), [
+            'tab' => 'generator'
+        ]);
 
         $response->assertJson(function (AssertableJson $json) {
-            $json->hasAll(['success', 'html'])
+            $json->hasAll(['success', 'tab', 'html'])
                 ->where('success', false)
+                ->where('tab', 'gpt-generator')
                 ->where('html', function ($html) {
-                    return strstr($html, 'The Topic field is required.') !== false;
+                    return strstr($html, 'The Topic field is required.') !== false && strstr($html, 'The Language field is required.') !== false;
                 });
         });
     }
 
-    public function testProcessApiNoResponse()
+    public function testProcessGenerator()
     {
         UserFactory::create()->admin(true);
 
-        Http::fake([
-            'https://api.openai.com/v1/chat/completions' => Http::response('404', 404),
-        ]);
-
         $response = $this->post(route('boilerplate.gpt.process', [], false), [
-            'topic'  => 'test',
-            'length' => '5',
-        ]);
-
-        $response->assertJson(function (AssertableJson $json) {
-            $json->hasAll(['success', 'html'])
-                ->where('success', false)
-                ->where('html', function ($html) {
-                    return strstr($html, 'HTTP request returned status code 404') !== false;
-                });
-        });
-    }
-
-    public function testProcessErrorFromAPI()
-    {
-        UserFactory::create()->admin(true);
-
-        $body = json_encode(['error' => ['message' => 'API error message']]);
-
-        Http::fake([
-            'https://api.openai.com/v1/chat/completions' => Http::response($body, 200),
-        ]);
-
-        $response = $this->post(route('boilerplate.gpt.process', [], false), [
-            'topic'  => 'test',
-            'length' => '5',
-        ]);
-
-        $response->assertJson(function (AssertableJson $json) {
-            $json->hasAll(['success', 'html'])
-                ->where('success', false)
-                ->where('html', function ($html) {
-                    return strstr($html, 'API error message') !== false;
-                });
-        });
-    }
-
-    public function testProcessNoContentFromAPI()
-    {
-        UserFactory::create()->admin(true);
-
-        $body = json_encode(['choices' => []]);
-
-        Http::fake([
-            'https://api.openai.com/v1/chat/completions' => Http::response($body, 200),
-        ]);
-
-        $response = $this->post(route('boilerplate.gpt.process', [], false), [
-            'topic'  => 'test',
-            'length' => '5',
-        ]);
-
-        $response->assertJson(function (AssertableJson $json) {
-            $json->hasAll(['success', 'html'])
-                ->where('success', false)
-                ->where('html', function ($html) {
-                    return strstr($html, 'No response from OpenAI') !== false;
-                });
-        });
-    }
-
-    public function testProcessContentFromAPI()
-    {
-        UserFactory::create()->admin(true);
-
-        $body = json_encode(['choices' => [['message' => ['content' => 'API content message']]]]);
-
-        Http::fake([
-            'https://api.openai.com/v1/chat/completions' => Http::response($body, 200),
-        ]);
-
-        $response = $this->post(route('boilerplate.gpt.process', [], false), [
-            'topic'    => 'test',
-            'length'   => '5',
+            'tab'      => 'generator',
+            'topic'    => 'Test',
+            'type'     => 'a text',
+            'language' => 'en',
+            'actas'    => 'tester',
             'pov'      => 'first person singular',
             'tone'     => 'formal',
-            'keywords' => 'test',
         ]);
 
         $response->assertJson(function (AssertableJson $json) {
-            $json->hasAll(['success', 'content'])
+            $json->hasAll(['success', 'prepend', 'id'])
                 ->where('success', true)
-                ->where('content', function ($html) {
-                    return strstr($html, 'API content message') !== false;
+                ->where('prepend', true)
+                ->where('id', function ($id) {
+                    return preg_match('#^gpt-[a-zA-Z0-9]{16}$#', $id) !== false;
+                });
+        });
+
+        $json = json_decode($response->getContent());
+        $cache = Cache::get($json->id);
+        $this->assertStringContainsString('Act as "tester". ', $cache);
+        $this->assertStringContainsString('Point of view: "first person singular". ', $cache);
+        $this->assertStringContainsString('Tone: "formal". ', $cache);
+        $this->assertStringContainsString('Write a text in "en" language about "Test"', $cache);
+    }
+
+    public function testProcessPromptNoInput()
+    {
+        UserFactory::create()->admin(true);
+
+        $response = $this->post(route('boilerplate.gpt.process', [], false), [
+            'tab' => 'prompt'
+        ]);
+
+        $response->assertJson(function (AssertableJson $json) {
+            $json->hasAll(['success', 'tab', 'html'])
+                ->where('success', false)
+                ->where('tab', 'gpt-prompt')
+                ->where('html', function ($html) {
+                    return strstr($html, 'The Prompt field is required.') !== false;
                 });
         });
     }
+
+    public function testProcessPrompt()
+    {
+        UserFactory::create()->admin(true);
+
+        $response = $this->post(route('boilerplate.gpt.process', [], false), [
+            'tab'      => 'prompt',
+            'prompt'   => 'This is a test',
+        ]);
+
+        $response->assertJson(function (AssertableJson $json) {
+            $json->hasAll(['success', 'prepend', 'id'])
+                ->where('success', true)
+                ->where('prepend', true)
+                ->where('id', function ($id) {
+                    return preg_match('#^gpt-[a-zA-Z0-9]{16}$#', $id) !== false;
+                });
+        });
+
+        $json = json_decode($response->getContent());
+        $cache = Cache::get($json->id);
+        $this->assertStringContainsString('This is a test', $cache);
+    }
+
+    public function testProcessRewriteNoInput()
+    {
+        UserFactory::create()->admin(true);
+
+        $response = $this->post(route('boilerplate.gpt.process', [], false), [
+            'tab' => 'rewrite'
+        ]);
+
+        $response->assertJson(function (AssertableJson $json) {
+            $json->hasAll(['success', 'tab', 'html'])
+                ->where('success', false)
+                ->where('tab', 'gpt-rewrite')
+                ->where('html', function ($html) {
+                    return strstr($html, 'The Original content field is required.') !== false && strstr($html, 'The Language field is required.') !== false;
+                });
+        });
+    }
+
+    public function testProcessRewrite()
+    {
+        UserFactory::create()->admin(true);
+
+        $response = $this->post(route('boilerplate.gpt.process', [], false), [
+            'type' => 'rewrite',
+            'tab' => 'rewrite',
+            'original-content' => 'Test',
+            'language' => 'en',
+            'actas' => 'tester',
+            'pov' => 'first person singular',
+        ]);
+
+        $response->assertJson(function (AssertableJson $json) {
+            $json->hasAll(['success', 'prepend', 'id'])
+                ->where('success', true)
+                ->where('prepend', false)
+                ->where('id', function ($id) {
+                    return preg_match('#^gpt-[a-zA-Z0-9]{16}$#', $id) !== false;
+                });
+        });
+
+        $json = json_decode($response->getContent());
+        $cache = Cache::get($json->id);
+        $this->assertStringContainsString('Act as "tester".', $cache);
+        $this->assertStringContainsString('Point of view: first person singular.', $cache);
+        $this->assertStringContainsString('Rewrite the following text', $cache);
+    }
+
+    public function testProcessTitle()
+    {
+        UserFactory::create()->admin(true);
+
+        $response = $this->post(route('boilerplate.gpt.process', [], false), [
+            'type' => 'title',
+            'tab' => 'rewrite',
+            'original-content' => 'Test',
+            'language' => 'en',
+        ]);
+
+        $response->assertJson(function (AssertableJson $json) {
+            $json->hasAll(['success', 'prepend', 'id'])
+                ->where('success', true)
+                ->where('prepend', true)
+                ->where('id', function ($id) {
+                    return preg_match('#^gpt-[a-zA-Z0-9]{16}$#', $id) !== false;
+                });
+        });
+
+        $json = json_decode($response->getContent());
+        $cache = Cache::get($json->id);
+        $this->assertStringContainsString('Write a title for the following text', $cache);
+    }
+
+    public function testProcessSummarize()
+    {
+        UserFactory::create()->admin(true);
+
+        $response = $this->post(route('boilerplate.gpt.process', [], false), [
+            'type' => 'summary',
+            'tab' => 'rewrite',
+            'original-content' => 'Test',
+            'language' => 'en',
+        ]);
+
+        $response->assertJson(function (AssertableJson $json) {
+            $json->hasAll(['success', 'prepend', 'id'])
+                ->where('success', true)
+                ->where('prepend', false)
+                ->where('id', function ($id) {
+                    return preg_match('#^gpt-[a-zA-Z0-9]{16}$#', $id) !== false;
+                });
+        });
+
+        $json = json_decode($response->getContent());
+        $cache = Cache::get($json->id);
+        $this->assertStringContainsString('Summarize the following text', $cache);
+    }
+
+    public function testProcessTranslate()
+    {
+        UserFactory::create()->admin(true);
+
+        $response = $this->post(route('boilerplate.gpt.process', [], false), [
+            'type' => 'translate',
+            'tab' => 'rewrite',
+            'original-content' => 'Test',
+            'language' => 'en',
+        ]);
+
+        $response->assertJson(function (AssertableJson $json) {
+            $json->hasAll(['success', 'prepend', 'id'])
+                ->where('success', true)
+                ->where('prepend', false)
+                ->where('id', function ($id) {
+                    return preg_match('#^gpt-[a-zA-Z0-9]{16}$#', $id) !== false;
+                });
+        });
+
+        $json = json_decode($response->getContent());
+        $cache = Cache::get($json->id);
+        $this->assertStringContainsString('Act as a professionnal translator.', $cache);
+        $this->assertStringContainsString('Translate the following text', $cache);
+    }
+
+    public function testStreamNoCache()
+    {
+        UserFactory::create()->admin(true);
+
+        $response = $this->get(route('boilerplate.gpt.stream', [], false));
+        $response->assertNotFound();
+    }
+
+    public function testStreamId()
+    {
+        UserFactory::create()->admin(true);
+
+        $response = $this->get(route('boilerplate.gpt.stream', ['id' => 'false'], false));
+        $response->assertNotFound();
+    }
+
+//    public function testStreamCache()
+//    {
+//        error_reporting(0);
+//        UserFactory::create()->admin(true);
+//
+//        Cache::put('gpt-test', 'Test prompt');
+//
+//        $response = $this->get(route('boilerplate.gpt.stream', ['id' => 'gpt-test'], false));
+//    }
+
 }

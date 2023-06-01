@@ -43,6 +43,7 @@ use Orchestra\Testbench\TestCase as OrchestraTestCase;
 use PHPUnit\Framework\Constraint\DirectoryExists;
 use PHPUnit\Framework\Constraint\FileExists;
 use PHPUnit\Framework\Constraint\LogicalNot;
+use PHPUnit\Framework\Constraint\StringContains;
 use SebastienHeyd\Active\ActiveServiceProvider;
 use Sebastienheyd\Boilerplate\BoilerplateServiceProvider;
 use Spatie\Html\HtmlServiceProvider;
@@ -202,6 +203,15 @@ abstract class TestCase extends OrchestraTestCase
     public static function assertDirectoryDoesNotExist(string $directory, string $message = ''): void
     {
         static::assertThat($directory, new LogicalNot(new DirectoryExists), $message);
+    }
+
+    public static function assertStringContainsString(string $needle, string $haystack, string $message = ''): void
+    {
+        if (method_exists(static::class, 'assertStringContainsString')) {
+            parent::assertStringContainsString($needle, $haystack, $message);
+        } else {
+            static::assertTrue(strstr($haystack, $needle) !== false, $message);
+        }
     }
 
     protected function getPackageProviders($app)

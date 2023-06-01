@@ -7,6 +7,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
@@ -14,6 +15,13 @@ use Orhanerday\OpenAi\OpenAi;
 
 class GptController
 {
+    public function __construct()
+    {
+        if (class_exists(\Barryvdh\Debugbar\Facades\Debugbar::class)) {
+            \Barryvdh\Debugbar\Facades\Debugbar::disable();
+        }
+    }
+
     /**
      * Show "Generate text with GPT" form.
      *
@@ -21,10 +29,6 @@ class GptController
      */
     public function index()
     {
-        if (class_exists(\Barryvdh\Debugbar\Facades\Debugbar::class)) {
-            \Barryvdh\Debugbar\Facades\Debugbar::disable();
-        }
-
         return view('boilerplate::gpt.layout');
     }
 
@@ -54,9 +58,11 @@ class GptController
     private function processRewrite($request)
     {
         $validator = Validator::make($request->post(), [
-            'original-content'  => 'required',
+            'original-content' => 'required',
+            'language'         => 'required',
         ], [], [
-            'original-content' => __('boilerplate::gpt.form.pov.form.rewrite.original'),
+            'original-content' => __('boilerplate::gpt.form.rewrite.original'),
+            'language'         => __('boilerplate::gpt.form.language'),
         ]);
 
         if ($validator->fails()) {
@@ -76,9 +82,13 @@ class GptController
     private function processGenerator($request)
     {
         $validator = Validator::make($request->post(), [
-            'topic'  => 'required',
+            'topic'    => 'required',
+            'language' => 'required',
+            'type'     => 'required',
         ], [], [
-            'topic' => __('boilerplate::gpt.form.topic'),
+            'topic'    => __('boilerplate::gpt.form.topic'),
+            'type'     => __('boilerplate::gpt.form.type.label'),
+            'language' => __('boilerplate::gpt.form.language'),
         ]);
 
         if ($validator->fails()) {
@@ -92,7 +102,7 @@ class GptController
         $key = 'gpt-'.Str::random();
         Cache::put($key, $this->buildPrompt($request), 90);
 
-        return response()->json(['success' => true, 'prepend' => true,  'id' => $key]);
+        return response()->json(['success' => true, 'prepend' => true, 'id' => $key]);
     }
 
     private function processPrompt($request)
@@ -133,7 +143,7 @@ class GptController
             abort(404);
         }
 
-        $openAi = new OpenAi(env('OPENAI_API_KEY'));
+        $openAi = new OpenAi(config('boilerplate.app.openai.key'));
 
         if ($organization = config('boilerplate.app.openai.organization')) {
             $openAi->setORG($organization);
@@ -164,8 +174,6 @@ class GptController
             echo PHP_EOL;
             ob_flush();
             flush();
-
-            return strlen($data);
         });
     }
 
@@ -177,21 +185,21 @@ class GptController
      */
     private function buildPrompt(Request $request)
     {
-        $prompt = 'Language: "'.$request->post('language').'".';
+        $prompt = '';
+
+        if (! empty($request->post('actas'))) {
+            $prompt .= 'Act as "'.$request->post('actas').'". ';
+        }
 
         if (! empty($request->post('pov'))) {
-            $prompt .= 'Point of view: "'.$request->post('pov').'".';
+            $prompt .= 'Point of view: "'.$request->post('pov').'". ';
         }
 
         if (! empty($request->post('tone'))) {
-            $prompt .= 'Tone: "'.$request->post('tone').'".';
+            $prompt .= 'Tone: "'.$request->post('tone').'". ';
         }
 
-        if (! empty($request->post('actas'))) {
-            $prompt .= 'Act as "'.$request->post('actas').'".';
-        }
-
-        $prompt .= 'Write '.$request->post('type').' about "'.$request->post('topic').'"';
+        $prompt .= 'Write '.$request->post('type').' in "'.$request->post('language').'" language about "'.$request->post('topic').'"';
 
         return $prompt;
     }
@@ -205,34 +213,34 @@ class GptController
     private function buildRewritePrompt(Request $request)
     {
         if ($request->post('type') !== 'translate') {
-            $prompt = 'Act as '.(empty($request->post('actas')) ? 'the writer of the text.' : '"'.$request->post('actas').'"');
+            $prompt = 'Act as '.(empty($request->post('actas')) ? 'the writer of the text. ' : '"'.$request->post('actas').'". ');
 
             if (! empty($request->post('pov'))) {
-                $prompt .= 'Point of view: '.$request->post('pov').'.';
+                $prompt .= 'Point of view: '.$request->post('pov').'. ';
             }
 
             if (! empty($request->post('tone'))) {
-                $prompt .= 'Tone: '.$request->post('tone').'.';
+                $prompt .= 'Tone: '.$request->post('tone').'. ';
             }
         } else {
-            $prompt = 'Act as a professionnal translator.';
+            $prompt = 'Act as a professionnal translator. ';
         }
 
         switch ($request->post('type')) {
             case 'rewrite':
-                $prompt .= 'Rewrite the following text in "'.$request->post('language').'": "'.$request->post('original-content').'".';
+                $prompt .= 'Rewrite the following text in "'.$request->post('language').'" language: "'.$request->post('original-content').'"';
                 break;
 
             case 'summary':
-                $prompt .= 'Summarize the following text in "'.$request->post('language').'": "'.$request->post('original-content').'".';
+                $prompt .= 'Summarize the following text in "'.$request->post('language').'" language: "'.$request->post('original-content').'"';
                 break;
 
             case 'title':
-                $prompt .= 'Write a title for the following text in "'.$request->post('language').'": "'.$request->post('original-content').'".';
+                $prompt .= 'Write a title for the following text in "'.$request->post('language').'" language: "'.$request->post('original-content').'"';
                 break;
 
             case 'translate':
-                $prompt .= 'Translate the following text in "'.$request->post('language').'": "'.$request->post('original-content').'".';
+                $prompt .= 'Translate the following text in "'.$request->post('language').'" language: "'.$request->post('original-content').'"';
                 break;
         }
 
