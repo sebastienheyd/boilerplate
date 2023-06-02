@@ -16,8 +16,7 @@
     <link rel="stylesheet" href="{{ mix('/plugins/tinymce/plugins/gpt/gpt.min.css', '/assets/vendor/boilerplate') }}">
     @stack('css')
     <script src="{{ mix('/bootstrap.min.js', '/assets/vendor/boilerplate') }}"></script>
-    <script src="{{ mix('/admin-lte.min.js', '/assets/vendor/boilerplate') }}"></script>
-    <script src="{{ mix('/boilerplate.min.js', '/assets/vendor/boilerplate') }}"></script>
+    <script src="{{ mix('/plugins/tinymce/plugins/gpt/generator.min.js', '/assets/vendor/boilerplate') }}"></script>
     @component('boilerplate::minify')
         <script>
             $.ajaxSetup({headers:{'X-CSRF-TOKEN':'{{ csrf_token() }}'}});
@@ -69,7 +68,6 @@
             copyerror: "@lang('boilerplate::gpt.copyerror')",
         };
     </script>
-    <script src="{{ mix('/plugins/tinymce/plugins/gpt/generator.min.js', '/assets/vendor/boilerplate') }}"></script>
     @endcomponent
 @stack('js')
 </body>

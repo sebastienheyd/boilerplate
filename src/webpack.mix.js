@@ -113,8 +113,8 @@ mix.copy('resources/assets/js/vendor/tinymce/skins/boilerplate-dark/skins/conten
 mix.copy('resources/assets/js/vendor/tinymce/skins/boilerplate-dark/skins/ui', 'public/plugins/tinymce/skins/ui');
 
 // GPT
-mix.scripts('resources/assets/js/vendor/tinymce/plugins/gpt/generator.js', 'public/plugins/tinymce/plugins/gpt/generator.min.js');
-mix.scripts('resources/assets/js/vendor/tinymce/plugins/gpt/plugin.js', 'public/plugins/tinymce/plugins/gpt/plugin.min.js');
+mix.js('resources/assets/js/vendor/tinymce/plugins/gpt/generator.js', 'public/plugins/tinymce/plugins/gpt/generator.min.js');
+mix.js('resources/assets/js/vendor/tinymce/plugins/gpt/plugin.js', 'public/plugins/tinymce/plugins/gpt/plugin.min.js');
 mix.sass('resources/assets/scss/gpt.scss', 'public/plugins/tinymce/plugins/gpt/gpt.min.css');
 
 // https://www.tiny.cloud/get-tiny/language-packages/

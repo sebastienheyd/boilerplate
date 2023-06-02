@@ -1,4 +1,20 @@
 /** global: gpt */
+import jQuery from "jquery";
+window.$ = window.jQuery = jQuery;
+
+import toastr from "toastr";
+window.toastr = toastr;
+window.toastr.options = {}
+
+window.growl = (message, type) => {
+    let types = ['info', 'error', 'warning', 'success'];
+
+    if (typeof type === "undefined" || !types.includes(type)) {
+        type = 'info';
+    }
+    window.toastr[type](message);
+}
+
 var eventSource;
 var content = parent.tinymce.activeEditor.selection.getContent({format : 'html'});
 var prepend;
@@ -39,6 +55,7 @@ $(function() {
                     prepend = json.prepend;
 
                     eventSource = new EventSource(gpt.stream + '?id=' + json.id);
+
                     eventSource.onmessage = function (e) {
                         if (e.data == "[DONE]") {
                             $('#stop').hide();
@@ -53,9 +70,10 @@ $(function() {
                             }
                         }
                     };
+
                     eventSource.onerror = function (e) {
                         eventSource.close();
-                        growl('Error', 'error');
+                        growl(gpt.error, 'error');
                         $('#stop, #copy, #confirm').hide();
                         $('#buttons').show();
                     };
