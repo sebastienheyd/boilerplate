@@ -11,25 +11,17 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
-use Orhanerday\OpenAi\OpenAi;
 
 class GptController
 {
-    public function __construct()
-    {
-        if (class_exists(\Barryvdh\Debugbar\Facades\Debugbar::class)) {
-            \Barryvdh\Debugbar\Facades\Debugbar::disable();
-        }
-    }
-
     /**
      * Show "Generate text with GPT" form.
      *
      * @return Application|Factory|\Illuminate\Contracts\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('boilerplate::gpt.layout');
+        return view('boilerplate::gpt.layout', ['selected' => $request->get('selected') === '1']);
     }
 
     /**
@@ -55,14 +47,21 @@ class GptController
         abort(404);
     }
 
-    private function processRewrite($request)
+    /**
+     * Process rewrite / summarize / ...
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    private function processRewrite(Request $request)
     {
         $validator = Validator::make($request->post(), [
             'original-content' => 'required',
-            'language'         => 'required',
+            'language'         => 'required_if:type,translate',
         ], [], [
             'original-content' => __('boilerplate::gpt.form.rewrite.original'),
             'language'         => __('boilerplate::gpt.form.language'),
+            'translate'        => __('boilerplate::gpt.form.translate'),
         ]);
 
         if ($validator->fails()) {
@@ -76,9 +75,25 @@ class GptController
         $key = 'gpt-' . Str::random();
         Cache::put($key, $this->buildRewritePrompt($request), 90);
 
-        return response()->json(['success' => true, 'prepend' => $request->post('type') === 'title', 'id' => $key]);
+        $json = ['success' => true, 'id' => $key];
+
+        if (in_array($request->post('type'), ['question', 'title'])) {
+            $json['prepend'] = true;
+        }
+
+        if (in_array($request->post('type'), ['conclusion', 'counterargument'])) {
+            $json['append'] = true;
+        }
+
+        return response()->json($json);
     }
 
+    /**
+     * Process wizard.
+     *
+     * @param $request
+     * @return JsonResponse
+     */
     private function processGenerator($request)
     {
         $validator = Validator::make($request->post(), [
@@ -102,9 +117,15 @@ class GptController
         $key = 'gpt-' . Str::random();
         Cache::put($key, $this->buildPrompt($request), 90);
 
-        return response()->json(['success' => true, 'prepend' => true, 'id' => $key]);
+        return response()->json(['success' => true, 'id' => $key]);
     }
 
+    /**
+     * Process raw prompt
+     *
+     * @param $request
+     * @return JsonResponse
+     */
     private function processPrompt($request)
     {
         $validator = Validator::make($request->post(), [
@@ -124,7 +145,7 @@ class GptController
         $key = 'gpt-' . Str::random();
         Cache::put($key, $request->post('prompt'), 90);
 
-        return response()->json(['success' => true, 'prepend' => true, 'id' => $key]);
+        return response()->json(['success' => true, 'id' => $key]);
     }
 
     /**
@@ -141,19 +162,20 @@ class GptController
             abort(404);
         }
 
-        if(connection_aborted()) exit();
+        if (connection_aborted()) {
+            exit();
+        }
 
         ini_set('max_execution_time', 90);
 
         header('Content-Type: text/event-stream');
         header('Cache-Control: no-cache');
 
-        $result = $this->sendRequest($prompt, function ($curl, $data) {
+        $this->sendRequest($prompt, function ($curl, $data) {
             $obj = json_decode($data);
 
             if ($obj && ! empty($obj->error)) {
-                $message = 'OpenAI API Error : ' . $obj->error->message . ' ' . $obj->error->code . ' (' . $obj->error->type . ')';
-                Log::error($message);
+                Log::error('OpenAI API Error : ' . $obj->error->message . ' ' . $obj->error->code . ' (' . $obj->error->type . ')');
             } else {
                 echo $data;
             }
@@ -167,6 +189,8 @@ class GptController
     }
 
     /**
+     * Send curl request to OpenAI Api.
+     *
      * @param $prompt
      * @param $callback
      * @return bool|string
@@ -187,7 +211,7 @@ class GptController
 
         $headers = [
             "Content-Type: application/json",
-            "Authorization: Bearer ".config('boilerplate.app.openai.key')
+            "Authorization: Bearer " . config('boilerplate.app.openai.key'),
         ];
 
         curl_setopt_array($curl, [
@@ -210,8 +234,8 @@ class GptController
         curl_close($curl);
 
         if ($err) {
-            Log::error('OpenAI API Curl error : '.$err);
-            return 'OpenAI API Curl error : '.$err;
+            Log::error('OpenAI API Curl error : ' . $err);
+            return 'OpenAI API Curl error : ' . $err;
         } else {
             return $response;
         }
@@ -252,37 +276,54 @@ class GptController
      */
     private function buildRewritePrompt(Request $request)
     {
-        if ($request->post('type') !== 'translate') {
-            $prompt = 'Act as ' . (empty($request->post('actas')) ? 'the writer of the text. ' : '"' . $request->post('actas') . '". ');
-
-            if (! empty($request->post('pov'))) {
-                $prompt .= 'Point of view: ' . $request->post('pov') . '. ';
-            }
-
-            if (! empty($request->post('tone'))) {
-                $prompt .= 'Tone: ' . $request->post('tone') . '. ';
-            }
-        } else {
-            $prompt = 'Act as a professionnal translator. ';
-        }
-
         switch ($request->post('type')) {
             case 'rewrite':
-                $prompt .= 'Rewrite the following text in "' . $request->post('language') . '" language: "' . $request->post('original-content') . '"';
+                $prompt = '';
+
+                if (! empty($request->post('actas'))) {
+                    $prompt = 'Act as: "' . $request->post('actas') . '". ';
+                }
+
+                if (! empty($request->post('pov'))) {
+                    $prompt .= 'Point of view: ' . $request->post('pov') . '. ';
+                }
+
+                if (! empty($request->post('tone'))) {
+                    $prompt .= 'Tone: ' . $request->post('tone') . '. ';
+                }
+
+                $prompt .= 'Rewrite';
                 break;
 
-            case 'summary':
-                $prompt .= 'Summarize the following text in "' . $request->post('language') . '" language: "' . $request->post('original-content') . '"';
+            case 'summarize':
+            case 'expand':
+            case 'paraphrase':
+                $prompt = ucfirst($request->post('type'));
                 break;
 
+            case 'question':
+            case 'conclusion':
             case 'title':
-                $prompt .= 'Write a title for the following text in "' . $request->post('language') . '" language: "' . $request->post('original-content') . '"';
+            case 'counterargument':
+                $prompt = 'Suggest a ' . $request->post('type') . ' for';
+                break;
+
+            case 'grammar':
+                $prompt = 'Correct grammar and spelling of';
                 break;
 
             case 'translate':
-                $prompt .= 'Translate the following text in "' . $request->post('language') . '" language: "' . $request->post('original-content') . '"';
+                $prompt = 'Act as a professionnal translator. Translate';
                 break;
         }
+
+        $prompt .= ' the following text';
+
+        if (! empty($request->post('language'))) {
+            $prompt .= ' in "' . $request->post('language') . '" language';
+        }
+
+        $prompt .= ': "' . $request->post('original-content') . '"';
 
         return $prompt;
     }

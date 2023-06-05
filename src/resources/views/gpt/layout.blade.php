@@ -31,13 +31,6 @@
     @stack('plugin-js')
 </head>
 <body class="sidebar-mini{{ setting('darkmode', false) && config('boilerplate.theme.darkmode') ? ' dark-mode accent-light' : '' }}">
-    <div id="disable" style="display: none"></div>
-    <div id="loading" style="display: none">
-        <div class="text-center">
-            <span class="fa fa-4x fa-cog fa-spin mb-2"></span>
-            <p>@lang('boilerplate::gpt.generation')</p>
-        </div>
-    </div>
     <div id="content" style="display: none">
         <div id="gpt-result"></div>
         <div class="text-center mt-3">

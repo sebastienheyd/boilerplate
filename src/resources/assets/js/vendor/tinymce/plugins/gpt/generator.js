@@ -18,18 +18,22 @@ window.growl = (message, type) => {
 var eventSource;
 var content = parent.tinymce.activeEditor.selection.getContent({format : 'html'});
 var prepend;
+var append;
 
 $(function() {
     if (content !== '') {
-        $('#nav-gpt-rewrite').show();
         $('.original-content').val($("<textarea/>").html(content).text());
     }
 
     $(document).on('change', '#rewrite-type', function() {
-        $('#rewrite-options').show();
+        $('[data-show-when]').hide().prop('disabled', true);
 
         if ($(this).val() === 'translate') {
-            $('#rewrite-options').hide();
+            $('[data-show-when="translate"]').prop('disabled', false).show();
+        }
+
+        if ($(this).val() === 'rewrite') {
+            $('[data-show-when="rewrite"]').prop('disabled', false).show();
         }
     });
 
@@ -53,6 +57,7 @@ $(function() {
                     $('#content, #stop').show();
                     $('#gpt-result').html('');
                     prepend = json.prepend;
+                    append = json.append;
 
                     eventSource = new EventSource(gpt.stream + '?id=' + json.id);
 
@@ -92,7 +97,7 @@ $(function() {
     })
 
     $(document).on('click', '#copy', function() {
-        navigator.clipboard.writeText($('#gpt-result').html()).then(function() {
+        navigator.clipboard.writeText(parseContent()).then(function() {
             growl(gpt.copy);
         }, function() {
             growl(gpt.copyerror);
@@ -111,8 +116,16 @@ $(function() {
     $(document).on('click', '#confirm', function() {
         window.parent.postMessage({
             mceAction: 'confirmGPTContent',
-            content: $('#gpt-result').html(),
-            prepend: prepend
+            content: parseContent(),
+            prepend: prepend,
+            append: append,
         }, '*');
     })
+
+    let parseContent = function() {
+        content = '<p>' + $('#gpt-result').html() + '</p>';
+        content = content.replace(/<br[^>]*>/gi, '</p><p>')
+        content = content.replace(/<p><\/p>/gi, '');
+        return content;
+    }
 });
