@@ -43,7 +43,6 @@ use Orchestra\Testbench\TestCase as OrchestraTestCase;
 use PHPUnit\Framework\Constraint\DirectoryExists;
 use PHPUnit\Framework\Constraint\FileExists;
 use PHPUnit\Framework\Constraint\LogicalNot;
-use PHPUnit\Framework\Constraint\StringContains;
 use SebastienHeyd\Active\ActiveServiceProvider;
 use Sebastienheyd\Boilerplate\BoilerplateServiceProvider;
 use Spatie\Html\HtmlServiceProvider;

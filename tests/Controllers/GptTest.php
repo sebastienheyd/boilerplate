@@ -3,7 +3,6 @@
 namespace Sebastienheyd\Boilerplate\Tests\Controllers;
 
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Sebastienheyd\Boilerplate\Tests\factories\UserFactory;
 use Sebastienheyd\Boilerplate\Tests\TestCase;
@@ -31,7 +30,7 @@ class GptTest extends TestCase
         UserFactory::create()->admin(true);
 
         $response = $this->post(route('boilerplate.gpt.process', [], false), [
-            'tab' => 'generator'
+            'tab' => 'generator',
         ]);
 
         $response->assertJson(function (AssertableJson $json) {
@@ -79,7 +78,7 @@ class GptTest extends TestCase
         UserFactory::create()->admin(true);
 
         $response = $this->post(route('boilerplate.gpt.process', [], false), [
-            'tab' => 'prompt'
+            'tab' => 'prompt',
         ]);
 
         $response->assertJson(function (AssertableJson $json) {
@@ -119,7 +118,7 @@ class GptTest extends TestCase
         UserFactory::create()->admin(true);
 
         $response = $this->post(route('boilerplate.gpt.process', [], false), [
-            'tab' => 'rewrite'
+            'tab' => 'rewrite',
         ]);
 
         $response->assertJson(function (AssertableJson $json) {
@@ -213,7 +212,7 @@ class GptTest extends TestCase
 
             $json = json_decode($response->getContent());
             $cache = Cache::get($json->id);
-            $this->assertStringContainsString('Suggest a ' . $action, $cache);
+            $this->assertStringContainsString('Suggest a '.$action, $cache);
             $this->assertStringContainsString('This is a test', $cache);
         }
     }
@@ -240,7 +239,7 @@ class GptTest extends TestCase
 
             $json = json_decode($response->getContent());
             $cache = Cache::get($json->id);
-            $this->assertStringContainsString('Suggest a ' . $action, $cache);
+            $this->assertStringContainsString('Suggest a '.$action, $cache);
             $this->assertStringContainsString('This is a test', $cache);
         }
     }
