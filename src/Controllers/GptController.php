@@ -214,6 +214,10 @@ class GptController
             'Authorization: Bearer '.config('boilerplate.app.openai.key'),
         ];
 
+        if (config('boilerplate.app.openai.organization')) {
+            $headers[] = 'OpenAI-Organization: ' . config('boilerplate.app.openai.organization');
+        }
+
         curl_setopt_array($curl, [
             CURLOPT_URL            => 'https://api.openai.com/v1/chat/completions',
             CURLOPT_RETURNTRANSFER => true,
