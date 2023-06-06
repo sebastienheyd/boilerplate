@@ -215,7 +215,7 @@ class GptController
         ];
 
         if (config('boilerplate.app.openai.organization')) {
-            $headers[] = 'OpenAI-Organization: ' . config('boilerplate.app.openai.organization');
+            $headers[] = 'OpenAI-Organization: '.config('boilerplate.app.openai.organization');
         }
 
         curl_setopt_array($curl, [
