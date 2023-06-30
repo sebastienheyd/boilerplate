@@ -18,6 +18,7 @@ use Laratrust\Middleware\LaratrustPermission;
 use Laratrust\Middleware\LaratrustRole;
 use Lavary\Menu\Facade;
 use Lavary\Menu\ServiceProvider as MenuServiceProvider;
+use Sebastienheyd\Boilerplate\Dashboard\UserWidget;
 use Sebastienheyd\Boilerplate\Datatables\Admin\RolesDatatable;
 use Sebastienheyd\Boilerplate\Datatables\Admin\UsersDatatable;
 use Sebastienheyd\Boilerplate\Middleware\BoilerplateImpersonate;
@@ -255,6 +256,7 @@ class BoilerplateServiceProvider extends ServiceProvider
         $this->registerMenu();
         $this->registerNavbarItems();
         $this->registerDatatables();
+        $this->registerDashboardWidgets();
 
         if (version_compare($this->app->version(), '8.0', '>=')) {
             Paginator::useBootstrap();
@@ -309,9 +311,6 @@ class BoilerplateServiceProvider extends ServiceProvider
         }
     }
 
-    /**
-     * Register navbar items repository.
-     */
     private function registerNavbarItems()
     {
         $this->app->singleton('boilerplate.navbar.items', function () {
@@ -321,11 +320,19 @@ class BoilerplateServiceProvider extends ServiceProvider
 
     private function registerDatatables()
     {
-        // Datatables repository singleton
         $this->app->singleton('boilerplate.datatables', function () {
             return new Datatables\DatatablesRepository();
         });
 
         app('boilerplate.datatables')->registerDatatable(UsersDatatable::class, RolesDatatable::class);
+    }
+
+    private function registerDashboardWidgets()
+    {
+        $this->app->singleton('boilerplate.dashboard.widgets', function () {
+            return new Dashboard\DashboardWidgetsRepository();
+        });
+
+        app('boilerplate.dashboard.widgets')->registerWidget(UserWidget::class);
     }
 }

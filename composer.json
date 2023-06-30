@@ -5,7 +5,7 @@
     "type": "library",
     "license": "MIT",
     "require": {
-        "php": ">=7.3",
+        "php": ">=7.4",
         "ext-curl": "*",
         "arcanedev/log-viewer": "^5.0|^7.0|^8.0|^9.0|^10.0",
         "creativeorange/gravatar": "^1.0",

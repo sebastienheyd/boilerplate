@@ -1,9 +1,7 @@
-@extends('boilerplate::layout.index', [
-    'title' => __('boilerplate::layout.dashboard'),
-    'subtitle' => 'Components & plugins demo',
-    'breadcrumb' => ['Components & plugins demo']]
-)
+@extends('boilerplate::layout.index', ['title' => __('boilerplate::layout.dashboard')])
 
 @section('content')
-    @include('boilerplate::plugins.demo')
+<section>
+    <button type="button" class="btn btn-primary">Add a widget</button>
+</section>
 @endsection

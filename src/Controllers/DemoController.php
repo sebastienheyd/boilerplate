@@ -6,7 +6,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 
-class DashboardController
+class DemoController
 {
     /**
      * Show the application dashboard.
@@ -15,11 +15,6 @@ class DashboardController
      */
     public function index()
     {
-        foreach (app('boilerplate.dashboard.widgets')->getWidgets() as $widget) {
-
-        }
-
-
-        return view('boilerplate::dashboard');
+        return view('boilerplate::plugins.demo');
     }
 }
