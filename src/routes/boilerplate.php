@@ -5,6 +5,7 @@ use Sebastienheyd\Boilerplate\Controllers\Auth\LoginController;
 use Sebastienheyd\Boilerplate\Controllers\Auth\RegisterController;
 use Sebastienheyd\Boilerplate\Controllers\Auth\ResetPasswordController;
 use Sebastienheyd\Boilerplate\Controllers\DatatablesController;
+use Sebastienheyd\Boilerplate\Controllers\DashboardController;
 use Sebastienheyd\Boilerplate\Controllers\DemoController;
 use Sebastienheyd\Boilerplate\Controllers\GptController;
 use Sebastienheyd\Boilerplate\Controllers\ImpersonateController;
@@ -73,7 +74,10 @@ Route::group([
         }
 
         // Dashboard
-        Route::get('/', [config('boilerplate.menu.dashboard'), 'index'])->name('dashboard');
+        Route::get('/', [config('boilerplate.menu.dashboard', DashboardController::class), 'index'])->name('dashboard');
+        Route::prefix('dashboard')->as('dashboard.')->group(function () {
+            Route::get('add-widget', [DashboardController::class, 'addWidget'])->name('add-widget');
+        });
 
         // Components demo page
         Route::get('/demo', [DemoController::class, 'index'])->name('demo');

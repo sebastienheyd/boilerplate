@@ -15,11 +15,13 @@ class DashboardController
      */
     public function index()
     {
-        foreach (app('boilerplate.dashboard.widgets')->getWidgets() as $widget) {
-
-        }
-
-
         return view('boilerplate::dashboard');
+    }
+
+    public function addWidget()
+    {
+        $widgets = app('boilerplate.dashboard.widgets')->getWidgets();
+
+        return view('boilerplate::dashboard.widgets', compact('widgets'));
     }
 }
