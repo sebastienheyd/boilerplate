@@ -7,17 +7,5 @@
 @endsection
 
 @push('js')
-@component('boilerplate::minify')
-<script>
-    $('#add-a-widget').on('click', function() {
-        $.ajax({
-            url: '{{ route('boilerplate.dashboard.add-widget') }}',
-            type: 'get',
-            success: function(html){
-                console.log(html)
-            }
-        });
-    })
-</script>
-@endcomponent
+    <script src="{{ mix('dashboard.min.js', '/assets/vendor/boilerplate') }}" data-params="{{ json_encode(['modal_route' => route('boilerplate.dashboard.add-widget')]) }}"></script>
 @endpush

@@ -11,6 +11,7 @@ mix.js('resources/assets/js/bootstrap.js', 'public/bootstrap.min.js');
 mix.js('resources/assets/js/admin-lte.js', 'public/admin-lte.min.js');
 mix.js('resources/assets/js/boilerplate.js', 'public/boilerplate.min.js');
 mix.js('resources/assets/js/avatar.js', 'public/avatar.min.js');
+mix.js('resources/assets/js/dashboard.js', 'public/dashboard.min.js');
 mix.copy('resources/assets/img/favicon.svg', 'public/favicon.svg');
 
 // ============== Log viewer ==============

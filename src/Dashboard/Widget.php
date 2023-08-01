@@ -4,6 +4,7 @@ namespace Sebastienheyd\Boilerplate\Dashboard;
 
 abstract class Widget
 {
+    protected $slug;
     protected $label;
     protected $description;
     protected $permission;
@@ -13,7 +14,7 @@ abstract class Widget
     public function __get($prop)
     {
         if ($prop === 'label' || $prop === 'description') {
-            return __($prop) ?? static::class.' → '.$prop;
+            return __($this->{$prop}) ?: static::class.' → '.$prop;
         }
 
         if (property_exists($this, $prop)) {
