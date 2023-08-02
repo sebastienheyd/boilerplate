@@ -1,0 +1,1 @@
+<x-boilerplate::smallbox color="green" nb="1234" text="Smallbox text" icon="far fa-envelope" link="#" link-text="More informations"/>

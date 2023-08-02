@@ -16,5 +16,14 @@ $('#add-a-widget').on('click', function() {
 
 $(document).on('click', '[data-action="add-widget"]', function(e) {
     dialog.modal('hide');
-    console.log($(this).data('slug'));
+
+    $.ajax({
+        url: params.load_widget,
+        type: 'post',
+        data: { slug: $(this).attr('data-slug') },
+        success: function(html){
+            $('#dashboard-widgets').append(html);
+        }
+    })
+
 })

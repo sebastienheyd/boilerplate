@@ -7,13 +7,14 @@
                     <small class="font-weight-light ml-1 text-md">{{ $subtitle }}</small>
                 @endif
             </h1>
-            <ol class="breadcrumb text-sm">
-                <li class="breadcrumb-item">
-                    <a href="{{ route('boilerplate.dashboard') }}">
-                        {{ __('boilerplate::layout.home') }}
-                    </a>
-                </li>
+            <div>
                 @if(isset($breadcrumb))
+                <ol class="breadcrumb text-sm">
+                    <li class="breadcrumb-item">
+                        <a href="{{ route('boilerplate.dashboard') }}">
+                            {{ __('boilerplate::layout.home') }}
+                        </a>
+                    </li>
                     @foreach($breadcrumb as $label => $route)
                         @if(is_numeric($label))
                             <li class="breadcrumb-item active">{{ $route }}</li>
@@ -23,8 +24,10 @@
                             <li class="breadcrumb-item"><a href="{{ route($route) }}">{{ $label }}</a></li>
                         @endif
                     @endforeach
+                </ol>
                 @endif
-            </ol>
+                @yield('content-header-right')
+            </div>
         </div>
     </div>
 </div>

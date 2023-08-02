@@ -10,6 +10,6 @@ class UserWidget extends Widget
 
     public function render()
     {
-
+        return view('boilerplate::dashboard.usersNumber');
     }
 }

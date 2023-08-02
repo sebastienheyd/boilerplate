@@ -21,7 +21,9 @@ class DashboardWidgetsRepository
                 continue;
             }
 
-            $this->widgets[] = $c;
+            $widget = new $c;
+
+            $this->widgets[$widget->slug] = $widget;
         }
 
         return $this;
@@ -33,12 +35,11 @@ class DashboardWidgetsRepository
             return [];
         }
 
-        $widgets = [];
+        return $this->widgets;
+    }
 
-        foreach ($this->widgets as $widget) {
-            $widgets[] = new $widget;
-        }
-
-        return $widgets;
+    public function getWidget($slug)
+    {
+        return $this->widgets[$slug] ?? false;
     }
 }

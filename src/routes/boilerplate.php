@@ -77,6 +77,7 @@ Route::group([
         Route::get('/', [config('boilerplate.menu.dashboard', DashboardController::class), 'index'])->name('dashboard');
         Route::prefix('dashboard')->as('dashboard.')->group(function () {
             Route::get('add-widget', [DashboardController::class, 'addWidget'])->name('add-widget');
+            Route::post('load-widget', [DashboardController::class, 'loadWidget'])->name('load-widget');
         });
 
         // Components demo page

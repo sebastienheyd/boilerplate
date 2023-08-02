@@ -5,6 +5,7 @@ namespace Sebastienheyd\Boilerplate\Controllers;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
 
 class DashboardController
 {
@@ -15,7 +16,10 @@ class DashboardController
      */
     public function index()
     {
-        return view('boilerplate::dashboard');
+        return view('boilerplate::dashboard', ['params' => json_encode([
+            'modal_route' => route('boilerplate.dashboard.add-widget'),
+            'load_widget' => route('boilerplate.dashboard.load-widget'),
+        ])]);
     }
 
     public function addWidget()
@@ -23,5 +27,22 @@ class DashboardController
         $widgets = app('boilerplate.dashboard.widgets')->getWidgets();
 
         return view('boilerplate::dashboard.widgets', compact('widgets'));
+    }
+
+    public function loadWidget(Request $request)
+    {
+        $widget = app('boilerplate.dashboard.widgets')->getWidget($request->post('slug'));
+
+        $render = $widget->render();
+
+        if (is_string($render)) {
+            return $render;
+        }
+
+        if ($render instanceof \Illuminate\View\View) {
+            return $render->render();
+        }
+
+        return '';
     }
 }
