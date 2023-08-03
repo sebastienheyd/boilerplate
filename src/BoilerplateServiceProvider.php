@@ -215,7 +215,7 @@ class BoilerplateServiceProvider extends ServiceProvider
     public function register()
     {
         // Get config
-        foreach (['app', 'laratrust', 'auth', 'menu', 'theme', 'locale'] as $config) {
+        foreach (['app', 'auth', 'dashboard', 'laratrust', 'locale', 'menu', 'theme'] as $config) {
             $this->mergeConfigFrom(__DIR__."/config/$config.php", "boilerplate.$config");
         }
 

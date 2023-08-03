@@ -16,10 +16,14 @@ class DashboardController
      */
     public function index()
     {
-        return view('boilerplate::dashboard', ['params' => json_encode([
+        $JSparams = json_encode([
             'modal_route' => route('boilerplate.dashboard.add-widget'),
             'load_widget' => route('boilerplate.dashboard.load-widget'),
-        ])]);
+        ]);
+
+        $widgets = [];
+
+        return view('boilerplate::dashboard', compact('JSparams', 'widgets'));
     }
 
     public function addWidget()
