@@ -1,6 +1,7 @@
 let dialog;
 let params = JSON.parse(document.currentScript.getAttribute('data-params'));
 
+// Enabling dashboard edition
 let enableDashboardEdition = function() {
     $('#toggle-dashboard').data('status', 'unlocked').html('<i class="fa-solid fa-lock-open fa-fw"></i>')
 
@@ -9,11 +10,13 @@ let enableDashboardEdition = function() {
     })
 }
 
+// Disabling dashboard edition
 let disableDashboard = function() {
     $('#toggle-dashboard').data('status', 'locked').html('<i class="fa-solid fa-lock fa-fw"></i>');
     $('.add-widget').remove();
 }
 
+// Toggle dashboard edition
 $('#toggle-dashboard').on('click', function() {
     if ($(this).data('status') === 'locked') {
         enableDashboardEdition();
@@ -22,12 +25,14 @@ $('#toggle-dashboard').on('click', function() {
     }
 })
 
+// Enable edition by default if enabled in configuration file
 $(function () {
     if($('#toggle-dashboard').data('status') === 'unlocked') {
         enableDashboardEdition();
     }
 })
 
+// Show widget selection modal
 $(document).on('click', '.add-widget button', function() {
     let line = $(this).closest('[data-line]');
     $.ajax({
@@ -46,6 +51,7 @@ $(document).on('click', '.add-widget button', function() {
     })
 })
 
+// Add widget to the current selected line
 $(document).on('click', '[data-action="add-widget"]', function(e) {
      $.ajax({
         url: params.load_widget,

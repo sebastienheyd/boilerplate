@@ -36,17 +36,11 @@ class DashboardController
     public function loadWidget(Request $request)
     {
         $widget = app('boilerplate.dashboard.widgets')->getWidget($request->post('slug'));
-
         $render = $widget->render();
 
-        if (is_string($render)) {
-            return $render;
-        }
-
-        if ($render instanceof \Illuminate\View\View) {
-            return $render->render();
-        }
-
-        return '';
+        return view('boilerplate::dashboard.widget', [
+            'width' => $widget->width,
+            'content' => is_string($render) ? $render : $render->render()
+        ]);
     }
 }
