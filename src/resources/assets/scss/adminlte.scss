@@ -16,6 +16,8 @@
 @import "~admin-lte/plugins/overlayScrollbars/css/OverlayScrollbars.css";
 @import "~toastr/toastr";
 
+@import "dashboard";
+
 // Toastr opacity
 #toast-container > div {
   opacity: 1;

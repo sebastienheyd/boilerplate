@@ -7,6 +7,7 @@ class UserWidget extends Widget
     protected $slug = 'users-number';
     protected $label = "Nombre d'utilisateurs";
     protected $description = "Affiche le nombre d'utilisateurs avec un accès rapide à la gestion des utilisateurs.";
+    protected $width = 1;
 
     public function render()
     {

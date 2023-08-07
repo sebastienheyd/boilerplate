@@ -1,0 +1,39 @@
+#dashboard-widgets {
+  .dashboard-buttons {
+    margin-bottom: 20px;
+  }
+
+  .dashboard-widget {
+    margin-bottom: 20px;
+
+    .dashboard-widget-tools {
+      z-index: 20000;
+      height: 100%;
+      width: calc(100% - 15px);
+      position: absolute;
+      top: 0;
+      left: 7.5px;
+      background: rgba(0,0,0,.75);
+      color: #FFF;
+      padding: 7.5px;
+      font-size: 1.4rem;
+      line-height: 1.4rem;
+      opacity: 0;
+      transition: opacity .2s ease-in-out;
+    }
+
+    &:hover {
+      .dashboard-widget-tools {
+        opacity: 1;
+      }
+    }
+
+    & > * {
+      margin-bottom: 0 !important;
+    }
+  }
+
+  .d-line-break {
+    flex-basis: 100%;
+  }
+}
