@@ -18,7 +18,7 @@ use Laratrust\Middleware\LaratrustPermission;
 use Laratrust\Middleware\LaratrustRole;
 use Lavary\Menu\Facade;
 use Lavary\Menu\ServiceProvider as MenuServiceProvider;
-use Sebastienheyd\Boilerplate\Dashboard\UserWidget;
+use Sebastienheyd\Boilerplate\Dashboard\Widgets\UserWidget;
 use Sebastienheyd\Boilerplate\Datatables\Admin\RolesDatatable;
 use Sebastienheyd\Boilerplate\Datatables\Admin\UsersDatatable;
 use Sebastienheyd\Boilerplate\Middleware\BoilerplateImpersonate;

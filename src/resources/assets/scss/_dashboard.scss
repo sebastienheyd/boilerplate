@@ -20,6 +20,16 @@
       line-height: 1.4rem;
       opacity: 0;
       transition: opacity .2s ease-in-out;
+
+      i {
+        color: #BBB;
+        cursor: pointer;
+        transition: color .2s ease-in-out;
+
+        &:hover {
+          color: #FFF;
+        }
+      }
     }
 
     &:hover {

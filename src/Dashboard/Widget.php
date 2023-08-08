@@ -8,7 +8,7 @@ abstract class Widget
     protected $label;
     protected $description;
     protected $permission;
-    protected $width = 3;
+    protected $width = ['sm' => 6, 'md' => 6, 'xl' => 4, 'xxl' => 3];
 
     abstract public function render();
 
