@@ -44,6 +44,18 @@
   }
 
   .d-line-break {
+    position: relative;
     flex-basis: 100%;
+    height: 0;
+    padding: 0;
+    margin: 0;
+
+    &.line-edit {
+      height: 20px;
+      font-size: .75rem !important;
+      background: rgba(0,0,0,.25);
+      margin: 0 7.5px 18px 7.5px;
+      padding: 3px;
+    }
   }
 }

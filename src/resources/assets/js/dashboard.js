@@ -3,24 +3,30 @@ let params = JSON.parse(document.currentScript.getAttribute('data-params'));
 
 let widgetTools =
 '<div class="dashboard-widget-tools d-flex flex-column justify-content-between">' +
-'    <div class="d-flex justify-content-between">' +
-'        <i class="fa fa-solid fa-square-plus" data-action="add-before"></i>' +
-'        <i class="fa fa-solid fa-square-plus" data-action="add-after"></i>' +
-'    </div>' +
-'    <div class="d-flex justify-content-center">' +
-'        <i class="fa-solid fa-trash-can" data-action="remove"></i>' +
-'    </div>' +
-'    <div class="d-flex justify-content-between align-items-center">' +
-'        <span>' +
-'            <i class="fa-solid fa-square-caret-left" data-action="move-left"></i>' +
-'            <i class="fa-solid fa-square-caret-right" data-action="move-right"></i>' +
-'        </span>' +
-'        <span><i class="fa-solid fa-share fa-rotate-180" data-action="new-line"></i></span>' +
-'    </div>' +
+    '<div class="d-flex justify-content-between">' +
+        '<i class="fa fa-solid fa-square-plus" data-action="add-before"></i>' +
+        '<i class="fa fa-solid fa-square-plus" data-action="add-after"></i>' +
+    '</div>' +
+    '<div class="d-flex justify-content-center">' +
+        '<i class="fa-solid fa-trash-can" data-action="remove"></i>' +
+    '</div>' +
+    '<div class="d-flex justify-content-between align-items-center">' +
+        '<span>' +
+            '<i class="fa-solid fa-square-caret-left" data-action="move-left"></i>' +
+            '<i class="fa-solid fa-square-caret-right" data-action="move-right"></i>' +
+        '</span>' +
+        '<span>' +
+            '<i class="fa-solid fa-share fa-rotate-180" data-action="new-line"></i>' +
+        '</span>' +
+    '</div>' +
 '</div>'
 
 let newLine =
-'<div class="d-line-break"></div>'
+'<div class="d-line-break line-edit">' +
+    '<div class="dashboard-widget-tools d-flex justify-content-center">' +
+        '<i class="fa-solid fa-trash-can" data-action="remove"></i>' +
+    '</div>' +
+'</div>'
 
 // Enabling dashboard edition
 let enableDashboardEdition = function() {
@@ -93,7 +99,7 @@ $(document).on('click', '[data-action="add-widget"]', function () {
         success: function (html) {
             $('#dashboard-widgets').find('.dashboard-buttons').before(html);
             $('.dashboard-widget-tools').remove();
-            $('.dashboard-widget').append(widgetTools);
+            $('.dashboard-widget').prepend(widgetTools);
             dialog.modal('hide');
             $('[data-action="dashboard-add-line"]').removeClass('d-none')
         }
