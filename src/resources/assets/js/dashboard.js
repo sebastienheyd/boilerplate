@@ -1,6 +1,12 @@
 let dialog;
 let params = JSON.parse(document.currentScript.getAttribute('data-params'));
 
+let buttons =
+'<div class="dashboard-buttons d-flex flex-column justify-content-between">' +
+    '<button class="btn btn-outline-secondary btn-sm mb-2" data-action="select-widget"><i class="fa-solid fa-plus fa-fw"></i></button>' +
+    '<button class="btn btn-outline-secondary btn-sm" data-action="dashboard-add-line"><i class="fa-solid fa-fw fa-rotate-180 fa-share"></i></i></button>' +
+'</div>'
+
 let widgetTools =
 '<div class="dashboard-widget-tools d-flex flex-column justify-content-between">' +
     '<div class="d-flex justify-content-between">' +
@@ -12,7 +18,7 @@ let widgetTools =
     '</div>' +
     '<div class="d-flex justify-content-between align-items-center">' +
         '<span>' +
-            '<i class="fa-solid fa-square-caret-left" data-action="move-left"></i>' +
+            '<i class="fa-solid fa-square-caret-left" data-action="move-left"></i>&nbsp;' +
             '<i class="fa-solid fa-square-caret-right" data-action="move-right"></i>' +
         '</span>' +
         '<span>' +
@@ -21,26 +27,86 @@ let widgetTools =
     '</div>' +
 '</div>'
 
-let newLine =
-'<div class="d-line-break line-edit">' +
-    '<div class="dashboard-widget-tools d-flex justify-content-center">' +
-        '<i class="fa-solid fa-trash-can" data-action="remove"></i>' +
-    '</div>' +
+let newLineTools =
+'<div class="dashboard-widget-tools d-flex justify-content-center">' +
+    '<i class="fa-solid fa-trash-can" data-action="line-remove"></i>' +
 '</div>'
+
+let newLine = '<div class="d-line-break line-edit">' + newLineTools + '</div>'
+
+let placeholder = '<div id="placeholder" class="d-none"></div'
+
+let modal = function() {
+    $.ajax({
+        url: params.modal_route,
+        type: 'get',
+        success: function(html){
+            dialog = bootbox.dialog({
+                message: html,
+                size: 'large',
+                onHide: function () {
+                    $('#placeholder').remove();
+                }
+            })
+        }
+    })
+}
 
 // Enabling dashboard edition
 let enableDashboardEdition = function() {
+    // Toggle lock icon
     $('#toggle-dashboard').data('status', 'unlocked').removeClass('btn-outline-secondary').addClass('btn-danger').html('<i class="fa-solid fa-lock-open fa-fw"></i>')
-    $('#dashboard-widgets').append('<div class="dashboard-buttons d-flex flex-column justify-content-between">' +
-        '<button class="btn btn-outline-secondary btn-sm" data-action="select-widget"><i class="fa-solid fa-plus fa-fw"></i></button>' +
-        '<button class="btn btn-outline-secondary btn-sm d-none" data-action="dashboard-add-line"><i class="fa-solid fa-fw fa-rotate-180 fa-share"></i></i></button>' +
-        '</div>')
+
+    // Add buttons at the end
+    $('#dashboard-widgets').append(buttons)
+
+    // Add edit button to lines
+    $('.d-line-break').addClass('line-edit').html(newLineTools);
+
+    // Add widget tools to all widgets
+    $('.dashboard-widget').prepend(widgetTools);
+
+    // Remove add new line button to widgets preceding a new line
+    $('.d-line-break').prev('.dashboard-widget').find('[data-action="new-line"]').remove()
+
+    // Remove buttons for the last widget
+    $('.dashboard-buttons').prev('.dashboard-widget').find('[data-action="new-line"],[data-action="move-right"],[data-action="add-after"]').remove()
+
+    // No widgets : cannot add a new line
+    if ($('.dashboard-widget').length === 0) {
+        $('[data-action="dashboard-add-line"]').addClass('d-none')
+    }
+
+    // Cannot add a line if the last item is a new line
+    if ($('.dashboard-buttons').prev().hasClass('d-line-break')) {
+        $('.dashboard-buttons [data-action="dashboard-add-line"]').remove()
+    }
+
+    // No move left for the first widget
+    $('#dashboard-widgets .dashboard-widget:first-child').find('[data-action="move-left"]').remove()
+
+    // No move right for the first child if the next item is a new line
+    if ($('#dashboard-widgets .dashboard-widget:first-child').next().hasClass('d-line-break')) {
+        $('#dashboard-widgets .dashboard-widget:first-child').find('[data-action="move-right"]').remove()
+    }
+
+    // Remove empty line if it is the first element
+    if ($('#dashboard-widgets div:first-child').hasClass('d-line-break')) {
+        $('#dashboard-widgets div:first-child').remove()
+    }
 }
 
 // Disabling dashboard edition
-let disableDashboard = function() {
+let disableDashboardEdition = function() {
     $('#toggle-dashboard').data('status', 'locked').removeClass('btn-danger').addClass('btn-outline-secondary').html('<i class="fa-solid fa-lock fa-fw"></i>');
+    $('.dashboard-widget-tools').remove();
+    $('.d-line-break').removeClass('line-edit');
+    $('.dashboard-buttons').remove()
+}
 
+let refreshDashboardEdition = function () {
+    disableDashboardEdition()
+    enableDashboardEdition()
 }
 
 // Toggle dashboard edition
@@ -48,7 +114,7 @@ $('#toggle-dashboard').on('click', function() {
     if ($(this).data('status') === 'locked') {
         enableDashboardEdition();
     } else {
-        disableDashboard();
+        disableDashboardEdition();
     }
 })
 
@@ -59,54 +125,73 @@ $(function () {
     }
 })
 
-// Show widget selection modal
+// Add widget before buttons
 $(document).on('click', '[data-action="select-widget"]', function() {
-    let line = $(this).closest('[data-line]');
+    $('.dashboard-buttons').before(placeholder)
+    modal()
+})
+
+// Add widget after current widget
+$(document).on('click', '[data-action="add-after"]', function() {
+    $(this).closest('.dashboard-widget').after(placeholder)
+    modal()
+})
+
+// Add widget before current widget
+$(document).on('click', '[data-action="add-before"]', function() {
+    $(this).closest('.dashboard-widget').before(placeholder)
+    modal()
+})
+
+// Add widget before current widget
+$(document).on('click', '.dashboard-widget-tools [data-action="move-right"]', function() {
+    let currentWidget = $(this).closest('.dashboard-widget');
+    currentWidget.next().after(currentWidget)
+    refreshDashboardEdition()
+})
+
+// Add widget before current widget
+$(document).on('click', '.dashboard-widget-tools [data-action="move-left"]', function() {
+    let currentWidget = $(this).closest('.dashboard-widget');
+    currentWidget.prev().before(currentWidget)
+    refreshDashboardEdition()
+})
+
+// Add a widget by replacing the placeholder
+$(document).on('click', '[data-action="add-widget"]', function () {
     $.ajax({
-        url: params.modal_route,
-        type: 'get',
-        success: function(html){
-            line.attr('data-active-line', 1);
-            dialog = bootbox.dialog({
-                message: html,
-                size: 'large',
-                onHide: function () {
-                    line.removeAttr('data-active-line');
-                }
-            })
+        url: params.load_widget,
+        type: 'post',
+        data: {slug: $(this).attr('data-slug')},
+        success: function (html) {
+            $('#placeholder').replaceWith(html)
+            refreshDashboardEdition();
+            dialog.modal('hide');
         }
     })
 })
 
 // Remove widget
 $(document).on('click', '.dashboard-widget-tools [data-action="remove"]', function () {
-    $(this).closest('.dashboard-widget').remove();
+    $(this).closest('.dashboard-widget').remove()
+    refreshDashboardEdition()
 })
 
 // Add a new line after current widget
 $(document).on('click', '.dashboard-widget-tools [data-action="new-line"]', function () {
     $(this).closest('.dashboard-widget').after(newLine)
+    refreshDashboardEdition()
 })
 
-// Add a widget at the end of the line
-$(document).on('click', '[data-action="add-widget"]', function () {
-    let currentLine = $('[data-active-line]');
-
-    $.ajax({
-        url: params.load_widget,
-        type: 'post',
-        data: {slug: $(this).attr('data-slug')},
-        success: function (html) {
-            $('#dashboard-widgets').find('.dashboard-buttons').before(html);
-            $('.dashboard-widget-tools').remove();
-            $('.dashboard-widget').prepend(widgetTools);
-            dialog.modal('hide');
-            $('[data-action="dashboard-add-line"]').removeClass('d-none')
-        }
-    })
-})
-
+// Add a line at the end
 $(document).on('click', '[data-action="dashboard-add-line"]', function() {
     $('.dashboard-buttons').before(newLine)
-    $('[data-action="dashboard-add-line"]').addClass('d-none')
+    refreshDashboardEdition()
 })
+
+// Remove an empty line
+$(document).on('click', '[data-action="line-remove"]', function() {
+    $(this).closest('.d-line-break').remove()
+    refreshDashboardEdition()
+})
+

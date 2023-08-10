@@ -1,13 +1,14 @@
 #dashboard-widgets {
   .dashboard-buttons {
     margin-bottom: 20px;
+    margin-left: 7.5px;
   }
 
   .dashboard-widget {
     margin-bottom: 20px;
 
     .dashboard-widget-tools {
-      z-index: 20000;
+      z-index: 1000;
       height: 100%;
       width: calc(100% - 15px);
       position: absolute;
@@ -51,11 +52,26 @@
     margin: 0;
 
     &.line-edit {
-      height: 20px;
+      height: auto;
       font-size: .75rem !important;
-      background: rgba(0,0,0,.25);
+      background: rgba(0,0,0,.15);
       margin: 0 7.5px 18px 7.5px;
-      padding: 3px;
+      padding: 7.5px;
+      transition: background .2s ease-in-out;
+
+      &:hover {
+        background: rgba(0,0,0,.25);
+      }
+
+      i {
+        color: #BBB;
+        cursor: pointer;
+        transition: color .2s ease-in-out;
+
+        &:hover {
+          color: #FFF;
+        }
+      }
     }
   }
 }

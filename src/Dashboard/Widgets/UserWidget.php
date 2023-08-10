@@ -13,6 +13,6 @@ class UserWidget extends Widget
 
     public function render()
     {
-        return view('boilerplate::dashboard.usersNumber');
+        return view('boilerplate::dashboard.usersNumber', ['num' => rand(0,123)]);
     }
 }
