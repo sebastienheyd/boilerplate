@@ -3,6 +3,7 @@
 namespace Sebastienheyd\Boilerplate\Dashboard\Widgets;
 
 use Sebastienheyd\Boilerplate\Dashboard\Widget;
+use Sebastienheyd\Boilerplate\Models\User;
 
 class UserWidget extends Widget
 {
@@ -13,6 +14,6 @@ class UserWidget extends Widget
 
     public function render()
     {
-        return view('boilerplate::dashboard.usersNumber', ['num' => rand(0,123)]);
+        return view('boilerplate::dashboard.usersNumber', ['num' => User::count()]);
     }
 }

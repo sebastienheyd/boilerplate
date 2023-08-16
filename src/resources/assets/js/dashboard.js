@@ -37,9 +37,13 @@ let newLine = '<div class="d-line-break line-edit">' + newLineTools + '</div>'
 let placeholder = '<div id="placeholder" class="d-none"></div'
 
 let modal = function() {
+    let widgets = [];
+    $('[data-widget-name]').each((i, e) => widgets.push($(e).data('widget-name')))
+
     $.ajax({
         url: params.modal_route,
-        type: 'get',
+        type: 'post',
+        data: {widgets: widgets},
         success: function(html){
             dialog = bootbox.dialog({
                 message: html,
@@ -104,9 +108,28 @@ let disableDashboardEdition = function() {
     $('.dashboard-buttons').remove()
 }
 
+let saveWidgets = function () {
+    let widgets = []
+
+    $('#dashboard-widgets > div.dashboard-widget, #dashboard-widgets > div.d-line-break').each(function(i, e) {
+        if(typeof $(e).data('widget-name') !== 'undefined') {
+            widgets.push($(e).data('widget-name'))
+        } else {
+            widgets.push('line-break');
+        }
+    })
+
+    $.ajax({
+        url: params.save_widgets,
+        type: 'post',
+        data: {widgets: JSON.stringify(widgets)}
+    })
+}
+
 let refreshDashboardEdition = function () {
     disableDashboardEdition()
     enableDashboardEdition()
+    saveWidgets()
 }
 
 // Toggle dashboard edition
@@ -165,8 +188,8 @@ $(document).on('click', '[data-action="add-widget"]', function () {
         data: {slug: $(this).attr('data-slug')},
         success: function (html) {
             $('#placeholder').replaceWith(html)
-            refreshDashboardEdition();
-            dialog.modal('hide');
+            refreshDashboardEdition()
+            dialog.modal('hide')
         }
     })
 })
@@ -175,6 +198,12 @@ $(document).on('click', '[data-action="add-widget"]', function () {
 $(document).on('click', '.dashboard-widget-tools [data-action="remove"]', function () {
     $(this).closest('.dashboard-widget').remove()
     refreshDashboardEdition()
+})
+
+$(document).on('click', '[data-action=remove-widget]', function () {
+    $('[data-widget-name="'+$(this).data('slug')+'"]').remove()
+    refreshDashboardEdition()
+    dialog.modal('hide');
 })
 
 // Add a new line after current widget

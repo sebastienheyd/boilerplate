@@ -8,7 +8,11 @@
                 <small class="text-muted">{{ $widget->description }}</small>
             </td>
             <td class="align-middle text-right">
-                <button type="button" class="btn btn-primary" data-action="add-widget" data-slug="{{ $widget->slug }}">Ajouter</button>
+                @if(in_array($widget->slug, $installed ?? []))
+                <button type="button" class="btn btn-outline-secondary" data-action="remove-widget" data-slug="{{ $widget->slug }}">Désinstaller</button>
+                @else
+                <button type="button" class="btn btn-primary" data-action="add-widget" data-slug="{{ $widget->slug }}">Installer</button>
+                @endif()
             </td>
         </tr>
     @endif()

@@ -6,7 +6,7 @@
     <div class="icon"><i class="{{ $icon ?? 'fas fa-cubes' }}"></i></div>
 @if(!empty($link))
     <a href="{!! $link !!}" class="small-box-footer">
-        @lang($linkText ?? '') <i class="fas fa-arrow-circle-right"></i>
+        @lang($linkText ?? '')&nbsp;<i class="fas fa-arrow-circle-right ml-1"></i>
     </a>
 @endif
 </div>
