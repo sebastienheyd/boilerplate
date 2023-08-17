@@ -5,15 +5,19 @@ namespace Sebastienheyd\Boilerplate\Dashboard\Widgets;
 use Sebastienheyd\Boilerplate\Dashboard\Widget;
 use Sebastienheyd\Boilerplate\Models\User;
 
-class UserWidget extends Widget
+class UsersNumber extends Widget
 {
     protected $slug = 'users-number';
     protected $label = "Nombre d'utilisateurs";
     protected $description = "Affiche le nombre d'utilisateurs avec un accès rapide à la gestion des utilisateurs.";
-    protected $width = ['sm' => 6, 'md' => 6, 'xl' => 4, 'xxl' => 3];
+    protected $size = 'xs';
+    protected $parameters = [
+        'color' => 'primary',
+    ];
 
     public function render()
     {
-        return view('boilerplate::dashboard.usersNumber', ['num' => User::count()]);
+        $params = array_merge($this->parameters, ['num' => User::count()]);
+        return view('boilerplate::dashboard.widgets.usersNumber', $params);
     }
 }

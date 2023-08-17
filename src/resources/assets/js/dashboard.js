@@ -2,41 +2,41 @@ let dialog;
 let params = JSON.parse(document.currentScript.getAttribute('data-params'));
 
 let buttons =
-'<div class="dashboard-buttons d-flex flex-column justify-content-between">' +
+    '<div class="dashboard-buttons d-flex flex-column justify-content-between">' +
     '<button class="btn btn-outline-secondary btn-sm mb-2" data-action="select-widget"><i class="fa-solid fa-plus fa-fw"></i></button>' +
     '<button class="btn btn-outline-secondary btn-sm" data-action="dashboard-add-line"><i class="fa-solid fa-fw fa-rotate-180 fa-share"></i></i></button>' +
-'</div>'
+    '</div>'
 
 let widgetTools =
-'<div class="dashboard-widget-tools d-flex flex-column justify-content-between">' +
+    '<div class="dashboard-widget-tools d-flex flex-column justify-content-between">' +
     '<div class="d-flex justify-content-between">' +
-        '<i class="fa fa-solid fa-square-plus" data-action="add-before"></i>' +
-        '<i class="fa fa-solid fa-square-plus" data-action="add-after"></i>' +
+    '<i class="fa fa-solid fa-square-plus" data-action="add-before"></i>' +
+    '<i class="fa fa-solid fa-square-plus" data-action="add-after"></i>' +
     '</div>' +
     '<div class="d-flex justify-content-center">' +
-        '<i class="fa-solid fa-trash-can" data-action="remove"></i>' +
+    '<i class="fa-solid fa-trash-can" data-action="remove"></i>' +
     '</div>' +
     '<div class="d-flex justify-content-between align-items-center">' +
-        '<span>' +
-            '<i class="fa-solid fa-square-caret-left" data-action="move-left"></i>&nbsp;' +
-            '<i class="fa-solid fa-square-caret-right" data-action="move-right"></i>' +
-        '</span>' +
-        '<span>' +
-            '<i class="fa-solid fa-share fa-rotate-180" data-action="new-line"></i>' +
-        '</span>' +
+    '<span>' +
+    '<i class="fa-solid fa-square-caret-left" data-action="move-left"></i>&nbsp;' +
+    '<i class="fa-solid fa-square-caret-right" data-action="move-right"></i>' +
+    '</span>' +
+    '<span>' +
+    '<i class="fa-solid fa-share fa-rotate-180" data-action="new-line"></i>' +
+    '</span>' +
     '</div>' +
-'</div>'
+    '</div>'
 
 let newLineTools =
-'<div class="dashboard-widget-tools d-flex justify-content-center">' +
+    '<div class="dashboard-widget-tools d-flex justify-content-center">' +
     '<i class="fa-solid fa-trash-can" data-action="line-remove"></i>' +
-'</div>'
+    '</div>'
 
 let newLine = '<div class="d-line-break line-edit">' + newLineTools + '</div>'
 
 let placeholder = '<div id="placeholder" class="d-none"></div'
 
-let modal = function() {
+let modal = function () {
     let widgets = [];
     $('[data-widget-name]').each((i, e) => widgets.push($(e).data('widget-name')))
 
@@ -44,7 +44,7 @@ let modal = function() {
         url: params.modal_route,
         type: 'post',
         data: {widgets: widgets},
-        success: function(html){
+        success: function (html) {
             dialog = bootbox.dialog({
                 message: html,
                 size: 'large',
@@ -57,7 +57,7 @@ let modal = function() {
 }
 
 // Enabling dashboard edition
-let enableDashboardEdition = function() {
+let enableDashboardEdition = function () {
     // Toggle lock icon
     $('#toggle-dashboard').data('status', 'unlocked').removeClass('btn-outline-secondary').addClass('btn-danger').html('<i class="fa-solid fa-lock-open fa-fw"></i>')
 
@@ -101,7 +101,7 @@ let enableDashboardEdition = function() {
 }
 
 // Disabling dashboard edition
-let disableDashboardEdition = function() {
+let disableDashboardEdition = function () {
     $('#toggle-dashboard').data('status', 'locked').removeClass('btn-danger').addClass('btn-outline-secondary').html('<i class="fa-solid fa-lock fa-fw"></i>');
     $('.dashboard-widget-tools').remove();
     $('.d-line-break').removeClass('line-edit');
@@ -111,13 +111,18 @@ let disableDashboardEdition = function() {
 let saveWidgets = function () {
     let widgets = []
 
-    $('#dashboard-widgets > div.dashboard-widget, #dashboard-widgets > div.d-line-break').each(function(i, e) {
-        if(typeof $(e).data('widget-name') !== 'undefined') {
-            widgets.push($(e).data('widget-name'))
+    $('#dashboard-widgets > div.dashboard-widget, #dashboard-widgets > div.d-line-break').each(function (i, e) {
+        let name = $(e).data('widget-name');
+
+        if (name !== undefined) {
+            let widgetParams = $(e).data('widget-parameters');
+            let widget = {[name]: widgetParams ? JSON.parse(widgetParams) : {}};
+
+            widgets.push(widget);
         } else {
-            widgets.push('line-break');
+            widgets.push({'line-break': {}});
         }
-    })
+    });
 
     $.ajax({
         url: params.save_widgets,
@@ -133,7 +138,7 @@ let refreshDashboardEdition = function () {
 }
 
 // Toggle dashboard edition
-$('#toggle-dashboard').on('click', function() {
+$('#toggle-dashboard').on('click', function () {
     if ($(this).data('status') === 'locked') {
         enableDashboardEdition();
     } else {
@@ -143,38 +148,38 @@ $('#toggle-dashboard').on('click', function() {
 
 // Enable edition by default if enabled in configuration file
 $(function () {
-    if($('#toggle-dashboard').data('status') === 'unlocked') {
+    if ($('#toggle-dashboard').data('status') === 'unlocked') {
         enableDashboardEdition();
     }
 })
 
 // Add widget before buttons
-$(document).on('click', '[data-action="select-widget"]', function() {
+$(document).on('click', '[data-action="select-widget"]', function () {
     $('.dashboard-buttons').before(placeholder)
     modal()
 })
 
 // Add widget after current widget
-$(document).on('click', '[data-action="add-after"]', function() {
+$(document).on('click', '[data-action="add-after"]', function () {
     $(this).closest('.dashboard-widget').after(placeholder)
     modal()
 })
 
 // Add widget before current widget
-$(document).on('click', '[data-action="add-before"]', function() {
+$(document).on('click', '[data-action="add-before"]', function () {
     $(this).closest('.dashboard-widget').before(placeholder)
     modal()
 })
 
 // Add widget before current widget
-$(document).on('click', '.dashboard-widget-tools [data-action="move-right"]', function() {
+$(document).on('click', '.dashboard-widget-tools [data-action="move-right"]', function () {
     let currentWidget = $(this).closest('.dashboard-widget');
     currentWidget.next().after(currentWidget)
     refreshDashboardEdition()
 })
 
 // Add widget before current widget
-$(document).on('click', '.dashboard-widget-tools [data-action="move-left"]', function() {
+$(document).on('click', '.dashboard-widget-tools [data-action="move-left"]', function () {
     let currentWidget = $(this).closest('.dashboard-widget');
     currentWidget.prev().before(currentWidget)
     refreshDashboardEdition()
@@ -201,7 +206,7 @@ $(document).on('click', '.dashboard-widget-tools [data-action="remove"]', functi
 })
 
 $(document).on('click', '[data-action=remove-widget]', function () {
-    $('[data-widget-name="'+$(this).data('slug')+'"]').remove()
+    $('[data-widget-name="' + $(this).data('slug') + '"]').remove()
     refreshDashboardEdition()
     dialog.modal('hide');
 })
@@ -213,13 +218,13 @@ $(document).on('click', '.dashboard-widget-tools [data-action="new-line"]', func
 })
 
 // Add a line at the end
-$(document).on('click', '[data-action="dashboard-add-line"]', function() {
+$(document).on('click', '[data-action="dashboard-add-line"]', function () {
     $('.dashboard-buttons').before(newLine)
     refreshDashboardEdition()
 })
 
 // Remove an empty line
-$(document).on('click', '[data-action="line-remove"]', function() {
+$(document).on('click', '[data-action="line-remove"]', function () {
     $(this).closest('.d-line-break').remove()
     refreshDashboardEdition()
 })

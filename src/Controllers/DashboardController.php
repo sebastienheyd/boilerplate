@@ -24,7 +24,9 @@ class DashboardController
 
         $widgets = [];
 
-        foreach (auth()->user()->setting('dashboard', []) as $widget) {
+        foreach (auth()->user()->setting('dashboard', config('boilerplate.dashboard.widgets')) as $widget) {
+            [$widget, $params] = [array_key_first($widget), $widget[array_key_first($widget)]];
+
             if ($widget === 'line-break') {
                 $widgets[] = '<div class="d-line-break"></div>';
                 continue;
@@ -32,11 +34,11 @@ class DashboardController
 
             $widget = app('boilerplate.dashboard.widgets')->getWidget($widget);
 
-            if ($widget->permission !== null && ! Auth::user()->ability('admin', $widget->permission)) {
+            if ($widget === false || ($widget->permission !== null && ! Auth::user()->ability('admin', $widget->permission))) {
                 continue;
             }
 
-            $render = $widget->render();
+            $render = $widget->make($params);
 
             $widgets[] = view('boilerplate::dashboard.widget', [
                 'widget'  => $widget,
