@@ -1,4 +1,5 @@
 let dialog;
+let editDialog;
 let params = JSON.parse(document.currentScript.getAttribute('data-params'));
 
 let buttons =
@@ -14,6 +15,7 @@ let widgetTools =
     '<i class="fa fa-solid fa-square-plus" data-action="add-after"></i>' +
     '</div>' +
     '<div class="d-flex justify-content-center">' +
+    '<i class="fa-solid fa-wrench mr-3 d-none" data-action="settings"></i>' +
     '<i class="fa-solid fa-trash-can" data-action="remove"></i>' +
     '</div>' +
     '<div class="d-flex justify-content-between align-items-center">' +
@@ -98,6 +100,8 @@ let enableDashboardEdition = function () {
     if ($('#dashboard-widgets div:first-child').hasClass('d-line-break')) {
         $('#dashboard-widgets div:first-child').remove()
     }
+
+    $('#dashboard-widgets .dashboard-widget[data-widget-edit="yes"]').find('[data-action="settings"]').removeClass('d-none')
 }
 
 // Disabling dashboard edition
@@ -197,6 +201,38 @@ $(document).on('click', '[data-action="add-widget"]', function () {
             dialog.modal('hide')
         }
     })
+})
+
+$(document).on('click', '[data-action="settings"]', function() {
+    $.ajax({
+        url: params.edit_widget,
+        type: 'post',
+        data: {slug: $(this).closest('.dashboard-widget').attr('data-widget-name')},
+        success: function (html) {
+            editDialog = bootbox.dialog({
+                message: html,
+                size: 'large',
+                closeButton: false,
+            })
+        }
+    })
+})
+
+$(document).on('click', '[data-action="update-widget"]', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    $.ajax({
+        url: params.update_widget,
+        type: 'post',
+        data: $(this).closest('form').serialize(),
+        success: function () {
+
+        }
+    })
+})
+$(document).on('click', '[data-action="undo-update"]', function () {
+    editDialog.modal('hide')
 })
 
 // Remove widget

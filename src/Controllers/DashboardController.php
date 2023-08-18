@@ -17,32 +17,34 @@ class DashboardController
     public function index()
     {
         $JSparams = json_encode([
-            'modal_route'  => route('boilerplate.dashboard.add-widget'),
-            'load_widget'  => route('boilerplate.dashboard.load-widget'),
-            'save_widgets' => route('boilerplate.dashboard.save-widgets'),
+            'modal_route'   => route('boilerplate.dashboard.add-widget'),
+            'load_widget'   => route('boilerplate.dashboard.load-widget'),
+            'save_widgets'  => route('boilerplate.dashboard.save-widgets'),
+            'edit_widget'   => route('boilerplate.dashboard.edit-widget'),
+            'update_widget' => route('boilerplate.dashboard.update-widget'),
         ]);
 
         $widgets = [];
 
         foreach (auth()->user()->setting('dashboard', config('boilerplate.dashboard.widgets')) as $widget) {
-            [$widget, $params] = [array_key_first($widget), $widget[array_key_first($widget)]];
+            [$widgetSlug, $params] = [array_key_first($widget), $widget[array_key_first($widget)]];
 
-            if ($widget === 'line-break') {
+            if ($widgetSlug === 'line-break') {
                 $widgets[] = '<div class="d-line-break"></div>';
                 continue;
             }
 
-            $widget = app('boilerplate.dashboard.widgets')->getWidget($widget);
+            $widget = app('boilerplate.dashboard.widgets')->getWidget($widgetSlug);
 
-            if ($widget === false || ($widget->permission !== null && ! Auth::user()->ability('admin', $widget->permission))) {
+            if (! $widget || ! $widget->isAuthorized()) {
                 continue;
             }
 
-            $render = $widget->make($params);
+            $widget->setParameter($params)->make();
 
             $widgets[] = view('boilerplate::dashboard.widget', [
                 'widget'  => $widget,
-                'content' => is_string($render) ? $render : $render->render()
+                'content' => $widget->render()
             ])->render();
         }
 
@@ -61,16 +63,55 @@ class DashboardController
     {
         $widget = app('boilerplate.dashboard.widgets')->getWidget($request->post('slug'));
 
-        if ($widget->permission !== null && ! Auth::user()->ability('admin', $widget->permission)) {
-            return '';
+        if (! $widget || ! $widget->isAuthorized()) {
+            abort(404);
         }
-
-        $render = $widget->render();
 
         return view('boilerplate::dashboard.widget', [
             'widget'  => $widget,
-            'content' => is_string($render) ? $render : $render->render()
         ]);
+    }
+
+    public function editWidget(Request $request)
+    {
+        $widget = app('boilerplate.dashboard.widgets')->getWidget($request->post('slug'));
+
+        if (! $widget || ! $widget->isAuthorized()) {
+            abort(404);
+        }
+
+        foreach (auth()->user()->setting('dashboard', config('boilerplate.dashboard.widgets')) as $widgetParameters) {
+            [$widgetSlug, $params] = [array_key_first($widgetParameters), $widgetParameters[array_key_first($widgetParameters)]];
+
+            if ($widgetSlug !== $request->post('slug')) {
+                continue;
+            }
+
+            $params = array_merge($widget->getParameters(), $params);
+        }
+
+        return view('boilerplate::dashboard.widgetEdit', [
+            'widget'  => $widget,
+            'params' => $params,
+        ]);
+    }
+
+    public function updateWidget(Request $request)
+    {
+        $widget = app('boilerplate.dashboard.widgets')->getWidget($request->post('widget-slug'));
+
+        $params = $request->except('widget-slug', '_token');
+
+        $settings = [];
+
+        foreach ($widget->getParameters() as $k => $v) {
+            if (! ($params[$k] ?? false) || $params[$k] === $v) {
+                continue;
+            }
+
+            $settings[$k] = $params[$k];
+        }
+        dd($settings);
     }
 
     public function saveWidgets(Request $request)

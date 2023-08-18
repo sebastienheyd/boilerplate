@@ -10,19 +10,68 @@ abstract class Widget
     protected $permission;
     protected $size = 'md';
     protected $width;
+    protected $view;
+    protected $editView;
     protected $parameters = [];
+    private $values = [];
 
-    abstract public function render();
+    abstract public function make();
 
-    public function make($params = [])
+    protected function assign($name, $value = null)
     {
-        foreach ($params as $k => $v) {
-            if (in_array($k, array_keys($this->parameters))) {
-                $this->parameters[$k] = $v;
+        if (is_string($name)) {
+            if (empty($value)) {
+                return $this;
             }
+
+            $name = [$name => $value];
         }
 
-        return $this->render();
+        $this->values = array_merge($this->values, $name);
+
+        return $this;
+    }
+
+    public function render()
+    {
+        $parameters = array_merge($this->parameters, $this->values);
+        return view($this->view, $parameters)->render();
+    }
+
+    public function renderEdit($values = [])
+    {
+        $parameters = array_merge($this->parameters, $values);
+        return view($this->editView, $parameters)->render();
+    }
+
+    public function isAuthorized()
+    {
+        return empty($this->permission) || Auth::user()->ability('admin', $this->permission);
+    }
+
+    public function isEditable()
+    {
+        return ! empty($this->parameters) && ! empty($this->editView);
+    }
+
+    public function setParameter($name, $value = null)
+    {
+        if (is_string($name)) {
+            if (empty($value)) {
+                return $this;
+            }
+
+            $name = [$name => $value];
+        }
+
+        $this->parameters = array_merge($this->parameters, $name);
+
+        return $this;
+    }
+
+    public function getParameters()
+    {
+        return $this->parameters;
     }
 
     public function __get($prop)

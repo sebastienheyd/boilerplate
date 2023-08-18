@@ -11,13 +11,15 @@ class UsersNumber extends Widget
     protected $label = "Nombre d'utilisateurs";
     protected $description = "Affiche le nombre d'utilisateurs avec un accès rapide à la gestion des utilisateurs.";
     protected $size = 'xs';
+    protected $view = 'boilerplate::dashboard.widgets.usersNumber';
+    protected $editView = 'boilerplate::dashboard.widgets.usersNumberEdit';
     protected $parameters = [
-        'color' => 'primary',
+        'color'    => 'primary',
+        'showLink' => true,
     ];
 
-    public function render()
+    public function make()
     {
-        $params = array_merge($this->parameters, ['num' => User::count()]);
-        return view('boilerplate::dashboard.widgets.usersNumber', $params);
+        $this->assign('num', User::count());
     }
 }
