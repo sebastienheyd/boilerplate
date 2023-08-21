@@ -40,7 +40,7 @@ class DashboardController
                 continue;
             }
 
-            $widget->setParameter($params)->make();
+            $widget->set($params)->make();
 
             $widgets[] = view('boilerplate::dashboard.widget', [
                 'widget'  => $widget,
@@ -61,62 +61,113 @@ class DashboardController
 
     public function loadWidget(Request $request)
     {
-        $widget = app('boilerplate.dashboard.widgets')->getWidget($request->post('slug'));
+        $widget = $this->getWidgetOrFail($request->post('slug'));
 
-        if (! $widget || ! $widget->isAuthorized()) {
-            abort(404);
-        }
+        $widget->make();
 
         return view('boilerplate::dashboard.widget', [
-            'widget'  => $widget,
+            'widget' => $widget,
         ]);
     }
 
     public function editWidget(Request $request)
     {
-        $widget = app('boilerplate.dashboard.widgets')->getWidget($request->post('slug'));
+        $widget = $this->getWidgetOrFail($request->post('slug'));
 
-        if (! $widget || ! $widget->isAuthorized()) {
-            abort(404);
-        }
+        $request->session()->forget('_old_input');
 
-        foreach (auth()->user()->setting('dashboard', config('boilerplate.dashboard.widgets')) as $widgetParameters) {
-            [$widgetSlug, $params] = [array_key_first($widgetParameters), $widgetParameters[array_key_first($widgetParameters)]];
-
-            if ($widgetSlug !== $request->post('slug')) {
-                continue;
-            }
-
-            $params = array_merge($widget->getParameters(), $params);
-        }
+        $params = $this->getWidgetUserSettings($request->post('slug'));
+        $params = array_merge($widget->getParameters(), $params);
 
         return view('boilerplate::dashboard.widgetEdit', [
-            'widget'  => $widget,
+            'widget' => $widget,
             'params' => $params,
         ]);
     }
 
     public function updateWidget(Request $request)
     {
-        $widget = app('boilerplate.dashboard.widgets')->getWidget($request->post('widget-slug'));
+        $widget = $this->getWidgetOrFail($request->post('widget-slug'));
 
-        $params = $request->except('widget-slug', '_token');
+        if (method_exists($widget, 'validator')) {
+            $validator = $widget->validator($request);
+
+            if ($validator->fails()) {
+                $request->flash();
+                $view = view($widget->getEditView())->withErrors($validator->errors());
+                view()->share('errors', $view->errors);
+
+                return response()->json(['success' => false, 'view' => $view->render()]);
+            }
+        }
+
+        $input = $request->except('widget-slug', '_token');
 
         $settings = [];
 
         foreach ($widget->getParameters() as $k => $v) {
-            if (! ($params[$k] ?? false) || $params[$k] === $v) {
+            if (! ($input[$k] ?? false) || $input[$k] === $v) {
                 continue;
             }
 
-            $settings[$k] = $params[$k];
+            $settings[$k] = $input[$k];
         }
-        dd($settings);
+
+        $this->setWidgetUserSettings($request->post('widget-slug'), $settings);
+        $widget->set($settings)->make();
+
+        return response()->json([
+            'success'  => true,
+            'slug'     => $request->post('widget-slug'),
+            'settings' => json_encode($settings),
+            'widget'   => $widget->render()
+        ]);
     }
 
     public function saveWidgets(Request $request)
     {
         $widgets = json_decode($request->post('widgets'));
         auth()->user()->setting(['dashboard' => $widgets]);
+    }
+
+    private function getWidgetOrFail($slug)
+    {
+        $widget = app('boilerplate.dashboard.widgets')->getWidget($slug);
+
+        if (! $widget || ! $widget->isAuthorized()) {
+            abort(404);
+        }
+
+        return $widget;
+    }
+
+    private function getWidgetUserSettings($slug)
+    {
+        foreach (auth()->user()->setting('dashboard', config('boilerplate.dashboard.widgets')) as $widgetParameters) {
+            [$widgetSlug, $settings] = [array_key_first($widgetParameters), $widgetParameters[array_key_first($widgetParameters)]];
+            if ($widgetSlug === $slug) {
+                return $settings;
+            }
+        }
+
+        return [];
+    }
+
+    private function setWidgetUserSettings($slug, $settings)
+    {
+        $widgets = auth()->user()->setting('dashboard', config('boilerplate.dashboard.widgets'));
+
+        foreach ($widgets as $k => $widgetParameters) {
+            if (array_key_first($widgetParameters) === $slug) {
+                $widgets[$k] = [$slug => $settings];
+                auth()->user()->setting(['dashboard' => $widgets]);
+                return true;
+            }
+        }
+
+        $widgets[] = [$slug => $settings];
+        auth()->user()->setting(['dashboard' => $widgets]);
+
+        return true;
     }
 }

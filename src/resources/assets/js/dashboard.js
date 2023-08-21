@@ -116,15 +116,15 @@ let saveWidgets = function () {
     let widgets = []
 
     $('#dashboard-widgets > div.dashboard-widget, #dashboard-widgets > div.d-line-break').each(function (i, e) {
-        let name = $(e).data('widget-name');
+        let name = $(e).data('widget-name')
 
         if (name !== undefined) {
-            let widgetParams = $(e).data('widget-parameters');
-            let widget = {[name]: widgetParams ? JSON.parse(widgetParams) : {}};
+            let widgetParams = $(e).data('widget-parameters')
+            let widget = {[name]: widgetParams ? widgetParams : {}}
 
-            widgets.push(widget);
+            widgets.push(widget)
         } else {
-            widgets.push({'line-break': {}});
+            widgets.push({'line-break': {}})
         }
     });
 
@@ -226,8 +226,14 @@ $(document).on('click', '[data-action="update-widget"]', function (e) {
         url: params.update_widget,
         type: 'post',
         data: $(this).closest('form').serialize(),
-        success: function () {
-
+        success: function (res) {
+            if (res.success === false) {
+                $('#widget-edition-form').html(res.view);
+            } else {
+                $('[data-widget-name="'+res.slug+'"]').html(res.widget).data('widget-parameters', JSON.parse(res.settings))
+                refreshDashboardEdition()
+                editDialog.modal('hide')
+            }
         }
     })
 })

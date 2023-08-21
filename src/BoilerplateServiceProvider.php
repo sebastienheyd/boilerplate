@@ -18,6 +18,7 @@ use Laratrust\Middleware\LaratrustPermission;
 use Laratrust\Middleware\LaratrustRole;
 use Lavary\Menu\Facade;
 use Lavary\Menu\ServiceProvider as MenuServiceProvider;
+use Sebastienheyd\Boilerplate\Dashboard\Widgets\LatestErrors;
 use Sebastienheyd\Boilerplate\Dashboard\Widgets\UsersNumber;
 use Sebastienheyd\Boilerplate\Datatables\Admin\RolesDatatable;
 use Sebastienheyd\Boilerplate\Datatables\Admin\UsersDatatable;
@@ -333,6 +334,9 @@ class BoilerplateServiceProvider extends ServiceProvider
             return new Dashboard\DashboardWidgetsRepository();
         });
 
-        app('boilerplate.dashboard.widgets')->registerWidget(UsersNumber::class);
+        app('boilerplate.dashboard.widgets')->registerWidget(
+            UsersNumber::class,
+            LatestErrors::class,
+        );
     }
 }

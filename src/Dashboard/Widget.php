@@ -13,6 +13,7 @@ abstract class Widget
     protected $view;
     protected $editView;
     protected $parameters = [];
+    private $settings = [];
     private $values = [];
 
     abstract public function make();
@@ -32,10 +33,42 @@ abstract class Widget
         return $this;
     }
 
+    public function set($name, $value = null)
+    {
+        if (is_string($name)) {
+            if (empty($value)) {
+                return $this;
+            }
+
+            $name = [$name => $value];
+        }
+
+        $this->settings = array_merge($this->settings, $name);
+
+        return $this;
+    }
+
+    public function getSettings()
+    {
+        foreach (auth()->user()->setting('dashboard', config('boilerplate.dashboard.widgets')) as $widgetParameters) {
+            [$widgetSlug, $settings] = [array_key_first($widgetParameters), $widgetParameters[array_key_first($widgetParameters)]];
+            if ($widgetSlug === $this->slug) {
+                return array_merge($settings, $this->settings);
+            }
+        }
+
+        return $this->settings;
+    }
+
     public function render()
     {
-        $parameters = array_merge($this->parameters, $this->values);
+        $parameters = array_merge($this->parameters, $this->settings, $this->values);
         return view($this->view, $parameters)->render();
+    }
+
+    public function getEditView()
+    {
+        return $this->editView ?? false;
     }
 
     public function renderEdit($values = [])
@@ -52,21 +85,6 @@ abstract class Widget
     public function isEditable()
     {
         return ! empty($this->parameters) && ! empty($this->editView);
-    }
-
-    public function setParameter($name, $value = null)
-    {
-        if (is_string($name)) {
-            if (empty($value)) {
-                return $this;
-            }
-
-            $name = [$name => $value];
-        }
-
-        $this->parameters = array_merge($this->parameters, $name);
-
-        return $this;
     }
 
     public function getParameters()

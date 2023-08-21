@@ -1,1 +1,1 @@
-<x-boilerplate::smallbox :color="$color" :nb="$num" text="Users" icon="fa-solid fa-users" :link="route('boilerplate.users.index')" link-text="Manage users" />
+<x-boilerplate::smallbox :color="$color" :nb="$num" text="boilerplate::widgets.users-number.users" icon="fa-solid fa-users" :link="route('boilerplate.users.index')" link-text="boilerplate::widgets.users-number.link" />

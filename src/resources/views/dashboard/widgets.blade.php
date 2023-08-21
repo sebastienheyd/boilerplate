@@ -9,9 +9,9 @@
             </td>
             <td class="align-middle text-right">
                 @if(in_array($widget->slug, $installed ?? []))
-                <button type="button" class="btn btn-outline-secondary" data-action="remove-widget" data-slug="{{ $widget->slug }}">Désinstaller</button>
+                <button type="button" class="btn btn-outline-secondary" data-action="remove-widget" data-slug="{{ $widget->slug }}">@lang('boilerplate::widgets.uninstall')</button>
                 @else
-                <button type="button" class="btn btn-primary" data-action="add-widget" data-slug="{{ $widget->slug }}">Installer</button>
+                <button type="button" class="btn btn-primary" data-action="add-widget" data-slug="{{ $widget->slug }}">@lang('boilerplate::widgets.install')</button>
                 @endif()
             </td>
         </tr>
