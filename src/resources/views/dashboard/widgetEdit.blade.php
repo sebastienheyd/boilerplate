@@ -4,7 +4,7 @@
         {!! $widget->renderEdit($params ?? []) !!}
     </div>
     <div class="d-flex justify-content-end">
-        <button type="button" class="btn btn-outline-secondary mr-3" data-action="undo-update">@lang('boilerplate::widgets.cancel')</button>
-        <button type="submit" class="btn btn-primary" data-action="update-widget">@lang('boilerplate::widgets.update')</button>
+        <button type="button" class="btn btn-outline-secondary mr-3" data-action="undo-update">@lang('boilerplate::dashboard.cancel')</button>
+        <button type="submit" class="btn btn-primary" data-action="update-widget">@lang('boilerplate::dashboard.update')</button>
     </div>
 </x-boilerplate::form>

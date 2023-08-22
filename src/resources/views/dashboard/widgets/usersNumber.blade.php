@@ -1,1 +1,1 @@
-<x-boilerplate::smallbox :color="$color" :nb="$num" text="boilerplate::widgets.users-number.users" icon="fa-solid fa-users" :link="route('boilerplate.users.index')" link-text="boilerplate::widgets.users-number.link" />
+@component('boilerplate::smallbox', ['color' => $color, 'nb' => $num, 'text' => 'boilerplate::dashboard.users-number.users', 'icon' => 'fa-solid fa-users', 'link' => route('boilerplate.users.index'), 'linkText' => 'boilerplate::dashboard.users-number.link']) @endcomponent

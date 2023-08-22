@@ -2,6 +2,8 @@
 
 namespace Sebastienheyd\Boilerplate\Dashboard;
 
+use Illuminate\Support\Facades\Auth;
+
 abstract class Widget
 {
     protected $slug;
@@ -15,6 +17,17 @@ abstract class Widget
     protected $parameters = [];
     private $settings = [];
     private $values = [];
+
+    public static $COLORS = [
+        'primary'   => 'Blue',
+        'secondary' => 'Grey',
+        'success'   => 'Green',
+        'danger'    => 'Red',
+        'warning'   => 'Orange',
+        'info'      => 'Cyan',
+        'light'     => 'White',
+        'dark'      => 'Black',
+    ];
 
     abstract public function make();
 
@@ -46,6 +59,11 @@ abstract class Widget
         $this->settings = array_merge($this->settings, $name);
 
         return $this;
+    }
+
+    public function get($name)
+    {
+        return $this->settings[$name] ?? $this->parameters[$name] ?? $this->values[$name] ?? null;
     }
 
     public function getSettings()
@@ -95,16 +113,16 @@ abstract class Widget
     public function __get($prop)
     {
         if ($prop === 'label' || $prop === 'description') {
-            return __($this->{$prop}) ?: static::class.' → '.$prop;
+            return __($this->{$prop}) ?: static::class . ' → ' . $prop;
         }
 
         if ($prop === 'width' && empty($this->width)) {
             $sizes = [
                 'xxs' => ['sm' => 4, 'md' => 4, 'xl' => 2, 'xxl' => 2],
-                'xs' => ['sm' => 6, 'md' => 6, 'xl' => 4, 'xxl' => 3],
-                'sm' => ['sm' => 12, 'md' => 6, 'xl' => 6, 'xxl' => 4],
-                'md' => ['sm' => 12, 'md' => 6, 'xl' => 6, 'xxl' => 6],
-                'xl' => ['sm' => 12, 'md' => 12, 'xl' => 8, 'xxl' => 8],
+                'xs'  => ['sm' => 6, 'md' => 6, 'xl' => 4, 'xxl' => 3],
+                'sm'  => ['sm' => 12, 'md' => 6, 'xl' => 6, 'xxl' => 4],
+                'md'  => ['sm' => 12, 'md' => 6, 'xl' => 6, 'xxl' => 6],
+                'xl'  => ['sm' => 12, 'md' => 12, 'xl' => 8, 'xxl' => 8],
                 'xxl' => ['sm' => 12, 'md' => 12, 'xl' => 12, 'xxl' => 12],
             ];
 

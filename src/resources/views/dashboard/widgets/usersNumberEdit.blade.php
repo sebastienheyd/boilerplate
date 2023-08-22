@@ -1,1 +1,1 @@
-<x-boilerplate::input type="select" :options="['primary' => 'Bleu', 'success' => 'Vert']" name="color" label="Couleur" :value="$color ?? 'primary'" />
+@component('boilerplate::input', ['type' => 'select', 'options' => \Sebastienheyd\Boilerplate\Dashboard\Widget::$COLORS, 'name' => 'color', 'label' => 'Color', 'value' => $color ?? 'primary']) @endcomponent

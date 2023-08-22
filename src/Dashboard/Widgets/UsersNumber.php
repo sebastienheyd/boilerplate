@@ -9,14 +9,14 @@ use Sebastienheyd\Boilerplate\Models\User;
 class UsersNumber extends Widget
 {
     protected $slug = 'users-number';
-    protected $label = "boilerplate::widgets.users-number.label";
-    protected $description = "boilerplate::widgets.users-number.description";
+    protected $label = "boilerplate::dashboard.users-number.label";
+    protected $description = "boilerplate::dashboard.users-number.description";
     protected $view = 'boilerplate::dashboard.widgets.usersNumber';
     protected $editView = 'boilerplate::dashboard.widgets.usersNumberEdit';
+    protected $permission = 'users_crud';
     protected $size = 'xs';
     protected $parameters = [
         'color'    => 'primary',
-        'showLink' => true,
     ];
 
     public function make()

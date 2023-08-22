@@ -11,7 +11,7 @@
 @endsection
 
 @section('content')
-<section id="dashboard-widgets" class="row">
+<section id="dashboard-widgets" class="row align-items-start">
 @foreach($widgets as $widget)
     {!! $widget !!}
 @endforeach
