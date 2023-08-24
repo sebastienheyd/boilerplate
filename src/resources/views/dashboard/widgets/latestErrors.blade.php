@@ -7,11 +7,11 @@
                     <div class="badge badge-danger mr-2">{{ __('Error') }}</div>
                     <div class="badge badge-secondary">{{ $error['date'] }}</div>
                 </div>
-                <div class="small">{{ $error['message'] }}</div>
+                <div class="small">{{ trim($error['message']) }}</div>
             </td>
         </tr>
     @empty
-        Your application does not generate any error
+        @lang('boilerplate::dashboard.latest-errors.no-error')
     @endforelse
     </table>
 @endcomponent

@@ -41,6 +41,7 @@ class LatestErrors extends Widget
                     if (preg_match('#^\[([^\]]+)\]\s([^\.]+)\.ERROR:\s([^\n]+)#', $buffer, $m)) {
                         $errors[$m[1]] = ['date' => Date::createFromFormat('Y-m-d H:i:s', $m[1])->isoFormat(__('boilerplate::date.YmdHis')), 'message' => $m[3]];
                         if (count($errors) == $length) {
+                            fclose($handle);
                             break 2;
                         }
                     }

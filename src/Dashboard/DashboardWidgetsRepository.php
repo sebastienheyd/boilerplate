@@ -31,10 +31,6 @@ class DashboardWidgetsRepository
 
     public function getWidgets()
     {
-        if (empty($this->widgets)) {
-            return [];
-        }
-
         return $this->widgets;
     }
 

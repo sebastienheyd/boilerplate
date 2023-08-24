@@ -35,7 +35,7 @@ HTML;
     </div>
     <div class="icon"><i class="far fa-envelope"></i></div>
     <a href="#" class="small-box-footer">
-        Dashboard <i class="fas fa-arrow-circle-right"></i>
+        Dashboard&nbsp;<i class="fas fa-arrow-circle-right ml-1"></i>
     </a>
 </div>
 HTML;

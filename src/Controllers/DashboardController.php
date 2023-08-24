@@ -126,7 +126,8 @@ class DashboardController
 
     public function saveWidgets(Request $request)
     {
-        $widgets = json_decode($request->post('widgets'));
+        $widgets = json_decode($request->post('widgets')) ?? [];
+
         auth()->user()->setting(['dashboard' => $widgets]);
     }
 
