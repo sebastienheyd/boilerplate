@@ -29,7 +29,9 @@ abstract class Widget
         'dark'      => 'Black',
     ];
 
-    abstract public function make();
+    public function make() {
+
+    }
 
     protected function assign($name, $value = null)
     {
@@ -81,6 +83,7 @@ abstract class Widget
     public function render()
     {
         $parameters = array_merge($this->parameters, $this->settings, $this->values);
+        $parameters['widget'] = $this;
         return view($this->view, $parameters)->render();
     }
 
@@ -97,6 +100,10 @@ abstract class Widget
 
     public function isAuthorized()
     {
+        if (empty($this->view)) {
+            return false;
+        }
+
         return empty($this->permission) || Auth::user()->ability('admin', $this->permission);
     }
 

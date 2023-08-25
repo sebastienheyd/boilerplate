@@ -8,7 +8,8 @@ class DashboardTest extends TestCase
 {
     public function testDashboard()
     {
-        unlink(config_path('boilerplate/menu.php'));
+        $fakeRouteCache = base_path('bootstrap/cache/routes-v7.php');
+        touch($fakeRouteCache);
 
         $this->artisan('boilerplate:dashboard')
             ->expectsOutput('Dashboard controller and view has been successfully published!')
@@ -16,6 +17,8 @@ class DashboardTest extends TestCase
 
         $this->assertFileExists('app/Http/Controllers/Boilerplate/DashboardController.php');
         $this->assertFileExists('resources/views/vendor/boilerplate/dashboard.blade.php');
+
+        unlink($fakeRouteCache);
     }
 
     public function testDashboardAlreadyExist()
@@ -37,6 +40,9 @@ class DashboardTest extends TestCase
 
     public function testDashboardRemove()
     {
+        $fakeRouteCache = base_path('bootstrap/cache/routes-v7.php');
+        touch($fakeRouteCache);
+
         $this->artisan('boilerplate:dashboard', ['--remove' => true])
             ->expectsConfirmation('Continue?', 'yes')
             ->expectsOutput('Custom dashboard has been removed!')
@@ -46,6 +52,8 @@ class DashboardTest extends TestCase
         $this->assertFileDoesNotExist('resources/views/vendor/boilerplate/dashboard.blade.php');
         $this->assertFileDoesNotExist('/app/Http/Controllers/Boilerplate');
         $this->assertFileDoesNotExist('/resources/views/vendor/boilerplate');
+
+        unlink($fakeRouteCache);
     }
 
     public function testDashboardAlreadyRemoved()

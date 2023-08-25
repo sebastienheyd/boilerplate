@@ -25,22 +25,6 @@ class Scaffold extends BoilerplateCommand
     protected $description = 'Scaffold all files to Laravel application';
 
     /**
-     * Instance of current Filesystem.
-     *
-     * @var Filesystem
-     */
-    private $fileSystem;
-
-    /**
-     * Create a new command instance.
-     */
-    public function __construct(Filesystem $fileSystem)
-    {
-        parent::__construct();
-        $this->fileSystem = $fileSystem;
-    }
-
-    /**
      * Execute the console command.
      *
      * @return mixed

@@ -2,7 +2,6 @@
 
 namespace Sebastienheyd\Boilerplate\Console;
 
-use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 
 class MenuItem extends BoilerplateCommand
@@ -39,25 +38,20 @@ class MenuItem extends BoilerplateCommand
         }
 
         $camelName = ucfirst(Str::camel(Str::slug($name)));
-        $order = intval($this->option('order'));
         $stubFile = $this->option('submenu') ? 'MenuItemSub.stub' : 'MenuItem.stub';
         $filePath = app_path('Menu/'.$camelName.'.php');
-
-        $content = file_get_contents(__DIR__.'/stubs/'.$stubFile);
-
-        $toReplace = [
-            '{{NAME}}' => $name,
-            '{{ID}}' => $camelName,
-            '{{ORDER}}' => $order,
-        ];
-
-        $content = str_replace(array_keys($toReplace), array_values($toReplace), $content);
 
         if (is_file($filePath)) {
             $this->error('Menu item '.$camelName.' already exists');
 
             return 1;
         }
+
+        $content = $this->buildStub(__DIR__.'/stubs/'.$stubFile, [
+            'NAME' => $name,
+            'ID' => $camelName,
+            'ORDER' => intval($this->option('order'))
+        ]);
 
         if (! is_dir(app_path('Menu'))) {
             mkdir(app_path('Menu'), 0775);

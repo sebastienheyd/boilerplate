@@ -112,7 +112,8 @@ class BoilerplateServiceProvider extends ServiceProvider
         ], 'boilerplate-views');
 
         $this->publishes([
-            __DIR__.'/resources/views/dashboard.blade.php' => resource_path('views/vendor/boilerplate/dashboard.blade.php'),
+            __DIR__.'/Console/stubs/dashboard.blade.php.stub' => resource_path('views/vendor/boilerplate/dashboard.blade.php'),
+            __DIR__.'/config/menu.php' => config_path('boilerplate/menu.php'),
         ], 'boilerplate-dashboard');
 
         $this->publishes([
@@ -129,6 +130,7 @@ class BoilerplateServiceProvider extends ServiceProvider
             Console\MenuItem::class,
             Console\Permission::class,
             Console\Scaffold::class,
+            Console\Widget::class,
         ]);
     }
 

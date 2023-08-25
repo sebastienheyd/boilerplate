@@ -1,7 +1,7 @@
 <div>
 <table class="table table-sm table-condensed table-striped table-hover">
 @foreach($widgets as $widget)
-    @if($widget->permission === null || Auth::user()->ability('admin', $widget->permission))
+    @if($widget->isAuthorized())
         <tr>
             <td>
                 <strong>{{ $widget->label }}</strong><br>

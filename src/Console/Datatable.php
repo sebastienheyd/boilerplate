@@ -27,18 +27,6 @@ class Datatable extends BoilerplateCommand
      */
     protected $description = 'Generate a new DataTable component';
 
-    protected $fileSystem;
-
-    /**
-     * Create a new command instance.
-     */
-    public function __construct(Filesystem $fileSystem)
-    {
-        parent::__construct();
-
-        $this->fileSystem = $fileSystem;
-    }
-
     /**
      * Execute the console command.
      *

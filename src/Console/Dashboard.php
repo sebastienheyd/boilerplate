@@ -3,8 +3,6 @@
 namespace Sebastienheyd\Boilerplate\Console;
 
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
-use Illuminate\Filesystem\Filesystem;
-use Symfony\Component\Console\Command\Command;
 
 class Dashboard extends BoilerplateCommand
 {
@@ -21,18 +19,6 @@ class Dashboard extends BoilerplateCommand
      * @var string
      */
     protected $description = 'Generate files to build your own boilerplate dashboard';
-
-    protected $fileSystem;
-
-    /**
-     * Create a new command instance.
-     */
-    public function __construct(Filesystem $fileSystem)
-    {
-        parent::__construct();
-
-        $this->fileSystem = $fileSystem;
-    }
 
     /**
      * Execute the console command.
@@ -63,7 +49,7 @@ class Dashboard extends BoilerplateCommand
         $this->fileSystem->makeDirectory($controllerPath, 0755, true, true);
 
         // Copy and publish files
-        $this->copy(__DIR__.'/../Controllers/DashboardController.php', $controller);
+        $this->copy(__DIR__.'/stubs/DashboardController.stub', $controller);
         $content = $this->fileSystem->get($controller);
         $content = str_replace('Sebastienheyd\Boilerplate\Controllers', 'App\Http\Controllers\Boilerplate', $content);
         $this->fileSystem->put($controller, $content);
@@ -73,10 +59,6 @@ class Dashboard extends BoilerplateCommand
         // Changes dashboard controller path in configuration file
         $configFile = config_path('boilerplate/menu.php');
 
-        if (! $this->fileSystem->exists($configFile)) {
-            $this->callSilent('vendor:publish', ['--tag' => 'boilerplate-config']);
-        }
-
         $config = preg_replace(
             "#('dashboard'\s*=>\s*)([^,]*)#",
             '$1\App\Http\Controllers\Boilerplate\DashboardController::class',
@@ -84,6 +66,10 @@ class Dashboard extends BoilerplateCommand
         );
 
         $this->fileSystem->put($configFile, $config);
+
+        if (is_file(base_path('bootstrap/cache/routes-v7.php')) || is_file(base_path('bootstrap/cache/routes.php'))) {
+            $this->callSilent('route:cache');
+        }
 
         $this->info('Dashboard controller and view has been successfully published!');
     }
@@ -124,6 +110,10 @@ class Dashboard extends BoilerplateCommand
         );
 
         $this->fileSystem->put($configFile, $config);
+
+        if (is_file(base_path('bootstrap/cache/routes-v7.php')) || is_file(base_path('bootstrap/cache/routes.php'))) {
+            $this->callSilent('route:cache');
+        }
 
         $this->info('Custom dashboard has been removed!');
     }

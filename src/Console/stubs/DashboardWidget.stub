@@ -1,0 +1,33 @@
+<?php
+
+namespace App\Dashboard;
+
+use Illuminate\Http\Request;
+use Sebastienheyd\Boilerplate\Dashboard\Widget;
+
+class {{CLASS}} extends Widget
+{
+    protected $slug = '{{SLUG}}';
+    protected $label = "{{SLUG}} label";
+    protected $description = "{{SLUG}} description";
+    protected $view = 'dashboard.widgets.{{SLUG}}';
+    protected $editView = 'dashboard.widgets.{{SLUG}}Edit';
+    protected $size = 'sm';
+    protected $permission = null;
+
+    protected $parameters = [
+        'color'    => 'primary',
+    ];
+
+    public function make()
+    {
+        // $this->assign('myVar', 'myValue');
+    }
+
+    public function validator(Request $request)
+    {
+        return validator()->make($request->post(), [
+            'color' => 'required'
+        ]);
+    }
+}

@@ -1,0 +1,7 @@
+@extends('boilerplate::layout.index', ['title' => __('boilerplate::layout.dashboard')])
+
+@section('content')
+<div class="alert alert-info">
+    Content of <strong>/resources/views/vendor/boilerplate/dashboard.blade.php</strong> called by <strong>/app/Http/Controllers/Boilerplate/DashboardController.php</strong>
+</div>
+@endsection

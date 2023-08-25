@@ -1,0 +1,3 @@
+<x-boilerplate::card title="{{ $widget->label }}" :color="$color">
+    {{ $widget->description }}
+</x-boilerplate::card>

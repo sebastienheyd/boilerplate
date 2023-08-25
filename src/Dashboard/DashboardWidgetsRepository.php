@@ -6,6 +6,11 @@ class DashboardWidgetsRepository
 {
     protected $widgets = [];
 
+    public function __construct()
+    {
+        $this->getProviders();
+    }
+
     /**
      * Register a widget class.
      *
@@ -37,5 +42,22 @@ class DashboardWidgetsRepository
     public function getWidget($slug)
     {
         return $this->widgets[$slug] ?? false;
+    }
+
+    private function getProviders()
+    {
+        if (! is_dir(app_path('Dashboard'))) {
+            return;
+        }
+
+        $classes = glob(app_path('Dashboard').'/*.php');
+
+        if (empty($classes)) {
+            return;
+        }
+
+        foreach ($classes as $class) {
+            $this->registerWidget('\\App\\Dashboard\\'.preg_replace('#\.php$#i', '', basename($class)));
+        }
     }
 }

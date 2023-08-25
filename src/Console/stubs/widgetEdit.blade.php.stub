@@ -1,0 +1,1 @@
+<x-boilerplate::input type="select" :options="\Sebastienheyd\Boilerplate\Dashboard\Widget::$COLORS" name="color" label="Color" :value="$color ?? 'primary'" />

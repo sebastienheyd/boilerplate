@@ -2,10 +2,24 @@
 
 namespace Sebastienheyd\Boilerplate\Console;
 
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Console\Command;
 
 abstract class BoilerplateCommand extends Command
 {
+    /**
+     * Instance of current Filesystem.
+     *
+     * @var Filesystem
+     */
+    protected $fileSystem;
+
+    public function __construct(Filesystem $fileSystem)
+    {
+        parent::__construct();
+        $this->fileSystem = $fileSystem;
+    }
+
     protected function title()
     {
         $this->info("
@@ -31,5 +45,16 @@ abstract class BoilerplateCommand extends Command
         }
 
         return $result;
+    }
+
+    protected function buildStub($stubFile, $replacements = [])
+    {
+        $content = file_get_contents($stubFile);
+
+        foreach ($replacements as $key => $value) {
+            $content = str_replace('{{' . $key . '}}', $value, $content);
+        }
+
+        return $content;
     }
 }
