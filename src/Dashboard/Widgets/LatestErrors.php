@@ -48,6 +48,7 @@ class LatestErrors extends Widget
                         $errors[$i] = [
                             'date' => Date::createFromFormat('Y-m-d H:i:s', $m[1])->isoFormat(__('boilerplate::date.YmdHis')),
                             'message' => $message,
+                            'stack' => [],
                         ];
                     } else {
                         if ($isError) {

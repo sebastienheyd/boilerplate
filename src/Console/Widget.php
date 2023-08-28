@@ -44,7 +44,7 @@ class Widget extends BoilerplateCommand
         $filePath = app_path('Dashboard/'.$className.'.php');
 
         if (is_file($filePath)) {
-            $this->error('Widget '.$className.' already exists');
+            $this->error('Widget '.$slug.' already exists');
 
             return 1;
         }
