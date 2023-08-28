@@ -1,15 +1,17 @@
 <?php
 
 return [
-    'install'      => 'Install',
-    'uninstall'    => 'Uninstall',
-    'cancel'       => 'Cancel',
-    'update'       => 'Update',
-    'edit'         => 'Dashboard editing',
+    'install'       => 'Install',
+    'uninstall'     => 'Uninstall',
+    'cancel'        => 'Cancel',
+    'update'        => 'Update',
+    'edit'          => 'Edit mode',
     'latest-errors' => [
-        'no-error' => 'Your application does not generate any error',
+        'label'       => 'Latest errors',
+        'description' => 'Display the latest errors of the application.',
+        'no-error'    => 'The application has not generated any errors yet.',
     ],
-    'users-number' => [
+    'users-number'  => [
         'label'       => "Number of users",
         'description' => "Displays the number of users with quick access to user management.",
         'users'       => 'Users',

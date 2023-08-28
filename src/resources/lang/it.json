@@ -15,5 +15,14 @@
   "Last name": "Nome",
   "Lastname": "Nome",
   "Email": "E-mail",
-  "Content": "Contenuto"
+  "Content": "Contenuto",
+  "Color": "Colore",
+  "Blue": "Blu",
+  "Grey": "Grigio",
+  "Green": "Verde",
+  "Red": "Rosso",
+  "Orange": "Arancione",
+  "Cyan": "Ciano",
+  "Light": "Chiaro",
+  "Dark": "Scuro"
 }

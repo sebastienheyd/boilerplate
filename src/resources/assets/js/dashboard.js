@@ -61,7 +61,7 @@ let modal = function () {
 // Enabling dashboard edition
 let enableDashboardEdition = function () {
     // Toggle lock icon
-    $('#toggle-dashboard').data('status', 'unlocked').removeClass('btn-outline-secondary').addClass('btn-danger').html('<i class="fa-solid fa-lock-open fa-fw"></i>')
+    $('#toggle-dashboard').data('status', 'unlocked').removeClass('btn-outline-secondary').addClass('btn-danger').children().toggleClass('fa-lock fa-lock-open');
 
     // Add buttons at the end
     $('#dashboard-widgets').append(buttons)
@@ -106,7 +106,7 @@ let enableDashboardEdition = function () {
 
 // Disabling dashboard edition
 let disableDashboardEdition = function () {
-    $('#toggle-dashboard').data('status', 'locked').removeClass('btn-danger').addClass('btn-outline-secondary').html('<i class="fa-solid fa-lock fa-fw"></i>');
+    $('#toggle-dashboard').data('status', 'locked').removeClass('btn-danger').addClass('btn-outline-secondary').children().toggleClass('fa-lock fa-lock-open');
     $('.dashboard-widget-tools').remove();
     $('.d-line-break').removeClass('line-edit');
     $('.dashboard-buttons').remove()

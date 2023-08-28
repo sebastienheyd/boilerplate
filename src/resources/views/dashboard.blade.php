@@ -3,8 +3,8 @@
 @section('content-header-right')
     @if(config('boilerplate.dashboard.edition', false))
         <section class="mb-2">
-            <button type="button" class="btn btn-{{ empty($widgets) ? 'danger' : 'outline-secondary' }} btn-xs" id="toggle-dashboard" data-status="{{ empty($widgets) ? 'unlocked' : 'locked' }}" data-toggle="tooltip" title="{{ __('Édition du tableau de bord') }}">
-                <i class="fa-solid fa-{{ empty($widgets) ? 'lock-open' : 'lock' }} fa-fw"></i>
+            <button type="button" class="btn btn-{{ empty($widgets) ? 'danger' : 'outline-secondary' }} btn-xs" id="toggle-dashboard" data-status="{{ empty($widgets) ? 'unlocked' : 'locked' }}">
+                <i class="fa-solid fa-{{ empty($widgets) ? 'lock-open' : 'lock' }} fa-fw"></i> {{ __('boilerplate::dashboard.edit') }}
             </button>
         </section>
     @endif

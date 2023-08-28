@@ -1,1 +1,1 @@
-@component('boilerplate::input', ['type' => 'select', 'options' => \Sebastienheyd\Boilerplate\Dashboard\Widget::$COLORS, 'name' => 'color', 'label' => 'Color', 'value' => $color ?? 'primary']) @endcomponent
+@component('boilerplate::input', ['type' => 'select', 'options' => \Sebastienheyd\Boilerplate\Dashboard\Widget::getColors(), 'name' => 'color', 'label' => 'Color', 'value' => $color ?? 'primary']) @endcomponent

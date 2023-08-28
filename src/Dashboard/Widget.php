@@ -2,6 +2,8 @@
 
 namespace Sebastienheyd\Boilerplate\Dashboard;
 
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Translation\Translator;
 use Illuminate\Support\Facades\Auth;
 
 abstract class Widget
@@ -18,21 +20,34 @@ abstract class Widget
     private $settings = [];
     private $values = [];
 
-    public static $COLORS = [
-        'primary'   => 'Blue',
-        'secondary' => 'Grey',
-        'success'   => 'Green',
-        'danger'    => 'Red',
-        'warning'   => 'Orange',
-        'info'      => 'Cyan',
-        'light'     => 'White',
-        'dark'      => 'Black',
-    ];
-
-    public function make() {
-
+    public static function getColors()
+    {
+        return [
+            'primary'   => __('Blue'),
+            'secondary' => __('Grey'),
+            'success'   => __('Green'),
+            'danger'    => __('Red'),
+            'warning'   => __('Orange'),
+            'info'      => __('Cyan'),
+            'light'     => __('Light'),
+            'dark'      => __('Dark'),
+        ];
     }
 
+    /**
+     * Method called before any rendering. You can assign values here.
+     *
+     * @return void
+     */
+    public function make() {}
+
+    /**
+     * Assign values to the view. This will overload the default parameters and settings.
+     *
+     * @param string $name
+     * @param mixed $value
+     * @return $this
+     */
     protected function assign($name, $value = null)
     {
         if (is_string($name)) {
@@ -48,6 +63,13 @@ abstract class Widget
         return $this;
     }
 
+    /**
+     * Change a widget setting. This will overload the default parameters.
+     *
+     * @param string $name
+     * @param mixed $value
+     * @return $this
+     */
     public function set($name, $value = null)
     {
         if (is_string($name)) {
@@ -63,11 +85,22 @@ abstract class Widget
         return $this;
     }
 
+    /**
+     * Get in order a value, a setting or a default parameter.
+     *
+     * @param string $name
+     * @return mixed|null
+     */
     public function get($name)
     {
-        return $this->settings[$name] ?? $this->parameters[$name] ?? $this->values[$name] ?? null;
+        return $this->values[$name] ?? $this->settings[$name] ?? $this->parameters[$name] ?? null;
     }
 
+    /**
+     * Get all settings.
+     *
+     * @return array
+     */
     public function getSettings()
     {
         foreach (auth()->user()->setting('dashboard', config('boilerplate.dashboard.widgets')) as $widgetParameters) {
@@ -80,6 +113,11 @@ abstract class Widget
         return $this->settings;
     }
 
+    /**
+     * Render the widget with the given values, settings and default parameters.
+     *
+     * @return string
+     */
     public function render()
     {
         $parameters = array_merge($this->parameters, $this->settings, $this->values);
@@ -87,17 +125,33 @@ abstract class Widget
         return view($this->view, $parameters)->render();
     }
 
+    /**
+     * Get the edit view name or false.
+     *
+     * @return string|false
+     */
     public function getEditView()
     {
         return $this->editView ?? false;
     }
 
+    /**
+     * Render the edit view.
+     *
+     * @param array $values     Values from the posted form or from the user parameters.
+     * @return string
+     */
     public function renderEdit($values = [])
     {
         $parameters = array_merge($this->parameters, $values);
         return view($this->editView, $parameters)->render();
     }
 
+    /**
+     * Returns true if current widget can be used by the current user.
+     *
+     * @return bool
+     */
     public function isAuthorized()
     {
         if (empty($this->view)) {
@@ -107,16 +161,32 @@ abstract class Widget
         return empty($this->permission) || Auth::user()->ability('admin', $this->permission);
     }
 
+    /**
+     * Returns true if the current widget is editable.
+     *
+     * @return bool
+     */
     public function isEditable()
     {
         return ! empty($this->parameters) && ! empty($this->editView);
     }
 
+    /**
+     * Returns default parameters only.
+     *
+     * @return array
+     */
     public function getParameters()
     {
         return $this->parameters;
     }
 
+    /**
+     * Default getter.
+     *
+     * @param $prop
+     * @return array|Application|Translator|\Illuminate\Foundation\Application|int[]|string|null
+     */
     public function __get($prop)
     {
         if ($prop === 'label' || $prop === 'description') {

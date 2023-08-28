@@ -15,5 +15,14 @@
   "Last name": "Soyadı",
   "Lastname": "Soyadı",
   "Email": "E-posta",
-  "Content": "İçerik"
+  "Content": "İçerik",
+  "Color": "Renk",
+  "Blue": "Mavi",
+  "Grey": "Gri",
+  "Green": "Yeşil",
+  "Red": "Kırmızı",
+  "Orange": "Turuncu",
+  "Cyan": "Camgöbeği",
+  "Light": "Açık",
+  "Dark": "Koyu"
 }
