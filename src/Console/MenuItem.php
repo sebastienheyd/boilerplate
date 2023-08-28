@@ -50,7 +50,7 @@ class MenuItem extends BoilerplateCommand
         $content = $this->buildStub(__DIR__.'/stubs/'.$stubFile, [
             'NAME' => $name,
             'ID' => $camelName,
-            'ORDER' => intval($this->option('order'))
+            'ORDER' => intval($this->option('order')),
         ]);
 
         if (! is_dir(app_path('Menu'))) {

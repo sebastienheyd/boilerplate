@@ -170,7 +170,7 @@ abstract class Datatable
     /**
      * Sets the DataTable order by column name and direction.
      *
-     * @param $column
+     * @param  $column
      * @param  string  $order
      * @return $this
      */
@@ -188,7 +188,7 @@ abstract class Datatable
     /**
      * Gets the column index number by column name.
      *
-     * @param $column
+     * @param  $column
      * @return int|string
      */
     protected function getColumnIndex($column)
@@ -341,7 +341,7 @@ abstract class Datatable
     /**
      * Sets the paging type to use. Can be numbers, simple, simple_numbers, full, full_numbers, first_last_numbers.
      *
-     * @param $type
+     * @param  $type
      * @return $this
      */
     public function pagingType($type): Datatable
@@ -527,7 +527,7 @@ abstract class Datatable
     /**
      * Get a search value by the column name.
      *
-     * @param $name
+     * @param  $name
      * @return mixed
      */
     protected function getRequestSearchValue($name)
@@ -540,7 +540,7 @@ abstract class Datatable
     /**
      * Magic method to get property or attribute.
      *
-     * @param $name
+     * @param  $name
      * @return false|mixed|string|null
      */
     public function __get($name)
@@ -569,7 +569,7 @@ abstract class Datatable
     /**
      * Magic method to check if property or attribute is set or not.
      *
-     * @param $name
+     * @param  $name
      * @return bool
      */
     public function __isset($name)

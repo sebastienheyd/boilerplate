@@ -79,7 +79,7 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * Return last name in uppercase by default.
      *
-     * @param $value
+     * @param  $value
      * @return string
      */
     public function getLastNameAttribute($value)
@@ -90,7 +90,7 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * Return first name with first char of every word in uppercase.
      *
-     * @param $value
+     * @param  $value
      * @return string
      */
     public function getFirstNameAttribute($value)

@@ -9,8 +9,8 @@ use Sebastienheyd\Boilerplate\Models\User;
 class UsersNumber extends Widget
 {
     protected $slug = 'users-number';
-    protected $label = "boilerplate::dashboard.users-number.label";
-    protected $description = "boilerplate::dashboard.users-number.description";
+    protected $label = 'boilerplate::dashboard.users-number.label';
+    protected $description = 'boilerplate::dashboard.users-number.description';
     protected $view = 'boilerplate::dashboard.widgets.usersNumber';
     protected $editView = 'boilerplate::dashboard.widgets.usersNumberEdit';
     protected $permission = 'users_crud';
@@ -27,7 +27,7 @@ class UsersNumber extends Widget
     public function validator(Request $request)
     {
         return validator()->make($request->post(), [
-            'color' => 'required'
+            'color' => 'required',
         ]);
     }
 }

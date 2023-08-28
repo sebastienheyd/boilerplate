@@ -2,8 +2,8 @@
 
 namespace Sebastienheyd\Boilerplate\Console;
 
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Console\Command;
+use Illuminate\Filesystem\Filesystem;
 
 abstract class BoilerplateCommand extends Command
 {
@@ -52,7 +52,7 @@ abstract class BoilerplateCommand extends Command
         $content = file_get_contents($stubFile);
 
         foreach ($replacements as $key => $value) {
-            $content = str_replace('{{' . $key . '}}', $value, $content);
+            $content = str_replace('{{'.$key.'}}', $value, $content);
         }
 
         return $content;

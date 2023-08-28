@@ -140,7 +140,7 @@ class UsersController
     /**
      * Show the form to set a new password on the first login.
      *
-     * @param $token
+     * @param  $token
      * @return Application|Factory|View
      */
     public function firstLogin($token)

@@ -4,7 +4,6 @@ namespace Sebastienheyd\Boilerplate\Console;
 
 use FilesystemIterator;
 use Illuminate\Console\Command;
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 

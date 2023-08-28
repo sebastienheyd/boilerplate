@@ -39,13 +39,15 @@ abstract class Widget
      *
      * @return void
      */
-    public function make() {}
+    public function make()
+    {
+    }
 
     /**
      * Assign values to the view. This will overload the default parameters and settings.
      *
-     * @param string $name
-     * @param mixed $value
+     * @param  string  $name
+     * @param  mixed  $value
      * @return $this
      */
     protected function assign($name, $value = null)
@@ -66,8 +68,8 @@ abstract class Widget
     /**
      * Change a widget setting. This will overload the default parameters.
      *
-     * @param string $name
-     * @param mixed $value
+     * @param  string  $name
+     * @param  mixed  $value
      * @return $this
      */
     public function set($name, $value = null)
@@ -88,7 +90,7 @@ abstract class Widget
     /**
      * Get in order a value, a setting or a default parameter.
      *
-     * @param string $name
+     * @param  string  $name
      * @return mixed|null
      */
     public function get($name)
@@ -122,6 +124,7 @@ abstract class Widget
     {
         $parameters = array_merge($this->parameters, $this->settings, $this->values);
         $parameters['widget'] = $this;
+
         return view($this->view, $parameters)->render();
     }
 
@@ -138,12 +141,13 @@ abstract class Widget
     /**
      * Render the edit view.
      *
-     * @param array $values     Values from the posted form or from the user parameters.
+     * @param  array  $values  Values from the posted form or from the user parameters.
      * @return string
      */
     public function renderEdit($values = [])
     {
         $parameters = array_merge($this->parameters, $values);
+
         return view($this->editView, $parameters)->render();
     }
 
@@ -184,13 +188,13 @@ abstract class Widget
     /**
      * Default getter.
      *
-     * @param $prop
+     * @param  $prop
      * @return array|Application|Translator|\Illuminate\Foundation\Application|int[]|string|null
      */
     public function __get($prop)
     {
         if ($prop === 'label' || $prop === 'description') {
-            return __($this->{$prop}) ?: static::class . ' → ' . $prop;
+            return __($this->{$prop}) ?: static::class.' → '.$prop;
         }
 
         if ($prop === 'width' && empty($this->width)) {

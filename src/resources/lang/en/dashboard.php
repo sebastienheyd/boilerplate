@@ -12,8 +12,8 @@ return [
         'no-error'    => 'The application has not generated any errors yet.',
     ],
     'users-number'  => [
-        'label'       => "Number of users",
-        'description' => "Displays the number of users with quick access to user management.",
+        'label'       => 'Number of users',
+        'description' => 'Displays the number of users with quick access to user management.',
         'users'       => 'Users',
         'link'        => 'Manage users',
     ],

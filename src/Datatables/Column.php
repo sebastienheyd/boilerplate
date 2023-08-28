@@ -81,7 +81,7 @@ class Column
     /**
      * Define an array of options to be used by the filter select.
      *
-     * @param $filterOptions
+     * @param  $filterOptions
      * @param  string  $filterType
      * @return $this
      */
@@ -267,8 +267,8 @@ class Column
     /**
      * Setting a boolean attribute.
      *
-     * @param $name
-     * @param $value
+     * @param  $name
+     * @param  $value
      * @return Column
      */
     private function booleanAttribute($name, $value): Column
@@ -315,7 +315,7 @@ class Column
     /**
      * Magic method to get properties or attributes.
      *
-     * @param $name
+     * @param  $name
      * @return mixed|null
      */
     public function __get($name)
@@ -334,7 +334,7 @@ class Column
     /**
      * Magic method to know if magic property or attribute is set.
      *
-     * @param $name
+     * @param  $name
      * @return bool
      */
     public function __isset($name)

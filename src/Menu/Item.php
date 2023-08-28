@@ -59,7 +59,7 @@ class Item extends LavaryMenuItem
     /**
      * Set the item order.
      *
-     * @param $order
+     * @param  $order
      * @return self
      */
     public function order($order)

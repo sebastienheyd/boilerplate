@@ -15,7 +15,7 @@ class DatatablesRepository
     /**
      * Register a datatable class.
      *
-     * @param ...$class
+     * @param  ...$class
      * @return $this
      *
      * @throws ReflectionException
@@ -51,7 +51,7 @@ class DatatablesRepository
     /**
      * Get datatable by slug.
      *
-     * @param $slug
+     * @param  $slug
      * @return false|mixed
      */
     public function getDatatable($slug)

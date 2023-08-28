@@ -3,7 +3,6 @@
 namespace Sebastienheyd\Boilerplate\Console;
 
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Command\Command;
 

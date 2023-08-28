@@ -11,7 +11,7 @@ class BoilerplateImpersonate
     /**
      * Check if the impersonate attribute of the session is set. If so, authenticate once as that user and continue.
      *
-     * @param $request
+     * @param  $request
      * @param  Closure  $next
      * @return mixed
      */

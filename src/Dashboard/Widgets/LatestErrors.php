@@ -5,13 +5,12 @@ namespace Sebastienheyd\Boilerplate\Dashboard\Widgets;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
 use Sebastienheyd\Boilerplate\Dashboard\Widget;
-use Sebastienheyd\Boilerplate\Models\User;
 
 class LatestErrors extends Widget
 {
     protected $slug = 'latest-errors';
-    protected $label = "boilerplate::dashboard.latest-errors.label";
-    protected $description = "boilerplate::dashboard.latest-errors.description";
+    protected $label = 'boilerplate::dashboard.latest-errors.label';
+    protected $description = 'boilerplate::dashboard.latest-errors.description';
     protected $permission = 'logs';
     protected $size = 'sm';
     protected $view = 'boilerplate::dashboard.widgets.latestErrors';
@@ -30,25 +29,25 @@ class LatestErrors extends Widget
     {
         $path = str_replace('.log', '', config('logging.channels.daily.path'));
 
-        $files = array_reverse(glob($path . '-*'));
+        $files = array_reverse(glob($path.'-*'));
 
         $errors = [];
         $isError = false;
         $i = 0;
 
         foreach ($files as $file) {
-            $handle = fopen($file, "r");
+            $handle = fopen($file, 'r');
             if ($handle) {
                 while (($buffer = fgets($handle)) !== false) {
                     if (preg_match('#^\[([^\]]+)\]\s([^\.]+)\.ERROR:\s([^\n]+)#', $buffer, $m)) {
                         $i++;
                         $isError = true;
 
-                        $message = preg_replace("#\{(.*)$#", "", $m[3]);
+                        $message = preg_replace("#\{(.*)$#", '', $m[3]);
 
                         $errors[$i] = [
                             'date' => Date::createFromFormat('Y-m-d H:i:s', $m[1])->isoFormat(__('boilerplate::date.YmdHis')),
-                            'message' => $message
+                            'message' => $message,
                         ];
                     } else {
                         if ($isError) {
@@ -68,16 +67,15 @@ class LatestErrors extends Widget
                                     $errors[$i]['stack'][] = [
                                         'path' => $n[1],
                                         'line' => $n[2],
-                                        'function' => $n[3]
+                                        'function' => $n[3],
                                     ];
                                 } else {
                                     $errors[$i]['stack'][] = [
                                         'path' => '',
                                         'line' => '',
-                                        'function' => $m[1]
+                                        'function' => $m[1],
                                     ];
                                 }
-
                             }
                         }
                     }
@@ -94,7 +92,7 @@ class LatestErrors extends Widget
     public function validator(Request $request)
     {
         return validator()->make($request->post(), [
-            'length' => 'required|integer|min:1|max:6'
+            'length' => 'required|integer|min:1|max:6',
         ], [], [
             'length' => __('Length'),
         ]);

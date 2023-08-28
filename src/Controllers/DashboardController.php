@@ -44,7 +44,7 @@ class DashboardController
 
             $widgets[] = view('boilerplate::dashboard.widget', [
                 'widget'  => $widget,
-                'content' => $widget->render()
+                'content' => $widget->render(),
             ])->render();
         }
 
@@ -54,7 +54,7 @@ class DashboardController
     /**
      * Show modal to add / remove a widget to the dashboard.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return Application|Factory|View|\Illuminate\Foundation\Application
      */
     public function addWidget(Request $request)
@@ -68,7 +68,7 @@ class DashboardController
     /**
      * Add a widget to the dashboard with a wrapper to allow editing.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return Application|Factory|View|\Illuminate\Foundation\Application
      */
     public function loadWidget(Request $request)
@@ -85,7 +85,7 @@ class DashboardController
     /**
      * Show modal to edit widget settings.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return Application|Factory|View|\Illuminate\Foundation\Application
      */
     public function editWidget(Request $request)
@@ -106,7 +106,7 @@ class DashboardController
     /**
      * Updates widget settings and saves them for the current user.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function updateWidget(Request $request)
@@ -144,14 +144,14 @@ class DashboardController
             'success'  => true,
             'slug'     => $request->post('widget-slug'),
             'settings' => json_encode($settings),
-            'widget'   => $widget->render()
+            'widget'   => $widget->render(),
         ]);
     }
 
     /**
      * Saves all dashboard widgets, will be used when moved, deleted, etc...
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return void
      */
     public function saveWidgets(Request $request)
@@ -164,7 +164,7 @@ class DashboardController
     /**
      * Get widget from repository or show a 404 error page.
      *
-     * @param $slug
+     * @param  $slug
      * @return mixed
      */
     private function getWidgetOrFail($slug)
@@ -181,7 +181,7 @@ class DashboardController
     /**
      * Get widget settings for the current user.
      *
-     * @param $slug
+     * @param  $slug
      * @return array|mixed
      */
     private function getWidgetUserSettings($slug)
@@ -199,8 +199,8 @@ class DashboardController
     /**
      * Set widget settings for the current user.
      *
-     * @param $slug
-     * @param $settings
+     * @param  $slug
+     * @param  $settings
      * @return true
      */
     private function setWidgetUserSettings($slug, $settings)
@@ -211,6 +211,7 @@ class DashboardController
             if (array_key_first($widgetParameters) === $slug) {
                 $widgets[$k] = [$slug => $settings];
                 auth()->user()->setting(['dashboard' => $widgets]);
+
                 return true;
             }
         }

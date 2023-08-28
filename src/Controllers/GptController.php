@@ -91,7 +91,7 @@ class GptController
     /**
      * Process wizard.
      *
-     * @param $request
+     * @param  $request
      * @return JsonResponse
      */
     private function processGenerator($request)
@@ -123,7 +123,7 @@ class GptController
     /**
      * Process raw prompt.
      *
-     * @param $request
+     * @param  $request
      * @return JsonResponse
      */
     private function processPrompt($request)
@@ -191,8 +191,8 @@ class GptController
     /**
      * Send curl request to OpenAI Api.
      *
-     * @param $prompt
-     * @param $callback
+     * @param  $prompt
+     * @param  $callback
      * @return bool|string
      */
     private function sendRequest($prompt, $callback)

@@ -14,7 +14,7 @@ class DashboardWidgetsRepository
     /**
      * Register one or more widget classes.
      *
-     * @param ...$class
+     * @param  ...$class
      * @return $this
      *
      * @throws ReflectionException
@@ -47,7 +47,7 @@ class DashboardWidgetsRepository
     /**
      * Get the widget with the given slug.
      *
-     * @param string $slug
+     * @param  string  $slug
      * @return Widget|false
      */
     public function getWidget($slug)

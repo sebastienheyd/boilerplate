@@ -74,9 +74,9 @@ class FileLoader extends LaravelTranslationFileLoader
     /**
      * Load a locale path if exists.
      *
-     * @param $path
-     * @param $locale
-     * @param $group
+     * @param  $path
+     * @param  $locale
+     * @param  $group
      * @return array
      */
     protected function loadLocalePath($path, $locale, $group): array
