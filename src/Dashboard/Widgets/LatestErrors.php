@@ -29,7 +29,7 @@ class LatestErrors extends Widget
     {
         $path = str_replace('.log', '', config('logging.channels.daily.path'));
 
-        $files = array_reverse(glob($path . '-*'));
+        $files = array_reverse(glob($path.'-*'));
 
         $errors = [];
         $isError = false;
@@ -37,7 +37,7 @@ class LatestErrors extends Widget
 
         foreach ($files as $file) {
             $handle = fopen($file, 'r');
-            if (!$handle) {
+            if (! $handle) {
                 continue;
             }
 
@@ -54,7 +54,7 @@ class LatestErrors extends Widget
                         'stack' => [],
                     ];
                 } else {
-                    if (!$isError) {
+                    if (! $isError) {
                         continue;
                     }
 
