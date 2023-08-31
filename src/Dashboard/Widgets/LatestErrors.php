@@ -17,7 +17,7 @@ class LatestErrors extends Widget
     protected $editView = 'boilerplate::dashboard.widgets.latestErrorsEdit';
     protected $parameters = [
         'length' => 3,
-        'color'  => 'danger',
+        'color' => 'danger',
     ];
 
     public function make()
@@ -29,7 +29,7 @@ class LatestErrors extends Widget
     {
         $path = str_replace('.log', '', config('logging.channels.daily.path'));
 
-        $files = array_reverse(glob($path.'-*'));
+        $files = array_reverse(glob($path . '-*'));
 
         $errors = [];
         $isError = false;
@@ -37,52 +37,50 @@ class LatestErrors extends Widget
 
         foreach ($files as $file) {
             $handle = fopen($file, 'r');
-            if ($handle) {
-                while (($buffer = fgets($handle)) !== false) {
-                    if (preg_match('#^\[([^\]]+)\]\s([^\.]+)\.ERROR:\s([^\n]+)#', $buffer, $m)) {
-                        $i++;
-                        $isError = true;
+            if (!$handle) {
+                continue;
+            }
 
-                        $message = preg_replace("#\{(.*)$#", '', $m[3]);
+            while (($buffer = fgets($handle)) !== false) {
+                if (preg_match('#^\[([^\]]+)\]\s([^\.]+)\.ERROR:\s([^\n]+)#', $buffer, $m)) {
+                    $i++;
+                    $isError = true;
 
-                        $errors[$i] = [
-                            'date' => Date::createFromFormat('Y-m-d H:i:s', $m[1])->isoFormat(__('boilerplate::date.YmdHis')),
-                            'message' => $message,
-                            'stack' => [],
-                        ];
-                    } else {
-                        if ($isError) {
-                            if (trim($buffer) === '"}') {
-                                $isError = false;
+                    $message = preg_replace("#\{(.*)$#", '', $m[3]);
 
-                                if (count($errors) == $length) {
-                                    fclose($handle);
-                                    break 2;
-                                }
+                    $errors[$i] = [
+                        'date' => Date::createFromFormat('Y-m-d H:i:s', $m[1])->isoFormat(__('boilerplate::date.YmdHis')),
+                        'message' => $message,
+                        'stack' => [],
+                    ];
+                } else {
+                    if (!$isError) {
+                        continue;
+                    }
 
-                                continue;
-                            }
+                    if (trim($buffer) === '"}') {
+                        $isError = false;
 
-                            if (preg_match('`^#[0-9]+\s(.*)`', $buffer, $m)) {
-                                if (preg_match('#^([^\(]+)\(([0-9]+)\):\s(.*)$#', str_replace(base_path(), '', $m[1]), $n)) {
-                                    $errors[$i]['stack'][] = [
-                                        'path' => $n[1],
-                                        'line' => $n[2],
-                                        'function' => $n[3],
-                                    ];
-                                } else {
-                                    $errors[$i]['stack'][] = [
-                                        'path' => '',
-                                        'line' => '',
-                                        'function' => $m[1],
-                                    ];
-                                }
-                            }
+                        if (count($errors) == $length) {
+                            fclose($handle);
+                            break 2;
                         }
+
+                        continue;
+                    }
+
+                    if (preg_match('`^#[0-9]+\s(.*)`', $buffer, $m)) {
+                        $error = ['path' => '', 'line' => '', 'function' => $m[1]];
+
+                        if (preg_match('#^([^\(]+)\(([0-9]+)\):\s(.*)$#', str_replace(base_path(), '', $m[1]), $n)) {
+                            $error = ['path' => $n[1], 'line' => $n[2], 'function' => $n[3]];
+                        }
+
+                        $errors[$i]['stack'][] = $error;
                     }
                 }
-                fclose($handle);
             }
+            fclose($handle);
         }
 
         krsort($errors);
