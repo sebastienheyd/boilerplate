@@ -118,7 +118,7 @@ body.dark-mode {
       background: #222;
     }
 
-    select.hourselect, select.minuteselect, select.secondselect, select.ampmselect, select.monthselect, select.yearselect  {
+    select.hourselect, select.minuteselect, select.secondselect, select.ampmselect, select.monthselect, select.yearselect {
       border: 1px solid darken($border, 10%);
       background: #292d32;
       color: #FFF;
@@ -185,7 +185,7 @@ body.dark-mode {
     }
   }
 
-  .login-card-body .input-group .form-control:focus~.input-group-append .input-group-text, .login-card-body .input-group .form-control:focus~.input-group-prepend .input-group-text, .register-card-body .input-group .form-control:focus~.input-group-append .input-group-text, .register-card-body .input-group .form-control:focus~.input-group-prepend .input-group-text {
+  .login-card-body .input-group .form-control:focus ~ .input-group-append .input-group-text, .login-card-body .input-group .form-control:focus ~ .input-group-prepend .input-group-text, .register-card-body .input-group .form-control:focus ~ .input-group-append .input-group-text, .register-card-body .input-group .form-control:focus ~ .input-group-prepend .input-group-text {
     border-color: #fff;
   }
 
@@ -195,5 +195,13 @@ body.dark-mode {
 
   .leaflet-touch a {
     color: #000 !important;
+  }
+
+  .main-footer {
+    a {
+      &:hover {
+        color: #FFF;
+      }
+    }
   }
 }

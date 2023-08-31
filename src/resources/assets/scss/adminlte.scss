@@ -373,4 +373,15 @@ aside.control-sidebar {
   }
 }
 
+.main-footer {
+    a {
+        color: #869099;
+        transition: color .2s ease-in-out;
+
+        &:hover {
+            color: #000;
+        }
+    }
+}
+
 @import "darkmode";

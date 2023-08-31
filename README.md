@@ -34,6 +34,7 @@ The documentation is readable on [Github pages](https://sebastienheyd.github.io/
 
 * Configurable [backend theme](https://sebastienheyd.github.io/boilerplate/howto/change-theme) and [components](https://sebastienheyd.github.io/boilerplate/components/) for [AdminLTE 3](https://adminlte.io/docs/3.0/)
 * [Text generation with GPT in TinyMCE](https://sebastienheyd.github.io/boilerplate/howto/gpt) with the OpenAI API
+* [Customizable dashboard](https://sebastienheyd.github.io/boilerplate/dashboard) with widgets
 * Css framework [Bootstrap 4](https://getbootstrap.com/)
 * Icons by [Font Awesome 5](https://fontawesome.com/)
 * Role-based permissions support by [santigarcor/laratrust](https://github.com/santigarcor/laratrust)
