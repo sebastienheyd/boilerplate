@@ -17,4 +17,8 @@ return [
         'users'       => 'Usuarios',
         'link'        => 'Gestionar usuarios',
     ],
+    'current-user' => [
+        'label' => 'Usuario actual',
+        'description' => "Un widget que muestra el avatar del usuario actual, con enlaces para editar el perfil y un botón de cierre de sesión."
+    ]
 ];

@@ -3,6 +3,6 @@
 return [
     'edition'    => true,
     'widgets'    => [
-        ['users-number' => []],
+        ['current-user' => []],
     ],
 ];

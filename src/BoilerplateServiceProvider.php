@@ -18,6 +18,7 @@ use Laratrust\Middleware\LaratrustPermission;
 use Laratrust\Middleware\LaratrustRole;
 use Lavary\Menu\Facade;
 use Lavary\Menu\ServiceProvider as MenuServiceProvider;
+use Sebastienheyd\Boilerplate\Dashboard\Widgets\CurrentUser;
 use Sebastienheyd\Boilerplate\Dashboard\Widgets\LatestErrors;
 use Sebastienheyd\Boilerplate\Dashboard\Widgets\UsersNumber;
 use Sebastienheyd\Boilerplate\Datatables\Admin\RolesDatatable;
@@ -49,7 +50,7 @@ class BoilerplateServiceProvider extends ServiceProvider
     /**
      * Create a new boilerplate service provider instance.
      *
-     * @param  Application  $app
+     * @param Application $app
      */
     public function __construct($app)
     {
@@ -73,17 +74,17 @@ class BoilerplateServiceProvider extends ServiceProvider
         $this->loadPusher();
 
         // Load routes
-        $this->loadRoutesFrom(__DIR__.'/routes/boilerplate.php');
+        $this->loadRoutesFrom(__DIR__ . '/routes/boilerplate.php');
         if (file_exists(base_path('routes/boilerplate.php'))) {
             $this->loadRoutesFrom(base_path('routes/boilerplate.php'));
         }
 
         // Load migrations, views and translations from current directory
-        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
-        $this->loadViewsFrom(__DIR__.'/resources/views/components', 'boilerplate');
-        $this->loadViewsFrom(__DIR__.'/resources/views', 'boilerplate');
-        $this->loadJSONTranslationsFrom(__DIR__.'/resources/lang');
-        $this->loadTranslationsFrom(__DIR__.'/resources/lang', 'boilerplate');
+        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+        $this->loadViewsFrom(__DIR__ . '/resources/views/components', 'boilerplate');
+        $this->loadViewsFrom(__DIR__ . '/resources/views', 'boilerplate');
+        $this->loadJSONTranslationsFrom(__DIR__ . '/resources/lang');
+        $this->loadTranslationsFrom(__DIR__ . '/resources/lang', 'boilerplate');
 
         // Add the impersonate middleware into the default web middleware group
         if (config('boilerplate.app.allowImpersonate', false)) {
@@ -100,28 +101,28 @@ class BoilerplateServiceProvider extends ServiceProvider
     private function bootInConsole()
     {
         $this->publishes([
-            __DIR__.'/config' => config_path('boilerplate'),
+            __DIR__ . '/config' => config_path('boilerplate'),
         ], ['boilerplate', 'boilerplate-config']);
 
         $this->publishes([
-            __DIR__.'/public' => public_path('assets/vendor/boilerplate'),
+            __DIR__ . '/public' => public_path('assets/vendor/boilerplate'),
         ], ['boilerplate', 'boilerplate-public', 'laravel-assets']);
 
         $this->publishes([
-            __DIR__.'/resources/views' => resource_path('views/vendor/boilerplate'),
+            __DIR__ . '/resources/views' => resource_path('views/vendor/boilerplate'),
         ], 'boilerplate-views');
 
         $this->publishes([
-            __DIR__.'/Console/stubs/dashboard.blade.php.stub' => resource_path('views/vendor/boilerplate/dashboard.blade.php'),
-            __DIR__.'/config/menu.php' => config_path('boilerplate/menu.php'),
+            __DIR__ . '/Console/stubs/dashboard.blade.php.stub' => resource_path('views/vendor/boilerplate/dashboard.blade.php'),
+            __DIR__ . '/config/menu.php'                        => config_path('boilerplate/menu.php'),
         ], 'boilerplate-dashboard');
 
         $this->publishes([
-            __DIR__.'/resources/lang' => app()->langPath().'/vendor/boilerplate',
+            __DIR__ . '/resources/lang' => app()->langPath() . '/vendor/boilerplate',
         ], 'boilerplate-lang');
 
         $this->publishes([
-            __DIR__.'/resources/laravel-lang' => app()->langPath(),
+            __DIR__ . '/resources/laravel-lang' => app()->langPath(),
         ], ['boilerplate-lang']);
 
         $this->commands([
@@ -155,9 +156,9 @@ class BoilerplateServiceProvider extends ServiceProvider
         });
 
         Blade::directive('once', function () {
-            $id = (string) Str::uuid();
+            $id = (string)Str::uuid();
 
-            return '<?php if (! $__env->hasRenderedOnce("'.$id.'")): $__env->markAsRenderedOnce("'.$id.'"); ?>';
+            return '<?php if (! $__env->hasRenderedOnce("' . $id . '")): $__env->markAsRenderedOnce("' . $id . '"); ?>';
         });
 
         Blade::directive('endonce', function () {
@@ -206,7 +207,7 @@ class BoilerplateServiceProvider extends ServiceProvider
             View::composer([
                 "boilerplate::$component",
                 "boilerplate::components.$component",
-            ], 'Sebastienheyd\Boilerplate\View\Composers\\'.ucfirst($component).'Composer');
+            ], 'Sebastienheyd\Boilerplate\View\Composers\\' . ucfirst($component) . 'Composer');
         }
     }
 
@@ -219,17 +220,17 @@ class BoilerplateServiceProvider extends ServiceProvider
     {
         // Get config
         foreach (['app', 'auth', 'dashboard', 'laratrust', 'locale', 'menu', 'theme'] as $config) {
-            $this->mergeConfigFrom(__DIR__."/config/$config.php", "boilerplate.$config");
+            $this->mergeConfigFrom(__DIR__ . "/config/$config.php", "boilerplate.$config");
         }
 
         // Overriding Laravel config
         config([
-            'auth.providers.users.driver' => config('boilerplate.auth.providers.users.driver', 'eloquent'),
-            'auth.providers.users.model' => config('boilerplate.auth.providers.users.model', 'App\User'),
-            'auth.providers.users.table' => config('boilerplate.auth.providers.users.table', 'users'),
-            'log-viewer.route.enabled' => false,
+            'auth.providers.users.driver'  => config('boilerplate.auth.providers.users.driver', 'eloquent'),
+            'auth.providers.users.model'   => config('boilerplate.auth.providers.users.model', 'App\User'),
+            'auth.providers.users.table'   => config('boilerplate.auth.providers.users.table', 'users'),
+            'log-viewer.route.enabled'     => false,
             'log-viewer.menu.filter-route' => 'boilerplate.logs.filter',
-            'boilerplate.app.locale' => config('boilerplate.app.locale', config('boilerplate.locale.default')),
+            'boilerplate.app.locale'       => config('boilerplate.app.locale', config('boilerplate.locale.default')),
         ]);
 
         if (config('boilerplate.app.logs', true) && ! in_array('daily', config('logging.channels.stack.channels'))) {
@@ -284,7 +285,7 @@ class BoilerplateServiceProvider extends ServiceProvider
         // Overriding config
         config([
             'laratrust.user_models.users' => config('boilerplate.laratrust.user'),
-            'laratrust.models.role' => config('boilerplate.laratrust.role'),
+            'laratrust.models.role'       => config('boilerplate.laratrust.role'),
             'laratrust.models.permission' => config('boilerplate.laratrust.permission'),
         ]);
 
@@ -337,6 +338,7 @@ class BoilerplateServiceProvider extends ServiceProvider
         });
 
         app('boilerplate.dashboard.widgets')->registerWidget(
+            CurrentUser::class,
             UsersNumber::class,
             LatestErrors::class,
         );

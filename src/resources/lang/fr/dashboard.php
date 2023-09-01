@@ -17,4 +17,8 @@ return [
         'users'       => 'Utilisateurs',
         'link'        => 'Gérer les utilisateurs',
     ],
+    'current-user' => [
+        'label' => 'Utilisateur courant',
+        'description' => "Affiche l'avatar de l'utilisateur courant avec un lien pour la modification du profil et un bouton de déconnexion."
+    ]
 ];

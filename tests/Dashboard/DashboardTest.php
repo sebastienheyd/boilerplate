@@ -16,7 +16,7 @@ class DashboardTest extends TestCase
         );
 
         $widgets = app('boilerplate.dashboard.widgets')->getWidgets();
-        $this->assertEquals(['users-number', 'latest-errors'], array_keys($widgets));
+        $this->assertEquals(['current-user', 'users-number', 'latest-errors'], array_keys($widgets));
     }
 
     public function testDashboardWidgetSet()

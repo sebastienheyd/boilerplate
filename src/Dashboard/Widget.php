@@ -24,13 +24,25 @@ abstract class Widget
     {
         return [
             'primary'   => __('Blue'),
-            'secondary' => __('Grey'),
+            'info'      => __('Cyan'),
             'success'   => __('Green'),
             'danger'    => __('Red'),
-            'warning'   => __('Orange'),
-            'info'      => __('Cyan'),
+            'warning'   => __('Yellow'),
             'light'     => __('Light'),
+            'secondary' => __('Gray'),
             'dark'      => __('Dark'),
+            'black'     => __('Black'),
+            'indigo'    => __('Indigo'),
+            'lightblue' => __('Light blue'),
+            'navy'      => __('Navy'),
+            'purple'    => __('Purple'),
+            'fuchsia'   => __('Fuchsia'),
+            'pink'      => __('Pink'),
+            'maroon'    => __('Maroon'),
+            'orange'    => __('Orange'),
+            'lime'      => __('Lime'),
+            'teal'      => __('Teal'),
+            'olive'     => __('Olive'),
         ];
     }
 
@@ -46,8 +58,8 @@ abstract class Widget
     /**
      * Assign values to the view. This will overload the default parameters and settings.
      *
-     * @param  string  $name
-     * @param  mixed  $value
+     * @param string $name
+     * @param mixed $value
      * @return $this
      */
     protected function assign($name, $value = null)
@@ -68,8 +80,8 @@ abstract class Widget
     /**
      * Change a widget setting. This will overload the default parameters.
      *
-     * @param  string  $name
-     * @param  mixed  $value
+     * @param string $name
+     * @param mixed $value
      * @return $this
      */
     public function set($name, $value = null)
@@ -90,7 +102,7 @@ abstract class Widget
     /**
      * Get in order a value, a setting or a default parameter.
      *
-     * @param  string  $name
+     * @param string $name
      * @return mixed|null
      */
     public function get($name)
@@ -141,7 +153,7 @@ abstract class Widget
     /**
      * Render the edit view.
      *
-     * @param  array  $values  Values from the posted form or from the user parameters.
+     * @param array $values Values from the posted form or from the user parameters.
      * @return string
      */
     public function renderEdit($values = [])
@@ -194,7 +206,7 @@ abstract class Widget
     public function __get($prop)
     {
         if ($prop === 'label' || $prop === 'description') {
-            return __($this->{$prop}) ?: static::class.' → '.$prop;
+            return __($this->{$prop}) ?: static::class . ' → ' . $prop;
         }
 
         if ($prop === 'width' && empty($this->width)) {
