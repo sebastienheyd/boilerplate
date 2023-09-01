@@ -27,7 +27,7 @@ class CurrentUser extends Widget
     public function validator(Request $request)
     {
         return validator()->make($request->post(), [
-            'color' => 'required'
+            'color' => 'required',
         ]);
     }
 }
