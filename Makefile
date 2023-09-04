@@ -1,4 +1,4 @@
-.PHONY:help test cs csfix clean
+.PHONY:help cs csfix test testcoverage testcoveragehtml clean
 .DEFAULT_GOAL=help
 
 help:

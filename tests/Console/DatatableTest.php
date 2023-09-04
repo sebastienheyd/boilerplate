@@ -9,6 +9,9 @@ class DatatableTest extends TestCase
 {
     public function testDatatable()
     {
+        $dt = app('boilerplate.datatables')->load(app_path('Datatables'))->getDatatable('test');
+        $this->assertFalse($dt);
+
         $this->artisan('boilerplate:datatable')
             ->expectsQuestion('Name of the DataTable component to create (E.g., <comment>users</comment>)', '')
             ->expectsOutput('Answer cannot be empty')
@@ -16,6 +19,11 @@ class DatatableTest extends TestCase
             ->expectsConfirmation('Use a model as the data source?', 'no')
             ->expectsOutput('Datatable component generated with success : '.app_path('Datatables/TestDatatable.php'))
             ->assertSuccessful();
+
+        $this->assertFileExists('app/Datatables/TestDatatable.php');
+
+        $dt = app('boilerplate.datatables')->load(app_path('Datatables'))->getDatatable('test');
+        $this->assertTrue($dt->slug === 'test');
     }
 
     public function testDatatableFileAlreadyExists()

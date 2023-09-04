@@ -21,6 +21,7 @@ class DashboardTest extends TestCase
             ['users-number' => ['color' => 'danger']],
             ['line-break' => []],
             ['latest-errors' => ['length' => 1]],
+            ['current-user' => ['color' => 'pink']],
             ['fake' => []],
         ]]);
 
@@ -85,6 +86,9 @@ class DashboardTest extends TestCase
         $resource = $this->post('admin/dashboard/widget/update');
         $resource->assertNotFound();
 
+        $resource = $this->post('admin/dashboard/widget/update', ['widget-slug' => 'current-user', 'color' => 'danger']);
+        $resource->assertJson(['success' => true]);
+
         $resource = $this->post('admin/dashboard/widget/update', ['widget-slug' => 'users-number', 'color' => 'secondary']);
         $resource->assertJson(['success' => true]);
 
@@ -101,6 +105,7 @@ class DashboardTest extends TestCase
         UserFactory::create()->user(true);
         $resource = $this->post('admin/dashboard/widget/update', ['widget-slug' => 'users-number']);
         $resource->assertStatus(403);
+
     }
 
     public function testDashboardWidgetSave()
@@ -118,7 +123,7 @@ class DashboardTest extends TestCase
     public function testDashboardLastErrorWidget()
     {
         config(['boilerplate.dashboard.widgets' => [
-            ['latest-errors' => ['length' => 1]],
+            ['latest-errors' => ['length' => 2]],
         ]]);
 
         UserFactory::create()->admin(true);
@@ -127,7 +132,9 @@ class DashboardTest extends TestCase
         $resource = $this->get('admin');
         $resource->assertSee(__('boilerplate::dashboard.latest-errors.no-error'), false);
 
-        Log::error('test 2');
+        Log::error("test 2\n[stacktrace]\n#1 /fakepath/fakefile.php(22): fakeerror()\n#2 main\n\"}");
+        Log::error("test 3\n[stacktrace]\n#1 /fakepath/fakefile.php(22): fakeerror()\n#2 main\n\"}");
+        Log::error("test 4\n[stacktrace]\n#1 /fakepath/fakefile.php(22): fakeerror()\n#2 main\n\"}");
         $resource = $this->get('admin');
         $resource->assertSee('<div class="small">test 2</div>', false);
     }

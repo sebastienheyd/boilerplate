@@ -34,10 +34,16 @@ class TestDatatable extends Datatable
                     return 'row-'.$item['id'];
                 },
             ])
+            ->setRowData([
+                'color' => 'red'
+            ])
             ->pagingType('numbers')
             ->setOffset(0)
             ->setTotalRecords(3)
             ->setFilteredRecords(3)
+            ->filter(function($q) {
+                $q->whereNotNull('id');
+            })
             ->showCheckboxes()
             ->noPaging()
             ->noLengthChange()

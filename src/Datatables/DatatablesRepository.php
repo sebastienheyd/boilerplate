@@ -25,6 +25,7 @@ class DatatablesRepository
         foreach ($class as $c) {
             if (is_subclass_of($c, Datatable::class) && ! (new ReflectionClass($c))->isAbstract()) {
                 $dt = (new $c());
+
                 $slug = $dt->slug;
 
                 if (empty($slug)) {

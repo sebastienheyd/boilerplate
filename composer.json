@@ -44,8 +44,9 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Sebastienheyd\\Boilerplate\\Tests\\": "tests",
-            "Sebastienheyd\\Boilerplate\\Database\\Factories\\": "database/factories/"
+            "Sebastienheyd\\Boilerplate\\Tests\\": "tests/",
+            "Sebastienheyd\\Boilerplate\\Database\\Factories\\": "database/factories/",
+            "App\\": "testbench/app/"
         }
     },
     "authors": [

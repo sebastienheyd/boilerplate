@@ -6,9 +6,12 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Sebastienheyd\Boilerplate\Dashboard\DashboardWidgetsRepository;
 
 class DashboardController
 {
+    private $registry;
+
     /**
      * Show the application dashboard.
      *
@@ -34,7 +37,7 @@ class DashboardController
                 continue;
             }
 
-            $widget = app('boilerplate.dashboard.widgets')->getWidget($widgetSlug);
+            $widget = $this->getWidgetsRegistry()->getWidget($widgetSlug);
 
             if (! $widget || ! $widget->isAuthorized()) {
                 continue;
@@ -59,7 +62,7 @@ class DashboardController
      */
     public function addWidget(Request $request)
     {
-        $widgets = app('boilerplate.dashboard.widgets')->getWidgets();
+        $widgets = $this->getWidgetsRegistry()->getWidgets();
         $installed = $request->post('widgets');
 
         return view('boilerplate::dashboard.widgets', compact('widgets', 'installed'));
@@ -169,13 +172,27 @@ class DashboardController
      */
     private function getWidgetOrFail($slug)
     {
-        $widget = app('boilerplate.dashboard.widgets')->getWidget($slug);
+        $widget = $this->getWidgetsRegistry()->getWidget($slug);
 
         if (! $widget || ! $widget->isAuthorized()) {
             abort(404);
         }
 
         return $widget;
+    }
+
+    /**
+     * Load widgets from app path and return instance of registry.
+     *
+     * @return DashboardWidgetsRepository
+     */
+    private function getWidgetsRegistry()
+    {
+        if (! isset($this->registry)) {
+            $this->registry = app('boilerplate.dashboard.widgets')->load(app_path('Dashboard'));
+        }
+
+        return $this->registry;
     }
 
     /**

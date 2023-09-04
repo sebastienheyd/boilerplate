@@ -37,9 +37,6 @@ class LatestErrors extends Widget
 
         foreach ($files as $file) {
             $handle = fopen($file, 'r');
-            if (! $handle) {
-                continue;
-            }
 
             while (($buffer = fgets($handle)) !== false) {
                 if (preg_match('#^\[([^\]]+)\]\s([^\.]+)\.ERROR:\s([^\n]+)#', $buffer, $m)) {
@@ -53,31 +50,33 @@ class LatestErrors extends Widget
                         'message' => $message,
                         'stack' => [],
                     ];
-                } else {
-                    if (! $isError) {
-                        continue;
+
+                    continue;
+                }
+
+                if (! $isError) {
+                    continue;
+                }
+
+                if (trim($buffer) === '"}') {
+                    $isError = false;
+
+                    if (count($errors) == $length) {
+                        fclose($handle);
+                        break 2;
                     }
 
-                    if (trim($buffer) === '"}') {
-                        $isError = false;
+                    continue;
+                }
 
-                        if (count($errors) == $length) {
-                            fclose($handle);
-                            break 2;
-                        }
+                if (preg_match('`^#[0-9]+\s(.*)`', $buffer, $m)) {
+                    $error = ['path' => '', 'line' => '', 'function' => $m[1]];
 
-                        continue;
+                    if (preg_match('#^([^\(]+)\(([0-9]+)\):\s(.*)$#', str_replace(base_path(), '', $m[1]), $n)) {
+                        $error = ['path' => $n[1], 'line' => $n[2], 'function' => $n[3]];
                     }
 
-                    if (preg_match('`^#[0-9]+\s(.*)`', $buffer, $m)) {
-                        $error = ['path' => '', 'line' => '', 'function' => $m[1]];
-
-                        if (preg_match('#^([^\(]+)\(([0-9]+)\):\s(.*)$#', str_replace(base_path(), '', $m[1]), $n)) {
-                            $error = ['path' => $n[1], 'line' => $n[2], 'function' => $n[3]];
-                        }
-
-                        $errors[$i]['stack'][] = $error;
-                    }
+                    $errors[$i]['stack'][] = $error;
                 }
             }
             fclose($handle);
