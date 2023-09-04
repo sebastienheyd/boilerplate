@@ -35,13 +35,13 @@ class TestDatatable extends Datatable
                 },
             ])
             ->setRowData([
-                'color' => 'red'
+                'color' => 'red',
             ])
             ->pagingType('numbers')
             ->setOffset(0)
             ->setTotalRecords(3)
             ->setFilteredRecords(3)
-            ->filter(function($q) {
+            ->filter(function ($q) {
                 $q->whereNotNull('id');
             })
             ->showCheckboxes()

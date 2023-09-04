@@ -57,10 +57,10 @@ class DashboardWidgetsRepository
     /**
      * Load widgets classes from the given paths.
      *
-     * @param string|array $paths
+     * @param  string|array  $paths
      * @return $this
      */
-    public function load($paths): static
+    public function load($paths)
     {
         $paths = array_unique(Arr::wrap($paths));
 

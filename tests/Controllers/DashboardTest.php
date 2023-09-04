@@ -105,7 +105,6 @@ class DashboardTest extends TestCase
         UserFactory::create()->user(true);
         $resource = $this->post('admin/dashboard/widget/update', ['widget-slug' => 'users-number']);
         $resource->assertStatus(403);
-
     }
 
     public function testDashboardWidgetSave()
