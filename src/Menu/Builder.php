@@ -39,8 +39,8 @@ class Builder extends LavaryMenuBuilder
             $item->icon($item->isActive ? 'dot-circle ' : 'circle', 'far');
         }
 
-        $roles = array_unique(!empty($options['role']) ? array_merge(['admin'], explode(',', $options['role'])) : ['admin']);
-        $permissions = array_unique(!empty($options['permission']) ? explode(',', $options['permission']) : ['backend_access']);
+        $roles = array_unique(! empty($options['role']) ? array_merge(['admin'], explode(',', $options['role'])) : ['admin']);
+        $permissions = array_unique(! empty($options['permission']) ? explode(',', $options['permission']) : ['backend_access']);
 
         if (Auth::user()->hasRole($roles) || Auth::user()->isAbleTo($permissions)) {
             $this->items->push($item);
