@@ -13,25 +13,36 @@ class BuilderTest extends TestCase
         UserFactory::create()->admin(true);
 
         $builder = new Builder('test', []);
-        $builder->add('test', ['id' => 'test', 'role' => 'admin']);
+        $builder->add('test', ['id' => 'test']);
         $builder->addTo('test', 'test 2')->icon('times');
         $menu = '<ul><li id="test" class="nav-item has-treeview" url="#"><a class="nav-link"><i class="nav-icon fas fa-stop"></i><p>test</p><i class="fa fa-angle-left right"></i></a><ul><li class="nav-item"><a class="nav-link"><i class="nav-icon fas fa-times"></i><p>test 2</p></a></li></ul></li></ul>';
         $this->assertEquals($menu, $builder->asUl());
     }
 
-    public function testBuilderWithNoPermission()
+    public function testBuilderFrontUser()
     {
         UserFactory::create()->user(true);
 
         $builder = new Builder('test', []);
-        $builder->add('test', ['id' => 'test', 'role' => 'admin']);
+        $builder->add('test', ['id' => 'test']);
+        $builder->addTo('test', 'test 2')->icon('times');
+        $menu = '<ul></ul>';
+        $this->assertEquals($menu, $builder->asUl());
+    }
+
+    public function testBuilderWithPermissionNotAllowed()
+    {
+        UserFactory::create()->backendUser(true);
+
+        $builder = new Builder('test', []);
+        $builder->add('test', ['id' => 'test', 'permission' => 'my-permission']);
         $builder->addTo('test', 'test 2')->icon('times');
         $this->assertEquals('<ul></ul>', $builder->asUl());
     }
 
     public function testBuilderSubitem()
     {
-        UserFactory::create()->user(true);
+        UserFactory::create()->backendUser(true);
 
         $builder = new Builder('test', []);
         $builder->add('test', ['id' => 'test']);
@@ -42,7 +53,7 @@ class BuilderTest extends TestCase
 
     public function testBuilderIcon()
     {
-        UserFactory::create()->user(true);
+        UserFactory::create()->backendUser(true);
 
         $builder = new Builder('test', []);
         $builder->add('test', ['id' => 'test']);
@@ -53,7 +64,7 @@ class BuilderTest extends TestCase
 
     public function testBuilderSubitemImgIcon()
     {
-        UserFactory::create()->user(true);
+        UserFactory::create()->backendUser(true);
 
         $builder = new Builder('test', []);
         $builder->add('test', ['id' => 'test']);
@@ -64,7 +75,7 @@ class BuilderTest extends TestCase
 
     public function testBuilderSubitemNoParent()
     {
-        UserFactory::create()->user(true);
+        UserFactory::create()->backendUser(true);
 
         $builder = new Builder('test', []);
         $builder->addTo('fake', 'test');
@@ -73,7 +84,7 @@ class BuilderTest extends TestCase
 
     public function testBuilderSubitemBadParent()
     {
-        UserFactory::create()->user(true);
+        UserFactory::create()->backendUser(true);
 
         $builder = new Builder('test', []);
         $builder->add('test', ['id' => 'test']);

@@ -8,6 +8,7 @@ use Lavary\Menu\Item as LavaryMenuItem;
 class Item extends LavaryMenuItem
 {
     protected $icon;
+    protected $iconType;
     public $hasSubitems = false;
 
     public function __construct($builder, $id, $title, $options)
@@ -26,22 +27,8 @@ class Item extends LavaryMenuItem
      */
     public function icon($icon, $type = 'fas')
     {
-        if (preg_match('#^https?|\.(png|jpg|gif|svg)$#', $icon)) {
-            $img = '<img src="%s" class="img-fluid" style="max-height: 17px" />';
-            $this->icon = sprintf('<div class="nav-icon d-inline-block text-sm">'.$img.'</div>', $icon);
-
-            return $this;
-        }
-
-        if (preg_match('#^(fa[bsr])\s#', $icon, $m)) {
-            $type = $m[1];
-        }
-
-        if (preg_match('#fa-(.*)$#', $icon, $m)) {
-            $icon = $m[1];
-        }
-
-        $this->icon = sprintf('<i class="nav-icon %s fa-%s"></i>', $type, $icon);
+        $this->icon = $icon;
+        $this->iconType = $type;
 
         return $this;
     }
@@ -51,9 +38,30 @@ class Item extends LavaryMenuItem
      *
      * @return string|false
      */
-    public function getIcon()
+    public function getIcon($raw = false)
     {
-        return $this->icon ?? false;
+        if ($raw) {
+            return $this->icon ?? false;
+        }
+
+        if (empty($this->icon)) {
+            return false;
+        }
+
+        if (preg_match('#^https?|\.(png|jpg|gif|svg)$#', $this->icon)) {
+            $img = '<img src="%s" class="img-fluid" style="max-height: 17px" />';
+            return sprintf('<div class="nav-icon d-inline-block text-sm">'.$img.'</div>', $this->icon);
+        }
+
+        if (preg_match('#^(fa[bsr])\s#', $this->icon, $m)) {
+            $this->iconType = $m[1];
+        }
+
+        if (preg_match('#fa-(.*)$#', $this->icon, $m)) {
+            $this->icon = $m[1];
+        }
+
+        return sprintf('<i class="nav-icon %s fa-%s"></i>', $this->iconType, $this->icon);
     }
 
     /**
@@ -64,7 +72,9 @@ class Item extends LavaryMenuItem
      */
     public function order($order)
     {
-        $this->data('order', $order);
+        if (! empty($order)) {
+            $this->data('order', $order);
+        }
 
         return $this;
     }
@@ -101,17 +111,21 @@ class Item extends LavaryMenuItem
         }
 
         foreach ($routes as $pattern) {
-            if (if_route_pattern($pattern)) {
-                $this->addLinkClass('active elevation-'.config('boilerplate.theme.sidebar.links.shadow'));
+            $pattern = trim($pattern);
 
-                if ($this->hasParent()) {
-                    $this->parent()->attr(['class' => 'nav-item has-treeview menu-open'])->addLinkClass('active');
-                }
-
-                $this->isActive = true;
-
-                return $this;
+            if (! if_route_pattern($pattern)) {
+                continue;
             }
+
+            $this->addLinkClass('active elevation-'.config('boilerplate.theme.sidebar.links.shadow'));
+
+            if ($this->hasParent()) {
+                $this->parent()->attr(['class' => 'nav-item has-treeview menu-open'])->addLinkClass('active');
+            }
+
+            $this->isActive = true;
+
+            return $this;
         }
 
         return $this;
