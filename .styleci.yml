@@ -1,4 +1,3 @@
 preset: laravel
 disabled:
-  - align_double_arrow
   - array_indentation
