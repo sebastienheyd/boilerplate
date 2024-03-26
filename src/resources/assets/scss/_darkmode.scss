@@ -42,13 +42,28 @@ body.dark-mode {
     border-top: 0;
   }
 
-  &.accent-light {
-    .page-item.active a, .page-item.active .page-link {
-      color: #333;
+  .page-item {
+    color: #DDD !important;
 
-      &:hover, &:focus {
-        background-color: #ffffff !important;
-        color: #000 !important;
+    &.active {
+      a, .page-link {
+        color: #333 !important;
+        box-shadow: none;
+
+        &:hover, &:focus {
+          background-color: #ffffff !important;
+          color: #333 !important;
+        }
+      }
+    }
+
+    &:not(.active) {
+      a, .page-link {
+        color: #DDD !important;
+
+        &:hover, &:focus {
+          color: #fff !important;
+        }
       }
     }
   }

@@ -29,6 +29,10 @@ table.dataTable {
   }
 }
 
+.page-link:focus {
+  box-shadow: none !important;
+}
+
 div.dataTables_wrapper div.dataTables_info {
   padding-top: 0;
 }
