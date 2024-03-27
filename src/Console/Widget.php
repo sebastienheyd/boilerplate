@@ -55,7 +55,7 @@ class Widget extends BoilerplateCommand
 
         $content = $this->buildStub(__DIR__.'/stubs/DashboardWidget.stub', [
             'CLASS' => $className,
-            'SLUG' => $slug,
+            'SLUG'  => $slug,
         ]);
 
         $controllerPath = app_path('Dashboard');

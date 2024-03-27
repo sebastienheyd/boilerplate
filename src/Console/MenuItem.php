@@ -48,8 +48,8 @@ class MenuItem extends BoilerplateCommand
         }
 
         $content = $this->buildStub(__DIR__.'/stubs/'.$stubFile, [
-            'NAME' => $name,
-            'ID' => $camelName,
+            'NAME'  => $name,
+            'ID'    => $camelName,
             'ORDER' => intval($this->option('order')),
         ]);
 

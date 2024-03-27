@@ -18,8 +18,8 @@ return [
 
     // Allows to generate text with ChatGPT in TinyMCE
     'openai'   => [
-        'key' => env('OPENAI_API_KEY'),
-        'model' => 'gpt-3.5-turbo',
+        'key'          => env('OPENAI_API_KEY'),
+        'model'        => 'gpt-3.5-turbo',
         'organization' => env('OPENAI_API_ORGANIZATION'),
     ],
 ];

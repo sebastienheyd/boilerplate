@@ -32,10 +32,10 @@ class RegisterTest extends TestCase
         $resource = $this->post('admin/register', []);
 
         $resource->assertSessionHasErrors([
-            'last_name' => 'The last name field is required.',
+            'last_name'  => 'The last name field is required.',
             'first_name' => 'The first name field is required.',
-            'email' => 'The email field is required.',
-            'password' => 'The password field is required.',
+            'email'      => 'The email field is required.',
+            'password'   => 'The password field is required.',
         ]);
     }
 
@@ -46,10 +46,10 @@ class RegisterTest extends TestCase
         $email = $factory->unique()->safeEmail();
 
         $resource = $this->post('admin/register', [
-            'last_name' => $factory->lastName,
-            'first_name' => $factory->firstName,
-            'email' => $email,
-            'password' => '#Password123',
+            'last_name'             => $factory->lastName,
+            'first_name'            => $factory->firstName,
+            'email'                 => $email,
+            'password'              => '#Password123',
             'password_confirmation' => '#Password123',
         ]);
 
@@ -65,10 +65,10 @@ class RegisterTest extends TestCase
         $factory = Factory::create();
 
         $resource = $this->post('admin/register', [
-            'last_name' => $factory->lastName,
-            'first_name' => $factory->firstName,
-            'email' => $factory->unique()->safeEmail(),
-            'password' => '#Password123',
+            'last_name'             => $factory->lastName,
+            'first_name'            => $factory->firstName,
+            'email'                 => $factory->unique()->safeEmail(),
+            'password'              => '#Password123',
             'password_confirmation' => '#Password123',
         ]);
 
@@ -85,10 +85,10 @@ class RegisterTest extends TestCase
         $email = $factory->unique()->safeEmail();
 
         $resource = $this->post('admin/register', [
-            'last_name' => $factory->lastName,
-            'first_name' => $factory->firstName,
-            'email' => $email,
-            'password' => '#Password123',
+            'last_name'             => $factory->lastName,
+            'first_name'            => $factory->firstName,
+            'email'                 => $email,
+            'password'              => '#Password123',
             'password_confirmation' => '#Password123',
         ]);
 
@@ -104,17 +104,17 @@ class RegisterTest extends TestCase
 
         config([
             'boilerplate.auth.verify_email' => true,
-            'boilerplate.auth.register' => true,
+            'boilerplate.auth.register'     => true,
         ]);
 
         $email = $factory->unique()->safeEmail();
 
         // Post register
         $resource = $this->post('admin/register', [
-            'last_name' => $factory->lastName,
-            'first_name' => $factory->firstName,
-            'email' => $email,
-            'password' => '#Password123',
+            'last_name'             => $factory->lastName,
+            'first_name'            => $factory->firstName,
+            'email'                 => $email,
+            'password'              => '#Password123',
             'password_confirmation' => '#Password123',
         ]);
 

@@ -68,12 +68,12 @@ class Permission extends BoilerplateCommand
         $content = file_get_contents($stub);
 
         $toReplace = [
-            'PERMISSION_CLASS' => $className,
-            'PERMISSION_NAME' => $name,
+            'PERMISSION_CLASS'        => $className,
+            'PERMISSION_NAME'         => $name,
             'PERMISSION_DISPLAY_NAME' => $displayName,
-            'PERMISSION_DESC' => $description,
-            'CATEGORY_NAME' => $categoryName,
-            'CATEGORY_DESC' => $categoryDescription,
+            'PERMISSION_DESC'         => $description,
+            'CATEGORY_NAME'           => $categoryName,
+            'CATEGORY_DESC'           => $categoryDescription,
         ];
 
         $toReplace = array_map(function ($str) {

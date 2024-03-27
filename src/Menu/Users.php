@@ -7,7 +7,7 @@ class Users implements MenuItemInterface
     public function make(Builder $menu)
     {
         $item = $menu->add('boilerplate::layout.access', [
-            'icon' => 'users',
+            'icon'  => 'users',
             'order' => 1000,
         ]);
 
@@ -18,22 +18,22 @@ class Users implements MenuItemInterface
 
         $item->add('boilerplate::users.create.title', [
             'permission' => 'users_crud',
-            'route' => 'boilerplate.users.create',
-            'order' => 1002,
+            'route'      => 'boilerplate.users.create',
+            'order'      => 1002,
         ]);
 
         $item->add('boilerplate::users.list.title', [
-            'active' => 'boilerplate.users.index,boilerplate.users.edit',
+            'active'     => 'boilerplate.users.index,boilerplate.users.edit',
             'permission' => 'users_crud',
-            'route' => 'boilerplate.users.index',
-            'order' => 1003,
+            'route'      => 'boilerplate.users.index',
+            'order'      => 1003,
         ]);
 
         $item->add('boilerplate::layout.role_management', [
-            'active' => 'boilerplate.roles.*',
+            'active'     => 'boilerplate.roles.*',
             'permission' => 'roles_crud',
-            'route' => 'boilerplate.roles.index',
-            'order' => 1004,
+            'route'      => 'boilerplate.roles.index',
+            'order'      => 1004,
         ]);
     }
 }

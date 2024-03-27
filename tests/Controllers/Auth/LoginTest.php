@@ -29,7 +29,7 @@ class LoginTest extends TestCase
         $resource = $this->post('admin/login', []);
 
         $resource->assertSessionHasErrors([
-            'email' => 'The email field is required.',
+            'email'    => 'The email field is required.',
             'password' => 'The password field is required.',
         ]);
     }

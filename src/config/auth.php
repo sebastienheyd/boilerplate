@@ -12,7 +12,7 @@ return [
         ],
     ],
     'throttle' => [
-        'maxAttempts' => 3,            // Maximum number of login attempts to allow
+        'maxAttempts'  => 3,           // Maximum number of login attempts to allow
         'decayMinutes' => 1,           // Number of minutes to wait before login will be available again
     ],
 ];

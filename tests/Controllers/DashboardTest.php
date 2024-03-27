@@ -19,10 +19,10 @@ class DashboardTest extends TestCase
     {
         config(['boilerplate.dashboard.widgets' => [
             ['users-number' => ['color' => 'danger']],
-            ['line-break' => []],
+            ['line-break'    => []],
             ['latest-errors' => ['length' => 1]],
-            ['current-user' => ['color' => 'pink']],
-            ['fake' => []],
+            ['current-user'  => ['color' => 'pink']],
+            ['fake'          => []],
         ]]);
 
         UserFactory::create()->admin(true);

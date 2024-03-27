@@ -8,8 +8,8 @@ class Logs implements MenuItemInterface
     {
         $item = $menu->add('boilerplate::logs.menu.category', [
             'permission' => 'logs',
-            'icon' => 'list',
-            'order' => 1100,
+            'icon'       => 'list',
+            'order'      => 1100,
         ]);
 
         $item->add('boilerplate::logs.menu.stats', [
@@ -17,7 +17,7 @@ class Logs implements MenuItemInterface
         ]);
 
         $item->add('boilerplate::logs.menu.reports', [
-            'route' => 'boilerplate.logs.list',
+            'route'  => 'boilerplate.logs.list',
             'active' => 'boilerplate.logs.list,boilerplate.logs.show,boilerplate.logs.filter',
         ]);
     }

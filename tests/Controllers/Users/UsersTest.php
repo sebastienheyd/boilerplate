@@ -170,7 +170,7 @@ class UsersTest extends TestCase
         $resource = $this->post('admin/connect/'.$user->remember_token);
 
         $resource->assertSessionHasErrors([
-            'token'  => 'The token field is required.',
+            'token'     => 'The token field is required.',
             'password'  => 'The password field is required.',
         ]);
     }
@@ -181,8 +181,8 @@ class UsersTest extends TestCase
         $user = UserFactory::create()->backendUser();
 
         $resource = $this->post('admin/connect/'.$user->remember_token, [
-            'token' => $user->remember_token,
-            'password' => '#Azerty123',
+            'token'                 => $user->remember_token,
+            'password'              => '#Azerty123',
             'password_confirmation' => '#Azerty123',
         ]);
 
@@ -227,9 +227,9 @@ class UsersTest extends TestCase
         $user = UserFactory::create()->backendUser();
 
         $resource = $this->actingAs($user)->post('admin/userprofile', [
-            'first_name' => 'John',
-            'last_name' => 'Doe',
-            'password' => '#Azerty123',
+            'first_name'            => 'John',
+            'last_name'             => 'Doe',
+            'password'              => '#Azerty123',
             'password_confirmation' => '#Azerty123',
         ]);
 
@@ -329,7 +329,7 @@ class UsersTest extends TestCase
         $resource->assertJson(['success' => false]);
 
         $resource = $this->actingAs($user)->post('admin/userprofile/settings', [
-            'name' => 'test',
+            'name'  => 'test',
             'value' => 'test',
         ], ['X-Requested-With' => 'XMLHttpRequest']);
         $resource->assertStatus(200);

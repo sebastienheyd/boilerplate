@@ -19,7 +19,7 @@ class BoilerplateImpersonate
     {
         if (session()->has('impersonate')) {
             config([
-                'laratrust.middleware.handling' => 'redirect',
+                'laratrust.middleware.handling'              => 'redirect',
                 'laratrust.middleware.handlers.redirect.url' => route('boilerplate.impersonate.unauthorized', [], false),
             ]);
 

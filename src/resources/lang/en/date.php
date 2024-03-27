@@ -3,10 +3,10 @@
  * @see https://carbon.nesbot.com/docs/#api-localization
  */
 return [
-    'Ymd'    => 'YYYY-MM-DD',
-    'YmdHi' => 'YYYY-MM-DD HH:mm',
-    'YmdHis' => 'YYYY-MM-DD HH:mm:ss',
-    'YmdhiA' => 'YYYY-MM-DD hh:mm A',
+    'Ymd'     => 'YYYY-MM-DD',
+    'YmdHi'   => 'YYYY-MM-DD HH:mm',
+    'YmdHis'  => 'YYYY-MM-DD HH:mm:ss',
+    'YmdhiA'  => 'YYYY-MM-DD hh:mm A',
     'YmdhisA' => 'YYYY-MM-DD hh:mm:ss A',
-    'lFdY'   => 'dddd, MMMM Do YYYY',
+    'lFdY'    => 'dddd, MMMM Do YYYY',
 ];

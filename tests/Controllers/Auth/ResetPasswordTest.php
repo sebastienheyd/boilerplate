@@ -39,8 +39,8 @@ class ResetPasswordTest extends TestCase
 
         $resource = $this->post('admin/password/reset');
         $resource->assertSessionHasErrors([
-            'token' => 'The token field is required.',
-            'email' => 'The email field is required.',
+            'token'    => 'The token field is required.',
+            'email'    => 'The email field is required.',
             'password' => 'The password field is required.',
         ]);
     }

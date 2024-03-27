@@ -18,7 +18,7 @@ return [
         'link'        => 'Manage users',
     ],
     'current-user' => [
-        'label' => 'Current user',
+        'label'       => 'Current user',
         'description' => "Current user's avatar with link for profile editing and a logout button.",
     ],
 ];

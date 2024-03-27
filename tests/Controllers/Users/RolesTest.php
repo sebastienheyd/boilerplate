@@ -43,17 +43,17 @@ class RolesTest extends TestCase
         $resource = $this->actingAs($this->admin)->post('admin/roles');
 
         $resource->assertSessionHasErrors([
-            'name' => 'The name field is required.',
+            'name'         => 'The name field is required.',
             'display_name' => 'The label field is required.',
-            'description' => 'The description field is required.',
+            'description'  => 'The description field is required.',
         ]);
     }
 
     public function testRoleCreateFormPost()
     {
         $resource = $this->actingAs($this->admin)->post('admin/roles', [
-            'display_name' => 'Test',
-            'description' => 'Role for testing',
+            'display_name'  => 'Test',
+            'description'   => 'Role for testing',
             'permission[2]' => 'on',
         ]);
 
@@ -65,9 +65,9 @@ class RolesTest extends TestCase
     public function testRoleEditForm()
     {
         Role::create([
-            'name' => 'test',
+            'name'         => 'test',
             'display_name' => 'Test',
-            'description' => 'Test role',
+            'description'  => 'Test role',
         ]);
 
         $resource = $this->actingAs($this->admin)->get('admin/roles/3/edit');
@@ -82,9 +82,9 @@ class RolesTest extends TestCase
     public function testRoleEditFormPostFail()
     {
         Role::create([
-            'name' => 'test',
+            'name'         => 'test',
             'display_name' => 'Test',
-            'description' => 'Test role',
+            'description'  => 'Test role',
         ]);
 
         $resource = $this->actingAs($this->admin)->post('admin/roles/3', [
@@ -93,22 +93,22 @@ class RolesTest extends TestCase
 
         $resource->assertSessionHasErrors([
             'display_name' => 'The label field is required.',
-            'description' => 'The description field is required.',
+            'description'  => 'The description field is required.',
         ]);
     }
 
     public function testRoleEditFormPost()
     {
         Role::create([
-            'name' => 'test',
+            'name'         => 'test',
             'display_name' => 'Test',
-            'description' => 'Test role',
+            'description'  => 'Test role',
         ]);
 
         $resource = $this->actingAs($this->admin)->post('admin/roles/3', [
-            '_method' => 'PUT',
+            '_method'      => 'PUT',
             'display_name' => 'Edited role',
-            'description' => 'Edited role description',
+            'description'  => 'Edited role description',
         ]);
 
         $resource->assertStatus(302);
@@ -120,9 +120,9 @@ class RolesTest extends TestCase
     public function testRoleDestroy()
     {
         Role::create([
-            'name' => 'test',
+            'name'         => 'test',
             'display_name' => 'Test',
-            'description' => 'Test role',
+            'description'  => 'Test role',
         ]);
 
         $this->assertTrue(Role::find(3) !== null);

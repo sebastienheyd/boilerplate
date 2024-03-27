@@ -249,8 +249,8 @@ abstract class Datatable
 
         $icons = [
             'colvis' => 'eye',
-            'csv' => 'file-csv',
-            'excel' => 'file-excel',
+            'csv'    => 'file-csv',
+            'excel'  => 'file-excel',
         ];
 
         foreach ($this->attributes['buttons'] as $button) {

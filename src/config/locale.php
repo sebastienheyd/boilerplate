@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'default' => config('app.locale'),
-    'switch' => false,
-    'allowed' => ['bg', 'en', 'es', 'fa', 'fr', 'it', 'tr'],
+    'default'   => config('app.locale'),
+    'switch'    => false,
+    'allowed'   => ['bg', 'en', 'es', 'fa', 'fr', 'it', 'tr'],
     'languages' => [
         'bg' => ['label' => 'български', 'datatable' => 'Bulgarian'],
         'en' => ['label' => 'English', 'datatable' => 'English'],

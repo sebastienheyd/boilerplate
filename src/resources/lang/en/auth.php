@@ -40,7 +40,7 @@ return [
     ],
     'impersonate' => [
         'back_to_impersonator' => 'Access the page as :user',
-        'not_authorized' => ':user is not authorized to access page :page.',
-        'back_to_dashboard' => 'Return to the dashboard',
+        'not_authorized'       => ':user is not authorized to access page :page.',
+        'back_to_dashboard'    => 'Return to the dashboard',
     ],
 ];

@@ -37,7 +37,7 @@ class Select2Controller
 
             $results = $query->get()->map(function ($item) {
                 return [
-                    'id' => $item->select2_id,
+                    'id'   => $item->select2_id,
                     'text' => $item->select2_text,
                 ];
             });
@@ -55,7 +55,7 @@ class Select2Controller
 
             $results = $query->get()->map(function ($item) use ($m, $key) {
                 return [
-                    'id' => $item->{$key},
+                    'id'   => $item->{$key},
                     'text' => $item->{$m[2]},
                 ];
             });

@@ -18,7 +18,7 @@ return [
         'link'        => 'Kullanıcıları Yönet',
     ],
     'current-user' => [
-        'label' => 'Mevcut kullanıcı',
+        'label'       => 'Mevcut kullanıcı',
         'description' => 'Mevcut kullanıcının avatarını gösteren, profil düzenleme bağlantıları ve çıkış düğmesi içeren bir widget.',
     ],
 ];

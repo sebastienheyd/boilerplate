@@ -18,7 +18,7 @@ return [
         'link'        => 'Gestisci gli utenti',
     ],
     'current-user' => [
-        'label' => 'Utente attuale',
+        'label'       => 'Utente attuale',
         'description' => "Un widget che mostra l'avatar dell'utente attuale, con link per la modifica del profilo e un pulsante di logout.",
     ],
 ];

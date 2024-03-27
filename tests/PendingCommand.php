@@ -35,7 +35,7 @@ class PendingCommand extends BasePendingCommand
     {
         $this->test->expectedChoices[$question] = [
             'expected' => $answers,
-            'strict' => $strict,
+            'strict'   => $strict,
         ];
 
         return $this->expectsQuestion($question, $answer);

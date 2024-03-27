@@ -186,9 +186,9 @@ class User extends Authenticatable implements MustVerifyEmail
 
         return 'https://ui-avatars.com/api/?'.http_build_query([
             'background' => 'F0F0F0',
-            'color' => '333',
-            'size' => 170,
-            'name' => $this->getNameAttribute(),
+            'color'      => '333',
+            'size'       => 170,
+            'name'       => $this->getNameAttribute(),
         ]);
     }
 

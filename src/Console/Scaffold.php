@@ -83,7 +83,7 @@ class Scaffold extends BoilerplateCommand
         if (! $this->confirm('Remove custom dashboard?')) {
             $backupDashboard = [
                 app_path('Http/Controllers/Boilerplate/DashboardController.php') => storage_path('scaffold/DashboardController.php'),
-                resource_path('views/vendor/boilerplate/dashboard.blade.php') => storage_path('scaffold/dashboard.blade.php'),
+                resource_path('views/vendor/boilerplate/dashboard.blade.php')    => storage_path('scaffold/dashboard.blade.php'),
             ];
 
             $this->fileSystem->makeDirectory(storage_path('scaffold'));
@@ -153,7 +153,7 @@ class Scaffold extends BoilerplateCommand
         foreach ($files as $file) {
             $this->replaceInFile([
                 'Sebastienheyd\Boilerplate\Controllers' => 'App\Http\Controllers\Boilerplate',
-                'Sebastienheyd\Boilerplate\Models' => 'App\Models\Boilerplate',
+                'Sebastienheyd\Boilerplate\Models'      => 'App\Models\Boilerplate',
             ], $file->getRealPath());
         }
 
@@ -177,8 +177,8 @@ class Scaffold extends BoilerplateCommand
 
         foreach ($files as $file) {
             $this->replaceInFile([
-                'Sebastienheyd\Boilerplate\Models' => 'App\Models\Boilerplate',
-                'Sebastienheyd\Boilerplate\Events' => 'App\Events\Boilerplate',
+                'Sebastienheyd\Boilerplate\Models'        => 'App\Models\Boilerplate',
+                'Sebastienheyd\Boilerplate\Events'        => 'App\Events\Boilerplate',
                 'Sebastienheyd\Boilerplate\Notifications' => 'App\Notifications\Boilerplate',
             ], $file->getRealPath());
         }

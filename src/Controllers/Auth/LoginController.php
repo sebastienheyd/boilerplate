@@ -56,7 +56,7 @@ class LoginController
     {
         $this->validate($request, [
             $this->username() => 'required|exists:users,'.$this->username().',active,1',
-            'password' => 'required',
+            'password'        => 'required',
         ], [
             $this->username().'.exists' => __('auth.failed'),
         ]);

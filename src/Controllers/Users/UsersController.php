@@ -90,7 +90,7 @@ class UsersController
         $user = $userModel::findOrFail($id);
 
         return view('boilerplate::users.edit', [
-            'user' => $user,
+            'user'  => $user,
             'roles' => Auth::user()->hasRole('admin') ? $role::all() : $role::whereNotIn('name', ['admin'])->get(),
         ]);
     }

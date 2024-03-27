@@ -17,7 +17,7 @@ class LatestErrors extends Widget
     protected $editView = 'boilerplate::dashboard.widgets.latestErrorsEdit';
     protected $parameters = [
         'length' => 3,
-        'color' => 'danger',
+        'color'  => 'danger',
     ];
 
     public function make()
@@ -46,9 +46,9 @@ class LatestErrors extends Widget
                     $message = preg_replace("#\{(.*)$#", '', $m[3]);
 
                     $errors[$i] = [
-                        'date' => Date::createFromFormat('Y-m-d H:i:s', $m[1])->isoFormat(__('boilerplate::date.YmdHis')),
+                        'date'    => Date::createFromFormat('Y-m-d H:i:s', $m[1])->isoFormat(__('boilerplate::date.YmdHis')),
                         'message' => $message,
-                        'stack' => [],
+                        'stack'   => [],
                     ];
 
                     continue;

@@ -35,13 +35,13 @@ class UserFactory
     public function user($authUser = false)
     {
         $user = User::create([
-            'active' => '1',
-            'first_name' => str_replace("'", '', $this->faker->firstName),
-            'last_name' => str_replace("'", '', $this->faker->lastName),
-            'email' => $this->faker->unique()->safeEmail(),
+            'active'            => '1',
+            'first_name'        => str_replace("'", '', $this->faker->firstName),
+            'last_name'         => str_replace("'", '', $this->faker->lastName),
+            'email'             => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => Hash::make('password'),
-            'remember_token' => Str::random(32),
+            'password'          => Hash::make('password'),
+            'remember_token'    => Str::random(32),
         ]);
 
         if ($authUser) {
@@ -54,13 +54,13 @@ class UserFactory
     public function backendUser($authUser = false)
     {
         $user = User::create([
-            'active' => '1',
-            'first_name' => str_replace("'", '', $this->faker->firstName),
-            'last_name' => str_replace("'", '', $this->faker->lastName),
-            'email' => $this->faker->unique()->safeEmail(),
+            'active'            => '1',
+            'first_name'        => str_replace("'", '', $this->faker->firstName),
+            'last_name'         => str_replace("'", '', $this->faker->lastName),
+            'email'             => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => Hash::make('password'),
-            'remember_token' => Str::random(32),
+            'password'          => Hash::make('password'),
+            'remember_token'    => Str::random(32),
         ]);
 
         $role = Role::find(2);
@@ -76,13 +76,13 @@ class UserFactory
     public function admin($authUser = false)
     {
         $user = DB::table('users')->insertGetId([
-            'active' => '1',
-            'first_name' => str_replace("'", '', $this->faker->firstName),
-            'last_name' => str_replace("'", '', mb_strtoupper($this->faker->lastName)),
-            'email' => $this->faker->unique()->safeEmail(),
+            'active'            => '1',
+            'first_name'        => str_replace("'", '', $this->faker->firstName),
+            'last_name'         => str_replace("'", '', mb_strtoupper($this->faker->lastName)),
+            'email'             => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => Hash::make('password'),
-            'remember_token' => Str::random(32),
+            'password'          => Hash::make('password'),
+            'remember_token'    => Str::random(32),
         ]);
 
         $user = User::find($user);
