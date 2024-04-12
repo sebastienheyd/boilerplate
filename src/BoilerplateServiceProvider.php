@@ -340,7 +340,7 @@ class BoilerplateServiceProvider extends ServiceProvider
         app('boilerplate.dashboard.widgets')->registerWidget(
             CurrentUser::class,
             UsersNumber::class,
-            LatestErrors::class,
+            LatestErrors::class
         );
     }
 }
