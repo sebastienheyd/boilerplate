@@ -18,9 +18,7 @@ class DashboardTest extends TestCase
     {
         UserFactory::create()->admin(true);
 
-        app('boilerplate.dashboard.widgets')->load(app_path('Dashboard'))->registerWidget(
-            self::class,
-        );
+        app('boilerplate.dashboard.widgets')->load(app_path('Dashboard'))->registerWidget(self::class);
 
         $widgets = app('boilerplate.dashboard.widgets')->getWidgets();
         $this->assertEquals(['current-user', 'users-number', 'latest-errors', 'test-widget'], array_keys($widgets));
