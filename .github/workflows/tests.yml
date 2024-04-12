@@ -9,7 +9,7 @@ jobs:
       fail-fast: false
       matrix:
         php: [8.0, 8.1, 8.2]
-        stability: [prefer-lowest, prefer-stable]
+        stability: [prefer-stable]
         laravel: ['^9.0', '^10.0']
         exclude:
           - php: 8.2
@@ -39,5 +39,8 @@ jobs:
       - name: Install dependencies
         run: composer update --${{ matrix.stability }} --prefer-dist --no-interaction --no-progress --with laravel/framework:${{ matrix.laravel }}
 
+      - name: Execute code sniffing
+        run: vendor/bin/phpcs
+
       - name: Execute tests
-        run: vendor/bin/phpunit
+        run: vendor/bin/phpunit --verbose
