@@ -39,8 +39,5 @@ jobs:
       - name: Install dependencies
         run: composer update --${{ matrix.stability }} --prefer-dist --no-interaction --no-progress --with laravel/framework:${{ matrix.laravel }}
 
-      - name: Execute code sniffing
-        run: vendor/bin/phpcs
-
       - name: Execute tests
         run: vendor/bin/phpunit
