@@ -1,0 +1,19 @@
+{
+  "name": "boilerplate-docs",
+  "version": "0.0.1",
+  "description": "sebastienheyd/boilerplate documentation",
+  "main": "index.js",
+  "authors": {
+    "name": "Sébastien HEYD",
+    "email": "contact@sheyd.fr"
+  },
+  "repository": "https://github.com/sebastienheyd/boilerplate",
+  "scripts": {
+    "docs:dev": "vuepress dev .",
+    "docs:build": "vuepress build ."
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "vuepress": "^1.9.10"
+  }
+}

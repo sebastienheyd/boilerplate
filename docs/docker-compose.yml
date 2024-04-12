@@ -1,0 +1,10 @@
+version: '3'
+services:
+  vuepress:
+    build: .
+    container_name: boilerplate-docs
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/local
+    tty: true
