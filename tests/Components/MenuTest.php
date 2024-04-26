@@ -3,7 +3,6 @@
 namespace Sebastienheyd\Boilerplate\Tests\Components;
 
 use Sebastienheyd\Boilerplate\Tests\factories\UserFactory;
-use Sebastienheyd\Boilerplate\Tests\TestCase;
 
 class MenuTest extends TestComponent
 {

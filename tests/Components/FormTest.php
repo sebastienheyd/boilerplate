@@ -6,7 +6,7 @@ class FormTest extends TestComponent
 {
     public function testFormComponent()
     {
-            $expected = <<<'HTML'
+        $expected = <<<'HTML'
 <form method="POST" action="">
 <input type="hidden" name="_token" value="" autocomplete="off">
 </form>

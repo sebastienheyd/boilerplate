@@ -3,7 +3,6 @@
 namespace Sebastienheyd\Boilerplate\Console;
 
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
-use Illuminate\Support\Facades\Artisan;
 
 class Dashboard extends BoilerplateCommand
 {

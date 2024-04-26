@@ -7,10 +7,8 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Routing\Router;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Str;
 use Laratrust\LaratrustFacade;
 use Laratrust\LaratrustServiceProvider;
 use Laratrust\Middleware\LaratrustAbility;
@@ -27,7 +25,6 @@ use Sebastienheyd\Boilerplate\Middleware\BoilerplateImpersonate;
 use Sebastienheyd\Boilerplate\View\Composers\DatatablesComposer;
 use Sebastienheyd\Boilerplate\View\Composers\MenuComposer;
 use Sebastienheyd\Boilerplate\View\Composers\TinymceLoadComposer;
-use Sebastienheyd\Boilerplate\View\ViewFactory;
 
 class BoilerplateServiceProvider extends ServiceProvider
 {

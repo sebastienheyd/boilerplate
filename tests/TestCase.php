@@ -4,7 +4,6 @@ namespace Sebastienheyd\Boilerplate\Tests;
 
 use Arcanedev\LogViewer\LogViewerServiceProvider;
 use Arcanedev\LogViewer\Providers\DeferredServicesProvider;
-use Collective\Html\FormFacade;
 use Creativeorange\Gravatar\GravatarServiceProvider;
 use Illuminate\Auth\AuthServiceProvider;
 use Illuminate\Broadcasting\BroadcastServiceProvider;
