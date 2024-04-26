@@ -15,15 +15,10 @@ class IcheckTest extends TestComponent
 </div>
 HTML;
 
-        if ($this->minLaravelVersion('7.0')) {
-            $view = $this->blade('<x-boilerplate::icheck id="test" name="test" label="boilerplate::layout.dashboard" />');
-            $view->assertSee($expected, false);
+        $view = $this->blade('<x-boilerplate::icheck id="test" name="test" label="boilerplate::layout.dashboard" />');
+        $view->assertSee($expected, false);
 
-            $view = $this->blade('<x-boilerplate::icheck id="test" name="test" label="boilerplate::layout.dashboard" :checked="false" />');
-            $view->assertSee($expected, false);
-        }
-
-        $view = $this->blade("@component('boilerplate::icheck', ['name' => 'test', 'id' => 'test', 'label' => 'boilerplate::layout.dashboard']) @endcomponent");
+        $view = $this->blade('<x-boilerplate::icheck id="test" name="test" label="boilerplate::layout.dashboard" :checked="false" />');
         $view->assertSee($expected, false);
     }
 
@@ -38,15 +33,10 @@ HTML;
 </div>
 HTML;
 
-        if ($this->minLaravelVersion('7.0')) {
-            $view = $this->blade('<x-boilerplate::icheck id="test" checked />');
-            $view->assertSee($expected, false);
+        $view = $this->blade('<x-boilerplate::icheck id="test" checked />');
+        $view->assertSee($expected, false);
 
-            $view = $this->blade('<x-boilerplate::icheck id="test" :checked="!isset($value)" />');
-            $view->assertSee($expected, false);
-        }
-
-        $view = $this->blade('@component("boilerplate::icheck", ["id" => "test", "checked" => !isset($value)]) @endcomponent');
+        $view = $this->blade('<x-boilerplate::icheck id="test" :checked="!isset($value)" />');
         $view->assertSee($expected, false);
     }
 
@@ -61,12 +51,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->minLaravelVersion('7.0')) {
-            $view = $this->blade('<x-boilerplate::icheck id="test" class="bg-red" data-toggle="tooltip" value="1"/>');
-            $view->assertSee($expected, false);
-        }
-
-        $view = $this->blade("@component('boilerplate::icheck', ['id' => 'test', 'class' => 'bg-red', 'data-toggle' => 'tooltip', 'value' => '1']) @endcomponent");
+        $view = $this->blade('<x-boilerplate::icheck id="test" class="bg-red" data-toggle="tooltip" value="1"/>');
         $view->assertSee($expected, false);
     }
 }

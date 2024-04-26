@@ -39,7 +39,7 @@ class RegisterController
     public function __construct()
     {
         $userModel = config('auth.providers.users.model');
-        $this->firstUser = $userModel::whereRoleIs('admin')->count() === 0;
+        $this->firstUser = $userModel::whereHasRole('admin')->count() === 0;
     }
 
     /**
@@ -108,7 +108,7 @@ class RegisterController
 
         if ($this->firstUser) {
             $admin = $roleModel::whereName('admin')->first();
-            $user->attachRole($admin);
+            $user->addRole($admin);
         } else {
             $user->restore();
             $role = $roleModel::whereName(config('boilerplate.auth.register_role'))->first();

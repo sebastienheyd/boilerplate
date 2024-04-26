@@ -20,7 +20,7 @@ class DatatablesRepository
      *
      * @throws ReflectionException
      */
-    public function registerDatatable(...$class)
+    public function registerDatatable(...$class): static
     {
         foreach ($class as $c) {
             if (is_subclass_of($c, Datatable::class) && ! (new ReflectionClass($c))->isAbstract()) {

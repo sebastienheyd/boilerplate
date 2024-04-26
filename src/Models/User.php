@@ -8,7 +8,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laratrust\Traits\LaratrustUserTrait;
+use Laratrust\Contracts\LaratrustUser;
+use Laratrust\Traits\HasRolesAndPermissions;
 use Sebastienheyd\Boilerplate\Events\UserCreated;
 use Sebastienheyd\Boilerplate\Events\UserDeleted;
 use Sebastienheyd\Boilerplate\Events\UserSaved;
@@ -16,10 +17,10 @@ use Sebastienheyd\Boilerplate\Notifications\NewUser;
 use Sebastienheyd\Boilerplate\Notifications\ResetPassword;
 use Sebastienheyd\Boilerplate\Notifications\VerifyEmail;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable implements MustVerifyEmail, LaratrustUser
 {
     use Notifiable;
-    use LaratrustUserTrait;
+    use HasRolesAndPermissions;
     use SoftDeletes;
 
     protected $casts = ['settings' => 'array'];

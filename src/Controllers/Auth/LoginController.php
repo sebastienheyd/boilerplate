@@ -38,7 +38,7 @@ class LoginController
     {
         $userModel = config('auth.providers.users.model');
 
-        if ($userModel::whereRoleIs('admin')->count() === 0) {
+        if ($userModel::whereHasRole('admin')->count() === 0) {
             return redirect(route('boilerplate.register'));
         }
 

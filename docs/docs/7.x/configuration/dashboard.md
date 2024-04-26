@@ -18,7 +18,7 @@ return [
 
 ```
 
-> NB: To maintain retrocompatibility with older versions of Boilerplate, the configuration value that defines the controller for the dashboard is located in the [menu.md](menu.md) configuration file.
+> NB: To maintain retrocompatibility with older versions of Boilerplate, the configuration value that defines the controller for the dashboard is located in the [menu.php](menu.md) configuration file.
 
 ---
 

@@ -3,6 +3,7 @@
 namespace Sebastienheyd\Boilerplate\Console;
 
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use Illuminate\Support\Facades\Artisan;
 
 class Dashboard extends BoilerplateCommand
 {
@@ -41,7 +42,7 @@ class Dashboard extends BoilerplateCommand
         if ($this->fileSystem->exists($controller)) {
             $this->error('DashboardController.php already exists in app/Http/Controllers/Boilerplate');
 
-            return 0;
+            return self::SUCCESS;
         }
 
         // Create controller folder
@@ -66,12 +67,13 @@ class Dashboard extends BoilerplateCommand
         );
 
         $this->fileSystem->put($configFile, $config);
-
         if (is_file(base_path('bootstrap/cache/routes-v7.php')) || is_file(base_path('bootstrap/cache/routes.php'))) {
             $this->callSilent('route:cache');
         }
 
         $this->info('Dashboard controller and view has been successfully published!');
+
+        return self::SUCCESS;
     }
 
     private function remove()
@@ -80,7 +82,7 @@ class Dashboard extends BoilerplateCommand
         if (! $this->fileSystem->exists($path.'/DashboardController.php')) {
             $this->info('Custom dashboard is not present, nothing to remove');
 
-            return 0;
+            return self::SUCCESS;
         }
 
         $this->warn('------------------------------------------------------------------------');
@@ -88,7 +90,7 @@ class Dashboard extends BoilerplateCommand
         $this->warn('------------------------------------------------------------------------');
 
         if (! $this->confirm('Continue?')) {
-            return 0;
+            return self::SUCCESS;
         }
 
         $this->delete($path.'/DashboardController.php');
@@ -116,6 +118,8 @@ class Dashboard extends BoilerplateCommand
         }
 
         $this->info('Custom dashboard has been removed!');
+
+        return self::SUCCESS;
     }
 
     /**

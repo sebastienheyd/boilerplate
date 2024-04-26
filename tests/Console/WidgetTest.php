@@ -13,9 +13,9 @@ class WidgetTest extends TestCase
             ->expectsConfirmation('Generate test-one widget?', 'yes')
             ->assertSuccessful();
 
-        $this->assertFileExists('app/Dashboard/TestOne.php');
-        $this->assertFileExists('resources/views/dashboard/widgets/test-one.blade.php');
-        $this->assertFileExists('resources/views/dashboard/widgets/test-oneEdit.blade.php');
+        $this->assertFileExistsTestBench('app/Dashboard/TestOne.php');
+        $this->assertFileExistsTestBench('resources/views/dashboard/widgets/test-one.blade.php');
+        $this->assertFileExistsTestBench('resources/views/dashboard/widgets/test-oneEdit.blade.php');
     }
 
     public function testWidgetAlreadyExists()
@@ -31,9 +31,9 @@ class WidgetTest extends TestCase
             ->expectsConfirmation('Generate test-two widget?', 'yes')
             ->assertSuccessful();
 
-        $this->assertFileExists('app/Dashboard/TestTwo.php');
-        $this->assertFileExists('resources/views/dashboard/widgets/test-two.blade.php');
-        $this->assertFileExists('resources/views/dashboard/widgets/test-twoEdit.blade.php');
+        $this->assertFileExistsTestBench('app/Dashboard/TestTwo.php');
+        $this->assertFileExistsTestBench('resources/views/dashboard/widgets/test-two.blade.php');
+        $this->assertFileExistsTestBench('resources/views/dashboard/widgets/test-twoEdit.blade.php');
     }
 
     public function testWidgetWithNameNoConfirmation()
@@ -42,8 +42,8 @@ class WidgetTest extends TestCase
             ->expectsConfirmation('Generate test-three widget?')
             ->assertSuccessful();
 
-        $this->assertFileDoesNotExist('app/Dashboard/TestThree.php');
-        $this->assertFileDoesNotExist('resources/views/dashboard/widgets/test-three.blade.php');
-        $this->assertFileDoesNotExist('resources/views/dashboard/widgets/test-threeEdit.blade.php');
+        $this->assertFileDoesNotExistTestBench('app/Dashboard/TestThree.php');
+        $this->assertFileDoesNotExistTestBench('resources/views/dashboard/widgets/test-three.blade.php');
+        $this->assertFileDoesNotExistTestBench('resources/views/dashboard/widgets/test-threeEdit.blade.php');
     }
 }

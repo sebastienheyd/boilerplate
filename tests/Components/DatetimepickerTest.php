@@ -10,12 +10,7 @@ class DatetimepickerTest extends TestComponent
 <code>&lt;x-boilerplate::datetimepicker> The name attribute has not been set</code>
 HTML;
 
-        if ($this->minLaravelVersion('7.0')) {
-            $view = $this->blade('<x-boilerplate::datetimepicker />');
-            $view->assertSee($expected, false);
-        }
-
-        $view = $this->blade("@component('boilerplate::datetimepicker') @endcomponent");
+        $view = $this->blade('<x-boilerplate::datetimepicker />');
         $view->assertSee($expected, false);
     }
 
@@ -30,12 +25,8 @@ HTML;
 </div>
 <script>loadScript('',()=>{moment.locale('en');registerAsset('momentjs')});</script><script>loadStylesheet('');whenAssetIsLoaded('momentjs',()=>{loadScript('',()=>{registerAsset('datetimepicker',()=>{$.fn.datetimepicker.Constructor.Default=$.extend({},$.fn.datetimepicker.Constructor.Default,{locale:"en",icons:$.extend({},$.fn.datetimepicker.Constructor.Default.icons,{time:'far fa-clock',date:'far fa-calendar',up:'fas fa-arrow-up',down:'fas fa-arrow-down',previous:'fas fa-chevron-left',next:'fas fa-chevron-right',today:'far fa-calendar-check',clear:'fas fa-trash',close:'fas fa-times'})})})})});</script><script>whenAssetIsLoaded('datetimepicker',()=>{window.DTP_test=$('#test').datetimepicker({format:"L",buttons:{showToday:!1,showClear:!1,showClose:!1},useCurrent:!1,});$('#test').on('change.datetimepicker',()=>{$('input[name="test"]').val('');if($('input[name="test_local"]').val()!==''){let date=$('#test').datetimepicker('viewDate').format('YYYY-MM-DD');$('input[name="test"]').val(date).trigger('change')}})});</script>
 HTML;
-        if ($this->minLaravelVersion('7.0')) {
-            $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" />');
-            $view->assertSee($expected, false);
-        }
 
-        $view = $this->blade("@component('boilerplate::datetimepicker', ['id' => 'test', 'name' => 'test']) @endcomponent");
+        $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" />');
         $view->assertSee($expected, false);
     }
 
@@ -51,12 +42,8 @@ HTML;
 </div>
 <script>loadScript('',()=>{moment.locale('en');registerAsset('momentjs')});</script><script>loadStylesheet('');whenAssetIsLoaded('momentjs',()=>{loadScript('',()=>{registerAsset('datetimepicker',()=>{$.fn.datetimepicker.Constructor.Default=$.extend({},$.fn.datetimepicker.Constructor.Default,{locale:"en",icons:$.extend({},$.fn.datetimepicker.Constructor.Default.icons,{time:'far fa-clock',date:'far fa-calendar',up:'fas fa-arrow-up',down:'fas fa-arrow-down',previous:'fas fa-chevron-left',next:'fas fa-chevron-right',today:'far fa-calendar-check',clear:'fas fa-trash',close:'fas fa-times'})})})})});</script><script>whenAssetIsLoaded('datetimepicker',()=>{window.DTP_test=$('#test').datetimepicker({format:"L",buttons:{showToday:!1,showClear:!1,showClose:!1},useCurrent:!1,});$('#test').on('change.datetimepicker',()=>{$('input[name="test"]').val('');if($('input[name="test_local"]').val()!==''){let date=$('#test').datetimepicker('viewDate').format('YYYY-MM-DD');$('input[name="test"]').val(date).trigger('change')}})});</script>
 HTML;
-        if ($this->minLaravelVersion('7.0')) {
-            $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" label="Test" />');
-            $view->assertSee($expected, false);
-        }
 
-        $view = $this->blade("@component('boilerplate::datetimepicker', ['id' => 'test', 'name' => 'test', 'label' => 'Test']) @endcomponent");
+        $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" label="Test" />');
         $view->assertSee($expected, false);
     }
 
@@ -71,12 +58,8 @@ HTML;
 </div>
 <script>loadScript('',()=>{moment.locale('en');registerAsset('momentjs')});</script><script>loadStylesheet('');whenAssetIsLoaded('momentjs',()=>{loadScript('',()=>{registerAsset('datetimepicker',()=>{$.fn.datetimepicker.Constructor.Default=$.extend({},$.fn.datetimepicker.Constructor.Default,{locale:"en",icons:$.extend({},$.fn.datetimepicker.Constructor.Default.icons,{time:'far fa-clock',date:'far fa-calendar',up:'fas fa-arrow-up',down:'fas fa-arrow-down',previous:'fas fa-chevron-left',next:'fas fa-chevron-right',today:'far fa-calendar-check',clear:'fas fa-trash',close:'fas fa-times'})})})})});</script><script>whenAssetIsLoaded('datetimepicker',()=>{window.DTP_test=$('#test').datetimepicker({format:"L",buttons:{showToday:!1,showClear:!1,showClose:!1},useCurrent:!1,});$('#test').on('change.datetimepicker',()=>{$('input[name="test"]').val('');if($('input[name="test_local"]').val()!==''){let date=$('#test').datetimepicker('viewDate').format('YYYY-MM-DD');$('input[name="test"]').val(date).trigger('change')}})});</script>
 HTML;
-        if ($this->minLaravelVersion('7.0')) {
-            $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" class="test-class" />');
-            $view->assertSee($expected, false);
-        }
 
-        $view = $this->blade("@component('boilerplate::datetimepicker', ['id' => 'test', 'name' => 'test', 'class' => 'test-class']) @endcomponent");
+        $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" class="test-class" />');
         $view->assertSee($expected, false);
     }
 
@@ -92,12 +75,8 @@ HTML;
 </div>
 <script>loadScript('',()=>{moment.locale('en');registerAsset('momentjs')});</script><script>loadStylesheet('');whenAssetIsLoaded('momentjs',()=>{loadScript('',()=>{registerAsset('datetimepicker',()=>{$.fn.datetimepicker.Constructor.Default=$.extend({},$.fn.datetimepicker.Constructor.Default,{locale:"en",icons:$.extend({},$.fn.datetimepicker.Constructor.Default.icons,{time:'far fa-clock',date:'far fa-calendar',up:'fas fa-arrow-up',down:'fas fa-arrow-down',previous:'fas fa-chevron-left',next:'fas fa-chevron-right',today:'far fa-calendar-check',clear:'fas fa-trash',close:'fas fa-times'})})})})});</script><script>whenAssetIsLoaded('datetimepicker',()=>{window.DTP_test=$('#test').datetimepicker({format:"L",buttons:{showToday:!1,showClear:!1,showClose:!1},useCurrent:!1,});$('#test').on('change.datetimepicker',()=>{$('input[name="test"]').val('');if($('input[name="test_local"]').val()!==''){let date=$('#test').datetimepicker('viewDate').format('YYYY-MM-DD');$('input[name="test"]').val(date).trigger('change')}})});</script>
 HTML;
-        if ($this->minLaravelVersion('7.0')) {
-            $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" help="boilerplate::users.create.help" />');
-            $view->assertSee($expected, false);
-        }
 
-        $view = $this->blade("@component('boilerplate::datetimepicker', ['id' => 'test', 'name' => 'test', 'help' => 'boilerplate::users.create.help']) @endcomponent");
+        $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" help="boilerplate::users.create.help" />');
         $view->assertSee($expected, false);
     }
 
@@ -113,12 +92,8 @@ HTML;
 </div>
 <script>loadScript('',()=>{moment.locale('en');registerAsset('momentjs')});</script><script>loadStylesheet('');whenAssetIsLoaded('momentjs',()=>{loadScript('',()=>{registerAsset('datetimepicker',()=>{$.fn.datetimepicker.Constructor.Default=$.extend({},$.fn.datetimepicker.Constructor.Default,{locale:"en",icons:$.extend({},$.fn.datetimepicker.Constructor.Default.icons,{time:'far fa-clock',date:'far fa-calendar',up:'fas fa-arrow-up',down:'fas fa-arrow-down',previous:'fas fa-chevron-left',next:'fas fa-chevron-right',today:'far fa-calendar-check',clear:'fas fa-trash',close:'fas fa-times'})})})})});</script><script>whenAssetIsLoaded('datetimepicker',()=>{window.DTP_test=$('#test').datetimepicker({format:"L",buttons:{showToday:!1,showClear:!1,showClose:!1},useCurrent:!1,});$('#test').on('change.datetimepicker',()=>{$('input[name="fielderror"]').val('');if($('input[name="fielderror_local"]').val()!==''){let date=$('#test').datetimepicker('viewDate').format('YYYY-MM-DD');$('input[name="fielderror"]').val(date).trigger('change')}})});</script>
 HTML;
-        if ($this->minLaravelVersion('7.0')) {
-            $view = $this->withoutMix()->withViewErrors(['fielderror' => 'Error message'])->rawBlade('<x-boilerplate::datetimepicker id="test" name="fielderror" />');
-            $view->assertSee($expected, false);
-        }
 
-        $view = $this->withoutMix()->withViewErrors(['fielderror' => 'Error message'])->rawBlade("@component('boilerplate::datetimepicker', ['id' => 'test', 'name' => 'fielderror']) @endcomponent");
+        $view = $this->withoutMix()->withViewErrors(['fielderror' => 'Error message'])->rawBlade('<x-boilerplate::datetimepicker id="test" name="fielderror" />');
         $view->assertSee($expected, false);
     }
 
@@ -139,12 +114,8 @@ HTML;
 </div>
 <script>loadScript('',()=>{moment.locale('en');registerAsset('momentjs')});</script><script>loadStylesheet('');whenAssetIsLoaded('momentjs',()=>{loadScript('',()=>{registerAsset('datetimepicker',()=>{$.fn.datetimepicker.Constructor.Default=$.extend({},$.fn.datetimepicker.Constructor.Default,{locale:"en",icons:$.extend({},$.fn.datetimepicker.Constructor.Default.icons,{time:'far fa-clock',date:'far fa-calendar',up:'fas fa-arrow-up',down:'fas fa-arrow-down',previous:'fas fa-chevron-left',next:'fas fa-chevron-right',today:'far fa-calendar-check',clear:'fas fa-trash',close:'fas fa-times'})})})})});</script><script>whenAssetIsLoaded('datetimepicker',()=>{window.DTP_test=$('#test').datetimepicker({format:"L",buttons:{showToday:!1,showClear:!1,showClose:!1},useCurrent:!1,});$('#test').on('change.datetimepicker',()=>{$('input[name="test"]').val('');if($('input[name="test_local"]').val()!==''){let date=$('#test').datetimepicker('viewDate').format('YYYY-MM-DD');$('input[name="test"]').val(date).trigger('change')}})});</script>
 HTML;
-        if ($this->minLaravelVersion('7.0')) {
-            $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" prepend-text="test" append-text="test" />');
-            $view->assertSee($expected, false);
-        }
 
-        $view = $this->blade("@component('boilerplate::datetimepicker', ['id' => 'test', 'name' => 'test', 'prepend-text' => 'test', 'append-text' => 'test']) @endcomponent");
+        $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" prepend-text="test" append-text="test" />');
         $view->assertSee($expected, false);
     }
 
@@ -165,12 +136,8 @@ HTML;
 </div>
 <script>loadScript('',()=>{moment.locale('en');registerAsset('momentjs')});</script><script>loadStylesheet('');whenAssetIsLoaded('momentjs',()=>{loadScript('',()=>{registerAsset('datetimepicker',()=>{$.fn.datetimepicker.Constructor.Default=$.extend({},$.fn.datetimepicker.Constructor.Default,{locale:"en",icons:$.extend({},$.fn.datetimepicker.Constructor.Default.icons,{time:'far fa-clock',date:'far fa-calendar',up:'fas fa-arrow-up',down:'fas fa-arrow-down',previous:'fas fa-chevron-left',next:'fas fa-chevron-right',today:'far fa-calendar-check',clear:'fas fa-trash',close:'fas fa-times'})})})})});</script><script>whenAssetIsLoaded('datetimepicker',()=>{window.DTP_test=$('#test').datetimepicker({format:"L",buttons:{showToday:!1,showClear:!1,showClose:!1},useCurrent:!1,});$('#test').on('change.datetimepicker',()=>{$('input[name="test"]').val('');if($('input[name="test_local"]').val()!==''){let date=$('#test').datetimepicker('viewDate').format('YYYY-MM-DD');$('input[name="test"]').val(date).trigger('change')}})});</script>
 HTML;
-        if ($this->minLaravelVersion('7.0')) {
-            $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" prepend-text="fas fa-calendar" append-text="fas fa-calendar" />');
-            $view->assertSee($expected, false);
-        }
 
-        $view = $this->blade("@component('boilerplate::datetimepicker', ['id' => 'test', 'name' => 'test', 'prepend-text' => 'fas fa-calendar', 'append-text' => 'fas fa-calendar']) @endcomponent");
+        $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" prepend-text="fas fa-calendar" append-text="fas fa-calendar" />');
         $view->assertSee($expected, false);
     }
 
@@ -191,12 +158,8 @@ HTML;
 </div>
 <script>loadScript('',()=>{moment.locale('en');registerAsset('momentjs')});</script><script>loadStylesheet('');whenAssetIsLoaded('momentjs',()=>{loadScript('',()=>{registerAsset('datetimepicker',()=>{$.fn.datetimepicker.Constructor.Default=$.extend({},$.fn.datetimepicker.Constructor.Default,{locale:"en",icons:$.extend({},$.fn.datetimepicker.Constructor.Default.icons,{time:'far fa-clock',date:'far fa-calendar',up:'fas fa-arrow-up',down:'fas fa-arrow-down',previous:'fas fa-chevron-left',next:'fas fa-chevron-right',today:'far fa-calendar-check',clear:'fas fa-trash',close:'fas fa-times'})})})})});</script><script>whenAssetIsLoaded('datetimepicker',()=>{window.DTP_test=$('#test').datetimepicker({format:"L",buttons:{showToday:!1,showClear:!1,showClose:!1},useCurrent:!1,});$('#test').on('change.datetimepicker',()=>{$('input[name="test"]').val('');if($('input[name="test_local"]').val()!==''){let date=$('#test').datetimepicker('viewDate').format('YYYY-MM-DD');$('input[name="test"]').val(date).trigger('change')}})});</script>
 HTML;
-        if ($this->minLaravelVersion('7.0')) {
-            $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test"><x-slot name="prepend">test</x-slot><x-slot name="append">test</x-slot></x-boilerplate::datetimepicker>');
-            $view->assertSee($expected, false);
-        }
 
-        $view = $this->blade("@component('boilerplate::datetimepicker', ['id' => 'test', 'name' => 'test']) @slot('prepend') test @endslot @slot('append') test @endslot @endcomponent");
+        $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test"><x-slot name="prepend">test</x-slot><x-slot name="append">test</x-slot></x-boilerplate::datetimepicker>');
         $view->assertSee($expected, false);
     }
 
@@ -211,12 +174,8 @@ HTML;
 </div>
 <script>loadScript('',()=>{moment.locale('en');registerAsset('momentjs')});</script><script>loadStylesheet('');whenAssetIsLoaded('momentjs',()=>{loadScript('',()=>{registerAsset('datetimepicker',()=>{$.fn.datetimepicker.Constructor.Default=$.extend({},$.fn.datetimepicker.Constructor.Default,{locale:"en",icons:$.extend({},$.fn.datetimepicker.Constructor.Default.icons,{time:'far fa-clock',date:'far fa-calendar',up:'fas fa-arrow-up',down:'fas fa-arrow-down',previous:'fas fa-chevron-left',next:'fas fa-chevron-right',today:'far fa-calendar-check',clear:'fas fa-trash',close:'fas fa-times'})})})})});</script><script>whenAssetIsLoaded('datetimepicker',()=>{window.DTP_test=$('#test').datetimepicker({format:"L",buttons:{showToday:!1,showClear:!1,showClose:!1},useCurrent:!1,});$('#test').on('change.datetimepicker',()=>{$('input[name="test"]').val('');if($('input[name="test_local"]').val()!==''){let date=$('#test').datetimepicker('viewDate').format('YYYY-MM-DD');$('input[name="test"]').val(date).trigger('change')}})});</script>
 HTML;
-        if ($this->minLaravelVersion('7.0')) {
-            $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" />@stack("js")');
-            $view->assertSee($expected, false);
-        }
 
-        $view = $this->blade("@component('boilerplate::datetimepicker', ['id' => 'test', 'name' => 'test']) @endcomponent()@stack('js')");
+        $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" />@stack("js")');
         $view->assertSee($expected, false);
     }
 
@@ -232,24 +191,13 @@ HTML;
 <script>loadScript('',()=>{moment.locale('en');registerAsset('momentjs')});</script><script>loadStylesheet('');whenAssetIsLoaded('momentjs',()=>{loadScript('',()=>{registerAsset('datetimepicker',()=>{$.fn.datetimepicker.Constructor.Default=$.extend({},$.fn.datetimepicker.Constructor.Default,{locale:"en",icons:$.extend({},$.fn.datetimepicker.Constructor.Default.icons,{time:'far fa-clock',date:'far fa-calendar',up:'fas fa-arrow-up',down:'fas fa-arrow-down',previous:'fas fa-chevron-left',next:'fas fa-chevron-right',today:'far fa-calendar-check',clear:'fas fa-trash',close:'fas fa-times'})})})})});</script><script>whenAssetIsLoaded('datetimepicker',()=>{window.DTP_test=$('#test').datetimepicker({format:"L",buttons:{showToday:!1,showClear:!1,showClose:!1},useCurrent:!1,});$('#test').on('change.datetimepicker',()=>{$('input[name="test"]').val('');if($('input[name="test_local"]').val()!==''){let date=$('#test').datetimepicker('viewDate').format('YYYY-MM-DD');$('input[name="test"]').val(date).trigger('change')}})});</script>
 HTML;
 
-        if ($this->minLaravelVersion('7.0')) {
-            $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" value="2022-01-01" />');
-            $view->assertSee($expected, false);
-
-            $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" value="2022-01-01 00:00:00" />');
-            $view->assertSee($expected, false);
-
-            $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" :value="Illuminate\Support\Carbon::createFromFormat(\'Y-m-d H:i:s\', \'2022-01-01 00:00:00\')" />');
-            $view->assertSee($expected, false);
-        }
-
-        $view = $this->blade("@component('boilerplate::datetimepicker', ['id' => 'test', 'name' => 'test', 'value' => '2022-01-01']) @endcomponent");
+        $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" value="2022-01-01" />');
         $view->assertSee($expected, false);
 
-        $view = $this->blade("@component('boilerplate::datetimepicker', ['id' => 'test', 'name' => 'test', 'value' => '2022-01-01 00:00:00']) @endcomponent");
+        $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" value="2022-01-01 00:00:00" />');
         $view->assertSee($expected, false);
 
-        $view = $this->blade("@component('boilerplate::datetimepicker', ['id' => 'test', 'name' => 'test', 'value' => Illuminate\Support\Carbon::createFromFormat('Y-m-d H:i:s', '2022-01-01 00:00:00')]) @endcomponent");
+        $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" :value="Illuminate\Support\Carbon::createFromFormat(\'Y-m-d H:i:s\', \'2022-01-01 00:00:00\')" />');
         $view->assertSee($expected, false);
     }
 }

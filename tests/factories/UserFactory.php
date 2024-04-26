@@ -64,7 +64,7 @@ class UserFactory
         ]);
 
         $role = Role::find(2);
-        $user->attachRole($role);
+        $user->addRole($role);
 
         if ($authUser) {
             Auth::setUser($user);
@@ -87,7 +87,7 @@ class UserFactory
 
         $user = User::find($user);
         $role = Role::find(1);
-        $user->attachRole($role);
+        $user->addRole($role);
 
         if ($authUser) {
             Auth::setUser($user);

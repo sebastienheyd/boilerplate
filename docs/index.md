@@ -3,7 +3,7 @@ home: true
 heroImage: 
 tagline: "with blade components, user management, roles, permissions, ..."
 actionText: Quick Start →
-actionLink: /docs/7.x/
+actionLink: /docs/8.x/
 footer: MIT Licensed | Copyright © 2017-present Sébastien HEYD
 ---
 
@@ -20,6 +20,7 @@ It includes profile creation and his management, user management, roles, permiss
 
 ## Version Compatibility
 
-| Laravel    | Boilerplate                                               |
-|:-----------|:----------------------------------------------------------|
-| 6.x-10.x   | [7.x](/docs/7.x/)                                         |
+| Laravel  | Boilerplate       |
+|:---------|:------------------|
+| 11.x     | [8.x](/docs/8.x/) |
+| 6.x-10.x | [7.x](/docs/7.x/) |

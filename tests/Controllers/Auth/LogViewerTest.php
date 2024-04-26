@@ -38,7 +38,7 @@ class LogViewerTest extends TestCase
         $user = UserFactory::create()->backendUser();
 
         $permission = Permission::whereName('logs')->first();
-        $user->attachPermission($permission);
+        $user->givePermission($permission);
 
         $resource = $this->actingAs($user)->get('admin/logs');
         $resource->assertStatus(200);

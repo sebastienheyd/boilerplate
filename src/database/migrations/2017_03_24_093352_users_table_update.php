@@ -15,16 +15,15 @@ class UsersTableUpdate extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->softDeletes();
-            $table->boolean('active')->default(0)->after('id');
-            $table->string('first_name')->nullable()->after('active');
-            $table->string('last_name')->nullable()->after('first_name');
-            $table->dateTime('last_login')->nullable();
+            $table->renameColumn('name', 'first_name');
         });
 
-        // Drop column in another call for sqlite
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('name');
+            $table->softDeletes();
+            $table->boolean('active')->default(0)->after('id');
+            $table->string('first_name')->nullable()->change();
+            $table->string('last_name')->nullable()->after('first_name');
+            $table->dateTime('last_login')->nullable();
         });
     }
 

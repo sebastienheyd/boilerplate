@@ -14,7 +14,7 @@ module.exports = {
     ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }]
   ],
   themeConfig: {
-    current: '7.x',
+    current: '8.x',
     repo: '',
     editLinks: false,
     docsRepo: "sebastienheyd/boilerplate",
@@ -29,6 +29,7 @@ module.exports = {
     ],
     sidebarDepth: 0,
     sidebar: {
+      '/docs/8.x/': getDocsNavBar("8.x"),
       '/docs/7.x/': getDocsNavBar("7.x"),
     }
   },

@@ -13,12 +13,7 @@ class InputTest extends TestComponent
 </code>
 HTML;
 
-        if ($this->minLaravelVersion('7.0')) {
-            $view = $this->blade('<x-boilerplate::input />');
-            $view->assertSee($expected, false);
-        }
-
-        $view = $this->blade("@component('boilerplate::input') @endcomponent");
+        $view = $this->blade('<x-boilerplate::input />');
         $view->assertSee($expected, false);
     }
 
@@ -30,12 +25,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->minLaravelVersion('7.0')) {
-            $view = $this->blade('<x-boilerplate::input name="test" />');
-            $view->assertSee($expected, false);
-        }
-
-        $view = $this->blade("@component('boilerplate::input', ['name' => 'test']) @endcomponent");
+        $view = $this->blade('<x-boilerplate::input name="test" />');
         $view->assertSee($expected, false);
     }
 
@@ -48,12 +38,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->minLaravelVersion('7.0')) {
-            $view = $this->blade('<x-boilerplate::input name="test" label="Test" />');
-            $view->assertSee($expected, false);
-        }
-
-        $view = $this->blade("@component('boilerplate::input', ['name' => 'test', 'label' => 'Test']) @endcomponent");
+        $view = $this->blade('<x-boilerplate::input name="test" label="Test" />');
         $view->assertSee($expected, false);
     }
 
@@ -65,12 +50,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->minLaravelVersion('7.0')) {
-            $view = $this->blade('<x-boilerplate::input name="test" class="test-field" />');
-            $view->assertSee($expected, false);
-        }
-
-        $view = $this->blade("@component('boilerplate::input', ['name' => 'test', 'class' => 'test-field']) @endcomponent");
+        $view = $this->blade('<x-boilerplate::input name="test" class="test-field" />');
         $view->assertSee($expected, false);
     }
 
@@ -85,12 +65,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->minLaravelVersion('7.0')) {
-            $view = $this->blade('<x-boilerplate::input name="test" class="test-field" data-attr="test" :clearable="true" />');
-            $view->assertSee($expected, false);
-        }
-
-        $view = $this->blade("@component('boilerplate::input', ['name' => 'test', 'class' => 'test-field', 'data-attr' => 'test', 'clearable' => true]) @endcomponent");
+        $view = $this->blade('<x-boilerplate::input name="test" class="test-field" data-attr="test" :clearable="true" />');
         $view->assertSee($expected, false);
     }
 
@@ -102,12 +77,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->minLaravelVersion('7.0')) {
-            $view = $this->blade('<x-boilerplate::input name="test" type="password" />');
-            $view->assertSee($expected, false);
-        }
-
-        $view = $this->blade("@component('boilerplate::input', ['name' => 'test', 'type' => 'password']) @endcomponent");
+        $view = $this->blade('<x-boilerplate::input name="test" type="password" />');
         $view->assertSee($expected, false);
     }
 
@@ -120,12 +90,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->minLaravelVersion('7.0')) {
-            $view = $this->withoutMix()->withViewErrors(['fielderror' => 'Error message'])->rawBlade('<x-boilerplate::input name="fielderror" />');
-            $view->assertSee($expected, false);
-        }
-
-        $view = $this->withoutMix()->withViewErrors(['fielderror' => 'Error message'])->rawBlade("@component('boilerplate::input', ['name' => 'fielderror']) @endcomponent");
+        $view = $this->withoutMix()->withViewErrors(['fielderror' => 'Error message'])->rawBlade('<x-boilerplate::input name="fielderror" />');
         $view->assertSee($expected, false);
     }
 
@@ -139,12 +104,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->minLaravelVersion('7.0')) {
-            $view = $this->withoutMix()->withViewErrors(['fielderror' => 'Error message'])->rawBlade('<x-boilerplate::input name="fielderror" help="boilerplate::users.create.help" />');
-            $view->assertSee($expected, false);
-        }
-
-        $view = $this->withoutMix()->withViewErrors(['fielderror' => 'Error message'])->rawBlade("@component('boilerplate::input', ['name' => 'fielderror', 'help' => 'boilerplate::users.create.help']) @endcomponent");
+        $view = $this->withoutMix()->withViewErrors(['fielderror' => 'Error message'])->rawBlade('<x-boilerplate::input name="fielderror" help="boilerplate::users.create.help" />');
         $view->assertSee($expected, false);
     }
 
@@ -164,12 +124,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->minLaravelVersion('7.0')) {
-            $view = $this->blade('<x-boilerplate::input name="test" prepend-text="test" append-text="test" />');
-            $view->assertSee($expected, false);
-        }
-
-        $view = $this->blade("@component('boilerplate::input', ['name' => 'test', 'prepend-text' => 'test', 'append-text' => 'test']) @endcomponent");
+        $view = $this->blade('<x-boilerplate::input name="test" prepend-text="test" append-text="test" />');
         $view->assertSee($expected, false);
     }
 
@@ -189,12 +144,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->minLaravelVersion('7.0')) {
-            $view = $this->blade('<x-boilerplate::input name="test" prepend-text="fas fa-envelope" append-text="fas fa-envelope" />');
-            $view->assertSee($expected, false);
-        }
-
-        $view = $this->blade("@component('boilerplate::input', ['name' => 'test', 'prepend-text' => 'fas fa-envelope', 'append-text' => 'fas fa-envelope']) @endcomponent");
+        $view = $this->blade('<x-boilerplate::input name="test" prepend-text="fas fa-envelope" append-text="fas fa-envelope" />');
         $view->assertSee($expected, false);
     }
 
@@ -214,12 +164,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->minLaravelVersion('7.0')) {
-            $view = $this->blade('<x-boilerplate::input name="test"><x-slot name="prepend">test</x-slot><x-slot name="append">test</x-slot></x-boilerplate::input>');
-            $view->assertSee($expected, false);
-        }
-
-        $view = $this->blade("@component('boilerplate::input', ['name' => 'test']) @slot('prepend') test @endslot @slot('append') test @endslot @endcomponent");
+        $view = $this->blade('<x-boilerplate::input name="test"><x-slot name="prepend">test</x-slot><x-slot name="append">test</x-slot></x-boilerplate::input>');
         $view->assertSee($expected, false);
     }
 
@@ -231,12 +176,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->minLaravelVersion('7.0')) {
-            $view = $this->blade('<x-boilerplate::input name="test" placeholder="Test" />');
-            $view->assertSee($expected, false);
-        }
-
-        $view = $this->blade("@component('boilerplate::input', ['name' => 'test', 'placeholder' => 'Test']) @endcomponent");
+        $view = $this->blade('<x-boilerplate::input name="test" placeholder="Test" />');
         $view->assertSee($expected, false);
     }
 
@@ -248,12 +188,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->minLaravelVersion('7.0')) {
-            $view = $this->blade('<x-boilerplate::input type="number" name="test" />');
-            $view->assertSee($expected, false);
-        }
-
-        $view = $this->blade("@component('boilerplate::input', ['type' => 'number', 'name' => 'test']) @endcomponent");
+        $view = $this->blade('<x-boilerplate::input type="number" name="test" />');
         $view->assertSee($expected, false);
     }
 
@@ -265,12 +200,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->minLaravelVersion('7.0')) {
-            $view = $this->blade('<x-boilerplate::input type="file" name="test" />');
-            $view->assertSee($expected, false);
-        }
-
-        $view = $this->blade("@component('boilerplate::input', ['type' => 'file', 'name' => 'test']) @endcomponent");
+        $view = $this->blade('<x-boilerplate::input type="file" name="test" />');
         $view->assertSee($expected, false);
     }
 
@@ -282,12 +212,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->minLaravelVersion('7.0')) {
-            $view = $this->blade('<x-boilerplate::input type="select" name="test" :options="[\'value\' => \'test\']" value="value" />');
-            $view->assertSee($expected, false);
-        }
-
-        $view = $this->blade("@component('boilerplate::input', ['type' => 'select', 'name' => 'test', 'options' => ['value' => 'test'], 'value' => 'value']) @endcomponent");
+        $view = $this->blade('<x-boilerplate::input type="select" name="test" :options="[\'value\' => \'test\']" value="value" />');
         $view->assertSee($expected, false);
     }
 
@@ -299,12 +224,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->minLaravelVersion('7.0')) {
-            $view = $this->blade('<x-boilerplate::input type="textarea" name="test" value="value" rows="12" />');
-            $view->assertSee($expected, false);
-        }
-
-        $view = $this->blade("@component('boilerplate::input', ['type' => 'textarea', 'name' => 'test', 'value' => 'value', 'rows' => '12']) @endcomponent");
+        $view = $this->blade('<x-boilerplate::input type="textarea" name="test" value="value" rows="12" />');
         $view->assertSee($expected, false);
     }
 }

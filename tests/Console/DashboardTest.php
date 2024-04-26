@@ -15,8 +15,8 @@ class DashboardTest extends TestCase
             ->expectsOutput('Dashboard controller and view has been successfully published!')
             ->assertSuccessful();
 
-        $this->assertFileExists('app/Http/Controllers/Boilerplate/DashboardController.php');
-        $this->assertFileExists('resources/views/vendor/boilerplate/dashboard.blade.php');
+        $this->assertFileExistsTestBench('app/Http/Controllers/Boilerplate/DashboardController.php');
+        $this->assertFileExistsTestBench('resources/views/vendor/boilerplate/dashboard.blade.php');
 
         unlink($fakeRouteCache);
     }
@@ -34,8 +34,8 @@ class DashboardTest extends TestCase
             ->expectsConfirmation('Continue?')
             ->assertSuccessful();
 
-        $this->assertFileExists('app/Http/Controllers/Boilerplate/DashboardController.php');
-        $this->assertFileExists('resources/views/vendor/boilerplate/dashboard.blade.php');
+        $this->assertFileExistsTestBench('app/Http/Controllers/Boilerplate/DashboardController.php');
+        $this->assertFileExistsTestBench('resources/views/vendor/boilerplate/dashboard.blade.php');
     }
 
     public function testDashboardRemove()
@@ -48,10 +48,10 @@ class DashboardTest extends TestCase
             ->expectsOutput('Custom dashboard has been removed!')
             ->assertSuccessful();
 
-        $this->assertFileDoesNotExist('app/Http/Controllers/Boilerplate/DashboardController.php');
-        $this->assertFileDoesNotExist('resources/views/vendor/boilerplate/dashboard.blade.php');
-        $this->assertFileDoesNotExist('/app/Http/Controllers/Boilerplate');
-        $this->assertFileDoesNotExist('/resources/views/vendor/boilerplate');
+        $this->assertFileDoesNotExistTestBench('app/Http/Controllers/Boilerplate/DashboardController.php');
+        $this->assertFileDoesNotExistTestBench('resources/views/vendor/boilerplate/dashboard.blade.php');
+        $this->assertFileDoesNotExistTestBench('/app/Http/Controllers/Boilerplate');
+        $this->assertFileDoesNotExistTestBench('/resources/views/vendor/boilerplate');
 
         unlink($fakeRouteCache);
     }

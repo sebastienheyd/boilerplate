@@ -5,6 +5,7 @@ namespace Sebastienheyd\Boilerplate\Tests\Components;
 use Illuminate\Support\Facades\View as ViewFacade;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\ViewErrorBag;
+use Illuminate\Testing\TestView;
 use Sebastienheyd\Boilerplate\Tests\TestCase;
 
 abstract class TestComponent extends TestCase
@@ -28,11 +29,7 @@ abstract class TestComponent extends TestCase
         $tempFile = $tempFileInfo['dirname'].'/'.$tempFileInfo['filename'].'.blade.php';
         file_put_contents($tempFile, $template);
 
-        if ($this->minLaravelVersion('8.0')) {
-            return new \Illuminate\Testing\TestView(view($tempFileInfo['filename'], $data));
-        } else {
-            return new \Sebastienheyd\Boilerplate\Tests\TestView(view($tempFileInfo['filename'], $data));
-        }
+        return new TestView(view($tempFileInfo['filename'], $data));
     }
 
     protected function withViewErrors(array $errors, $key = 'default')

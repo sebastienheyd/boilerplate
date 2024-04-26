@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
-use Intervention\Image\Facades\Image;
+use Intervention\Image\Laravel\Facades\Image;
 use Sebastienheyd\Boilerplate\Rules\Password;
 
 class UsersController
@@ -274,8 +274,8 @@ class UsersController
             $fileName = md5($user->id.$user->email).'_tmp.'.$extension;
             $avatar->move($destinationPath, $fileName);
 
-            Image::make($destinationPath.DIRECTORY_SEPARATOR.$fileName)
-                ->fit(170, 170)
+            Image::read($destinationPath.DIRECTORY_SEPARATOR.$fileName)
+                ->cover(170, 170)
                 ->save($user->avatar_path);
 
             unlink($destinationPath.DIRECTORY_SEPARATOR.$fileName);

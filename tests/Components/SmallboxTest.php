@@ -16,12 +16,7 @@ class SmallboxTest extends TestComponent
 </div>
 HTML;
 
-        if ($this->minLaravelVersion('7.0')) {
-            $view = $this->blade('<x-boilerplate::smallbox />');
-            $view->assertSee($expected, false);
-        }
-
-        $view = $this->blade("@component('boilerplate::smallbox') @endcomponent");
+        $view = $this->blade('<x-boilerplate::smallbox />');
         $view->assertSee($expected, false);
     }
 
@@ -40,12 +35,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->minLaravelVersion('7.0')) {
-            $view = $this->blade('<x-boilerplate::smallbox id="test" color="primary" class="extra-class" nb="1234" text="boilerplate::layout.dashboard" icon="far fa-envelope" link="#" link-text="boilerplate::layout.dashboard" />');
-            $view->assertSee($expected, false);
-        }
-
-        $view = $this->blade("@component('boilerplate::smallbox', ['id' => 'test', 'color' => 'primary', 'class' => 'extra-class', 'nb' => '1234', 'text' => 'boilerplate::layout.dashboard', 'icon' => 'far fa-envelope', 'link' => '#', 'link-text' => 'boilerplate::layout.dashboard']) @endcomponent");
+        $view = $this->blade('<x-boilerplate::smallbox id="test" color="primary" class="extra-class" nb="1234" text="boilerplate::layout.dashboard" icon="far fa-envelope" link="#" link-text="boilerplate::layout.dashboard" />');
         $view->assertSee($expected, false);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Sebastienheyd\Boilerplate\Models;
 
-use Laratrust\Models\LaratrustRole;
+use Laratrust\Models\Role as LaratrustRole;
 
 class Role extends LaratrustRole
 {

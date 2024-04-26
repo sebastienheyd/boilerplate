@@ -18,13 +18,13 @@ class ScaffoldTest extends TestCase
             ->expectsConfirmation('Continue?', 'yes')
             ->assertSuccessful();
 
-        $this->assertDirectoryExists('app/Http/Controllers/Boilerplate');
-        $this->assertDirectoryExists('app/Events/Boilerplate');
-        $this->assertDirectoryExists('app/Models/Boilerplate');
-        $this->assertDirectoryExists('app/Notifications/Boilerplate');
-        $this->assertDirectoryExists($this->minLaravelVersion('9.0') ? 'lang/vendor/boilerplate' : 'resources/lang/vendor/boilerplate');
-        $this->assertDirectoryExists('resources/views/vendor/boilerplate');
-        $this->assertDirectoryExists('public/assets/vendor/boilerplate');
+        $this->assertDirectoryExistsTestBench('app/Http/Controllers/Boilerplate');
+        $this->assertDirectoryExistsTestBench('app/Events/Boilerplate');
+        $this->assertDirectoryExistsTestBench('app/Models/Boilerplate');
+        $this->assertDirectoryExistsTestBench('app/Notifications/Boilerplate');
+        $this->assertDirectoryExistsTestBench('lang/vendor/boilerplate');
+        $this->assertDirectoryExistsTestBench('resources/views/vendor/boilerplate');
+        $this->assertDirectoryExistsTestBench('public/assets/vendor/boilerplate');
     }
 
     public function testScaffoldRemove()
@@ -38,22 +38,22 @@ class ScaffoldTest extends TestCase
             ->expectsConfirmation('Remove custom dashboard?')
             ->assertSuccessful();
 
-        $this->assertFileExists('app/Http/Controllers/Boilerplate/DashboardController.php');
-        $this->assertFileExists('resources/views/vendor/boilerplate/dashboard.blade.php');
-        $this->assertDirectoryDoesNotExist('app/Events/Boilerplate');
-        $this->assertDirectoryDoesNotExist('app/Models/Boilerplate');
-        $this->assertDirectoryDoesNotExist('app/Notifications/Boilerplate');
-        $this->assertDirectoryDoesNotExist($this->minLaravelVersion('9.0') ? 'lang/vendor/boilerplate' : 'resources/lang/vendor/boilerplate');
+        $this->assertFileExistsTestBench('app/Http/Controllers/Boilerplate/DashboardController.php');
+        $this->assertFileExistsTestBench('resources/views/vendor/boilerplate/dashboard.blade.php');
+        $this->assertDirectoryDoesNotExistTestBench('app/Events/Boilerplate');
+        $this->assertDirectoryDoesNotExistTestBench('app/Models/Boilerplate');
+        $this->assertDirectoryDoesNotExistTestBench('app/Notifications/Boilerplate');
+        $this->assertDirectoryDoesNotExistTestBench('lang/vendor/boilerplate');
 
         $this->artisan('boilerplate:scaffold', ['--remove' => true])
             ->expectsConfirmation('Continue?', 'yes')
             ->expectsConfirmation('Remove custom dashboard?', 'yes')
             ->assertSuccessful();
 
-        $this->assertFileDoesNotExist('app/Http/Controllers/Boilerplate/DashboardController.php');
-        $this->assertFileDoesNotExist('resources/views/vendor/boilerplate/dashboard.blade.php');
-        $this->assertDirectoryDoesNotExist('app/Http/Controllers/Boilerplate');
-        $this->assertDirectoryDoesNotExist('resources/views/vendor/boilerplate');
+        $this->assertFileDoesNotExistTestBench('app/Http/Controllers/Boilerplate/DashboardController.php');
+        $this->assertFileDoesNotExistTestBench('resources/views/vendor/boilerplate/dashboard.blade.php');
+        $this->assertDirectoryDoesNotExistTestBench('app/Http/Controllers/Boilerplate');
+        $this->assertDirectoryDoesNotExistTestBench('resources/views/vendor/boilerplate');
     }
 
     public function testScaffoldBadDatabase()
@@ -73,9 +73,9 @@ class ScaffoldTest extends TestCase
 
         app('config')->set('database.default', 'testbench');
 
-        $this->assertFileDoesNotExist('app/Http/Controllers/Boilerplate/DashboardController.php');
-        $this->assertFileDoesNotExist('resources/views/vendor/boilerplate/dashboard.blade.php');
-        $this->assertDirectoryDoesNotExist('app/Http/Controllers/Boilerplate');
-        $this->assertDirectoryDoesNotExist('resources/views/vendor/boilerplate');
+        $this->assertFileDoesNotExistTestBench('app/Http/Controllers/Boilerplate/DashboardController.php');
+        $this->assertFileDoesNotExistTestBench('resources/views/vendor/boilerplate/dashboard.blade.php');
+        $this->assertDirectoryDoesNotExistTestBench('app/Http/Controllers/Boilerplate');
+        $this->assertDirectoryDoesNotExistTestBench('resources/views/vendor/boilerplate');
     }
 }

@@ -1,32 +1,41 @@
 {
     "name": "sebastienheyd/boilerplate",
     "description": "Laravel Boilerplate based on AdminLTE 3 with blade components, user management, roles, permissions, logs viewer, ...",
-    "keywords": ["laravel", "boilerplate", "backend", "adminlte", "laratrust", "laravelcollective", "active", "admin"],
+    "keywords": [
+        "laravel",
+        "boilerplate",
+        "backend",
+        "adminlte",
+        "laratrust",
+        "laravelcollective",
+        "active",
+        "admin"
+    ],
     "type": "library",
     "license": "MIT",
     "require": {
-        "php": ">=7.2",
+        "php": ">=8.2",
         "ext-curl": "*",
-        "arcanedev/log-viewer": "^5.0|^7.0|^8.0|^9.0|^10.0",
+        "arcanedev/log-viewer": "^11.0",
         "creativeorange/gravatar": "^1.0",
-        "illuminate/support": "^6.0|^7.0|^8.0|^9.0|^10.0",
-        "intervention/image": "^2.5",
-        "laravel/ui": "^1.2|^2.0|^3.0|^4.0",
-        "lavary/laravel-menu": "^1.7",
+        "illuminate/support": "^11.0",
+        "intervention/image-laravel": "^1.2",
+        "laravel/ui": "^4.0",
+        "lavary/laravel-menu": "^1.8",
         "matthiasmullie/minify": "^1.3",
-        "nesbot/carbon": "^2.0",
-        "pusher/pusher-php-server": "^6.0|^7.0",
-        "santigarcor/laratrust": "^6.0|^7.0",
+        "nesbot/carbon": "^3.0",
+        "pusher/pusher-php-server": "^7.0",
+        "santigarcor/laratrust": "^8.0",
         "sebastienheyd/active": "^1.0",
-        "spatie/laravel-html": "^2.0|^3.0",
-        "yajra/laravel-datatables-oracle": "^9.0|^10.0"
+        "spatie/laravel-html": "^3.0",
+        "yajra/laravel-datatables-oracle": "^11.0"
     },
     "require-dev": {
-        "doctrine/dbal": "^2.9|^3.0",
+        "doctrine/dbal": "^3.0",
         "fakerphp/faker": "^1.20",
-        "orchestra/testbench": "^4.0|^5.0|^6.0|^7.0|^8.0",
-        "phpunit/php-code-coverage": "^7.0|^8.0|^9.0",
-        "phpunit/phpunit": "^7.0|^8.0|^9.0",
+        "orchestra/testbench": "^9.0",
+        "phpunit/php-code-coverage": "^10.0",
+        "phpunit/phpunit": "^10.0|^11.0",
         "squizlabs/php_codesniffer": "^3.0"
     },
     "suggest": {
@@ -46,7 +55,7 @@
         "psr-4": {
             "Sebastienheyd\\Boilerplate\\Tests\\": "tests/",
             "Sebastienheyd\\Boilerplate\\Database\\Factories\\": "database/factories/",
-            "App\\": "testbench/app/"
+            "App\\": "vendor/orchestra/testbench-core/laravel/app/"
         }
     },
     "authors": [
@@ -63,5 +72,25 @@
         }
     },
     "minimum-stability": "stable",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "scripts": {
+        "post-autoload-dump": [
+            "@clear",
+            "@prepare"
+        ],
+        "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
+        "prepare": "@php vendor/bin/testbench package:discover --ansi",
+        "build": "@php vendor/bin/testbench workbench:build --ansi",
+        "serve": [
+            "Composer\\Config::disableProcessTimeout",
+            "@build",
+            "@php vendor/bin/testbench serve"
+        ],
+        "lint": [
+            "@php vendor/bin/phpstan analyse"
+        ],
+        "test": [
+            "@php vendor/bin/phpunit"
+        ]
+    }
 }

@@ -15,15 +15,10 @@ class ToggleTest extends TestComponent
 </div>
 HTML;
 
-        if ($this->minLaravelVersion('7.0')) {
-            $view = $this->blade('<x-boilerplate::toggle id="test" name="test" label="boilerplate::layout.dashboard" />');
-            $view->assertSee($expected, false);
+        $view = $this->blade('<x-boilerplate::toggle id="test" name="test" label="boilerplate::layout.dashboard" />');
+        $view->assertSee($expected, false);
 
-            $view = $this->blade('<x-boilerplate::toggle id="test" name="test" label="boilerplate::layout.dashboard" :checked="false" />');
-            $view->assertSee($expected, false);
-        }
-
-        $view = $this->blade("@component('boilerplate::toggle', ['name' => 'test', 'id' => 'test', 'label' => 'boilerplate::layout.dashboard']) @endcomponent");
+        $view = $this->blade('<x-boilerplate::toggle id="test" name="test" label="boilerplate::layout.dashboard" :checked="false" />');
         $view->assertSee($expected, false);
     }
 
@@ -38,15 +33,10 @@ HTML;
 </div>
 HTML;
 
-        if ($this->minLaravelVersion('7.0')) {
-            $view = $this->blade('<x-boilerplate::toggle id="test" checked />');
-            $view->assertSee($expected, false);
+        $view = $this->blade('<x-boilerplate::toggle id="test" checked />');
+        $view->assertSee($expected, false);
 
-            $view = $this->blade('<x-boilerplate::toggle id="test" :checked="!isset($value)" />');
-            $view->assertSee($expected, false);
-        }
-
-        $view = $this->blade('@component("boilerplate::toggle", ["id" => "test", "checked" => !isset($value)]) @endcomponent');
+        $view = $this->blade('<x-boilerplate::toggle id="test" :checked="!isset($value)" />');
         $view->assertSee($expected, false);
     }
 
@@ -61,12 +51,7 @@ HTML;
 </div>
 HTML;
 
-        if ($this->minLaravelVersion('7.0')) {
-            $view = $this->blade('<x-boilerplate::toggle type="radio" id="test" value="1" class="bg-red" data-toggle="tooltip" />');
-            $view->assertSee($expected, false);
-        }
-
-        $view = $this->blade("@component('boilerplate::toggle', ['id' => 'test', 'type' => 'radio', 'class' => 'bg-red', 'data-toggle' => 'tooltip', 'value' => '1']) @endcomponent");
+        $view = $this->blade('<x-boilerplate::toggle type="radio" id="test" value="1" class="bg-red" data-toggle="tooltip" />');
         $view->assertSee($expected, false);
     }
 }

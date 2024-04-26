@@ -143,30 +143,6 @@ class BoilerplateServiceProvider extends ServiceProvider
     }
 
     /**
-     * Once directive for Laravel 6.
-     */
-    private function bladeDirectives()
-    {
-        $this->app->singleton('view', function ($app) {
-            $factory = new ViewFactory($app['view.engine.resolver'], $app['view.finder'], $app['events']);
-            $factory->setContainer($app);
-            $factory->share('app', $app);
-
-            return $factory;
-        });
-
-        Blade::directive('once', function () {
-            $id = (string) Str::uuid();
-
-            return '<?php if (! $__env->hasRenderedOnce("'.$id.'")): $__env->markAsRenderedOnce("'.$id.'"); ?>';
-        });
-
-        Blade::directive('endonce', function () {
-            return '<?php endif; ?>';
-        });
-    }
-
-    /**
      * Load all necessary view composers, this also allows the compatibility with Laravel 6.
      */
     private function viewComposers()
@@ -242,10 +218,6 @@ class BoilerplateServiceProvider extends ServiceProvider
         $this->router->aliasMiddleware('boilerplatelocale', Middleware\BoilerplateLocale::class);
         $this->router->aliasMiddleware('boilerplateauth', Middleware\BoilerplateAuthenticate::class);
         $this->router->aliasMiddleware('boilerplateguest', Middleware\BoilerplateGuest::class);
-        if (version_compare($this->app->version(), '7.0', '<')) {
-            $this->router->aliasMiddleware('boilerplateguest', Middleware\BoilerplateGuestL6::class);
-        }
-
         $this->router->aliasMiddleware('boilerplate.locale', Middleware\BoilerplateLocale::class);
         $this->router->aliasMiddleware('boilerplate.auth', Middleware\BoilerplateAuthenticate::class);
         $this->router->aliasMiddleware('boilerplate.guest', Middleware\BoilerplateGuest::class);
@@ -262,14 +234,7 @@ class BoilerplateServiceProvider extends ServiceProvider
         $this->registerDatatables();
         $this->registerDashboardWidgets();
 
-        if (version_compare($this->app->version(), '8.0', '>=')) {
-            Paginator::useBootstrap();
-        }
-
-        // Load directives for Laravel 6
-        if (version_compare($this->app->version(), '7.0', '<')) {
-            $this->bladeDirectives();
-        }
+        Paginator::useBootstrap();
 
         $this->app->register(TranslationServiceProvider::class);
     }

@@ -15,8 +15,7 @@ class MenuTest extends TestComponent
             ->expectsQuestion('Name of the menu item to create', 'test')
             ->assertSuccessful();
 
-        $this->assertFileExists('/app/Menu/Test.php');
-        require_once TestCase::$testbench_path.'/app/Menu/Test.php';
+        $this->assertFileExistsTestBench('/app/Menu/Test.php');
 
         $expected = '<aside class="main-sidebar sidebar-dark-blue elevation-4">
     <a href="http://localhost/admin" class="brand-link d-flex bg-gray-dark">
@@ -46,7 +45,6 @@ class MenuTest extends TestComponent
         $view = $this->actingAs($user)->blade('@include("boilerplate::layout/mainsidebar")');
         $view->assertSee($expected, false);
 
-        unlink(TestCase::$testbench_path.'/app/Menu/Test.php');
-        $this->assertFileDoesNotExist('/app/Menu/Test.php');
+        $this->assertFileDoesNotExistTestBench('/app/Menu/Test.php');
     }
 }

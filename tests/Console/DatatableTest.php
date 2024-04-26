@@ -20,7 +20,7 @@ class DatatableTest extends TestCase
             ->expectsOutput('Datatable component generated with success : '.app_path('Datatables/TestDatatable.php'))
             ->assertSuccessful();
 
-        $this->assertFileExists('app/Datatables/TestDatatable.php');
+        $this->assertFileExistsTestBench('app/Datatables/TestDatatable.php');
 
         $dt = app('boilerplate.datatables')->load(app_path('Datatables'))->getDatatable('test');
         $this->assertTrue($dt->slug === 'test');
@@ -62,6 +62,6 @@ class DatatableTest extends TestCase
             ->expectsOutput('Datatable component generated with success : '.app_path('Datatables/UsersDatatable.php'))
             ->assertSuccessful();
 
-        $this->assertFileExists('app/Datatables/UsersDatatable.php');
+        $this->assertFileExistsTestBench('app/Datatables/UsersDatatable.php');
     }
 }
