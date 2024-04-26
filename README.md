@@ -27,6 +27,13 @@ Other packages to extend the features :
 <a href="https://sebastienheyd.github.io/boilerplate/assets/img/logs.png" class="img-link"><img src="https://sebastienheyd.github.io/boilerplate/assets/img/logs.png" style="max-width:100%;height:90px;margin-right:.5rem" /></a>
 <a href="https://sebastienheyd.github.io/boilerplate/assets/img/dashboard.png" class="img-link"><img src="https://sebastienheyd.github.io/boilerplate/assets/img/dashboard.png" style="max-width:100%;height:90px;margin-right:.5rem" /></a>
 
+## Version Compatibility
+
+| Laravel         | Boilerplate                                                  |
+|:----------------|:-------------------------------------------------------------|
+| 11.x            | [8.x](https://sebastienheyd.github.io/boilerplate/docs/8.x/) |
+| 6.x &rarr; 10.x | [7.x](https://sebastienheyd.github.io/boilerplate/docs/7.x/) |
+
 ## Documentation
 
 The documentation is readable on [Github pages](https://sebastienheyd.github.io/boilerplate/)

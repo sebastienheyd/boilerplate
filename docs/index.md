@@ -20,7 +20,7 @@ It includes profile creation and his management, user management, roles, permiss
 
 ## Version Compatibility
 
-| Laravel  | Boilerplate       |
-|:---------|:------------------|
-| 11.x     | [8.x](/docs/8.x/) |
-| 6.x-10.x | [7.x](/docs/7.x/) |
+| Laravel         | Boilerplate       |
+|:----------------|:------------------|
+| 11.x            | [8.x](/docs/8.x/) |
+| 6.x &rarr; 10.x | [7.x](/docs/7.x/) |
