@@ -284,7 +284,7 @@ class UsersTest extends TestCase
 
         $resource->assertJson([
             'success' => false,
-            'message' => 'The avatar must be a file of type: jpeg, jpg, png.',
+            'message' => 'The avatar field must be a file of type: jpeg, jpg, png.',
         ]);
 
         $resource = $this->actingAs($user)->post('admin/userprofile/avatar/upload', [
