@@ -117,7 +117,7 @@ class Datatable extends BoilerplateCommand
 
         foreach ($fields as $field) {
             if (! $this->option('nodb')) {
-                $type = $connection->getDoctrineColumn($model->getTable(), $field)->getType()->getName();
+                $type = $connection->getSchemaBuilder()->getColumnType($model->getTable(), $field);
             } else {
                 $type = preg_match('#_at$#', $field) ? 'datetime' : 'default';
             }
