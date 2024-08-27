@@ -1,4 +1,4 @@
-{!! '<?php' !!}
+{!! html_entity_decode('&lt;?php') !!}
 
 namespace App\Datatables;
 
