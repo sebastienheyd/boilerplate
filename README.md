@@ -4,7 +4,7 @@
 [![Build Status](https://scrutinizer-ci.com/g/sebastienheyd/boilerplate/badges/build.png?b=master&style=flat-square)](https://scrutinizer-ci.com/g/sebastienheyd/boilerplate/build-status/master)
 [![StyleCI](https://github.styleci.io/repos/86598046/shield?branch=master&style=flat-square)](https://github.styleci.io/repos/86598046)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/sebastienheyd/boilerplate/badges/quality-score.png?b=master&style=flat-square)](https://scrutinizer-ci.com/g/sebastienheyd/boilerplate/?branch=master)
-[![Laravel](https://img.shields.io/badge/Laravel-6.x%20→%2010.x-green?logo=Laravel&style=flat-square)](https://laravel.com/)
+[![Laravel](https://img.shields.io/badge/Laravel-6.x%20→%2011.x-green?logo=Laravel&style=flat-square)](https://laravel.com/)
 [![Nb downloads](https://img.shields.io/packagist/dt/sebastienheyd/boilerplate.svg?style=flat-square)](https://packagist.org/packages/sebastienheyd/boilerplate)
 [![MIT License](https://img.shields.io/github/license/sebastienheyd/boilerplate.svg?style=flat-square)](LICENSE)
 
@@ -40,9 +40,9 @@ The documentation is readable on [Github pages](https://sebastienheyd.github.io/
 
 ## Features
 
-* Configurable [backend theme](https://sebastienheyd.github.io/boilerplate/howto/change-theme) and [components](https://sebastienheyd.github.io/boilerplate/components/) for [AdminLTE 3](https://adminlte.io/docs/3.0/)
-* [Text generation with GPT in TinyMCE](https://sebastienheyd.github.io/boilerplate/howto/gpt) with the OpenAI API
-* [Customizable dashboard](https://sebastienheyd.github.io/boilerplate/dashboard) with widgets
+* Configurable [backend theme](https://sebastienheyd.github.io/boilerplate/docs/8.x/howto/change_theme.html) and [components](https://sebastienheyd.github.io/boilerplate/docs/8.x/components/card.html) for [AdminLTE 3](https://adminlte.io/docs/3.0/)
+* [Text generation with GPT in TinyMCE](https://sebastienheyd.github.io/boilerplate/docs/8.x/howto/generate_text_gpt.html) with the OpenAI API
+* [Customizable dashboard](https://sebastienheyd.github.io/boilerplate/docs/8.x/dashboard/generate_widget.html) with widgets
 * Css framework [Bootstrap 4](https://getbootstrap.com/)
 * Icons by [Font Awesome 5](https://fontawesome.com/)
 * Role-based permissions support by [santigarcor/laratrust](https://github.com/santigarcor/laratrust)
