@@ -3,7 +3,7 @@
 if (! function_exists('dot_str')) {
     function dot_str($string)
     {
-        return str_replace(['[', ']'], ['.', ''], $string);
+        return trim(str_replace(['[', ']'], ['.', ''], $string), '.');
     }
 }
 
