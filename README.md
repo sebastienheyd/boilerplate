@@ -9,7 +9,7 @@
 [![MIT License](https://img.shields.io/github/license/sebastienheyd/boilerplate.svg?style=flat-square)](LICENSE)
 
 This package serves as a basis for quickly creating a back-office. 
-It includes profile creation and his management, user management, roles, permissions, log viewing and ready to use [components](https://sebastienheyd.github.io/boilerplate/components/).
+It includes profile creation and his management, user management, roles, permissions, log viewing and ready to use [components](https://sebastienheyd.github.io/boilerplate/docs/8.x/components/card.html).
 
 It also makes it easy to add other packages to extend the features, have a look to
 [sebastienheyd/boilerplate-packager](https://github.com/sebastienheyd/boilerplate-packager) to quickly build your own
