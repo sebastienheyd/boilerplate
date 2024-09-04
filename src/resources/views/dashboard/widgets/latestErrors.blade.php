@@ -2,7 +2,7 @@
     @slot('tools')
         <a href="{{ route('boilerplate.logs.list') }}" type="button" class="btn btn-secondary btn-xs">View all logs</a>
     @endslot
-    <table class="table table-condensed table-striped table-borderless table-hover" id="latest-errors">
+    <table class="table table-condensed table-striped table-borderless table-hover" style="word-break:break-word" id="latest-errors">
     @forelse($errors as $error)
         <tr>
             <td>
