@@ -17,11 +17,11 @@
                     </li>
                     @foreach($breadcrumb as $label => $route)
                         @if(is_numeric($label))
-                            <li class="breadcrumb-item active">{{ $route }}</li>
+                            <li class="breadcrumb-item text-word-wrap active">{{ $route }}</li>
                         @elseif(is_array($route))
-                            <li class="breadcrumb-item"><a href="{{ route($route[0], $route[1]) }}">{{ $label }}</a></li>
+                            <li class="breadcrumb-item text-word-wrap"><a href="{{ route($route[0], $route[1]) }}">{{ $label }}</a></li>
                         @else
-                            <li class="breadcrumb-item"><a href="{{ route($route) }}">{{ $label }}</a></li>
+                            <li class="breadcrumb-item text-word-wrap"><a href="{{ route($route) }}">{{ $label }}</a></li>
                         @endif
                     @endforeach
                 </ol>

@@ -1,7 +1,7 @@
 <table class="table table-striped no-border table-sm">
     <tr>
         <th class="text-nowrap">{{ __('boilerplate::logs.show.filepath') }}</th>
-        <td>{{ $log->getPath() }}</td>
+        <td class="text-word-wrap">{{ $log->getPath() }}</td>
     </tr>
     <tr>
         <th class="text-nowrap">{{ __('boilerplate::logs.show.logentries') }}</th>
