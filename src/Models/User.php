@@ -44,6 +44,12 @@ class User extends Authenticatable implements MustVerifyEmail, LaratrustUser
         'saved'   => UserSaved::class,
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+        self::bootLaratrustUserTrait();
+    }
+
     /**
      * Send the email verification notification.
      *
