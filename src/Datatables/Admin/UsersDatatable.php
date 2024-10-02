@@ -71,6 +71,7 @@ class UsersDatatable extends Datatable
 
             Column::add(__('Email'))
                 ->width('12%')
+                ->class('text-nowrap')
                 ->data('email'),
 
             Column::add(__('boilerplate::users.list.roles'))
