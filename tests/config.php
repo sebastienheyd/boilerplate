@@ -8,6 +8,7 @@ return [
     'app.url'                          => 'http://localhost',
     'app.fallback_locale'              => 'en',
     'boilerplate.app.locale'           => 'en',
+    'boilerplate.app.keepalive'        => 'true',
     'boilerplate.locale.switch'        => true,
     'boilerplate.locale.allowed'       => ['fr'],
     'boilerplate.app.allowImpersonate' => true,

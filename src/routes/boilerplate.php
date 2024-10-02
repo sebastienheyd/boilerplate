@@ -89,7 +89,9 @@ Route::group([
         Route::get('/demo', [DemoController::class, 'index'])->name('demo');
 
         // Session keep-alive
-        Route::post('keep-alive', [UsersController::class, 'keepAlive'])->name('keepalive');
+        if (config('boilerplate.app.keepalive', false)) {
+            Route::post('keep-alive', [UsersController::class, 'keepAlive'])->name('keepalive');
+        }
 
         // Datatables
         Route::post('datatables/{slug}', [DatatablesController::class, 'make'])->name('datatables');

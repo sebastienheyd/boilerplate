@@ -26,12 +26,14 @@
         var bpRoutes={
             settings:"{{ route('boilerplate.user.settings',null,false) }}"
         };
+@if(config('boilerplate.app.keepalive', false))
         var session={
             keepalive:"{{ route('boilerplate.keepalive', null, false) }}",
             expire:{{ time() +  config('session.lifetime') * 60 }},
             lifetime:{{ config('session.lifetime') * 60 }},
             id:"{{ session()->getId() }}"
         };
+@endif
     </script>
 @endcomponent
 @stack('plugin-js')

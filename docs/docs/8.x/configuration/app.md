@@ -6,22 +6,34 @@ The `config/boilerplate/app.php` file allows to define the general parameters of
 
 ```php
 <?php
+
 return [
     // Backend routes prefix. Ex: "admin" => "http://..../admin"
-    'prefix'     => 'admin',
+    'prefix'            => 'admin',
 
     // Backend domain if different as current domain. Ex: "admin.mydomain.tld"
-    'domain'     => '',
+    'domain'            => '',
 
     // Redirect to this route after login
-    'redirectTo' => 'boilerplate.dashboard',
+    'redirectTo'        => 'boilerplate.dashboard',
 
     // Activating daily logs and showing log viewer
-    'logs'       => true,
-    
+    'logs'              => true,
+
     // When set to true, allows admins to view the site as a user of their choice
     'allowImpersonate'  => false,
+
+    // If true, the session will be kept alive and the user must log out
+    'keepalive'         => true,
+
+    // Allows to generate text with ChatGPT in TinyMCE
+    'openai'   => [
+        'key'          => env('OPENAI_API_KEY'),
+        'model'        => 'gpt-3.5-turbo',
+        'organization' => env('OPENAI_API_ORGANIZATION'),
+    ],
 ];
+
 ```
 ---
 
@@ -76,4 +88,18 @@ Log viewer is only visible by administrators by default.
 When `allowImpersonate` is set to true, admins are allowed to view the site as the user of their choice by using a
 switch in the navbar.
 
-> You can't switch to an admin user 
+> You can't switch to an admin user
+
+---
+
+## keepalive
+
+Allows enabling or disabling session keep alive. If the value is set to `true`, the session will be maintained until the user logs out.
+
+Conversely, if the value is set to `false`, the user will be logged out when the session expires.
+
+---
+
+## openai
+
+Allows setting variables for using ChatGPT in TinyMCE

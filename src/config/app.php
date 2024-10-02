@@ -16,6 +16,9 @@ return [
     // When set to true, allows admins to view the site as a user of their choice
     'allowImpersonate'  => false,
 
+    // If true, the session will be kept alive and the user must log out
+    'keepalive'         => true,
+
     // Allows to generate text with ChatGPT in TinyMCE
     'openai'   => [
         'key'          => env('OPENAI_API_KEY'),
