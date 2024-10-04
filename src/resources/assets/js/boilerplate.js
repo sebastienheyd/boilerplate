@@ -1,7 +1,8 @@
 window.toastr.options = {}
+import { clearInterval, setInterval } from 'worker-timers';
 
 window.growl = (message, type) => {
-    types = ['info', 'error', 'warning', 'success'];
+    let types = ['info', 'error', 'warning', 'success'];
 
     if (typeof type === "undefined" || !types.includes(type)) {
         type = 'info';
@@ -123,17 +124,42 @@ $(() => {
     })
 
     if(typeof session !== 'undefined') {
-        setInterval(function () {
-            var timestamp = Math.round(+new Date() / 1000);
-            if (Math.round(+new Date() / 1000) === (session.expire - 10)) {
-                session.expire = timestamp + session.lifetime;
-                $.ajax({
-                    url: session.keepalive,
-                    type: 'post',
-                    data: {id: session.id}
-                })
+        if (typeof session.keepalive !== 'undefined') {
+            let sessionKeepAlive = function() {
+                let timestamp = Math.round(+new Date() / 1000);
+
+                if (timestamp === (session.expire - 10)) {
+                    session.expire = timestamp + session.lifetime;
+                    $.ajax({
+                        url: session.keepalive,
+                        type: 'post',
+                        data: {id: session.id}
+                    })
+                }
+
+                if (timestamp > (session.expire + 1)) {
+                    clearInterval(sessionKeepAliveInterval);
+                    window.location = session.login;
+                }
             }
-        }, 1000);
+
+            let sessionKeepAliveInterval = setInterval(sessionKeepAlive, 1000);
+        } else {
+            let expireSession = function() {
+                let timestamp = Math.round(+new Date() / 1000);
+
+                if (timestamp === (session.expire - 15)) {
+                    growl(session.warning, 'warning');
+                }
+
+                if (timestamp > (session.expire + 1)) {
+                    clearInterval(sessionCheckInterval);
+                    window.location = session.login;
+                }
+            }
+
+            let sessionCheckInterval = setInterval(expireSession, 1000);
+        }
     }
 
     let enableDarkMode = function() {

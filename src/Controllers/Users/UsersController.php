@@ -301,7 +301,7 @@ class UsersController
      *
      * @param  Request  $request
      */
-    public function keepAlive(Request $request)
+    public function sessionKeepAlive(Request $request)
     {
         if ($request->post('id') !== null) {
             session()->setId($request->post('id'));

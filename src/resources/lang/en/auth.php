@@ -43,4 +43,8 @@ return [
         'not_authorized'       => ':user is not authorized to access page :page.',
         'back_to_dashboard'    => 'Return to the dashboard',
     ],
+    'session'           => [
+        'warning'       => 'Your session will expire soon',
+        'expired'       => 'Your session has expired, please log in again',
+    ],
 ];

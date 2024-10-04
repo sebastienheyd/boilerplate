@@ -34,7 +34,7 @@ class LoginController
      *
      * @return View|Redirector
      */
-    public function showLoginForm()
+    public function showLoginForm(Request $request)
     {
         $userModel = config('auth.providers.users.model');
 
@@ -42,7 +42,10 @@ class LoginController
             return redirect(route('boilerplate.register'));
         }
 
-        return view('boilerplate::auth.login');
+        return view('boilerplate::auth.login', [
+            'expired'  => $request->get('expired', false),
+            'redirect' => $request->get('path', false),
+        ]);
     }
 
     /**
@@ -77,9 +80,11 @@ class LoginController
         if ($this->authenticated($request, $this->guard()->user())) {
             $this->guard()->user()->update(['last_login' => Carbon::now()->toDateTimeString()]);
 
+            $path = $request->post('redirect');
+
             return $request->wantsJson()
                 ? new JsonResponse([], 204)
-                : redirect()->intended($this->redirectPath());
+                : redirect()->intended($path ?: $this->redirectPath());
         }
     }
 

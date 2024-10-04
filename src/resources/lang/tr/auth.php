@@ -43,4 +43,8 @@ return [
         'not_authorized'       => ':user, :page sayfasına erişim izni bulunmamaktadır.',
         'back_to_dashboard'    => 'Kontrol paneline dön',
     ],
+    'session'           => [
+        'warning'       => 'Oturumunuz yakında sona erecek',
+        'expired'       => 'Oturumunuz sona erdi, lütfen tekrar giriş yapın',
+    ],
 ];

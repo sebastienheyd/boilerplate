@@ -153,6 +153,8 @@ class GptController
      *
      * @param  Request  $request
      * @return void
+     *
+     * @codeCoverageIgnore
      */
     public function stream(Request $request)
     {
@@ -194,6 +196,8 @@ class GptController
      * @param  $prompt
      * @param  $callback
      * @return bool|string
+     *
+     * @codeCoverageIgnore
      */
     private function sendRequest($prompt, $callback)
     {
