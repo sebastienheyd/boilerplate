@@ -19,23 +19,7 @@
     <script src="{{ mix('/bootstrap.min.js', '/assets/vendor/boilerplate') }}"></script>
     <script src="{{ mix('/admin-lte.min.js', '/assets/vendor/boilerplate') }}"></script>
     <script src="{{ mix('/boilerplate.min.js', '/assets/vendor/boilerplate') }}"></script>
-@component('boilerplate::minify')
-    <script>
-        $.ajaxSetup({headers:{'X-CSRF-TOKEN':'{{ csrf_token() }}'}});
-        bootbox.setLocale('{{ App::getLocale() }}');
-        var bpRoutes={
-            settings:"{{ route('boilerplate.user.settings',null,false) }}"
-        };
-@if(config('boilerplate.app.keepalive', false))
-        var session={
-            keepalive:"{{ route('boilerplate.keepalive', null, false) }}",
-            expire:{{ time() +  config('session.lifetime') * 60 }},
-            lifetime:{{ config('session.lifetime') * 60 }},
-            id:"{{ session()->getId() }}"
-        };
-@endif
-    </script>
-@endcomponent
+    @include('boilerplate::layout.session')
 @stack('plugin-js')
 </head>
 <body class="layout-fixed layout-navbar-fixed sidebar-mini{{ $darkmode ? ' dark-mode' : '' }}{{ setting('sidebar-collapsed', false) ? ' sidebar-collapse' : '' }}" data-darkmode="{{ setting('darkmode', '2') }}">

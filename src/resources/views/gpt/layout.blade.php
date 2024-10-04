@@ -17,19 +17,7 @@
     @stack('css')
     <script src="{{ mix('/bootstrap.min.js', '/assets/vendor/boilerplate') }}"></script>
     <script src="{{ mix('/plugins/tinymce/plugins/gpt/generator.min.js', '/assets/vendor/boilerplate') }}"></script>
-    @component('boilerplate::minify')
-        <script>
-            $.ajaxSetup({headers:{'X-CSRF-TOKEN':'{{ csrf_token() }}'}});
-@if(config('boilerplate.app.keepalive', false))
-            var session={
-                keepalive:"{{ route('boilerplate.keepalive', null, false) }}",
-                expire:{{ time() +  config('session.lifetime') * 60 }},
-                lifetime:{{ config('session.lifetime') * 60 }},
-                id:"{{ session()->getId() }}"
-            };
-@endif
-        </script>
-    @endcomponent
+    @include('boilerplate::layout.session')
     @stack('plugin-js')
 </head>
 <body class="sidebar-mini{{ setting('darkmode', false) && config('boilerplate.theme.darkmode') ? ' dark-mode accent-light' : '' }}">

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Sebastienheyd\Boilerplate\Controllers\Auth\ForgotPasswordController;
 use Sebastienheyd\Boilerplate\Controllers\Auth\LoginController;
 use Sebastienheyd\Boilerplate\Controllers\Auth\RegisterController;
@@ -90,7 +91,7 @@ Route::group([
 
         // Session keep-alive
         if (config('boilerplate.app.keepalive', false)) {
-            Route::post('keep-alive', [UsersController::class, 'keepAlive'])->name('keepalive');
+            Route::post('keep-alive', [UsersController::class, 'sessionKeepAlive'])->name('session.keepalive');
         }
 
         // Datatables

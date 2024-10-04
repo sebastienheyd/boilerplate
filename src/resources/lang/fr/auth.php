@@ -43,4 +43,8 @@ return [
         'not_authorized'       => ':user n\'est pas autorisé(e) à accéder à la page :page.',
         'back_to_dashboard'    => 'Retourner au tableau de bord',
     ],
+    'session'           => [
+        'warning'       => 'Votre session va bientôt expirer',
+        'expired'       => 'Votre session a expirée, veuillez vous reconnecter'
+    ]
 ];

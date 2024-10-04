@@ -151,6 +151,7 @@ class GptController
     /**
      * Stream the result from OpenAI API.
      *
+     * @codeCoverageIgnore
      * @param  Request  $request
      * @return void
      */
@@ -191,6 +192,7 @@ class GptController
     /**
      * Send curl request to OpenAI Api.
      *
+     * @codeCoverageIgnore
      * @param  $prompt
      * @param  $callback
      * @return bool|string

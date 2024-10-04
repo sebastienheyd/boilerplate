@@ -43,4 +43,8 @@ return [
         'not_authorized'       => ':user non è autorizzato ad accedere alla pagina :page.',
         'back_to_dashboard'    => 'Torna alla dashboard',
     ],
+    'session'           => [
+        'warning'       => 'La tua sessione sta per scadere',
+        'expired'       => 'La tua sessione è scaduta, per favore effettua nuovamente il login'
+    ]
 ];

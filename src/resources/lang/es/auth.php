@@ -43,4 +43,8 @@ return [
         'not_authorized'       => ':user no está autorizado para acceder a la página :page.',
         'back_to_dashboard'    => 'Volver al panel de control',
     ],
+    'session'           => [
+        'warning'       => 'Tu sesión está a punto de expirar',
+        'expired'       => 'Tu sesión ha expirado, por favor inicia sesión de nuevo'
+    ]
 ];
