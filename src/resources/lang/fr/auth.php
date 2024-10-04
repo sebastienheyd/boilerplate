@@ -45,6 +45,6 @@ return [
     ],
     'session'           => [
         'warning'       => 'Votre session va bientôt expirer',
-        'expired'       => 'Votre session a expirée, veuillez vous reconnecter'
-    ]
+        'expired'       => 'Votre session a expirée, veuillez vous reconnecter',
+    ],
 ];

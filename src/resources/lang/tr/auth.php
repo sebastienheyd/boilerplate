@@ -45,6 +45,6 @@ return [
     ],
     'session'           => [
         'warning'       => 'Oturumunuz yakında sona erecek',
-        'expired'       => 'Oturumunuz sona erdi, lütfen tekrar giriş yapın'
-    ]
+        'expired'       => 'Oturumunuz sona erdi, lütfen tekrar giriş yapın',
+    ],
 ];

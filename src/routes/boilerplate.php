@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Sebastienheyd\Boilerplate\Controllers\Auth\ForgotPasswordController;
 use Sebastienheyd\Boilerplate\Controllers\Auth\LoginController;
 use Sebastienheyd\Boilerplate\Controllers\Auth\RegisterController;

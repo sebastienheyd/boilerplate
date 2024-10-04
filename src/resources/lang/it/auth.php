@@ -45,6 +45,6 @@ return [
     ],
     'session'           => [
         'warning'       => 'La tua sessione sta per scadere',
-        'expired'       => 'La tua sessione è scaduta, per favore effettua nuovamente il login'
-    ]
+        'expired'       => 'La tua sessione è scaduta, per favore effettua nuovamente il login',
+    ],
 ];

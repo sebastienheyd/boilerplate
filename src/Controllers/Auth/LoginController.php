@@ -43,7 +43,7 @@ class LoginController
         }
 
         return view('boilerplate::auth.login', [
-            'expired' => $request->get('expired', false),
+            'expired'  => $request->get('expired', false),
             'redirect' => $request->get('path', false),
         ]);
     }

@@ -45,6 +45,6 @@ return [
     ],
     'session'           => [
         'warning'       => 'Your session will expire soon',
-        'expired'       => 'Your session has expired, please log in again'
-    ]
+        'expired'       => 'Your session has expired, please log in again',
+    ],
 ];
