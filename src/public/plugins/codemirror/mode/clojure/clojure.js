@@ -281,7 +281,6 @@ CodeMirror.defineMode("clojure", function (options) {
     },
 
     closeBrackets: {pairs: "()[]{}\"\""},
-    fold: "brace",
     lineComment: ";;"
   };
 });

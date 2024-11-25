@@ -44,8 +44,6 @@
     blockKeywords: set(blockKeywords),
     builtin: set(builtins),
     atoms: set(atoms),
-    // clike numbers without the suffixes, and with '_' separators.
-    number: /^(?:0x[a-f\d_]+|(?:[\d_]+\.?[\d_]*|\.[\d_]+)(?:e[-+]?[\d_]+)?)/i,
     hooks: {
       "@": function(stream) {
         stream.eatWhile(/[\w\$_\.]/);

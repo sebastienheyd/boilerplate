@@ -129,8 +129,10 @@ CodeMirror.defineMode("groovy", function(config) {
 
   function tokenVariableDeref(stream, state) {
     var next = stream.match(/^(\.|[\w\$_]+)/)
-    if (!next || !stream.match(next[0] == "." ? /^[\w$_]/ : /^\./)) state.tokenize.pop()
-    if (!next) return state.tokenize[state.tokenize.length-1](stream, state)
+    if (!next) {
+      state.tokenize.pop()
+      return state.tokenize[state.tokenize.length-1](stream, state)
+    }
     return next[0] == "." ? null : "variable"
   }
 
