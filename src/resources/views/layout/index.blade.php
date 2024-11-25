@@ -16,6 +16,18 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
 @stack('css')
+    <script>//Laravel 11 
+    var bpRoutes = {
+        settings: "{{ route('boilerplate.user.settings') }}",
+        login: "{{ route('boilerplate.login') }}",
+        logout: "{{ route('boilerplate.logout') }}",
+        dashboard: "{{ route('boilerplate.dashboard') }}",
+    };
+</script>
+
+<script src="{{ mix('/bootstrap.min.js', '/assets/vendor/boilerplate') }}"></script>
+<script src="{{ mix('/admin-lte.min.js', '/assets/vendor/boilerplate') }}"></script>
+<script src="{{ mix('/boilerplate.min.js', '/assets/vendor/boilerplate') }}"></script>
     <script src="{{ mix('/bootstrap.min.js', '/assets/vendor/boilerplate') }}"></script>
     <script src="{{ mix('/admin-lte.min.js', '/assets/vendor/boilerplate') }}"></script>
     <script src="{{ mix('/boilerplate.min.js', '/assets/vendor/boilerplate') }}"></script>
