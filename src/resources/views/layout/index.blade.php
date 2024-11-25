@@ -18,7 +18,7 @@
 @stack('css')
     <script src="{{ mix('/bootstrap.min.js', '/assets/vendor/boilerplate') }}"></script>
     <script src="{{ mix('/admin-lte.min.js', '/assets/vendor/boilerplate') }}"></script>
-    <script src="{{ mix('/boilerplate.min.js', '/assets/vendor/boilerplate') }}"></script>
+    <script src="{{ mix('/boilerplate.min.js', '/assets/vendor/boilerplate') }}" data-csrf="{{ csrf_token() }}" data-locale="{{ App::getLocale() }}" data-settings="{{ route('boilerplate.user.settings',null,false) }}"></script>
     @include('boilerplate::layout.session')
 @stack('plugin-js')
 </head>

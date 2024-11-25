@@ -1,6 +1,5 @@
 @component('boilerplate::minify')
 <script>
-    $.ajaxSetup({headers:{'X-CSRF-TOKEN':'{{ csrf_token() }}'}});
     var session={
         login:"{!! route('boilerplate.login') . '?expired=1&path='.request()->path() !!}",
         @if(config('boilerplate.app.keepalive', false))

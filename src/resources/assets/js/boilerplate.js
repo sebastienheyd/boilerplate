@@ -1,3 +1,7 @@
+const script = document.currentScript;
+$.ajaxSetup({headers:{'X-CSRF-TOKEN':script.dataset.csrf}});
+bootbox.setLocale(script.dataset.locale);
+
 window.toastr.options = {}
 import { clearInterval, setInterval } from 'worker-timers';
 
@@ -87,7 +91,7 @@ $(document).on('focusin', function(e) {
 
 function storeSetting(settingName, settingValue) {
     $.ajax({
-        url: bpRoutes.settings,
+        url: script.dataset.settings,
         type: 'post',
         data: {name: settingName, value: settingValue},
     });
