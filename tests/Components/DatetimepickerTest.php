@@ -186,7 +186,7 @@ HTML;
     <div class="input-group" id="test" data-target-input="nearest">
         <input class="form-control datetimepicker-input" type="text" name="test_local" value="01/01/2022" data-toggle="datetimepicker" data-target="#test" autocomplete="off">
     </div>
-    <input type="hidden" name="test" value="2022-01-01 00:00:00">
+    <input type="hidden" name="test" value="2022-01-01">
 </div>
 <script>loadScript('',()=>{moment.locale('en');registerAsset('momentjs')});</script><script>loadStylesheet('');whenAssetIsLoaded('momentjs',()=>{loadScript('',()=>{registerAsset('datetimepicker',()=>{$.fn.datetimepicker.Constructor.Default=$.extend({},$.fn.datetimepicker.Constructor.Default,{locale:"en",icons:$.extend({},$.fn.datetimepicker.Constructor.Default.icons,{time:'far fa-clock',date:'far fa-calendar',up:'fas fa-arrow-up',down:'fas fa-arrow-down',previous:'fas fa-chevron-left',next:'fas fa-chevron-right',today:'far fa-calendar-check',clear:'fas fa-trash',close:'fas fa-times'})})})})});</script><script>whenAssetIsLoaded('datetimepicker',()=>{window.DTP_test=$('#test').datetimepicker({format:"L",buttons:{showToday:!1,showClear:!1,showClose:!1},useCurrent:!1,});$('#test').on('change.datetimepicker',()=>{$('input[name="test"]').val('');if($('input[name="test_local"]').val()!==''){let date=$('#test').datetimepicker('viewDate').format('YYYY-MM-DD');$('input[name="test"]').val(date).trigger('change')}})});</script>
 HTML;
@@ -198,6 +198,28 @@ HTML;
         $view->assertSee($expected, false);
 
         $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" :value="Illuminate\Support\Carbon::createFromFormat(\'Y-m-d H:i:s\', \'2022-01-01 00:00:00\')" />');
+        $view->assertSee($expected, false);
+    }
+
+    public function testDatetimepickerValue()
+    {
+        $expected = <<<'HTML'
+<div class="form-group">
+    <div class="input-group" id="test" data-target-input="nearest">
+        <input class="form-control datetimepicker-input" type="text" name="test_local" value="01/01/2022 00:00:00" data-toggle="datetimepicker" data-target="#test" autocomplete="off">
+    </div>
+    <input type="hidden" name="test" value="2022-01-01 00:00:00">
+</div>
+<script>loadScript('',()=>{moment.locale('en');registerAsset('momentjs')});</script><script>loadStylesheet('');whenAssetIsLoaded('momentjs',()=>{loadScript('',()=>{registerAsset('datetimepicker',()=>{$.fn.datetimepicker.Constructor.Default=$.extend({},$.fn.datetimepicker.Constructor.Default,{locale:"en",icons:$.extend({},$.fn.datetimepicker.Constructor.Default.icons,{time:'far fa-clock',date:'far fa-calendar',up:'fas fa-arrow-up',down:'fas fa-arrow-down',previous:'fas fa-chevron-left',next:'fas fa-chevron-right',today:'far fa-calendar-check',clear:'fas fa-trash',close:'fas fa-times'})})})})});</script><script>whenAssetIsLoaded('datetimepicker',()=>{window.DTP_test=$('#test').datetimepicker({format:"L HH:mm:ss",buttons:{showToday:!1,showClear:!1,showClose:!1},useCurrent:!1,});$('#test').on('change.datetimepicker',()=>{$('input[name="test"]').val('');if($('input[name="test_local"]').val()!==''){let date=$('#test').datetimepicker('viewDate').format('YYYY-MM-DD HH:mm:ss');$('input[name="test"]').val(date).trigger('change')}})});</script>
+HTML;
+
+        $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" value="2022-01-01" format="L HH:mm:ss" />');
+        $view->assertSee($expected, false);
+
+        $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" value="2022-01-01 00:00:00" format="L HH:mm:ss" />');
+        $view->assertSee($expected, false);
+
+        $view = $this->blade('<x-boilerplate::datetimepicker id="test" name="test" :value="Illuminate\Support\Carbon::createFromFormat(\'Y-m-d H:i:s\', \'2022-01-01 00:00:00\')" format="L HH:mm:ss" />');
         $view->assertSee($expected, false);
     }
 }

@@ -49,7 +49,7 @@ class DatetimepickerComposer extends ComponentComposer
 
         if (! empty($data['value'])) {
             $date = $this->dateToCarbon($data['value']);
-            $rawValue = $date->format('Y-m-d H:i:s');
+            $rawValue = $date->format($data['format'] === 'L' ? 'Y-m-d' : 'Y-m-d H:i:s');
             $data['value'] = $date->isoFormat($data['format']);
         }
         $view->with('value', $data['value'] ?? null);
