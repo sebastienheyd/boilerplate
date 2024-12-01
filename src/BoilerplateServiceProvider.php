@@ -115,12 +115,9 @@ class BoilerplateServiceProvider extends ServiceProvider
         ], 'boilerplate-dashboard');
 
         $this->publishes([
+            __DIR__.'/resources/laravel-lang' => app()->langPath(),
             __DIR__.'/resources/lang' => app()->langPath().'/vendor/boilerplate',
         ], 'boilerplate-lang');
-
-        $this->publishes([
-            __DIR__.'/resources/laravel-lang' => app()->langPath(),
-        ], ['boilerplate-lang']);
 
         $this->commands([
             Console\Datatable::class,

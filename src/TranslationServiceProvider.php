@@ -11,14 +11,21 @@ class TranslationServiceProvider extends LaravelTranslationServiceProvider
      */
     protected function registerLoader()
     {
-        $this->app->singleton('translation.loader', function ($app) {
-            $loader = new FileLoader($app['files'], $app['path.lang'], [__DIR__.'/resources/laravel-lang']);
+        $this->app->extend('translation.loader', function ($loader, $app) {
+            $paths = [
+                base_path('lang'),
+                __DIR__.'/resources/laravel-lang',
+            ];
 
-            if (\is_callable([$loader, 'addJsonPath'])) {
-                $loader->addJsonPath(__DIR__.'/resources/laravel-lang');
+            $newLoader = new FileLoader($app['files'], $paths[0], $paths);
+
+            if (method_exists($newLoader, 'addJsonPath')) {
+                foreach ($paths as $path) {
+                    $newLoader->addJsonPath($path);
+                }
             }
 
-            return $loader;
+            return $newLoader;
         });
     }
 }
