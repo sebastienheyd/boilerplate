@@ -116,7 +116,7 @@ class BoilerplateServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/resources/laravel-lang' => app()->langPath(),
-            __DIR__.'/resources/lang' => app()->langPath().'/vendor/boilerplate',
+            __DIR__.'/resources/lang'         => app()->langPath().'/vendor/boilerplate',
         ], 'boilerplate-lang');
 
         $this->commands([
