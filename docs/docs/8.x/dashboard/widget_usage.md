@@ -112,20 +112,19 @@ Array of dimensions that the widget can use. This involves assigning Bootstrap c
 
 ```php
 [
-    'xxs' => ['sm' => 4, 'md' => 4, 'xl' => 2, 'xxl' => 2],
-    'xs'  => ['sm' => 6, 'md' => 6, 'xl' => 4, 'xxl' => 3],
-    'sm'  => ['sm' => 12, 'md' => 6, 'xl' => 6, 'xxl' => 4],
-    'md'  => ['sm' => 12, 'md' => 6, 'xl' => 6, 'xxl' => 6],
-    'xl'  => ['sm' => 12, 'md' => 12, 'xl' => 8, 'xxl' => 8],
-    'xxl' => ['sm' => 12, 'md' => 12, 'xl' => 12, 'xxl' => 12],
+    'xxs' => ['xs' => 12, 'sm' => 4, 'md' => 4, 'xl' => 2, 'xxl' => 2],
+    'xs'  => ['xs' => 12, 'sm' => 6, 'md' => 6, 'xl' => 4, 'xxl' => 3],
+    'sm'  => ['xs' => 12, 'sm' => 12, 'md' => 6, 'xl' => 6, 'xxl' => 4],
+    'md'  => ['xs' => 12, 'sm' => 12, 'md' => 6, 'xl' => 6, 'xxl' => 6],
+    'xl'  => ['xs' => 12, 'sm' => 12, 'md' => 12, 'xl' => 8, 'xxl' => 8],
+    'xxl' => ['xs' => 12, 'sm' => 12, 'md' => 12, 'xl' => 12, 'xxl' => 12],
 ]
 ```
 
-You can define specific dimensions and call them like this:
+You can define specific dimensions by using the `witdh` property in your widget class :
 
 ```php
-protected $width = ['md' => ['sm' => 6, 'md' => 6, 'xl' => 4]];
-protected $size = 'md';
+protected $width = ['xs' => 12, 'sm' => 6, 'md' => 6, 'xl' => 4, 'xxl' => 3];
 ```
 
 ---

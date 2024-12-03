@@ -211,15 +211,15 @@ abstract class Widget
 
         if ($prop === 'width' && empty($this->width)) {
             $sizes = [
-                'xxs' => ['sm' => 4, 'md' => 4, 'xl' => 2, 'xxl' => 2],
-                'xs'  => ['sm' => 6, 'md' => 6, 'xl' => 4, 'xxl' => 3],
-                'sm'  => ['sm' => 12, 'md' => 6, 'xl' => 6, 'xxl' => 4],
-                'md'  => ['sm' => 12, 'md' => 6, 'xl' => 6, 'xxl' => 6],
-                'xl'  => ['sm' => 12, 'md' => 12, 'xl' => 8, 'xxl' => 8],
-                'xxl' => ['sm' => 12, 'md' => 12, 'xl' => 12, 'xxl' => 12],
+                'xxs' => ['xs' => 12, 'sm' => 4, 'md' => 4, 'xl' => 2, 'xxl' => 2],
+                'xs'  => ['xs' => 12, 'sm' => 6, 'md' => 6, 'xl' => 4, 'xxl' => 3],
+                'sm'  => ['xs' => 12, 'sm' => 12, 'md' => 6, 'xl' => 6, 'xxl' => 4],
+                'md'  => ['xs' => 12, 'sm' => 12, 'md' => 6, 'xl' => 6, 'xxl' => 6],
+                'xl'  => ['xs' => 12, 'sm' => 12, 'md' => 12, 'xl' => 8, 'xxl' => 8],
+                'xxl' => ['xs' => 12, 'sm' => 12, 'md' => 12, 'xl' => 12, 'xxl' => 12],
             ];
 
-            return $sizes[$this->size] ?? ['sm' => 6, 'md' => 6, 'xl' => 4, 'xxl' => 3];
+            return $sizes[$this->size] ?? ['xs' => 12, 'sm' => 6, 'md' => 6, 'xl' => 4, 'xxl' => 3];
         }
 
         if (property_exists($this, $prop)) {
