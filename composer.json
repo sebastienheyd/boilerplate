@@ -18,7 +18,7 @@
         "ext-curl": "*",
         "arcanedev/log-viewer": "^11.0",
         "creativeorange/gravatar": "^1.0",
-        "illuminate/support": "^11.0",
+        "illuminate/support": "^11.0|^12.0",
         "intervention/image-laravel": "^1.2",
         "laravel/ui": "^4.0",
         "lavary/laravel-menu": "^1.8",
@@ -31,10 +31,10 @@
         "yajra/laravel-datatables-oracle": "^11.0"
     },
     "require-dev": {
-        "doctrine/dbal": "^3.0",
+        "doctrine/dbal": "^3.0|^4.2",
         "fakerphp/faker": "^1.20",
-        "orchestra/testbench": "^9.0",
-        "phpunit/php-code-coverage": "^10.0",
+        "orchestra/testbench": "^9.0|^10.0",
+        "phpunit/php-code-coverage": "^10.0|^11.0",
         "phpunit/phpunit": "^10.0|^11.0",
         "squizlabs/php_codesniffer": "^3.0"
     },
