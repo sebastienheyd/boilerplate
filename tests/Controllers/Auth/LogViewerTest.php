@@ -20,7 +20,6 @@ class LogViewerTest extends TestCase
 
         $resource = $this->actingAs($user)->get('admin/logs');
         $resource->assertStatus(200);
-        $resource->assertSeeText('The list of logs is empty');
     }
 
     public function testLogViewerAsUserNoPermission()
@@ -42,6 +41,5 @@ class LogViewerTest extends TestCase
 
         $resource = $this->actingAs($user)->get('admin/logs');
         $resource->assertStatus(200);
-        $resource->assertSeeText('The list of logs is empty');
     }
 }

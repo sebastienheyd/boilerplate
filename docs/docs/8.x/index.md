@@ -41,9 +41,9 @@ Other packages to extend the features :
 * Menu items activated by [sebastienheyd/active](https://github.com/sebastienheyd/active)
 * Server-side datatables methods provided by [yajra/laravel-datatables](https://yajrabox.com/docs/laravel-datatables)
 * Image manipulation by [intervention/image](https://github.com/intervention/image)
-* Logs visualization by [arcanedev/log-viewer](https://github.com/ARCANEDEV/LogViewer)
 * Gravatar import by [creativeorange/gravatar](https://github.com/creativeorange/gravatar)
 * Default languages from [laravel-lang/lang](https://github.com/Laravel-Lang/lang)
+* Logs visualization
 * Javascript session keep-alive
 * Dark mode
 * [Localized](https://github.com/sebastienheyd/boilerplate/tree/master/src/resources/lang)

@@ -1,7 +1,6 @@
 <?php
 
 return [
-    'vendor'    => 'نمایش لاگ با <a href="https://github.com/ARCANEDEV/LogViewer">Arcanedev</a>',
     'menu'      => [
         'category'  => 'لاگ ها',
         'stats'     => 'وضعیت ها',

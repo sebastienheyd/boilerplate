@@ -1,7 +1,6 @@
 <?php
 
 return [
-    'vendor' => '<a href="https://github.com/ARCANEDEV/LogViewer">Arcanedev</a> tarafından Günlük görüntüleyici',
     'menu'   => [
         'category' => 'Günlükler',
         'stats'    => 'İstatistikler',

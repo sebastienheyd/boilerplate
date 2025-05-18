@@ -7,14 +7,14 @@ Boilerplate 8.x requires at least PHP 8.2 and Laravel 11.x
 ## What's new in 8.x
 
 - PHP >= 8.2
-- [Laravel 11.x](https://laravel.com/docs/11.x)
-- [Arcanedev Log Viewer 11.x](https://github.com/ARCANEDEV/LogViewer)
-- [Intervention Image 3.x](http://image.intervention.io/) now with [Laravel Integration 1.x](https://github.com/Intervention/image-laravel)
-- [Nesbot Carbon 3.x](https://carbon.nesbot.com/)
-- [Laratrust 8.x](https://laratrust.santigarcor.me/)
-- [Laravel Datatables 11.x](https://yajrabox.com/docs/laravel-datatables/master)
-- [PHPUnit 11.x](https://phpunit.de/)
-- [Laravel Orchestra Testbench 9.x](https://packages.tools/testbench.html)
+- [Laravel >= 11.x](https://laravel.com/docs/)
+- [Intervention Image >= 3.x](http://image.intervention.io/) now with [Laravel Integration 1.x](https://github.com/Intervention/image-laravel)
+- [Nesbot Carbon >= 3.x](https://carbon.nesbot.com/)
+- [Laratrust >= 8.x](https://laratrust.santigarcor.me/)
+- [Laravel Datatables >= 11.x](https://yajrabox.com/docs/laravel-datatables/master)
+- [PHPUnit >= 11.x](https://phpunit.de/)
+- [Laravel Orchestra Testbench >= 9.x](https://packages.tools/testbench.html)
+- Replaced Arcanedev Log Viewer (which seems to be no longer maintained) with a custom solution.
 
 ## Upgrade steps
 

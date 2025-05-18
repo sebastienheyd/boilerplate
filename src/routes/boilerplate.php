@@ -129,15 +129,11 @@ Route::group([
         // Logs
         if (config('boilerplate.app.logs', false)) {
             Route::prefix('logs')->as('logs.')->middleware('ability:admin,logs')->group(function () {
-                Route::get('/', [LogViewerController::class, 'index'])->name('dashboard');
-                Route::prefix('list')->group(function () {
-                    Route::get('/', [LogViewerController::class, 'listLogs'])->name('list');
-                    Route::delete('delete', [LogViewerController::class, 'delete'])->name('delete');
-                    Route::prefix('{date}')->group(function () {
-                        Route::get('/', [LogViewerController::class, 'show'])->name('show');
-                        Route::get('download', [LogViewerController::class, 'download'])->name('download');
-                        Route::get('{level}', [LogViewerController::class, 'showByLevel'])->name('filter');
-                    });
+                Route::get('/', [LogViewerController::class, 'index'])->name('list');
+                Route::delete('delete', [LogViewerController::class, 'delete'])->name('delete');
+                Route::prefix('{date}')->group(function () {
+                    Route::get('/', [LogViewerController::class, 'show'])->name('show');
+                    Route::get('download', [LogViewerController::class, 'download'])->name('download');
                 });
             });
         }

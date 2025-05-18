@@ -19,6 +19,8 @@ use Lavary\Menu\ServiceProvider as MenuServiceProvider;
 use Sebastienheyd\Boilerplate\Dashboard\Widgets\CurrentUser;
 use Sebastienheyd\Boilerplate\Dashboard\Widgets\LatestErrors;
 use Sebastienheyd\Boilerplate\Dashboard\Widgets\UsersNumber;
+use Sebastienheyd\Boilerplate\Datatables\Admin\LogFileDatatable;
+use Sebastienheyd\Boilerplate\Datatables\Admin\LogsDatatable;
 use Sebastienheyd\Boilerplate\Datatables\Admin\RolesDatatable;
 use Sebastienheyd\Boilerplate\Datatables\Admin\UsersDatatable;
 use Sebastienheyd\Boilerplate\Middleware\BoilerplateImpersonate;
@@ -198,9 +200,14 @@ class BoilerplateServiceProvider extends ServiceProvider
             'auth.providers.users.driver'  => config('boilerplate.auth.providers.users.driver', 'eloquent'),
             'auth.providers.users.model'   => config('boilerplate.auth.providers.users.model', 'App\User'),
             'auth.providers.users.table'   => config('boilerplate.auth.providers.users.table', 'users'),
-            'log-viewer.route.enabled'     => false,
-            'log-viewer.menu.filter-route' => 'boilerplate.logs.filter',
             'boilerplate.app.locale'       => config('boilerplate.app.locale', config('boilerplate.locale.default')),
+            'filesystems.disks.logs'        => [
+                'driver' => 'local',
+                'root' => storage_path('logs'),
+                'serve' => true,
+                'throw' => false,
+                'report' => false,
+            ],
         ]);
 
         if (config('boilerplate.app.logs', true) && ! in_array('daily', config('logging.channels.stack.channels'))) {
@@ -287,7 +294,12 @@ class BoilerplateServiceProvider extends ServiceProvider
             return new Datatables\DatatablesRepository();
         });
 
-        app('boilerplate.datatables')->registerDatatable(UsersDatatable::class, RolesDatatable::class);
+        app('boilerplate.datatables')->registerDatatable(
+            UsersDatatable::class,
+            RolesDatatable::class,
+            LogsDatatable::class,
+            LogFileDatatable::class
+        );
     }
 
     private function registerDashboardWidgets()

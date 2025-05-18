@@ -2,8 +2,6 @@
 
 namespace Sebastienheyd\Boilerplate\Tests;
 
-use Arcanedev\LogViewer\LogViewerServiceProvider;
-use Arcanedev\LogViewer\Providers\DeferredServicesProvider;
 use Creativeorange\Gravatar\GravatarServiceProvider;
 use Illuminate\Auth\AuthServiceProvider;
 use Illuminate\Broadcasting\BroadcastServiceProvider;
@@ -184,7 +182,6 @@ class TestCase extends OrchestraTestCase
             CookieServiceProvider::class,
             DataTablesServiceProvider::class,
             DatabaseServiceProvider::class,
-            DeferredServicesProvider::class,
             EncryptionServiceProvider::class,
             EventServiceProvider::class,
             FilesystemServiceProvider::class,
@@ -193,7 +190,6 @@ class TestCase extends OrchestraTestCase
             HashServiceProvider::class,
             HtmlServiceProvider::class,
             LaratrustServiceProvider::class,
-            LogViewerServiceProvider::class,
             MailServiceProvider::class,
             NotificationServiceProvider::class,
             QueueServiceProvider::class,

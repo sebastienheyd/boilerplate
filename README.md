@@ -4,7 +4,7 @@
 [![Build Status](https://scrutinizer-ci.com/g/sebastienheyd/boilerplate/badges/build.png?b=master&style=flat-square)](https://scrutinizer-ci.com/g/sebastienheyd/boilerplate/build-status/master)
 [![StyleCI](https://github.styleci.io/repos/86598046/shield?branch=master&style=flat-square)](https://github.styleci.io/repos/86598046)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/sebastienheyd/boilerplate/badges/quality-score.png?b=master&style=flat-square)](https://scrutinizer-ci.com/g/sebastienheyd/boilerplate/?branch=master)
-[![Laravel](https://img.shields.io/badge/Laravel-6.x%20→%2011.x-green?logo=Laravel&style=flat-square)](https://laravel.com/)
+[![Laravel](https://img.shields.io/badge/Laravel-6.x%20→%2012.x-green?logo=Laravel&style=flat-square)](https://laravel.com/)
 [![Nb downloads](https://img.shields.io/packagist/dt/sebastienheyd/boilerplate.svg?style=flat-square)](https://packagist.org/packages/sebastienheyd/boilerplate)
 [![MIT License](https://img.shields.io/github/license/sebastienheyd/boilerplate.svg?style=flat-square)](LICENSE)
 
@@ -29,10 +29,10 @@ Other packages to extend the features :
 
 ## Version Compatibility
 
-| Laravel         | Boilerplate                                                  |
-|:----------------|:-------------------------------------------------------------|
-| 11.x            | [8.x](https://sebastienheyd.github.io/boilerplate/docs/8.x/) |
-| 6.x &rarr; 10.x | [7.x](https://sebastienheyd.github.io/boilerplate/docs/7.x/) |
+| Laravel          | Boilerplate                                                  |
+|:-----------------|:-------------------------------------------------------------|
+| 11.x &rarr; 12.x | [8.x](https://sebastienheyd.github.io/boilerplate/docs/8.x/) |
+| 6.x &rarr; 10.x  | [7.x](https://sebastienheyd.github.io/boilerplate/docs/7.x/) |
 
 ## Documentation
 
@@ -51,7 +51,6 @@ The documentation is readable on [Github pages](https://sebastienheyd.github.io/
 * Menu items activated by [sebastienheyd/active](https://github.com/sebastienheyd/active)
 * Server-side datatables methods provided by [yajra/laravel-datatables](https://yajrabox.com/docs/laravel-datatables)
 * Image manipulation by [intervention/image](https://github.com/intervention/image)
-* Logs visualization by [arcanedev/log-viewer](https://github.com/ARCANEDEV/LogViewer)
 * Gravatar import by [creativeorange/gravatar](https://github.com/creativeorange/gravatar)
 * Default languages from [Laravel-Lang/lang](https://github.com/Laravel-Lang/lang)
 * Javascript session keep-alive

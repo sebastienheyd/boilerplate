@@ -1,7 +1,6 @@
 <?php
 
 return [
-    'vendor'    => 'Log viewer by <a href="https://github.com/ARCANEDEV/LogViewer">Arcanedev</a>',
     'menu'      => [
         'category'  => 'Logs',
         'stats'     => 'Statistiche',
