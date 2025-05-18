@@ -1,9 +1,8 @@
 # Laravel / AdminLTE 3 Boilerplate
 
 [![Packagist](https://img.shields.io/packagist/v/sebastienheyd/boilerplate.svg?style=flat-square)](https://packagist.org/packages/sebastienheyd/boilerplate)
-[![Build Status](https://scrutinizer-ci.com/g/sebastienheyd/boilerplate/badges/build.png?b=master&style=flat-square)](https://scrutinizer-ci.com/g/sebastienheyd/boilerplate/build-status/master)
+[![tests](https://github.com/sebastienheyd/boilerplate/actions/workflows/tests.yml/badge.svg)](https://github.com/sebastienheyd/boilerplate/actions/workflows/tests.yml)
 [![StyleCI](https://github.styleci.io/repos/86598046/shield?branch=master&style=flat-square)](https://github.styleci.io/repos/86598046)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/sebastienheyd/boilerplate/badges/quality-score.png?b=master&style=flat-square)](https://scrutinizer-ci.com/g/sebastienheyd/boilerplate/?branch=master)
 [![Laravel](https://img.shields.io/badge/Laravel-6.x%20→%2012.x-green?logo=Laravel&style=flat-square)](https://laravel.com/)
 [![Nb downloads](https://img.shields.io/packagist/dt/sebastienheyd/boilerplate.svg?style=flat-square)](https://packagist.org/packages/sebastienheyd/boilerplate)
 [![MIT License](https://img.shields.io/github/license/sebastienheyd/boilerplate.svg?style=flat-square)](LICENSE)
