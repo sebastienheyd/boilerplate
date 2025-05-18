@@ -2,7 +2,6 @@
 
 namespace Sebastienheyd\Boilerplate\Datatables\Admin;
 
-use Sebastienheyd\Boilerplate\Datatables\Button;
 use Sebastienheyd\Boilerplate\Datatables\Column;
 use Sebastienheyd\Boilerplate\Datatables\Datatable;
 use Sebastienheyd\Boilerplate\Models\LogFile;
@@ -15,7 +14,7 @@ class LogFileDatatable extends Datatable
     {
         $date = request()->post('log');
 
-        if (!$date) {
+        if (! $date) {
             abort(404);
         }
 
@@ -47,13 +46,13 @@ class LogFileDatatable extends Datatable
                 ->width('80px')
                 ->filterOptions(function () {
                     return [
-                        'debug' => 'Debug',
-                        'info' => 'Info',
-                        'notice' => 'Notice',
-                        'warning' => 'Warning',
-                        'error' => 'Error',
-                        'critical' => 'Critical',
-                        'alert' => 'Alert',
+                        'debug'     => 'Debug',
+                        'info'      => 'Info',
+                        'notice'    => 'Notice',
+                        'warning'   => 'Warning',
+                        'error'     => 'Error',
+                        'critical'  => 'Critical',
+                        'alert'     => 'Alert',
                         'emergency' => 'Emergency',
                     ];
                 })

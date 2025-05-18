@@ -2,9 +2,9 @@
 
 namespace Sebastienheyd\Boilerplate\Models;
 
+use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Contracts\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class LogFile
@@ -18,6 +18,7 @@ class LogFile
     {
         $pattern = storage_path('logs/laravel-*.log');
         $files = array_map('basename', glob($pattern));
+
         return array_reverse($files);
     }
 
@@ -25,7 +26,7 @@ class LogFile
     {
         return new static($file);
     }
-    
+
     public function __construct($file)
     {
         $this->storage = Storage::disk('logs');
@@ -60,7 +61,7 @@ class LogFile
             $bytes /= 1024;
         }
 
-        return round($bytes, 2) . ' ' . $units[$i];
+        return round($bytes, 2).' '.$units[$i];
     }
 
     protected function content()
@@ -85,11 +86,11 @@ class LogFile
 
             if (preg_match($pattern, $line, $matches)) {
                 $entries[$lineNumber] = [
-                    'line' => $lineNumber,
-                    'date' => Date::createFromFormat('Y-m-d H:i:s', $matches['date']),
-                    'env' => $matches['env'],
-                    'type' => $matches['type'],
-                    'message' => $matches['message'],
+                    'line'       => $lineNumber,
+                    'date'       => Date::createFromFormat('Y-m-d H:i:s', $matches['date']),
+                    'env'        => $matches['env'],
+                    'type'       => $matches['type'],
+                    'message'    => $matches['message'],
                     'stacktrace' => [],
                 ];
             }
@@ -112,6 +113,7 @@ class LogFile
         }
 
         fclose($stream);
+
         return array_reverse($entries);
     }
 
@@ -130,16 +132,16 @@ class LogFile
         }
 
         foreach ($parse as $entry) {
-             $levels[$entry['type']]++;
+            $levels[$entry['type']]++;
         }
 
         return [
-            'file' => $this->file,
-            'date' => $this->getDate(),
-            'size' => $this->fileSize(),
+            'file'          => $this->file,
+            'date'          => $this->getDate(),
+            'size'          => $this->fileSize(),
             'sizeFormatted' => $this->fileSizeFormatted(),
-            'entries' => count($parse),
-            'levels' => $levels,
+            'entries'       => count($parse),
+            'levels'        => $levels,
         ];
     }
 

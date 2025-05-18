@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @see https://carbon.nesbot.com/docs/#api-localization
  */

@@ -197,15 +197,15 @@ class BoilerplateServiceProvider extends ServiceProvider
 
         // Overriding Laravel config
         config([
-            'auth.providers.users.driver'  => config('boilerplate.auth.providers.users.driver', 'eloquent'),
-            'auth.providers.users.model'   => config('boilerplate.auth.providers.users.model', 'App\User'),
-            'auth.providers.users.table'   => config('boilerplate.auth.providers.users.table', 'users'),
-            'boilerplate.app.locale'       => config('boilerplate.app.locale', config('boilerplate.locale.default')),
+            'auth.providers.users.driver'   => config('boilerplate.auth.providers.users.driver', 'eloquent'),
+            'auth.providers.users.model'    => config('boilerplate.auth.providers.users.model', 'App\User'),
+            'auth.providers.users.table'    => config('boilerplate.auth.providers.users.table', 'users'),
+            'boilerplate.app.locale'        => config('boilerplate.app.locale', config('boilerplate.locale.default')),
             'filesystems.disks.logs'        => [
                 'driver' => 'local',
-                'root' => storage_path('logs'),
-                'serve' => true,
-                'throw' => false,
+                'root'   => storage_path('logs'),
+                'serve'  => true,
+                'throw'  => false,
                 'report' => false,
             ],
         ]);

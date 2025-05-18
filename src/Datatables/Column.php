@@ -67,7 +67,7 @@ class Column
      * @param  Closure|null  $format
      * @return $this
      */
-    public function data(string $name, Closure $format = null): Column
+    public function data(string $name, ?Closure $format = null): Column
     {
         $this->attributes['data'] = $name;
 
