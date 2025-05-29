@@ -47,6 +47,8 @@ function getDocsNavBar(version) {
                         'dashboard/widget_usage',
                     ]
                 },
+                'middleware',
+                'layout',
                 {
                     title: 'Datatables',
                     children: [

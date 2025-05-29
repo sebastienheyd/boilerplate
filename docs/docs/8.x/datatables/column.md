@@ -178,17 +178,65 @@ For dates, replace the date by a "from now" text.
 
 ## dateFormat
 
-For dates, will replace the date by the localized date. By default, it will use the locale `boilerplate::date.YmdHis` defined in the file `date.php`
+For dates, will replace the date by the localized date using Moment.js formatting. This method automatically sets up date range filtering and proper date rendering.
+
+By default, it will use the locale `boilerplate::date.YmdHis` defined in the `date.php` language file:
 
 ```php
 ->dateFormat()
 ```
 
-You can also specify the format to use, this will use the [momentjs displaying format](https://momentjs.com/docs/#/displaying/)
+This renders dates using the default format `YYYY-MM-DD HH:mm:ss`.
+
+You can specify a custom format using [Moment.js display format](https://momentjs.com/docs/#/displaying/):
 
 ```php
 ->dateFormat('dddd D MMMM YYYY')
+// Output: "Monday 15 January 2024"
+
+->dateFormat('DD/MM/YYYY HH:mm')
+// Output: "15/01/2024 14:30"
+
+->dateFormat('MMM Do, YYYY')
+// Output: "Jan 15th, 2024"
 ```
+
+The boilerplate provides predefined date formats in `resources/lang/{locale}/date.php`:
+
+| Key | Format | Example Output |
+|-----|--------|----------------|
+| `Ymd` | `YYYY-MM-DD` | 2024-01-15 |
+| `YmdHi` | `YYYY-MM-DD HH:mm` | 2024-01-15 14:30 |
+| `YmdHis` | `YYYY-MM-DD HH:mm:ss` | 2024-01-15 14:30:25 |
+| `YmdhiA` | `YYYY-MM-DD hh:mm A` | 2024-01-15 02:30 PM |
+| `YmdhisA` | `YYYY-MM-DD hh:mm:ss A` | 2024-01-15 02:30:25 PM |
+| `lFdY` | `dddd, MMMM Do YYYY` | Monday, January 15th 2024 |
+
+You can use these predefined formats:
+
+```php
+->dateFormat(__('boilerplate::date.lFdY'))
+// Renders: "Monday, January 15th 2024"
+```
+
+
+| Pattern | Description | Example |
+|---------|-------------|---------|
+| `YYYY` | 4-digit year | 2024 |
+| `YY` | 2-digit year | 24 |
+| `MMMM` | Full month name | January |
+| `MMM` | Short month name | Jan |
+| `MM` | Month number (01-12) | 01 |
+| `DDDD` | Day of year (001-366) | 015 |
+| `DD` | Day of month (01-31) | 15 |
+| `dddd` | Full day name | Monday |
+| `ddd` | Short day name | Mon |
+| `HH` | Hour (00-23) | 14 |
+| `hh` | Hour (01-12) | 02 |
+| `mm` | Minute (00-59) | 30 |
+| `ss` | Second (00-59) | 25 |
+| `A` | AM/PM | PM |
+
 
 ## notSearchable
 
