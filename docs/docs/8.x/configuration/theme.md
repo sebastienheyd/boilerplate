@@ -6,7 +6,17 @@ The `config/boilerplate/theme.php` file allows to define the backend theme param
 
 ```php
 <?php
-$theme = include __DIR__.'/themes/default.php';
+// Selected theme
+$selectedTheme = env('BOILERPLATE_THEME', 'default');
+
+// Check if theme exists
+$themePath = __DIR__.'/themes/'.$selectedTheme.'.php';
+if (!file_exists($themePath)) {
+    $selectedTheme = 'default';
+    $themePath = __DIR__.'/themes/default.php';
+}
+
+$theme = include $themePath;
 
 $theme += [
     'navbar' => [               // Additionnal views to append items to the navbar
@@ -24,7 +34,9 @@ return $theme;
 
 ## theme
 
-Theme to use.
+Theme to use. You can change the theme by setting the `BOILERPLATE_THEME` environment variable in your `.env` file.
+
+The system automatically validates that the specified theme file exists and falls back to the default theme if not found.
 
 See [How to change theme](/howto/change-theme)
 

@@ -1,6 +1,16 @@
 <?php
 
-$theme = include __DIR__.'/themes/default.php';
+// Selected theme
+$selectedTheme = env('BOILERPLATE_THEME', 'default');
+
+// Check if theme exists
+$themePath = __DIR__.'/themes/'.$selectedTheme.'.php';
+if (!file_exists($themePath)) {
+    $selectedTheme = 'default';
+    $themePath = __DIR__.'/themes/default.php';
+}
+
+$theme = include $themePath;
 
 $theme += [
     'navbar' => [               // Additionnal views to append items to the navbar
