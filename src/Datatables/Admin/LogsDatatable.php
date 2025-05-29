@@ -2,7 +2,6 @@
 
 namespace Sebastienheyd\Boilerplate\Datatables\Admin;
 
-use Carbon\Carbon;
 use Sebastienheyd\Boilerplate\Datatables\Button;
 use Sebastienheyd\Boilerplate\Datatables\Column;
 use Sebastienheyd\Boilerplate\Datatables\Datatable;
