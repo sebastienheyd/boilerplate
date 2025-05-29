@@ -44,6 +44,15 @@
         @endif
         </thead>
         <tbody></tbody>
+        @if(!empty($datatable->getSumColumns()))
+        <tfoot>
+        <tr>
+            @foreach($datatable->getColumns() as $index => $column)
+                <th>{{ $column->sum ? '0' : '' }}</th>
+            @endforeach
+        </tr>
+        </tfoot>
+        @endif
     </table>
 </div>
 @include('boilerplate::load.async.datatables', ['buttons' => true])
@@ -89,6 +98,9 @@
                     {!! $column->get() !!},
                 @endforeach
             ],
+            @if($datatable->footerCallback)
+                footerCallback: {!! $datatable->footerCallback !!},
+            @endif
             initComplete: $.fn.dataTable.init,
             dom:
                 "<'d-flex flex-wrap justify-content-between'<'dt_top_left mb-2 mr-2'l><'dt_top_right d-flex mb-2'f>>" +

@@ -41,6 +41,7 @@ abstract class Datatable
         'condensed'    => false,
         'lengthMenu'   => [[10, 25, 50, 100, -1], [10, 25, 50, 100, '∞']],
         'buttons'      => ['filters'],
+        'footerCallback' => null,
     ];
 
     /**
@@ -538,6 +539,23 @@ abstract class Datatable
     }
 
     /**
+     * Get columns that must calculate a sum.
+     *
+     * @return array
+     */
+    public function getSumColumns(): array
+    {
+        $sumColumns = [];
+        foreach ($this->getColumns() as $index => $column) {
+            if ($column->sum) {
+                $sumColumns[] = $index;
+            }
+        }
+
+        return $sumColumns;
+    }
+
+    /**
      * Magic method to get property or attribute.
      *
      * @param  $name
@@ -557,6 +575,41 @@ abstract class Datatable
             }
 
             return json_encode($this->attributes[$name]);
+        }
+
+        if ($name === 'footerCallback') {
+            $sumColumns = $this->getSumColumns();
+            if (! empty($sumColumns)) {
+                $columnsJson = json_encode($sumColumns);
+
+                return "function (row, data, start, end, display) {
+                    var api = this.api();
+                    var sumColumns = $columnsJson;
+
+                    sumColumns.forEach(function(colIndex) {
+                        var total = api
+                            .column(colIndex, {page: 'current'})
+                            .data()
+                            .reduce(function (a, b) {
+                                // Extract numeric value from HTML content if present
+                                var val = b;
+                                if (typeof b === 'string' && b.includes('<')) {
+                                    // Extract text content from HTML tags
+                                    var tempDiv = document.createElement('div');
+                                    tempDiv.innerHTML = b;
+                                    val = tempDiv.textContent || tempDiv.innerText || '';
+                                    // Replace '.' with 0 for empty level indicators
+                                    val = val === '.' ? '0' : val;
+                                }
+                                return a + (parseFloat(val) || 0);
+                            }, 0);
+
+                        \$(api.column(colIndex).footer()).html(total.toLocaleString());
+                    });
+                }";
+            }
+
+            return $this->attributes[$name];
         }
 
         if (isset($this->attributes[$name])) {

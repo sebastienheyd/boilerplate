@@ -15,6 +15,7 @@ class Column
     protected $raw = null;
     protected $title = '';
     protected $tooltip = '';
+    protected $sum = false;
 
     /**
      * Instanciate a new column.
@@ -329,6 +330,18 @@ class Column
         }
 
         return null;
+    }
+
+    /**
+     * Enable calculation of the sum for this column in the footer.
+     *
+     * @return Column
+     */
+    public function sum(): Column
+    {
+        $this->sum = true;
+
+        return $this;
     }
 
     /**

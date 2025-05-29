@@ -50,6 +50,7 @@ public function columns(): array
 | [class](#class)                 | Sets the column class                                  |
 | [width](#width)                 | Sets the column width                                  |
 | [hidden](#hidden)               | Hide the column                                        |
+| [sum](#sum)                     | Enable sum calculation in footer for numeric columns   |
 
 ---
 
@@ -319,3 +320,33 @@ Hide the column.
 ```php
 ->hidden()
 ```
+
+## sum
+
+Enables automatic sum calculation for numeric columns. When applied to a column, the sum of all visible values will be displayed in the table footer.
+
+```php
+Column::add('Price')
+    ->data('price')
+    ->sum(),
+
+Column::add('Quantity') 
+    ->data('quantity')
+    ->sum(),
+```
+
+**Features**
+
+- **Automatic Calculation**: Sums are calculated client-side using JavaScript for optimal performance
+- **Locale Formatting**: Numbers are formatted according to the user's locale (e.g., `1,234.56`)
+- **Dynamic Updates**: Sums update automatically when filtering or searching the table
+- **Current Page Only**: Calculations are performed on currently visible rows only
+- The column data should contain numeric values
+- Non-numeric values are treated as zero in calculations
+- Works with both integer and decimal numbers
+- The sum is calculated using `parseFloat()` to handle both integers and decimals
+- Empty or non-numeric cells contribute 0 to the sum
+- The footer is automatically generated when at least one column has sum enabled
+- Multiple columns can have sum calculations simultaneously
+- **HTML-formatted columns**: The sum calculation automatically extracts numeric values from HTML content (e.g., `<span class="badge">5</span>` → `5`)
+- Special handling for empty indicators: dots (`.`) are treated as zero values
