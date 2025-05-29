@@ -28,19 +28,19 @@ abstract class Datatable
     protected $permissions = ['backend_access'];
     protected $orderAttr = [];
     protected $attributes = [
-        'filters'      => true,
-        'info'         => true,
-        'lengthChange' => true,
-        'order'        => [],
-        'ordering'     => true,
-        'pageLength'   => 10,
-        'paging'       => true,
-        'pagingType'   => 'simple_numbers',
-        'searching'    => true,
-        'stateSave'    => false,
-        'condensed'    => false,
-        'lengthMenu'   => [[10, 25, 50, 100, -1], [10, 25, 50, 100, '∞']],
-        'buttons'      => ['filters'],
+        'filters'        => true,
+        'info'           => true,
+        'lengthChange'   => true,
+        'order'          => [],
+        'ordering'       => true,
+        'pageLength'     => 10,
+        'paging'         => true,
+        'pagingType'     => 'simple_numbers',
+        'searching'      => true,
+        'stateSave'      => false,
+        'condensed'      => false,
+        'lengthMenu'     => [[10, 25, 50, 100, -1], [10, 25, 50, 100, '∞']],
+        'buttons'        => ['filters'],
         'footerCallback' => null,
     ];
 
