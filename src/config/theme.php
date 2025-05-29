@@ -5,7 +5,7 @@ $selectedTheme = env('BOILERPLATE_THEME', 'default');
 
 // Check if theme exists
 $themePath = __DIR__.'/themes/'.$selectedTheme.'.php';
-if (!file_exists($themePath)) {
+if (! file_exists($themePath)) {
     $selectedTheme = 'default';
     $themePath = __DIR__.'/themes/default.php';
 }
