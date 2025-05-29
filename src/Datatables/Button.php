@@ -4,12 +4,13 @@ namespace Sebastienheyd\Boilerplate\Datatables;
 
 class Button
 {
-    protected $class = '';
-    protected $color = 'default';
-    protected $href = '#';
-    protected $icon = '';
-    protected $label = '';
-    protected $attributes = [];
+    protected string $class = '';
+    protected string $color = 'default';
+    protected string $href = '#';
+    protected string $icon = '';
+    protected string $label = '';
+    protected array $attributes = [];
+    protected string $tooltip = '';
 
     /**
      * Instanciate a new button.
@@ -31,6 +32,23 @@ class Button
     {
         return new static($label);
     }
+
+    /**
+     * Returns a custom button.
+     *
+     * @param string $route
+     * @param array|string $args
+     * @param string $tooltip
+     * @param string $color
+     * @param string $icon
+     * @param array $attributes
+     * @return string
+     */
+    public static function custom(string $route, array|string $args = [], string $tooltip = '', string $color = 'default', string $icon = '', array $attributes = []): string
+    {
+        return self::add()->route($route, $args)->tooltip($tooltip)->color($color)->icon($icon)->attributes($attributes)->make();
+    }
+
 
     /**
      * Returns an edit button.
@@ -168,7 +186,7 @@ class Button
      */
     public function make(): string
     {
-        $str = '<a href="%s" class="btn btn-sm btn-%s ml-1%s" %s>%s%s</a>';
+        $str = '<a href="%s" title="%s" class="btn btn-sm btn-%s ml-1%s" %s>%s%s</a>';
 
         if (! empty($this->label) && ! empty($this->icon)) {
             $this->label = $this->label.' ';
@@ -182,6 +200,19 @@ class Button
             return sprintf('%s="%s"', $k, $this->attributes[$k]);
         }, array_keys($this->attributes)));
 
-        return sprintf($str, $this->href, $this->color, $this->class, $attributes, $this->label, $this->icon);
+        return sprintf($str, $this->href, $this->tooltip, $this->color, $this->class, $attributes, $this->label, $this->icon);
+    }
+
+    /**
+     * Sets tooltip of button.
+     *
+     * @param string $tooltip
+     * @return $this
+     */
+    public function tooltip(string $tooltip): self
+    {
+        $this->tooltip = $tooltip;
+
+        return $this;
     }
 }
