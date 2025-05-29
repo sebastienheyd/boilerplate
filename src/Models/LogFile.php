@@ -90,19 +90,13 @@ class LogFile
                     'date'       => Date::createFromFormat('Y-m-d H:i:s', $matches['date']),
                     'env'        => $matches['env'],
                     'type'       => $matches['type'],
-                    'message'    => $matches['message'],
+                    'message'    => str_replace(base_path(), '', $matches['message']),
                     'stacktrace' => [],
                 ];
-            }
 
-            if ($line === '[stacktrace]' || $errorLineNumber !== false) {
-                if (! $errorLineNumber && isset($entries[$lineNumber - 1])) {
-                    $errorLineNumber = $lineNumber - 1;
-                    continue;
-                }
-
-                if (preg_match($pattern, $line)) {
-                    $errorLineNumber = false;
+                $errorLineNumber = $lineNumber;
+            } else {
+                if (! $errorLineNumber) {
                     continue;
                 }
 
