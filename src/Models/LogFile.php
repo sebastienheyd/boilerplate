@@ -132,6 +132,10 @@ class LogFile
         }
 
         foreach ($parse as $entry) {
+            if (! isset($entry['type'])) {
+                continue;
+            }
+
             $levels[$entry['type']]++;
         }
 

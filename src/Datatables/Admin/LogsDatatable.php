@@ -2,6 +2,7 @@
 
 namespace Sebastienheyd\Boilerplate\Datatables\Admin;
 
+use Carbon\Carbon;
 use Sebastienheyd\Boilerplate\Datatables\Button;
 use Sebastienheyd\Boilerplate\Datatables\Column;
 use Sebastienheyd\Boilerplate\Datatables\Datatable;
@@ -18,7 +19,7 @@ class LogsDatatable extends Datatable
         $stats = [];
         foreach ($logs as $logFile) {
             $log = LogFile::get($logFile);
-            $stats[$logFile] = $log->stats();
+            $stats[] = $log->stats();
         }
 
         return collect($stats);
@@ -32,6 +33,7 @@ class LogsDatatable extends Datatable
                 'deleteSuccess' => __('boilerplate::role.list.deletesuccess'),
             ])
             ->buttons([])
+            ->noOrdering()
             ->noSearching()
             ->order('date', 'asc');
     }
@@ -51,7 +53,7 @@ class LogsDatatable extends Datatable
             Column::add(__('Date'))
                 ->class('text-nowrap')
                 ->data('date', function ($log) {
-                    return mb_convert_case($log['date']->isoFormat(__('boilerplate::date.lFdY')), MB_CASE_TITLE);
+                    return mb_convert_case($log['date']->isoFormat(__('boilerplate::date.lFdY')), MB_CASE_TITLE, 'UTF-8');
                 }),
 
             Column::add(__('boilerplate::logs.show.size'))
@@ -115,12 +117,13 @@ class LogsDatatable extends Datatable
             Column::add()
                 ->width('20px')
                 ->actions(function ($log) {
-                    $buttons = Button::show('boilerplate.logs.show', $log['date']->format('Y-m-d'));
+                    $date = $log['date']->format('Y-m-d');
+                    $buttons = Button::show('boilerplate.logs.show', $date);
                     $buttons .= Button::add()
                         ->route('boilerplate.logs.delete')
                         ->attributes([
                             'data-action' => 'delete-log',
-                            'data-date'   => $log['date']->format('Y-m-d'),
+                            'data-date'   => $date,
                         ])
                         ->color('danger')
                         ->icon('trash')
