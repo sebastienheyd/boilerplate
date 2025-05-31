@@ -34,6 +34,7 @@ class ExampleDatatable extends Datatable
 | [setRowId()](#setrowid) | null | Sets id to rows |
 | [setRowClass()](#setrowclass) | null | Sets class to rows |
 | [setRowAttr()](#setrowattr) | null | Sets attribute(s) to rows |
+| [setRowData()](#setrowdata) | null | Sets data attributes to rows |
 | [noPaging()](#nopaging) | visible | Disable paging |
 | [noLengthChange()](#nolengthchange) | visible | Disable length change |
 | [noSorting()](#nosorting) | visible | Disable sorting |
@@ -200,6 +201,21 @@ Sets row attribute(s) via `blade` string.
 ->setRowAttr([
     'data-id' => 'row-{{$id}}',
     'data-name' => 'row-{{$name}}',
+])
+```
+
+## setRowData
+
+Sets row data attributes via array.
+
+```php
+->setRowData([
+    'id' => function($user) {
+        return $user->id;
+    },
+    'status' => function($user) {
+        return $user->status;
+    },
 ])
 ```
 

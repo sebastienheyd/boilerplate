@@ -10,7 +10,7 @@ use Symfony\Component\Finder\Finder;
 
 class DatatablesRepository
 {
-    protected $datatables = [];
+    protected array $datatables = [];
 
     /**
      * Register a datatable class.

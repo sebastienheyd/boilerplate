@@ -202,6 +202,14 @@ You can specify a custom format using [Moment.js display format](https://momentj
 // Output: "Jan 15th, 2024"
 ```
 
+You can also use a Closure for advanced date formatting logic:
+
+```php
+->dateFormat(function($data) {
+    return Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format('l F Y');
+})
+```
+
 The boilerplate provides predefined date formats in `resources/lang/{locale}/date.php`:
 
 | Key | Format | Example Output |

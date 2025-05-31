@@ -11,23 +11,23 @@ use Yajra\DataTables\DataTables;
 
 abstract class Datatable
 {
-    protected $slug = '';
-    protected $datasource;
-    protected $checkboxes = false;
-    protected $checkboxesField = 'id';
-    protected $filter;
-    protected $filteredRecords;
-    protected $offset;
-    protected $rowAttr;
-    protected $rowClass;
-    protected $rowData;
-    protected $rowId;
-    protected $skipPaging;
-    protected $totalRecords;
-    protected $locale = [];
-    protected $permissions = ['backend_access'];
-    protected $orderAttr = [];
-    protected $attributes = [
+    public $slug = '';
+    protected object $datasource;
+    protected bool $checkboxes = false;
+    protected string $checkboxesField = 'id';
+    protected Closure|null $filter = null;
+    protected int $filteredRecords = 0;
+    protected int|null $offset = null;
+    protected array $rowAttr = [];
+    protected string|Closure $rowClass = '';
+    protected array $rowData = [];
+    protected string|Closure $rowId = '';
+    protected bool $skipPaging = false;
+    protected int $totalRecords = 0;
+    protected array $locale = [];
+    protected array $permissions = ['backend_access'];
+    protected array $orderAttr = [];
+    protected array $attributes = [
         'filters'        => true,
         'info'           => true,
         'lengthChange'   => true,
@@ -264,10 +264,10 @@ abstract class Datatable
     /**
      * Sets attributes on all rows.
      *
-     * @param  string|Closure  $rowAttr
+     * @param  array  $rowAttr
      * @return $this
      */
-    public function setRowAttr($rowAttr): Datatable
+    public function setRowAttr(array $rowAttr): Datatable
     {
         $this->rowAttr = $rowAttr;
 
@@ -280,7 +280,7 @@ abstract class Datatable
      * @param  string|Closure  $rowClass
      * @return $this
      */
-    public function setRowClass($rowClass): Datatable
+    public function setRowClass(string|Closure $rowClass): Datatable
     {
         $this->rowClass = $rowClass;
 
@@ -290,10 +290,10 @@ abstract class Datatable
     /**
      * Sets data on all rows.
      *
-     * @param  string|Closure  $rowData
+     * @param  array  $rowData
      * @return $this
      */
-    public function setRowData($rowData): Datatable
+    public function setRowData(array $rowData): Datatable
     {
         $this->rowData = $rowData;
 
@@ -306,7 +306,7 @@ abstract class Datatable
      * @param  string|Closure  $rowId
      * @return $this
      */
-    public function setRowId($rowId): Datatable
+    public function setRowId(string|Closure $rowId): Datatable
     {
         $this->rowId = $rowId;
 
@@ -506,7 +506,7 @@ abstract class Datatable
      * @param  int  $filteredRecords
      * @return $this
      */
-    public function setFilteredRecords($filteredRecords)
+    public function setFilteredRecords(int $filteredRecords)
     {
         $this->filteredRecords = $filteredRecords;
 

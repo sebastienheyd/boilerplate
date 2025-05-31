@@ -4,12 +4,12 @@ namespace Sebastienheyd\Boilerplate\Datatables;
 
 class Button
 {
-    protected $class = '';
-    protected $color = 'default';
-    protected $href = '#';
-    protected $icon = '';
-    protected $label = '';
-    protected $attributes = [];
+    protected string $class = '';
+    protected string $color = 'default';
+    protected string $href = '#';
+    protected string $icon = '';
+    protected string $label = '';
+    protected array $attributes = [];
 
     /**
      * Instanciate a new button.

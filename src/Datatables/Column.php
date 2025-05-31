@@ -6,16 +6,16 @@ use Closure;
 
 class Column
 {
-    protected $actions = [];
-    protected $attributes = [];
-    protected $filter = null;
-    protected $filterOptions = [];
-    protected $filterType = 'input';
-    protected $order = null;
-    protected $raw = null;
-    protected $title = '';
-    protected $tooltip = '';
-    protected $sum = false;
+    protected array $actions = [];
+    protected array $attributes = [];
+    protected Closure|null $filter = null;
+    protected array $filterOptions = [];
+    protected string $filterType = 'input';
+    protected Closure|null $order = null;
+    protected Closure|null $raw = null;
+    protected string $title = '';
+    protected string $tooltip = '';
+    protected bool $sum = false;
 
     /**
      * Instanciate a new column.
@@ -116,23 +116,19 @@ class Column
     /**
      * For dates, convert the date to the given format. Default format is "YYYY-MM-DD HH:mm:ss".
      *
-     * @param  null  $format
+     * @param string|Closure|null $format
      * @return $this
      */
-    public function dateFormat($format = null): Column
+    public function dateFormat(string|Closure $format = null): Column
     {
-        if ($format === null) {
-            $format = __('boilerplate::date.YmdHis');
-        }
-
-        if (is_string($format)) {
-            $format = function () use ($format) {
-                return "$.fn.dataTable.render.moment('$format')";
-            };
-        }
-
         if ($format instanceof Closure) {
-            $this->attributes['render'] = $format;
+            $this->raw = $format;
+        } else {
+            if ($format === null) {
+                $format = __('boilerplate::date.YmdHis');
+            }
+
+            $this->attributes['render'] = fn() => "$.fn.dataTable.render.moment('" . $format . "')";
         }
 
         $this->filter(function ($query, $q) {
