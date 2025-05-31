@@ -15,9 +15,9 @@ abstract class Datatable
     protected object $datasource;
     protected bool $checkboxes = false;
     protected string $checkboxesField = 'id';
-    protected Closure|null $filter = null;
+    protected ?Closure $filter = null;
     protected int $filteredRecords = 0;
-    protected int|null $offset = null;
+    protected ?int $offset = null;
     protected array $rowAttr = [];
     protected string|Closure $rowClass = '';
     protected array $rowData = [];

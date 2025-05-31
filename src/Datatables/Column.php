@@ -8,11 +8,11 @@ class Column
 {
     protected array $actions = [];
     protected array $attributes = [];
-    protected Closure|null $filter = null;
+    protected ?Closure $filter = null;
     protected array $filterOptions = [];
     protected string $filterType = 'input';
-    protected Closure|null $order = null;
-    protected Closure|null $raw = null;
+    protected ?Closure $order = null;
+    protected ?Closure $raw = null;
     protected string $title = '';
     protected string $tooltip = '';
     protected bool $sum = false;
@@ -116,10 +116,10 @@ class Column
     /**
      * For dates, convert the date to the given format. Default format is "YYYY-MM-DD HH:mm:ss".
      *
-     * @param string|Closure|null $format
+     * @param  string|Closure|null  $format
      * @return $this
      */
-    public function dateFormat(string|Closure $format = null): Column
+    public function dateFormat(string|Closure|null $format = null): Column
     {
         if ($format instanceof Closure) {
             $this->raw = $format;
@@ -128,7 +128,7 @@ class Column
                 $format = __('boilerplate::date.YmdHis');
             }
 
-            $this->attributes['render'] = fn() => "$.fn.dataTable.render.moment('" . $format . "')";
+            $this->attributes['render'] = fn () => "$.fn.dataTable.render.moment('".$format."')";
         }
 
         $this->filter(function ($query, $q) {
