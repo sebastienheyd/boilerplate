@@ -108,9 +108,9 @@ class Column
      */
     public function fromNow(): Column
     {
-        return $this->dateFormat(function () {
-            return '$.fn.dataTable.render.fromNow()';
-        });
+        $this->attributes['render'] = fn () => "$.fn.dataTable.render.fromNow()";
+
+        return $this;
     }
 
     /**
