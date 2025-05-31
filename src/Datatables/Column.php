@@ -108,7 +108,7 @@ class Column
      */
     public function fromNow(): Column
     {
-        $this->attributes['render'] = fn () => "$.fn.dataTable.render.fromNow()";
+        $this->attributes['render'] = fn () => '$.fn.dataTable.render.fromNow()';
 
         return $this;
     }
