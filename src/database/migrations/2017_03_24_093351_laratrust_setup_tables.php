@@ -5,7 +5,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class LaratrustSetupTables extends Migration
+return new class extends Migration
 {
     private $roles = [
         [
@@ -140,4 +140,4 @@ class LaratrustSetupTables extends Migration
         Schema::dropIfExists('role_user');
         Schema::dropIfExists('roles');
     }
-}
+};

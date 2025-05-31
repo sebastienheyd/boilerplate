@@ -4,7 +4,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class LogViewerPermission extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -31,4 +31,4 @@ class LogViewerPermission extends Migration
     {
         DB::table('permissions')->where('name', 'logs')->delete();
     }
-}
+};
