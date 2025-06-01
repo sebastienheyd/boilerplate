@@ -62,7 +62,7 @@ abstract class Datatable
         if ($this->datasource() instanceof DataTableAbstract) {
             $datatable = $this->datasource();
         } else {
-            $datatable = DataTables::of($this->datasource() ?? []);
+            $datatable = DataTables::of($this->datasource());
         }
 
         if ($this->filter) {
@@ -536,6 +536,16 @@ abstract class Datatable
         $idx = $this->getColumnIndex($name);
 
         return request()->input('columns')[$idx]['search']['value'];
+    }
+
+    /**
+     * Gets the DataTable global search value.
+     *
+     * @return string|null
+     */
+    protected function getGlobalSearchValue(): ?string
+    {
+        return request()->input('search.value');
     }
 
     /**
