@@ -48,6 +48,7 @@ function getDocsNavBar(version) {
                     ]
                 },
                 'middleware',
+                'pwa',
                 'layout',
                 {
                     title: 'Datatables',

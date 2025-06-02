@@ -16,6 +16,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
 @stack('css')
+@if(config('boilerplate.app.pwa.enabled', false))
+    <link rel="manifest" href="{{ route('boilerplate.pwa.manifest') }}">
+    <meta name="theme-color" content="{{ config('boilerplate.app.pwa.theme_color') }}">
+    <link rel="apple-touch-icon" href="{{ url(config('boilerplate.app.pwa.apple_touch_icon')) }}">
+@endif
     <script src="{{ mix('/bootstrap.min.js', '/assets/vendor/boilerplate') }}"></script>
     <script src="{{ mix('/admin-lte.min.js', '/assets/vendor/boilerplate') }}"></script>
     <script src="{{ mix('/boilerplate.min.js', '/assets/vendor/boilerplate') }}" data-csrf="{{ csrf_token() }}" data-locale="{{ App::getLocale() }}" data-settings="{{ route('boilerplate.user.settings',null,false) }}"></script>

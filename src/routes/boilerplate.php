@@ -11,6 +11,7 @@ use Sebastienheyd\Boilerplate\Controllers\GptController;
 use Sebastienheyd\Boilerplate\Controllers\ImpersonateController;
 use Sebastienheyd\Boilerplate\Controllers\LanguageController;
 use Sebastienheyd\Boilerplate\Controllers\Logs\LogViewerController;
+use Sebastienheyd\Boilerplate\Controllers\PwaController;
 use Sebastienheyd\Boilerplate\Controllers\Select2Controller;
 use Sebastienheyd\Boilerplate\Controllers\Users\RolesController;
 use Sebastienheyd\Boilerplate\Controllers\Users\UsersController;
@@ -27,6 +28,11 @@ Route::group([
     // Language switch
     if (config('boilerplate.locale.switch', false)) {
         Route::post('language', [LanguageController::class, 'switch'])->name('lang.switch');
+    }
+
+    // PWA Manifest
+    if (config('boilerplate.app.pwa.enabled', false)) {
+        Route::get('manifest.json', [PwaController::class, 'manifest'])->name('pwa.manifest');
     }
 
     // Frontend
