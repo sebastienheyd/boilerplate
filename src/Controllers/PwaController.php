@@ -9,7 +9,7 @@ class PwaController extends Controller
 {
     public function manifest(): JsonResponse
     {
-        if (!config('boilerplate.app.pwa.enabled', false)) {
+        if (! config('boilerplate.app.pwa.enabled', false)) {
             abort(404);
         }
 
@@ -22,16 +22,16 @@ class PwaController extends Controller
         $scope = $prefix ? "/{$prefix}/" : '/';
 
         $manifest = [
-            'name' => $config['name'],
-            'short_name' => $config['short_name'],
-            'description' => $config['description'],
-            'start_url' => $baseUrl.$startUrl,
-            'scope' => $baseUrl.$scope,
-            'display' => $config['display'],
-            'orientation' => $config['orientation'],
-            'theme_color' => $config['theme_color'],
+            'name'             => $config['name'],
+            'short_name'       => $config['short_name'],
+            'description'      => $config['description'],
+            'start_url'        => $baseUrl.$startUrl,
+            'scope'            => $baseUrl.$scope,
+            'display'          => $config['display'],
+            'orientation'      => $config['orientation'],
+            'theme_color'      => $config['theme_color'],
             'background_color' => $config['background_color'],
-            'icons' => []
+            'icons'            => [],
         ];
 
         if (empty($config['description'])) {
@@ -40,9 +40,9 @@ class PwaController extends Controller
 
         foreach ($config['icons'] as $icon) {
             $manifest['icons'][] = [
-                'src' => asset($icon['src']),
+                'src'   => asset($icon['src']),
                 'sizes' => $icon['sizes'],
-                'type' => $icon['type']
+                'type'  => $icon['type'],
             ];
         }
 
