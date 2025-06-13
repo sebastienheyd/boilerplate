@@ -39,7 +39,14 @@ if (! function_exists('channel_hash')) {
 }
 
 if (! function_exists('channel_hash_equals')) {
-    function channel_hash_equals($signature, ...$values): string
+    /**
+     * Check if the provided signature matches the generated one.
+     *
+     * @param  string  $signature
+     * @param  mixed  ...$values
+     * @return bool
+     */
+    function channel_hash_equals($signature, ...$values): bool
     {
         return $signature === md5(join('|', $values).config('app.key').config('app.url'));
     }
