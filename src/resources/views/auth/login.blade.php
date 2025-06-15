@@ -10,7 +10,7 @@
             @if($redirect)
             <x-boilerplate::input type="hidden" name="redirect" :value="$redirect" />
             @endif
-            <x-boilerplate::input name="email" placeholder="boilerplate::auth.fields.email" append-text="fas fa-fw fa-envelope" type="email" />
+            <x-boilerplate::input name="email" placeholder="boilerplate::auth.fields.email" append-text="fas fa-fw fa-envelope" type="email" autofocus />
             <x-boilerplate::password name="password" placeholder="boilerplate::auth.fields.password" :check="false" />
             <div class="d-flex flex-wrap align-items-center justify-content-between">
                 <x-boilerplate::icheck name="remember" :checked="old('remember') == 'on'" label="boilerplate::auth.login.rememberme" class="text-sm" />
