@@ -24,6 +24,9 @@
     <testsuite name="Datatables">
       <directory suffix="Test.php">./tests/Datatables</directory>
     </testsuite>
+    <testsuite name="Helpers">
+      <directory suffix="Test.php">./tests/Helpers</directory>
+    </testsuite>
     <testsuite name="Menu">
       <directory suffix="Test.php">./tests/Menu</directory>
     </testsuite>
