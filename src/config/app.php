@@ -7,6 +7,9 @@ return [
     // Backend domain if different as current domain. Ex: "admin.mydomain.tld"
     'domain'            => '',
 
+    // Backend application name, visible as meta title suffix
+    'name'              => env('APP_NAME', 'Boilerplate'),
+
     // Redirect to this route after login
     'redirectTo'        => 'boilerplate.dashboard',
 
@@ -22,7 +25,7 @@ return [
     // Allows to generate text with ChatGPT in TinyMCE
     'openai'   => [
         'key'          => env('OPENAI_API_KEY'),
-        'model'        => 'gpt-3.5-turbo',
+        'model'        => 'gpt-4o-mini',
         'organization' => env('OPENAI_API_ORGANIZATION'),
     ],
 
