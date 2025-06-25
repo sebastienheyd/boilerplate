@@ -14,6 +14,9 @@ return [
     // Backend domain if different as current domain. Ex: "admin.mydomain.tld"
     'domain'            => '',
 
+    // Backend application name, visible as meta title suffix
+    'name'              => env('APP_NAME', 'Boilerplate'),
+
     // Redirect to this route after login
     'redirectTo'        => 'boilerplate.dashboard',
 
@@ -29,8 +32,29 @@ return [
     // Allows to generate text with ChatGPT in TinyMCE
     'openai'   => [
         'key'          => env('OPENAI_API_KEY'),
-        'model'        => 'gpt-3.5-turbo',
+        'model'        => 'gpt-4o-mini',
         'organization' => env('OPENAI_API_ORGANIZATION'),
+    ],
+
+    // Progressive Web App configuration
+    'pwa' => [
+        'enabled'          => true,
+        'name'             => env('APP_NAME', 'Boilerplate'),
+        'short_name'       => env('APP_NAME', 'Boilerplate'),
+        'description'      => '',
+        'theme_color'      => '#454d55',
+        'background_color' => '#454d55',
+        'display'          => 'standalone',
+        'orientation'      => 'portrait-primary',
+        'apple_touch_icon' => 'assets/vendor/boilerplate/favicon.svg',
+        'icons'            => [
+            [
+                'src'   => 'assets/vendor/boilerplate/favicon.svg',
+                'sizes' => 'any',
+                'type'  => 'image/svg+xml',
+            ],
+            // ... additional icons here, see documentation
+        ],
     ],
 ];
 
@@ -100,6 +124,72 @@ Conversely, if the value is set to `false`, the user will be logged out when the
 
 ---
 
+## name
+
+The `name` parameter allows you to define the backend application name, which is visible as meta title suffix.
+
+The default value is `env('APP_NAME', 'Boilerplate')`
+
+---
+
 ## openai
 
 Allows setting variables for using ChatGPT in TinyMCE
+
+### key
+
+The OpenAI API key for authenticating with the ChatGPT service.
+
+### model
+
+The OpenAI model to use. The default value is `'gpt-3.5-turbo'`
+
+### organization
+
+The OpenAI organization ID if you belong to multiple organizations.
+
+---
+
+## pwa
+
+Progressive Web App configuration that allows the backend to be installed as a PWA.
+
+### enabled
+
+Enable or disable PWA functionality. The default value is `true`
+
+### name
+
+The application name shown in the PWA installation dialog. The default value is `env('APP_NAME', 'Boilerplate')`
+
+### short_name
+
+The short name used when there is insufficient space to display the full name. The default value is `env('APP_NAME', 'Boilerplate')`
+
+### description
+
+A description of the application. The default value is an empty string.
+
+### theme_color
+
+The theme color for the PWA. The default value is `'#454d55'`
+
+### background_color
+
+The background color for the PWA splash screen. The default value is `'#454d55'`
+
+### display
+
+The display mode for the PWA. The default value is `'standalone'`
+
+### orientation
+
+The preferred orientation for the PWA. The default value is `'portrait-primary'`
+
+### apple_touch_icon
+
+The icon used for Apple Touch Icon. The default value is `'assets/vendor/boilerplate/favicon.svg'`
+
+### icons
+
+Array of icons for the PWA in different sizes and formats. The default includes an SVG icon that scales to any size.
