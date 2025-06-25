@@ -42,7 +42,7 @@
 <div class="error-bubble"><div>{{ $message }}</div></div>
 @enderror
     {{ html()->input('hidden')->name($name.'[start]')->value(old($name.'[start]', $start ?? ''))->attributes(['autocomplete' => 'off']) }}
-    {{ html()->input('hidden')->name($name.'[end]')->value(old($name.'[end]', $start ?? ''))->attributes(['autocomplete' => 'off']) }}
+    {{ html()->input('hidden')->name($name.'[end]')->value(old($name.'[end]', $end ?? ''))->attributes(['autocomplete' => 'off']) }}
 </div>
 @include('boilerplate::load.async.daterangepicker')
 @component('boilerplate::minify')
