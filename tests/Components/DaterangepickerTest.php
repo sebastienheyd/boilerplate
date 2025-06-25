@@ -52,7 +52,7 @@ HTML;
     </div>
     <small class="form-text text-muted">Help text</small>
     <input type="hidden" name="range[start]" value="1970-01-01 00:00:00" autocomplete="off">
-    <input type="hidden" name="range[end]" value="1970-01-01 00:00:00" autocomplete="off">
+    <input type="hidden" name="range[end]" value="2021-11-20 09:27:57" autocomplete="off">
 </div>
 <script>loadScript('',()=>{moment.locale('en');registerAsset('momentjs')});</script><script>loadStylesheet("");whenAssetIsLoaded('momentjs',()=>{loadScript("",()=>{registerAsset('daterangepicker');$.fn.daterangepicker.defaultOptions={locale:{"applyLabel":"Apply","cancelLabel":"Cancel","fromLabel":"From","toLabel":"To","customRangeLabel":"Custom",}}})});</script><script>whenAssetIsLoaded('daterangepicker',()=>{window.DRP_range=$('input[name="range[value]"]').daterangepicker({showDropdowns:!0,opens:"right",timePicker:!1,timePickerIncrement:1,timePicker24Hour:!0,timePickerSeconds:!1,autoUpdateInput:!0,startDate:moment("1970-01-01 00:00:00"),endDate:moment("2021-11-20 09:27:57"),locale:{format:'YYYY-MM-DD'}}).on('apply.daterangepicker',applyDateRangePicker)});</script>
 HTML;
