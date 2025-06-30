@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
 
-class PERMISSION_CLASS extends Migration
+return new class extends Migration
 {
     private $permissions = [
         [
@@ -45,4 +46,4 @@ class PERMISSION_CLASS extends Migration
 
         DB::table('permissions_categories')->where('name', 'CATEGORY_NAME')->delete();
     }
-}
+};
