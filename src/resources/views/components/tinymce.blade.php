@@ -22,6 +22,8 @@
             toolbar_sticky: {{ ($sticky ?? false) ? 'true' : 'false' }},
             {{ $minHeight ?? false ? 'min_height:'.$minHeight.',' : '' }}
             {{ $maxHeight ?? false ? 'max_height:'.$maxHeight.',' : '' }}
+            {!! isset($toolbar) ? 'toolbar: "'.$toolbar.'",' : ''  !!}
+            {!! isset($contextmenu) ? 'contextmenu: "'.$contextmenu.'",' : '' !!}
         });
     });
 </script>
