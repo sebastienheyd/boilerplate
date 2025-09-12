@@ -53,6 +53,8 @@ class Column
                 $attributes[] = "$k:".$v();
             } elseif (is_bool($v)) {
                 $attributes[] = "$k:".($v ? 'true' : 'false');
+            } elseif (is_array($v)) {
+                $attributes[] = "$k:[".implode(',', $v).']';
             } else {
                 $attributes[] = "$k:".intval($v);
             }
@@ -131,14 +133,16 @@ class Column
             $this->attributes['render'] = fn () => "$.fn.dataTable.render.moment('".$format."')";
         }
 
-        $this->filter(function ($query, $q) {
-            if (preg_match('#^[0-9]{4}-[0-9]{2}-[0-9]{2}\s[0-9]{2}:[0-9]{2}:[0-9]{2}|[0-9]{4}-[0-9]{2}-[0-9]{2}\s[0-9]{2}:[0-9]{2}:[0-9]{2}$#', $q)) {
-                [$start, $end] = explode('|', $q);
-                $query->whereBetween($this->name ?? $this->data, [$start, $end]);
-            }
-        });
+        if (isset($query) && method_exists($query, 'whereBetween')) {
+            $this->filter(function ($query, $q) {
+                if (preg_match('#^[0-9]{4}-[0-9]{2}-[0-9]{2}\s[0-9]{2}:[0-9]{2}:[0-9]{2}|[0-9]{4}-[0-9]{2}-[0-9]{2}\s[0-9]{2}:[0-9]{2}:[0-9]{2}$#', $q)) {
+                    [$start, $end] = explode('|', $q);
+                    $query->whereBetween($this->name ?? $this->data, [$start, $end]);
+                }
+            });
 
-        $this->filterType('daterangepicker');
+            $this->filterType('daterangepicker');
+        }
 
         return $this;
     }
@@ -307,6 +311,20 @@ class Column
     public function notOrderable(): Column
     {
         return $this->booleanAttribute('orderable', false);
+    }
+
+    /**
+     * Specify the column index(es) or data names to use for ordering this column.
+     * Useful when you want to order by a hidden column.
+     *
+     * @param  int|string|array  $columnIndexOrData
+     * @return Column
+     */
+    public function orderData(int|string|array $columnIndexOrData): Column
+    {
+        $this->attributes['orderData'] = $columnIndexOrData;
+
+        return $this;
     }
 
     /**

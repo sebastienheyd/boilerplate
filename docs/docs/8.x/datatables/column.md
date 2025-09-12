@@ -45,6 +45,7 @@ public function columns(): array
 | [notSearchable](#notsearchable) | Disables search (and filter) of the column             |
 | [notSortable](#notsortable)     | Disables the sorting of the column                     |
 | [notOrderable](#notorderable)   | Alias of [notSortable](#notsortable)                   |
+| [orderData](#orderdata)         | Specify column index(es) to use for ordering           |
 | [actions](#actions)             | Specific method to add actions buttons as a string     |
 | [tooltip](#tooltip)             | Displays a tooltip when hovering over the column title |
 | [class](#class)                 | Sets the column class                                  |
@@ -269,6 +270,41 @@ Alias of [notSortable](#notsortable)
 
 ```php
 ->notOrderable()
+```
+
+## orderData
+
+Specify the column index(es) to use for ordering this column. This is useful when you want to order by a hidden column or by multiple columns.
+
+```php
+// Order by column index
+->orderData(0)
+
+// Order by multiple column indexes
+->orderData([0, 1])
+```
+
+**Examples:**
+
+```php
+// Display formatted date but order by column index 2 (raw timestamp)
+Column::add('Created')
+    ->data('created_at', function($user) {
+        return $user->created_at->format('d/m/Y');
+    })
+    ->orderData(2),
+
+// Order by multiple columns (indexes 3 and 4 for last name, then first name)
+Column::add('Name')
+    ->data('name', function($user) {
+        return $user->first_name . ' ' . $user->last_name;
+    })
+    ->orderData([3, 4]),
+
+// Order by a hidden column (column index 5 is hidden)
+Column::add('Status')
+    ->data('status_label')
+    ->orderData(5), // Orders by the hidden priority column
 ```
 
 ## actions

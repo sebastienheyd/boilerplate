@@ -34,7 +34,7 @@ Menu items providers can be added by using the `boilerplate.menu.items` singleto
 package service provider. Example : 
 
 ```php
-public function register()
+public function boot()
 {
     app('boilerplate.menu.items')->registerMenuItem([
         \MyPackage\MyNamespace\MyMenu::class,
