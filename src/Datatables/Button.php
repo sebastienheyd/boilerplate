@@ -37,14 +37,14 @@ class Button
      * Returns a custom button.
      *
      * @param  string  $route
-     * @param  array|string  $args
+     * @param  mixed  $args
      * @param  string  $icon
      * @param  string  $tooltip
      * @param  string  $color
      * @param  array  $attributes
      * @return string
      */
-    public static function custom(string $route, array|string $args = [], string $icon = '', string $tooltip = '', string $color = 'default', array $attributes = []): string
+    public static function custom(string $route, mixed $args = [], string $icon = '', string $tooltip = '', string $color = 'default', array $attributes = []): string
     {
         $button = self::add()->route($route, $args)->tooltip($tooltip);
 
