@@ -101,6 +101,7 @@ Route::group([
 
         // Datatables
         Route::post('datatables/{slug}', [DatatablesController::class, 'make'])->name('datatables');
+        Route::post('datatables/{slug}/reorder', [DatatablesController::class, 'reorder'])->name('datatables.reorder');
         Broadcast::channel('dt.{name}.{signature}', function ($user, $name, $signature) {
             return channel_hash_equals($signature, 'dt', $name);
         });

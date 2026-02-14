@@ -55,7 +55,7 @@
         @endif
     </table>
 </div>
-@include('boilerplate::load.async.datatables', ['buttons' => true])
+@include('boilerplate::load.async.datatables', ['buttons' => true, 'rowReorder' => !empty($datatable->rowReorder)])
 @include('boilerplate::load.pusher')
 @component('boilerplate::minify')
 <script>
@@ -87,6 +87,9 @@
                 stateSaveParams: $.fn.dataTable.saveFiltersState,
                 stateLoadParams: $.fn.dataTable.loadFiltersState,
             @endif
+            @if($datatable->getRowReorderConfig())
+                rowReorder: {!! $datatable->getRowReorderConfig() !!},
+            @endif
             ajax: {
                 url: '{!! route('boilerplate.datatables', $datatable->slug, false) !!}',
                 type: 'post',
@@ -109,6 +112,27 @@
         });
 
         window.{{ \Str::camel($id) }}.locale = {!! $datatable->getLocale() !!}
+
+        @if($datatable->getRowReorderConfig())
+        window.{{ \Str::camel($id) }}.on('row-reorder', function(e, diff) {
+            if (!diff.length) return;
+            var changes = [];
+            for (var i = 0; i < diff.length; i++) {
+                changes.push({
+                    id: diff[i].node.id || window.{{ \Str::camel($id) }}.row(diff[i].node).data().id,
+                    position: diff[i].newData
+                });
+            }
+            $.ajax({
+                url: '{!! $datatable->getRowReorderUrl() !!}',
+                type: 'POST',
+                data: {_token: '{{ csrf_token() }}', changes: changes},
+                success: function() {
+                    window.{{ \Str::camel($id) }}.draw('full-hold');
+                }
+            });
+        });
+        @endif
     });
 
     whenAssetIsLoaded('echo', () => {

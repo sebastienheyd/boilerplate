@@ -42,6 +42,7 @@ class ExampleDatatable extends Datatable
 | [noSearching()](#nosearching) | visible | Disable searching |
 | [noInfo()](#noinfo) | visible | Disable table informations |
 | [locale()](#locale) | [] | Set different locale for generic buttons |
+| [rowReorder()](#rowreorder) | disabled | Enables drag-and-drop row reordering |
 
 ---
 
@@ -279,3 +280,66 @@ $this->locale([
 ```
 
 > Default locale can be found in the [`datatable.php`](https://github.com/sebastienheyd/boilerplate/blob/master/src/resources/lang/en/datatable.php) lang file.
+
+## rowReorder
+
+Enables drag-and-drop row reordering on the DataTable. When a row is dragged to a new position, an AJAX POST request is sent to persist the new order.
+
+```php
+$this->rowReorder('position')
+```
+
+Parameters:
+
+| parameter | default | description |
+| --- | --- | --- |
+| `$dataSrc` | `'order'` | The column data source used for ordering |
+| `$updateUrl` | `''` | Custom URL for the reorder AJAX call. If empty, uses the default route `boilerplate.datatables.reorder` |
+| `$fullRow` | `true` | If `true`, the whole row is draggable. If `false`, only the first cell is draggable |
+
+### Complete example
+
+```php
+use Sebastienheyd\Boilerplate\Datatables\Column;
+use Sebastienheyd\Boilerplate\Datatables\Datatable;
+use Illuminate\Http\JsonResponse;
+
+class TasksDatatable extends Datatable
+{
+    public $slug = 'tasks';
+
+    public function setUp()
+    {
+        $this->rowReorder('position')
+             ->order('position', 'asc');
+    }
+
+    public function columns(): array
+    {
+        return [
+            Column::add('Title')->data('title'),
+            Column::add('Position')->data('position')->hidden(),
+        ];
+    }
+
+    public function datasource()
+    {
+        return Task::query();
+    }
+
+    public function reorder(array $changes): JsonResponse
+    {
+        foreach ($changes as $change) {
+            Task::where('id', $change['id'])->update(['position' => $change['position']]);
+        }
+
+        return response()->json(['success' => true]);
+    }
+}
+```
+
+The `reorder()` method receives an array of changes, where each item contains:
+- `id`: the row identifier
+- `position`: the new value for the ordering column
+
+After a successful reorder, the DataTable automatically redraws to reflect the new order.
