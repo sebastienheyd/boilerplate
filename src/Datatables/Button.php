@@ -185,6 +185,19 @@ class Button
     }
 
     /**
+     * Sets tooltip of button.
+     *
+     * @param  string  $tooltip
+     * @return $this
+     */
+    public function tooltip(string $tooltip): self
+    {
+        $this->tooltip = $tooltip;
+
+        return $this;
+    }
+
+    /**
      * Renders the button.
      *
      * @return string
@@ -203,22 +216,9 @@ class Button
             return sprintf('%s="%s"', $k, $this->attributes[$k]);
         }, array_keys($this->attributes)));
 
-        $tooltip = ! empty($this->tooltip) ? sprintf(' title="%s"', $this->tooltip) : '';
+        $tooltip = ! empty($this->tooltip) ? sprintf(' title="%s"', e($this->tooltip)) : '';
         $str = '<a href="%s"%s class="btn btn-sm btn-%s ml-1%s" %s>%s%s</a>';
 
         return sprintf($str, $this->href, $tooltip, $this->color, $this->class, $attributes, $this->label, $this->icon);
-    }
-
-    /**
-     * Sets tooltip of button.
-     *
-     * @param  string  $tooltip
-     * @return $this
-     */
-    public function tooltip(string $tooltip): self
-    {
-        $this->tooltip = $tooltip;
-
-        return $this;
     }
 }
