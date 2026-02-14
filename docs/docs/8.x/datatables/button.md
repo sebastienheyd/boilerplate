@@ -20,6 +20,7 @@ Button::add()
 | [class](#class) | Sets additional class |
 | [route](#route) | Sets the button link href by using a route |
 | [link](#link) | Sets the button link href |
+| [tooltip](#tooltip) | Sets a tooltip for the button |
 | [attributes](#attributes) | Sets HTML attributes to the button |
 | [make](#make) | Renders the button |
 
@@ -93,6 +94,27 @@ Sets the button link href.
 ->link(route('boilerplate.users.edit', $user->id))
 ```
 
+## tooltip
+
+Sets a tooltip for the button using the HTML `title` attribute.
+
+```php
+->tooltip('Edit this user')
+```
+
+The tooltip is only rendered when a non-empty string is provided, avoiding unnecessary HTML attributes.
+
+**Example with tooltip:**
+
+```php
+Button::add('Edit')
+    ->route('boilerplate.users.edit', $user->id)
+    ->icon('pencil-alt')
+    ->color('primary')
+    ->tooltip('Edit this user')
+    ->make();
+```
+
 ## attributes
 
 Sets HTML attributes.
@@ -113,6 +135,8 @@ Renders the button.
 
 ## Button aliases
 
+### Predefined buttons
+
 ```php
 Button::show('route.to.resource.show', $resource);
 ```
@@ -126,3 +150,33 @@ Button::delete('route.to.resource.destroy', $resource);
 ```
 
 > `Button::delete` will show a modal to confirm the deletion. You can set another confirmation message by using the [`Datatable::locale()` method](options#locale).
+
+### Custom button helper
+
+The `custom()` method provides a convenient way to create custom buttons with all parameters in a single call:
+
+```php
+Button::custom(
+    'route.name',           // Route name (required)
+    $args,                  // Route arguments (optional, default: [])
+    'icon-name',            // FontAwesome icon (optional, default: '')
+    'Tooltip text',         // Tooltip text (optional, default: '')
+    'primary',              // Button color (optional, default: 'default')
+    ['data-action' => 'x']  // HTML attributes (optional, default: [])
+);
+```
+
+**Example:**
+
+```php
+Button::custom(
+    'users.export',
+    ['id' => $user->id],
+    'download',
+    'Export user data',
+    'success',
+    ['data-confirm' => 'Export this user?']
+);
+```
+
+**Note:** The icon parameter comes before the tooltip for better ergonomics. If no icon is provided, no empty HTML markup is generated.

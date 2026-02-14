@@ -10,6 +10,7 @@ class Button
     protected string $icon = '';
     protected string $label = '';
     protected array $attributes = [];
+    protected string $tooltip = '';
 
     /**
      * Instanciate a new button.
@@ -33,6 +34,28 @@ class Button
     }
 
     /**
+     * Returns a custom button.
+     *
+     * @param  string  $route
+     * @param  mixed  $args
+     * @param  string  $icon
+     * @param  string  $tooltip
+     * @param  string  $color
+     * @param  array  $attributes
+     * @return string
+     */
+    public static function custom(string $route, mixed $args = [], string $icon = '', string $tooltip = '', string $color = 'default', array $attributes = []): string
+    {
+        $button = self::add()->route($route, $args)->tooltip($tooltip);
+
+        if (! empty($icon)) {
+            $button->icon($icon);
+        }
+
+        return $button->color($color)->attributes($attributes)->make();
+    }
+
+    /**
      * Returns an edit button.
      *
      * @param  string  $route
@@ -41,7 +64,7 @@ class Button
      */
     public static function show(string $route, $args = []): string
     {
-        return self::add()->attributes(['data-action' => 'dt-show-element'])->route($route, $args)->icon('eye')->make();
+        return self::add()->attributes(['data-action' => 'dt-show-element'])->route($route, $args)->tooltip(__('boilerplate::datatable.show'))->icon('eye')->make();
     }
 
     /**
@@ -53,7 +76,7 @@ class Button
      */
     public static function edit(string $route, $args = []): string
     {
-        return self::add()->attributes(['data-action' => 'dt-edit-element'])->route($route, $args)->color('primary')->icon('pencil-alt')->make();
+        return self::add()->attributes(['data-action' => 'dt-edit-element'])->route($route, $args)->tooltip(__('boilerplate::datatable.edit'))->color('primary')->icon('pencil-alt')->make();
     }
 
     /**
@@ -68,6 +91,7 @@ class Button
         return self::add()
             ->route($route, $args)
             ->attributes(['data-action' => 'dt-delete-element'])
+            ->tooltip(__('boilerplate::datatable.delete'))
             ->color('danger')
             ->icon('trash')
             ->make();
@@ -162,14 +186,25 @@ class Button
     }
 
     /**
+     * Sets tooltip of button.
+     *
+     * @param  string  $tooltip
+     * @return $this
+     */
+    public function tooltip(string $tooltip): self
+    {
+        $this->tooltip = $tooltip;
+
+        return $this;
+    }
+
+    /**
      * Renders the button.
      *
      * @return string
      */
     public function make(): string
     {
-        $str = '<a href="%s" class="btn btn-sm btn-%s ml-1%s" %s>%s%s</a>';
-
         if (! empty($this->label) && ! empty($this->icon)) {
             $this->label = $this->label.' ';
         }
@@ -182,6 +217,9 @@ class Button
             return sprintf('%s="%s"', $k, $this->attributes[$k]);
         }, array_keys($this->attributes)));
 
-        return sprintf($str, $this->href, $this->color, $this->class, $attributes, $this->label, $this->icon);
+        $tooltip = ! empty($this->tooltip) ? sprintf(' data-toggle="tooltip" title="%s"', e($this->tooltip)) : '';
+        $str = '<a href="%s"%s class="btn btn-sm btn-%s ml-1%s" %s>%s%s</a>';
+
+        return sprintf($str, $this->href, $tooltip, $this->color, $this->class, $attributes, $this->label, $this->icon);
     }
 }
