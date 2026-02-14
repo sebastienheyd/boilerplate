@@ -129,6 +129,12 @@
                 data: {_token: '{{ csrf_token() }}', changes: changes},
                 success: function() {
                     window.{{ \Str::camel($id) }}.draw('full-hold');
+                },
+                error: function() {
+                    window.{{ \Str::camel($id) }}.draw('full-hold');
+                    if (typeof toastr !== 'undefined') {
+                        toastr.error(window.{{ \Str::camel($id) }}.locale.reorderError || 'An error occurred while reordering.');
+                    }
                 }
             });
         });
