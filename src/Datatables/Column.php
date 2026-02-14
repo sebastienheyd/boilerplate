@@ -256,13 +256,30 @@ class Column
     }
 
     /**
+     * Set the column visibility.
+     *
+     * @param  bool  $visible
+     * @return Column
+     */
+    public function visible(bool $visible = true): Column
+    {
+        if ($visible) {
+            unset($this->attributes['visible']);
+        } else {
+            $this->attributes['visible'] = false;
+        }
+
+        return $this;
+    }
+
+    /**
      * Column must be hidden.
      *
      * @return Column
      */
     public function hidden(): Column
     {
-        return $this->booleanAttribute('visible', false);
+        return $this->visible(false);
     }
 
     /**
