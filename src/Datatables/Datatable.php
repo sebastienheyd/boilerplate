@@ -27,6 +27,8 @@ abstract class Datatable
     protected array $locale = [];
     protected array $permissions = ['backend_access'];
     protected array $orderAttr = [];
+    protected array $rowReorder = [];
+    protected string $rowReorderUrl = '';
     protected array $attributes = [
         'filters'        => true,
         'info'           => true,
@@ -381,6 +383,55 @@ abstract class Datatable
         $this->attributes['stateSave'] = true;
 
         return $this;
+    }
+
+    /**
+     * Enables row reorder (drag-and-drop) on the DataTable.
+     *
+     * @param  string  $dataSrc  Column data source used for ordering
+     * @param  string  $updateUrl  URL for the reorder AJAX call
+     * @param  bool  $fullRow  If true, the whole row is draggable
+     * @return $this
+     */
+    public function rowReorder(string $dataSrc = 'order', string $updateUrl = '', bool $fullRow = true): Datatable
+    {
+        $this->rowReorder = [
+            'dataSrc'  => $dataSrc,
+            'selector' => $fullRow ? 'tr' : 'td:first-child',
+            'update'   => false,
+        ];
+
+        $this->rowReorderUrl = $updateUrl;
+
+        return $this;
+    }
+
+    /**
+     * Gets the rowReorder configuration as JSON string.
+     *
+     * @return string|null
+     */
+    public function getRowReorderConfig(): ?string
+    {
+        if (empty($this->rowReorder)) {
+            return null;
+        }
+
+        return json_encode($this->rowReorder);
+    }
+
+    /**
+     * Gets the rowReorder URL for AJAX updates.
+     *
+     * @return string
+     */
+    public function getRowReorderUrl(): string
+    {
+        if (! empty($this->rowReorderUrl)) {
+            return $this->rowReorderUrl;
+        }
+
+        return route('boilerplate.datatables.reorder', $this->slug, false);
     }
 
     /**

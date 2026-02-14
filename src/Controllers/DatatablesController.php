@@ -2,6 +2,7 @@
 
 namespace Sebastienheyd\Boilerplate\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use ReflectionException;
 
@@ -26,6 +27,32 @@ class DatatablesController
     }
 
     /**
+     * Handle row reorder request.
+     *
+     * @param  Request  $request
+     * @param  string  $slug
+     * @return JsonResponse
+     *
+     * @throws ReflectionException
+     */
+    public function reorder(Request $request, string $slug): JsonResponse
+    {
+        if (! $request->ajax()) {
+            abort(404);
+        }
+
+        $datatable = $this->getDatatable($slug);
+
+        if (! method_exists($datatable, 'reorder')) {
+            abort(404);
+        }
+
+        $datatable->setUp();
+
+        return $datatable->reorder($request->input('changes', []));
+    }
+
+    /**
      * Get DataTable class for the given slug.
      *
      * @param  string  $slug
@@ -33,7 +60,7 @@ class DatatablesController
      *
      * @throws ReflectionException
      */
-    private function getDatatable(string $slug)
+    protected function getDatatable(string $slug)
     {
         $datatable = app('boilerplate.datatables')->load(app_path('Datatables'))->getDatatable($slug);
 
