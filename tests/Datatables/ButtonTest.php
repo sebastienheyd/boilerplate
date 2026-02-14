@@ -48,7 +48,7 @@ class ButtonTest extends TestCase
             ->color('success')
             ->make();
 
-        $this->assertMatchesRegularExpression('/<a href="\/action" title="Button tooltip" class="btn btn-sm btn-success/', $button);
+        $this->assertMatchesRegularExpression('/<a href="\/action" data-toggle="tooltip" title="Button tooltip" class="btn btn-sm btn-success/', $button);
     }
 
     public function testCustomButtonWithRoute()

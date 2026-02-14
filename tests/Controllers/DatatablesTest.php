@@ -48,6 +48,6 @@ class DatatablesTest extends TestCase
         $data = $resource->getOriginalContent()['data'][0];
 
         $this->assertEquals($user->email, $data['email']);
-        $this->assertEquals('<a href="/admin/users/1/edit" class="btn btn-sm btn-primary ml-1" data-action="dt-edit-element"><i class="fas fa-fw fa-pencil-alt"></i></a>', $data['dt-actions']);
+        $this->assertEquals('<a href="/admin/users/1/edit" data-toggle="tooltip" title="Edit" class="btn btn-sm btn-primary ml-1" data-action="dt-edit-element"><i class="fas fa-fw fa-pencil-alt"></i></a>', $data['dt-actions']);
     }
 }

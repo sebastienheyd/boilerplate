@@ -64,7 +64,7 @@ class Button
      */
     public static function show(string $route, $args = []): string
     {
-        return self::add()->attributes(['data-action' => 'dt-show-element'])->route($route, $args)->icon('eye')->make();
+        return self::add()->attributes(['data-action' => 'dt-show-element'])->route($route, $args)->tooltip(__('boilerplate::datatable.show'))->icon('eye')->make();
     }
 
     /**
@@ -76,7 +76,7 @@ class Button
      */
     public static function edit(string $route, $args = []): string
     {
-        return self::add()->attributes(['data-action' => 'dt-edit-element'])->route($route, $args)->color('primary')->icon('pencil-alt')->make();
+        return self::add()->attributes(['data-action' => 'dt-edit-element'])->route($route, $args)->tooltip(__('boilerplate::datatable.edit'))->color('primary')->icon('pencil-alt')->make();
     }
 
     /**
@@ -91,6 +91,7 @@ class Button
         return self::add()
             ->route($route, $args)
             ->attributes(['data-action' => 'dt-delete-element'])
+            ->tooltip(__('boilerplate::datatable.delete'))
             ->color('danger')
             ->icon('trash')
             ->make();
@@ -216,7 +217,7 @@ class Button
             return sprintf('%s="%s"', $k, $this->attributes[$k]);
         }, array_keys($this->attributes)));
 
-        $tooltip = ! empty($this->tooltip) ? sprintf(' title="%s"', e($this->tooltip)) : '';
+        $tooltip = ! empty($this->tooltip) ? sprintf(' data-toggle="tooltip" title="%s"', e($this->tooltip)) : '';
         $str = '<a href="%s"%s class="btn btn-sm btn-%s ml-1%s" %s>%s%s</a>';
 
         return sprintf($str, $this->href, $tooltip, $this->color, $this->class, $attributes, $this->label, $this->icon);
