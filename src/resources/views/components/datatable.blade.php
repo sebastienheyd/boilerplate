@@ -118,10 +118,9 @@
             if (!diff.length) return;
             var changes = [];
             for (var i = 0; i < diff.length; i++) {
-                changes.push({
-                    id: diff[i].node.id || window.{{ \Str::camel($id) }}.row(diff[i].node).data().id,
-                    position: diff[i].newData
-                });
+                var rowId = diff[i].node.id || window.{{ \Str::camel($id) }}.row(diff[i].node).data().id;
+                if (!rowId) continue;
+                changes.push({id: rowId, position: diff[i].newData});
             }
             $.ajax({
                 url: '{!! $datatable->getRowReorderUrl() !!}',
