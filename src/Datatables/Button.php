@@ -36,19 +36,24 @@ class Button
     /**
      * Returns a custom button.
      *
-     * @param string $route
-     * @param array|string $args
-     * @param string $tooltip
-     * @param string $color
-     * @param string $icon
-     * @param array $attributes
+     * @param  string  $route
+     * @param  array|string  $args
+     * @param  string  $icon
+     * @param  string  $tooltip
+     * @param  string  $color
+     * @param  array  $attributes
      * @return string
      */
-    public static function custom(string $route, array|string $args = [], string $tooltip = '', string $color = 'default', string $icon = '', array $attributes = []): string
+    public static function custom(string $route, array|string $args = [], string $icon = '', string $tooltip = '', string $color = 'default', array $attributes = []): string
     {
-        return self::add()->route($route, $args)->tooltip($tooltip)->color($color)->icon($icon)->attributes($attributes)->make();
-    }
+        $button = self::add()->route($route, $args)->tooltip($tooltip);
 
+        if (! empty($icon)) {
+            $button->icon($icon);
+        }
+
+        return $button->color($color)->attributes($attributes)->make();
+    }
 
     /**
      * Returns an edit button.
@@ -186,8 +191,6 @@ class Button
      */
     public function make(): string
     {
-        $str = '<a href="%s" title="%s" class="btn btn-sm btn-%s ml-1%s" %s>%s%s</a>';
-
         if (! empty($this->label) && ! empty($this->icon)) {
             $this->label = $this->label.' ';
         }
@@ -200,13 +203,16 @@ class Button
             return sprintf('%s="%s"', $k, $this->attributes[$k]);
         }, array_keys($this->attributes)));
 
-        return sprintf($str, $this->href, $this->tooltip, $this->color, $this->class, $attributes, $this->label, $this->icon);
+        $tooltip = ! empty($this->tooltip) ? sprintf(' title="%s"', $this->tooltip) : '';
+        $str = '<a href="%s"%s class="btn btn-sm btn-%s ml-1%s" %s>%s%s</a>';
+
+        return sprintf($str, $this->href, $tooltip, $this->color, $this->class, $attributes, $this->label, $this->icon);
     }
 
     /**
      * Sets tooltip of button.
      *
-     * @param string $tooltip
+     * @param  string  $tooltip
      * @return $this
      */
     public function tooltip(string $tooltip): self
