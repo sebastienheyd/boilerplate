@@ -94,6 +94,10 @@ abstract class Datatable
         }
 
         foreach ($this->getColumns() as $column) {
+            if (empty($column->data)) {
+                continue;
+            }
+
             if ($column->filter) {
                 $datatable->filterColumn($column->name ?? $column->data, $column->filter);
             }
