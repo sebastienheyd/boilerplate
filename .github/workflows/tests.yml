@@ -44,8 +44,39 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - php: 8.2
+          - php: 8.3
             laravel: '^12.0'
+    name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate composer.json and composer.lock
+        run: composer validate --strict
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: dependencies-php-${{ matrix.php }}-composer-${{ hashFiles('composer.lock') }}
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, gd, xdebug
+          coverage: none
+      - name: Install dependencies
+        run: composer update --prefer-stable --prefer-dist --no-interaction --no-progress --with laravel/framework:${{ matrix.laravel }}
+      - name: Execute code sniffing
+        run: vendor/bin/phpcs
+      - name: Execute tests
+        run: vendor/bin/phpunit
+
+  tests-laravel-13:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - php: 8.4
+            laravel: '^13.0'
     name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }}
     steps:
       - uses: actions/checkout@v4
