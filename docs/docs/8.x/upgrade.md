@@ -1,7 +1,7 @@
 # Upgrade from 7.x to 8.x
 
 ::: tip IMPORTANT
-Boilerplate 8.x requires at least PHP 8.2 and Laravel 11.x
+Boilerplate 8.x requires at least PHP 8.2 and Laravel 11.x to 13.x
 :::
 
 ## What's new in 8.x

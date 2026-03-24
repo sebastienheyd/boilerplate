@@ -3,7 +3,7 @@
 [![Packagist](https://img.shields.io/packagist/v/sebastienheyd/boilerplate.svg?style=flat-square)](https://packagist.org/packages/sebastienheyd/boilerplate)
 [![tests](https://github.com/sebastienheyd/boilerplate/actions/workflows/tests.yml/badge.svg)](https://github.com/sebastienheyd/boilerplate/actions/workflows/tests.yml)
 [![StyleCI](https://github.styleci.io/repos/86598046/shield?branch=master&style=flat-square)](https://github.styleci.io/repos/86598046)
-[![Laravel](https://img.shields.io/badge/Laravel-6.x%20→%2012.x-green?logo=Laravel&style=flat-square)](https://laravel.com/)
+[![Laravel](https://img.shields.io/badge/Laravel-6.x%20→%2013.x-green?logo=Laravel&style=flat-square)](https://laravel.com/)
 [![Nb downloads](https://img.shields.io/packagist/dt/sebastienheyd/boilerplate.svg?style=flat-square)](https://packagist.org/packages/sebastienheyd/boilerplate)
 [![MIT License](https://img.shields.io/github/license/sebastienheyd/boilerplate.svg?style=flat-square)](LICENSE)
 
@@ -30,7 +30,7 @@ Other packages to extend the features :
 
 | Laravel          | Boilerplate                                                  |
 |:-----------------|:-------------------------------------------------------------|
-| 11.x &rarr; 12.x | [8.x](https://sebastienheyd.github.io/boilerplate/docs/8.x/) |
+| 11.x &rarr; 13.x | [8.x](https://sebastienheyd.github.io/boilerplate/docs/8.x/) |
 | 6.x &rarr; 10.x  | [7.x](https://sebastienheyd.github.io/boilerplate/docs/7.x/) |
 
 ## Documentation
