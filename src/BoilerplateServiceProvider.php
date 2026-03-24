@@ -30,8 +30,6 @@ use Sebastienheyd\Boilerplate\View\Composers\TinymceLoadComposer;
 
 class BoilerplateServiceProvider extends ServiceProvider
 {
-    protected $defer = false;
-
     /**
      * Instance of AliasLoader.
      *
