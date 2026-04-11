@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a **Laravel Boilerplate package** based on AdminLTE 3, designed for creating back-office applications with user management, roles, permissions, and dashboard widgets. The package is compatible with Laravel 11-12 and distributed via Composer with namespace `Sebastienheyd\Boilerplate`.
+This is a **Laravel Boilerplate package** based on AdminLTE 3, designed for creating back-office applications with user management, roles, permissions, and dashboard widgets. The package is compatible with Laravel 11-13 and distributed via Composer with namespace `Sebastienheyd\Boilerplate`.
 
 ## Development Commands
 
@@ -146,7 +146,7 @@ $this->router->aliasMiddleware('ability', LaratrustAbility::class);
 
 ### Internationalization
 - **Laravel-Lang Integration**: Standard Laravel translations
-- **Custom Namespace**: `boilerplate::` for package-specific translations
+- **Custom Namespace**: `boilerplate::` for package-specific translations (views and translations share this namespace)
 - **Supported Languages**: EN, FR, ES, IT, TR, BG, FA
 - **Dual Format**: Both JSON and PHP translation files
 
@@ -155,6 +155,31 @@ $this->router->aliasMiddleware('ability', LaratrustAbility::class);
 - **Repository Pattern**: Centralized datatable registration
 - **Custom Components**: Buttons, columns, and filters
 - **Multi-language**: Complete i18n support with localized strings
+
+## Key File Locations
+
+- **Source code**: `src/`
+- **Controllers**: `src/Controllers/`
+- **Models**: `src/Models/`
+- **Middleware**: `src/Http/Middleware/`
+- **Routes**: `src/routes/boilerplate.php`
+- **Views**: `src/resources/views/` (namespace: `boilerplate::`)
+- **Translations**: `src/resources/lang/` (namespace: `boilerplate::`)
+- **Config files**: `src/config/boilerplate/`
+- **Console commands & stubs**: `src/Console/`
+- **Assets (SCSS/JS)**: `src/resources/assets/`
+- **Tests**: `tests/`
+
+## Contribution Workflow
+
+- Development happens on feature branches, PRs target `master`
+- Run `make cs` before committing to check coding standards
+- Run `make test` before submitting a PR
+- Use `composer lint` for static analysis with PHPStan
+- Before pushing, ensure that:
+  - All new or modified code is covered by tests (`make test`)
+  - Coding standards pass (`make cs`)
+  - New features or behavior changes are documented in `docs/docs/8.x`
 
 ## Package Installation Workflow
 
@@ -176,12 +201,21 @@ The package is designed for extensibility:
 ## Development Notes
 
 - **PSR-12 Compliance**: Code follows PSR-12 standards with StyleCI integration
-- **Laravel Compatibility**: Supports Laravel 11-12 with version constraints
+- **Laravel Compatibility**: Supports Laravel 11-13 with version constraints
+- **PHP Requirement**: Minimum PHP 8.2 (required by Laravel 11+)
 - **No Source Modification**: Tests should never modify source files
 - **Minimal Mocking**: Integration tests preferred over mocked dependencies
+- **Code Comments Language**: All comments in source code must be written in English only
+- **Commit Messages Language**: All commit messages must be written in English only
+- **Commit Convention**: Follow Conventional Commits format — `feat:`, `fix:`, `docs:`, `ci:`, `chore:`, `refactor:`, `test:`, `perf:`
+- **Asset Pipeline**: Frontend assets use Laravel Mix (not Vite) — do not suggest migrating to Vite
+- **Bootstrap Grid**: The `xxl` breakpoint (≥1400px) is defined in `$grid-breakpoints` in `src/resources/assets/scss/adminlte.scss` — `col-xxl-*` classes are available and already compiled in the published assets
+- **Publishable Views**: Views in `src/resources/views/` are meant to be published to the consuming application — do not assume they will be modified directly in the package
 
 ## Documentation
 
 - Documentation must be written in English only
-- Documentation use VuePress
-- Latest documentation source path : u/docs/docs/8.x
+- Documentation uses VuePress
+- Latest documentation source path: `docs/docs/8.x`
+- Each feature should have its own dedicated page under the appropriate section
+- New pages must be referenced in the VuePress sidebar configuration
