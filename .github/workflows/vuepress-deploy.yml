@@ -1,6 +1,9 @@
 name: Build and Deploy Docs
 on:
   workflow_dispatch:
+  push:
+    tags:
+      - '*'
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
