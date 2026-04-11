@@ -128,7 +128,7 @@ When `keepalive` is `true` **and** the session driver is set to `database`, two 
 
 - **Profile page**: an "Active sessions" card lists all connected devices with their browser, OS, IP address and last activity. Each session can be disconnected individually, or all other sessions at once via the "Disconnect other devices" button.
 
-![Active sessions card](/assets/img/active_sessions.png)
+<img :src="$withBase('/assets/img/active_sessions.png')" alt="Active sessions card" style="max-width: 700px">
 
 - **Password change form**: a toggle "Disconnect other devices after password change" appears below the password fields. When enabled, all other sessions are invalidated when the new password is saved.
 
