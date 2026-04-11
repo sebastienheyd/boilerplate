@@ -209,7 +209,7 @@ $(() => {
         });
     });
 
-    $('#impersonate-user').on('select2:select', function() {
+$('#impersonate-user').on('select2:select', function() {
         $.ajax({
             url: $(this).data('route'),
             type: 'post',

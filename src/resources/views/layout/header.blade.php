@@ -17,7 +17,7 @@
             @includeWhen(config('boilerplate.locale.switch', false), 'boilerplate::layout.header.language')
             @includeWhen(config('boilerplate.theme.darkmode', false), 'boilerplate::layout.header.darkmode')
             @includeWhen(config('boilerplate.theme.fullscreen', false), 'boilerplate::layout.header.fullscreen')
-            <li class="nav-item">
+<li class="nav-item">
                 @component('boilerplate::form', ['route' => 'boilerplate.logout', 'id' => 'logout-form'])
                 <button type="submit" class="btn nav-link d-flex align-items-center logout px-2" data-question="{{ __('boilerplate::layout.logoutconfirm') }}" data-toggle="tooltip" title="@lang('boilerplate::layout.logout')">
                     <span class="fa fa-fw fa-power-off hidden-xs pr-1"></span>
