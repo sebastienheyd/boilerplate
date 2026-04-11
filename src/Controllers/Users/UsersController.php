@@ -328,13 +328,13 @@ class UsersController
                 $device = $this->parseUserAgent($session->user_agent);
 
                 return [
-                    'id'           => $session->id,
-                    'ip_address'   => $session->ip_address ?? '—',
-                    'browser'      => $device['browser'],
-                    'os'           => $device['os'],
-                    'icon'         => $device['icon'],
+                    'id'            => $session->id,
+                    'ip_address'    => $session->ip_address ?? '—',
+                    'browser'       => $device['browser'],
+                    'os'            => $device['os'],
+                    'icon'          => $device['icon'],
                     'last_activity' => Carbon::createFromTimestamp($session->last_activity)->diffForHumans(),
-                    'is_current'   => $session->id === $currentSessionId,
+                    'is_current'    => $session->id === $currentSessionId,
                 ];
             });
 
@@ -381,11 +381,11 @@ class UsersController
         // Detect OS
         $os = match (true) {
             str_contains($userAgent, 'iPhone') || str_contains($userAgent, 'iPad') => 'iOS',
-            str_contains($userAgent, 'Android')   => 'Android',
-            str_contains($userAgent, 'Windows')   => 'Windows',
-            str_contains($userAgent, 'Macintosh') => 'macOS',
-            str_contains($userAgent, 'Linux')     => 'Linux',
-            default                               => 'Unknown',
+            str_contains($userAgent, 'Android')                                    => 'Android',
+            str_contains($userAgent, 'Windows')                                    => 'Windows',
+            str_contains($userAgent, 'Macintosh')                                  => 'macOS',
+            str_contains($userAgent, 'Linux')                                      => 'Linux',
+            default                                                                => 'Unknown',
         };
 
         // Detect browser (order matters: Edge/Opera must come before Chrome)
