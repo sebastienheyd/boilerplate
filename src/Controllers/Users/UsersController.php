@@ -11,6 +11,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -212,6 +213,14 @@ class UsersController
         if (! empty(trim($input['password']))) {
             $input['password'] = bcrypt($input['password']);
             $input['remember_token'] = Str::random(32);
+
+            // If the "disconnect other devices" toggle is enabled, invalidate all other sessions
+            if ($request->boolean('disconnect_devices') && config('session.driver') === 'database') {
+                DB::table(config('session.table', 'sessions'))
+                    ->where('user_id', $request->user()->id)
+                    ->where('id', '!=', session()->getId())
+                    ->delete();
+            }
         } else {
             unset($input['password']);
         }
@@ -294,6 +303,128 @@ class UsersController
     public function getAvatarFromGravatar()
     {
         return response()->json(['success' => Auth::user()->getAvatarFromGravatar()]);
+    }
+
+    /**
+     * Return the list of active sessions for the current user.
+     * Each session includes device info parsed from the user agent.
+     * Requires the session driver to be "database".
+     *
+     * @return JsonResponse
+     */
+    public function getActiveSessions(): JsonResponse
+    {
+        if (config('session.driver') !== 'database') {
+            return response()->json(['success' => false]);
+        }
+
+        $currentSessionId = session()->getId();
+
+        $sessions = DB::table(config('session.table', 'sessions'))
+            ->where('user_id', Auth::id())
+            ->orderBy('last_activity', 'desc')
+            ->get(['id', 'ip_address', 'user_agent', 'last_activity'])
+            ->map(function ($session) use ($currentSessionId) {
+                $device = $this->parseUserAgent($session->user_agent);
+
+                return [
+                    'id'           => $session->id,
+                    'ip_address'   => $session->ip_address ?? '—',
+                    'browser'      => $device['browser'],
+                    'os'           => $device['os'],
+                    'icon'         => $device['icon'],
+                    'last_activity' => Carbon::createFromTimestamp($session->last_activity)->diffForHumans(),
+                    'is_current'   => $session->id === $currentSessionId,
+                ];
+            });
+
+        return response()->json(['success' => true, 'sessions' => $sessions]);
+    }
+
+    /**
+     * Disconnect a specific session by ID.
+     * The session must belong to the current user and must not be the current session.
+     *
+     * @param  string  $sessionId
+     * @return JsonResponse
+     */
+    public function disconnectSession(string $sessionId): JsonResponse
+    {
+        if (config('session.driver') !== 'database') {
+            return response()->json(['success' => false]);
+        }
+
+        if ($sessionId === session()->getId()) {
+            return response()->json(['success' => false, 'message' => 'Cannot disconnect the current session']);
+        }
+
+        $deleted = DB::table(config('session.table', 'sessions'))
+            ->where('id', $sessionId)
+            ->where('user_id', Auth::id())
+            ->delete();
+
+        return response()->json(['success' => (bool) $deleted]);
+    }
+
+    /**
+     * Parse a user agent string to extract browser, OS, and device icon.
+     *
+     * @param  string|null  $userAgent
+     * @return array{browser: string, os: string, icon: string}
+     */
+    private function parseUserAgent(?string $userAgent): array
+    {
+        if (empty($userAgent)) {
+            return ['browser' => 'Unknown', 'os' => 'Unknown', 'icon' => 'fa-globe'];
+        }
+
+        // Detect OS
+        $os = match (true) {
+            str_contains($userAgent, 'iPhone') || str_contains($userAgent, 'iPad') => 'iOS',
+            str_contains($userAgent, 'Android')   => 'Android',
+            str_contains($userAgent, 'Windows')   => 'Windows',
+            str_contains($userAgent, 'Macintosh') => 'macOS',
+            str_contains($userAgent, 'Linux')     => 'Linux',
+            default                               => 'Unknown',
+        };
+
+        // Detect browser (order matters: Edge/Opera must come before Chrome)
+        $browser = match (true) {
+            str_contains($userAgent, 'Edg/')    => 'Edge',
+            str_contains($userAgent, 'OPR/')    => 'Opera',
+            str_contains($userAgent, 'Chrome')  => 'Chrome',
+            str_contains($userAgent, 'Firefox') => 'Firefox',
+            str_contains($userAgent, 'Safari')  => 'Safari',
+            default                             => 'Unknown',
+        };
+
+        $isMobile = in_array($os, ['iOS', 'Android']);
+
+        return [
+            'browser' => $browser,
+            'os'      => $os,
+            'icon'    => $isMobile ? 'fa-mobile-alt' : 'fa-desktop',
+        ];
+    }
+
+    /**
+     * Disconnect all active sessions for the current user except the current session.
+     * Requires the session driver to be "database".
+     *
+     * @return JsonResponse
+     */
+    public function disconnectOtherDevices(): JsonResponse
+    {
+        if (config('session.driver') !== 'database') {
+            return response()->json(['success' => false, 'message' => 'Unsupported session driver']);
+        }
+
+        $deleted = DB::table(config('session.table', 'sessions'))
+            ->where('user_id', Auth::id())
+            ->where('id', '!=', session()->getId())
+            ->delete();
+
+        return response()->json(['success' => true, 'deleted' => $deleted]);
     }
 
     /**

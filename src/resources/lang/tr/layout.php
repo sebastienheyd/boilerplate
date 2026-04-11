@@ -14,6 +14,9 @@ return [
     'rightsres'        => 'Tüm hakları saklıdır.',
     'darkmode'         => 'Karanlık mod',
     'fullscreen'       => 'Tam ekran',
-    'stop_impersonate' => 'Profilinize geri dönün',
-    'view_as'          => 'Kullanıcı olarak görüntüle',
+    'stop_impersonate'           => 'Profilinize geri dönün',
+    'view_as'                    => 'Kullanıcı olarak görüntüle',
+    'disconnect_devices'         => 'Diğer cihazların bağlantısını kes',
+    'disconnect_devices_confirm' => 'Tüm diğer cihazların bağlantısını kesmek istediğinizden emin misiniz?',
+    'disconnect_devices_success' => 'Diğer cihazların bağlantısı kesildi.',
 ];

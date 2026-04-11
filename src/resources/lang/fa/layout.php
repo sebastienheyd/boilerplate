@@ -14,6 +14,9 @@ return [
     'rightsres'          => 'کلیه حقوق محفوظ است',
     'darkmode'           => 'حالت تاریک',
     'fullscreen'         => 'تمام صفحه',
-    'stop_impersonate'   => 'به نمایه خود بازگردید',
-    'view_as'            => 'مشاهده به عنوان کاربر',
+    'stop_impersonate'           => 'به نمایه خود بازگردید',
+    'view_as'                    => 'مشاهده به عنوان کاربر',
+    'disconnect_devices'         => 'قطع اتصال سایر دستگاه‌ها',
+    'disconnect_devices_confirm' => 'آیا مطمئن هستید که می‌خواهید همه دستگاه‌های دیگر را قطع کنید؟',
+    'disconnect_devices_success' => 'سایر دستگاه‌ها قطع شدند.',
 ];

@@ -14,6 +14,9 @@ return [
     'rightsres'         => 'Tous droits réservés.',
     'darkmode'          => 'Mode sombre',
     'fullscreen'        => 'Plein écran',
-    'stop_impersonate'  => 'Revenir à votre profil',
-    'view_as'           => 'Visualiser en tant que',
+    'stop_impersonate'           => 'Revenir à votre profil',
+    'view_as'                    => 'Visualiser en tant que',
+    'disconnect_devices'         => 'Déconnecter les autres appareils',
+    'disconnect_devices_confirm' => 'Êtes-vous sûr de vouloir déconnecter tous les autres appareils ?',
+    'disconnect_devices_success' => 'Les autres appareils ont été déconnectés.',
 ];

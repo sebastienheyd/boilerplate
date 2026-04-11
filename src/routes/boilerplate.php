@@ -122,6 +122,10 @@ Route::group([
             Route::post('avatar/upload', [UsersController::class, 'avatarUpload'])->name('avatar.upload');
             Route::post('avatar/gravatar', [UsersController::class, 'getAvatarFromGravatar'])->name('avatar.gravatar');
             Route::post('avatar/delete', [UsersController::class, 'avatarDelete'])->name('avatar.delete');
+            // Disconnect other devices (visible only when keepalive + database session driver)
+            Route::get('sessions', [UsersController::class, 'getActiveSessions'])->name('sessions');
+            Route::post('disconnect-devices', [UsersController::class, 'disconnectOtherDevices'])->name('disconnect-devices');
+            Route::delete('sessions/{sessionId}', [UsersController::class, 'disconnectSession'])->name('session.disconnect');
         });
 
         // ChatGPT
