@@ -122,6 +122,18 @@ Allows enabling or disabling session keep alive. If the value is set to `true`, 
 
 Conversely, if the value is set to `false`, the user will be logged out when the session expires.
 
+### Disconnect other devices
+
+When `keepalive` is `true` **and** the session driver is set to `database`, two additional features become available:
+
+- **Profile page**: an "Active sessions" card lists all connected devices with their browser, OS, IP address and last activity. Each session can be disconnected individually, or all other sessions at once via the "Disconnect other devices" button.
+
+![Active sessions card](/assets/img/active_sessions.png)
+
+- **Password change form**: a toggle "Disconnect other devices after password change" appears below the password fields. When enabled, all other sessions are invalidated when the new password is saved.
+
+> These features require `SESSION_DRIVER=database` in your `.env` file.
+
 ---
 
 ## name
