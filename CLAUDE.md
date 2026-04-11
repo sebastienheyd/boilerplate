@@ -219,3 +219,4 @@ The package is designed for extensibility:
 - Latest documentation source path: `docs/docs/8.x`
 - Each feature should have its own dedicated page under the appropriate section
 - New pages must be referenced in the VuePress sidebar configuration
+- **Images**: always use `<img :src="$withBase('/assets/img/...')" alt="...">` instead of markdown `![](...)` — VuePress is deployed under a `/boilerplate/` base path and `$withBase` is required for images to resolve correctly
