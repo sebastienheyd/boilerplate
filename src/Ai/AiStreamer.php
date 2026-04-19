@@ -8,7 +8,7 @@ class AiStreamer
 {
     /**
      * Stream AI provider response as normalized Server-Sent Events.
-     * Emits: data: {"content":"..."}\n\n  or  data: [DONE]\n\n
+     * Emits: data: {"content":"..."}\n\n  or  data: [DONE]\n\n.
      *
      * @codeCoverageIgnore
      */
