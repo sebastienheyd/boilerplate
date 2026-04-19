@@ -52,3 +52,71 @@ If you want to store a setting via ajax you can use the JS `storeSetting` functi
     storeSetting('my-setting-name', 'my-setting-value')
 </script>
 ```
+
+## Avatar management
+
+Each user can have a profile picture (avatar). The avatar is stored locally in `public/images/avatars/` and is served via the `avatar_url` attribute.
+
+If no avatar has been uploaded, the package falls back to a generated initials image from [ui-avatars.com](https://ui-avatars.com).
+
+### Retrieve the avatar URL
+
+```php
+Auth::user()->avatar_url; // Returns the URL of the avatar, or the fallback initials image
+```
+
+### Check if a user has an avatar
+
+```php
+Auth::user()->hasAvatar(); // Returns true if a local avatar file exists
+```
+
+### Fetch avatar from Gravatar
+
+At user creation, the package automatically attempts to download a Gravatar image for the new user's email address. You can also trigger this manually:
+
+```php
+Auth::user()->getAvatarFromGravatar(); // Returns true if a Gravatar was found and saved
+```
+
+### Delete the avatar
+
+```php
+Auth::user()->deleteAvatar(); // Returns true if the file was deleted
+```
+
+## Active sessions
+
+When the session driver is set to `database`, users can view and manage their active sessions across devices from the profile page.
+
+::: warning
+Session management requires `SESSION_DRIVER=database` in your `.env` file and the `sessions` table to exist. Run `php artisan session:table && php artisan migrate` if needed.
+:::
+
+### List active sessions
+
+Returns the list of active sessions for the current user, including device info (browser, OS, IP address, last activity):
+
+```php
+// Via the built-in route (AJAX)
+// GET /boilerplate/user/sessions
+```
+
+Each session entry includes:
+- `ip_address` — IP address of the session
+- `browser` — Detected browser (Chrome, Firefox, Safari, Edge, Opera)
+- `os` — Detected OS (Windows, macOS, Linux, iOS, Android)
+- `icon` — FontAwesome icon class (`fa-desktop` or `fa-mobile-alt`)
+- `last_activity` — Human-readable relative time
+- `is_current` — Whether this is the current session
+
+### Disconnect a specific session
+
+```php
+// Via the built-in route (AJAX)
+// DELETE /boilerplate/user/sessions/{sessionId}
+```
+
+### Disconnect all other sessions
+
+When a user changes their password from the profile page, they can optionally disconnect all other devices by enabling the "disconnect other devices" toggle. This deletes all sessions except the current one from the `sessions` table.

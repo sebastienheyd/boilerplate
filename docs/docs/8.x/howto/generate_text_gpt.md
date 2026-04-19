@@ -34,4 +34,14 @@ OPENAI_API_ORGANIZATION=[place your organisation key here]
 
 ### Model
 
-By default, the used model is `gpt-3.5-turbo`, but you can set another model in the `boilerplate\config\app.php` file.  
+By default, the used model is `gpt-4o-mini`, but you can set another model in the `config/boilerplate/app.php` file:
+
+```php
+'openai' => [
+    'key'          => env('OPENAI_API_KEY'),
+    'model'        => 'gpt-4o-mini',
+    'organization' => env('OPENAI_API_ORGANIZATION'),
+],
+```
+
+Any model available through the OpenAI API can be used (e.g. `gpt-4o`, `gpt-4-turbo`).

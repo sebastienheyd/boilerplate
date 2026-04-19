@@ -69,7 +69,9 @@ function getDocsNavBar(version) {
                         'howto/call_css_js',
                         'howto/change_dashboard',
                         'howto/change_theme',
+                        'howto/events',
                         'howto/generate_text_gpt',
+                        'howto/notifications',
                         'howto/scaffold',
                         'howto/user_settings',
                     ]
