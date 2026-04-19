@@ -7,10 +7,10 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
+use Sebastienheyd\Boilerplate\Ai\AiStreamer;
 
 class GptController
 {
@@ -149,7 +149,7 @@ class GptController
     }
 
     /**
-     * Stream the result from OpenAI API.
+     * Stream the AI provider response as Server-Sent Events.
      *
      * @param  Request  $request
      * @return void
@@ -168,86 +168,18 @@ class GptController
             exit;
         }
 
+        $provider = app('boilerplate.ai.providers')->getActiveProvider();
+
+        if (! $provider) {
+            abort(503);
+        }
+
         ini_set('max_execution_time', 90);
 
         header('Content-Type: text/event-stream');
         header('Cache-Control: no-cache');
 
-        $this->sendRequest($prompt, function ($curl, $data) {
-            $obj = json_decode($data);
-
-            if ($obj && ! empty($obj->error)) {
-                Log::error('OpenAI API Error : '.$obj->error->message.' '.$obj->error->code.' ('.$obj->error->type.')');
-            } else {
-                echo $data;
-            }
-
-            echo PHP_EOL;
-            ob_flush();
-            flush();
-
-            return strlen($data);
-        });
-    }
-
-    /**
-     * Send curl request to OpenAI Api.
-     *
-     * @param  $prompt
-     * @param  $callback
-     * @return bool|string
-     *
-     * @codeCoverageIgnore
-     */
-    private function sendRequest($prompt, $callback)
-    {
-        $curl = curl_init();
-
-        $data = [
-            'model'             => config('boilerplate.app.openai.model', 'gpt-3.5-turbo'),
-            'messages'          => [['role' => 'user', 'content' => $prompt]],
-            'temperature'       => 0.6,
-            'frequency_penalty' => 0.52,
-            'presence_penalty'  => 0.5,
-            'max_tokens'        => 500,
-            'stream'            => true,
-        ];
-
-        $headers = [
-            'Content-Type: application/json',
-            'Authorization: Bearer '.config('boilerplate.app.openai.key'),
-        ];
-
-        if (config('boilerplate.app.openai.organization')) {
-            $headers[] = 'OpenAI-Organization: '.config('boilerplate.app.openai.organization');
-        }
-
-        curl_setopt_array($curl, [
-            CURLOPT_URL            => 'https://api.openai.com/v1/chat/completions',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING       => '',
-            CURLOPT_MAXREDIRS      => 10,
-            CURLOPT_TIMEOUT        => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST  => 'POST',
-            CURLOPT_POSTFIELDS     => json_encode($data),
-            CURLOPT_HTTPHEADER     => $headers,
-            CURLOPT_WRITEFUNCTION  => $callback,
-        ]);
-
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
-
-        curl_close($curl);
-
-        if ($err) {
-            Log::error('OpenAI API Curl error : '.$err);
-
-            return 'OpenAI API Curl error : '.$err;
-        } else {
-            return $response;
-        }
+        app(AiStreamer::class)->stream($provider, $prompt);
     }
 
     /**
