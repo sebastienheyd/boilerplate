@@ -13,5 +13,7 @@ class TinymceLoadComposer extends ComponentComposer
         // Check if sebastienheyd/boilerplate-media-manager is installed
         $providers = app()->getProviders('Sebastienheyd\BoilerplateMediaManager\ServiceProvider');
         $view->with('hasMediaManager', ! empty($providers));
+
+        $view->with('aiEnabled', app('boilerplate.ai.providers')->hasConfiguredProvider());
     }
 }

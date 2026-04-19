@@ -232,6 +232,7 @@ class BoilerplateServiceProvider extends ServiceProvider
         $this->registerNavbarItems();
         $this->registerDatatables();
         $this->registerDashboardWidgets();
+        $this->registerAiProviders();
 
         Paginator::useBootstrap();
 
@@ -310,6 +311,19 @@ class BoilerplateServiceProvider extends ServiceProvider
             CurrentUser::class,
             UsersNumber::class,
             LatestErrors::class
+        );
+    }
+
+    private function registerAiProviders()
+    {
+        $this->app->singleton('boilerplate.ai.providers', function () {
+            return new Ai\AiProvidersRepository();
+        });
+
+        app('boilerplate.ai.providers')->registerAiProvider(
+            Ai\Providers\OpenAiProvider::class,
+            Ai\Providers\AnthropicProvider::class,
+            Ai\Providers\OllamaProvider::class
         );
     }
 }
