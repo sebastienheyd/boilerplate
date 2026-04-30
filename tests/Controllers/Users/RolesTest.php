@@ -117,6 +117,61 @@ class RolesTest extends TestCase
         $this->assertTrue(Role::find(3)->description === 'Edited role description');
     }
 
+    public function testRoleEditFormContainsUsersDatatable()
+    {
+        Role::create([
+            'name'         => 'test',
+            'display_name' => 'Test',
+            'description'  => 'Test role',
+        ]);
+
+        $resource = $this->actingAs($this->admin)->get('admin/roles/3/edit');
+        $resource->assertStatus(200);
+        $resource->assertSeeInOrder([
+            '<h3 class="card-title">Parameters</h3>',
+            '<h3 class="card-title">Users with this role</h3>',
+            'id="dt_role_users"',
+            'window.dt_role_users_ajax',
+            '"role_id":3',
+        ], false);
+    }
+
+    public function testRoleUsersDatatableReturnsOnlyUsersWithRole()
+    {
+        $altRole = Role::create([
+            'name'         => 'other',
+            'display_name' => 'Other',
+            'description'  => 'Other role',
+        ]);
+
+        $userInRole = UserFactory::create()->backendUser();
+        $userInRole->addRole($altRole);
+        UserFactory::create()->backendUser();
+
+        $resource = $this->actingAs($this->admin)->post('admin/datatables/role_users', [
+            'role_id' => $altRole->id,
+        ], [
+            'X-Requested-With' => 'XMLHttpRequest',
+        ]);
+
+        $resource->assertStatus(200);
+        $content = $resource->getOriginalContent();
+
+        $this->assertEquals(1, $content['recordsTotal']);
+        $this->assertEquals($userInRole->email, $content['data'][0]['email']);
+    }
+
+    public function testRoleUsersDatatableDeniedWithoutPermission()
+    {
+        $resource = $this->actingAs($this->user)->post('admin/datatables/role_users', [
+            'role_id' => 1,
+        ], [
+            'X-Requested-With' => 'XMLHttpRequest',
+        ]);
+
+        $resource->assertStatus(503);
+    }
+
     public function testRoleDestroy()
     {
         Role::create([

@@ -31,4 +31,7 @@ return [
         'confirmdelete' => 'Do you confirm that you want to delete this role ?',
         'deletesuccess' => 'The role has been correctly deleted',
     ],
+    'users' => [
+        'title'         => 'Users with this role',
+    ],
 ];

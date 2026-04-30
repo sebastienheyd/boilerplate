@@ -31,4 +31,7 @@ return [
         'confirmdelete' => 'Sicuro di voler cancellare questo ruolo ?',
         'deletesuccess' => 'Ruolo eliminato correttamente',
     ],
+    'users' => [
+        'title'         => 'Utenti con questo ruolo',
+    ],
 ];

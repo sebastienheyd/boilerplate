@@ -31,4 +31,7 @@ return [
         'confirmdelete' => '¿Confirmas que deseas eliminar este rol?',
         'deletesuccess' => 'El rol ha sido eliminado correctamente',
     ],
+    'users' => [
+        'title'         => 'Usuarios con este rol',
+    ],
 ];

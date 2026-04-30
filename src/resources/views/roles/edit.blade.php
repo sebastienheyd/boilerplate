@@ -8,6 +8,21 @@
 ])
 
 @section('content')
+    <style>
+        #dt_role_users tbody td { vertical-align: middle; }
+        .role-edit-layout { display: flex; flex-direction: column; }
+        .role-edit-layout .role-edit-left { display: contents; }
+        .role-edit-layout .role-edit-params { order: 1; }
+        .role-edit-layout .role-edit-permissions { order: 2; }
+        .role-edit-layout .role-edit-users { order: 3; }
+        @media (min-width: 1200px) {
+            .role-edit-layout { flex-direction: row; align-items: flex-start; column-gap: 1.5rem; }
+            .role-edit-layout .role-edit-left { display: flex; flex-direction: column; flex: 1 1 0; min-width: 0; }
+            .role-edit-layout .role-edit-permissions { flex: 1 1 0; min-width: 0; order: 0; }
+            .role-edit-layout .role-edit-params,
+            .role-edit-layout .role-edit-users { order: 0; }
+        }
+    </style>
     @component('boilerplate::form', ['route' => ['boilerplate.roles.update', $role->id], 'method' => 'put'])
         <div class="row">
             <div class="col-12 mb-3">
@@ -23,23 +38,30 @@
                 @endif
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-5">
-                @component('boilerplate::card', ['title' => __('boilerplate::role.parameters')])
-                    {!! $errors->first('name','<p class="text-danger"><strong>:message</strong></p>') !!}
-                    @if($role->name === 'admin' || $role->name === 'backend_user')
-                        <p><strong>@lang('boilerplate::role.label')</strong><br>{{ $role->display_name }}</p>
-                        <p><strong>@lang('boilerplate::role.description')</strong><br>{{ $role->description }}</p>
-                        @component('boilerplate::input', ['type' => 'hidden', 'name' => 'display_name', 'value' => $role->getAttributes()['display_name']])@endcomponent
-                        @component('boilerplate::input', ['type' => 'hidden', 'name' => 'description', 'value' => $role->getAttributes()['description'] ])@endcomponent
-                    @else
-                        @component('boilerplate::input', ['name' => 'display_name', 'label' => 'boilerplate::role.label', 'value' => $role->display_name])@endcomponent
-                        @component('boilerplate::input', ['name' => 'description', 'label' => 'boilerplate::role.description', 'value' => $role->description])@endcomponent
-                    @endif
-                @endcomponent
+        <div class="role-edit-layout">
+            <div class="role-edit-left">
+                <div class="role-edit-params">
+                    @component('boilerplate::card', ['title' => __('boilerplate::role.parameters')])
+                        {!! $errors->first('name','<p class="text-danger"><strong>:message</strong></p>') !!}
+                        @if($role->name === 'admin' || $role->name === 'backend_user')
+                            <p><strong>@lang('boilerplate::role.label')</strong><br>{{ $role->display_name }}</p>
+                            <p><strong>@lang('boilerplate::role.description')</strong><br>{{ $role->description }}</p>
+                            @component('boilerplate::input', ['type' => 'hidden', 'name' => 'display_name', 'value' => $role->getAttributes()['display_name']])@endcomponent
+                            @component('boilerplate::input', ['type' => 'hidden', 'name' => 'description', 'value' => $role->getAttributes()['description'] ])@endcomponent
+                        @else
+                            @component('boilerplate::input', ['name' => 'display_name', 'label' => 'boilerplate::role.label', 'value' => $role->display_name])@endcomponent
+                            @component('boilerplate::input', ['name' => 'description', 'label' => 'boilerplate::role.description', 'value' => $role->description])@endcomponent
+                        @endif
+                    @endcomponent
+                </div>
+                <div class="role-edit-users">
+                    @component('boilerplate::card', ['color' => 'orange', 'title' => __('boilerplate::role.users.title')])
+                        <x-boilerplate::datatable name="role_users" :ajax="['role_id' => $role->id]" />
+                    @endcomponent
+                </div>
             </div>
             @if(count($permissions_categories) > 0)
-            <div class="col-md-7">
+            <div class="role-edit-permissions">
                 @component('boilerplate::card', ['color' => 'teal', 'title' => __('boilerplate::role.permissions')])
                     @foreach($permissions_categories as $category)
                         <div class="permission_category">
@@ -73,5 +95,6 @@
                 @endcomponent
             </div>
             @endif
+        </div>
     @endcomponent
 @endsection

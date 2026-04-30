@@ -22,6 +22,7 @@ use Sebastienheyd\Boilerplate\Dashboard\Widgets\UsersNumber;
 use Sebastienheyd\Boilerplate\Datatables\Admin\LogFileDatatable;
 use Sebastienheyd\Boilerplate\Datatables\Admin\LogsDatatable;
 use Sebastienheyd\Boilerplate\Datatables\Admin\RolesDatatable;
+use Sebastienheyd\Boilerplate\Datatables\Admin\RoleUsersDatatable;
 use Sebastienheyd\Boilerplate\Datatables\Admin\UsersDatatable;
 use Sebastienheyd\Boilerplate\Middleware\BoilerplateImpersonate;
 use Sebastienheyd\Boilerplate\View\Composers\DatatablesComposer;
@@ -295,6 +296,7 @@ class BoilerplateServiceProvider extends ServiceProvider
         app('boilerplate.datatables')->registerDatatable(
             UsersDatatable::class,
             RolesDatatable::class,
+            RoleUsersDatatable::class,
             LogsDatatable::class,
             LogFileDatatable::class
         );

@@ -31,4 +31,7 @@ return [
         'confirmdelete' => 'Bu rolü silmek istediğinizden emin misiniz?',
         'deletesuccess' => 'Rol başarıyla silindi',
     ],
+    'users' => [
+        'title'         => 'Bu role sahip kullanıcılar',
+    ],
 ];
