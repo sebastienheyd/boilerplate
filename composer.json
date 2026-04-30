@@ -68,6 +68,9 @@
             "providers": [
                 "Sebastienheyd\\Boilerplate\\BoilerplateServiceProvider"
             ]
+        },
+        "branch-alias": {
+            "dev-master": "8.x-dev"
         }
     },
     "minimum-stability": "stable",
