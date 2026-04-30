@@ -94,12 +94,14 @@ class UsersDatatable extends Datatable
                 ->width('12%')
                 ->data('created_at')
                 ->name('users.created_at')
-                ->dateFormat(),
+                ->dateFormat()
+                ->dateRangeFilter(),
 
             Column::add(__('boilerplate::users.list.lastconnect'))
                 ->width('12%')
                 ->data('last_login')
-                ->fromNow(),
+                ->fromNow()
+                ->dateRangeFilter(),
 
             Column::add()
                 ->width('70px')

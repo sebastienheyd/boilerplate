@@ -72,6 +72,7 @@ function getDocsNavBar(version) {
                         'howto/events',
                         'howto/generate_text_gpt',
                         'howto/notifications',
+                        'howto/role_users',
                         'howto/scaffold',
                         'howto/user_settings',
                     ]

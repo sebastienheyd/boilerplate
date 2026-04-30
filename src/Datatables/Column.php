@@ -133,18 +133,30 @@ class Column
             $this->attributes['render'] = fn () => "$.fn.dataTable.render.moment('".$format."')";
         }
 
-        if (isset($query) && method_exists($query, 'whereBetween')) {
-            $this->filter(function ($query, $q) {
-                if (preg_match('#^[0-9]{4}-[0-9]{2}-[0-9]{2}\s[0-9]{2}:[0-9]{2}:[0-9]{2}|[0-9]{4}-[0-9]{2}-[0-9]{2}\s[0-9]{2}:[0-9]{2}:[0-9]{2}$#', $q)) {
-                    [$start, $end] = explode('|', $q);
-                    $query->whereBetween($this->name ?? $this->data, [$start, $end]);
-                }
-            });
-
-            $this->filterType('daterangepicker');
-        }
-
         return $this;
+    }
+
+    /**
+     * Attach a daterangepicker filter that searches the column with whereBetween
+     * on a "YYYY-MM-DD HH:mm:ss|YYYY-MM-DD HH:mm:ss" range value emitted by the
+     * boilerplate::daterangepicker hidden [start]/[end] inputs.
+     *
+     * @param  string|null  $column  Database column to filter on. Defaults to
+     *                               $this->name (qualified) or $this->data.
+     * @return $this
+     */
+    public function dateRangeFilter(?string $column = null): Column
+    {
+        $column = $column ?? $this->name ?? $this->data;
+
+        $this->filterType('daterangepicker');
+
+        return $this->filter(function ($query, $q) use ($column) {
+            if (preg_match('#^[0-9]{4}-[0-9]{2}-[0-9]{2}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\|[0-9]{4}-[0-9]{2}-[0-9]{2}\s[0-9]{2}:[0-9]{2}:[0-9]{2}$#', $q)) {
+                [$start, $end] = explode('|', $q);
+                $query->whereBetween($column, [$start, $end]);
+            }
+        });
     }
 
     /**
