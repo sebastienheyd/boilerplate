@@ -42,6 +42,7 @@ public function columns(): array
 | [order](#order)                 | Allow to set a specific order query                    |
 | [fromNow](#fromnow)             | For dates, replace the date by a “from now” text       |
 | [dateFormat](#dateformat)       | For dates, will replace the date by the localized date |
+| [dateRangeFilter](#daterangefilter) | Attach a daterangepicker filter on a date column   |
 | [notSearchable](#notsearchable) | Disables search (and filter) of the column             |
 | [notSortable](#notsortable)     | Disables the sorting of the column                     |
 | [notOrderable](#notorderable)   | Alias of [notSortable](#notsortable)                   |
@@ -180,7 +181,9 @@ For dates, replace the date by a "from now" text.
 
 ## dateFormat
 
-For dates, will replace the date by the localized date using Moment.js formatting. This method automatically sets up date range filtering and proper date rendering.
+For dates, will replace the date by the localized date using Moment.js formatting.
+
+To enable a daterangepicker filter on this column, chain the [`dateRangeFilter`](#daterangefilter) method.
 
 By default, it will use the locale `boilerplate::date.YmdHis` defined in the `date.php` language file:
 
@@ -247,6 +250,30 @@ You can use these predefined formats:
 | `ss` | Second (00-59) | 25 |
 | `A` | AM/PM | PM |
 
+
+## dateRangeFilter
+
+Attach a [daterangepicker](https://www.daterangepicker.com/) filter to a date column. The filter sends a `YYYY-MM-DD HH:mm:ss|YYYY-MM-DD HH:mm:ss` value that is used to apply a `whereBetween` clause on the underlying database column.
+
+By default, the filter targets the qualified column name set with [`name`](#name) or, as a fallback, the [`data`](#data) attribute:
+
+```php
+Column::add(__('Created at'))
+    ->data('created_at')
+    ->dateFormat()
+    ->dateRangeFilter(),
+```
+
+You can target a different database column by passing its name as argument. This is useful when the displayed column name differs from the column to filter on (for example with eager loaded relationships):
+
+```php
+Column::add(__('Last login'))
+    ->data('last_login')
+    ->fromNow()
+    ->dateRangeFilter('users.last_login'),
+```
+
+This method automatically sets the column [`filterType`](#filtertype) to `daterangepicker` and registers a custom [`filter`](#filter) closure. It can be combined with [`dateFormat`](#dateformat) or [`fromNow`](#fromnow) for the column rendering.
 
 ## notSearchable
 
