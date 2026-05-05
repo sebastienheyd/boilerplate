@@ -128,8 +128,8 @@ Route::group([
             Route::delete('sessions/{sessionId}', [UsersController::class, 'disconnectSession'])->name('session.disconnect');
         });
 
-        // ChatGPT
-        if (config('boilerplate.app.openai.key')) {
+        // AI text generation
+        if (app('boilerplate.ai.providers')->hasConfiguredProvider()) {
             Route::prefix('gpt')->as('gpt.')->group(function () {
                 Route::get('/', [GptController::class, 'index'])->name('index');
                 Route::post('/', [GptController::class, 'process'])->name('process');
