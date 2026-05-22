@@ -203,7 +203,7 @@ class BoilerplateServiceProvider extends ServiceProvider
             'filesystems.disks.logs'        => [
                 'driver' => 'local',
                 'root'   => storage_path('logs'),
-                'serve'  => true,
+                'serve'  => false,
                 'throw'  => false,
                 'report' => false,
             ],
