@@ -3,12 +3,12 @@
 [![Packagist](https://img.shields.io/packagist/v/sebastienheyd/boilerplate.svg?style=flat-square)](https://packagist.org/packages/sebastienheyd/boilerplate)
 [![tests](https://github.com/sebastienheyd/boilerplate/actions/workflows/tests.yml/badge.svg)](https://github.com/sebastienheyd/boilerplate/actions/workflows/tests.yml)
 [![StyleCI](https://github.styleci.io/repos/86598046/shield?branch=master&style=flat-square)](https://github.styleci.io/repos/86598046)
-[![Laravel](https://img.shields.io/badge/Laravel-6.x%20→%2013.x-green?logo=Laravel&style=flat-square)](https://laravel.com/)
+[![Laravel](https://img.shields.io/badge/Laravel-11.x%20→%2013.x-green?logo=Laravel&style=flat-square)](https://laravel.com/)
 [![Nb downloads](https://img.shields.io/packagist/dt/sebastienheyd/boilerplate.svg?style=flat-square)](https://packagist.org/packages/sebastienheyd/boilerplate)
 [![MIT License](https://img.shields.io/github/license/sebastienheyd/boilerplate.svg?style=flat-square)](LICENSE)
 
 This package serves as a basis for quickly creating a back-office. 
-It includes profile creation and his management, user management, roles, permissions, log viewing and ready to use [components](https://sebastienheyd.github.io/boilerplate/docs/8.x/components/card.html).
+It includes profile creation and its management, user management, roles, permissions, log viewing and ready to use [components](https://sebastienheyd.github.io/boilerplate/docs/8.x/components/card.html).
 
 It also makes it easy to add other packages to extend the features, have a look to
 [sebastienheyd/boilerplate-packager](https://github.com/sebastienheyd/boilerplate-packager) to quickly build your own
@@ -43,10 +43,10 @@ The documentation is readable on [Github pages](https://sebastienheyd.github.io/
 * [Text generation with GPT in TinyMCE](https://sebastienheyd.github.io/boilerplate/docs/8.x/howto/generate_text_gpt.html) with the OpenAI API
 * [Customizable dashboard](https://sebastienheyd.github.io/boilerplate/docs/8.x/dashboard/generate_widget.html) with widgets
 * Css framework [Bootstrap 4](https://getbootstrap.com/)
-* Icons by [Font Awesome 5](https://fontawesome.com/)
+* Icons by [Font Awesome 6](https://fontawesome.com/)
 * Role-based permissions support by [santigarcor/laratrust](https://github.com/santigarcor/laratrust)
 * Forms & Html helpers by [spatie/laravel-html](https://github.com/spatie/laravel-html)
-* Menu dynamically builded by [lavary/laravel-menu](https://github.com/lavary/laravel-menu)
+* Menu dynamically built by [lavary/laravel-menu](https://github.com/lavary/laravel-menu)
 * Menu items activated by [sebastienheyd/active](https://github.com/sebastienheyd/active)
 * Server-side datatables methods provided by [yajra/laravel-datatables](https://yajrabox.com/docs/laravel-datatables)
 * Image manipulation by [intervention/image](https://github.com/intervention/image)
@@ -55,6 +55,11 @@ The documentation is readable on [Github pages](https://sebastienheyd.github.io/
 * Javascript session keep-alive
 * Dark mode
 * [Localized](https://github.com/sebastienheyd/boilerplate/tree/master/src/resources/lang)
+
+## Requirements
+
+* PHP >= 8.2
+* Laravel 11.x, 12.x or 13.x
 
 ## Installation
 
@@ -86,28 +91,6 @@ php artisan serve
 
 Now you can point your browser to [http://localhost:8000/admin](http://localhost:8000/admin)
 
-## Package update (Laravel < 8.6.9)
-
-Boilerplate comes with assets such as Javascript, CSS, and images. Since you typically will need to overwrite the assets
-every time the package is updated, you may use the ```--force``` flag :
-
-```
-php artisan vendor:publish --tag=boilerplate-public --force
-```
-
-To auto update assets each time package is updated, you can add this command to `post-update-cmd` into the
-file `composer.json` at the root of your project.
-
-```json
-{
-    "scripts": {
-        "post-update-cmd": [
-            "@php artisan vendor:publish --tag=boilerplate-public --force --ansi"
-        ]
-    }
-}
-```
-
 ## Tests / Coding standards
 
 This package is delivered with a `Makefile` used to launch checks for the respect of coding standards and the unit tests
@@ -125,7 +108,7 @@ Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details and a todolist.
 
 ## License
 
-This package is free software distributed under the terms of the [MIT license](license.md).
+This package is free software distributed under the terms of the [MIT license](LICENSE).
 
 ## Special thanks
 
