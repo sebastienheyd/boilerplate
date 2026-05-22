@@ -73,6 +73,7 @@ function getDocsNavBar(version) {
                         'howto/generate_text_gpt',
                         'howto/notifications',
                         'howto/scaffold',
+                        'howto/user_permissions',
                         'howto/user_settings',
                     ]
                 },

@@ -45,7 +45,7 @@
                         @foreach($roles as $role)
                             <tr>
                                 <td style="width:25px">
-                                    @component('boilerplate::icheck', ['name' => 'roles['.$role->id.']', 'id' => 'role_'.$role->id, 'checked' => old('roles.'.$role->id) == 'on'])@endcomponent
+                                    @component('boilerplate::icheck', ['name' => 'roles['.$role->id.']', 'id' => 'role_'.$role->id, 'checked' => old('roles.'.$role->id) == 'on', 'data' => ['permissions' => $role->permissions->pluck('id')->implode(','), 'admin' => $role->name === 'admin' ? 1 : 0]])@endcomponent
                                 </td>
                                 <td>
                                     <label for="{{ 'role_'.$role->id }}" class="mb-0">{{ $role->display_name }}</label><br>
@@ -56,7 +56,40 @@
                         @endforeach
                     </table>
                 @endcomponent
+                @if(count($permissions_categories) > 0)
+                @component('boilerplate::card', ['color' => 'indigo', 'title' => __('boilerplate::users.permissions')])
+                    @foreach($permissions_categories as $category)
+                        <div class="permission_category">
+                            <div class="h6">
+                                {{ $category->name }}
+                            </div>
+                            <table class="table table-hover table-sm">
+                                <tbody>
+                                @foreach($category->permissions as $permission)
+                                    @php
+                                        $isDirect = old('permission.'.$permission->id, false) ? 1 : 0;
+                                    @endphp
+                                    <tr>
+                                        <td style="width:25px;">
+                                            @component('boilerplate::icheck', ['name' => 'permission['.$permission->id.']', 'id' => 'permission_'.$permission->id, 'checked' => (bool) $isDirect, 'data' => ['direct' => $isDirect]])@endcomponent
+                                        </td>
+                                        <td>
+                                            <label for="{{ 'permission_'.$permission->id }}" class="mb-0">{{ $permission->display_name }}</label><br>
+                                            <small class="text-muted">{{ $permission->description }}</small>
+                                        </td>
+                                        <td class="text-right visible-on-hover">
+                                            <span class="badge badge-secondary badge-pill">{{ $permission->name }}</span>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    @endforeach
+                @endcomponent
+                @endif
             </div>
         </div>
     @endcomponent
+    @include('boilerplate::users._permissions-script')
 @endsection

@@ -350,4 +350,217 @@ class UsersTest extends TestCase
 
         $this->assertEquals($sessionId, session()->getId());
     }
+
+    public function testUserCreateFormHasPermissionsCategories()
+    {
+        $admin = UserFactory::create()->admin();
+
+        $resource = $this->actingAs($admin)->get('admin/users/create');
+        $resource->assertStatus(200);
+        $resource->assertViewHas('permissions_categories');
+
+        $categories = $resource->viewData('permissions_categories');
+        $this->assertNotEmpty($categories);
+    }
+
+    public function testUserEditFormHasPermissionsCategories()
+    {
+        $admin = UserFactory::create()->admin();
+        UserFactory::create()->backendUser();
+
+        $resource = $this->actingAs($admin)->get('admin/users/2/edit');
+        $resource->assertStatus(200);
+        $resource->assertViewHas('permissions_categories');
+
+        $categories = $resource->viewData('permissions_categories');
+        $this->assertNotEmpty($categories);
+    }
+
+    public function testUserCreateFormPostWithDirectPermissions()
+    {
+        $admin = UserFactory::create()->admin();
+
+        $resource = $this->actingAs($admin)->post('admin/users', [
+            'last_name'  => 'Doe',
+            'first_name' => 'John',
+            'email'      => 'john.doe@email.tld',
+            'permission' => [2 => 1, 3 => 1],
+        ]);
+
+        $resource->assertStatus(302);
+        $resource->assertRedirect('/admin/users/2/edit');
+
+        $user = User::find(2);
+        $this->assertEqualsCanonicalizing([2, 3], $user->permissions->pluck('id')->all());
+    }
+
+    public function testUserEditFormPostAddDirectPermissions()
+    {
+        $admin = UserFactory::create()->admin();
+        UserFactory::create()->backendUser();
+
+        $resource = $this->actingAs($admin)->post('admin/users/2', [
+            '_method'    => 'PUT',
+            'last_name'  => 'Doe',
+            'first_name' => 'John',
+            'email'      => 'john.doe@email.tld',
+            'permission' => [2 => 1],
+        ]);
+
+        $resource->assertStatus(302);
+        $resource->assertRedirect('/admin/users/2/edit');
+
+        $user = User::find(2);
+        $this->assertEquals([2], $user->permissions->pluck('id')->all());
+    }
+
+    public function testUserEditFormPostRemoveDirectPermissions()
+    {
+        $admin = UserFactory::create()->admin();
+        $user = UserFactory::create()->backendUser();
+        $user->permissions()->sync([2]);
+        $this->assertEquals([2], $user->fresh()->permissions->pluck('id')->all());
+
+        $resource = $this->actingAs($admin)->post('admin/users/2', [
+            '_method'    => 'PUT',
+            'last_name'  => 'Doe',
+            'first_name' => 'John',
+            'email'      => 'john.doe@email.tld',
+        ]);
+
+        $resource->assertStatus(302);
+
+        $this->assertEmpty($user->fresh()->permissions);
+    }
+
+    public function testUserEditFormPostReplaceDirectPermissions()
+    {
+        $admin = UserFactory::create()->admin();
+        $user = UserFactory::create()->backendUser();
+        $user->permissions()->sync([1, 2]);
+
+        $resource = $this->actingAs($admin)->post('admin/users/2', [
+            '_method'    => 'PUT',
+            'last_name'  => 'Doe',
+            'first_name' => 'John',
+            'email'      => 'john.doe@email.tld',
+            'permission' => [3 => 1, 4 => 1],
+        ]);
+
+        $resource->assertStatus(302);
+
+        $this->assertEqualsCanonicalizing([3, 4], $user->fresh()->permissions->pluck('id')->all());
+    }
+
+    public function testUserEditFormPostPermissionsIndependentFromRoles()
+    {
+        $admin = UserFactory::create()->admin();
+        $user = UserFactory::create()->backendUser();
+        $rolesBefore = $user->roles->pluck('id')->all();
+
+        $resource = $this->actingAs($admin)->post('admin/users/2', [
+            '_method'    => 'PUT',
+            'last_name'  => 'Doe',
+            'first_name' => 'John',
+            'email'      => 'john.doe@email.tld',
+            'roles'      => [2 => 1],
+            'permission' => [3 => 1],
+        ]);
+
+        $resource->assertStatus(302);
+
+        $user = $user->fresh();
+        $this->assertEquals([3], $user->permissions->pluck('id')->all());
+        $this->assertEqualsCanonicalizing($rolesBefore, $user->roles->pluck('id')->all());
+    }
+
+    public function testUserEditFormPostNonExistentPermission()
+    {
+        $admin = UserFactory::create()->admin();
+        $user = UserFactory::create()->backendUser();
+        $user->permissions()->sync([2]);
+
+        $resource = $this->actingAs($admin)->post('admin/users/2', [
+            '_method'    => 'PUT',
+            'last_name'  => 'Doe',
+            'first_name' => 'John',
+            'email'      => 'john.doe@email.tld',
+            'permission' => [99999 => 1],
+        ]);
+
+        $resource->assertStatus(302);
+        $resource->assertSessionHasErrors(['permission_ids.0']);
+
+        $this->assertEquals([2], $user->fresh()->permissions->pluck('id')->all());
+    }
+
+    public function testUserCreateFormShowsPermissionsBlock()
+    {
+        $admin = UserFactory::create()->admin();
+
+        $resource = $this->actingAs($admin)->get('admin/users/create');
+        $resource->assertStatus(200);
+        $resource->assertSee('id="permission_1"', false);
+        $resource->assertSee('name="permission[1]"', false);
+        $resource->assertSee(__('boilerplate::users.permissions'), false);
+    }
+
+    public function testUserEditFormShowsPermissionsBlockWithChecked()
+    {
+        $admin = UserFactory::create()->admin();
+        $user = UserFactory::create()->backendUser();
+        $user->permissions()->sync([2]);
+
+        $resource = $this->actingAs($admin)->get('admin/users/2/edit');
+        $resource->assertStatus(200);
+        $resource->assertSee('id="permission_1"', false);
+        $resource->assertSee('id="permission_2"', false);
+        $resource->assertSee(__('boilerplate::users.permissions'), false);
+
+        $html = $resource->getContent();
+        $pattern = '/<input[^>]*id="permission_2"[^>]*checked/';
+        $this->assertMatchesRegularExpression($pattern, $html, 'Permission 2 should be pre-checked.');
+    }
+
+    public function testUserCreateFormRoleHasPermissionsDataAttribute()
+    {
+        $admin = UserFactory::create()->admin();
+
+        $resource = $this->actingAs($admin)->get('admin/users/create');
+        $resource->assertStatus(200);
+
+        $html = $resource->getContent();
+        $pattern = '/<input[^>]*id="role_2"[^>]*data-permissions="1"/';
+        $this->assertMatchesRegularExpression(
+            $pattern,
+            $html,
+            'Role 2 (backend_user) should expose its permission ids via data-permissions="1".'
+        );
+    }
+
+    public function testUserEditFormPermissionHasDataDirectAttribute()
+    {
+        $admin = UserFactory::create()->admin();
+        $user = UserFactory::create()->backendUser();
+        $user->permissions()->sync([2]);
+
+        $resource = $this->actingAs($admin)->get('admin/users/2/edit');
+        $resource->assertStatus(200);
+
+        $html = $resource->getContent();
+
+        $patternDirect = '/<input[^>]*id="permission_2"[^>]*data-direct="1"/';
+        $this->assertMatchesRegularExpression(
+            $patternDirect,
+            $html,
+            'Permission 2 is directly attached to the user and should carry data-direct="1".'
+        );
+
+        $patternNotDirect = '/<input[^>]*id="permission_1"[^>]*data-direct="0"/';
+        $this->assertMatchesRegularExpression(
+            $patternNotDirect,
+            $html,
+            'Permission 1 is not directly attached to the user and should carry data-direct="0".'
+        );
+    }
 }

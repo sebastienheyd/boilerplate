@@ -12,6 +12,7 @@ return [
     'firstname'     => 'First name',
     'email'         => 'E-mail',
     'roles'         => 'Role',
+    'permissions'   => 'Permissions',
     'successadd'    => 'The user has been correctly added.',
     'successmod'    => 'The user has been correctly modified.',
     'newpassword'   => 'Your password has been saved.',

@@ -12,6 +12,7 @@ return [
     'firstname'     => 'نام',
     'email'         => 'ایمیل',
     'roles'         => 'نقش',
+    'permissions'   => 'دسترسی‌ها',
     'successadd'    => 'کاربر با موفقیت اضافه شد.',
     'successmod'    => 'کاربر ویرایش شد.',
     'newpassword'   => 'رمز عبور ذخیره شد.',

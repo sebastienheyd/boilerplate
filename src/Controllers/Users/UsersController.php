@@ -42,7 +42,8 @@ class UsersController
         $role = config('boilerplate.laratrust.role');
 
         return view('boilerplate::users.create', [
-            'roles' => Auth::user()->hasRole('admin') ? $role::all() : $role::whereNotIn('name', ['admin'])->get(),
+            'roles'                  => Auth::user()->hasRole('admin') ? $role::all() : $role::whereNotIn('name', ['admin'])->get(),
+            'permissions_categories' => $this->permissionsCategories(),
         ]);
     }
 
@@ -56,10 +57,14 @@ class UsersController
      */
     public function store(Request $request)
     {
+        $request->merge(['permission_ids' => array_keys($request->input('permission', []))]);
+
         $this->validate($request, [
-            'last_name'  => 'required',
-            'first_name' => 'required',
-            'email'      => 'required|email|unique:users,email,NULL,id,deleted_at,NULL',
+            'last_name'        => 'required',
+            'first_name'       => 'required',
+            'email'            => 'required|email|unique:users,email,NULL,id,deleted_at,NULL',
+            'permission_ids'   => 'array',
+            'permission_ids.*' => 'integer|exists:permissions,id',
         ]);
 
         $input = $request->all();
@@ -71,6 +76,7 @@ class UsersController
         $user = $userModel::withTrashed()->updateOrCreate(['email' => $input['email']], $input);
         $user->restore();
         $user->roles()->sync(array_keys($request->input('roles', [])));
+        $user->permissions()->sync($request->input('permission_ids', []));
 
         $user->sendNewUserNotification($input['remember_token']);
 
@@ -89,10 +95,12 @@ class UsersController
         $role = config('boilerplate.laratrust.role');
         $userModel = config('boilerplate.auth.providers.users.model');
         $user = $userModel::findOrFail($id);
+        $user->load('permissions');
 
         return view('boilerplate::users.edit', [
-            'user'  => $user,
-            'roles' => Auth::user()->hasRole('admin') ? $role::all() : $role::whereNotIn('name', ['admin'])->get(),
+            'user'                   => $user,
+            'roles'                  => Auth::user()->hasRole('admin') ? $role::all() : $role::whereNotIn('name', ['admin'])->get(),
+            'permissions_categories' => $this->permissionsCategories(),
         ]);
     }
 
@@ -110,15 +118,20 @@ class UsersController
         $userModel = config('boilerplate.auth.providers.users.model');
         $user = $userModel::findOrFail($id);
 
+        $request->merge(['permission_ids' => array_keys($request->input('permission', []))]);
+
         $this->validate($request, [
-            'last_name'  => 'required',
-            'first_name' => 'required',
-            'email'      => 'required|email|unique:users,email,'.$id,
+            'last_name'        => 'required',
+            'first_name'       => 'required',
+            'email'            => 'required|email|unique:users,email,'.$id,
+            'permission_ids'   => 'array',
+            'permission_ids.*' => 'integer|exists:permissions,id',
         ]);
 
         $user->update($request->all());
 
         $user->roles()->sync(array_keys($request->input('roles', [])));
+        $user->permissions()->sync($request->input('permission_ids', []));
 
         return redirect()->route('boilerplate.users.edit', $user)
                          ->with('growl', [__('boilerplate::users.successmod'), 'success']);
@@ -457,5 +470,36 @@ class UsersController
         }
 
         return response()->json(['success' => setting([$request->post('name') => $request->post('value')])]);
+    }
+
+    /**
+     * Build the list of permissions grouped by category, ready to be consumed by the views.
+     * Mirrors the structure used in RolesController and honors the boilerplate.app.logs config flag.
+     *
+     * @return array
+     */
+    private function permissionsCategories(): array
+    {
+        $permModel = config('boilerplate.laratrust.permission');
+        $permissions = $permModel::with('category')->orderBy('category_id')->get()->groupBy('category_id');
+
+        $categories = [];
+        foreach ($permissions as $perms) {
+            $perms = $perms->filter(function ($perm) {
+                return config('boilerplate.app.logs', true) || $perm->name !== 'logs';
+            });
+
+            if ($perms->isEmpty()) {
+                continue;
+            }
+
+            $name = $perms->first()->category->display_name ?? __('boilerplate::permissions.categories.default');
+            $categories[] = (object) [
+                'name'        => $name,
+                'permissions' => $perms,
+            ];
+        }
+
+        return $categories;
     }
 }

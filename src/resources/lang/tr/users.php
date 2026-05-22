@@ -12,6 +12,7 @@ return [
     'firstname'    => 'Adı',
     'email'        => 'E-posta',
     'roles'        => 'Rol',
+    'permissions'  => 'İzinler',
     'successadd'   => 'Kullanıcı başarıyla eklendi.',
     'successmod'   => 'Kullanıcı başarıyla düzenlendi.',
     'newpassword'  => 'Şifreniz kaydedildi.',
