@@ -16,7 +16,7 @@ class UsersDatatable extends Datatable
     {
         $userModel = config('boilerplate.auth.providers.users.model');
 
-        return $userModel::with('roles')->select([
+        return $userModel::with(['roles', 'permissions'])->select([
             'users.id',
             'email',
             'last_name',
@@ -51,6 +51,7 @@ class UsersDatatable extends Datatable
 
             Column::add(__('boilerplate::users.list.state'))
                 ->width('100px')
+                ->class('text-nowrap')
                 ->data('active', function ($user) {
                     $badge = '<span class="badge badge-pill badge-%s">%s</span>';
                     if ($user->active == 1) {
@@ -63,10 +64,12 @@ class UsersDatatable extends Datatable
 
             Column::add(__('Last name'))
                 ->width('12%')
+                ->class('text-nowrap')
                 ->data('last_name'),
 
             Column::add(__('First name'))
                 ->width('12%')
+                ->class('text-nowrap')
                 ->data('first_name'),
 
             Column::add(__('Email'))
@@ -76,6 +79,7 @@ class UsersDatatable extends Datatable
 
             Column::add(__('boilerplate::users.list.roles'))
                 ->notOrderable()
+                ->class('text-nowrap')
                 ->filter(function ($query, $q) {
                     $query->whereHas('roles', function (Builder $query) use ($q) {
                         $query->where('name', '=', $q);
@@ -90,8 +94,27 @@ class UsersDatatable extends Datatable
                     return $roleModel::all()->pluck('display_name', 'name')->toArray();
                 }),
 
+            Column::add(__('boilerplate::users.list.additional_permissions'))
+                ->notOrderable()
+                ->class('text-nowrap')
+                ->filter(function ($query, $q) {
+                    $query->whereHas('permissions', function (Builder $query) use ($q) {
+                        $query->where('name', '=', $q);
+                    });
+                })
+                ->data('permissions', function ($user) {
+                    return $user->permissions->pluck('display_name')->implode(', ') ?: '-';
+                })
+                ->filterOptions(function () {
+                    $permModel = config('boilerplate.laratrust.permission');
+
+                    return $permModel::orderBy('display_name')
+                        ->pluck('display_name', 'name')->toArray();
+                }),
+
             Column::add(__('Created at'))
                 ->width('12%')
+                ->class('text-nowrap')
                 ->data('created_at')
                 ->name('users.created_at')
                 ->dateFormat()
@@ -99,6 +122,7 @@ class UsersDatatable extends Datatable
 
             Column::add(__('boilerplate::users.list.lastconnect'))
                 ->width('12%')
+                ->class('text-nowrap')
                 ->data('last_login')
                 ->fromNow()
                 ->dateRangeFilter(),

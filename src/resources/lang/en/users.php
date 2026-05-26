@@ -31,6 +31,7 @@ return [
         'firstname'     => 'First name',
         'email'         => 'E-mail',
         'roles'         => 'Role',
+        'additional_permissions' => 'Additional permissions',
         'creationdate'  => 'Creation date',
         'lastconnect'   => 'Last log',
         'confirmdelete' => 'Do you confirm that you want to delete this user ?',

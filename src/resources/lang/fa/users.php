@@ -31,6 +31,7 @@ return [
         'firstname'     => 'نام',
         'email'         => 'ایمیل',
         'roles'         => 'نقش',
+        'additional_permissions' => 'دسترسی‌های اضافی',
         'creationdate'  => 'تاریخ ایجاد',
         'lastconnect'   => 'آخرین ورود',
         'confirmdelete' => 'آیا از حذف اطمینان دارید؟',

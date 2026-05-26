@@ -38,6 +38,12 @@ When a role is checked on the user form, every permission belonging to that role
 
 If the admin unchecks the role, the permissions inherited from it become enabled again, and the previously selected direct permissions are restored to their original state.
 
+## Visibility in the users list
+
+The users datatable (Admin → Users) exposes an **Additional permissions** column next to **Roles**. It lists each user's direct permissions only — permissions inherited from roles are not shown here, to keep the two concepts distinct and avoid duplicating the Roles column.
+
+A dropdown filter on the column header lets you list every user that has a specific permission assigned directly. Users who own the same permission only through a role are excluded from the filtered result.
+
 ## Read direct permissions in code
 
 Direct permissions are exposed through the standard Laratrust API on the `User` model.

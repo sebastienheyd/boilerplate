@@ -31,6 +31,7 @@ return [
         'firstname'     => 'Nombre',
         'email'         => 'E-mail',
         'roles'         => 'Rol',
+        'additional_permissions' => 'Permisos adicionales',
         'creationdate'  => 'Fecha de alta',
         'lastconnect'   => 'Último acceso',
         'confirmdelete' => '¿Estás seguro que deseas eliminar este usuario?',

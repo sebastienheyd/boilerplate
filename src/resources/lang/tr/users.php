@@ -31,6 +31,7 @@ return [
         'firstname'     => 'Adı',
         'email'         => 'E-posta',
         'roles'         => 'Rol',
+        'additional_permissions' => 'Ek izinler',
         'creationdate'  => 'Kayıt Tarihi',
         'lastconnect'   => 'Son giriş',
         'confirmdelete' => 'Kullanıcıyı silmek istediğinizden emin misiniz?',
