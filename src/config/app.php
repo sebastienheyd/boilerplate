@@ -22,8 +22,29 @@ return [
     // If true, the session will be kept alive and the user must log out
     'keepalive'         => true,
 
-    // Allows to generate text with ChatGPT in TinyMCE
-    'openai'   => [
+    // AI provider for text generation in TinyMCE (openai, anthropic, ollama, or custom slug)
+    'ai' => [
+        'default' => env('AI_PROVIDER', 'openai'),
+
+        'providers' => [
+            'openai' => [
+                'key'          => env('OPENAI_API_KEY'),
+                'model'        => env('OPENAI_MODEL', 'gpt-4o-mini'),
+                'organization' => env('OPENAI_API_ORGANIZATION'),
+            ],
+            'anthropic' => [
+                'key'   => env('ANTHROPIC_API_KEY'),
+                'model' => env('ANTHROPIC_MODEL', 'claude-3-5-haiku-20241022'),
+            ],
+            'ollama' => [
+                'endpoint' => env('OLLAMA_ENDPOINT', 'http://localhost:11434'),
+                'model'    => env('OLLAMA_MODEL', ''),
+            ],
+        ],
+    ],
+
+    // Kept for backward compatibility — OpenAiProvider falls back to this if ai.providers.openai.key is empty
+    'openai' => [
         'key'          => env('OPENAI_API_KEY'),
         'model'        => 'gpt-4o-mini',
         'organization' => env('OPENAI_API_ORGANIZATION'),

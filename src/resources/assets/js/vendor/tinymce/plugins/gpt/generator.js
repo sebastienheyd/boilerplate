@@ -67,7 +67,7 @@ $(function() {
                             $('#buttons, #copy, #confirm').show();
                             eventSource.close();
                         } else {
-                            let txt = JSON.parse(e.data).choices[0].delta.content
+                            let txt = JSON.parse(e.data).content
                             if (txt !== undefined) {
                                 txt = txt.replace(/(?:\r\n|\r|\n)/g, '<br>');
                                 txt = txt.replace(/"/g, '')
