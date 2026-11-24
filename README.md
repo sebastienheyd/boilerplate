@@ -109,9 +109,3 @@ Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details and a todolist.
 ## License
 
 This package is free software distributed under the terms of the [MIT license](LICENSE).
-
-## Special thanks
-
-This project is made with [PhpStorm](https://www.jetbrains.com/phpstorm/) and supported by [JetBrains](https://www.jetbrains.com/?from=LaravelBoilerplate)
-
-[![JetBrains Logo](jetbrains.svg)](https://www.jetbrains.com/?from=LaravelBoilerplate)
