@@ -79,7 +79,6 @@ class UsersDatatable extends Datatable
 
             Column::add(__('boilerplate::users.list.roles'))
                 ->notOrderable()
-                ->class('text-nowrap')
                 ->filter(function ($query, $q) {
                     $query->whereHas('roles', function (Builder $query) use ($q) {
                         $query->where('name', '=', $q);
@@ -96,7 +95,6 @@ class UsersDatatable extends Datatable
 
             Column::add(__('boilerplate::users.list.additional_permissions'))
                 ->notOrderable()
-                ->class('text-nowrap')
                 ->filter(function ($query, $q) {
                     $query->whereHas('permissions', function (Builder $query) use ($q) {
                         $query->where('name', '=', $q);
