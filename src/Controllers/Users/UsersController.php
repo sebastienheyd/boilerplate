@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
-use Intervention\Image\Laravel\Facades\Image;
+use Intervention\Image\Drivers\Gd\Driver as GdDriver;
+use Intervention\Image\ImageManager;
 use Sebastienheyd\Boilerplate\Rules\Password;
 
 class UsersController
@@ -296,7 +297,7 @@ class UsersController
             $fileName = md5($user->id.$user->email).'_tmp.'.$extension;
             $avatar->move($destinationPath, $fileName);
 
-            Image::read($destinationPath.DIRECTORY_SEPARATOR.$fileName)
+            $this->imageManager()->read($destinationPath.DIRECTORY_SEPARATOR.$fileName)
                 ->cover(170, 170)
                 ->save($user->avatar_path);
 
@@ -501,5 +502,22 @@ class UsersController
         }
 
         return $categories;
+    }
+
+    /**
+     * Build the Intervention image manager from the intervention/image-laravel configuration.
+     *
+     * The "image" container binding is not used because Laravel 13 registers its own
+     * image manager under that name, which overrides the Intervention one.
+     */
+    private function imageManager(): ImageManager
+    {
+        return new ImageManager(
+            driver: config('image.driver', GdDriver::class),
+            autoOrientation: config('image.options.autoOrientation', true),
+            decodeAnimation: config('image.options.decodeAnimation', true),
+            blendingColor: config('image.options.blendingColor', 'ffffff'),
+            strip: config('image.options.strip', false)
+        );
     }
 }
