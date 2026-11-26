@@ -4,7 +4,7 @@ Originally created for reports at Improvely, the Date Range Picker can be attach
 
 > [https://www.daterangepicker.com](https://www.daterangepicker.com/)
 
-<img :src="$withBase('/assets/img/daterange.png')" alt="Daterangepicker">
+<img :src="$withBase('/assets/img/7.x/daterange.png')" alt="Daterangepicker">
 
 ## Usage
 

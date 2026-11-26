@@ -4,7 +4,7 @@ CodeMirror is a versatile text editor implemented in JavaScript for the browser.
 
 > [https://codemirror.net](https://codemirror.net)
 
-<img :src="$withBase('/assets/img/codemirror.png')" alt="CodeMirror">
+<img :src="$withBase('/assets/img/7.x/codemirror.png')" alt="CodeMirror">
 
 ## Component
 

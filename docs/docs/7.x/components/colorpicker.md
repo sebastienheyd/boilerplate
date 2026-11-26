@@ -6,7 +6,7 @@
 
 Will render
 
-<img :src="$withBase('/assets/img/colorpicker.png')" alt="Colorpicker">
+<img :src="$withBase('/assets/img/7.x/colorpicker.png')" alt="Colorpicker">
 
 ## Attributes
 

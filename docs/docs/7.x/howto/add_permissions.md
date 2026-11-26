@@ -24,7 +24,7 @@ To create a new role, just click on the button `Add a role` above the role list.
 
 When editing a role, you can define one or multiple permissions. 
 
-<img :src="$withBase('/assets/img/permissions.png')" alt="Parmissions">
+<img :src="$withBase('/assets/img/7.x/permissions.png')" alt="Parmissions">
 
 Permission name can be found when you move the mouse over the permission label. This name is required to check if the current user is allowed or not to do the action.
 

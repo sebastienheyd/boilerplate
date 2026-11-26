@@ -4,7 +4,7 @@
 Boilerplate version >= 7.10
 :::
 
-<a :href="$withBase('/assets/img/datatable.jpg')" class="img-link"><img :src="$withBase('/assets/img/datatable.png')" style="max-width:100%;height:400px;margin-right:.5rem"/></a>
+<a :href="$withBase('/assets/img/7.x/datatable.jpg')" class="img-link"><img :src="$withBase('/assets/img/7.x/datatable.jpg')" style="max-width:100%;height:400px;margin-right:.5rem"/></a>
 
 The [datatable component](../components/datatable) uses a class to operate. The class will specify the [options](options) of the table, the [data source](datasource), and the [columns](column) to be used.
 

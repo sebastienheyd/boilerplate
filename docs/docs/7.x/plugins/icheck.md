@@ -4,7 +4,7 @@ icheck-bootstrap is pure css solution for displaying twitter bootstrap style che
 
 > [https://github.com/bantikyan/icheck-bootstrap](https://github.com/bantikyan/icheck-bootstrap)
 
-<img :src="$withBase('/assets/img/icheck.png')" alt="iCheck">
+<img :src="$withBase('/assets/img/7.x/icheck.png')" alt="iCheck">
 
 ## Component
 

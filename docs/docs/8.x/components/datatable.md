@@ -6,7 +6,7 @@
 
 Will render
 
-<img :src="$withBase('/assets/img/datatable.jpg')" alt="DataTable" style="max-width: 700px">
+<img :src="$withBase('/assets/img/datatable.png')" alt="DataTable" style="max-width: 700px">
 
 ## How to create a DataTable
 

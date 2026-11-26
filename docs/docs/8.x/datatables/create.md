@@ -1,6 +1,6 @@
 # Create a DataTable
 
-<img :src="$withBase('/assets/img/datatable.jpg')" alt="DataTable" style="max-width: 700px">
+<img :src="$withBase('/assets/img/datatable.png')" alt="DataTable" style="max-width: 700px">
 
 The [datatable component](../components/datatable) uses a class to operate. The class will specify the [options](options) of the table, the [data source](datasource), and the [columns](column) to be used.
 

@@ -6,7 +6,7 @@
 
 Will render
 
-<img :src="$withBase('/assets/img/daterangepicker.png')" alt="Daterangepicker">
+<img :src="$withBase('/assets/img/7.x/daterangepicker.png')" alt="Daterangepicker">
 
 ## Attributes
 

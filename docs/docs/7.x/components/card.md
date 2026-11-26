@@ -8,7 +8,7 @@
 
 Will render
 
-<img :src="$withBase('/assets/img/card.png')" alt="Card">
+<img :src="$withBase('/assets/img/7.x/card.png')" alt="Card">
 
 ## Attributes
 

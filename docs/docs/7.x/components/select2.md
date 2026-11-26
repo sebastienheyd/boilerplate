@@ -16,7 +16,7 @@ Or
 
 Will render
 
-<img :src="$withBase('/assets/img/select2.png')" alt="Select2">
+<img :src="$withBase('/assets/img/7.x/select2.png')" alt="Select2">
 
 ## Attributes
 

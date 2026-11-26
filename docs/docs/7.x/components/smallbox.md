@@ -7,7 +7,7 @@
 
 Will render
 
-<img :src="$withBase('/assets/img/smallbox.png')" alt="Smallbox">
+<img :src="$withBase('/assets/img/7.x/smallbox.png')" alt="Smallbox">
 
 ## Attributes
 

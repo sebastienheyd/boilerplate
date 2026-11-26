@@ -6,7 +6,7 @@
 
 Will render
 
-<img :src="$withBase('/assets/img/codemirror.png')" alt="CodeMirror">
+<img :src="$withBase('/assets/img/7.x/codemirror.png')" alt="CodeMirror">
 
 ## Value
 

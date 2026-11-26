@@ -6,7 +6,7 @@
 
 Will render
 
-<img :src="$withBase('/assets/img/tinymce.png')" alt="TinyMCE">
+<img :src="$withBase('/assets/img/7.x/tinymce.png')" alt="TinyMCE">
 
 > If you have installed the package [sebastien/boilerplate-media-manager](https://github.com/sebastienheyd/boilerplate-media-manager), the media manager will be automatically added to TinyMCE for images and documents.
  

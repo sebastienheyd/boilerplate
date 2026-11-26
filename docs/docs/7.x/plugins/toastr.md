@@ -4,7 +4,7 @@ Toastr is a Javascript library for non-blocking notifications
 
 > [https://codeseven.github.io/toastr](https://codeseven.github.io/toastr)
 
-<img :src="$withBase('/assets/img/toastr.png')" alt="Toastr">
+<img :src="$withBase('/assets/img/7.x/toastr.png')" alt="Toastr">
 
 ## Usage
 

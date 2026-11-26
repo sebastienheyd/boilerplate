@@ -6,7 +6,7 @@
 
 Will render
 
-<img :src="$withBase('/assets/img/input.png')" alt="Input">
+<img :src="$withBase('/assets/img/7.x/input.png')" alt="Input">
 
 ## Attributes
 

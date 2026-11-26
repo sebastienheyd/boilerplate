@@ -4,7 +4,7 @@ Tempus Dominus is the successor to the very popular Eonasdan/bootstrap-datetimep
 
 > [https://tempusdominus.github.io/bootstrap-4](https://tempusdominus.github.io/bootstrap-4/)
 
-<img :src="$withBase('/assets/img/datetimepicker.png')" alt="Datetimepicker">
+<img :src="$withBase('/assets/img/7.x/datetimepicker.png')" alt="Datetimepicker">
 
 ## Usage
 

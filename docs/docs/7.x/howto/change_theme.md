@@ -10,9 +10,9 @@ $theme = include __DIR__.'/themes/default.php';
 
 > Available themes are `default`, `black`, `red`.
 
-<a :href="$withBase('/assets/img/logs_stats.png')" class="img-link"><img :src="$withBase('/assets/img/logs_stats.png')" style="max-width:100%;height:100px;margin-right:.5rem" /></a>
-<a :href="$withBase('/assets/img/theme_black.png')" class="img-link"><img :src="$withBase('/assets/img/theme_black.png')" style="max-width:100%;height:100px;margin-right:.5rem" /></a>
-<a :href="$withBase('/assets/img/theme_red.png')" class="img-link"><img :src="$withBase('/assets/img/theme_red.png')" style="max-width:100%;height:100px;margin-right:.5rem" /></a>
+<a :href="$withBase('/assets/img/7.x/logs_stats.png')" class="img-link"><img :src="$withBase('/assets/img/7.x/logs_stats.png')" style="max-width:100%;height:100px;margin-right:.5rem" /></a>
+<a :href="$withBase('/assets/img/7.x/theme_black.png')" class="img-link"><img :src="$withBase('/assets/img/7.x/theme_black.png')" style="max-width:100%;height:100px;margin-right:.5rem" /></a>
+<a :href="$withBase('/assets/img/7.x/theme_red.png')" class="img-link"><img :src="$withBase('/assets/img/7.x/theme_red.png')" style="max-width:100%;height:100px;margin-right:.5rem" /></a>
 
 ---
 

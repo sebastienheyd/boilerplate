@@ -4,7 +4,7 @@ An enhanced HTML 5 file input with file preview for various files, offers multip
 
 > [https://plugins.krajee.com/file-input](https://plugins.krajee.com/file-input)
 
-<img :src="$withBase('/assets/img/fileinput.png')" alt="FileInput" style="max-width:700px">
+<img :src="$withBase('/assets/img/7.x/fileinput.png')" alt="FileInput" style="max-width:700px">
 
 ## Loading
  

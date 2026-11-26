@@ -4,7 +4,7 @@ Bootbox.js is a small JavaScript library which allows you to create programmatic
 
 > [http://bootboxjs.com/](http://bootboxjs.com/documentation.html) 
 
-<img :src="$withBase('/assets/img/bootbox.png')" alt="Bootbox">
+<img :src="$withBase('/assets/img/7.x/bootbox.png')" alt="Bootbox">
 
 ## Usage
 

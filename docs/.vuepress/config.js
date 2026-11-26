@@ -35,6 +35,10 @@ module.exports = {
   },
   plugins: [
     '@vuepress/plugin-back-to-top',
-    '@vuepress/plugin-medium-zoom',
+    ['@vuepress/plugin-medium-zoom', {
+      // Images written as HTML on their own line are direct children of the content, images in a link are not zoomed
+      selector: '.theme-default-content > img, .theme-default-content :not(a) > img',
+      options: { background: 'rgba(0, 0, 0, .85)' },
+    }],
   ]
 }

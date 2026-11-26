@@ -19,8 +19,9 @@ This is a **Laravel Boilerplate package** based on AdminLTE 3, designed for crea
 ### Composer Scripts
 - `composer test` - Run PHPUnit tests
 - `composer lint` - Run PHPStan static analysis
-- `composer serve` - Start development server with Orchestra Testbench
-- `composer build` - Build workbench for testing
+- `composer serve` - Build the workbench and start the local demo server (http://127.0.0.1:8000/admin, `admin@example.com` / `password`, configured in `testbench.yaml`)
+- `composer build` - Build the workbench: publish assets, create the SQLite database, migrate and seed the demo administrator (`workbench/database/seeders`)
+- `docker compose up` - Same demo without a local PHP (public `composer:2` image, port 8000). The demo login form is prefilled by `workbench/app/Providers/WorkbenchServiceProvider.php`. `workbench/server.php` is the demo server router (cache headers on assets), copied to the skeleton by `composer build`
 
 ### Asset Compilation
 - `npm run docs:dev` - Start VuePress documentation development server
@@ -220,3 +221,5 @@ The package is designed for extensibility:
 - Each feature should have its own dedicated page under the appropriate section
 - New pages must be referenced in the VuePress sidebar configuration
 - **Images**: always use `<img :src="$withBase('/assets/img/...')" alt="...">` instead of markdown `![](...)` — VuePress is deployed under a `/boilerplate/` base path and `$withBase` is required for images to resolve correctly
+- **Image zoom**: images are zoomed on click (`@vuepress/plugin-medium-zoom`), do not wrap them in a link: images inside a link are not zoomable
+- **Screenshots**: prefer the dark mode for the documentation screenshots, except the ones showing the themes

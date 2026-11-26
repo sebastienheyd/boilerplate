@@ -10,7 +10,7 @@ Boilerplate version >= 7.10
 
 Will render
 
-<img :src="$withBase('/assets/img/datatable.jpg')" alt="DataTable" style="max-width: 700px">
+<img :src="$withBase('/assets/img/7.x/datatable.jpg')" alt="DataTable" style="max-width: 700px">
 
 ## How to create a DataTable
 

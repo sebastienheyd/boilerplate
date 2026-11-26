@@ -4,7 +4,7 @@ DataTables is a plugin to convert html tables into dynamic tables, allowing fast
 
 > [https://datatables.net/](https://datatables.net/)
 
-<img :src="$withBase('/assets/img/datatables.png')" alt="DataTables">
+<img :src="$withBase('/assets/img/7.x/datatables.png')" alt="DataTables">
 
 ## Loading
 

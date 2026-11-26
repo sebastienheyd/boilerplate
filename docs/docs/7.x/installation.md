@@ -30,4 +30,4 @@ Now you can point your browser to [http://localhost:8000/admin](http://localhost
 
 If everything is ok, you will see the first user registration form.
 
-<img :src="$withBase('/assets/img/register.png')" alt="Register">
+<img :src="$withBase('/assets/img/7.x/register.png')" alt="Register">

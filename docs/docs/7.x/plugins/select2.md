@@ -4,7 +4,7 @@ Select2 gives you a customizable select box with support for searching, tagging,
 
 > [https://select2.org](https://select2.org)
 
-<img :src="$withBase('/assets/img/select2.png')" alt="Select2">
+<img :src="$withBase('/assets/img/7.x/select2.png')" alt="Select2">
 
 ## Component
 

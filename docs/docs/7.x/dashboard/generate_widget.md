@@ -6,7 +6,7 @@ Boilerplate version >= 7.24
 
 Since version 7.24, the dashboard is composed of configurable widgets. It is possible to generate these widgets using an artisan command.
 
-<a :href="$withBase('/assets/img/dashboard.png')" class="img-link"><img :src="$withBase('/assets/img/dashboard.png')" style="max-width:100%;height:400px;margin-right:.5rem"/></a>
+<a :href="$withBase('/assets/img/7.x/dashboard.png')" class="img-link"><img :src="$withBase('/assets/img/7.x/dashboard.png')" style="max-width:100%;height:400px;margin-right:.5rem"/></a>
 
 ---
 

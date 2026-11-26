@@ -6,7 +6,7 @@
 
 Will render a field with a button to switch the visibility of the password and requirements when focusing the field.
 
-<img :src="$withBase('/assets/img/password.png')" alt="Password">
+<img :src="$withBase('/assets/img/7.x/password.png')" alt="Password">
 
 ## Attributes
 

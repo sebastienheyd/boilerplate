@@ -6,7 +6,7 @@
 
 Will render
 
-<img :src="$withBase('/assets/img/icheck.png')" alt="Icheck">
+<img :src="$withBase('/assets/img/7.x/icheck.png')" alt="Icheck">
 
 ## Attributes
 

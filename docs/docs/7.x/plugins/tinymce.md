@@ -4,7 +4,7 @@ TinyMCE is the an advanced WYSIWYG HTML editor designed to simplify website cont
 
 > [https://www.tiny.cloud](https://www.tiny.cloud)
 
-<img :src="$withBase('/assets/img/tinymce.png')" alt="TinyMCE">
+<img :src="$withBase('/assets/img/7.x/tinymce.png')" alt="TinyMCE">
 
 ## Component
 

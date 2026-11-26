@@ -19,13 +19,13 @@ Other packages to extend the features :
 * [sebastienheyd/boilerplate-email-editor](https://github.com/sebastienheyd/boilerplate-email-editor)
 
 ---
-<a :href="$withBase('/assets/img/register.png')" class="img-link"><img :src="$withBase('/assets/img/register.png')" style="max-width:100%;height:90px;margin-right:.5rem"/></a>
-<a :href="$withBase('/assets/img/login.png')" class="img-link"><img :src="$withBase('/assets/img/login.png')" style="max-width:100%;height:90px;margin-right:.5rem"/></a>
-<a :href="$withBase('/assets/img/add_user.png')" class="img-link"><img :src="$withBase('/assets/img/add_user.png')" style="max-width:100%;height:90px;margin-right:.5rem" /></a>
-<a :href="$withBase('/assets/img/role.png')" class="img-link"><img :src="$withBase('/assets/img/role.png')" style="max-width:100%;height:90px;margin-right:.5rem" /></a>
-<a :href="$withBase('/assets/img/logs.png')" class="img-link"><img :src="$withBase('/assets/img/logs.png')" style="max-width:100%;height:90px;margin-right:.5rem" /></a>
-<a :href="$withBase('/assets/img/theme_red.png')" class="img-link"><img :src="$withBase('/assets/img/theme_red.png')" style="max-width:100%;height:90px;margin-right:.5rem" /></a>
-<a :href="$withBase('/assets/img/dashboard.png')" class="img-link"><img :src="$withBase('/assets/img/dashboard.png')" style="max-width:100%;height:90px;margin-right:.5rem" /></a>
+<a :href="$withBase('/assets/img/7.x/register.png')" class="img-link"><img :src="$withBase('/assets/img/7.x/register.png')" style="max-width:100%;height:90px;margin-right:.5rem"/></a>
+<a :href="$withBase('/assets/img/7.x/login.png')" class="img-link"><img :src="$withBase('/assets/img/7.x/login.png')" style="max-width:100%;height:90px;margin-right:.5rem"/></a>
+<a :href="$withBase('/assets/img/7.x/add_user.png')" class="img-link"><img :src="$withBase('/assets/img/7.x/add_user.png')" style="max-width:100%;height:90px;margin-right:.5rem" /></a>
+<a :href="$withBase('/assets/img/7.x/role.png')" class="img-link"><img :src="$withBase('/assets/img/7.x/role.png')" style="max-width:100%;height:90px;margin-right:.5rem" /></a>
+<a :href="$withBase('/assets/img/7.x/logs.png')" class="img-link"><img :src="$withBase('/assets/img/7.x/logs.png')" style="max-width:100%;height:90px;margin-right:.5rem" /></a>
+<a :href="$withBase('/assets/img/7.x/theme_red.png')" class="img-link"><img :src="$withBase('/assets/img/7.x/theme_red.png')" style="max-width:100%;height:90px;margin-right:.5rem" /></a>
+<a :href="$withBase('/assets/img/7.x/dashboard.png')" class="img-link"><img :src="$withBase('/assets/img/7.x/dashboard.png')" style="max-width:100%;height:90px;margin-right:.5rem" /></a>
 
 ## Features
 

@@ -4,7 +4,7 @@ A full-sized drag & drop JavaScript event calendar
 
 > [https://fullcalendar.io](https://fullcalendar.io)
 
-<img :src="$withBase('/assets/img/fullcalendar.png')" alt="FullCalendar" style="max-width:500px">
+<img :src="$withBase('/assets/img/7.x/fullcalendar.png')" alt="FullCalendar" style="max-width:500px">
 
 ## Loading
 
