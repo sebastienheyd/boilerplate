@@ -35,3 +35,40 @@ In order to upgrade from Boilerplate 7.x to 8.x you have to follow these steps:
 Intervention Image v2.x is end of life and no longer maintained. The service provider for Laravel has been removed and the package has been replaced by the [Intervention Laravel Integration 1.x](https://github.com/Intervention/image-laravel) package.
 
 Intervention Image has been updated to version 3.x. You can find the upgrade guide [here](https://image.intervention.io/v3/introduction/upgrade).
+## Modern theme
+
+Version 8.x adds a `modern` theme with named color palettes, see [Modern theme](modern_theme.md). It is the default
+theme of new installations.
+
+Existing installations keep their current look: a theme configuration published before this version has no `style` key
+in its theme file, and is rendered with the `classic` style.
+
+To switch an existing installation to the modern theme, either:
+
+- add `'style' => 'modern'` to the theme file you use (for example `config/boilerplate/themes/default.php`). This works
+  with any published configuration. You can also copy the AdminLTE settings of
+  `vendor/sebastienheyd/boilerplate/src/config/themes/modern.php` into this file;
+
+- or republish the configuration (your changes to the `config/boilerplate` files will be overwritten), which adds the
+  `modern` theme file and makes it the default one:
+
+```
+php artisan vendor:publish --tag=boilerplate-config --force
+```
+
+::: tip
+A `config/boilerplate/theme.php` file published before version 8.3.1 always loads `themes/default.php`: the
+`BOILERPLATE_THEME` variable has no effect with it. Use the first method, or republish the configuration.
+:::
+
+Then publish the assets, which contain the modern stylesheet: `php artisan vendor:publish --tag=boilerplate-public --force`.
+
+::: warning
+An application that has never published the boilerplate configuration uses the package configuration, and switches to
+the modern theme on update. Publish the assets (`php artisan vendor:publish --tag=boilerplate-public --force`), or set
+`BOILERPLATE_THEME=default` in your `.env` file to keep the previous look. Without up-to-date assets, the modern
+stylesheet is missing from the Mix manifest and Laravel throws an "Unable to locate Mix file" error in debug mode.
+:::
+
+The automatic dark mode (when the user has not chosen a mode) now follows the system preference. It was previously
+enabled whatever this preference was.

@@ -50,6 +50,7 @@ function getDocsNavBar(version) {
                 'middleware',
                 'pwa',
                 'layout',
+                'modern_theme',
                 {
                     title: 'Datatables',
                     children: [

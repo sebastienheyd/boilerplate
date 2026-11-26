@@ -20,11 +20,13 @@ Other packages to extend the features :
 
 ---
 
-<a href="https://sebastienheyd.github.io/boilerplate/assets/img/login.png" class="img-link"><img src="https://sebastienheyd.github.io/boilerplate/assets/img/login.png" style="max-width:100%;height:90px;margin-right:.5rem"/></a>
-<a href="https://sebastienheyd.github.io/boilerplate/assets/img/add_user.png" class="img-link"><img src="https://sebastienheyd.github.io/boilerplate/assets/img/add_user.png" style="max-width:100%;height:90px;margin-right:.5rem" /></a>
+<a href="https://sebastienheyd.github.io/boilerplate/assets/img/login.png" class="img-link"><img src="https://sebastienheyd.github.io/boilerplate/assets/img/login.png" style="max-width:100%;height:90px;margin-right:.5rem" /></a>
+<a href="https://sebastienheyd.github.io/boilerplate/assets/img/dashboard.png" class="img-link"><img src="https://sebastienheyd.github.io/boilerplate/assets/img/dashboard.png" style="max-width:100%;height:90px;margin-right:.5rem" /></a>
+<a href="https://sebastienheyd.github.io/boilerplate/assets/img/users_list.png" class="img-link"><img src="https://sebastienheyd.github.io/boilerplate/assets/img/users_list.png" style="max-width:100%;height:90px;margin-right:.5rem" /></a>
 <a href="https://sebastienheyd.github.io/boilerplate/assets/img/role.png" class="img-link"><img src="https://sebastienheyd.github.io/boilerplate/assets/img/role.png" style="max-width:100%;height:90px;margin-right:.5rem" /></a>
 <a href="https://sebastienheyd.github.io/boilerplate/assets/img/logs.png" class="img-link"><img src="https://sebastienheyd.github.io/boilerplate/assets/img/logs.png" style="max-width:100%;height:90px;margin-right:.5rem" /></a>
-<a href="https://sebastienheyd.github.io/boilerplate/assets/img/dashboard.png" class="img-link"><img src="https://sebastienheyd.github.io/boilerplate/assets/img/dashboard.png" style="max-width:100%;height:90px;margin-right:.5rem" /></a>
+<a href="https://sebastienheyd.github.io/boilerplate/assets/img/theme_modern.png" class="img-link"><img src="https://sebastienheyd.github.io/boilerplate/assets/img/theme_modern.png" style="max-width:100%;height:90px;margin-right:.5rem" /></a>
+<a href="https://sebastienheyd.github.io/boilerplate/assets/img/theme_modern_dark.png" class="img-link"><img src="https://sebastienheyd.github.io/boilerplate/assets/img/theme_modern_dark.png" style="max-width:100%;height:90px;margin-right:.5rem" /></a>
 
 ## Version Compatibility
 

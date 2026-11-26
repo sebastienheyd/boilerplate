@@ -10,6 +10,9 @@ Add the theme name to your `.env` file:
 BOILERPLATE_THEME=black
 ```
 
+With the `modern` theme, the color palette is set with the `BOILERPLATE_PALETTE` environment variable, see
+[Modern theme](../modern_theme.md).
+
 ## Method 2: Direct Configuration
 
 You can also manually modify the theme in your `config/boilerplate/theme.php` file:
@@ -28,11 +31,13 @@ if (!file_exists($themePath)) {
 $theme = include $themePath;
 ```
 
-> Available themes are `default`, `black`, `red`. The system automatically validates theme existence and falls back to default if the specified theme is not found.
+> Available themes are `modern` (default), `default`, `black`, `red`. The system automatically validates theme existence and falls back to `modern` if the specified theme is not found.
 
-<a :href="$withBase('/assets/img/logs_stats.png')" class="img-link"><img :src="$withBase('/assets/img/logs_stats.png')" style="max-width:100%;height:100px;margin-right:.5rem" /></a>
-<a :href="$withBase('/assets/img/theme_black.png')" class="img-link"><img :src="$withBase('/assets/img/theme_black.png')" style="max-width:100%;height:100px;margin-right:.5rem" /></a>
-<a :href="$withBase('/assets/img/theme_red.png')" class="img-link"><img :src="$withBase('/assets/img/theme_red.png')" style="max-width:100%;height:100px;margin-right:.5rem" /></a>
+<img :src="$withBase('/assets/img/theme_modern.png')" style="max-width:100%;height:100px;margin-right:.5rem" />
+<img :src="$withBase('/assets/img/theme_modern_dark.png')" style="max-width:100%;height:100px;margin-right:.5rem" />
+<img :src="$withBase('/assets/img/theme_default.png')" style="max-width:100%;height:100px;margin-right:.5rem" />
+<img :src="$withBase('/assets/img/theme_black.png')" style="max-width:100%;height:100px;margin-right:.5rem" />
+<img :src="$withBase('/assets/img/theme_red.png')" style="max-width:100%;height:100px;margin-right:.5rem" />
 
 ---
 
@@ -42,7 +47,7 @@ You don't have to create a new theme, you can also edit the `default` theme. But
 
 To create a new theme:
 
-1. Copy the `default.php` file in the `config/boilerplate/themes/` folder to a new theme file (e.g., `custom.php`)
+1. Copy the `modern.php` (or `default.php` for the classic style) file in the `config/boilerplate/themes/` folder to a new theme file (e.g., `custom.php`)
 2. Modify your new theme file as needed  
 3. Set the `BOILERPLATE_THEME` environment variable to your new theme name:
 
@@ -50,7 +55,7 @@ To create a new theme:
 BOILERPLATE_THEME=custom
 ```
 
-The system will automatically load your custom theme. If the theme file doesn't exist, it will fallback to the default theme.
+The system will automatically load your custom theme. If the theme file doesn't exist, it will fallback to the `modern` theme.
 
 ---
 
