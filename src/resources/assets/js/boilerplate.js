@@ -176,7 +176,7 @@ $(() => {
     }
 
     // Enable dark-mode automaticaly if not set and if system use dark-mode
-    if ($('body').data('darkmode') == '2' && window.matchMedia("(prefers-color-scheme: dark)")) {
+    if ($('body').data('darkmode') == '2' && window.matchMedia("(prefers-color-scheme: dark)").matches) {
         enableDarkMode();
     }
 
@@ -198,6 +198,42 @@ $(() => {
         e.preventDefault();
         storeSetting('sidebar-collapsed', !$('body').hasClass('sidebar-collapse'));
     })
+
+    // AdminLTE removes "sidebar-is-opening" 50ms after the click, before the end of the width transition: the menu
+    // labels would wrap on several lines, then come back on one. Keep them on one line until the sidebar is open.
+    // The body class is observed: AdminLTE events are triggered with its own jQuery instance, not visible here.
+    let sidebar = document.querySelector('.main-sidebar');
+    let sidebarCollapsed = document.body.classList.contains('sidebar-collapse');
+
+    let keepLabelsOnOneLine = function() {
+        let timer;
+        let done = function() {
+            clearTimeout(timer);
+            sidebar.removeEventListener('transitionend', onEnd);
+            document.body.classList.remove('sidebar-is-expanding');
+        };
+        let onEnd = function(e) {
+            if (e.target === sidebar && e.propertyName === 'width') {
+                done();
+            }
+        };
+
+        document.body.classList.add('sidebar-is-expanding');
+        sidebar.addEventListener('transitionend', onEnd);
+        timer = setTimeout(done, 600);
+    };
+
+    if (sidebar) {
+        new MutationObserver(function() {
+            let collapsed = document.body.classList.contains('sidebar-collapse');
+
+            if (sidebarCollapsed && ! collapsed) {
+                keepLabelsOnOneLine();
+            }
+
+            sidebarCollapsed = collapsed;
+        }).observe(document.body, {attributes: true, attributeFilter: ['class']});
+    }
 
     $('.logout').click(function(e) {
         e.preventDefault();

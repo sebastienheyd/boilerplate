@@ -85,10 +85,18 @@ $red: #dc3545;
   }
 }
 
-.sidebar-is-opening .nav-sidebar .nav-link {
+// Labels on one line while the sidebar opens ("sidebar-is-expanding" is set by boilerplate.js until the end of the
+// transition), long labels can wrap once it is open
+.sidebar-is-opening .nav-sidebar .nav-link,
+.sidebar-is-expanding .nav-sidebar .nav-link {
   p {
     white-space: nowrap !important;
   }
+}
+
+.sidebar-is-expanding .user-panel .info a {
+  flex-wrap: nowrap !important;
+  white-space: nowrap;
 }
 
 // Remove dots around buttons
@@ -319,6 +327,12 @@ aside.control-sidebar {
 
   input {
     border-right: 0;
+
+    // Native Edge reveal button, duplicate of the component one
+    &::-ms-reveal,
+    &::-ms-clear {
+      display: none;
+    }
 
     &:focus ~ .input-group-append .btn {
       border: 1px solid #80bdff;
