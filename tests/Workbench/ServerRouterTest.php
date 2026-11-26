@@ -29,7 +29,9 @@ class ServerRouterTest extends TestCase
         self::$server = new Process([PHP_BINARY, '-S', '127.0.0.1:'.self::$port, __DIR__.'/../../workbench/server.php'], self::$public);
         self::$server->start();
 
-        // Wait for the server to accept connections, at most 5 seconds
+        // Wait for the server to accept connections, at most 5 seconds. Refused connections are expected until it
+        // starts: their warnings are ignored.
+        set_error_handler(static fn () => true);
         $deadline = microtime(true) + 5;
         while (microtime(true) < $deadline) {
             $connection = stream_socket_client('tcp://127.0.0.1:'.self::$port, $errno, $error, 0.1);
@@ -39,6 +41,7 @@ class ServerRouterTest extends TestCase
             }
             usleep(50000);
         }
+        restore_error_handler();
     }
 
     public static function tearDownAfterClass(): void
