@@ -94,7 +94,10 @@ $red: #dc3545;
   }
 }
 
-.sidebar-is-expanding .user-panel .info a {
+// User name on one line while the sidebar opens, and while it is collapsed: its narrow box would put the first and
+// last names on two lines, that jump back on one line when the sidebar expands on hover
+.sidebar-is-expanding .user-panel .info a,
+.sidebar-mini.sidebar-collapse .user-panel .info a {
   flex-wrap: nowrap !important;
   white-space: nowrap;
 }
