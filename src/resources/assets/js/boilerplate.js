@@ -204,23 +204,26 @@ $(() => {
     // The body class is observed: AdminLTE events are triggered with its own jQuery instance, not visible here.
     let sidebar = document.querySelector('.main-sidebar');
     let sidebarCollapsed = document.body.classList.contains('sidebar-collapse');
+    let expandingTimer = null;
 
+    let stopKeepingLabelsOnOneLine = function() {
+        clearTimeout(expandingTimer);
+        sidebar.removeEventListener('transitionend', onSidebarTransitionEnd);
+        document.body.classList.remove('sidebar-is-expanding');
+    };
+
+    let onSidebarTransitionEnd = function(e) {
+        if (e.target === sidebar && e.propertyName === 'width') {
+            stopKeepingLabelsOnOneLine();
+        }
+    };
+
+    // A single state, re-armed on each opening: a previous opening can not end the current one
     let keepLabelsOnOneLine = function() {
-        let timer;
-        let done = function() {
-            clearTimeout(timer);
-            sidebar.removeEventListener('transitionend', onEnd);
-            document.body.classList.remove('sidebar-is-expanding');
-        };
-        let onEnd = function(e) {
-            if (e.target === sidebar && e.propertyName === 'width') {
-                done();
-            }
-        };
-
+        stopKeepingLabelsOnOneLine();
         document.body.classList.add('sidebar-is-expanding');
-        sidebar.addEventListener('transitionend', onEnd);
-        timer = setTimeout(done, 600);
+        sidebar.addEventListener('transitionend', onSidebarTransitionEnd);
+        expandingTimer = setTimeout(stopKeepingLabelsOnOneLine, 600);
     };
 
     if (sidebar) {

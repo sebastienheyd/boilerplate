@@ -1,7 +1,7 @@
 {
     "/bootstrap.min.js": "/bootstrap.min.js?id=02b8669fc03d0878fd272682b6c1da3e",
     "/admin-lte.min.js": "/admin-lte.min.js?id=8420f385a9e74b6c70df83490b391514",
-    "/boilerplate.min.js": "/boilerplate.min.js?id=ffb0644ddbd91580fdf23a178cb580db",
+    "/boilerplate.min.js": "/boilerplate.min.js?id=df72a25adf1fe22c291ba29deac8d8b6",
     "/avatar.min.js": "/avatar.min.js?id=d0db393de9971533804791401fa42974",
     "/dashboard.min.js": "/dashboard.min.js?id=bd7909aec64e9524edb6dc98260782f1",
     "/plugins/codemirror/jquery.codemirror.min.js": "/plugins/codemirror/jquery.codemirror.min.js?id=602a128a5d02d1298120d05d0f6caf51",
@@ -24,7 +24,7 @@
     "/plugins/codemirror/codemirror.min.css": "/plugins/codemirror/codemirror.min.css?id=addb181215dbefc2b14653dc866e1e7e",
     "/plugins/datepicker/daterangepicker.min.css": "/plugins/datepicker/daterangepicker.min.css?id=fc692f59361a0d91c8e4ea5baf560bbd",
     "/logviewer.min.css": "/logviewer.min.css?id=c20601ee7b03d48bbc9c512e074b6c4f",
-    "/themes/modern.min.css": "/themes/modern.min.css?id=a998ca6543e0956ffaf71aef52e58041",
+    "/themes/modern.min.css": "/themes/modern.min.css?id=ebea99f8013313f0ceb9a33dd39354fa",
     "/plugins/spectrum-colorpicker2/spectrum.min.css": "/plugins/spectrum-colorpicker2/spectrum.min.css?id=3e847cdfd0ab4dec14fd04b5e0e323e2",
     "/plugins/tinymce/plugins/gpt/gpt.min.css": "/plugins/tinymce/plugins/gpt/gpt.min.css?id=133d027c5a4c001f3f49f7923ffb6873",
     "/plugins/codemirror/theme/storm.css": "/plugins/codemirror/theme/storm.css?id=5c8af50de527c1e87943e51cb7ebe293",
