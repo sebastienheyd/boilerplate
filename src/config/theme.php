@@ -1,13 +1,13 @@
 <?php
 
 // Selected theme
-$selectedTheme = env('BOILERPLATE_THEME', 'default');
+$selectedTheme = env('BOILERPLATE_THEME', 'modern');
 
 // Check if theme exists
 $themePath = __DIR__.'/themes/'.$selectedTheme.'.php';
 if (! file_exists($themePath)) {
-    $selectedTheme = 'default';
-    $themePath = __DIR__.'/themes/default.php';
+    $selectedTheme = 'modern';
+    $themePath = __DIR__.'/themes/modern.php';
 }
 
 $theme = include $themePath;

@@ -7,6 +7,7 @@ mix.webpackConfig({plugins: [new CleanWebpackPlugin()],stats:'errors-only'})
 
 // ============== AdminLTE & default ==============
 mix.sass('resources/assets/scss/adminlte.scss', 'public/adminlte.min.css');
+mix.sass('resources/assets/scss/themes/modern.scss', 'public/themes/modern.min.css');
 mix.js('resources/assets/js/bootstrap.js', 'public/bootstrap.min.js');
 mix.js('resources/assets/js/admin-lte.js', 'public/admin-lte.min.js');
 mix.js('resources/assets/js/boilerplate.js', 'public/boilerplate.min.js');

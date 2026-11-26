@@ -5,6 +5,7 @@
 )
 
 @section('content')
+@include('boilerplate::plugins.demo.theme')
 <div class="row">
     <div class="col-md-6">
         @include('boilerplate::plugins.demo.select2')

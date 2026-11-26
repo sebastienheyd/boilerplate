@@ -12,6 +12,9 @@
 @stack('plugin-css')
     <link rel="stylesheet" href="{{ mix('/plugins/fontawesome/fontawesome.min.css', '/assets/vendor/boilerplate') }}">
     <link rel="stylesheet" href="{{ mix('/adminlte.min.css', '/assets/vendor/boilerplate') }}">
+@if(\Sebastienheyd\Boilerplate\View\Theme::isModern())
+    <link rel="stylesheet" href="{{ mix('/themes/modern.min.css', '/assets/vendor/boilerplate') }}">
+@endif
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -27,7 +30,7 @@
     @include('boilerplate::layout.session')
 @stack('plugin-js')
 </head>
-<body class="layout-fixed layout-navbar-fixed sidebar-mini{{ $darkmode ? ' dark-mode' : '' }}{{ setting('sidebar-collapsed', false) ? ' sidebar-collapse' : '' }}" data-darkmode="{{ setting('darkmode', '2') }}">
+<body class="layout-fixed layout-navbar-fixed sidebar-mini{{ \Sebastienheyd\Boilerplate\View\Theme::isModern() ? ' '.\Sebastienheyd\Boilerplate\View\Theme::bodyClasses() : '' }}{{ $darkmode ? ' dark-mode' : '' }}{{ setting('sidebar-collapsed', false) ? ' sidebar-collapse' : '' }}" data-darkmode="{{ setting('darkmode', '2') }}">
     <div class="wrapper">
         @include('boilerplate::layout.header')
         @include('boilerplate::layout.mainsidebar')

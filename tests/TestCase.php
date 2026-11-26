@@ -120,6 +120,12 @@ class TestCase extends OrchestraTestCase
     protected static function refreshTestBench(): void
     {
         self::deleteTestBench();
+
+        // Files written in the skeleton by "composer serve" (local demo environment) would leak into tests
+        $fileSystem = new Filesystem();
+        $fileSystem->delete(self::$core_path.'/.env');
+        $fileSystem->delete($fileSystem->glob(self::$core_path.'/storage/logs/*.log'));
+
         self::backupTestBench();
     }
 

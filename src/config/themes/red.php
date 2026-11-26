@@ -6,6 +6,7 @@
  * Shadow : 0-4.
  */
 return [
+    'style'   => 'classic',
     'navbar'  => [
         'bg'     => 'red',
         'type'   => 'dark',

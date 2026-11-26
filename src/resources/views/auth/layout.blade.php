@@ -11,6 +11,9 @@
 @stack('plugin-css')
     <link rel="stylesheet" href="{{ mix('/plugins/fontawesome/fontawesome.min.css', '/assets/vendor/boilerplate') }}">
     <link rel="stylesheet" href="{{ mix('/adminlte.min.css', '/assets/vendor/boilerplate') }}">
+@if(\Sebastienheyd\Boilerplate\View\Theme::isModern())
+    <link rel="stylesheet" href="{{ mix('/themes/modern.min.css', '/assets/vendor/boilerplate') }}">
+@endif
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -21,14 +24,14 @@
     <link rel="apple-touch-icon" href="{{ url(config('boilerplate.app.pwa.apple_touch_icon')) }}">
 @endif
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page{{ \Sebastienheyd\Boilerplate\View\Theme::isModern() ? ' '.\Sebastienheyd\Boilerplate\View\Theme::bodyClasses() : '' }}">
     @yield('content')
     <script src="{{ mix('/bootstrap.min.js', '/assets/vendor/boilerplate') }}"></script>
     <script src="{{ mix('/admin-lte.min.js', '/assets/vendor/boilerplate') }}"></script>
     <script src="{{ mix('/boilerplate.min.js', '/assets/vendor/boilerplate') }}"></script>
     <script>$.ajaxSetup({headers:{'X-CSRF-TOKEN':'{{ csrf_token() }}'}});</script>
 @if(config('boilerplate.theme.darkmode'))
-    <script>window.matchMedia("(prefers-color-scheme: dark)") ? $('body').addClass('dark-mode accent-light') : $('body').removeClass('dark-mode accent-light')</script>
+    <script>window.matchMedia("(prefers-color-scheme: dark)").matches ? $('body').addClass('dark-mode accent-light') : $('body').removeClass('dark-mode accent-light')</script>
 @endif
 @stack('js')
 </body>

@@ -1,0 +1,600 @@
+/*
+ * Modern style for the boilerplate (light and dark), with named color palettes.
+ *
+ * Loaded right after adminlte.min.css when boilerplate.theme.style is "modern". The layouts add the
+ * "theme-modern palette-<name>" classes to the body tag. Colors are CSS variables defined on the body
+ * and redefined under body.dark-mode: the boilerplate dark mode switch only toggles this class,
+ * without reloading the page.
+ *
+ * Selectors start with "body.theme-modern": this prefix wins over the AdminLTE ".dark-mode ..." rules
+ * of the same structure. Applications can override any --bp-* variable in a stylesheet pushed to the
+ * "css" stack, which is loaded after this one.
+ */
+
+// ------------------------------------------------------------------ Palettes
+
+// Accent and primary colors of each palette, in light then dark mode. Other variables are derived
+// from them unless the palette sets them.
+$bp-palettes: (
+    'orange': (
+        light: (accent: #f98f34, accent-bg: #fff4ea, primary: #1746a2, primary-hover: #123a87, link: #1746a2, badge: #103273, badge-text: #ffffff),
+        dark: (accent: #ff9133, accent-bg: rgba(255, 145, 51, .1), primary: #2563eb, primary-hover: #1d4ed8, link: #7cc0eb, badge: #103273, badge-text: #7cc8f2),
+    ),
+    'blue': (
+        light: (accent: #2563eb, primary: #1d4ed8),
+        dark: (accent: #60a5fa, primary: #2563eb, link: #93c5fd),
+    ),
+    'green': (
+        light: (accent: #16a34a, primary: #15803d),
+        dark: (accent: #4ade80, primary: #16a34a, link: #86efac),
+    ),
+    'red': (
+        light: (accent: #dc2626, primary: #b91c1c),
+        dark: (accent: #f87171, primary: #dc2626, link: #fca5a5),
+    ),
+    'purple': (
+        light: (accent: #7c3aed, primary: #6d28d9),
+        dark: (accent: #a78bfa, primary: #7c3aed, link: #c4b5fd),
+    ),
+    'teal': (
+        light: (accent: #0d9488, primary: #0f766e),
+        dark: (accent: #2dd4bf, primary: #0d9488, link: #5eead4),
+    ),
+);
+
+// Prefix of the content links rule, copied from AdminLTE ".accent-dark a:not(...)" to override it
+$bp-content-links: 'a:not(.dropdown-item):not(.btn-app):not(.nav-link):not(.brand-link):not(.page-link):not(.badge):not(.btn)';
+
+// Form controls, with the same structure as the AdminLTE ".dark-mode .form-control:not(...)" rules
+$bp-form-control: '.form-control:not(.form-control-navbar):not(.form-control-sidebar)';
+
+// ------------------------------------------------------------- Neutral colors
+
+body.theme-modern {
+    --bp-bg: #fafafa;
+    --bp-surface: #ffffff;
+    --bp-surface-hover: #f3f4f6;
+    --bp-border: #e5e7eb;
+    --bp-header: #f4f6fb;
+    --bp-header-border: #e8edf6;
+    --bp-text: #1c2435;
+    --bp-text-muted: #6b7280;
+    --bp-field: #ffffff;
+}
+
+body.theme-modern.dark-mode {
+    --bp-bg: #0b1220;
+    --bp-surface: #111828;
+    --bp-surface-hover: #1a2336;
+    --bp-border: #27334b;
+    --bp-header: #0d1930;
+    --bp-header-border: #20314f;
+    --bp-text: #e5e7eb;
+    --bp-text-muted: #9a9ca6;
+    --bp-field: #0b1220;
+}
+
+// Derived values, used when the palette does not set them
+body.theme-modern {
+    --bp-accent: #f98f34;
+    --bp-primary: #1746a2;
+    --bp-accent-bg: color-mix(in srgb, var(--bp-accent) 10%, #ffffff);
+    --bp-primary-hover: color-mix(in srgb, var(--bp-primary) 82%, #000000);
+    --bp-link: var(--bp-primary);
+    --bp-badge: color-mix(in srgb, var(--bp-primary) 70%, #000000);
+    --bp-badge-text: #ffffff;
+}
+
+body.theme-modern.dark-mode {
+    --bp-accent-bg: color-mix(in srgb, var(--bp-accent) 12%, transparent);
+    --bp-badge: color-mix(in srgb, var(--bp-primary) 35%, #0b1220);
+    --bp-badge-text: var(--bp-link);
+}
+
+@each $name, $modes in $bp-palettes {
+    body.theme-modern.palette-#{$name} {
+        @each $var, $value in map-get($modes, light) {
+            --bp-#{$var}: #{$value};
+        }
+    }
+
+    body.theme-modern.palette-#{$name}.dark-mode {
+        @each $var, $value in map-get($modes, dark) {
+            --bp-#{$var}: #{$value};
+        }
+    }
+}
+
+// ------------------------------------------------------------- Page structure
+
+body.theme-modern,
+body.theme-modern.dark-mode {
+    background-color: var(--bp-bg) !important;
+    color: var(--bp-text);
+}
+
+body.theme-modern .content-wrapper {
+    background-color: var(--bp-bg);
+    color: var(--bp-text);
+}
+
+body.theme-modern .content-wrapper .content-header,
+body.theme-modern .content-wrapper .content-header h1 {
+    color: var(--bp-text);
+}
+
+body.theme-modern .content-header .breadcrumb-item,
+body.theme-modern .content-header .breadcrumb-item.active,
+body.theme-modern .text-muted {
+    color: var(--bp-text-muted) !important;
+}
+
+// Content links. AdminLTE colors them in gray or white with ".accent-dark a:not(...)" (or accent-light):
+// the same structure, prefixed, replaces it. The sidebar and the navbar are outside .content-wrapper.
+body.theme-modern .content-wrapper.accent-dark #{$bp-content-links},
+body.theme-modern .content-wrapper.accent-light #{$bp-content-links} {
+    color: var(--bp-link);
+}
+
+body.theme-modern .content-wrapper.accent-dark #{$bp-content-links}:hover,
+body.theme-modern .content-wrapper.accent-light #{$bp-content-links}:hover {
+    color: var(--bp-primary-hover);
+}
+
+// Navbar
+body.theme-modern .main-header.navbar,
+body.theme-modern .main-header.navbar-dark {
+    background-color: var(--bp-surface);
+    border-bottom: 1px solid var(--bp-border);
+}
+
+body.theme-modern .main-header .nav-link {
+    color: var(--bp-text-muted);
+}
+
+body.theme-modern .main-header .nav-link:hover {
+    color: var(--bp-text);
+}
+
+// ------------------------------------------------------------------- Sidebar
+
+body.theme-modern .main-sidebar,
+body.theme-modern .main-sidebar::before {
+    background-color: var(--bp-surface);
+    box-shadow: none !important;
+}
+
+body.theme-modern .main-sidebar {
+    border-right: 1px solid var(--bp-border);
+}
+
+body.theme-modern .main-sidebar .brand-link {
+    background-color: var(--bp-surface) !important;
+    border-bottom: 1px solid var(--bp-border);
+    color: var(--bp-text);
+}
+
+// Brand icon in the accent color, without the round badge of the classic style
+body.theme-modern .main-sidebar .brand-link .brand-logo {
+    background-color: transparent !important;
+    border-radius: 0;
+    box-shadow: none !important;
+    color: var(--bp-accent);
+}
+
+body.theme-modern .main-sidebar .user-panel {
+    border-bottom: 1px solid var(--bp-border);
+}
+
+body.theme-modern .main-sidebar .user-panel a {
+    color: var(--bp-text);
+}
+
+body.theme-modern .main-sidebar .nav-sidebar .nav-item > .nav-link {
+    background-color: transparent;
+    border-radius: .375rem;
+    box-shadow: none !important;
+    color: var(--bp-text);
+}
+
+body.theme-modern .main-sidebar .nav-sidebar .nav-item > .nav-link .nav-icon {
+    color: var(--bp-text-muted);
+}
+
+body.theme-modern .main-sidebar .nav-sidebar .nav-item > .nav-link:hover,
+body.theme-modern .main-sidebar .nav-sidebar .nav-item > .nav-link:focus {
+    background-color: var(--bp-surface-hover);
+    color: var(--bp-text);
+}
+
+// Group (item with a submenu): muted title, without background, even when open or holding the current
+// page. Detected with :has(), as groups created by $item->add() have no has-treeview class.
+body.theme-modern .main-sidebar .nav-sidebar .nav-item:has(> .nav-treeview) > .nav-link,
+body.theme-modern .main-sidebar .nav-sidebar .nav-item:has(> .nav-treeview) > .nav-link.active {
+    background-color: transparent;
+    color: var(--bp-text-muted);
+}
+
+// Current page: text and icon in the accent color, with a vertical marker on the left
+body.theme-modern .main-sidebar .nav-sidebar .nav-item:not(:has(> .nav-treeview)) > .nav-link.active {
+    background-color: var(--bp-accent-bg);
+    color: var(--bp-accent);
+    position: relative;
+}
+
+body.theme-modern .main-sidebar .nav-sidebar .nav-item:not(:has(> .nav-treeview)) > .nav-link.active .nav-icon {
+    color: var(--bp-accent);
+}
+
+body.theme-modern .main-sidebar .nav-sidebar .nav-item:not(:has(> .nav-treeview)) > .nav-link.active::before {
+    background-color: var(--bp-accent);
+    border-radius: 0 3px 3px 0;
+    bottom: .4rem;
+    content: "";
+    left: -.5rem;
+    position: absolute;
+    top: .4rem;
+    width: 3px;
+}
+
+// --------------------------------------------------------------------- Cards
+
+body.theme-modern .card {
+    background-color: var(--bp-surface);
+    border-radius: .5rem;
+    box-shadow: none;
+    color: var(--bp-text);
+}
+
+// Neutral border with a low specificity, so that the AdminLTE colored top border of outline cards wins
+body.theme-modern :where(.card) {
+    border: 1px solid var(--bp-border);
+}
+
+// Outline cards keep the AdminLTE colored top border (info, success, warning...). The primary one takes
+// the palette primary color, like the buttons.
+body.theme-modern .card.card-outline.card-primary {
+    border-top-color: var(--bp-primary);
+}
+
+body.theme-modern .card > .card-header {
+    background-color: var(--bp-header);
+    border-bottom: 1px solid var(--bp-header-border);
+    border-radius: .5rem .5rem 0 0;
+    color: var(--bp-text);
+}
+
+body.theme-modern .card > .card-footer {
+    background-color: var(--bp-surface);
+    border-top: 1px solid var(--bp-border);
+}
+
+body.theme-modern .card .card-title {
+    color: var(--bp-text);
+    font-weight: 600;
+}
+
+// ----------------------------------------------------------- Tables and lists
+
+body.theme-modern .table {
+    color: var(--bp-text);
+}
+
+body.theme-modern .table td,
+body.theme-modern .table th,
+body.theme-modern .table thead th {
+    border-color: var(--bp-border);
+}
+
+body.theme-modern .table-striped tbody tr:nth-of-type(odd) {
+    background-color: var(--bp-header);
+}
+
+body.theme-modern .table-hover tbody tr:hover {
+    background-color: var(--bp-surface-hover);
+    color: var(--bp-text);
+}
+
+body.theme-modern .list-group-item {
+    background-color: var(--bp-surface);
+    border-color: var(--bp-border);
+    color: var(--bp-text);
+}
+
+body.theme-modern .page-item .page-link {
+    background-color: var(--bp-surface);
+    border-color: var(--bp-border);
+    color: var(--bp-link);
+}
+
+// AdminLTE colors the active page with ".accent-dark" / ".accent-light" rules (up to ".dark-mode .accent-dark
+// .page-item.active .page-link"): the attribute selector and the dark-mode variant win over them.
+body.theme-modern .page-item.active .page-link,
+body.theme-modern [class*="accent-"] .page-item.active .page-link,
+body.theme-modern.dark-mode [class*="accent-"] .page-item.active .page-link {
+    background-color: var(--bp-primary);
+    border-color: var(--bp-primary);
+    // The boilerplate sets "body.dark-mode .page-item.active .page-link" with !important
+    color: #ffffff !important;
+}
+
+// In dark mode, the boilerplate sets the pagination colors with !important (_darkmode.scss): the same
+// structure, prefixed, wins. Covers hover and focus, set by DataTables on the active page after a click.
+body.theme-modern.dark-mode .page-item:not(.active):not(.disabled) .page-link {
+    color: var(--bp-link) !important;
+}
+
+body.theme-modern.dark-mode .page-item.active .page-link:hover,
+body.theme-modern.dark-mode .page-item.active .page-link:focus {
+    background-color: var(--bp-primary-hover) !important;
+    border-color: var(--bp-primary-hover) !important;
+    color: #ffffff !important;
+}
+
+body.theme-modern .page-item.disabled .page-link {
+    background-color: var(--bp-surface) !important;
+    border-color: var(--bp-border) !important;
+    color: var(--bp-text-muted);
+}
+
+// ---------------------------------------------------------------------- Tabs
+
+body.theme-modern .nav-tabs {
+    border-bottom-color: var(--bp-border);
+}
+
+body.theme-modern .nav-tabs .nav-link {
+    border: 0;
+    border-bottom: 2px solid transparent;
+    color: var(--bp-text-muted);
+}
+
+body.theme-modern .nav-tabs .nav-link:hover {
+    color: var(--bp-text);
+}
+
+body.theme-modern .nav-tabs .nav-link.active,
+body.theme-modern .nav-tabs .nav-item.show .nav-link {
+    background-color: transparent;
+    border-bottom-color: var(--bp-accent);
+    color: var(--bp-text);
+    font-weight: 600;
+}
+
+// --------------------------------------------------------------------- Forms
+
+body.theme-modern #{$bp-form-control},
+body.theme-modern .custom-select,
+body.theme-modern .input-group-text,
+body.theme-modern .select2-container--default .select2-selection,
+body.theme-modern .select2-dropdown,
+body.theme-modern .select2-search__field {
+    background-color: var(--bp-field);
+    border-color: var(--bp-border);
+    color: var(--bp-text);
+}
+
+body.theme-modern .select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: var(--bp-text);
+}
+
+// In dark mode, AdminLTE sets the border with ".dark-mode .form-control:not(...) x4", more specific than
+// the rule above: same structure, prefixed, to win.
+body.theme-modern #{$bp-form-control}:not(.is-invalid):not(:focus) {
+    border-color: var(--bp-border);
+}
+
+// Focus, in the palette accent color: selector at least as specific as the border rules above. Invalid
+// fields keep the Bootstrap red focus.
+body.theme-modern #{$bp-form-control}:focus:not(.is-invalid),
+body.theme-modern .custom-select:focus:not(.is-invalid),
+body.theme-modern .select2-container--default.select2-container--focus .select2-selection,
+body.theme-modern .select2-container--default.select2-container--open .select2-selection {
+    border-color: var(--bp-accent);
+    box-shadow: 0 0 0 .15rem color-mix(in srgb, var(--bp-accent) 25%, transparent);
+}
+
+// In the content, AdminLTE sets the focus border with ".dark-mode .accent-light .form-control:focus:not(...)"
+// (white in dark mode): same structure, prefixed, to win.
+body.theme-modern [class*="accent-"] .form-control:focus:not(.is-invalid):not(.is-warning):not(.is-valid),
+body.theme-modern [class*="accent-"] .custom-select:focus:not(.is-invalid):not(.is-warning):not(.is-valid),
+body.theme-modern.dark-mode [class*="accent-"] .form-control:focus:not(.is-invalid):not(.is-warning):not(.is-valid),
+body.theme-modern.dark-mode [class*="accent-"] .custom-select:focus:not(.is-invalid):not(.is-warning):not(.is-valid) {
+    border-color: var(--bp-accent);
+}
+
+// Input groups: the halo surrounds the whole group (field and addons) instead of the field alone, and
+// the addons take the focus border. :has() targets the group of the focused field only.
+body.theme-modern .input-group:has(> #{$bp-form-control}:focus:not(.is-invalid)) {
+    border-radius: .25rem;
+    box-shadow: 0 0 0 .15rem color-mix(in srgb, var(--bp-accent) 25%, transparent);
+}
+
+body.theme-modern .input-group-sm:has(> #{$bp-form-control}:focus:not(.is-invalid)) {
+    border-radius: .2rem;
+}
+
+body.theme-modern .input-group-lg:has(> #{$bp-form-control}:focus:not(.is-invalid)) {
+    border-radius: .3rem;
+}
+
+body.theme-modern .input-group > #{$bp-form-control}:focus:not(.is-invalid) {
+    box-shadow: none;
+}
+
+// More specific than the boilerplate ".dark-mode ... .form-control:focus ~ ... .input-group-text" rules
+body.theme-modern .input-group:has(> #{$bp-form-control}:focus:not(.is-invalid)) .input-group-text {
+    border-color: var(--bp-accent);
+}
+
+// Password show/hide button: looks like the field it extends (boilerplate sets a grey border, blue
+// then white on focus in dark mode). Invalid fields keep the red border set with !important.
+body.theme-modern .input-group.password .input-group-append .btn {
+    background-color: var(--bp-field);
+    border-color: var(--bp-border);
+    color: var(--bp-text-muted);
+}
+
+body.theme-modern .input-group.password:has(> #{$bp-form-control}:focus:not(.is-invalid)) .input-group-append .btn {
+    border-color: var(--bp-accent);
+    border-left-width: 0;
+}
+
+body.theme-modern .form-control::placeholder {
+    color: var(--bp-text-muted);
+}
+
+// ------------------------------------------------- Buttons, badges and menus
+
+body.theme-modern .btn-primary {
+    background-color: var(--bp-primary);
+    border-color: var(--bp-primary);
+    color: #ffffff;
+}
+
+body.theme-modern .btn-primary:hover,
+body.theme-modern .btn-primary:focus {
+    background-color: var(--bp-primary-hover);
+    border-color: var(--bp-primary-hover);
+}
+
+body.theme-modern .btn-default,
+body.theme-modern .btn-outline-secondary {
+    background-color: var(--bp-surface);
+    border-color: var(--bp-border);
+    color: var(--bp-text);
+}
+
+body.theme-modern .btn-default:hover,
+body.theme-modern .btn-outline-secondary:hover {
+    background-color: var(--bp-surface-hover);
+    color: var(--bp-text);
+}
+
+body.theme-modern .badge-primary {
+    background-color: var(--bp-badge);
+    color: var(--bp-badge-text);
+}
+
+body.theme-modern .dropdown-menu,
+body.theme-modern .modal-content {
+    background-color: var(--bp-surface);
+    border-color: var(--bp-border);
+    color: var(--bp-text);
+}
+
+body.theme-modern .modal-header,
+body.theme-modern .modal-footer {
+    border-color: var(--bp-border);
+}
+
+body.theme-modern .dropdown-item {
+    color: var(--bp-text);
+}
+
+body.theme-modern .dropdown-item:hover,
+body.theme-modern .dropdown-item:focus {
+    background-color: var(--bp-surface-hover);
+    color: var(--bp-text);
+}
+
+// ---------------------------------------------------------------- Login page
+
+// Pages extending boilerplate::auth.layout. The "body.theme-modern.login-page" prefix wins over the
+// AdminLTE ".dark-mode .login-..." rules.
+body.theme-modern.login-page .login-box {
+    max-width: calc(100% - 2rem);
+}
+
+body.theme-modern.login-page .login-logo,
+body.theme-modern.login-page .login-logo a {
+    color: var(--bp-text);
+}
+
+// Brand icon in the accent color, as in the sidebar
+body.theme-modern.login-page .login-logo i {
+    color: var(--bp-accent);
+}
+
+// Links of the login box, with the structure of the AdminLTE ".accent-light a:not(...)" rule set in dark mode
+body.theme-modern.login-page .login-card-body #{$bp-content-links} {
+    color: var(--bp-link);
+}
+
+body.theme-modern.login-page .login-card-body #{$bp-content-links}:hover {
+    color: var(--bp-primary-hover);
+}
+
+body.theme-modern.login-page .login-box .card {
+    background-color: var(--bp-surface);
+    border: 1px solid var(--bp-border);
+    border-radius: .5rem;
+    box-shadow: none;
+}
+
+body.theme-modern.login-page .login-card-body {
+    background-color: var(--bp-surface);
+    border-radius: .5rem;
+    color: var(--bp-text);
+    padding: 1.75rem 1.5rem;
+}
+
+body.theme-modern.login-page .login-box-msg {
+    color: var(--bp-text);
+}
+
+body.theme-modern.login-page #{$bp-form-control},
+body.theme-modern.login-page #{$bp-form-control}:not(.is-invalid):not(:focus),
+body.theme-modern.login-page .input-group-text,
+body.theme-modern.login-page .login-card-body .input-group .input-group-text {
+    background-color: var(--bp-field);
+    border-color: var(--bp-border);
+    color: var(--bp-text);
+}
+
+// Input group addons muted, so as not to be mistaken for the input
+body.theme-modern.login-page .login-card-body .input-group .input-group-text {
+    color: var(--bp-text-muted);
+}
+
+// Focus: more specific than the border rules above and than the AdminLTE ".dark-mode ... :focus" rules
+body.theme-modern.login-page .login-card-body #{$bp-form-control}:focus:not(.is-invalid),
+body.theme-modern.login-page .login-card-body .input-group .form-control:focus:not(.is-invalid) ~ .input-group-append .input-group-text {
+    border-color: var(--bp-accent);
+}
+
+// ------------------------------------------- Wider sidebar on extra-large screens
+
+// AdminLTE sets the sidebar column to 250px. Only applies to the expanded sidebar: collapsed, it keeps
+// the AdminLTE reduced width and its expansion on hover (250px). Each selector copies the AdminLTE one,
+// adding :not(.sidebar-collapse), to win.
+@media (min-width: 1600px) {
+    body.theme-modern:not(.sidebar-collapse) {
+        --bp-sidebar-width: 300px;
+    }
+
+    body.theme-modern:not(.sidebar-collapse) .main-sidebar,
+    body.theme-modern:not(.sidebar-collapse) .main-sidebar::before {
+        width: var(--bp-sidebar-width);
+    }
+
+    body.theme-modern:not(.sidebar-collapse):not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav) .content-wrapper,
+    body.theme-modern:not(.sidebar-collapse):not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav) .main-footer,
+    body.theme-modern:not(.sidebar-collapse):not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav) .main-header {
+        margin-left: var(--bp-sidebar-width);
+    }
+
+    body.theme-modern.layout-fixed:not(.sidebar-collapse) .brand-link,
+    body.theme-modern.layout-navbar-fixed:not(.sidebar-collapse) .wrapper .brand-link,
+    body.theme-modern.layout-navbar-fixed:not(.sidebar-collapse) .wrapper .main-sidebar:hover .brand-link {
+        width: var(--bp-sidebar-width);
+    }
+
+    body.theme-modern.sidebar-mini:not(.sidebar-collapse) .main-sidebar .nav-link {
+        width: calc(var(--bp-sidebar-width) - 1rem);
+    }
+
+    body.theme-modern.sidebar-mini:not(.sidebar-collapse) .main-sidebar .nav-child-indent .nav-treeview .nav-link {
+        width: calc(var(--bp-sidebar-width) - 2rem);
+    }
+}

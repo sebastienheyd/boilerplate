@@ -10,6 +10,9 @@ class MenuTest extends TestComponent
     {
         $user = UserFactory::create()->admin();
 
+        // The expected markup below is the sidebar of the classic "default" preset
+        config(['boilerplate.theme.sidebar' => (include __DIR__.'/../../src/config/themes/default.php')['sidebar']]);
+
         $this->artisan('boilerplate:menuitem')
             ->expectsQuestion('Name of the menu item to create', 'test')
             ->assertSuccessful();

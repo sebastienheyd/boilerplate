@@ -28,6 +28,7 @@ use Sebastienheyd\Boilerplate\Middleware\BoilerplateImpersonate;
 use Sebastienheyd\Boilerplate\View\Composers\DatatablesComposer;
 use Sebastienheyd\Boilerplate\View\Composers\MenuComposer;
 use Sebastienheyd\Boilerplate\View\Composers\TinymceLoadComposer;
+use Sebastienheyd\Boilerplate\View\Theme;
 
 class BoilerplateServiceProvider extends ServiceProvider
 {
@@ -189,6 +190,12 @@ class BoilerplateServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        // A theme config published before the modern style has no "style" key: as mergeConfigFrom only merges
+        // the first level, the package default would leak into it, so the classic style is kept for it.
+        if ($style = Theme::styleForPublishedConfig(config('boilerplate.theme'))) {
+            config(['boilerplate.theme.style' => $style]);
+        }
+
         // Get config
         foreach (['app', 'auth', 'dashboard', 'laratrust', 'locale', 'menu', 'theme'] as $config) {
             $this->mergeConfigFrom(__DIR__."/config/$config.php", "boilerplate.$config");
