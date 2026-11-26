@@ -6,6 +6,7 @@
             <p class="alert alert-info">@lang('boilerplate::auth.session.expired')</p>
         @endif
         <p class="login-box-msg text-sm">@lang('boilerplate::auth.login.intro')</p>
+        @stack('login-notice')
         <x-boilerplate::form route="boilerplate.login">
             @if($redirect)
             <x-boilerplate::input type="hidden" name="redirect" :value="$redirect" />

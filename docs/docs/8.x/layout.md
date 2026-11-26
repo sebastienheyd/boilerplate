@@ -157,6 +157,19 @@ For plugin-specific assets that need to load before the main JavaScript:
 @endpush
 ```
 
+### Login Page Notice
+
+The login page renders the `login-notice` stack between the introduction message and the form. Use it to display a
+message without publishing the login view, for example from a view composer in a service provider:
+
+```php
+use Illuminate\Support\Facades\View;
+
+View::composer('boilerplate::auth.login', function () {
+    View::startPush('login-notice', '<div class="alert alert-warning">Maintenance tonight at 10 pm</div>');
+});
+```
+
 ---
 
 ## Theme Customization
