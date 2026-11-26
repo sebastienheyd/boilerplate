@@ -48,6 +48,9 @@ $bp-content-links: 'a:not(.dropdown-item):not(.btn-app):not(.nav-link):not(.bran
 // Form controls, with the same structure as the AdminLTE ".dark-mode .form-control:not(...)" rules
 $bp-form-control: '.form-control:not(.form-control-navbar):not(.form-control-sidebar)';
 
+// Validation states, whose Bootstrap border colors must not be replaced by the neutral border
+$bp-no-state: ':not(.is-invalid):not(.is-valid):not(.is-warning)';
+
 // ------------------------------------------------------------- Neutral colors
 
 body.theme-modern {
@@ -370,8 +373,17 @@ body.theme-modern .select2-container--default .select2-selection,
 body.theme-modern .select2-dropdown,
 body.theme-modern .select2-search__field {
     background-color: var(--bp-field);
-    border-color: var(--bp-border);
     color: var(--bp-text);
+}
+
+// Neutral border, except for the validation states: their Bootstrap colors must stay visible
+body.theme-modern #{$bp-form-control}#{$bp-no-state},
+body.theme-modern .custom-select#{$bp-no-state},
+body.theme-modern .input-group-text,
+body.theme-modern .select2-container--default .select2-selection,
+body.theme-modern .select2-dropdown,
+body.theme-modern .select2-search__field {
+    border-color: var(--bp-border);
 }
 
 body.theme-modern .select2-container--default .select2-selection--single .select2-selection__rendered {
@@ -380,7 +392,7 @@ body.theme-modern .select2-container--default .select2-selection--single .select
 
 // In dark mode, AdminLTE sets the border with ".dark-mode .form-control:not(...) x4", more specific than
 // the rule above: same structure, prefixed, to win.
-body.theme-modern #{$bp-form-control}:not(.is-invalid):not(:focus) {
+body.theme-modern #{$bp-form-control}#{$bp-no-state}:not(:focus) {
     border-color: var(--bp-border);
 }
 
@@ -543,8 +555,7 @@ body.theme-modern.login-page .login-box-msg {
     color: var(--bp-text);
 }
 
-body.theme-modern.login-page #{$bp-form-control},
-body.theme-modern.login-page #{$bp-form-control}:not(.is-invalid):not(:focus),
+body.theme-modern.login-page #{$bp-form-control}#{$bp-no-state}:not(:focus),
 body.theme-modern.login-page .input-group-text,
 body.theme-modern.login-page .login-card-body .input-group .input-group-text {
     background-color: var(--bp-field);
