@@ -54,7 +54,9 @@
         "psr-4": {
             "Sebastienheyd\\Boilerplate\\Tests\\": "tests/",
             "Sebastienheyd\\Boilerplate\\Database\\Factories\\": "database/factories/",
-            "App\\": "vendor/orchestra/testbench-core/laravel/app/"
+            "App\\": "vendor/orchestra/testbench-core/laravel/app/",
+            "Workbench\\App\\": "workbench/app/",
+            "Workbench\\Database\\Seeders\\": "workbench/database/seeders/"
         }
     },
     "authors": [
@@ -82,7 +84,10 @@
         ],
         "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
         "prepare": "@php vendor/bin/testbench package:discover --ansi",
-        "build": "@php vendor/bin/testbench workbench:build --ansi",
+        "build": [
+            "@php vendor/bin/testbench workbench:build --ansi",
+            "@php -r \"copy('workbench/server.php', 'vendor/orchestra/testbench-core/laravel/server.php');\""
+        ],
         "serve": [
             "Composer\\Config::disableProcessTimeout",
             "@build",

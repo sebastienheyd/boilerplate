@@ -36,7 +36,13 @@
     <testsuite name="Rules">
       <directory suffix="Test.php">./tests/Rules</directory>
     </testsuite>
-  </testsuites>
+    <testsuite name="View">
+      <directory suffix="Test.php">./tests/View</directory>
+    </testsuite>
+  <testsuite name="Workbench">
+<directory suffix="Test.php">./tests/Workbench</directory>
+</testsuite>
+</testsuites>
   <source>
     <include>
       <directory suffix=".php">src/</directory>

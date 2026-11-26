@@ -1,0 +1,20 @@
+# Local demo environment: docker compose up, then http://localhost:8000/admin (admin@example.com / password)
+#
+# Runs as the host user so that the files written in vendor/ keep their owner: if your user id is not
+# 1000, start it with "UID=$(id -u) GID=$(id -g) docker compose up".
+services:
+  demo:
+    image: composer:2
+    user: "${UID:-1000}:${GID:-1000}"
+    working_dir: /app
+    environment:
+      HOME: /tmp
+      COMPOSER_HOME: /tmp/composer
+      # Optional, forwarded when set on the host: theme preset and color palette (see testbench.yaml)
+      BOILERPLATE_THEME:
+      BOILERPLATE_PALETTE:
+    volumes:
+      - .:/app
+    ports:
+      - "127.0.0.1:8000:8000"
+    command: sh -c "composer install --no-interaction --no-progress && composer build && php vendor/bin/testbench serve --host=0.0.0.0 --port=8000"

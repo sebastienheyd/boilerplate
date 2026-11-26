@@ -1,0 +1,40 @@
+# Local demo environment: composer serve, then http://127.0.0.1:8000/admin (admin@example.com / password)
+laravel: '@testbench'
+
+providers:
+  - Sebastienheyd\Boilerplate\BoilerplateServiceProvider
+  - Workbench\App\Providers\WorkbenchServiceProvider
+
+migrations: true
+
+seeders:
+  - Workbench\Database\Seeders\DatabaseSeeder
+
+env:
+  APP_NAME: Boilerplate
+  APP_KEY: base64:Wo2VgRys/LE/wWcQhIh3GrKb+3GbvE0TEq41WMm1UkQ=
+  APP_DEBUG: true
+  DB_CONNECTION: sqlite
+  SESSION_DRIVER: file
+  CACHE_STORE: array
+  BOILERPLATE_THEME: modern
+  BOILERPLATE_PALETTE: orange
+
+workbench:
+  start: /admin/demo
+  install: true
+  health: false
+  discovers:
+    web: false
+    api: false
+    commands: false
+    components: false
+    factories: false
+    views: false
+  build:
+    - asset-publish
+    - create-sqlite-db
+    - db-wipe
+    - migrate-fresh
+  assets:
+    - boilerplate-public
