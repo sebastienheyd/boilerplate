@@ -1,2 +1,7 @@
 *.js linguist-vendored
 *.css linguist-vendored
+
+# Local demo environment, not part of the distributed package
+/workbench export-ignore
+/testbench.yaml export-ignore
+/docker-compose.yml export-ignore

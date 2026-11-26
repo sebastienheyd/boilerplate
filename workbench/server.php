@@ -10,11 +10,15 @@
  * string) are immutable, the others are revalidated with Last-Modified.
  */
 
-$publicPath = getcwd();
+$publicPath = realpath(getcwd()) ?: getcwd();
 $uri = urldecode(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) ?? '');
 $file = realpath($publicPath.$uri);
 
 if ($uri === '/' || $file === false || ! is_file($file) || ! str_starts_with($file, $publicPath.DIRECTORY_SEPARATOR)) {
+    // Same request line as the Laravel router, displayed by the serve command
+    $remoteAddress = $_SERVER['REMOTE_ADDR'].':'.$_SERVER['REMOTE_PORT'];
+    file_put_contents('php://stdout', '['.date('D M j H:i:s Y')."] $remoteAddress [{$_SERVER['REQUEST_METHOD']}] URI: $uri\n");
+
     require_once $publicPath.'/index.php';
 
     return;

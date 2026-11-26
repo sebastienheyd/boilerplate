@@ -86,7 +86,7 @@
         "prepare": "@php vendor/bin/testbench package:discover --ansi",
         "build": [
             "@php vendor/bin/testbench workbench:build --ansi",
-            "@php -r \"copy('workbench/server.php', 'vendor/orchestra/testbench-core/laravel/server.php');\""
+            "@php -r \"exit(copy('workbench/server.php', 'vendor/orchestra/testbench-core/laravel/server.php') ? 0 : 1);\""
         ],
         "serve": [
             "Composer\\Config::disableProcessTimeout",
