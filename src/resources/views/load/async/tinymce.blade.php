@@ -1,7 +1,12 @@
 @once
+@php
+    // TinyMCE loads its skins, plugins and languages itself: the Mix version of tinymce.min.js is added to their URLs
+    $tinymceSrc = (string) mix('/plugins/tinymce/tinymce.min.js', '/assets/vendor/boilerplate');
+    $tinymceVersion = parse_url($tinymceSrc, PHP_URL_QUERY);
+@endphp
 @component('boilerplate::minify')
 <script>
-    loadScript("{!! mix('/plugins/tinymce/tinymce.min.js', '/assets/vendor/boilerplate') !!}", () => {
+    loadScript("{!! $tinymceSrc !!}", () => {
         tinymce.defaultSettings = {
             plugins: "autoresize fullscreen codemirror link lists table media image imagetools paste customalign{{ config('boilerplate.app.openai.key') ? ' gpt' : '' }}",
             toolbar: "undo redo | styleselect | bold italic underline | customalignleft aligncenter customalignright | gpt link media image | bullist numlist | table | code fullscreen",
@@ -22,6 +27,9 @@
             encoding: 'UTF-8',
             image_uploadtab: false,
             deprecation_warnings: false,
+            @if($tinymceVersion)
+            cache_suffix: '?{{ $tinymceVersion }}',
+            @endif
             @if(config('boilerplate.app.openai.key'))
             gpt: {
                 'tooltip': "@lang('boilerplate::gpt.tooltip')",
@@ -36,8 +44,8 @@
             },
             @if(config('boilerplate.theme.darkmode'))
                 @if(setting('darkmode', 2) == 2)
-                    skin : window.matchMedia("(prefers-color-scheme: dark)") ? "boilerplate-dark" : 'oxide',
-                    content_css: window.matchMedia("(prefers-color-scheme: dark)") ? "boilerplate-dark" : '',
+                    skin : window.matchMedia("(prefers-color-scheme: dark)").matches ? "boilerplate-dark" : 'oxide',
+                    content_css: window.matchMedia("(prefers-color-scheme: dark)").matches ? "boilerplate-dark" : '',
                 @elseif(setting('darkmode'))
                     skin : "boilerplate-dark",
                     content_css: 'boilerplate-dark',
